@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+        <AssemblyName>AbanoubNassem.Trinity</AssemblyName>
+        <RootNamespace>AbanoubNassem.Trinity</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Humanizer.Core" Version="2.14.1" />
+      <PackageReference Include="Inertia.AspNetCore.Adapter" Version="0.0.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Trinity-Vue\src\Components\__tests__" />
+      <Folder Include="wwwroot" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Trinity-Vue\.prettierrc.json" />
+      <_ContentIncludedByDefault Remove="Trinity-Vue\package-lock.json" />
+      <_ContentIncludedByDefault Remove="Trinity-Vue\package.json" />
+      <_ContentIncludedByDefault Remove="Trinity-Vue\tsconfig.config.json" />
+      <_ContentIncludedByDefault Remove="Trinity-Vue\tsconfig.json" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\admin-vue.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\Home.9ac703be.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\Index.1b8b126f.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\main.7d600959.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\Privacy.2f2b3f55.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\style.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\dist\vite.svg" />
+      <_ContentIncludedByDefault Remove="Trinity-Vue-old\.prettierrc.json" />
+      <_ContentIncludedByDefault Remove="Trinity-Vue-old\package-lock.json" />
+      <_ContentIncludedByDefault Remove="Trinity-Vue-old\package.json" />
+      <_ContentIncludedByDefault Remove="Trinity-Vue-old\tsconfig.json" />
+      <_ContentIncludedByDefault Remove="Trinity-Vue-old\tsconfig.node.json" />
+    </ItemGroup>
+
+<!--    <ItemGroup>-->
+<!--        <EmbeddedResource Include="wwwroot/**/**/**/*" Pack="false" />-->
+<!--    </ItemGroup>-->
+    
+    
+</Project>
