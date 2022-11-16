@@ -2,6 +2,8 @@ using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Controllers;
 using InertiaAdapter.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
@@ -10,7 +12,7 @@ namespace AbanoubNassem.Trinity.Extensions;
 
 public static class AppExtensions
 {
-    public static IServiceCollection AddTrinity(this IServiceCollection services,
+    public static IServiceCollection AddTrinity<TContext>(this IServiceCollection services,
         Action<TrinityConfigurations>? configure = null)
     {
         services.AddRazorPages();
@@ -24,7 +26,7 @@ public static class AppExtensions
         configure?.Invoke(configs);
         services.AddSingleton(configs);
 
-        services.AddSingleton(new TrinityManager(configs));
+        services.AddSingleton(new TrinityManager(configs, typeof(TContext)));
 
         services.AddInertia();
 
@@ -73,10 +75,11 @@ public static class AppExtensions
 
             endpoints.MapControllerRoute(
                 name: "trinity-resources",
-                pattern: configs?.Prefix + "/{resource}/{view=Index}/{id?}",
+                pattern: configs?.Prefix + "/{name}/{view=Index}/{id?}",
                 defaults: new { controller = "Trinity", action = "Handle" }
             );
         });
+
 
         return app;
     }

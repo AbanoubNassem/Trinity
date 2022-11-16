@@ -1,9 +1,10 @@
-using System.Dynamic;
 using AbanoubNassem.Trinity.Configurations;
+using AbanoubNassem.Trinity.Resources;
 using Humanizer;
 using InertiaAdapter;
 using InertiaAdapter.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AbanoubNassem.Trinity.Controllers;
 
@@ -24,22 +25,56 @@ public class TrinityController : Controller
         return Inertia.Render("Home", new { configs = _configurations, _trinityManager.Resources });
     }
 
-    public IActionResult Handle(string resource, string view, int? id)
+    public async Task<IActionResult> Handle(string name, string view, int? id)
     {
-        if (!_trinityManager.Resources.TryGetValue(resource.Titleize(), out var res))
+        var resourceName = name.Titleize();
+        if (!_trinityManager.Resources.TryGetValue(resourceName, out var resource))
         {
-            return NotFound(resource);
+            return NotFound(name);
         }
 
-        dynamic json = new ExpandoObject();
+        InjectServices(resourceName, resource);
+
+        await resource.Setup();
+
 
         if (!Request.IsInertiaRequest())
         {
-            json.configs = _configurations;
-            json.resources = _trinityManager.Resources;
+            return Inertia.Render(view, new
+                {
+                    configs = _configurations,
+                    resources = _trinityManager.Resources,
+                    resource,
+                    data = await resource.GetIndexData()
+                }
+            );
         }
 
-        json.resource = res;
-        return Inertia.Render(view, json);
+
+        return Inertia.Render(view, new
+        {
+            resource,
+            data = await resource.GetIndexData()
+        });
+    }
+
+    private void InjectServices(string resourceName, ITrinityResource resource)
+    {
+        _trinityManager.ResourcesTypes[resourceName].Item2["ServiceProvider"]
+            .SetValue(resource, HttpContext.RequestServices);
+
+        _trinityManager.ResourcesTypes[resourceName].Item2["Request"].SetValue(resource, Request);
+        _trinityManager.ResourcesTypes[resourceName].Item2["Response"].SetValue(resource, Response);
+
+        var dbCtx = HttpContext.RequestServices.GetRequiredService(_trinityManager.DbContextType);
+
+        _trinityManager.ResourcesTypes[resourceName].Item2["DbContext"].SetValue(resource, dbCtx);
+
+        _trinityManager.ResourcesTypes[resourceName].Item2["DbSet"]
+            .SetValue(resource,
+                _trinityManager.DbContextType
+                    .GetProperty(resource.DbSetName ?? resource.PluralLabel!)
+                    ?.GetValue(dbCtx)
+            );
     }
 }
