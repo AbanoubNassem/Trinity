@@ -1,9 +1,12 @@
 <template>
-  <v-navigation-drawer :model-value="drawer" :rail="rail" @click="rail = false">
+  <v-navigation-drawer app :rail="rail" @click="rail = false">
     <v-list-item
-      prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-      title="John Leider"
+      @click.prevent="useTrinityLink('/')"
+      prepend-icon="mdi-monitor-dashboard"
+      title="Dashboard"
+      :active="$page.component === 'Home'"
       nav
+      class="pl-5"
     >
       <template v-slot:append>
         <v-btn
@@ -17,13 +20,6 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav>
-      <AppLink
-        href="/"
-        prepend-icon="mdi-monitor-dashboard"
-        title="Dashboard"
-        :active="$page.component === 'Home'"
-      />
-
       <AppLink
         v-for="resource of configStore.resources"
         :key="resource.label"
@@ -41,13 +37,14 @@
 
 <script lang="ts" setup>
 import { useConfigStore } from "@/Stores/ConfigStore";
+import { useTrinityLink } from "@/Composables/trinity-link";
 import { ref } from "vue";
 
 const configStore = useConfigStore();
 
-defineProps<{
-  drawer: boolean;
-}>();
+// defineProps<{
+//   drawer: boolean;
+// }>();
 
 let rail = ref(false);
 </script>

@@ -18,6 +18,7 @@
     "@inertiajs/progress": "^0.2.7",
     "pinia": "^2.0.23",
     "vue": "^3.2.41",
+    "vue3-easy-data-table": "^1.5.15",
     "vuetify": "^3.0.1"
   },
   "devDependencies": {

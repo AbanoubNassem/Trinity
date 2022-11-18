@@ -1,6 +1,8 @@
+using AbanoubNassem.Trinity.Components;
+
 namespace AbanoubNassem.Trinity.Fields;
 
-public abstract class BaseField
+public abstract class BaseField : BaseComponent
 {
     private string? _label;
     private string _attribute = null!;

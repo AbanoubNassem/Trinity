@@ -29,15 +29,20 @@ public class TrinityController : Controller
     public async Task<IActionResult> Handle(string name, string view, int? id)
     {
         var resourceName = name.Titleize();
-        if (!_trinityManager.Resources.TryGetValue(resourceName, out var resource))
+        if (!_trinityManager.Resources.TryGetValue(resourceName, out var resourceObject))
         {
             return NotFound(name);
         }
 
+        //to serialize the public properties of TrinityResource class not ITrinityResource the interface.
+        var resource = (resourceObject as ITrinityResource)!;
+
+
         InjectServices(resourceName, resource);
 
         await resource.Setup();
-
+        if (resource.GetFields().Count == 0)
+            await resource.SetFields();
 
         if (!Request.IsInertiaRequest())
         {
@@ -45,8 +50,8 @@ public class TrinityController : Controller
                 {
                     configs = _configurations,
                     resources = _trinityManager.Resources,
-                    resource,
-                    data = await resource.GetIndexData(),
+                    resource = resourceObject,
+                    paginator = await resource.GetIndexData(),
                     fields = resource.GetFields()
                 }
             );
@@ -55,8 +60,8 @@ public class TrinityController : Controller
 
         return Inertia.Render(view, new
         {
-            resource,
-            data = await resource.GetIndexData(),
+            resource = resourceObject,
+            paginator = await resource.GetIndexData(),
             fields = resource.GetFields()
         });
     }
@@ -76,7 +81,7 @@ public class TrinityController : Controller
         _trinityManager.ResourcesTypes[resourceName].Item2["DbSet"]
             .SetValue(resource,
                 _trinityManager.DbContextType
-                    .GetProperty(resource.DbSetName ?? resource.PluralLabel!)
+                    .GetProperty(resource.GetDbSetName() ?? resource.PluralLabel!)
                     ?.GetValue(dbCtx)
             );
     }

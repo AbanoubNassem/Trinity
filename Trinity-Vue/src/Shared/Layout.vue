@@ -4,11 +4,11 @@
   <v-app>
     <v-layout>
       <NavBar :onIconPress="toggleDrawer" />
-      <SideNav :drawer="drawer" />
+      <SideNav v-model="drawer" />
       <v-main>
-        <v-card style="height: 200px" class="ma-lg-12">
+        <div class="ma-4 ma-lg-12">
           <slot />
-        </v-card>
+        </div>
       </v-main>
     </v-layout>
   </v-app>
@@ -44,5 +44,5 @@ theme.global.name.value =
 InertiaProgress.init(props.controller.configs.progressSettings);
 
 let drawer = ref(true);
-let toggleDrawer = () => (drawer.value = !drawer.value);
+let toggleDrawer = (value?: boolean) => (drawer.value = value ?? !drawer.value);
 </script>

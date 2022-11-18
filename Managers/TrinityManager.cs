@@ -9,7 +9,7 @@ public class TrinityManager
 {
     private readonly TrinityConfigurations _configurations;
 
-    private readonly Dictionary<string, ITrinityResource> _resources = new();
+    private readonly Dictionary<string, object> _resources = new();
     private readonly Dictionary<string, Tuple<Type, Dictionary<string, PropertyInfo>>> _resourcesTypes = new();
 
     public TrinityManager(TrinityConfigurations configurations, Type dbContextType)
@@ -66,7 +66,7 @@ public class TrinityManager
         }
     }
 
-    public Dictionary<string, ITrinityResource> Resources => _resources;
+    public Dictionary<string, object> Resources => _resources;
 
     public Dictionary<string, Tuple<Type, Dictionary<string, PropertyInfo>>> ResourcesTypes => _resourcesTypes;
 

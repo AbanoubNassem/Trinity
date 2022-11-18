@@ -4145,7 +4145,14 @@ vue-tsc@^1.0.8:
     "@volar/vue-language-core" "1.0.9"
     "@volar/vue-typescript" "1.0.9"
 
-vue@^3.2.41:
+vue3-easy-data-table@^1.5.15:
+  version "1.5.15"
+  resolved "https://registry.yarnpkg.com/vue3-easy-data-table/-/vue3-easy-data-table-1.5.15.tgz#2e0e78a47291671c1bd8a563fbb472dff75bab6c"
+  integrity sha512-BgMbMFlMibX803J8en/rAJy9XI2jJYRp6hQpRBbFNyv4vDxbRJROkkeoRcRFRiebPLb5SljmGQvsmykRo8iOlg==
+  dependencies:
+    vue "^3.2.25"
+
+vue@^3.2.25, vue@^3.2.41:
   version "3.2.45"
   resolved "https://registry.npmjs.org/vue/-/vue-3.2.45.tgz"
   integrity sha512-9Nx/Mg2b2xWlXykmCwiTUCWHbWIj53bnkizBxKai1g61f2Xit700A1ljowpTIM11e3uipOeiPcSqnmBg6gyiaA==

@@ -1,7 +1,9 @@
 export default interface Field {
-    label: string;
+  componentName: string;
 
-    attribute: string;
+  label: string;
 
-    initialValue: string;
+  attribute: string;
+
+  initialValue: string;
 }

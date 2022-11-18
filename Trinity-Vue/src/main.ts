@@ -1,6 +1,7 @@
 import "vuetify/styles";
 import "@mdi/font/css/materialdesignicons.css";
 import "@fortawesome/fontawesome-free/css/all.css";
+import "vue3-easy-data-table/dist/style.css";
 import "./assets/main.css";
 
 import { createVuetify } from "vuetify";
