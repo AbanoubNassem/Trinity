@@ -1,49 +1,53 @@
 <template>
-  <div class="drawer-side">
-    <label for="side-drawer" class="drawer-overlay"></label>
-    <aside class="menu p-4 w-80 bg-base-200 text-base-content">
-      <ul class="menu menu-compact flex flex-col p-0 px-4">
-        <li class="menu-title"><span>Dashboard</span></li>
-        <li>
-          <AppLink
-            href="/"
-            preserve-state
-            preserve-scroll
-            :class="{ active: $page.component === 'Home' }"
-            >Dashboard
-          </AppLink>
-        </li>
-        <li />
-      </ul>
+  <v-navigation-drawer :model-value="drawer" :rail="rail" @click="rail = false">
+    <v-list-item
+      prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
+      title="John Leider"
+      nav
+    >
+      <template v-slot:append>
+        <v-btn
+          variant="text"
+          icon="mdi-chevron-left"
+          @click.stop="rail = !rail"
+        ></v-btn>
+      </template>
+    </v-list-item>
 
-      <ul
-        class="menu menu-compact flex flex-col p-0 px-4"
+    <v-divider></v-divider>
+
+    <v-list density="compact" nav>
+      <AppLink
+        href="/"
+        prepend-icon="mdi-monitor-dashboard"
+        title="Dashboard"
+        :active="$page.component === 'Home'"
+      />
+
+      <AppLink
         v-for="resource of configStore.resources"
         :key="resource.label"
-      >
-        <!--        <li></li>-->
-        <!--        <li class="menu-title"><span>Mockup</span></li>-->
-        <li>
-          <AppLink
-            :href="`/${resource.pluralLabel.toLowerCase()}`"
-            :class="{
-              active:
-                $page.props.controller?.resource?.pluralLabel.toLowerCase() ===
-                resource.pluralLabel.toLowerCase(),
-            }"
-            preserve-state
-            preserve-scroll
-          >
-            {{ resource.pluralLabel }}
-          </AppLink>
-        </li>
-      </ul>
-    </aside>
-  </div>
+        :href="`/${resource.pluralLabel.toLowerCase()}`"
+        :title="resource.pluralLabel"
+        :prepend-icon="resource.icon ?? 'mdi-semantic-web'"
+        :active="
+          $page.props.controller?.resource?.pluralLabel.toLowerCase() ===
+          resource.pluralLabel.toLowerCase()
+        "
+      />
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script lang="ts" setup>
 import { useConfigStore } from "@/Stores/ConfigStore";
+import { ref } from "vue";
 
 const configStore = useConfigStore();
+
+defineProps<{
+  drawer: boolean;
+}>();
+
+let rail = ref(false);
 </script>

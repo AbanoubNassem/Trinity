@@ -1,5 +1,6 @@
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Controllers;
+using AbanoubNassem.Trinity.Managers;
 using InertiaAdapter.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;

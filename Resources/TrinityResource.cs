@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Extensions;
+using AbanoubNassem.Trinity.Managers;
 using AbanoubNassem.Trinity.RequestHelpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,8 @@ public interface ITrinityResource
 
     public Task Setup();
     public Task<IPaginator> GetIndexData();
+
+    public IDictionary GetFields();
 }
 
 public abstract class TrinityResource<TModel> : ITrinityResource where TModel : class
@@ -27,12 +31,13 @@ public abstract class TrinityResource<TModel> : ITrinityResource where TModel : 
     protected IServiceProvider ServiceProvider { get; init; } = null!;
 
     protected DbContext DbContext { get; init; } = null!;
-
     protected DbSet<TModel> DbSet { get; init; } = null!;
 
     protected HttpRequest Request { get; init; } = null!;
 
     protected HttpResponse Response { get; init; } = null!;
+
+    protected FieldManager<TModel> FieldsManager { get; init; } = new();
 
     public virtual async Task Setup()
     {
@@ -42,5 +47,10 @@ public abstract class TrinityResource<TModel> : ITrinityResource where TModel : 
     public async Task<IPaginator> GetIndexData()
     {
         return await DbSet.Paginate(1, 12);
+    }
+
+    public IDictionary GetFields()
+    {
+        return FieldsManager.Fields;
     }
 }

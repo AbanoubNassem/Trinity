@@ -1,4 +1,5 @@
 using AbanoubNassem.Trinity.Configurations;
+using AbanoubNassem.Trinity.Managers;
 using AbanoubNassem.Trinity.Resources;
 using Humanizer;
 using InertiaAdapter;
@@ -45,7 +46,8 @@ public class TrinityController : Controller
                     configs = _configurations,
                     resources = _trinityManager.Resources,
                     resource,
-                    data = await resource.GetIndexData()
+                    data = await resource.GetIndexData(),
+                    fields = resource.GetFields()
                 }
             );
         }
@@ -54,7 +56,8 @@ public class TrinityController : Controller
         return Inertia.Render(view, new
         {
             resource,
-            data = await resource.GetIndexData()
+            data = await resource.GetIndexData(),
+            fields = resource.GetFields()
         });
     }
 

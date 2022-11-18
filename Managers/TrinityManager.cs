@@ -3,7 +3,7 @@ using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Resources;
 using Humanizer;
 
-namespace AbanoubNassem.Trinity;
+namespace AbanoubNassem.Trinity.Managers;
 
 public class TrinityManager
 {
