@@ -1,24 +1,33 @@
 using AbanoubNassem.Trinity.RequestHelpers;
-using Microsoft.EntityFrameworkCore;
+using Dapper;
+using DapperQueryBuilder;
 
 namespace AbanoubNassem.Trinity.Extensions;
 
 public static class QueryableExtensions
 {
     public static async Task<Pagination> Paginate<TSource>(
-        this IQueryable<TSource> query,
+        this FluentQueryBuilder query,
+        string table,
         int pageNumber,
-        int perPage,
-        CancellationToken cancellationToken = default)
+        int perPage)
     {
-        var count = await query.CountAsync(cancellationToken);
+        var countQuery = query.Connection.FluentQueryBuilder()
+            .Select($"COUNT(*)")
+            .From($"{table:raw}").Sql;
+
+        var selectQuery = query
+            .Limit((pageNumber - 1) * perPage, perPage)
+            .Sql;
+
+
+        using var multi = await query.Connection.QueryMultipleAsync($"{countQuery};{selectQuery};");
+
+        var count = await multi.ReadSingleAsync<int>();
         return new Pagination
         {
             TotalCount = count,
-            Data = await query
-                .Skip((pageNumber - 1) * perPage)
-                .Take(perPage)
-                .ToListAsync(cancellationToken: cancellationToken),
+            Data = (await multi.ReadAsync<TSource>()).ToList(),
             CurrentPage = pageNumber,
             PerPage = perPage,
             TotalPages = (int)Math.Ceiling(count / (double)perPage)

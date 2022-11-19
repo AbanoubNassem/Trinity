@@ -73,16 +73,6 @@ public class TrinityController : Controller
 
         _trinityManager.ResourcesTypes[resourceName].Item2["Request"].SetValue(resource, Request);
         _trinityManager.ResourcesTypes[resourceName].Item2["Response"].SetValue(resource, Response);
-
-        var dbCtx = HttpContext.RequestServices.GetRequiredService(_trinityManager.DbContextType);
-
-        _trinityManager.ResourcesTypes[resourceName].Item2["DbContext"].SetValue(resource, dbCtx);
-
-        _trinityManager.ResourcesTypes[resourceName].Item2["DbSet"]
-            .SetValue(resource,
-                _trinityManager.DbContextType
-                    .GetProperty(resource.GetDbSetName() ?? resource.PluralLabel!)
-                    ?.GetValue(dbCtx)
-            );
+        
     }
 }

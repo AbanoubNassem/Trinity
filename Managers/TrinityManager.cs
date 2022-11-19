@@ -12,10 +12,9 @@ public class TrinityManager
     private readonly Dictionary<string, object> _resources = new();
     private readonly Dictionary<string, Tuple<Type, Dictionary<string, PropertyInfo>>> _resourcesTypes = new();
 
-    public TrinityManager(TrinityConfigurations configurations, Type dbContextType)
+    public TrinityManager(TrinityConfigurations configurations)
     {
         _configurations = configurations;
-        DbContextType = dbContextType;
         LoadResources();
     }
 
@@ -26,6 +25,7 @@ public class TrinityManager
             .SelectMany(s => s.GetTypes())
             .Where(p => type.IsAssignableFrom(p) && !p.IsAbstract);
 
+        const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
 
         foreach (var resourceType in types)
         {
@@ -36,30 +36,31 @@ public class TrinityManager
 
             var resource = (ITrinityResource)Activator.CreateInstance(resourceType)!;
 
+
             resource.Label ??= name;
 
             resource.PluralLabel ??= plural;
 
+            if (resource.Table == null)
+            {
+                resourceType.GetProperty("Table", flags)!
+                    .SetValue(resource, plural.ToLower());
+            }
 
             properties.Add("ServiceProvider",
-                resourceType.GetProperty("ServiceProvider", BindingFlags.NonPublic | BindingFlags.Instance)!
-            );
-            
-            properties.Add("Request",
-                resourceType.GetProperty("Request", BindingFlags.NonPublic | BindingFlags.Instance)!
-            );
-            
-            properties.Add("Response",
-                resourceType.GetProperty("Response", BindingFlags.NonPublic | BindingFlags.Instance)!
-            );
-            
-            properties.Add("DbContext",
-                resourceType.GetProperty("DbContext", BindingFlags.NonPublic | BindingFlags.Instance)!
+                resourceType.GetProperty("ServiceProvider", flags)!
             );
 
-            properties.Add("DbSet",
-                resourceType.GetProperty("DbSet", BindingFlags.NonPublic | BindingFlags.Instance)!
+            properties.Add("Request",
+                resourceType.GetProperty("Request", flags)!
             );
+
+            properties.Add("Response",
+                resourceType.GetProperty("Response", flags)!
+            );
+
+            resourceType.GetProperty("ConnectionFactory", flags)!
+                .SetValue(resource, _configurations.ConnectionFactory);
 
             _resources.Add(plural, resource);
             _resourcesTypes.Add(plural, new Tuple<Type, Dictionary<string, PropertyInfo>>(resourceType, properties));
@@ -69,6 +70,4 @@ public class TrinityManager
     public Dictionary<string, object> Resources => _resources;
 
     public Dictionary<string, Tuple<Type, Dictionary<string, PropertyInfo>>> ResourcesTypes => _resourcesTypes;
-
-    public Type DbContextType { get; }
 }

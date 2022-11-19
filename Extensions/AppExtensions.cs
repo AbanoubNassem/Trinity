@@ -1,10 +1,7 @@
 using AbanoubNassem.Trinity.Configurations;
-using AbanoubNassem.Trinity.Controllers;
 using AbanoubNassem.Trinity.Managers;
 using InertiaAdapter.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
@@ -13,7 +10,7 @@ namespace AbanoubNassem.Trinity.Extensions;
 
 public static class AppExtensions
 {
-    public static IServiceCollection AddTrinity<TContext>(this IServiceCollection services,
+    public static IServiceCollection AddTrinity(this IServiceCollection services,
         Action<TrinityConfigurations>? configure = null)
     {
         services.AddRazorPages();
@@ -25,9 +22,11 @@ public static class AppExtensions
 
         var configs = new TrinityConfigurations();
         configure?.Invoke(configs);
+        if (configs.ConnectionFactory == null) throw new Exception("Connection Factory must be configured!");
+        
         services.AddSingleton(configs);
 
-        services.AddSingleton(new TrinityManager(configs, typeof(TContext)));
+        services.AddSingleton(new TrinityManager(configs));
 
         services.AddInertia();
 
