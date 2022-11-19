@@ -1,11 +1,11 @@
-using System.Data;
+using System.Data.Common;
 using System.Text.Json.Serialization;
 
 namespace AbanoubNassem.Trinity.Configurations;
 
 public class TrinityConfigurations
 {
-    [JsonIgnore] public Func<IDbConnection> ConnectionFactory { get; set; } = null!;
+    [JsonIgnore] public Func<DbConnection> ConnectionFactory { get; set; } = null!;
     public string Prefix { get; set; } = "admin";
 
     public string Title { get; set; } = "Trinity";

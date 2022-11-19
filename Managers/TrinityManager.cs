@@ -2,23 +2,22 @@ using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Resources;
 using Humanizer;
+using StackExchange.Profiling;
 
 namespace AbanoubNassem.Trinity.Managers;
 
 public class TrinityManager
 {
     private readonly TrinityConfigurations _configurations;
-
     private readonly Dictionary<string, object> _resources = new();
     private readonly Dictionary<string, Tuple<Type, Dictionary<string, PropertyInfo>>> _resourcesTypes = new();
 
     public TrinityManager(TrinityConfigurations configurations)
     {
         _configurations = configurations;
-        LoadResources();
     }
 
-    private void LoadResources()
+    public void LoadResources(bool isDevelopment)
     {
         var type = typeof(ITrinityResource);
         var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -35,7 +34,6 @@ public class TrinityManager
             var properties = new Dictionary<string, PropertyInfo>();
 
             var resource = (ITrinityResource)Activator.CreateInstance(resourceType)!;
-
 
             resource.Label ??= name;
 
@@ -59,8 +57,18 @@ public class TrinityManager
                 resourceType.GetProperty("Response", flags)!
             );
 
-            resourceType.GetProperty("ConnectionFactory", flags)!
-                .SetValue(resource, _configurations.ConnectionFactory);
+            if (isDevelopment)
+            {
+                resourceType.GetProperty("ConnectionFactory", flags)!
+                    .SetValue(resource,
+                        () => new StackExchange.Profiling.Data.ProfiledDbConnection(_configurations.ConnectionFactory(),
+                            MiniProfiler.Current));
+            }
+            else
+            {
+                resourceType.GetProperty("ConnectionFactory", flags)!
+                    .SetValue(resource, _configurations.ConnectionFactory);
+            }
 
             _resources.Add(plural, resource);
             _resourcesTypes.Add(plural, new Tuple<Type, Dictionary<string, PropertyInfo>>(resourceType, properties));

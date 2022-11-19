@@ -10,6 +10,7 @@ import { fa } from "vuetify/iconsets/fa";
 import { createApp, h } from "vue";
 import { createPinia } from "pinia";
 import { createInertiaApp } from "@inertiajs/inertia-vue3";
+import axios from "axios";
 import Layout from "./Shared/Layout.vue";
 import AppHead from "./Components/AppHead.vue";
 import AppLink from "./Components/AppLink.vue";
@@ -45,4 +46,15 @@ createInertiaApp({
       .component("AppLink", AppLink)
       .mount(el);
   },
+});
+
+axios.interceptors.response.use(function (response) {
+  // @ts-ignore
+  const profiler = window.MiniProfiler as any;
+
+  if (profiler && response.headers["x-miniprofiler-ids"]) {
+    console.log(response.headers["x-miniprofiler-ids"]);
+    profiler.fetchResults(JSON.parse(response.headers["x-miniprofiler-ids"]));
+  }
+  return response;
 });

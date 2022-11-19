@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using StackExchange.Profiling;
+using StackExchange.Profiling.Helpers;
+using StackExchange.Profiling.Storage;
 
 namespace AbanoubNassem.Trinity.Extensions;
 
@@ -23,12 +26,20 @@ public static class AppExtensions
         var configs = new TrinityConfigurations();
         configure?.Invoke(configs);
         if (configs.ConnectionFactory == null) throw new Exception("Connection Factory must be configured!");
-        
+
         services.AddSingleton(configs);
 
         services.AddSingleton(new TrinityManager(configs));
 
         services.AddInertia();
+
+        services.AddMiniProfiler(conf =>
+        {
+            conf.PopupRenderPosition = RenderPosition.Right;
+            conf.ColorScheme = ColorScheme.Auto;
+            conf.ShowControls = true;
+            conf.PopupMaxTracesToShow = 4;
+        });
 
         return services;
     }
@@ -40,6 +51,7 @@ public static class AppExtensions
         {
             app.UseStatusCodePages();
             app.UseDeveloperExceptionPage();
+            app.UseMiniProfiler();
         }
 
         // var assembly = typeof(Controllers.TrinityController).GetTypeInfo().Assembly;
@@ -64,7 +76,7 @@ public static class AppExtensions
         app.UseRouting();
 
         var configs = app.Services.GetService<TrinityConfigurations>();
-        var trinityManager = app.Services.GetService<TrinityManager>();
+        var trinityManager = app.Services.GetService<TrinityManager>()!;
 
         app.UseEndpoints(endpoints =>
         {
@@ -80,6 +92,7 @@ public static class AppExtensions
             );
         });
 
+        trinityManager.LoadResources(app.Environment.IsDevelopment());
 
         return app;
     }
