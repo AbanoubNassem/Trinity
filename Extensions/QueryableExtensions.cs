@@ -19,15 +19,18 @@ public static class QueryableExtensions
         var selectQuery = query
             .Limit((pageNumber - 1) * perPage, perPage)
             .Sql;
+        
 
-
-        using var multi = await query.Connection.QueryMultipleAsync($"{countQuery};{selectQuery};");
+        using var multi =
+            await query.Connection.QueryMultipleAsync($"{countQuery};{selectQuery};");
+        
+        Console.WriteLine(query.Sql);
 
         var count = await multi.ReadSingleAsync<int>();
         return new Pagination
         {
             TotalCount = count,
-            Data = (await multi.ReadAsync<TSource>()).ToList(),
+            Data = (await multi.ReadAsync()).ToList(),
             CurrentPage = pageNumber,
             PerPage = perPage,
             TotalPages = (int)Math.Ceiling(count / (double)perPage)

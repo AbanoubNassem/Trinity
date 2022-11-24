@@ -1,4 +1,4 @@
-import { d as G, u as se, t as Nt, b as y, p as Ye, e as at, r as D, f as nt, w as de, o as g, c as h, g as _, F as z, h as ve, i as t, n as A, j as q, k as J, l as Z, m as ke, q as Re, s as ce, v as j, x as Ze, y as Ce, z as St, A as Ct, B as It, C as Oe, D as Le, E as pe, G as fe, H as re, I as $t, J as At, _ as rt, K as Bt, L as Tt } from "./main.3ee96862.mjs";
+import { d as G, u as re, t as wt, b as y, p as Ye, e as at, r as D, f as nt, w as de, o as g, c as h, g as _, F as z, h as ve, i as t, n as A, j as q, k as J, l as Z, m as ke, q as Re, s as ce, v as j, x as Ze, y as Ce, z as St, A as Ct, B as It, C as Oe, D as Le, E as pe, G as fe, H as se, I as $t, J as At, _ as st, K as Bt, L as Tt } from "./main.a1346c5e.mjs";
 var Rt = Object.defineProperty, Ot = Object.defineProperties, Lt = Object.getOwnPropertyDescriptors, et = Object.getOwnPropertySymbols, Ft = Object.prototype.hasOwnProperty, Et = Object.prototype.propertyIsEnumerable, tt = (a, l, e) => l in a ? Rt(a, l, { enumerable: !0, configurable: !0, writable: !0, value: e }) : a[l] = e, U = (a, l) => {
   for (var e in l || (l = {}))
     Ft.call(l, e) && tt(a, e, l[e]);
@@ -19,13 +19,13 @@ const Dt = (a) => (pe("data-v-e0a0b7f0"), a = a(), fe(), a), Ht = ["onClick"], M
   emits: ["change"],
   setup(a, { emit: l }) {
     const e = a;
-    se((m) => ({
-      "51ab8a49": t(o)
+    re((m) => ({
+      "51ab8a49": t(u)
     }));
     const n = y(() => e.status === "allSelected"), c = () => {
       l("change", !n.value);
-    }, o = re("themeColor");
-    return (m, r) => (g(), h("div", {
+    }, u = se("themeColor");
+    return (m, s) => (g(), h("div", {
       class: "easy-checkbox",
       onClick: Le(c, ["stop", "prevent"])
     }, [
@@ -45,13 +45,13 @@ const jt = (a) => (pe("data-v-7e69a276"), a = a(), fe(), a), Jt = ["checked"], z
   },
   emits: ["change"],
   setup(a, { emit: l }) {
-    se((n) => ({
+    re((n) => ({
       fdaf7e9e: t(e)
     }));
-    const e = re("themeColor");
+    const e = se("themeColor");
     return (n, c) => (g(), h("div", {
       class: "easy-checkbox",
-      onClick: c[0] || (c[0] = Le((o) => l("change"), ["stop", "prevent"]))
+      onClick: c[0] || (c[0] = Le((u) => l("change"), ["stop", "prevent"]))
     }, [
       _("input", {
         type: "checkbox",
@@ -70,13 +70,13 @@ const Kt = (a) => (pe("data-v-09dad912"), a = a(), fe(), a), Qt = { class: "easy
   emits: ["update:modelValue"],
   setup(a, { emit: l }) {
     const e = a;
-    se((v) => ({
+    re((v) => ({
       "7fe9410c": t(x)
     }));
-    const n = D(!1), c = D(!1), o = re("dataTable");
+    const n = D(!1), c = D(!1), u = se("dataTable");
     de(n, (v) => {
-      if (v && o) {
-        const k = window.innerHeight, P = o.value.getBoundingClientRect().height, E = o.value.getBoundingClientRect().top;
+      if (v && u) {
+        const k = window.innerHeight, P = u.value.getBoundingClientRect().height, E = u.value.getBoundingClientRect().top;
         k - (P + E) <= 100 ? c.value = !0 : c.value = !1;
       }
     });
@@ -85,9 +85,9 @@ const Kt = (a) => (pe("data-v-09dad912"), a = a(), fe(), a), Qt = { class: "easy
       set: (v) => {
         l("update:modelValue", v);
       }
-    }), r = (v) => {
+    }), s = (v) => {
       m.value = v, n.value = !1;
-    }, s = (v, k) => {
+    }, r = (v, k) => {
       let P = v.parentNode;
       for (; P != null; ) {
         if (P.classList && P.classList.contains(k))
@@ -95,15 +95,15 @@ const Kt = (a) => (pe("data-v-09dad912"), a = a(), fe(), a), Qt = { class: "easy
         P = P.parentNode;
       }
       return !1;
-    }, u = (v) => {
-      s(v.target, "easy-data-table__rows-selector") || (n.value = !1);
+    }, o = (v) => {
+      r(v.target, "easy-data-table__rows-selector") || (n.value = !1);
     };
     nt(() => {
-      document.addEventListener("click", u);
+      document.addEventListener("click", o);
     }), $t(() => {
-      document.removeEventListener("click", u);
+      document.removeEventListener("click", o);
     });
-    const x = re("themeColor");
+    const x = se("themeColor");
     return (v, k) => (g(), h("div", Qt, [
       _("div", {
         class: "rows-input__wrapper",
@@ -118,34 +118,34 @@ const Kt = (a) => (pe("data-v-09dad912"), a = a(), fe(), a), Qt = { class: "easy
         (g(!0), h(z, null, ve(a.rowsItems, (P) => (g(), h("li", {
           key: P,
           class: A({ selected: P === t(m) }),
-          onClick: (E) => r(P)
+          onClick: (E) => s(P)
         }, j(P), 11, Zt))), 128))
       ], 2)
     ]));
   }
 });
 var ta = /* @__PURE__ */ ee(ea, [["__scopeId", "data-v-09dad912"]]);
-const Ie = (a) => (pe("data-v-1fa3a520"), a = a(), fe(), a), aa = { class: "lds-ring" }, na = /* @__PURE__ */ Ie(() => /* @__PURE__ */ _("div", null, null, -1)), ra = /* @__PURE__ */ Ie(() => /* @__PURE__ */ _("div", null, null, -1)), sa = /* @__PURE__ */ Ie(() => /* @__PURE__ */ _("div", null, null, -1)), la = /* @__PURE__ */ Ie(() => /* @__PURE__ */ _("div", null, null, -1)), oa = [
+const Ie = (a) => (pe("data-v-1fa3a520"), a = a(), fe(), a), aa = { class: "lds-ring" }, na = /* @__PURE__ */ Ie(() => /* @__PURE__ */ _("div", null, null, -1)), sa = /* @__PURE__ */ Ie(() => /* @__PURE__ */ _("div", null, null, -1)), ra = /* @__PURE__ */ Ie(() => /* @__PURE__ */ _("div", null, null, -1)), la = /* @__PURE__ */ Ie(() => /* @__PURE__ */ _("div", null, null, -1)), oa = [
   na,
-  ra,
   sa,
+  ra,
   la
 ], ua = /* @__PURE__ */ G({
   setup(a) {
-    se((e) => ({
+    re((e) => ({
       26774109: t(l)
     }));
-    const l = re("themeColor");
+    const l = se("themeColor");
     return (e, n) => (g(), h("div", aa, oa));
   }
 });
 var ia = /* @__PURE__ */ ee(ua, [["__scopeId", "data-v-1fa3a520"]]);
 const ca = { class: "loader-line" }, da = /* @__PURE__ */ G({
   setup(a) {
-    se((e) => ({
+    re((e) => ({
       "0d327f57": t(l)
     }));
-    const l = re("themeColor");
+    const l = se("themeColor");
     return (e, n) => (g(), h("div", ca));
   }
 });
@@ -158,129 +158,129 @@ const pa = { class: "buttons-pagination" }, fa = ["onClick"], ga = /* @__PURE__ 
   emits: ["updatePage"],
   setup(a, { emit: l }) {
     const e = a;
-    se((r) => ({
+    re((s) => ({
       "40dd4f07": t(m)
     }));
-    const n = 7, c = (r) => {
-      r.type === "button" && !r.active && l("updatePage", r.page);
-    }, o = y(() => {
-      const r = [];
+    const n = 7, c = (s) => {
+      s.type === "button" && !s.active && l("updatePage", s.page);
+    }, u = y(() => {
+      const s = [];
       if (e.maxPaginationNumber <= n)
-        for (let s = 1; s <= e.maxPaginationNumber; s += 1)
-          r.push({
+        for (let r = 1; r <= e.maxPaginationNumber; r += 1)
+          s.push({
             type: "button",
-            page: s,
-            active: s === e.currentPaginationNumber,
-            activePrev: s + 1 === e.currentPaginationNumber
+            page: r,
+            active: r === e.currentPaginationNumber,
+            activePrev: r + 1 === e.currentPaginationNumber
           });
       else if ([1, 2, e.maxPaginationNumber, e.maxPaginationNumber - 1].includes(e.currentPaginationNumber))
-        for (let s = 1; s <= n; s += 1)
-          if (s <= 3)
-            r.push({
+        for (let r = 1; r <= n; r += 1)
+          if (r <= 3)
+            s.push({
               type: "button",
-              page: s,
-              active: s === e.currentPaginationNumber,
-              activePrev: s + 1 === e.currentPaginationNumber
+              page: r,
+              active: r === e.currentPaginationNumber,
+              activePrev: r + 1 === e.currentPaginationNumber
             });
-          else if (s === 4)
-            r.push({
+          else if (r === 4)
+            s.push({
               type: "omission"
             });
           else {
-            const u = e.maxPaginationNumber - (n - s);
-            r.push({
+            const o = e.maxPaginationNumber - (n - r);
+            s.push({
               type: "button",
-              page: u,
-              active: u === e.currentPaginationNumber,
-              activePrev: u + 1 === e.currentPaginationNumber
+              page: o,
+              active: o === e.currentPaginationNumber,
+              activePrev: o + 1 === e.currentPaginationNumber
             });
           }
       else if ([3, 4].includes(e.currentPaginationNumber))
-        for (let s = 1; s <= n; s += 1)
-          s <= 5 ? r.push({
+        for (let r = 1; r <= n; r += 1)
+          r <= 5 ? s.push({
             type: "button",
-            page: s,
-            active: s === e.currentPaginationNumber,
-            activePrev: s + 1 === e.currentPaginationNumber
-          }) : s === 6 ? r.push({
+            page: r,
+            active: r === e.currentPaginationNumber,
+            activePrev: r + 1 === e.currentPaginationNumber
+          }) : r === 6 ? s.push({
             type: "omission"
-          }) : r.push({
+          }) : s.push({
             type: "button",
             page: e.maxPaginationNumber,
             active: e.maxPaginationNumber === e.currentPaginationNumber,
-            activePrev: s + 1 === e.currentPaginationNumber
+            activePrev: r + 1 === e.currentPaginationNumber
           });
       else if ([e.maxPaginationNumber - 2, e.maxPaginationNumber - 3].includes(e.currentPaginationNumber))
-        for (let s = 1; s <= n; s += 1)
-          if (s === 1)
-            r.push({
+        for (let r = 1; r <= n; r += 1)
+          if (r === 1)
+            s.push({
               type: "button",
               page: 1,
               active: e.currentPaginationNumber === 1,
-              activePrev: s + 1 === e.currentPaginationNumber
+              activePrev: r + 1 === e.currentPaginationNumber
             });
-          else if (s === 2)
-            r.push({
+          else if (r === 2)
+            s.push({
               type: "omission"
             });
           else {
-            const u = e.maxPaginationNumber - (n - s);
-            r.push({
+            const o = e.maxPaginationNumber - (n - r);
+            s.push({
               type: "button",
-              page: u,
-              active: u === e.currentPaginationNumber,
-              activePrev: u + 1 === e.currentPaginationNumber
+              page: o,
+              active: o === e.currentPaginationNumber,
+              activePrev: o + 1 === e.currentPaginationNumber
             });
           }
       else
-        for (let s = 1; s <= n; s += 1)
-          if (s === 1)
-            r.push({
+        for (let r = 1; r <= n; r += 1)
+          if (r === 1)
+            s.push({
               type: "button",
               page: 1,
               active: e.currentPaginationNumber === 1,
-              activePrev: s + 1 === e.currentPaginationNumber
+              activePrev: r + 1 === e.currentPaginationNumber
             });
-          else if (s === 2 || s === 6)
-            r.push({
+          else if (r === 2 || r === 6)
+            s.push({
               type: "omission"
             });
-          else if (s === 7)
-            r.push({
+          else if (r === 7)
+            s.push({
               type: "button",
               page: e.maxPaginationNumber,
               active: e.maxPaginationNumber === e.currentPaginationNumber,
-              activePrev: s + 1 === e.currentPaginationNumber
+              activePrev: r + 1 === e.currentPaginationNumber
             });
           else {
-            const u = 4 - s, x = e.currentPaginationNumber - u;
-            r.push({
+            const o = 4 - r, x = e.currentPaginationNumber - o;
+            s.push({
               type: "button",
               page: x,
               active: x === e.currentPaginationNumber,
               activePrev: x + 1 === e.currentPaginationNumber
             });
           }
-      return r;
-    }), m = re("themeColor");
-    return (r, s) => (g(), h("div", pa, [
-      (g(!0), h(z, null, ve(t(o), (u, x) => (g(), h("div", {
+      return s;
+    }), m = se("themeColor");
+    return (s, r) => (g(), h("div", pa, [
+      (g(!0), h(z, null, ve(t(u), (o, x) => (g(), h("div", {
         key: x,
         class: A(["item", {
-          button: u.type === "button",
-          active: u.type === "button" && u.active,
-          "active-prev": u.type === "button" && u.activePrev,
-          omission: u.type === "omission"
+          button: o.type === "button",
+          active: o.type === "button" && o.active,
+          "active-prev": o.type === "button" && o.activePrev,
+          omission: o.type === "omission"
         }]),
-        onClick: (v) => c(u)
-      }, j(u.type === "button" ? u.page : "..."), 11, fa))), 128))
+        onClick: (v) => c(o)
+      }, j(o.type === "button" ? o.page : "..."), 11, fa))), 128))
     ]));
   }
 });
 var ya = /* @__PURE__ */ ee(ga, [["__scopeId", "data-v-4c681fa2"]]);
-const st = (a) => (pe("data-v-c9da5286"), a = a(), fe(), a), ma = /* @__PURE__ */ st(() => /* @__PURE__ */ _("span", { class: "arrow arrow-right" }, null, -1)), ha = [
+const rt = (a) => (pe("data-v-c9da5286"), a = a(), fe(), a), ma = /* @__PURE__ */ rt(() => /* @__PURE__ */ _("span", { class: "arrow arrow-right" }, null, -1)), ha = [
   ma
-], ba = /* @__PURE__ */ st(() => /* @__PURE__ */ _("span", { class: "arrow arrow-left" }, null, -1)), xa = [
+], ba = /* @__PURE__ */ rt(() => /* @__PURE__ */ _("span", { class: "arrow arrow-left" }, null, -1)), xa = [
   ba
 ], Pa = /* @__PURE__ */ G({
   props: {
@@ -293,12 +293,12 @@ const st = (a) => (pe("data-v-c9da5286"), a = a(), fe(), a), ma = /* @__PURE__ *
     return (n, c) => (g(), h(z, null, [
       _("div", {
         class: A(["previous-page__click-button", { "first-page": a.isFirstPage }]),
-        onClick: c[0] || (c[0] = (o) => l("clickPrevPage"))
+        onClick: c[0] || (c[0] = (u) => l("clickPrevPage"))
       }, ha, 2),
       t(e).buttonsPagination ? J(n.$slots, "buttonsPagination", { key: 0 }, void 0, !0) : q("", !0),
       _("div", {
         class: A(["next-page__click-button", { "last-page": a.isLastPage }]),
-        onClick: c[1] || (c[1] = (o) => l("clickNextPage"))
+        onClick: c[1] || (c[1] = (u) => l("clickNextPage"))
       }, xa, 2)
     ], 64));
   }
@@ -306,33 +306,33 @@ const st = (a) => (pe("data-v-c9da5286"), a = a(), fe(), a), ma = /* @__PURE__ *
 var _a = /* @__PURE__ */ ee(Pa, [["__scopeId", "data-v-c9da5286"]]);
 function ka(a, l, e, n) {
   return {
-    clickRow: (o, m) => {
+    clickRow: (u, m) => {
       if (a.value !== m)
         return;
-      const r = U({}, o);
+      const s = U({}, u);
       if (l.value) {
-        const { checkbox: s } = o;
-        delete r.checkbox, r.isSelected = s;
+        const { checkbox: r } = u;
+        delete s.checkbox, s.isSelected = r;
       }
       if (e.value) {
-        const { index: s } = o;
-        delete r.index, r.indexInCurrentPage = s;
+        const { index: r } = u;
+        delete s.index, s.indexInCurrentPage = r;
       }
-      n("clickRow", r);
+      n("clickRow", s);
     }
   };
 }
-function wa(a, l, e) {
+function Na(a, l, e) {
   const n = D([]);
   return {
     expandingItemIndexList: n,
-    updateExpandingItemIndexList: (m, r, s) => {
-      s.stopPropagation();
-      const u = n.value.indexOf(m);
-      if (u !== -1)
-        n.value.splice(u, 1);
+    updateExpandingItemIndexList: (m, s, r) => {
+      r.stopPropagation();
+      const o = n.value.indexOf(m);
+      if (o !== -1)
+        n.value.splice(o, 1);
       else {
-        const x = a.value.findIndex((v) => JSON.stringify(v) === JSON.stringify(r));
+        const x = a.value.findIndex((v) => JSON.stringify(v) === JSON.stringify(s));
         e("expandRow", l.value + x), n.value.push(l.value + x);
       }
     },
@@ -341,22 +341,22 @@ function wa(a, l, e) {
     }
   };
 }
-function Na(a) {
+function wa(a) {
   const l = y(() => a.value.filter((c) => c.fixed)), e = y(() => l.value.length ? l.value[l.value.length - 1].value : ""), n = y(() => {
     if (!l.value.length)
       return [];
-    const c = l.value.map((o) => {
+    const c = l.value.map((u) => {
       var m;
-      return (m = o.width) != null ? m : 100;
+      return (m = u.width) != null ? m : 100;
     });
-    return l.value.map((o, m) => {
-      var r, s;
+    return l.value.map((u, m) => {
+      var s, r;
       return {
-        value: o.value,
-        fixed: (r = o.fixed) != null ? r : !0,
-        width: (s = o.width) != null ? s : 100,
-        distance: m === 0 ? 0 : c.reduce((u, x, v) => {
-          let k = u;
+        value: u.value,
+        fixed: (s = u.fixed) != null ? s : !0,
+        width: (r = u.width) != null ? r : 100,
+        distance: m === 0 ? 0 : c.reduce((o, x, v) => {
+          let k = o;
           return v < m && (k += x), k;
         })
       };
@@ -368,8 +368,8 @@ function Na(a) {
     fixedColumnsInfos: n
   };
 }
-function Sa(a, l, e, n, c, o, m, r, s, u, x, v, k, P, E, w, $, W) {
-  const H = y(() => o.value.findIndex((b) => b.fixed) !== -1), d = y(() => H.value ? o.value.filter((b) => b.fixed) : []), S = y(() => o.value.filter((b) => !b.fixed)), p = D(((b, M) => Array.isArray(b) && Array.isArray(M) ? {
+function Sa(a, l, e, n, c, u, m, s, r, o, x, v, k, P, E, N, $, W) {
+  const H = y(() => u.value.findIndex((b) => b.fixed) !== -1), d = y(() => H.value ? u.value.filter((b) => b.fixed) : []), S = y(() => u.value.filter((b) => !b.fixed)), p = D(((b, M) => Array.isArray(b) && Array.isArray(M) ? {
     sortBy: b,
     sortDesc: M.map((I) => I === "desc")
   } : b !== "" ? {
@@ -407,10 +407,10 @@ function Sa(a, l, e, n, c, o, m, r, s, u, x, v, k, P, E, w, $, W) {
       text: "#",
       value: "index",
       fixed: !0,
-      width: r.value
+      width: s.value
     } : { text: "#", value: "index" }, ...V] : oe = V;
     let ge = [];
-    return s.value ? ge = [e.value || H.value ? {
+    return r.value ? ge = [e.value || H.value ? {
       text: "checkbox",
       value: "checkbox",
       fixed: !0,
@@ -423,7 +423,7 @@ function Sa(a, l, e, n, c, o, m, r, s, u, x, v, k, P, E, w, $, W) {
     headersForRender: B,
     updateSortField: (b, M) => {
       let I = null;
-      if (M === "none" ? I = "asc" : M === "asc" ? I = "desc" : I = x.value ? "asc" : null, u.value && $(b, I), p.value && Array.isArray(p.value.sortBy) && Array.isArray(p.value.sortDesc)) {
+      if (M === "none" ? I = "asc" : M === "asc" ? I = "desc" : I = x.value ? "asc" : null, o.value && $(b, I), p.value && Array.isArray(p.value.sortBy) && Array.isArray(p.value.sortDesc)) {
         const V = p.value.sortBy.indexOf(b);
         V === -1 ? I !== null && (p.value.sortBy.push(b), p.value.sortDesc.push(I === "desc")) : I === null ? (p.value.sortDesc.splice(V, 1), p.value.sortBy.splice(V, 1)) : p.value.sortDesc[V] = I === "desc";
       } else
@@ -440,59 +440,59 @@ function Sa(a, l, e, n, c, o, m, r, s, u, x, v, k, P, E, w, $, W) {
     getMultiSortNumber: (b) => v.value && Array.isArray(v.value.sortBy) ? v.value.sortBy.indexOf(b) + 1 : p.value && Array.isArray(p.value.sortBy) ? p.value.sortBy.indexOf(b) + 1 : !1
   };
 }
-function Ca(a, l, e, n, c, o, m, r, s) {
-  const u = y(() => (a.value - 1) * c.value + 1), x = y(() => e.value ? Math.min(s.value, a.value * c.value) : Math.min(r.value.length, a.value * c.value)), v = y(() => e.value ? n.value : r.value.slice(u.value - 1, x.value)), k = y(() => m.value ? v.value.map((w, $) => U({ index: u.value + $ }, w)) : v.value), P = y(() => o.value.length === 0 || o.value.every(($) => r.value.findIndex((W) => JSON.stringify($) === JSON.stringify(W)) === -1) ? "noneSelected" : o.value.length === r.value.length && o.value.every((W) => r.value.findIndex((H) => JSON.stringify(W) === JSON.stringify(H)) !== -1) ? "allSelected" : "partSelected"), E = y(() => l.value ? P.value === "allSelected" ? k.value.map((w) => U({ checkbox: !0 }, w)) : P.value === "noneSelected" ? k.value.map((w) => U({ checkbox: !1 }, w)) : k.value.map((w) => {
-    const $ = o.value.findIndex((W) => {
-      const H = U({}, w);
+function Ca(a, l, e, n, c, u, m, s, r) {
+  const o = y(() => (a.value - 1) * c.value + 1), x = y(() => e.value ? Math.min(r.value, a.value * c.value) : Math.min(s.value.length, a.value * c.value)), v = y(() => e.value ? n.value : s.value.slice(o.value - 1, x.value)), k = y(() => m.value ? v.value.map((N, $) => U({ index: o.value + $ }, N)) : v.value), P = y(() => u.value.length === 0 || u.value.every(($) => s.value.findIndex((W) => JSON.stringify($) === JSON.stringify(W)) === -1) ? "noneSelected" : u.value.length === s.value.length && u.value.every((W) => s.value.findIndex((H) => JSON.stringify(W) === JSON.stringify(H)) !== -1) ? "allSelected" : "partSelected"), E = y(() => l.value ? P.value === "allSelected" ? k.value.map((N) => U({ checkbox: !0 }, N)) : P.value === "noneSelected" ? k.value.map((N) => U({ checkbox: !1 }, N)) : k.value.map((N) => {
+    const $ = u.value.findIndex((W) => {
+      const H = U({}, N);
       return delete H.index, JSON.stringify(W) === JSON.stringify(H);
     }) !== -1;
-    return U({ checkbox: $ }, w);
+    return U({ checkbox: $ }, N);
   }) : k.value);
   return {
-    currentPageFirstIndex: u,
+    currentPageFirstIndex: o,
     currentPageLastIndex: x,
     multipleSelectStatus: P,
     pageItems: E
   };
 }
-function Ia(a, l, e, n, c, o, m) {
-  const r = D(o.value ? o.value.page : a.value), s = y(() => Math.ceil(n.value / c.value)), u = y(() => s.value === 0 || r.value === s.value), x = y(() => r.value === 1);
+function Ia(a, l, e, n, c, u, m) {
+  const s = D(u.value ? u.value.page : a.value), r = y(() => Math.ceil(n.value / c.value)), o = y(() => r.value === 0 || s.value === r.value), x = y(() => s.value === 1);
   return {
-    currentPaginationNumber: r,
-    maxPaginationNumber: s,
-    isLastPage: u,
+    currentPaginationNumber: s,
+    maxPaginationNumber: r,
+    isLastPage: o,
     isFirstPage: x,
     nextPage: () => {
-      if (n.value !== 0 && !u.value && !e.value)
+      if (n.value !== 0 && !o.value && !e.value)
         if (l.value) {
-          const w = r.value + 1;
-          m(w);
+          const N = s.value + 1;
+          m(N);
         } else
-          r.value += 1;
+          s.value += 1;
     },
     prevPage: () => {
       if (n.value !== 0 && !x.value && !e.value)
         if (l.value) {
-          const w = r.value - 1;
-          m(w);
+          const N = s.value - 1;
+          m(N);
         } else
-          r.value -= 1;
+          s.value -= 1;
     },
-    updatePage: (w) => {
-      e.value || (l.value ? m(w) : r.value = w);
+    updatePage: (N) => {
+      e.value || (l.value ? m(N) : s.value = N);
     },
-    updateCurrentPaginationNumber: (w) => {
-      r.value = w;
+    updateCurrentPaginationNumber: (N) => {
+      s.value = N;
     }
   };
 }
 function $a(a, l, e, n) {
-  const c = y(() => !a.value && l.value.findIndex((r) => r === n.value) === -1 ? [n.value, ...l.value] : l.value), o = D(e.value ? e.value.rowsPerPage : n.value);
+  const c = y(() => !a.value && l.value.findIndex((s) => s === n.value) === -1 ? [n.value, ...l.value] : l.value), u = D(e.value ? e.value.rowsPerPage : n.value);
   return {
     rowsItemsComputed: c,
-    rowsPerPageRef: o,
-    updateRowsPerPage: (r) => {
-      o.value = r;
+    rowsPerPageRef: u,
+    updateRowsPerPage: (s) => {
+      u.value = s;
     }
   };
 }
@@ -501,46 +501,46 @@ function Aa(a, l, e) {
     get: () => {
       if (a.value) {
         const {
-          page: r,
-          rowsPerPage: s,
-          sortBy: u,
+          page: s,
+          rowsPerPage: r,
+          sortBy: o,
           sortType: x
         } = a.value;
         return {
-          page: r,
-          rowsPerPage: s,
-          sortBy: u != null ? u : null,
+          page: s,
+          rowsPerPage: r,
+          sortBy: o != null ? o : null,
           sortType: x != null ? x : null
         };
       }
       return null;
     },
-    set: (r) => {
-      e("update:serverOptions", r);
+    set: (s) => {
+      e("update:serverOptions", s);
     }
   });
   return {
     serverOptionsComputed: n,
-    updateServerOptionsPage: (r) => {
+    updateServerOptionsPage: (s) => {
       n.value && (n.value = Se(U({}, n.value), {
-        page: r
+        page: s
       }));
     },
-    updateServerOptionsSort: (r, s) => {
+    updateServerOptionsSort: (s, r) => {
       if (n.value)
         if (l.value && Array.isArray(n.value.sortBy) && Array.isArray(n.value.sortType)) {
-          const u = n.value.sortBy.findIndex((x) => x === r);
-          u === -1 && s !== null && (n.value.sortBy.push(r), n.value.sortType.push(s)), s === null ? (n.value.sortBy.splice(u, 1), n.value.sortType.splice(u, 1)) : n.value.sortType[u] = s;
+          const o = n.value.sortBy.findIndex((x) => x === s);
+          o === -1 && r !== null && (n.value.sortBy.push(s), n.value.sortType.push(r)), r === null ? (n.value.sortBy.splice(o, 1), n.value.sortType.splice(o, 1)) : n.value.sortType[o] = r;
         } else
           n.value = Se(U({}, n.value), {
-            sortBy: s !== null ? r : null,
-            sortType: s
+            sortBy: r !== null ? s : null,
+            sortType: r
           });
     },
-    updateServerOptionsRowsPerPage: (r) => {
+    updateServerOptionsRowsPerPage: (s) => {
       n.value && (n.value = Se(U({}, n.value), {
         page: 1,
-        rowsPerPage: r
+        rowsPerPage: s
       }));
     }
   };
@@ -549,8 +549,8 @@ function F(a, l) {
   if (a.includes(".")) {
     let e = "";
     const n = a.split("."), { length: c } = n;
-    let o = 0;
-    for (; o < c && (e = o === 0 ? l[n[o]] : e[n[o]], o += 1, e !== void 0); )
+    let u = 0;
+    for (; u < c && (e = u === 0 ? l[n[u]] : e[n[u]], u += 1, e !== void 0); )
       ;
     return e;
   }
@@ -560,14 +560,14 @@ function Ba(a, l) {
   const e = F(a, l);
   return Array.isArray(e) ? e.join(",") : e;
 }
-function Ta(a, l, e, n, c, o, m, r, s, u) {
+function Ta(a, l, e, n, c, u, m, s, r, o) {
   const x = (d) => {
-    if (typeof o.value == "string" && o.value !== "")
-      return F(o.value, d);
-    if (Array.isArray(o.value)) {
+    if (typeof u.value == "string" && u.value !== "")
+      return F(u.value, d);
+    if (Array.isArray(u.value)) {
       let S = "";
-      return o.value.forEach((N) => {
-        S += F(N, d);
+      return u.value.forEach((w) => {
+        S += F(w, d);
       }), S;
     }
     return Object.values(d).join(" ");
@@ -580,11 +580,11 @@ function Ta(a, l, e, n, c, o, m, r, s, u) {
   }), k = y(() => {
     let d = [...v.value];
     return l.value ? (l.value.forEach((S) => {
-      d = d.filter((N) => {
+      d = d.filter((w) => {
         const { field: p, comparison: B, criteria: C } = S;
         if (typeof B == "function")
-          return B(F(p, N), C);
-        const R = F(p, N);
+          return B(F(p, w), C);
+        const R = F(p, w);
         switch (B) {
           case "=":
             return R === C;
@@ -607,11 +607,11 @@ function Ta(a, l, e, n, c, o, m, r, s, u) {
     }), d) : v.value;
   });
   de(k, (d) => {
-    l.value && u("updateFilter", d);
+    l.value && o("updateFilter", d);
   }, { immediate: !0, deep: !0 });
-  function P(d, S, N, p) {
+  function P(d, S, w, p) {
     const B = d[p], C = S[p];
-    return (p === 0 ? N : P(d, S, N, p - 1)).sort((le, K) => {
+    return (p === 0 ? w : P(d, S, w, p - 1)).sort((le, K) => {
       let b = !0;
       for (let M = 0; M < p; M += 1)
         if (F(d[M], le) !== F(d[M], K)) {
@@ -626,31 +626,31 @@ function Ta(a, l, e, n, c, o, m, r, s, u) {
       return n.value;
     if (a.value === null)
       return k.value;
-    const { sortBy: d, sortDesc: S } = a.value, N = [...k.value];
-    return s && Array.isArray(d) && Array.isArray(S) ? d.length === 0 ? N : P(d, S, N, d.length - 1) : N.sort((p, B) => F(d, p) < F(d, B) ? S ? 1 : -1 : F(d, p) > F(d, B) ? S ? -1 : 1 : 0);
-  }), w = y(() => e.value ? r.value : E.value.length), $ = y({
+    const { sortBy: d, sortDesc: S } = a.value, w = [...k.value];
+    return r && Array.isArray(d) && Array.isArray(S) ? d.length === 0 ? w : P(d, S, w, d.length - 1) : w.sort((p, B) => F(d, p) < F(d, B) ? S ? 1 : -1 : F(d, p) > F(d, B) ? S ? -1 : 1 : 0);
+  }), N = y(() => e.value ? s.value : E.value.length), $ = y({
     get: () => {
       var d;
       return (d = c.value) != null ? d : [];
     },
     set: (d) => {
-      u("update:itemsSelected", d);
+      o("update:itemsSelected", d);
     }
   });
   return {
     totalItems: E,
     selectItemsComputed: $,
-    totalItemsLength: w,
+    totalItemsLength: N,
     toggleSelectAll: (d) => {
       $.value = d ? E.value : [];
     },
     toggleSelectItem: (d) => {
       const S = d.checkbox;
       if (delete d.checkbox, delete d.index, S)
-        $.value = $.value.filter((N) => JSON.stringify(N) !== JSON.stringify(d));
+        $.value = $.value.filter((w) => JSON.stringify(w) !== JSON.stringify(d));
       else {
-        const N = $.value;
-        N.unshift(d), $.value = N;
+        const w = $.value;
+        w.unshift(d), $.value = w;
       }
     }
   };
@@ -872,29 +872,29 @@ const Oa = (a) => (pe("data-v-0c7093ee"), a = a(), fe(), a), La = ["onClick"], F
   ],
   setup(a, { expose: l, emit: e }) {
     const n = a;
-    se((f) => ({
+    re((f) => ({
       "275a4262": t(ye),
       "56f410fe": t(O)
     }));
     const {
       clickEventType: c,
-      bodyTextDirection: o,
+      bodyTextDirection: u,
       checkboxColumnWidth: m,
-      currentPage: r,
-      expandColumnWidth: s,
-      filterOptions: u,
+      currentPage: s,
+      expandColumnWidth: r,
+      filterOptions: o,
       fixedCheckbox: x,
       fixedExpand: v,
       fixedHeader: k,
       fixedIndex: P,
       headers: E,
-      headerTextDirection: w,
+      headerTextDirection: N,
       indexColumnWidth: $,
       items: W,
       itemsSelected: H,
       loading: d,
       mustSort: S,
-      multiSort: N,
+      multiSort: w,
       rowsItems: p,
       rowsPerPage: B,
       searchField: C,
@@ -908,7 +908,7 @@ const Oa = (a) => (pe("data-v-0c7093ee"), a = a(), fe(), a), La = ["onClick"], F
       tableMinHeight: oe,
       themeColor: ge,
       rowsOfPageSeparatorMessage: ue
-    } = Nt(n), O = y(() => V.value ? `${V.value}px` : null), ye = y(() => `${oe.value}px`);
+    } = wt(n), O = y(() => V.value ? `${V.value}px` : null), ye = y(() => `${oe.value}px`);
     Ye("themeColor", ge.value);
     const te = at(), ot = y(() => !!te.pagination), ut = y(() => !!te.loading), Fe = y(() => !!te.expand), it = y(() => !!te.body), Ee = D(), $e = D();
     Ye("dataTable", Ee);
@@ -923,24 +923,24 @@ const Oa = (a) => (pe("data-v-0c7093ee"), a = a(), fe(), a), La = ["onClick"], F
       updateServerOptionsPage: ct,
       updateServerOptionsSort: dt,
       updateServerOptionsRowsPerPage: vt
-    } = Aa(K, N, e), {
+    } = Aa(K, w, e), {
       clientSortOptions: He,
       headerColumns: Me,
       headersForRender: ne,
       updateSortField: pt,
       isMultiSorting: ft,
       getMultiSortNumber: gt
-    } = Sa(m, s, x, v, P, E, Fe, $, Ae, ae, S, Be, b, M, I, N, dt, e), {
+    } = Sa(m, r, x, v, P, E, Fe, $, Ae, ae, S, Be, b, M, I, w, dt, e), {
       rowsItemsComputed: Ve,
       rowsPerPageRef: Y,
       updateRowsPerPage: yt
     } = $a(ae, p, K, B), {
       totalItems: mt,
       selectItemsComputed: ht,
-      totalItemsLength: we,
+      totalItemsLength: Ne,
       toggleSelectAll: bt,
       toggleSelectItem: xt
-    } = Ta(He, u, ae, W, H, C, R, le, N, e), {
+    } = Ta(He, o, ae, W, H, C, R, le, w, e), {
       currentPaginationNumber: Q,
       maxPaginationNumber: me,
       isLastPage: he,
@@ -949,22 +949,22 @@ const Oa = (a) => (pe("data-v-0c7093ee"), a = a(), fe(), a), La = ["onClick"], F
       prevPage: Pe,
       updatePage: _e,
       updateCurrentPaginationNumber: Pt
-    } = Ia(r, ae, d, we, Y, K, ct), {
+    } = Ia(s, ae, d, Ne, Y, K, ct), {
       currentPageFirstIndex: We,
       currentPageLastIndex: qe,
       multipleSelectStatus: je,
       pageItems: ie
-    } = Ca(Q, Ae, ae, W, Y, ht, b, mt, we), Ne = y(() => Q.value === 0 ? 0 : (Q.value - 1) * Y.value), {
+    } = Ca(Q, Ae, ae, W, Y, ht, b, mt, Ne), we = y(() => Q.value === 0 ? 0 : (Q.value - 1) * Y.value), {
       expandingItemIndexList: Je,
       updateExpandingItemIndexList: _t,
       clearExpandingItemIndexList: ze
-    } = wa(ie, Ne, e), {
+    } = Na(ie, we, e), {
       fixedHeaders: Te,
       lastFixedColumn: Ue,
       fixedColumnsInfos: kt
-    } = Na(ne), {
+    } = wa(ne), {
       clickRow: Ge
-    } = ka(c, Ae, b, e), wt = (f) => {
+    } = ka(c, Ae, b, e), Nt = (f) => {
       var X;
       const i = (X = f.width) != null ? X : Te.value.length ? 100 : null;
       if (i)
@@ -982,12 +982,12 @@ const Oa = (a) => (pe("data-v-0c7093ee"), a = a(), fe(), a), La = ["onClick"], F
       ae.value ? vt(f) : _e(1);
     }), de(R, () => {
       ae.value || _e(1);
-    }), de([Q, He, C, R, u], () => {
+    }), de([Q, He, C, R, o], () => {
       ze();
     }, { deep: !0 }), l({
       currentPageFirstIndex: We,
       currentPageLastIndex: qe,
-      clientItemsLength: we,
+      clientItemsLength: Ne,
       maxPaginationNumber: me,
       currentPaginationNumber: Q,
       isLastPage: he,
@@ -1019,7 +1019,7 @@ const Oa = (a) => (pe("data-v-0c7093ee"), a = a(), fe(), a), La = ["onClick"], F
           _("colgroup", null, [
             (g(!0), h(z, null, ve(t(ne), (i, L) => (g(), h("col", {
               key: L,
-              style: Oe(wt(i))
+              style: Oe(Nt(i))
             }, null, 4))), 128))
           ]),
           t(ne).length && !f.hideHeader ? (g(), h("thead", {
@@ -1045,14 +1045,14 @@ const Oa = (a) => (pe("data-v-0c7093ee"), a = a(), fe(), a), La = ["onClick"], F
                   onChange: t(bt)
                 }, null, 8, ["status", "onChange"])) : (g(), h("span", {
                   key: 1,
-                  class: A(["header", `direction-${t(w)}`])
+                  class: A(["header", `direction-${t(N)}`])
                 }, [
                   t(te)[`header-${i.value}`] ? J(f.$slots, `header-${i.value}`, Z(ke({ key: 0 }, i)), void 0, !0) : (g(), h("span", Fa, j(i.text), 1)),
                   i.sortable ? (g(), h("i", {
                     key: i.sortType ? i.sortType : "none",
                     class: A(["sortType-icon", { desc: i.sortType === "desc" }])
                   }, null, 2)) : q("", !0),
-                  t(N) && t(ft)(i.value) ? (g(), h("span", Ea, j(t(gt)(i.value)), 1)) : q("", !0)
+                  t(w) && t(ft)(i.value) ? (g(), h("span", Ea, j(t(gt)(i.value)), 1)) : q("", !0)
                 ], 2))
               ], 14, La))), 128))
             ])
@@ -1088,12 +1088,12 @@ const Oa = (a) => (pe("data-v-0c7093ee"), a = a(), fe(), a), La = ["onClick"], F
                   class: A([{
                     shadow: T === t(Ue),
                     "can-expand": T === "expand"
-                  }, typeof f.bodyItemClassName == "string" ? f.bodyItemClassName : f.bodyItemClassName(T, Qe), `direction-${t(o)}`]),
-                  onClick: (Xe) => T === "expand" ? t(_t)(L + t(Ne), i, Xe) : null
+                  }, typeof f.bodyItemClassName == "string" ? f.bodyItemClassName : f.bodyItemClassName(T, Qe), `direction-${t(u)}`]),
+                  onClick: (Xe) => T === "expand" ? t(_t)(L + t(we), i, Xe) : null
                 }, [
                   t(te)[`item-${T}`] ? J(f.$slots, `item-${T}`, Z(ke({ key: 0 }, i)), void 0, !0) : t(te)[`item-${T.toLowerCase()}`] ? J(f.$slots, `item-${T.toLowerCase()}`, Z(ke({ key: 1 }, i)), void 0, !0) : T === "expand" ? (g(), h("i", {
                     key: 2,
-                    class: A(["expand-icon", { expanding: t(Je).includes(t(Ne) + L) }])
+                    class: A(["expand-icon", { expanding: t(Je).includes(t(we) + L) }])
                   }, null, 2)) : T === "checkbox" ? (g(), ce(Gt, {
                     key: 3,
                     checked: i[T],
@@ -1103,7 +1103,7 @@ const Oa = (a) => (pe("data-v-0c7093ee"), a = a(), fe(), a), La = ["onClick"], F
                   ], 64))
                 ], 14, Ha))), 128))
               ], 42, Da),
-              t(Fe) && t(Je).includes(L + t(Ne)) ? (g(), h("tr", {
+              t(Fe) && t(Je).includes(L + t(we)) ? (g(), h("tr", {
                 key: 0,
                 class: A([
                   { "even-row": (L + 1) % 2 === 0 },
@@ -1154,7 +1154,7 @@ const Oa = (a) => (pe("data-v-0c7093ee"), a = a(), fe(), a), La = ["onClick"], F
             "rows-items": t(Ve)
           }, null, 8, ["modelValue", "rows-items"])
         ])),
-        _("div", Ua, j(`${t(We)}\u2013${t(qe)}`) + " " + j(t(ue)) + " " + j(t(we)), 1),
+        _("div", Ua, j(`${t(We)}\u2013${t(qe)}`) + " " + j(t(ue)) + " " + j(t(Ne)), 1),
         t(ot) ? J(f.$slots, "pagination", Z(ke({ key: 1 }, {
           isFirstPage: t(be),
           isLastPage: t(he),
@@ -1195,25 +1195,25 @@ const Ka = /* @__PURE__ */ G({
   setup(a) {
     const l = a, e = D([]), n = D([]);
     return At(() => {
-      const { fields: c, paginator: o } = l;
+      const { fields: c, paginator: u } = l;
       e.value = [];
       for (const m in c) {
-        const r = c[m];
+        const s = c[m];
         e.value.push({
-          text: r.label,
-          value: r.attribute
+          text: s.label,
+          value: s.columnName
         });
       }
       n.value = [];
-      for (const m of o.data) {
-        let r = {};
-        for (const s in c) {
-          const u = c[s].attribute;
-          r[u] = m[u];
+      for (const m of u.data) {
+        let s = {};
+        for (const r in c) {
+          const o = c[r];
+          o.relationshipName ? s[o.columnName] = m[o.relationshipName][o.title] : s[o.columnName] = m[o.columnName];
         }
-        n.value.push(r);
+        n.value.push(s);
       }
-    }), (c, o) => (g(), ce(t(lt), {
+    }), (c, u) => (g(), ce(t(lt), {
       class: "elevation-1",
       headers: e.value,
       items: n.value,
@@ -1221,14 +1221,14 @@ const Ka = /* @__PURE__ */ G({
     }, null, 8, ["headers", "items", "rows-per-page"]));
   }
 });
-const Qa = /* @__PURE__ */ rt(Ka, [["__scopeId", "data-v-12f1e068"], ["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Components/Table.vue"]]), Xa = /* @__PURE__ */ G({
+const Qa = /* @__PURE__ */ st(Ka, [["__scopeId", "data-v-12f1e068"], ["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Components/Table.vue"]]), Xa = /* @__PURE__ */ G({
   __name: "Index",
   setup(a) {
     const { props: l } = Bt(), e = D(y(() => l.value.controller.resource)), n = D(y(() => l.value.controller.paginator)), c = D(y(() => l.value.controller.fields));
-    return (o, m) => {
-      const r = Tt("AppHead");
+    return (u, m) => {
+      const s = Tt("AppHead");
       return g(), h(z, null, [
-        Ce(r, {
+        Ce(s, {
           title: e.value.pluralLabel
         }, null, 8, ["title"]),
         Ce(Qa, {
@@ -1239,7 +1239,7 @@ const Qa = /* @__PURE__ */ rt(Ka, [["__scopeId", "data-v-12f1e068"], ["__file", 
       ], 64);
     };
   }
-}), Za = /* @__PURE__ */ rt(Xa, [["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Pages/Index.vue"]]);
+}), Za = /* @__PURE__ */ st(Xa, [["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Pages/Index.vue"]]);
 export {
   Za as default
 };

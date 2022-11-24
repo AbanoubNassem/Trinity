@@ -3,7 +3,11 @@ export default interface Field {
 
   label: string;
 
-  attribute: string;
+  columnName: string;
 
   initialValue: string;
+
+  title: string;
+
+  relationshipName?: string;
 }

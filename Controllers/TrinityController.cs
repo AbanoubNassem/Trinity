@@ -41,8 +41,6 @@ public class TrinityController : Controller
         InjectServices(resourceName, resource);
 
         await resource.Setup();
-        if (resource.GetFields().Count == 0)
-            await resource.SetFields();
 
         if (!Request.IsInertiaRequest())
         {
@@ -52,7 +50,7 @@ public class TrinityController : Controller
                     resources = _trinityManager.Resources,
                     resource = resourceObject,
                     paginator = await resource.GetIndexData(),
-                    fields = resource.GetFields()
+                    fields = resource.Fields
                 }
             );
         }
@@ -62,7 +60,7 @@ public class TrinityController : Controller
         {
             resource = resourceObject,
             paginator = await resource.GetIndexData(),
-            fields = resource.GetFields()
+            fields = resource.Fields
         });
     }
 
@@ -73,6 +71,5 @@ public class TrinityController : Controller
 
         _trinityManager.ResourcesTypes[resourceName].Item2["Request"].SetValue(resource, Request);
         _trinityManager.ResourcesTypes[resourceName].Item2["Response"].SetValue(resource, Response);
-        
     }
 }

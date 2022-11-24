@@ -31,7 +31,7 @@ watchEffect(() => {
     const field = fields[key];
     headers.value.push({
       text: field.label,
-      value: field.attribute,
+      value: field.columnName,
     });
   }
 
@@ -39,8 +39,12 @@ watchEffect(() => {
   for (const it of paginator.data) {
     let item = {} as any;
     for (const key in fields) {
-      const attr = fields[key].attribute;
-      item[attr] = it[attr];
+      const field = fields[key];
+      if (field.relationshipName) {
+        item[field.columnName] = it[field.relationshipName][field.title];
+      } else {
+        item[field.columnName] = it[field.columnName];
+      }
     }
     items.value.push(item);
   }

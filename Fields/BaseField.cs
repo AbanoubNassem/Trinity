@@ -1,41 +1,66 @@
 using AbanoubNassem.Trinity.Components;
+using DapperQueryBuilder;
+using Humanizer;
 
 namespace AbanoubNassem.Trinity.Fields;
 
 public abstract class BaseField : BaseComponent
 {
-    private string? _label;
-    private string _attribute = null!;
-    private object? _initialValue;
+    protected BaseField(string columnName)
+    {
+        _columnName = columnName;
+        _label = _columnName.Titleize();
+        _title = columnName;
+    }
 
-    public string? Label => _label;
+    protected virtual void SetUp(string propertyName, Type propertyType)
+    {
+    }
 
-    public string Attribute => _attribute;
+    public virtual void SelectQuery(FluentQueryBuilder query)
+    {
+        query.Select($"{ColumnName:raw}");
+    }
 
-    public object? InitialValue => _initialValue;
 
-    public string? GetLabel() => _label;
+    private string _columnName;
+    public string ColumnName => _columnName;
 
-    public BaseField SetLabel(string? value)
+    public BaseField SetColumnName(string value)
+    {
+        _columnName = value;
+        return this;
+    }
+
+
+    private string _label;
+    public string Label => _label;
+
+    public BaseField SetLabel(string value)
     {
         _label = value;
-
         return this;
     }
 
-    public string GetAttribute() => _attribute;
+    private string _title;
+    public string Title => _title;
 
-    public BaseField SetAttribute(string value)
+    public BaseField SetTitle(string value)
     {
-        _attribute = value;
+        _title = value;
         return this;
     }
 
-    public object? GetInitialValue() => _initialValue;
+    private Action<IDictionary<string, object>>? _formatUsing;
 
-    public BaseField SetInitialValue(object? value)
+    public BaseField FormatUsing(Action<IDictionary<string, dynamic>> formatUsing)
     {
-        _initialValue = value;
+        _formatUsing = formatUsing;
         return this;
+    }
+
+    public void Format(IDictionary<string, dynamic> record)
+    {
+        _formatUsing?.Invoke(record);
     }
 }

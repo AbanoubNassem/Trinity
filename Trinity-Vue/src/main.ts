@@ -53,7 +53,6 @@ axios.interceptors.response.use(function (response) {
   const profiler = window.MiniProfiler as any;
 
   if (profiler && response.headers["x-miniprofiler-ids"]) {
-    console.log(response.headers["x-miniprofiler-ids"]);
     profiler.fetchResults(JSON.parse(response.headers["x-miniprofiler-ids"]));
   }
   return response;
