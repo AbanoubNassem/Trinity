@@ -1,3 +1,4 @@
+using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Managers;
 using InertiaAdapter.Extensions;
@@ -6,8 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Profiling;
-using StackExchange.Profiling.Helpers;
-using StackExchange.Profiling.Storage;
 
 namespace AbanoubNassem.Trinity.Extensions;
 
@@ -54,24 +53,34 @@ public static class AppExtensions
             app.UseMiniProfiler();
         }
 
-        // var assembly = typeof(Controllers.TrinityController).GetTypeInfo().Assembly;
-        // var embeddedFileProvider = new EmbeddedFileProvider(
-        //     assembly,
-        //     "AbanoubNassem.Trinity.wwwroot"
-        // );
+
         app.MapRazorPages();
         app.UseDefaultFiles();
-        app.UseStaticFiles(new StaticFileOptions
+
+        if (app.Environment.IsDevelopment())
         {
-            FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "../Trinity/wwwroot")),
-            RequestPath = "/trinity"
-        });
-        // app.UseStaticFiles(new StaticFileOptions
-        // {
-        //     FileProvider = embeddedFileProvider,
-        //     RequestPath = "/trinity"
-        // });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "../Trinity/wwwroot")),
+                RequestPath = "/trinity"
+            });
+        }
+        else
+        {
+            var assembly = typeof(Controllers.TrinityController).GetTypeInfo().Assembly;
+            var embeddedFileProvider = new EmbeddedFileProvider(
+                assembly,
+                "AbanoubNassem.Trinity.wwwroot"
+            );
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = embeddedFileProvider,
+                RequestPath = "/trinity"
+            });
+        }
+
+
         app.UseInertia();
         app.UseRouting();
 

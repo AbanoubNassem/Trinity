@@ -87,7 +87,7 @@ public abstract class TrinityResource : ITrinityResource
             .From($"{Table:raw}").Sql;
 
         var selectQuery = query
-            .Limit((1 - 1) * 12, 12)
+            .Limit((1 - 1) * 250, 250)
             .Sql;
 
 
@@ -104,14 +104,27 @@ public abstract class TrinityResource : ITrinityResource
         {
             if (filed is not HasRelationshipField field) continue;
 
-            var ids = li.Select(x => x[field.ColumnName]);
+            var columnName = field.ColumnName.Split('.')[0];
+            var foreignColumn = field.ForeignColumn.Split('.')[0];
+            var relationshipName = field.RelationshipName.Split('.')[0];
+
+            var ids = li.Select(x => x[columnName]);
             var results = (await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), ids))
                 .Cast<IDictionary<string, object>>();
 
+
             foreach (var result in results)
             {
-                li.Single(x => x[field.ColumnName].Equals(result[field.ForeignColumn]))
-                    .Add(field.RelationshipName, result);
+                var relation = li.First(x => x[columnName].Equals(result[foreignColumn]));
+
+                if (relation != null)
+                {
+                    relation[relationshipName] = result;
+                }
+                else
+                {
+                    relation.Add(relationshipName, result);
+                }
             }
         }
 
@@ -129,10 +142,10 @@ public abstract class TrinityResource : ITrinityResource
             TotalCount = count,
             Data = li,
             CurrentPage = 1,
-            PerPage = 12,
-            TotalPages = (int)Math.Ceiling(count / (double)12)
+            PerPage = 250,
+            TotalPages = (int)Math.Ceiling(count / (double)250)
         };
-        // return await query.Paginate<TModel>(Table!, 1, 12);
+        // return await query.Paginate<TModel>(Table!, 1, 250);
     }
 
 
@@ -181,7 +194,7 @@ public abstract class TrinityResource : ITrinityResource
     //
     //     IEnumerable<TModel> li;
     //
-    //     query.Limit((1 - 1) * 12, 12);
+    //     query.Limit((1 - 1) * 250, 250);
     //
     //     if (parameters.Count > 1)
     //     {
@@ -205,8 +218,8 @@ public abstract class TrinityResource : ITrinityResource
     //     return new Pagination()
     //     {
     //         Data = li,
-    //         PerPage = 12
+    //         PerPage = 250
     //     };
-    //     return await query.Paginate<TModel>(Table!, 1, 12);
+    //     return await query.Paginate<TModel>(Table!, 1, 250);
     // }
 }

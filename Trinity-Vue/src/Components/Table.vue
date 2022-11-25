@@ -31,7 +31,7 @@ watchEffect(() => {
     const field = fields[key];
     headers.value.push({
       text: field.label,
-      value: field.columnName,
+      value: field.columnName.replace(".", "_"),
     });
   }
 
@@ -40,8 +40,18 @@ watchEffect(() => {
     let item = {} as any;
     for (const key in fields) {
       const field = fields[key];
+      const columnName = field.columnName.replace(".", "_");
+
       if (field.relationshipName) {
-        item[field.columnName] = it[field.relationshipName][field.title];
+        const relations = field.relationshipName.split(".");
+        let record = it;
+        for (let i = 0; i < relations.length; i++) {
+          if (record === null) continue;
+
+          record = record[relations[i]];
+        }
+
+        item[columnName] = record !== null ? record[field.title] : null;
       } else {
         item[field.columnName] = it[field.columnName];
       }

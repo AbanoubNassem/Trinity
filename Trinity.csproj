@@ -22,9 +22,9 @@
     </ItemGroup>
     
 
-<!--    <ItemGroup>-->
-<!--        <EmbeddedResource Include="wwwroot/**/**/**/*" Pack="false" />-->
-<!--    </ItemGroup>-->
+    <ItemGroup>
+        <EmbeddedResource Include="wwwroot/**/**/**/*" Pack="true" />
+    </ItemGroup>
     
     
 </Project>

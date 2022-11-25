@@ -1,28 +1,15 @@
 <template>
-  <div role="status" class="max-w-sm animate-pulse">
-    <div
-      class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"
-    ></div>
-    <div
-      class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"
-    ></div>
-    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-    <div
-      class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"
-    ></div>
-    <div
-      class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"
-    ></div>
-    <div
-      class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"
-    ></div>
-    <span class="sr-only">Loading...</span>
-  </div>
+  <v-skeleton-loader
+    v-bind="attrs"
+    type="card-avatar, article, actions"
+  ></v-skeleton-loader>
 </template>
 
-<script>
-export default {
-  name: "Home",
+<script lang="ts" setup>
+let attrs: {
+  class: "mb-6";
+  boilerplate: true;
+  elevation: 2;
 };
 </script>
 
