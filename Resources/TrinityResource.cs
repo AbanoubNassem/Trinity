@@ -1,11 +1,6 @@
-using System.Collections;
 using System.Data;
-using System.Linq.Expressions;
-using System.Reflection;
 using System.Text.Json.Serialization;
-using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Fields;
-using AbanoubNassem.Trinity.Managers;
 using AbanoubNassem.Trinity.RequestHelpers;
 using Dapper;
 using DapperQueryBuilder;
@@ -98,41 +93,19 @@ public abstract class TrinityResource : ITrinityResource
 
         var count = await multi.ReadSingleAsync<int>();
 
-        var li = (await multi.ReadAsync()).Cast<IDictionary<string, object>>();
+        var result = ((await multi.ReadAsync()).Cast<IDictionary<string, object?>>()).ToList();
 
         foreach (var filed in Fields.Values)
         {
             if (filed is not HasRelationshipField field) continue;
-
-            var columnName = field.ColumnName.Split('.')[0];
-            var foreignColumn = field.ForeignColumn.Split('.')[0];
-            var relationshipName = field.RelationshipName.Split('.')[0];
-
-            var ids = li.Select(x => x[columnName]);
-            var results = (await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), ids))
-                .Cast<IDictionary<string, object>>();
-
-
-            foreach (var result in results)
-            {
-                var relation = li.First(x => x[columnName].Equals(result[foreignColumn]));
-
-                if (relation != null)
-                {
-                    relation[relationshipName] = result;
-                }
-                else
-                {
-                    relation.Add(relationshipName, result);
-                }
-            }
+            await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result);
         }
 
-        foreach (var result in li)
+        foreach (var record in result)
         {
             foreach (BaseField field in Fields.Values)
             {
-                field.Format(result);
+                field.Format(record);
             }
         }
 
@@ -140,7 +113,7 @@ public abstract class TrinityResource : ITrinityResource
         return new Pagination
         {
             TotalCount = count,
-            Data = li,
+            Data = result,
             CurrentPage = 1,
             PerPage = 250,
             TotalPages = (int)Math.Ceiling(count / (double)250)

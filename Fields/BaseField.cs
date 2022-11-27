@@ -59,7 +59,7 @@ public abstract class BaseField : BaseComponent
         return this;
     }
 
-    public void Format(IDictionary<string, dynamic> record)
+    public void Format(IDictionary<string, object?> record)
     {
         _formatUsing?.Invoke(record);
     }

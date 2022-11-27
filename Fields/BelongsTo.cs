@@ -6,13 +6,10 @@ public class BelongsTo : HasRelationshipField
 {
     public override string ComponentName => "BelongsTo";
 
-    private readonly string _localColumnNames;
-
     public BelongsTo(string localColumnNames, string relationTables, string foreignColumnNames,
         string relationshipName, string relationTitleColumn)
         : base(localColumnNames, foreignColumnNames, relationTables)
     {
-        _localColumnNames = localColumnNames;
 
         SetTitle(relationTitleColumn);
 
@@ -21,8 +18,6 @@ public class BelongsTo : HasRelationshipField
 
     public BelongsTo(string columnName, string relationTitleColumn, string? relationshipName = null) : base(columnName)
     {
-        _localColumnNames = columnName;
-
         SetTitle(relationTitleColumn);
 
         if (relationshipName != null)
@@ -31,24 +26,32 @@ public class BelongsTo : HasRelationshipField
         }
     }
 
-    public override async Task<IEnumerable<dynamic>> RunRelationQuery(FluentQueryBuilder query, IEnumerable<object> ids)
+    public override async Task RunRelationQuery(FluentQueryBuilder query,
+        IList<IDictionary<string, object?>> entities)
     {
-        var localColumns = _localColumnNames.Split('.');
+        var localColumns = ColumnName.Split('.');
         var foreignTables = ForeignTable.Split('.');
         var foreignColumns = ForeignColumn.Split('.');
         var relationshipNames = RelationshipName.Split('.');
 
-        var result = (await query.Select($"*")
-            .From($"{foreignTables[0]:raw}")
-            .Where($"{foreignColumns[0]:raw} in ({string.Join(',', ids):raw})")
-            .QueryAsync()).Cast<IDictionary<string, object>>().ToList();
 
+        var temp = entities;
 
-        var temp = result;
-
-        for (var i = 1; i < foreignTables.Length; i++)
+        for (var i = 0; i < foreignTables.Length; i++)
         {
-            var innerIds = result.Select(x => x[localColumns[i]]);
+            var loadedBefore = entities.Where(x => x[relationshipNames[i]] != null)
+                .Select(x => x[relationshipNames[i]])
+                .Cast<IDictionary<string, object?>>()
+                .ToList();
+
+            if (loadedBefore.Any())
+            {
+                temp = loadedBefore;
+                continue;
+            }
+
+            var i1 = i;
+            var innerIds = temp.Select(x => x[localColumns[i1]]);
 
             var q = query.Connection.FluentQueryBuilder()
                 .Select($"*")
@@ -62,8 +65,8 @@ public class BelongsTo : HasRelationshipField
             {
                 var relation = tempResult.SingleOrDefault(x => x[foreignColumns[i]].Equals(item[localColumns[i]]));
                 if (relation == null) continue;
-                
-                
+
+
                 if (item.ContainsKey(relationshipNames[i]))
                 {
                     item[relationshipNames[i]] = relation;
@@ -74,9 +77,7 @@ public class BelongsTo : HasRelationshipField
                 }
             }
 
-            temp = tempResult;
+            temp = tempResult.ToList()!;
         }
-
-        return result;
     }
 }

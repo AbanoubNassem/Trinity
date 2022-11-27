@@ -13,7 +13,7 @@ public abstract class HasRelationshipField : BaseField
         _relationshipName = ForeignTable.Singularize().Camelize();
     }
 
-    public abstract Task<IEnumerable<dynamic>> RunRelationQuery(FluentQueryBuilder query, IEnumerable<object> ids);
+    public abstract Task RunRelationQuery(FluentQueryBuilder query, IList<IDictionary<string, object?>> entities);
 
     public override void SelectQuery(FluentQueryBuilder query)
     {

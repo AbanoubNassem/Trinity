@@ -18,7 +18,7 @@
     <Column
       v-for="field in fields"
       :field="field.columnName.replace('.', '_')"
-      :header="field.title"
+      :header="field.label"
       :key="field.title"
     ></Column>
 
