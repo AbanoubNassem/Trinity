@@ -34,7 +34,7 @@ public static class AppExtensions
 
         services.AddMiniProfiler(conf =>
         {
-            conf.PopupRenderPosition = RenderPosition.Right;
+            conf.PopupRenderPosition = RenderPosition.BottomRight;
             conf.ColorScheme = ColorScheme.Auto;
             conf.ShowControls = true;
             conf.PopupMaxTracesToShow = 4;

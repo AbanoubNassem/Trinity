@@ -1,19 +1,19 @@
-import "vuetify/styles";
-import "@mdi/font/css/materialdesignicons.css";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "vue3-easy-data-table/dist/style.css";
-import "./assets/main.css";
+import "./assets/layout.scss";
 
-import { createVuetify } from "vuetify";
-import { aliases, mdi } from "vuetify/iconsets/mdi";
-import { fa } from "vuetify/iconsets/fa";
-import { createApp, h } from "vue";
+import { createApp, h, reactive } from "vue";
 import { createPinia } from "pinia";
 import { createInertiaApp } from "@inertiajs/inertia-vue3";
 import axios from "axios";
+
+import PrimeVue from "primevue/config";
+import StyleClass from "primevue/styleclass";
+
 import Layout from "./Shared/Layout.vue";
 import AppHead from "./Components/AppHead.vue";
-import AppLink from "./Components/AppLink.vue";
+
+import Tooltip from "primevue/tooltip";
+import Ripple from "primevue/ripple";
+import BadgeDirective from "primevue/badgedirective";
 
 createInertiaApp({
   resolve: async (name) => {
@@ -27,24 +27,33 @@ createInertiaApp({
   },
   // @ts-ignore
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+    // const routes = [{ path: "/", component: App }];
+    // const router = createRouter({
+    //   history: createWebHashHistory(),
+    //   routes,
+    // });
+
+    const app = createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(createPinia())
-      .use(
-        createVuetify({
-          icons: {
-            defaultSet: "mdi",
-            aliases,
-            sets: {
-              mdi,
-              fa,
-            },
-          },
-        })
-      )
-      .component("AppHead", AppHead)
-      .component("AppLink", AppLink)
-      .mount(el);
+      // .use(router)
+      .use(PrimeVue)
+      .directive("styleclass", StyleClass)
+      .directive("tooltip", Tooltip)
+      .directive("ripple", Ripple)
+      // .directive('code', CodeHighlight),
+      .directive("badge", BadgeDirective)
+      .component("AppHead", AppHead);
+
+    app.provide(
+      "appState",
+      reactive({
+        theme: "tailwind-light",
+        darkTheme: false,
+      })
+    );
+
+    app.mount(el);
   },
 });
 

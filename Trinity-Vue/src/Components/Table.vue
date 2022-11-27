@@ -1,18 +1,43 @@
 <template>
-  <Vue3EasyDataTable
-    class="elevation-1"
-    :headers="headers"
-    :items="items"
-    :rows-per-page="paginator.perPage"
+  <DataTable
+    :value="items"
+    :paginator="items.length > 0"
+    :rows="10"
+    :paginatorTemplate="{
+      '640px': 'PrevPageLink CurrentPageReport NextPageLink',
+      '960px':
+        'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
+      '1300px':
+        'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
+      default:
+        'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown',
+    }"
+    responsiveLayout="scroll"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
   >
-  </Vue3EasyDataTable>
+    <Column
+      v-for="field in fields"
+      :field="field.columnName.replace('.', '_')"
+      :header="field.title"
+      :key="field.title"
+    ></Column>
+
+    <template #paginatorstart>
+      <Button type="button" icon="pi pi-refresh" class="p-button-text" />
+    </template>
+    <template #paginatorend>
+      <Button type="button" icon="pi pi-cloud" class="p-button-text" />
+    </template>
+  </DataTable>
 </template>
 
 <script lang="ts" setup>
 import type Field from "@/Models/Field";
 import { ref, watchEffect } from "vue";
 
-import Vue3EasyDataTable, { Header } from "vue3-easy-data-table";
+import Button from "primevue/button";
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
 import type IPaginator from "@/Models/Paginator";
 
 const props = defineProps<{
@@ -20,20 +45,10 @@ const props = defineProps<{
   paginator: IPaginator;
 }>();
 
-const headers = ref<Array<Header>>([]);
 const items = ref<Array<any>>([]);
 
 watchEffect(() => {
   const { fields, paginator } = props;
-
-  headers.value = [];
-  for (const key in fields) {
-    const field = fields[key];
-    headers.value.push({
-      text: field.label,
-      value: field.columnName.replace(".", "_"),
-    });
-  }
 
   items.value = [];
   for (const it of paginator.data) {
@@ -60,72 +75,3 @@ watchEffect(() => {
   }
 });
 </script>
-
-<!--suppress CssUnresolvedCustomProperty -->
-<style scoped>
-.v-theme--dark .customize-table {
-  --easy-table-border: 1px solid
-    rgba(var(--v-border-color), var(--v-border-opacity));
-  --easy-table-row-border: 1px solid
-    rgba(var(--v-border-color), var(--v-border-opacity));
-
-  --easy-table-header-font-size: 14px;
-  --easy-table-header-height: 50px;
-  --easy-table-header-font-color: rgba(
-    var(--v-theme-on-surface),
-    var(--v-high-emphasis-opacity)
-  );
-  --easy-table-header-background-color: rgb(var(--v-theme-surface));
-
-  --easy-table-header-item-padding: 10px 15px;
-
-  --easy-table-body-even-row-font-color: rgba(
-    var(--v-theme-on-surface),
-    var(--v-high-emphasis-opacity)
-  );
-  --easy-table-body-even-row-background-color: #4c5d7a;
-
-  --easy-table-body-row-font-color: rgba(
-    var(--v-theme-on-surface),
-    var(--v-high-emphasis-opacity)
-  );
-  --easy-table-body-row-background-color: rgb(var(--v-theme-surface));
-  --easy-table-body-row-height: 50px;
-  --easy-table-body-row-font-size: 14px;
-
-  --easy-table-body-row-hover-font-color: rgba(
-    var(--v-theme-on-surface),
-    var(--v-high-emphasis-opacity)
-  );
-  --easy-table-body-row-hover-background-color: rgba(
-    var(--v-theme-on-surface),
-    calc(0.04 * var(--v-theme-overlay-multiplier))
-  );
-
-  --easy-table-body-item-padding: 10px 15px;
-
-  --easy-table-footer-background-color: rgb(var(--v-theme-surface));
-  --easy-table-footer-font-color: rgba(
-    var(--v-theme-on-surface),
-    var(--v-high-emphasis-opacity)
-  );
-  --easy-table-footer-font-size: 14px;
-  --easy-table-footer-padding: 0px 10px;
-  --easy-table-footer-height: 50px;
-
-  --easy-table-rows-per-page-selector-width: 70px;
-  --easy-table-rows-per-page-selector-option-padding: 10px;
-
-  --easy-table-scrollbar-track-color: #2d3a4f;
-  --easy-table-scrollbar-color: #2d3a4f;
-  --easy-table-scrollbar-thumb-color: #4c5d7a;
-  --easy-table-scrollbar-corner-color: #2d3a4f;
-
-  --easy-table-loading-mask-background-color: #2d3a4f;
-
-  --easy-table-message-font-color: rgba(
-    var(--v-theme-on-surface),
-    var(--v-high-emphasis-opacity)
-  );
-}
-</style>

@@ -1,11 +1,14 @@
 <template>
   <AppHead :title="resource.pluralLabel"></AppHead>
 
-  <Table
-    table-class-name="customize-table"
-    :fields="fields"
-    :paginator="paginator"
-  />
+  <div class="grid">
+    <div class="col-12">
+      <div class="card">
+        <h5>{{ resource.pluralLabel }}</h5>
+        <Table :paginator="paginator" :fields="fields" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
