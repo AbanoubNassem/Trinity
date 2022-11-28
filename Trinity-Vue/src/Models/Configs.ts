@@ -4,6 +4,7 @@ interface Configs {
   prefix: String;
   title: String;
   progressSettings: ProgressSettings;
+  rowsPerPageOptions: Array<number>;
   themeMode: ThemeMode;
 }
 

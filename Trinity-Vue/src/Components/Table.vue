@@ -1,27 +1,37 @@
 <template>
   <DataTable
-    :value="items"
-    :paginator="items.length > 0"
-    :rows="10"
     :paginatorTemplate="{
       '640px': 'PrevPageLink CurrentPageReport NextPageLink',
-      '960px':
-        'FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink',
-      '1300px':
-        'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink',
       default:
-        'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown',
+        'CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
     }"
-    responsiveLayout="scroll"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+    ref="dt"
+    :value="items"
+    :lazy="true"
+    :paginator="true"
+    :loading="loading"
+    :rows="paginator.perPage"
+    :first="(paginator.currentPage - 1) * paginator.perPage"
+    :totalRecords="paginator.totalCount"
+    :rowsPerPageOptions="configStore.configs.rowsPerPageOptions"
+    responsiveLayout="scroll"
+    stateStorage="session"
+    :stateKey="resource.pluralLabel"
+    @page="onPage($event)"
   >
     <Column
       v-for="field in fields"
       :field="field.columnName.replace('.', '_')"
       :header="field.label"
       :key="field.title"
-    ></Column>
+    >
+      <template #body v-if="loading">
+        <Skeleton></Skeleton>
+      </template>
+    </Column>
 
+    <template #loading> </template>
     <template #paginatorstart>
       <Button type="button" icon="pi pi-refresh" class="p-button-text" />
     </template>
@@ -32,21 +42,51 @@
 </template>
 
 <script lang="ts" setup>
-import type Field from "@/Models/Field";
 import { ref, watchEffect } from "vue";
+import { Inertia } from "@inertiajs/inertia";
+import type Field from "@/Models/Field";
+import type IPaginator from "@/Models/Paginator";
+import type { Resource } from "@/Models/Resource";
+import { useConfigStore } from "@/Stores/ConfigStore";
 
 import Button from "primevue/button";
-import DataTable from "primevue/datatable";
+import DataTable, { DataTablePageEvent } from "primevue/datatable";
 import Column from "primevue/column";
-import type IPaginator from "@/Models/Paginator";
+import Skeleton from "primevue/skeleton";
+
+const configStore = useConfigStore();
 
 const props = defineProps<{
   fields: { [key: string]: Field };
   paginator: IPaginator;
+  resource: Resource;
 }>();
 
-const items = ref<Array<any>>([]);
+const dt = ref();
+const loading = ref(false);
+const onPage = (event: DataTablePageEvent) => {
+  if (
+    event.page + 1 === props.paginator.currentPage &&
+    event.rows === props.paginator.perPage
+  )
+    return;
 
+  Inertia.get(
+    `/${
+      configStore.configs.prefix
+    }/${props.resource.pluralLabel.toLowerCase()}`,
+    { page: event.page + 1, perPage: event.rows },
+    {
+      preserveScroll: true,
+      preserveState: true,
+      replace: true,
+      onStart: () => (loading.value = true),
+      onFinish: () => (loading.value = false),
+    }
+  );
+};
+
+const items = ref<Array<any>>([]);
 watchEffect(() => {
   const { fields, paginator } = props;
 
@@ -75,3 +115,9 @@ watchEffect(() => {
   }
 });
 </script>
+
+<style lang="scss">
+.p-datatable .p-datatable-loading-overlay {
+  display: none !important;
+}
+</style>

@@ -1,5 +1,6 @@
 using System.Data;
 using System.Text.Json.Serialization;
+using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Fields;
 using AbanoubNassem.Trinity.RequestHelpers;
 using Dapper;
@@ -22,8 +23,9 @@ public interface ITrinityResource
 
 public abstract class TrinityResource : ITrinityResource
 {
-    protected IServiceProvider ServiceProvider { get; init; } = null!;
+    protected TrinityConfigurations Configurations { get; init; } = null!;
 
+    protected IServiceProvider ServiceProvider { get; init; } = null!;
     protected HttpRequest Request { get; init; } = null!;
 
     protected HttpResponse Response { get; init; } = null!;
@@ -65,6 +67,14 @@ public abstract class TrinityResource : ITrinityResource
 
     public virtual async Task<IPaginator> GetIndexData()
     {
+        var page = int.Parse(Request.Query["page"].FirstOrDefault() ?? "1");
+
+        var perPage = int.Parse(Request.Query["perPage"].FirstOrDefault() ?? "10");
+        if (perPage > Configurations.MaxPaginationPerPageCount)
+        {
+            perPage = Configurations.MaxPaginationPerPageCount;
+        }
+
         using var conn = ConnectionFactory();
 
         var query = (FluentQueryBuilder)conn.FluentQueryBuilder();
@@ -82,14 +92,12 @@ public abstract class TrinityResource : ITrinityResource
             .From($"{Table:raw}").Sql;
 
         var selectQuery = query
-            .Limit((1 - 1) * 250, 250)
+            .Limit((page - 1) * perPage, perPage)
             .Sql;
 
 
         using var multi =
             await query.Connection.QueryMultipleAsync($"{countQuery};{selectQuery};");
-
-        Console.WriteLine($"{selectQuery};");
 
         var count = await multi.ReadSingleAsync<int>();
 
@@ -114,11 +122,11 @@ public abstract class TrinityResource : ITrinityResource
         {
             TotalCount = count,
             Data = result,
-            CurrentPage = 1,
-            PerPage = 250,
-            TotalPages = (int)Math.Ceiling(count / (double)250)
+            CurrentPage = page,
+            PerPage = perPage,
+            TotalPages = (int)Math.Ceiling(count / (double)perPage)
         };
-        // return await query.Paginate<TModel>(Table!, 1, 250);
+        // return await query.Paginate<TModel>(Table!, 1, 10);
     }
 
 
@@ -167,7 +175,7 @@ public abstract class TrinityResource : ITrinityResource
     //
     //     IEnumerable<TModel> li;
     //
-    //     query.Limit((1 - 1) * 250, 250);
+    //     query.Limit((1 - 1) * 10, 10);
     //
     //     if (parameters.Count > 1)
     //     {
@@ -191,8 +199,8 @@ public abstract class TrinityResource : ITrinityResource
     //     return new Pagination()
     //     {
     //         Data = li,
-    //         PerPage = 250
+    //         PerPage = 10
     //     };
-    //     return await query.Paginate<TModel>(Table!, 1, 250);
+    //     return await query.Paginate<TModel>(Table!, 1, 10);
     // }
 }

@@ -45,6 +45,9 @@ public class TrinityManager
                     .SetValue(resource, plural.ToLower());
             }
 
+            resourceType.GetProperty("Configurations", flags)!
+                .SetValue(resource, _configurations);
+
             properties.Add("ServiceProvider",
                 resourceType.GetProperty("ServiceProvider", flags)!
             );

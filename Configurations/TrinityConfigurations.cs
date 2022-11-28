@@ -11,6 +11,10 @@ public class TrinityConfigurations
     public string Title { get; set; } = "Trinity";
 
     public ProgressConfigurations ProgressSettings { get; set; } = new();
+    
+    public int MaxPaginationPerPageCount { get; set; } = 250;
+
+    public List<int> RowsPerPageOptions { get; set; } = new() { 10, 50, 150, 250 };
 
     public ThemeMode ThemeMode { get; set; } = ThemeMode.Light;
 }
@@ -18,7 +22,7 @@ public class TrinityConfigurations
 public class ProgressConfigurations
 {
     public int Delay { get; set; } = 250;
-    public string Color { get; set; } = "#29d";
+    public string Color { get; set; } = "#4F46E5";
 
     public bool ShowSpinner { get; set; } = true;
 }
