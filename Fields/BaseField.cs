@@ -19,7 +19,7 @@ public abstract class BaseField : BaseComponent
 
     public virtual void SelectQuery(FluentQueryBuilder query)
     {
-        query.Select($"{ColumnName:raw}");
+        query.Select($"t.{ColumnName:raw}");
     }
 
 
@@ -48,6 +48,15 @@ public abstract class BaseField : BaseComponent
     public BaseField SetTitle(string value)
     {
         _title = value;
+        return this;
+    }
+
+    private string? _sortable;
+    public string? Sortable => _sortable;
+
+    public BaseField SetSortable(string value = "ASC")
+    {
+        _sortable = value;
         return this;
     }
 

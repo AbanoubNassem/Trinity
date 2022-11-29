@@ -1,8 +1,8 @@
 <template>
   <div class="layout-topbar">
     <a class="layout-topbar-logo">
-      <img alt="Logo" :src="topbarImage()" />
-      <span>SAKAI</span>
+      <img alt="Logo" :src="logo" />
+      <span>{{ configStore.configs.title }}</span>
     </a>
     <Button
       class="p-link layout-menu-button layout-topbar-button"
@@ -48,10 +48,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineEmits, inject } from "vue";
+import { defineEmits } from "vue";
 import Button from "primevue/button";
+import { useConfigStore } from "@/Stores/ConfigStore";
+import { useLogo } from "@/Composables/trinity_logo";
 
-const appState = inject<any>("appState");
+const configStore = useConfigStore();
 
 const emit = defineEmits(["menu-toggle", "topbar-menu-toggle"]);
 
@@ -63,12 +65,5 @@ function onTopbarMenuToggle(event: Event | undefined) {
   emit("topbar-menu-toggle", event);
 }
 
-function topbarImage() {
-  // return "images/logo-white.svg";
-  return appState.darkTheme
-    ? "images/logo-white.svg"
-    : "https://www.primefaces.org/primevue/demo/images/primevue-logo-dark.svg";
-}
-
-const darkTheme = computed(() => appState.darkTheme);
+const logo = useLogo();
 </script>

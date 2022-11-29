@@ -10,4 +10,6 @@ export default interface Field {
   title: string;
 
   relationshipName?: string;
+
+  sortable?: string;
 }

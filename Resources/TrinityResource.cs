@@ -1,4 +1,5 @@
 using System.Data;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Fields;
@@ -68,11 +69,20 @@ public abstract class TrinityResource : ITrinityResource
     public virtual async Task<IPaginator> GetIndexData()
     {
         var page = int.Parse(Request.Query["page"].FirstOrDefault() ?? "1");
-
         var perPage = int.Parse(Request.Query["perPage"].FirstOrDefault() ?? "10");
         if (perPage > Configurations.MaxPaginationPerPageCount)
         {
             perPage = Configurations.MaxPaginationPerPageCount;
+        }
+
+        List<Sort>? sorts = null;
+
+        if (Request.Query.TryGetValue("sort", out var s))
+        {
+            sorts = JsonSerializer.Deserialize<List<Sort>>(s, new JsonSerializerOptions()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
         }
 
         using var conn = ConnectionFactory();
@@ -82,9 +92,21 @@ public abstract class TrinityResource : ITrinityResource
         query.From($"{Table:raw} t");
 
 
-        foreach (var field in Fields.Values)
+        foreach (BaseField field in Fields.Values)
         {
-            ((BaseField)field).SelectQuery(query);
+            field.SelectQuery(query);
+        }
+
+        if (sorts != null)
+        {
+            foreach (var sort in sorts)
+            {
+                if (!Fields.TryGetValue(sort.Field, out var field) || field is HasRelationshipField) continue;
+
+                var direction = sort.Order == 1 ? "ASC" : "DESC";
+
+                query.OrderBy($"t.{sort.Field:raw} {direction:raw}");
+            }
         }
 
         var countQuery = query.Connection.FluentQueryBuilder()
@@ -95,6 +117,7 @@ public abstract class TrinityResource : ITrinityResource
             .Limit((page - 1) * perPage, perPage)
             .Sql;
 
+        Console.WriteLine(selectQuery);
 
         using var multi =
             await query.Connection.QueryMultipleAsync($"{countQuery};{selectQuery};");
@@ -103,10 +126,12 @@ public abstract class TrinityResource : ITrinityResource
 
         var result = ((await multi.ReadAsync()).Cast<IDictionary<string, object?>>()).ToList();
 
-        foreach (var filed in Fields.Values)
+        foreach (BaseField filed in Fields.Values)
         {
             if (filed is not HasRelationshipField field) continue;
-            await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result);
+            result = await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result,
+                sorts?.SingleOrDefault(x => x.Field == field.ColumnName)
+            );
         }
 
         foreach (var record in result)
@@ -126,81 +151,5 @@ public abstract class TrinityResource : ITrinityResource
             PerPage = perPage,
             TotalPages = (int)Math.Ceiling(count / (double)perPage)
         };
-        // return await query.Paginate<TModel>(Table!, 1, 10);
     }
-
-
-    // public virtual async Task<IPaginator> GetIndexDataDyna()
-    // {
-    //     using var conn = ConnectionFactory();
-    //
-    //     var query = (FluentQueryBuilder)conn.FluentQueryBuilder();
-    //
-    //     query.From($"{Table:raw} t");
-    //
-    //     var modelExpr = Expression.Parameter(typeof(TModel), "model");
-    //     var parameters = new List<ParameterExpression>();
-    //     var expressions = new List<Expression>();
-    //     var types = new List<Type> { typeof(TModel) };
-    //
-    //     parameters.Add(modelExpr);
-    //
-    //     foreach (var field in Fields.Fields.Values)
-    //     {
-    //         if (field is IRelationshipField)
-    //         {
-    //             types.Add(typeof(TModel).GetProperty(field.PropertyName)!.PropertyType);
-    //
-    //             var parameter = Expression.Parameter(types.Last(),
-    //                 field.PropertyName);
-    //             parameters.Add(parameter);
-    //
-    //             var propertyExpression = Expression.Property(modelExpr, field.PropertyName);
-    //             expressions.Add(Expression.Assign(propertyExpression, parameter));
-    //         }
-    //
-    //         field.SelectQuery(query);
-    //     }
-    //
-    //     Console.WriteLine(query.Sql);
-    //
-    //     types.Add(typeof(TModel));
-    //     expressions.Add(modelExpr);
-    //
-    //     var c = Expression.Lambda(Expression.Block(expressions),
-    //         "BelongsTo",
-    //         true,
-    //         parameters
-    //     ).Compile();
-    //
-    //     IEnumerable<TModel> li;
-    //
-    //     query.Limit((1 - 1) * 10, 10);
-    //
-    //     if (parameters.Count > 1)
-    //     {
-    //         var t = typeof(SqlMapper)
-    //             .GetMethods(BindingFlags.Public | BindingFlags.Static)
-    //             .FirstOrDefault(x =>
-    //                 x.Name == "QueryAsync" && x.ContainsGenericParameters &&
-    //                 x.GetGenericArguments().Length == parameters.Count + 1);
-    //
-    //
-    //         li = (await ((Task<IEnumerable<TModel>>)t?.MakeGenericMethod(types.ToArray())
-    //             .Invoke(conn, new object?[] { conn, query.Sql, c, null, null, true, "customerNumber", null, null })!)!);
-    //     }
-    //     else
-    //     {
-    //         li = await query.QueryAsync<TModel>();
-    //     }
-    //
-    //     // var lii = (conn.Query<TModel>(query.Sql));
-    //
-    //     return new Pagination()
-    //     {
-    //         Data = li,
-    //         PerPage = 10
-    //     };
-    //     return await query.Paginate<TModel>(Table!, 1, 10);
-    // }
 }

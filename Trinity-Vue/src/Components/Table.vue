@@ -16,15 +16,19 @@
     :totalRecords="paginator.totalCount"
     :rowsPerPageOptions="configStore.configs.rowsPerPageOptions"
     responsiveLayout="scroll"
-    stateStorage="session"
     :stateKey="resource.pluralLabel"
     @page="onPage($event)"
+    removableSort
+    sortMode="multiple"
+    :multiSortMeta="multiSortMeta"
+    @sort="onSort($event)"
   >
     <Column
       v-for="field in fields"
       :field="field.columnName.replace('.', '_')"
       :header="field.label"
       :key="field.title"
+      :sortable="field.sortable != null"
     >
       <template #body v-if="loading">
         <Skeleton></Skeleton>
@@ -32,12 +36,6 @@
     </Column>
 
     <template #loading> </template>
-    <template #paginatorstart>
-      <Button type="button" icon="pi pi-refresh" class="p-button-text" />
-    </template>
-    <template #paginatorend>
-      <Button type="button" icon="pi pi-cloud" class="p-button-text" />
-    </template>
   </DataTable>
 </template>
 
@@ -49,10 +47,13 @@ import type IPaginator from "@/Models/Paginator";
 import type { Resource } from "@/Models/Resource";
 import { useConfigStore } from "@/Stores/ConfigStore";
 
-import Button from "primevue/button";
-import DataTable, { DataTablePageEvent } from "primevue/datatable";
+import DataTable, {
+  DataTablePageEvent,
+  DataTableSortEvent,
+} from "primevue/datatable";
 import Column from "primevue/column";
 import Skeleton from "primevue/skeleton";
+import { useUrlParams } from "@/Composables/trinity_url_params";
 
 const configStore = useConfigStore();
 
@@ -64,6 +65,14 @@ const props = defineProps<{
 
 const dt = ref();
 const loading = ref(false);
+
+let sortEvent = ref<DataTableSortEvent>();
+const onSort = (event: DataTableSortEvent) => {
+  sortEvent.value = event;
+  fetchTable();
+};
+
+let pageEvent = ref<DataTablePageEvent>();
 const onPage = (event: DataTablePageEvent) => {
   if (
     event.page + 1 === props.paginator.currentPage &&
@@ -71,11 +80,27 @@ const onPage = (event: DataTablePageEvent) => {
   )
     return;
 
+  pageEvent.value = event;
+  fetchTable();
+};
+
+const fetchTable = () => {
   Inertia.get(
     `/${
       configStore.configs.prefix
     }/${props.resource.pluralLabel.toLowerCase()}`,
-    { page: event.page + 1, perPage: event.rows },
+    {
+      page: pageEvent?.value
+        ? pageEvent.value?.page + 1
+        : props.paginator.currentPage,
+      perPage: pageEvent?.value?.rows ?? props.paginator.perPage,
+      sort: JSON.stringify(
+        sortEvent?.value?.multiSortMeta?.map((s) => {
+          s.field = s.field.replace("_", ".");
+          return s;
+        })
+      ),
+    },
     {
       preserveScroll: true,
       preserveState: true,
@@ -85,10 +110,19 @@ const onPage = (event: DataTablePageEvent) => {
     }
   );
 };
-
 const items = ref<Array<any>>([]);
+const multiSortMeta = ref<Array<any>>([]);
 watchEffect(() => {
   const { fields, paginator } = props;
+  const urlParams = useUrlParams();
+
+  multiSortMeta.value = [];
+  for (const sortable of urlParams.sort ?? []) {
+    multiSortMeta.value.push({
+      field: sortable.field.replace(".", "_"),
+      order: sortable.order,
+    });
+  }
 
   items.value = [];
   for (const it of paginator.data) {

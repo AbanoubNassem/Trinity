@@ -1,3 +1,4 @@
+using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
 
 namespace AbanoubNassem.Trinity.Fields;
@@ -10,7 +11,6 @@ public class BelongsTo : HasRelationshipField
         string relationshipName, string relationTitleColumn)
         : base(localColumnNames, foreignColumnNames, relationTables)
     {
-
         SetTitle(relationTitleColumn);
 
         SetRelationshipName(relationshipName);
@@ -26,8 +26,8 @@ public class BelongsTo : HasRelationshipField
         }
     }
 
-    public override async Task RunRelationQuery(FluentQueryBuilder query,
-        IList<IDictionary<string, object?>> entities)
+    public override async Task<List<IDictionary<string, object?>>> RunRelationQuery(FluentQueryBuilder query,
+        List<IDictionary<string, object?>> entities, Sort? sort = null)
     {
         var localColumns = ColumnName.Split('.');
         var foreignTables = ForeignTable.Split('.');
@@ -78,6 +78,43 @@ public class BelongsTo : HasRelationshipField
             }
 
             temp = tempResult.ToList()!;
+        }
+
+        if (sort != null)
+        {
+            Sort(ref entities, relationshipNames, Title, sort);
+        }
+
+        return entities;
+    }
+
+    private IDictionary<string, object?>? GetNestedRelationship(IDictionary<string, object?>? entity,
+        string[] relationshipNames, int index = -1)
+    {
+        while (true)
+        {
+            var i = index + 1;
+
+            if (entity == null || i == relationshipNames.Length) return entity;
+
+            entity = (IDictionary<string, object?>?)entity[relationshipNames[i]];
+            index = i;
+        }
+    }
+
+    private void Sort(ref List<IDictionary<string, object?>> entities,
+        string[] relationshipNames,
+        string columnTitle,
+        Sort sort)
+    {
+        if (sort.Order == 1)
+        {
+            entities = entities.OrderBy(x => GetNestedRelationship(x, relationshipNames)?[columnTitle]).ToList();
+        }
+        else
+        {
+            entities = entities.OrderByDescending(x => GetNestedRelationship(x, relationshipNames)?[columnTitle])
+                .ToList();
         }
     }
 }

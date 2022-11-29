@@ -1,3 +1,4 @@
+using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
 using Humanizer;
 
@@ -13,7 +14,8 @@ public abstract class HasRelationshipField : BaseField
         _relationshipName = ForeignTable.Singularize().Camelize();
     }
 
-    public abstract Task RunRelationQuery(FluentQueryBuilder query, IList<IDictionary<string, object?>> entities);
+    public abstract Task<List<IDictionary<string, object?>>> RunRelationQuery(FluentQueryBuilder query,
+        List<IDictionary<string, object?>> list, Sort? sort = null);
 
     public override void SelectQuery(FluentQueryBuilder query)
     {

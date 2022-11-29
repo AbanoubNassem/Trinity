@@ -38,6 +38,8 @@ public static class AppExtensions
             conf.ColorScheme = ColorScheme.Auto;
             conf.ShowControls = true;
             conf.PopupMaxTracesToShow = 4;
+
+            configs.MiniProfilerConfigures?.Invoke(conf);
         });
 
         return services;

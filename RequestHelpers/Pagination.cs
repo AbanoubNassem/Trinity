@@ -18,7 +18,7 @@ public class Pagination : IPaginator
 {
     public int CurrentPage { get; set; }
 
-    public IEnumerable Data { get; set; }
+    public IEnumerable Data { get; set; } = null!;
 
     public int TotalCount { get; set; }
 

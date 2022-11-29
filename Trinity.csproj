@@ -6,7 +6,7 @@
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
         <AssemblyName>AbanoubNassem.Trinity</AssemblyName>
         <RootNamespace>AbanoubNassem.Trinity</RootNamespace>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,18 +23,7 @@
     
 
     <ItemGroup>
-        <EmbeddedResource Include="wwwroot/**/**/**/*" Pack="true" />
-    </ItemGroup>
-    
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\dist\favicon.ico" />
-      <_ContentIncludedByDefault Remove="wwwroot\dist\Home.82ca6a3c.mjs" />
-      <_ContentIncludedByDefault Remove="wwwroot\dist\Index.869853ec.mjs" />
-      <_ContentIncludedByDefault Remove="wwwroot\dist\main.74a5e5d8.mjs" />
-      <_ContentIncludedByDefault Remove="wwwroot\dist\style.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\dist\trinity-vue.mjs" />
-      <_ContentIncludedByDefault Remove="wwwroot\dist\_plugin-vue_export-helper.e9cbb45e.mjs" />
+        <EmbeddedResource Include="wwwroot/**/**/**/*" Pack="false" />
     </ItemGroup>
     
     

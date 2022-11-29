@@ -7,6 +7,11 @@
     "
   >
     <slot />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      :href="configStore.configs.favIcon ?? '/trinity/dist/favicon.ico'"
+    />
   </Head>
 </template>
 
