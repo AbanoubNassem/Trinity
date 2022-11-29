@@ -2,6 +2,7 @@ using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Resources;
 using Humanizer;
+using Microsoft.Extensions.Logging;
 using StackExchange.Profiling;
 
 namespace AbanoubNassem.Trinity.Managers;
@@ -51,7 +52,11 @@ public class TrinityManager
             properties.Add("ServiceProvider",
                 resourceType.GetProperty("ServiceProvider", flags)!
             );
-
+            
+            properties.Add("Logger",
+                resourceType.GetProperty("Logger", flags)!
+            );
+            
             properties.Add("Request",
                 resourceType.GetProperty("Request", flags)!
             );

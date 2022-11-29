@@ -7,6 +7,7 @@ using AbanoubNassem.Trinity.RequestHelpers;
 using Dapper;
 using DapperQueryBuilder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Resources;
 
@@ -17,7 +18,7 @@ public interface ITrinityResource
     public string? Table { get; set; }
     public string? GetDbSetName();
     public Task Setup();
-    public Task<IPaginator> GetIndexData();
+    public Task<IPaginator?> GetIndexData();
 
     public Dictionary<string, object> Fields { get; }
 }
@@ -30,6 +31,8 @@ public abstract class TrinityResource : ITrinityResource
     protected HttpRequest Request { get; init; } = null!;
 
     protected HttpResponse Response { get; init; } = null!;
+    
+    protected ILogger Logger { get; init; } = null!;
     [JsonIgnore] protected Func<IDbConnection> ConnectionFactory { get; init; } = null!;
 
     public virtual string? Label { get; set; }
@@ -66,90 +69,99 @@ public abstract class TrinityResource : ITrinityResource
     }
 
 
-    public virtual async Task<IPaginator> GetIndexData()
+    public virtual async Task<IPaginator?> GetIndexData()
     {
-        var page = int.Parse(Request.Query["page"].FirstOrDefault() ?? "1");
-        var perPage = int.Parse(Request.Query["perPage"].FirstOrDefault() ?? "10");
-        if (perPage > Configurations.MaxPaginationPerPageCount)
+        try
         {
-            perPage = Configurations.MaxPaginationPerPageCount;
-        }
-
-        List<Sort>? sorts = null;
-
-        if (Request.Query.TryGetValue("sort", out var s))
-        {
-            sorts = JsonSerializer.Deserialize<List<Sort>>(s, new JsonSerializerOptions()
+            var page = int.Parse(Request.Query["page"].FirstOrDefault() ?? "1");
+            var perPage = int.Parse(Request.Query["perPage"].FirstOrDefault() ?? "10");
+            if (perPage > Configurations.MaxPaginationPerPageCount)
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
-        }
-
-        using var conn = ConnectionFactory();
-
-        var query = (FluentQueryBuilder)conn.FluentQueryBuilder();
-
-        query.From($"{Table:raw} t");
-
-
-        foreach (BaseField field in Fields.Values)
-        {
-            field.SelectQuery(query);
-        }
-
-        if (sorts != null)
-        {
-            foreach (var sort in sorts)
-            {
-                if (!Fields.TryGetValue(sort.Field, out var field) || field is HasRelationshipField) continue;
-
-                var direction = sort.Order == 1 ? "ASC" : "DESC";
-
-                query.OrderBy($"t.{sort.Field:raw} {direction:raw}");
+                perPage = Configurations.MaxPaginationPerPageCount;
             }
-        }
 
-        var countQuery = query.Connection.FluentQueryBuilder()
-            .Select($"COUNT(*)")
-            .From($"{Table:raw}").Sql;
+            List<Sort>? sorts = null;
 
-        var selectQuery = query
-            .Limit((page - 1) * perPage, perPage)
-            .Sql;
+            if (Request.Query.TryGetValue("sort", out var s))
+            {
+                sorts = JsonSerializer.Deserialize<List<Sort>>(s, new JsonSerializerOptions()
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                });
+            }
 
-        Console.WriteLine(selectQuery);
+            using var conn = ConnectionFactory();
 
-        using var multi =
-            await query.Connection.QueryMultipleAsync($"{countQuery};{selectQuery};");
+            var query = (FluentQueryBuilder)conn.FluentQueryBuilder();
 
-        var count = await multi.ReadSingleAsync<int>();
+            query.From($"{Table:raw} t");
 
-        var result = ((await multi.ReadAsync()).Cast<IDictionary<string, object?>>()).ToList();
 
-        foreach (BaseField filed in Fields.Values)
-        {
-            if (filed is not HasRelationshipField field) continue;
-            result = await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result,
-                sorts?.SingleOrDefault(x => x.Field == field.ColumnName)
-            );
-        }
-
-        foreach (var record in result)
-        {
             foreach (BaseField field in Fields.Values)
             {
-                field.Format(record);
+                field.SelectQuery(query);
             }
+
+            if (sorts != null)
+            {
+                foreach (var sort in sorts)
+                {
+                    if (!Fields.TryGetValue(sort.Field, out var field) || field is HasRelationshipField) continue;
+
+                    var direction = sort.Order == 1 ? "ASC" : "DESC";
+
+                    query.OrderBy($"t.{sort.Field:raw} {direction:raw}");
+                }
+            }
+
+            var countQuery = query.Connection.FluentQueryBuilder()
+                .Select($"COUNT(*)")
+                .From($"{Table:raw}").Sql;
+
+            var selectQuery = query
+                .Limit((page - 1) * perPage, perPage)
+                .Sql;
+
+            Logger.LogInformation(selectQuery);
+
+            using var multi =
+                await query.Connection.QueryMultipleAsync($"{countQuery};{selectQuery};");
+
+            var count = await multi.ReadSingleAsync<int>();
+
+            var result = ((await multi.ReadAsync()).Cast<IDictionary<string, object?>>()).ToList();
+
+            foreach (BaseField filed in Fields.Values)
+            {
+                if (filed is not HasRelationshipField field) continue;
+                result = await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result,
+                    sorts?.SingleOrDefault(x => x.Field == field.ColumnName)
+                );
+            }
+
+            foreach (var record in result)
+            {
+                foreach (BaseField field in Fields.Values)
+                {
+                    field.Format(record);
+                }
+            }
+
+
+            return new Pagination
+            {
+                TotalCount = count,
+                Data = result,
+                CurrentPage = page,
+                PerPage = perPage,
+                TotalPages = (int)Math.Ceiling(count / (double)perPage)
+            };
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, ex.Message);
         }
 
-
-        return new Pagination
-        {
-            TotalCount = count,
-            Data = result,
-            CurrentPage = page,
-            PerPage = perPage,
-            TotalPages = (int)Math.Ceiling(count / (double)perPage)
-        };
+        return null;
     }
 }

@@ -6,6 +6,7 @@ using InertiaAdapter;
 using InertiaAdapter.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Controllers;
 
@@ -68,6 +69,14 @@ public class TrinityController : Controller
     {
         _trinityManager.ResourcesTypes[resourceName].Item2["ServiceProvider"]
             .SetValue(resource, HttpContext.RequestServices);
+
+
+        _trinityManager.ResourcesTypes[resourceName].Item2["Logger"]
+            .SetValue(resource,
+                HttpContext.RequestServices.GetRequiredService(
+                    typeof(ILogger<>).MakeGenericType(resource.GetType())
+                )
+            );
 
         _trinityManager.ResourcesTypes[resourceName].Item2["Request"].SetValue(resource, Request);
         _trinityManager.ResourcesTypes[resourceName].Item2["Response"].SetValue(resource, Response);
