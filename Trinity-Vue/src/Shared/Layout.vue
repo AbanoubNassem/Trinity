@@ -28,7 +28,7 @@ import Configs, { ThemeMode } from "@/Models/Configs";
 import type { Resource } from "@/Models/Resource";
 import { useConfigStore } from "@/Stores/ConfigStore";
 import { InertiaProgress } from "@inertiajs/progress";
-import { computed, provide, ref, watchEffect } from "vue";
+import { computed, ref } from "vue";
 
 import AppTopBar from "@/Components/AppTopbar.vue";
 import AppFooter from "@/Components/AppFooter.vue";

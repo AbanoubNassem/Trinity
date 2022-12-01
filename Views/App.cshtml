@@ -3,6 +3,7 @@
 @using StackExchange.Profiling
 @addTagHelper *, MiniProfiler.AspNetCore.Mvc
 @inject TrinityConfigurations Configurations
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,7 @@
 <body >
 
 @Inertia.Html(Model)
-
+@Html.AntiForgeryToken()
 
 <script type="module" crossorigin src="~/trinity/dist/trinity-vue.mjs"></script>
 <mini-profiler/>

@@ -1,6 +1,7 @@
-import { o as h, c as _, h as O, n as V, p as x, J as A, q as f, K as M, d as N, w, u as y, L as q, j as D, A as F, i as S, F as T, _ as R, r as j, b as k, t as J } from "./main.9d3feb2f.mjs";
-import { a as K, b as H } from "./column.esm.3b97b764.mjs";
-var $ = {
+import { o as h, c as _, h as M, n as O, p as R, J as A, q as f, K as F, d as N, w as S, u as k, L as I, j as J, y as K, i as b, F as $, b as v, t as j, r as D } from "./main.dc407183.mjs";
+import { s as H, a as U } from "./column.esm.d049bfc6.mjs";
+import "./inputtext.esm.f9cb7d7d.mjs";
+var x = {
   name: "Skeleton",
   props: {
     shape: {
@@ -43,14 +44,14 @@ var $ = {
     }
   }
 };
-function U(t, e, c, o, n, u) {
+function V(t, e, c, o, n, u) {
   return h(), _("div", {
-    style: O(u.containerStyle),
-    class: V(u.containerClass),
+    style: M(u.containerStyle),
+    class: O(u.containerClass),
     "aria-hidden": "true"
   }, null, 6);
 }
-function W(t, e) {
+function q(t, e) {
   e === void 0 && (e = {});
   var c = e.insertAt;
   if (!(!t || typeof document > "u")) {
@@ -104,38 +105,38 @@ to {
 }
 }
 `;
-W(E);
-$.render = U;
+q(E);
+x.render = V;
 function G() {
   return new Proxy(new URLSearchParams(window.location.search), {
     get: (t, e) => JSON.parse(t.get(e.toString()))
   });
 }
-const Q = /* @__PURE__ */ x({
+const Q = /* @__PURE__ */ R({
   __name: "Table",
   props: {
-    fields: { type: Object, required: !0 },
-    paginator: { type: null, required: !0 },
-    resource: { type: null, required: !0 }
+    fields: null,
+    paginator: null,
+    resource: null
   },
   setup(t) {
     const e = t, c = A(), o = f(), n = f(!1);
     let u = f();
-    const X = (a) => {
-      u.value = a, C();
+    const X = (r) => {
+      u.value = r, L();
     };
-    let i = f();
-    const z = (a) => {
-      a.page + 1 === e.paginator.currentPage && a.rows === e.paginator.perPage || (i.value = a, C());
-    }, C = () => {
-      var a, s, r, m, l;
-      q.Inertia.get(
+    let l = f();
+    const z = (r) => {
+      r.page + 1 === e.paginator.currentPage && r.rows === e.paginator.perPage || (l.value = r, L());
+    }, L = () => {
+      var r, s, a, m, i;
+      I.Inertia.get(
         `/${c.configs.prefix}/${e.resource.pluralLabel.toLowerCase()}`,
         {
-          page: i != null && i.value ? ((a = i.value) == null ? void 0 : a.page) + 1 : e.paginator.currentPage,
-          perPage: (r = (s = i == null ? void 0 : i.value) == null ? void 0 : s.rows) != null ? r : e.paginator.perPage,
+          page: l != null && l.value ? ((r = l.value) == null ? void 0 : r.page) + 1 : e.paginator.currentPage,
+          perPage: (a = (s = l == null ? void 0 : l.value) == null ? void 0 : s.rows) != null ? a : e.paginator.perPage,
           sort: JSON.stringify(
-            (l = (m = u == null ? void 0 : u.value) == null ? void 0 : m.multiSortMeta) == null ? void 0 : l.map((p) => (p.field = p.field.replace("_", "."), p))
+            (i = (m = u == null ? void 0 : u.value) == null ? void 0 : m.multiSortMeta) == null ? void 0 : i.map((p) => (p.field = p.field.replace("_", "."), p))
           )
         },
         {
@@ -146,33 +147,33 @@ const Q = /* @__PURE__ */ x({
           onFinish: () => n.value = !1
         }
       );
-    }, v = f([]), b = f([]);
-    return M(() => {
+    }, y = f([]), P = f([]);
+    return F(() => {
       var m;
-      const { fields: a, paginator: s } = e, r = G();
-      b.value = [];
-      for (const l of (m = r.sort) != null ? m : [])
-        b.value.push({
-          field: l.field.replace(".", "_"),
-          order: l.order
+      const { fields: r, paginator: s } = e, a = G();
+      P.value = [];
+      for (const i of (m = a.sort) != null ? m : [])
+        P.value.push({
+          field: i.field.replace(".", "_"),
+          order: i.order
         });
-      v.value = [];
-      for (const l of s.data) {
+      y.value = [];
+      for (const i of s.data) {
         let p = {};
-        for (const I in a) {
-          const d = a[I], B = d.columnName.replace(".", "_");
+        for (const T in r) {
+          const d = r[T], B = d.columnName.replace(".", "_");
           if (d.relationshipName) {
-            const L = d.relationshipName.split(".");
-            let g = l;
-            for (let P = 0; P < L.length; P++)
-              g !== null && (g = g[L[P]]);
+            const C = d.relationshipName.split(".");
+            let g = i;
+            for (let w = 0; w < C.length; w++)
+              g !== null && (g = g[C[w]]);
             p[B] = g !== null ? g[d.title] : null;
           } else
-            p[d.columnName] = l[d.columnName];
+            p[d.columnName] = i[d.columnName];
         }
-        v.value.push(p);
+        y.value.push(p);
       }
-    }), (a, s) => (h(), N(y(H), {
+    }), (r, s) => (h(), N(k(H), {
       paginatorTemplate: {
         "640px": "PrevPageLink CurrentPageReport NextPageLink",
         default: "CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
@@ -180,34 +181,34 @@ const Q = /* @__PURE__ */ x({
       currentPageReportTemplate: "Showing {first} to {last} of {totalRecords}",
       ref_key: "dt",
       ref: o,
-      value: v.value,
+      value: y.value,
       lazy: !0,
       paginator: !0,
       loading: n.value,
       rows: t.paginator.perPage,
       first: (t.paginator.currentPage - 1) * t.paginator.perPage,
       totalRecords: t.paginator.totalCount,
-      rowsPerPageOptions: y(c).configs.rowsPerPageOptions,
+      rowsPerPageOptions: k(c).configs.rowsPerPageOptions,
       responsiveLayout: "scroll",
       stateKey: t.resource.pluralLabel,
-      onPage: s[0] || (s[0] = (r) => z(r)),
+      onPage: s[0] || (s[0] = (a) => z(a)),
       removableSort: "",
       sortMode: "multiple",
-      multiSortMeta: b.value,
-      onSort: s[1] || (s[1] = (r) => X(r))
+      multiSortMeta: P.value,
+      onSort: s[1] || (s[1] = (a) => X(a))
     }, {
-      loading: w(() => []),
-      default: w(() => [
-        (h(!0), _(T, null, D(t.fields, (r) => (h(), N(y(K), {
-          field: r.columnName.replace(".", "_"),
-          header: r.label,
-          key: r.title,
-          sortable: r.sortable != null
-        }, F({ _: 2 }, [
+      loading: S(() => []),
+      default: S(() => [
+        (h(!0), _($, null, J(t.fields, (a) => (h(), N(k(U), {
+          field: a.columnName.replace(".", "_"),
+          header: a.label,
+          key: a.title,
+          sortable: a.sortable != null
+        }, K({ _: 2 }, [
           n.value ? {
             name: "body",
-            fn: w(() => [
-              S(y($))
+            fn: S(() => [
+              b(k(x))
             ]),
             key: "0"
           } : void 0
@@ -217,20 +218,20 @@ const Q = /* @__PURE__ */ x({
     }, 8, ["value", "loading", "rows", "first", "totalRecords", "rowsPerPageOptions", "stateKey", "multiSortMeta"]));
   }
 });
-const Y = /* @__PURE__ */ R(Q, [["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Components/Table.vue"]]), Z = { class: "grid" }, ee = { class: "col-12" }, te = { class: "card" }, ne = /* @__PURE__ */ x({
+const W = { class: "grid" }, Y = { class: "col-12" }, Z = { class: "card" }, ae = /* @__PURE__ */ R({
   __name: "Index",
   setup(t) {
     return (e, c) => {
-      const o = j("AppHead");
-      return h(), _(T, null, [
-        S(o, {
+      const o = D("AppHead");
+      return h(), _($, null, [
+        b(o, {
           title: e.$page.props.controller.resource.pluralLabel
         }, null, 8, ["title"]),
-        k("div", Z, [
-          k("div", ee, [
-            k("div", te, [
-              k("h5", null, J(e.$page.props.controller.resource.pluralLabel), 1),
-              S(Y, {
+        v("div", W, [
+          v("div", Y, [
+            v("div", Z, [
+              v("h5", null, j(e.$page.props.controller.resource.pluralLabel), 1),
+              b(Q, {
                 paginator: e.$page.props.controller.paginator,
                 fields: e.$page.props.controller.fields,
                 resource: e.$page.props.controller.resource
@@ -241,7 +242,7 @@ const Y = /* @__PURE__ */ R(Q, [["__file", "/Volumes/Data/Websites/Inertia/Trini
       ], 64);
     };
   }
-}), oe = /* @__PURE__ */ R(ne, [["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Pages/Index.vue"]]);
+});
 export {
-  oe as default
+  ae as default
 };

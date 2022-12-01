@@ -1,6 +1,6 @@
 import type { ProgressSettings } from "@inertiajs/progress";
 
-interface Configs {
+export default interface Configs {
   prefix: String;
   title: String;
   whiteLogo?: String;
@@ -10,8 +10,6 @@ interface Configs {
   rowsPerPageOptions: Array<number>;
   themeMode: ThemeMode;
 }
-
-export default Configs;
 
 export enum ThemeMode {
   Light,

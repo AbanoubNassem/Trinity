@@ -1,14 +1,20 @@
 using System.Data.Common;
 using System.Text.Json.Serialization;
+using AbanoubNassem.Trinity.Concerns;
+using Microsoft.AspNetCore.Http;
 using StackExchange.Profiling;
 
 namespace AbanoubNassem.Trinity.Configurations;
 
 public class TrinityConfigurations
 {
+    public delegate Task<LoginConcern?> Authenticate(HttpContext httpContext, string email, string password);
+
     [JsonIgnore] public Func<DbConnection> ConnectionFactory { get; set; } = null!;
 
     [JsonIgnore] public Action<MiniProfilerOptions>? MiniProfilerConfigures { get; set; }
+
+    [JsonIgnore] public Authenticate? AuthenticateUser { get; set; }
     public string Prefix { get; set; } = "admin";
 
     public string Title { get; set; } = "Trinity";

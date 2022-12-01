@@ -2,7 +2,10 @@ using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Managers;
 using InertiaAdapter.Extensions;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +32,17 @@ public static class AppExtensions
         services.AddSingleton(configs);
 
         services.AddSingleton(new TrinityManager(configs));
+
+        services.AddAuthorization();
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, ops =>
+            {
+                ops.LoginPath = $"/{configs.Prefix}/login";
+                ops.LogoutPath = $"/{configs.Prefix}/logout";
+                ops.Cookie.Name = "Trinity";
+            });
+
+        services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
         services.AddInertia();
 
@@ -85,12 +99,39 @@ public static class AppExtensions
 
         app.UseInertia();
         app.UseRouting();
+        app.UseAuthentication();
+        app.UseAuthorization();
+        
 
-        var configs = app.Services.GetService<TrinityConfigurations>();
+        var configs = app.Services.GetService<TrinityConfigurations>()!;
         var trinityManager = app.Services.GetService<TrinityManager>()!;
+
+
+        var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
+
+        app.Use((context, next) =>
+        {
+            var requestPath = context.Request.Path.Value;
+
+            if (requestPath == null ||
+                !requestPath.StartsWith($"/{configs.Prefix}", StringComparison.OrdinalIgnoreCase))
+                return next(context);
+
+            var tokenSet = antiforgery.GetAndStoreTokens(context);
+            context.Response.Cookies.Append("XSRF-TOKEN", tokenSet.RequestToken!,
+                new CookieOptions { HttpOnly = false });
+
+            return next(context);
+        });
 
         app.UseEndpoints(endpoints =>
         {
+            endpoints.MapControllerRoute(
+                name: "trinity-login",
+                pattern: configs?.Prefix + "/login",
+                defaults: new { controller = "Trinity", action = "Login" }
+            );
+
             endpoints.MapControllerRoute(
                 name: "trinity-initial",
                 pattern: configs?.Prefix + "/{controller=Trinity}/{action=Index}"
@@ -102,6 +143,7 @@ public static class AppExtensions
                 defaults: new { controller = "Trinity", action = "Handle" }
             );
         });
+
 
         trinityManager.LoadResources(app.Environment.IsDevelopment());
 
