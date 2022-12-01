@@ -14,6 +14,7 @@ import AppHead from "./Components/AppHead.vue";
 import Tooltip from "primevue/tooltip";
 import Ripple from "primevue/ripple";
 import BadgeDirective from "primevue/badgedirective";
+import { createMemoryHistory, createRouter } from "vue-router";
 
 createInertiaApp({
   resolve: async (name) => {
@@ -27,16 +28,16 @@ createInertiaApp({
   },
   // @ts-ignore
   setup({ el, App, props, plugin }) {
-    // const routes = [{ path: "/", component: App }];
-    // const router = createRouter({
-    //   history: createWebHashHistory(),
-    //   routes,
-    // });
+    const routes = [{ path: "/:catchAll(.*)", component: App }];
+    const router = createRouter({
+      history: createMemoryHistory(),
+      routes,
+    });
 
     const app = createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(createPinia())
-      // .use(router)
+      .use(router)
       .use(PrimeVue)
       .directive("styleclass", StyleClass)
       .directive("tooltip", Tooltip)

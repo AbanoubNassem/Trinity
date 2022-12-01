@@ -90,6 +90,16 @@ public class TrinityController : Controller
 
         return Inertia.Location(returnUrl ?? $"/{_configurations.Prefix}/");
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        return HttpContext.IsInertiaRequest()
+            ? Inertia.Location($"/{_configurations.Prefix}/")
+            : Redirect($"/{_configurations.Prefix}/");
+    }
 
     public async Task<IActionResult> Handle(string name, string view, int? id)
     {

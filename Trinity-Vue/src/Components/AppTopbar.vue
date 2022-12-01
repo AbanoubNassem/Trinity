@@ -26,32 +26,23 @@
     </button>
     <ul class="layout-topbar-menu hidden lg:flex origin-top">
       <li>
-        <Button class="p-link layout-topbar-button">
-          <i class="pi pi-calendar"></i>
-          <span>Events</span>
-        </Button>
-      </li>
-      <li>
-        <Button class="p-link layout-topbar-button">
-          <i class="pi pi-cog"></i>
-          <span>Settings</span>
-        </Button>
-      </li>
-      <li>
-        <Button class="p-link layout-topbar-button">
+        <Button class="p-link layout-topbar-button" @click="toggle">
           <i class="pi pi-user"></i>
           <span>Profile</span>
         </Button>
+        <Menu ref="profileMenu" :model="profileItems" :popup="true" />
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineEmits } from "vue";
+import { defineEmits, ref } from "vue";
 import Button from "primevue/button";
+import Menu from "primevue/menu";
 import { useConfigStore } from "@/Stores/ConfigStore";
 import { useLogo } from "@/Composables/trinity_logo";
+import { Inertia } from "@inertiajs/inertia";
 
 const configStore = useConfigStore();
 
@@ -66,4 +57,25 @@ function onTopbarMenuToggle(event: Event | undefined) {
 }
 
 const logo = useLogo();
+
+const profileMenu = ref();
+const profileItems = ref([
+  {
+    label: "Profile",
+    items: [
+      {
+        label: "Logout",
+        icon: "pi pi-sign-out",
+        href: "",
+        command: () => {
+          Inertia.post(`/${configStore.configs.prefix}/logout`);
+        },
+      },
+    ],
+  },
+]);
+
+const toggle = (event: Event | any) => {
+  profileMenu.value.toggle(event);
+};
 </script>

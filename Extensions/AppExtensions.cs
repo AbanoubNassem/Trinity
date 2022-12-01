@@ -101,7 +101,7 @@ public static class AppExtensions
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
-        
+
 
         var configs = app.Services.GetService<TrinityConfigurations>()!;
         var trinityManager = app.Services.GetService<TrinityManager>()!;
@@ -130,6 +130,12 @@ public static class AppExtensions
                 name: "trinity-login",
                 pattern: configs?.Prefix + "/login",
                 defaults: new { controller = "Trinity", action = "Login" }
+            );
+
+            endpoints.MapControllerRoute(
+                name: "trinity-logout",
+                pattern: configs?.Prefix + "/logout",
+                defaults: new { controller = "Trinity", action = "Logout" }
             );
 
             endpoints.MapControllerRoute(
