@@ -11,5 +11,7 @@ export default interface Field {
 
   relationshipName?: string;
 
-  sortable?: string;
+  sortable: boolean;
+  searchable: boolean;
+  isGloballySearchable: boolean;
 }

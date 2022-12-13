@@ -130,7 +130,7 @@
               type="submit"
               class="w-full p-3 text-xl"
               iconPos="right"
-              :icon="{ 'pi pi-spin pi-spinner text-xl': form.processing }"
+              :loading="form.processing"
               :disabled="form.processing"
             ></Button>
           </form>

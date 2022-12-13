@@ -26,6 +26,36 @@ public class BelongsTo : HasRelationshipField
         }
     }
 
+    public override void FilterQuery(Filters filters, string globalSearch)
+    {
+        var localColumns = ColumnName.Split('.');
+        var foreignTables = ForeignTable.Split('.');
+        var foreignColumns = ForeignColumn.Split('.');
+        var relationshipNames = RelationshipName.Split('.');
+
+        var innerFilters = new Filters(Filters.FiltersType.AND);
+
+        for (var i = 0; i < foreignTables.Length; i++)
+        {
+            var parentRelation = i == 0 ? "t" : relationshipNames[i - 1];
+            if (i == foreignTables.Length - 1)
+            {
+                var appendParentheses = foreignTables.Length == 1 ? "" : ")";
+                innerFilters.Add(new Filter(
+                    $"EXISTS (SELECT {Title:raw} FROM {foreignTables[i]:raw} AS {relationshipNames[i]:raw} WHERE {foreignColumns[i]:raw} = {parentRelation:raw}.{localColumns[i]:raw} AND LOWER({Title:raw}) LIKE {globalSearch}) {appendParentheses:raw}")
+                );
+            }
+            else
+            {
+                innerFilters.Add(new Filter(
+                    $"EXISTS (SELECT {localColumns[i + 1]:raw} FROM {foreignTables[i]:raw} AS {relationshipNames[i]:raw} WHERE {foreignColumns[i]:raw} = {parentRelation:raw}.{localColumns[i]:raw}")
+                );
+            }
+        }
+
+        filters.Add(innerFilters);
+    }
+
     public override async Task<List<IDictionary<string, object?>>> RunRelationQuery(FluentQueryBuilder query,
         List<IDictionary<string, object?>> entities, Sort? sort = null)
     {
@@ -53,11 +83,10 @@ public class BelongsTo : HasRelationshipField
             var i1 = i;
             var innerIds = temp.Select(x => x[localColumns[i1]]);
 
-            var q = query.Connection.FluentQueryBuilder()
+            var q = (FluentQueryBuilder)query.Connection.FluentQueryBuilder()
                 .Select($"*")
                 .From($"{foreignTables[i]:raw}")
                 .Where($"{foreignColumns[i]:raw} in ({string.Join(',', innerIds):raw})");
-
 
             var tempResult = (await q.QueryAsync()).Cast<IDictionary<string, object>>().ToList();
 

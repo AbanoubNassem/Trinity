@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import Configs, { ThemeMode } from "@/Models/Configs";
+import Configs from "@/Models/Configs";
 import type { Resource } from "@/Models/Resource";
 import { useConfigStore } from "@/Stores/ConfigStore";
 import { InertiaProgress } from "@inertiajs/progress";
@@ -33,8 +33,9 @@ import { computed, ref } from "vue";
 import AppTopBar from "@/Components/AppTopbar.vue";
 import AppFooter from "@/Components/AppFooter.vue";
 import AppMenu from "@/Components/AppMenu.vue";
+import { usePageProps } from "@/Composables/trinity_page_props";
 
-let props = defineProps<{
+defineProps<{
   controller: {
     configs: Configs;
     resources: Array<Resource>;
@@ -42,11 +43,12 @@ let props = defineProps<{
   };
 }>();
 
+const props = usePageProps();
 const configStore = useConfigStore();
 
-configStore.$state = ref(props.controller).value;
+configStore.$state = ref(props.value).value as any;
 
-InertiaProgress.init(props.controller.configs.progressSettings);
+InertiaProgress.init(props.value.configs?.progressSettings);
 
 let layoutMode = ref("static");
 let staticMenuInactive = ref(false);
@@ -70,8 +72,8 @@ menuItems.value.push({
   items: [],
 });
 
-for (const r in props.controller.resources) {
-  const resource = props.controller.resources[r];
+for (let r in props.value.resources ?? []) {
+  const resource = props.value.resources![r];
   menuItems.value[1].items.push({
     label: resource.pluralLabel,
     icon: resource.icon,

@@ -22,6 +22,11 @@ public abstract class HasRelationshipField : BaseField
         query.Select($"{ColumnName.Split('.')[0]:raw}");
     }
 
+    public override void FilterQuery(Filters filters, string globalSearch)
+    {
+        
+    }
+
     private string _relationshipName;
     public string RelationshipName => _relationshipName;
 

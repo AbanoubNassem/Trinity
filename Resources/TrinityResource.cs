@@ -4,7 +4,6 @@ using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Fields;
 using AbanoubNassem.Trinity.RequestHelpers;
-using Dapper;
 using DapperQueryBuilder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -31,7 +30,7 @@ public abstract class TrinityResource : ITrinityResource
     protected HttpRequest Request { get; init; } = null!;
 
     protected HttpResponse Response { get; init; } = null!;
-    
+
     protected ILogger Logger { get; init; } = null!;
     [JsonIgnore] protected Func<IDbConnection> ConnectionFactory { get; init; } = null!;
 
@@ -42,7 +41,7 @@ public abstract class TrinityResource : ITrinityResource
     public virtual string? Icon => null;
     [JsonIgnore] public virtual string? Table { get; set; }
 
-    private Dictionary<string, object> _fields = new();
+    private readonly Dictionary<string, object> _fields = new();
 
     public virtual string? GetDbSetName() => null;
 
@@ -82,24 +81,50 @@ public abstract class TrinityResource : ITrinityResource
 
             List<Sort>? sorts = null;
 
-            if (Request.Query.TryGetValue("sort", out var s))
+            if (Request.Query.TryGetValue("sort", out var sortStr) && !string.IsNullOrEmpty(sortStr))
             {
-                sorts = JsonSerializer.Deserialize<List<Sort>>(s, new JsonSerializerOptions()
+                sorts = JsonSerializer.Deserialize<List<Sort>>(sortStr!, new JsonSerializerOptions()
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
             }
 
+
+            string? globalSearch = null;
+            var filters = new Filters(Filters.FiltersType.OR);
+            var countFilters = new Filters(Filters.FiltersType.OR);
+            if (Request.Query.TryGetValue("globalSearch", out var globalSearchStr) &&
+                !string.IsNullOrEmpty(globalSearchStr))
+            {
+                globalSearch = $@"%{globalSearchStr.ToString().ToLower()}%";
+            }
+
+
             using var conn = ConnectionFactory();
 
             var query = (FluentQueryBuilder)conn.FluentQueryBuilder();
+            var countQuery = (FluentQueryBuilder)conn.FluentQueryBuilder();
 
-            query.From($"{Table:raw} t");
+            countQuery
+                .Select($"COUNT(*)")
+                .From($"{Table:raw} AS t");
 
+            query.From($"{Table:raw} AS t");
 
             foreach (BaseField field in Fields.Values)
             {
                 field.SelectQuery(query);
+
+                if (globalSearch == null) continue;
+
+                field.FilterQuery(countFilters, globalSearch);
+                field.FilterQuery(filters, globalSearch);
+            }
+
+            if (filters.Any())
+            {
+                countQuery.Where(countFilters);
+                query.Where(filters);
             }
 
             if (sorts != null)
@@ -114,29 +139,26 @@ public abstract class TrinityResource : ITrinityResource
                 }
             }
 
-            var countQuery = query.Connection.FluentQueryBuilder()
-                .Select($"COUNT(*)")
-                .From($"{Table:raw}").Sql;
-
             var selectQuery = query
                 .Limit((page - 1) * perPage, perPage)
                 .Sql;
 
+            Logger.LogInformation(countQuery.Sql);
             Logger.LogInformation(selectQuery);
 
-            using var multi =
-                await query.Connection.QueryMultipleAsync($"{countQuery};{selectQuery};");
+            var count = await countQuery.QuerySingleAsync<int>();
 
-            var count = await multi.ReadSingleAsync<int>();
+            var result = (await query.QueryAsync()).Cast<IDictionary<string, object?>>().ToList();
 
-            var result = ((await multi.ReadAsync()).Cast<IDictionary<string, object?>>()).ToList();
-
-            foreach (BaseField filed in Fields.Values)
+            if (result.Any())
             {
-                if (filed is not HasRelationshipField field) continue;
-                result = await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result,
-                    sorts?.SingleOrDefault(x => x.Field == field.ColumnName)
-                );
+                foreach (BaseField filed in Fields.Values)
+                {
+                    if (filed is not HasRelationshipField field) continue;
+                    result = await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result,
+                        sorts?.SingleOrDefault(x => x.Field == field.ColumnName)
+                    );
+                }
             }
 
             foreach (var record in result)

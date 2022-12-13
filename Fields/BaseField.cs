@@ -22,6 +22,11 @@ public abstract class BaseField : BaseComponent
         query.Select($"t.{ColumnName:raw}");
     }
 
+    public virtual void FilterQuery(Filters filters, string globalSearch)
+    {
+        filters.Add(new Filter($@"LOWER(t.{ColumnName:raw}) LIKE {globalSearch}"));
+    }
+
 
     private string _columnName;
     public string ColumnName => _columnName;
@@ -51,18 +56,9 @@ public abstract class BaseField : BaseComponent
         return this;
     }
 
-    private string? _sortable;
-    public string? Sortable => _sortable;
+    private Action<IDictionary<string, object?>>? _formatUsing;
 
-    public BaseField SetSortable(string value = "ASC")
-    {
-        _sortable = value;
-        return this;
-    }
-
-    private Action<IDictionary<string, object>>? _formatUsing;
-
-    public BaseField FormatUsing(Action<IDictionary<string, dynamic>> formatUsing)
+    public BaseField FormatUsing(Action<IDictionary<string, object?>> formatUsing)
     {
         _formatUsing = formatUsing;
         return this;
@@ -71,5 +67,27 @@ public abstract class BaseField : BaseComponent
     public void Format(IDictionary<string, object?> record)
     {
         _formatUsing?.Invoke(record);
+    }
+
+    private bool _sortable;
+    public bool Sortable => _sortable;
+
+    public BaseField SetAsSortable(bool sortable = true)
+    {
+        _sortable = sortable;
+        return this;
+    }
+
+    private bool _searchable;
+    private bool _isGloballySearchable;
+
+    public bool Searchable => _searchable;
+    public bool IsGloballySearchable => _isGloballySearchable;
+
+    public BaseField SetAsSearchable(bool searchable = true, bool globallySearchable = true)
+    {
+        _searchable = searchable;
+        _isGloballySearchable = globallySearchable;
+        return this;
     }
 }

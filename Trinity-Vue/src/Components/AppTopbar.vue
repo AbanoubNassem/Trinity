@@ -52,9 +52,9 @@ function onMenuToggle(event: Event | undefined) {
   emit("menu-toggle", event);
 }
 
-function onTopbarMenuToggle(event: Event | undefined) {
-  emit("topbar-menu-toggle", event);
-}
+// function onTopbarMenuToggle(event: Event | undefined) {
+//   emit("topbar-menu-toggle", event);
+// }
 
 const logo = useLogo();
 

@@ -16,9 +16,7 @@
 <script lang="ts" setup>
 import AppSubmenu from "@/Components/AppSubmenu.vue";
 
-import { inject } from "vue";
-
-let $appState = inject<any>("appState");
+// let $appState = inject<any>("appState");
 
 defineProps<{
   items: Array<any>;
@@ -37,9 +35,9 @@ function onKeyDown(event: Event | any) {
     event.preventDefault();
   }
 }
-function bannerImage() {
-  return $appState.darkTheme
-    ? "images/banner-primeblocks-dark.png"
-    : "https://www.primefaces.org/primevue/demo/images/primevue-logo-dark.svg";
-}
+// function bannerImage() {
+//   return $appState.darkTheme
+//     ? "images/banner-primeblocks-dark.png"
+//     : "https://www.primefaces.org/primevue/demo/images/primevue-logo-dark.svg";
+// }
 </script>
