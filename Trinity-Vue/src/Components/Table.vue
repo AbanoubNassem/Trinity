@@ -16,7 +16,6 @@
     :totalRecords="paginator.totalCount"
     :rowsPerPageOptions="configStore.configs.rowsPerPageOptions"
     responsiveLayout="scroll"
-    :stateKey="props.resource?.pluralLabel"
     @page="onPage($event)"
     removableSort
     sortMode="multiple"
@@ -24,7 +23,6 @@
     @sort="onSort($event)"
     filterDisplay="row"
     :globalFilterFields="['customerNumber']"
-    @filter="onFilter($event)"
   >
     <template #header>
       <div class="flex justify-content-between flex-column sm:flex-row">
@@ -56,27 +54,27 @@
 
     <Column
       v-for="field in fields"
-      :field="field.columnName.replace('.', '_')"
+      :field="field.columnName"
       :header="field.label"
-      :key="field.title"
+      :key="field.columnName"
       :sortable="field.sortable"
       :showFilterMenu="false"
       filterMatchMode="contains"
     >
-      <template #body v-if="loading">
-        <Skeleton></Skeleton>
+      <template #body="slotProps">
+        <Skeleton v-if="loading" />
+        <template v-else>
+          {{ slotProps.data[field.columnName] }}
+        </template>
       </template>
 
-      <template
-        #filter="{ filterCallback }"
-        v-if="field.searchable && !field.isGloballySearchable"
-      >
+      <template #filter v-if="field.searchable && !field.isGloballySearchable">
         <InputText
           type="text"
           class="p-column-filter"
           v-model="filters[field.columnName]"
-          @keydown.enter="filterCallback()"
-          :placeholder="`Search by name ${field.label}`"
+          @keydown.enter="onFilter(field.columnName)"
+          :placeholder="`Search by ${field.label}`"
           v-tooltip.top.focus="'Hit enter key to filter'"
         />
       </template>
@@ -116,7 +114,7 @@ defineProps<{
 }>();
 
 const props = usePageProps();
-
+const urlParams = useUrlParams();
 const dt = ref();
 const loading = ref(false);
 
@@ -144,8 +142,19 @@ let globalSearchFields = computed(() =>
   )
 );
 
-let globalSearchInput = ref(useUrlParams().globalSearch);
-let filters = ref({});
+let globalSearchInput = ref(urlParams.globalSearch);
+let filters = ref(JSON.parse(urlParams.columnsSearch) ?? {});
+
+function onFilter(column: string) {
+  if (
+    filters.value[column] !== undefined &&
+    filters.value[column].trim() === ""
+  ) {
+    delete filters.value[column];
+  }
+
+  fetchTable();
+}
 
 function clearFilters() {}
 
@@ -156,28 +165,37 @@ watch(
   }, 300)
 );
 
-function onFilter(event: any) {
-  console.log(filters, event);
-}
-
 const fetchTable = () => {
+  let data = {} as any;
+
+  if (pageEvent?.value) {
+    data.page = pageEvent?.value
+      ? pageEvent.value?.page + 1
+      : props.value.paginator?.currentPage ?? 1;
+  }
+
+  if (pageEvent?.value?.rows) {
+    data.perPage =
+      pageEvent?.value?.rows ?? props.value.paginator?.perPage ?? 10;
+  }
+
+  if (sortEvent?.value?.multiSortMeta) {
+    data.sort = JSON.stringify(sortEvent?.value?.multiSortMeta);
+  }
+
+  if (globalSearchInput.value) {
+    data.globalSearch = globalSearchInput.value;
+  }
+
+  if (Object.keys(filters.value).length) {
+    data.columnsSearch = JSON.stringify(filters.value);
+  }
+
   Inertia.get(
     `/${
       configStore.configs.prefix
     }/${props.value.resource?.pluralLabel.toLowerCase()}`,
-    {
-      page: pageEvent?.value
-        ? pageEvent.value?.page + 1
-        : props.value.paginator?.currentPage ?? 1,
-      perPage: pageEvent?.value?.rows ?? props.value.paginator?.perPage ?? 10,
-      sort: JSON.stringify(
-        sortEvent?.value?.multiSortMeta?.map((s) => {
-          s.field = s.field.replace("_", ".");
-          return s;
-        })
-      ),
-      globalSearch: globalSearchInput.value,
-    },
+    data,
     {
       preserveState: true,
       replace: true,
@@ -186,18 +204,17 @@ const fetchTable = () => {
     }
   );
 };
+
 const items = ref<Array<any>>([]);
 const multiSortMeta = ref<Array<any>>([]);
 watchEffect(() => {
   const { fields, paginator } = props.value;
   const urlParams = useUrlParams();
 
-  // globalSearchInput.value = urlParams.globalSearch;
-
   multiSortMeta.value = [];
   for (const sortable of JSON.parse(urlParams.sort) ?? []) {
     multiSortMeta.value.push({
-      field: sortable.field.replace(".", "_"),
+      field: sortable.field,
       order: sortable.order,
     });
   }
@@ -207,18 +224,17 @@ watchEffect(() => {
     let item = {} as any;
     for (const key in fields) {
       const field = fields[key];
-      const columnName = field.columnName.replace(".", "_");
 
       if (field.relationshipName) {
         const relations = field.relationshipName.split(".");
         let record = it;
+
         for (let i = 0; i < relations.length; i++) {
           if (record === null) continue;
-
           record = record[relations[i]];
         }
 
-        item[columnName] = record !== null ? record[field.title] : null;
+        item[field.columnName] = record !== null ? record[field.title] : null;
       } else {
         item[field.columnName] = it[field.columnName];
       }

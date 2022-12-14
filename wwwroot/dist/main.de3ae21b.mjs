@@ -11532,9 +11532,7 @@ const KN = { key: 0 }, qN = ["aria-label"], QN = {
                   target: u.target,
                   "aria-label": u.label,
                   exact: "",
-                  role: "menuitem",
-                  "preserve-state": "",
-                  "preserve-scroll": ""
+                  role: "menuitem"
                 }, {
                   default: ke(() => [
                     Ut("i", {
@@ -13407,7 +13405,7 @@ function HM(t, e) {
 }
 Nf({
   resolve: async (t) => {
-    const e = (await uv(/* @__PURE__ */ Object.assign({ "./Pages/Home.vue": () => import("./Home.3c1c043a.mjs"), "./Pages/Index.vue": () => import("./Index.4b579b1a.mjs"), "./Pages/Login.vue": () => import("./Login.6897d364.mjs") }), `./Pages/${t}.vue`)).default;
+    const e = (await uv(/* @__PURE__ */ Object.assign({ "./Pages/Home.vue": () => import("./Home.cfe0bd80.mjs"), "./Pages/Index.vue": () => import("./Index.c342d7a8.mjs"), "./Pages/Login.vue": () => import("./Login.d11afaa7.mjs") }), `./Pages/${t}.vue`)).default;
     return e.layout === void 0 && (e.layout = ub), e;
   },
   setup({ el: t, App: e, props: o, plugin: n }) {

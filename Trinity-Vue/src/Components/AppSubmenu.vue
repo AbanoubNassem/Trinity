@@ -44,8 +44,6 @@
             exact
             role="menuitem"
             v-ripple
-            preserve-state
-            preserve-scroll
           >
             <i :class="item.icon"></i>
             <span>{{ item.label }}</span>

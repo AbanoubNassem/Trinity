@@ -19,7 +19,7 @@ public abstract class HasRelationshipField : BaseField
 
     public override void SelectQuery(FluentQueryBuilder query)
     {
-        query.Select($"{ColumnName.Split('.')[0]:raw}");
+        query.Select($"t.{ColumnName.Split('.')[0]:raw}");
     }
 
     public override void FilterQuery(Filters filters, string globalSearch)

@@ -1,5 +1,6 @@
 using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
+using Filter = DapperQueryBuilder.Filter;
 
 namespace AbanoubNassem.Trinity.Fields;
 
@@ -47,8 +48,9 @@ public class BelongsTo : HasRelationshipField
             }
             else
             {
+                var appendParentheses = i == 0 ? "" : ")";
                 innerFilters.Add(new Filter(
-                    $"EXISTS (SELECT {localColumns[i + 1]:raw} FROM {foreignTables[i]:raw} AS {relationshipNames[i]:raw} WHERE {foreignColumns[i]:raw} = {parentRelation:raw}.{localColumns[i]:raw}")
+                    $"EXISTS (SELECT {localColumns[i + 1]:raw} FROM {foreignTables[i]:raw} AS {relationshipNames[i]:raw} WHERE {foreignColumns[i]:raw} = {parentRelation:raw}.{localColumns[i]:raw} {appendParentheses:raw}")
                 );
             }
         }

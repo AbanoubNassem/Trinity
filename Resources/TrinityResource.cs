@@ -89,6 +89,16 @@ public abstract class TrinityResource : ITrinityResource
                 });
             }
 
+            Dictionary<string, string>? requestFilters = null;
+
+            if (Request.Query.TryGetValue("columnsSearch", out var filtersStr) && !string.IsNullOrEmpty(filtersStr))
+            {
+                requestFilters = JsonSerializer.Deserialize<Dictionary<string, string>>(filtersStr!,
+                    new JsonSerializerOptions()
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    });
+            }
 
             string? globalSearch = null;
             var filters = new Filters(Filters.FiltersType.OR);
@@ -115,10 +125,18 @@ public abstract class TrinityResource : ITrinityResource
             {
                 field.SelectQuery(query);
 
-                if (globalSearch == null) continue;
+                if (globalSearch != null && field.IsGloballySearchable)
+                {
+                    field.FilterQuery(countFilters, globalSearch);
+                    field.FilterQuery(filters, globalSearch);
+                }
+                else if (requestFilters != null && requestFilters.ContainsKey(field.ColumnName))
+                {
+                    var search = $@"%{requestFilters[field.ColumnName].ToLower()}%";
 
-                field.FilterQuery(countFilters, globalSearch);
-                field.FilterQuery(filters, globalSearch);
+                    field.FilterQuery(countFilters, search);
+                    field.FilterQuery(filters, search);
+                }
             }
 
             if (filters.Any())
@@ -139,16 +157,11 @@ public abstract class TrinityResource : ITrinityResource
                 }
             }
 
-            var selectQuery = query
-                .Limit((page - 1) * perPage, perPage)
-                .Sql;
-
-            Logger.LogInformation(countQuery.Sql);
-            Logger.LogInformation(selectQuery);
 
             var count = await countQuery.QuerySingleAsync<int>();
 
-            var result = (await query.QueryAsync()).Cast<IDictionary<string, object?>>().ToList();
+            var result = (await query.Limit((page - 1) * perPage, perPage).QueryAsync())
+                .Cast<IDictionary<string, object?>>().ToList();
 
             if (result.Any())
             {
@@ -181,6 +194,7 @@ public abstract class TrinityResource : ITrinityResource
         }
         catch (Exception ex)
         {
+            // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
             Logger.LogError(ex, ex.Message);
         }
 
