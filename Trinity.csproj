@@ -24,6 +24,22 @@
 
     <ItemGroup>
         <EmbeddedResource Include="wwwroot/**/**/**/*" Pack="false" />
+        <EmbeddedResource Remove="wwwroot\dist\**" />
+    </ItemGroup>
+    
+
+    <ItemGroup>
+      <Compile Remove="wwwroot\dist\**" />
+    </ItemGroup>
+    
+
+    <ItemGroup>
+      <None Remove="wwwroot\dist\**" />
+    </ItemGroup>
+    
+
+    <ItemGroup>
+      <Content Remove="wwwroot\dist\**" />
     </ItemGroup>
     
     

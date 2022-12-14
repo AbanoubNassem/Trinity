@@ -8,9 +8,9 @@ public abstract class BaseField : BaseComponent
 {
     protected BaseField(string columnName)
     {
-        _columnName = columnName;
-        _label = _columnName.Titleize();
-        _title = columnName;
+        ColumnName = columnName;
+        Label = ColumnName.Titleize();
+        Title = columnName;
     }
 
     protected virtual void SetUp(string propertyName, Type propertyType)
@@ -28,31 +28,28 @@ public abstract class BaseField : BaseComponent
     }
 
 
-    private string _columnName;
-    public string ColumnName => _columnName;
+    public string ColumnName { get; protected set; }
 
     public BaseField SetColumnName(string value)
     {
-        _columnName = value;
+        ColumnName = value;
         return this;
     }
 
 
-    private string _label;
-    public string Label => _label;
+    public string Label { get; protected set; }
 
     public BaseField SetLabel(string value)
     {
-        _label = value;
+        Label = value;
         return this;
     }
 
-    private string _title;
-    public string Title => _title;
+    public string Title { get; protected set; }
 
     public BaseField SetTitle(string value)
     {
-        _title = value;
+        Title = value;
         return this;
     }
 
@@ -69,25 +66,33 @@ public abstract class BaseField : BaseComponent
         _formatUsing?.Invoke(record);
     }
 
-    private bool _sortable;
-    public bool Sortable => _sortable;
+    public bool Sortable { get; protected set; }
 
     public BaseField SetAsSortable(bool sortable = true)
     {
-        _sortable = sortable;
+        Sortable = sortable;
         return this;
     }
 
-    private bool _searchable;
-    private bool _isGloballySearchable;
+    public bool Searchable { get; protected set; }
 
-    public bool Searchable => _searchable;
-    public bool IsGloballySearchable => _isGloballySearchable;
+    public bool IsGloballySearchable { get; protected set; }
 
     public BaseField SetAsSearchable(bool searchable = true, bool globallySearchable = true)
     {
-        _searchable = searchable;
-        _isGloballySearchable = globallySearchable;
+        Searchable = searchable;
+        IsGloballySearchable = globallySearchable;
+        return this;
+    }
+
+    public bool Toggleable { get; protected set; }
+
+    public bool IsToggledHiddenByDefault { get; protected set; }
+
+    public BaseField SetAsToggleable(bool toggleable = true, bool isToggledHiddenByDefault = true)
+    {
+        Toggleable = toggleable;
+        IsToggledHiddenByDefault = isToggledHiddenByDefault;
         return this;
     }
 }

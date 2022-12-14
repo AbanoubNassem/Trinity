@@ -13405,7 +13405,7 @@ function HM(t, e) {
 }
 Nf({
   resolve: async (t) => {
-    const e = (await uv(/* @__PURE__ */ Object.assign({ "./Pages/Home.vue": () => import("./Home.cfe0bd80.mjs"), "./Pages/Index.vue": () => import("./Index.c342d7a8.mjs"), "./Pages/Login.vue": () => import("./Login.d11afaa7.mjs") }), `./Pages/${t}.vue`)).default;
+    const e = (await uv(/* @__PURE__ */ Object.assign({ "./Pages/Home.vue": () => import("./Home.2f1d94f2.mjs"), "./Pages/Index.vue": () => import("./Index.96753d41.mjs"), "./Pages/Login.vue": () => import("./Login.14a73e40.mjs") }), `./Pages/${t}.vue`)).default;
     return e.layout === void 0 && (e.layout = ub), e;
   },
   setup({ el: t, App: e, props: o, plugin: n }) {

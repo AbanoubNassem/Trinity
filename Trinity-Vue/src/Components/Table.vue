@@ -26,34 +26,59 @@
   >
     <template #header>
       <div class="flex justify-content-between flex-column sm:flex-row">
-        <Button
-          type="button"
-          icon="pi pi-filter-slash"
-          label="Clear"
-          class="p-button-outlined mb-2"
-          @click="clearFilters()"
-        />
-        <span
-          class="p-input-icon-left mb-2"
-          v-if="globalSearchFields.length > 0"
-        >
-          <i class="pi pi-search" />
-          <InputText
-            v-model="globalSearchInput"
-            placeholder="Keyword Search"
-            style="width: 100%"
-            :disabled="globalSearchInput !== null && loading"
+        <div>
+          <Button
+            v-if="showClearFilters"
+            type="button"
+            icon="pi pi-filter-slash"
+            label="Clear"
+            class="p-button-outlined mb-2"
+            @click="clearFilters()"
           />
-          <i
-            class="pi pi-spin pi-spinner global-search-icon"
-            v-if="globalSearchInput !== null && loading"
-          />
-        </span>
+        </div>
+        <div class="flex">
+          <span
+            class="p-input-icon-left mb-2"
+            v-if="globalSearchFields.length > 0"
+          >
+            <i class="pi pi-search" />
+            <InputText
+              v-model="globalSearchInput"
+              placeholder="Keyword Search"
+              style="width: 100%"
+              :disabled="globalSearchInput !== null && loading"
+            />
+            <i
+              class="pi pi-spin pi-spinner global-search-icon"
+              v-if="globalSearchInput !== null && loading"
+            />
+          </span>
+
+          <div id="toggleableFields" class="mx-2">
+            <Button
+              icon="pi pi-table"
+              class="p-button-rounded p-button-text"
+              v-if="toggleableFields.length"
+              @click="toggleableMultiSelect.show()"
+            />
+
+            <MultiSelect
+              appendTo="#toggleableFields"
+              ref="toggleableMultiSelect"
+              class="hidden"
+              panelClass="toggleableFields"
+              :options="toggleableFields"
+              optionLabel="header"
+              :modelValue="selectedColumns"
+              @update:modelValue="onToggle"
+            />
+          </div>
+        </div>
       </div>
     </template>
 
     <Column
-      v-for="field in fields"
+      v-for="[, field] in columns"
       :field="field.columnName"
       :header="field.label"
       :key="field.columnName"
@@ -101,6 +126,7 @@ import Column from "primevue/column";
 import Skeleton from "primevue/skeleton";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
+import MultiSelect from "primevue/multiselect";
 import { useUrlParams } from "@/Composables/trinity_url_params";
 import { usePageProps } from "@/Composables/trinity_page_props";
 import type { Resource } from "@/Models/Resource";
@@ -117,6 +143,16 @@ const props = usePageProps();
 const urlParams = useUrlParams();
 const dt = ref();
 const loading = ref(false);
+
+let columns = ref(
+  computed(() =>
+    Object.entries(props.value.fields ?? {}).filter(
+      ([, f]) =>
+        !f.toggleable ||
+        selectedColumns.value?.find((el: any) => el.field === f.columnName)
+    )
+  )
+);
 
 let sortEvent = ref<DataTableSortEvent>();
 const onSort = (event: DataTableSortEvent) => {
@@ -142,6 +178,31 @@ let globalSearchFields = computed(() =>
   )
 );
 
+let toggleableMultiSelect = ref(null);
+let toggleableFields = ref(
+  Object.entries(props.value.fields ?? {}).flatMap(([, f]) => {
+    if (f.toggleable) {
+      return {
+        field: f.columnName,
+        header: f.label,
+        isToggledHiddenByDefault: f.isToggledHiddenByDefault,
+      };
+    }
+
+    return [];
+  })
+);
+
+let selectedColumns = ref(
+  toggleableFields.value.filter((col) => !col.isToggledHiddenByDefault)
+);
+
+function onToggle(val: any) {
+  selectedColumns.value = toggleableFields.value.filter((col) =>
+    val.includes(col)
+  ) as any;
+}
+
 let globalSearchInput = ref(urlParams.globalSearch);
 let filters = ref(JSON.parse(urlParams.columnsSearch) ?? {});
 
@@ -156,7 +217,20 @@ function onFilter(column: string) {
   fetchTable();
 }
 
-function clearFilters() {}
+let showClearFilters = computed(
+  () =>
+    globalSearchInput.value ||
+    sortEvent?.value?.multiSortMeta ||
+    Object.keys(filters.value).length
+);
+
+function clearFilters() {
+  filters.value = {};
+  globalSearchInput.value = "";
+  sortEvent.value = undefined;
+  pageEvent.value = undefined;
+  fetchTable();
+}
 
 watch(
   globalSearchInput,
@@ -247,5 +321,10 @@ watchEffect(() => {
 <style lang="scss">
 .p-datatable .p-datatable-loading-overlay {
   display: none !important;
+}
+.toggleableFields {
+  left: unset !important;
+  right: 0 !important;
+  top: 5rem !important;
 }
 </style>
