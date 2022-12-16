@@ -1,8 +1,8 @@
 import "./assets/layout.scss";
 
-import { createApp, h, reactive } from "vue";
-import { createPinia } from "pinia";
-import { createInertiaApp } from "@inertiajs/inertia-vue3";
+import {createApp, h, reactive} from "vue";
+import {createPinia} from "pinia";
+import {createInertiaApp} from "@inertiajs/inertia-vue3";
 import axios from "axios";
 
 import PrimeVue from "primevue/config";
@@ -14,56 +14,56 @@ import AppHead from "./Components/AppHead.vue";
 import Tooltip from "primevue/tooltip";
 import Ripple from "primevue/ripple";
 import BadgeDirective from "primevue/badgedirective";
-import { createMemoryHistory, createRouter } from "vue-router";
+import {createMemoryHistory, createRouter} from "vue-router";
 
 createInertiaApp({
-  resolve: async (name) => {
-    const page = (await import(`./Pages/${name}.vue`)).default;
+    resolve: async (name) => {
+        const page = (await import(`./Pages/${name}.vue`)).default;
 
-    if (page.layout === undefined) {
-      page.layout = Layout;
-    }
+        if (page.layout === undefined) {
+            page.layout = Layout;
+        }
 
-    return page;
-  },
-  // @ts-ignore
-  setup({ el, App, props, plugin }) {
-    const routes = [{ path: "/:catchAll(.*)", component: App }];
-    const router = createRouter({
-      history: createMemoryHistory(),
-      routes,
-    });
+        return page;
+    },
+    // @ts-ignore
+    setup({el, App, props, plugin}) {
+        const routes = [{path: "/:catchAll(.*)", component: App}];
+        const router = createRouter({
+            history: createMemoryHistory(),
+            routes,
+        });
 
-    const app = createApp({ render: () => h(App, props) })
-      .use(plugin)
-      .use(createPinia())
-      .use(router)
-      .use(PrimeVue)
-      .directive("styleclass", StyleClass)
-      .directive("tooltip", Tooltip)
-      .directive("ripple", Ripple)
-      // .directive('code', CodeHighlight),
-      .directive("badge", BadgeDirective)
-      .component("AppHead", AppHead);
+        const app = createApp({render: () => h(App, props)})
+            .use(plugin)
+            .use(createPinia())
+            .use(router)
+            .use(PrimeVue, {ripple: true, inputStyle: 'outlined'})
+            .directive("styleclass", StyleClass)
+            .directive("tooltip", Tooltip)
+            .directive("ripple", Ripple)
+            // .directive('code', CodeHighlight),
+            .directive("badge", BadgeDirective)
+            .component("AppHead", AppHead);
 
-    app.provide(
-      "appState",
-      reactive({
-        theme: "tailwind-light",
-        darkTheme: false,
-      })
-    );
+        app.provide(
+            "appState",
+            reactive({
+                theme: "tailwind-light",
+                darkTheme: false,
+            })
+        );
 
-    app.mount(el);
-  },
+        app.mount(el);
+    },
 });
 
 axios.interceptors.response.use(function (response) {
-  // @ts-ignore
-  const profiler = window.MiniProfiler as any;
+    // @ts-ignore
+    const profiler = window.MiniProfiler as any;
 
-  if (profiler && response.headers["x-miniprofiler-ids"]) {
-    profiler.fetchResults(JSON.parse(response.headers["x-miniprofiler-ids"]));
-  }
-  return response;
+    if (profiler && response.headers["x-miniprofiler-ids"]) {
+        profiler.fetchResults(JSON.parse(response.headers["x-miniprofiler-ids"]));
+    }
+    return response;
 });

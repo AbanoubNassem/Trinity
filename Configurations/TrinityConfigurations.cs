@@ -30,6 +30,13 @@ public class TrinityConfigurations
     public string? WhiteLogo { get; set; }
     public string? DarkLogo { get; set; }
     public string? FavIcon { get; set; }
+
+    public List<string> ExtraStyleSources { get; } = new()
+    {
+        "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    };
+
+    public List<string> ExtraJavaScriptSources { get; } = new();
 }
 
 public class ProgressConfigurations

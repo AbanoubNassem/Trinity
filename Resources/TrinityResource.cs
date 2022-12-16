@@ -10,19 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Resources;
 
-public interface ITrinityResource
-{
-    public string? Label { get; set; }
-    public string? PluralLabel { get; set; }
-    public string? Table { get; set; }
-    public string? GetDbSetName();
-    public Task Setup();
-    public Task<IPaginator?> GetIndexData();
-
-    public Dictionary<string, object> Fields { get; }
-}
-
-public abstract class TrinityResource : ITrinityResource
+public abstract class TrinityResource
 {
     protected TrinityConfigurations Configurations { get; init; } = null!;
 
@@ -30,21 +18,23 @@ public abstract class TrinityResource : ITrinityResource
     protected HttpRequest Request { get; init; } = null!;
 
     protected HttpResponse Response { get; init; } = null!;
-
     protected ILogger Logger { get; init; } = null!;
     [JsonIgnore] protected Func<IDbConnection> ConnectionFactory { get; init; } = null!;
 
-    public virtual string? Label { get; set; }
-    public virtual string? PluralLabel { get; set; }
+    private string? _label = null;
+    public virtual string? Label => _label;
 
-    public object? Record { get; set; }
+    private string? _pluralLabel = null;
+    public virtual string? PluralLabel => _pluralLabel;
+    public virtual bool ShowGridlines => false;
+    public virtual bool StripedRows => false;
     public virtual string? Icon => null;
-    [JsonIgnore] public virtual string? Table { get; set; }
+
+    private string? _table = null;
+    [JsonIgnore] public virtual string? Table => _table;
 
     private readonly Dictionary<string, object> _fields = new();
-
-    public virtual string? GetDbSetName() => null;
-
+    
     public virtual async Task Setup()
     {
         await Task.CompletedTask;
@@ -66,7 +56,6 @@ public abstract class TrinityResource : ITrinityResource
             return _fields;
         }
     }
-
 
     public virtual async Task<IPaginator?> GetIndexData()
     {
@@ -196,8 +185,7 @@ public abstract class TrinityResource : ITrinityResource
         {
             // ReSharper disable once TemplateIsNotCompileTimeConstantProblem
             Logger.LogError(ex, ex.Message);
+            throw;
         }
-
-        return null;
     }
 }

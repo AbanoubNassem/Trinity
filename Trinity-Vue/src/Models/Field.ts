@@ -10,4 +10,5 @@ export default interface Field {
   isGloballySearchable: boolean;
   toggleable: boolean;
   isToggledHiddenByDefault: boolean;
+  exportable: boolean;
 }

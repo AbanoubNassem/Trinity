@@ -28,6 +28,9 @@ public abstract class BaseField : BaseComponent
     }
 
 
+    public delegate void ActionWithRecord(IDictionary<string, object?> record);
+
+
     public string ColumnName { get; protected set; }
 
     public BaseField SetColumnName(string value)
@@ -53,9 +56,10 @@ public abstract class BaseField : BaseComponent
         return this;
     }
 
-    private Action<IDictionary<string, object?>>? _formatUsing;
 
-    public BaseField FormatUsing(Action<IDictionary<string, object?>> formatUsing)
+    private ActionWithRecord? _formatUsing;
+
+    public BaseField FormatUsing(ActionWithRecord formatUsing)
     {
         _formatUsing = formatUsing;
         return this;
@@ -93,6 +97,14 @@ public abstract class BaseField : BaseComponent
     {
         Toggleable = toggleable;
         IsToggledHiddenByDefault = isToggledHiddenByDefault;
+        return this;
+    }
+    
+    public bool Exportable { get; protected set; }
+
+    public BaseField SetAsExportable(bool exportable = true)
+    {
+        Exportable = exportable;
         return this;
     }
 }

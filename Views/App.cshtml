@@ -11,6 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <link rel="stylesheet" type="text/css" href="~/trinity/dist/style.css"/>
+    @foreach (var style in Configurations.ExtraStyleSources)
+    {
+        <link rel="stylesheet" type="text/css" href="@style"/>
+    }
 
     <link rel="icon" type="image/x-icon" href="~/trinity/dist/favicon.ico" inertia>
     <title inertia>@Configurations.Title</title>
@@ -22,5 +26,9 @@
 
 <script type="module" crossorigin src="~/trinity/dist/trinity-vue.mjs"></script>
 <mini-profiler/>
+@foreach (var js in Configurations.ExtraJavaScriptSources)
+{
+    <script src="@js"></script>
+}
 </body>
 </html>

@@ -110,7 +110,7 @@ public class TrinityController : Controller
         }
 
         //to serialize the public properties of TrinityResource class not ITrinityResource the interface.
-        var resource = (resourceObject as ITrinityResource)!;
+        var resource = (resourceObject as TrinityResource)!;
 
 
         InjectServices(resourceName, resource);
@@ -139,7 +139,7 @@ public class TrinityController : Controller
         });
     }
 
-    private void InjectServices(string resourceName, ITrinityResource resource)
+    private void InjectServices(string resourceName, TrinityResource resource)
     {
         _trinityManager.ResourcesTypes[resourceName].Item2["ServiceProvider"]
             .SetValue(resource, HttpContext.RequestServices);

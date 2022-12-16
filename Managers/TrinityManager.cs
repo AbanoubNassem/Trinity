@@ -20,29 +20,38 @@ public class TrinityManager
 
     public void LoadResources(bool isDevelopment)
     {
-        var type = typeof(ITrinityResource);
+        var trinityResourceType = typeof(TrinityResource);
         var types = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
-            .Where(p => type.IsAssignableFrom(p) && !p.IsAbstract);
+            .Where(p => trinityResourceType.IsAssignableFrom(p) && !p.IsAbstract);
 
         const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
 
         foreach (var resourceType in types)
         {
-            var name = resourceType.Name[..^8].Titleize();
+            var name = resourceType.Name.Replace("Resource", "").Titleize();
             var plural = name.Pluralize();
 
             var properties = new Dictionary<string, PropertyInfo>();
 
-            var resource = (ITrinityResource)Activator.CreateInstance(resourceType)!;
+            var resource = (TrinityResource)Activator.CreateInstance(resourceType)!;
+            
 
-            resource.Label ??= name;
-
-            resource.PluralLabel ??= plural;
-
+            if (resource.Label == null)
+            {
+                trinityResourceType.GetField("_label", flags)!
+                    .SetValue(resource, plural);
+            }
+            
+            if (resource.PluralLabel == null)
+            {
+                trinityResourceType.GetField("_pluralLabel", flags)!
+                    .SetValue(resource, plural);
+            }
+            
             if (resource.Table == null)
             {
-                resourceType.GetProperty("Table", flags)!
+                trinityResourceType.GetField("_table", flags)!
                     .SetValue(resource, plural.ToLower());
             }
 
@@ -52,11 +61,11 @@ public class TrinityManager
             properties.Add("ServiceProvider",
                 resourceType.GetProperty("ServiceProvider", flags)!
             );
-            
+
             properties.Add("Logger",
                 resourceType.GetProperty("Logger", flags)!
             );
-            
+
             properties.Add("Request",
                 resourceType.GetProperty("Request", flags)!
             );

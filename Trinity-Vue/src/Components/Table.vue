@@ -1,75 +1,102 @@
 <template>
+  <Toolbar class="mb-4">
+    <template #end>
+      <Button
+        class="p-button-success mr-2"
+        icon="pi pi-plus"
+        label="New"
+        @click="openNew"
+      />
+      <Button
+        :disabled="!selectedProducts || !selectedProducts.length"
+        class="p-button-danger"
+        icon="pi pi-trash"
+        label="Delete"
+        @click="confirmDeleteSelected"
+      />
+    </template>
+  </Toolbar>
+
   <DataTable
+    ref="dt"
+    v-model:selection="selectedItems"
+    :first="(paginator.currentPage - 1) * paginator.perPage"
+    :lazy="true"
+    :loading="loading"
+    :multiSortMeta="multiSortMeta"
+    :paginator="true"
     :paginatorTemplate="{
       '640px': 'PrevPageLink CurrentPageReport NextPageLink',
       default:
         'CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
     }"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-    ref="dt"
-    :value="items"
-    :lazy="true"
-    :paginator="true"
-    :loading="loading"
     :rows="paginator.perPage"
-    :first="(paginator.currentPage - 1) * paginator.perPage"
-    :totalRecords="paginator.totalCount"
     :rowsPerPageOptions="configStore.configs.rowsPerPageOptions"
-    responsiveLayout="scroll"
-    @page="onPage($event)"
-    removableSort
-    sortMode="multiple"
-    :multiSortMeta="multiSortMeta"
-    @sort="onSort($event)"
+    :showGridlines="props.resource?.showGridlines"
+    :stripedRows="props.resource?.stripedRows"
+    :totalRecords="paginator.totalCount"
+    :value="items"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
     filterDisplay="row"
-    :globalFilterFields="['customerNumber']"
+    removableSort
+    responsiveLayout="scroll"
+    sortMode="multiple"
+    @page="onPage($event)"
+    @sort="onSort($event)"
   >
     <template #header>
       <div class="flex justify-content-between flex-column sm:flex-row">
         <div>
           <Button
+            v-if="exportableFields.length"
+            icon="pi pi-external-link"
+            class="p-button-primary mb-2 mr-2"
+            label="Export"
+            @click="exportCSV($event)"
+          />
+          <Button
             v-if="showClearFilters"
-            type="button"
+            class="p-button-outlined mb-2"
             icon="pi pi-filter-slash"
             label="Clear"
-            class="p-button-outlined mb-2"
+            type="button"
             @click="clearFilters()"
           />
         </div>
         <div class="flex">
           <span
-            class="p-input-icon-left mb-2"
             v-if="globalSearchFields.length > 0"
+            class="p-input-icon-left mb-2"
           >
             <i class="pi pi-search" />
             <InputText
               v-model="globalSearchInput"
+              :disabled="globalSearchInput !== null && loading"
               placeholder="Keyword Search"
               style="width: 100%"
-              :disabled="globalSearchInput !== null && loading"
             />
             <i
-              class="pi pi-spin pi-spinner global-search-icon"
               v-if="globalSearchInput !== null && loading"
+              class="pi pi-spin pi-spinner global-search-icon"
             />
           </span>
 
           <div id="toggleableFields" class="mx-2">
             <Button
-              icon="pi pi-table"
-              class="p-button-rounded p-button-text"
               v-if="toggleableFields.length"
+              class="p-button-rounded p-button-text"
+              icon="pi pi-table"
               @click="toggleableMultiSelect.show()"
             />
 
             <MultiSelect
-              appendTo="#toggleableFields"
               ref="toggleableMultiSelect"
-              class="hidden"
-              panelClass="toggleableFields"
-              :options="toggleableFields"
-              optionLabel="header"
               :modelValue="selectedColumns"
+              :options="toggleableFields"
+              appendTo="#toggleableFields"
+              class="hidden"
+              optionLabel="header"
+              panelClass="toggleableFields"
               @update:modelValue="onToggle"
             />
           </div>
@@ -77,35 +104,59 @@
       </div>
     </template>
 
+    <Column :exportable="false" selectionMode="multiple" style="width: 3rem" />
+
     <Column
       v-for="[, field] in columns"
+      :key="field.columnName"
       :field="field.columnName"
       :header="field.label"
-      :key="field.columnName"
       :sortable="field.sortable"
       :showFilterMenu="false"
       filterMatchMode="contains"
+      :exportable="field.exportable"
     >
       <template #body="slotProps">
         <Skeleton v-if="loading" />
         <template v-else>
-          {{ slotProps.data[field.columnName] }}
+          <div v-html="slotProps.data[field.columnName]"></div>
         </template>
       </template>
 
-      <template #filter v-if="field.searchable && !field.isGloballySearchable">
+      <template v-if="field.searchable && !field.isGloballySearchable" #filter>
         <InputText
-          type="text"
-          class="p-column-filter"
           v-model="filters[field.columnName]"
-          @keydown.enter="onFilter(field.columnName)"
-          :placeholder="`Search by ${field.label}`"
           v-tooltip.top.focus="'Hit enter key to filter'"
+          :placeholder="`Search by ${field.label}`"
+          class="p-column-filter"
+          type="text"
+          @keydown.enter="onFilter(field.columnName)"
         />
       </template>
     </Column>
 
+    <Column :exportable="false" headerStyle="min-width:10rem;">
+      <template #body="slotProps">
+        <Skeleton v-if="loading" />
+        <template v-else>
+          <Button
+            class="p-button-rounded p-button-warning mr-2"
+            icon="pi pi-pencil"
+            @click="editProduct(slotProps.data)"
+          />
+          <Button
+            class="p-button-rounded p-button-danger mt-2"
+            icon="pi pi-trash"
+            @click="confirmDeleteProduct(slotProps.data)"
+          />
+        </template>
+      </template>
+    </Column>
+
     <template #loading></template>
+    <template #footer>
+      <ScrollTop />
+    </template>
   </DataTable>
 </template>
 
@@ -127,6 +178,8 @@ import Skeleton from "primevue/skeleton";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
 import MultiSelect from "primevue/multiselect";
+import ScrollTop from "primevue/scrolltop";
+import Toolbar from "primevue/toolbar";
 import { useUrlParams } from "@/Composables/trinity_url_params";
 import { usePageProps } from "@/Composables/trinity_page_props";
 import type { Resource } from "@/Models/Resource";
@@ -177,6 +230,14 @@ let globalSearchFields = computed(() =>
     ([, f]) => f.isGloballySearchable
   )
 );
+
+let exportableFields = computed(() =>
+  Object.entries(props.value.fields ?? {}).filter(([, f]) => f.exportable)
+);
+
+function exportCSV() {
+  dt.value.exportCSV();
+}
 
 let toggleableMultiSelect = ref(null);
 let toggleableFields = ref(
@@ -272,6 +333,7 @@ const fetchTable = () => {
     data,
     {
       preserveState: true,
+      preserveScroll: true,
       replace: true,
       onStart: () => (loading.value = true),
       onFinish: () => (loading.value = false),
@@ -280,6 +342,7 @@ const fetchTable = () => {
 };
 
 const items = ref<Array<any>>([]);
+const selectedItems = ref([]);
 const multiSortMeta = ref<Array<any>>([]);
 watchEffect(() => {
   const { fields, paginator } = props.value;
@@ -322,6 +385,7 @@ watchEffect(() => {
 .p-datatable .p-datatable-loading-overlay {
   display: none !important;
 }
+
 .toggleableFields {
   left: unset !important;
   right: 0 !important;
