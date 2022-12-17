@@ -1,5 +1,5 @@
 <template>
-  <div class="p-fluid formgrid grid" :class="`col-${component.columnSpan}`">
+  <Fieldset :class="`col-${component.columnSpan}`">
     <template
       v-for="(innerComponent, index) of component.schema"
       :key="`gird_${index}_${innerComponent.componentName}`"
@@ -9,13 +9,15 @@
         :component="innerComponent"
       ></component>
     </template>
-  </div>
+  </Fieldset>
 </template>
 
 <script lang="ts" setup>
-import type GridLayout from "@/Models/Layouts/GridLayout";
 import type Field from "@/Models/Field";
-defineProps<{ component: GridLayout | Field }>();
+import type BaseLayout from "@/Models/BaseLayout";
+import Fieldset from "primevue/fieldset";
+
+defineProps<{ component: BaseLayout | Field }>();
 </script>
 
 <style scoped></style>

@@ -1,26 +1,36 @@
 namespace AbanoubNassem.Trinity.Components;
 
-public abstract class BaseLayout : BaseComponent
+public interface IBaseLayout : IBaseComponent
 {
-    protected BaseLayout(List<BaseComponent> schema, int columns = 1)
+    public List<object> Schema { get; set; }
+
+    public int Columns { get; set; }
+}
+
+public abstract class BaseLayout<T> : BaseComponent<BaseLayout<T>> where T : BaseLayout<T>
+{
+    protected BaseLayout(List<IBaseComponent> schema, int columns = 1)
     {
         Schema = schema.Cast<object>().ToList();
         Columns = columns;
     }
-    
-    public List<object> Schema { get; protected set; }
 
-    public virtual BaseLayout SetSchema(List<BaseComponent> schema)
+    public override int ColumnSpan { get; protected set; } = 12;
+
+    public override string Type => "Layout";
+    public List<object> Schema { get; set; }
+
+    public T SetSchema(List<IBaseComponent> schema)
     {
         Schema = schema.Cast<object>().ToList();
-        return this;
+        return (this as T)!;
     }
 
     public int Columns { get; protected set; }
 
-    public virtual BaseLayout SetColumns(int columns = 1)
+    public T SetColumns(int columns = 1)
     {
         Columns = columns;
-        return this;
+        return (this as T)!;
     }
 }

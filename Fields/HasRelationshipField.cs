@@ -1,10 +1,11 @@
+using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
 using Humanizer;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public abstract class HasRelationshipField : BaseField
+public abstract class HasRelationshipField : BaseField<HasRelationshipField>
 {
     protected HasRelationshipField(string columnName, string? foreignColumn = null, string? foreignTable = null) :
         base(columnName)

@@ -125,7 +125,6 @@ public class TrinityController : Controller
                     resources = _trinityManager.Resources,
                     resource = resourceObject,
                     paginator = await resource.GetIndexData(),
-                    fields = resource.Fields
                 }
             );
         }
@@ -135,7 +134,6 @@ public class TrinityController : Controller
         {
             resource = resourceObject,
             paginator = await resource.GetIndexData(),
-            fields = resource.Fields
         });
     }
 

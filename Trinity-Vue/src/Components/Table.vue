@@ -5,7 +5,7 @@
         class="p-button-success mr-2"
         icon="pi pi-plus"
         label="New"
-        @click="useTrinityLink(`/${props.resource?.name}/create`)"
+        @click="useTrinityLink(`/${pageProps.resource?.name}/create`)"
       />
       <Button class="p-button-danger" icon="pi pi-trash" label="Delete" />
     </template>
@@ -14,7 +14,9 @@
   <DataTable
     ref="dt"
     v-model:selection="selectedItems"
-    :first="(paginator.currentPage - 1) * paginator.perPage"
+    :first="
+      (pageProps.paginator?.currentPage - 1) * pageProps.paginator?.perPage
+    "
     :lazy="true"
     :loading="loading"
     :multiSortMeta="multiSortMeta"
@@ -24,11 +26,11 @@
       default:
         'CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
     }"
-    :rows="paginator.perPage"
+    :rows="pageProps.paginator?.perPage"
     :rowsPerPageOptions="configStore.configs.rowsPerPageOptions"
-    :showGridlines="props.resource?.showGridlines"
-    :stripedRows="props.resource?.stripedRows"
-    :totalRecords="paginator.totalCount"
+    :showGridlines="pageProps.resource?.showGridlines"
+    :stripedRows="pageProps.resource?.stripedRows"
+    :totalRecords="pageProps.paginator?.totalCount"
     :value="items"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
     filterDisplay="row"
@@ -155,8 +157,6 @@
 <script lang="ts" setup>
 import { computed, ref, watch, watchEffect } from "vue";
 import { Inertia } from "@inertiajs/inertia";
-import type Field from "@/Models/Field";
-import type IPaginator from "@/Models/Paginator";
 import debounce from "lodash/debounce";
 
 import { useConfigStore } from "@/Stores/ConfigStore";
@@ -174,25 +174,22 @@ import ScrollTop from "primevue/scrolltop";
 import Toolbar from "primevue/toolbar";
 import { useUrlParams } from "@/Composables/trinity_url_params";
 import { usePageProps } from "@/Composables/trinity_page_props";
-import type { Resource } from "@/Models/Resource";
 import { useTrinityLink } from "@/Composables/trinity_link";
+import { useGetResourceFields } from "@/Composables/trinity_resource_fields";
 
 const configStore = useConfigStore();
 
-defineProps<{
-  fields: { [key: string]: Field };
-  paginator: IPaginator;
-  resource: Resource;
-}>();
+const pageProps = usePageProps();
+const resource = pageProps.value.resource;
 
-const props = usePageProps();
 const urlParams = useUrlParams();
+const fields = useGetResourceFields();
 const dt = ref();
 const loading = ref(false);
 
 let columns = ref(
   computed(() =>
-    Object.entries(props.value.fields ?? {}).filter(
+    Object.entries(fields).filter(
       ([, f]) =>
         !f.toggleable ||
         selectedColumns.value?.find((el: any) => el.field === f.columnName)
@@ -209,8 +206,8 @@ const onSort = (event: DataTableSortEvent) => {
 let pageEvent = ref<DataTablePageEvent>();
 const onPage = (event: DataTablePageEvent) => {
   if (
-    event.page + 1 === props.value.paginator?.currentPage &&
-    event.rows === props.value.paginator?.perPage
+    event.page + 1 === pageProps.value.paginator?.currentPage &&
+    event.rows === pageProps.value.paginator?.perPage
   )
     return;
 
@@ -219,13 +216,11 @@ const onPage = (event: DataTablePageEvent) => {
 };
 
 let globalSearchFields = computed(() =>
-  Object.entries(props.value.fields ?? {}).filter(
-    ([, f]) => f.isGloballySearchable
-  )
+  Object.entries(fields).filter(([, f]) => f.isGloballySearchable)
 );
 
 let exportableFields = computed(() =>
-  Object.entries(props.value.fields ?? {}).filter(([, f]) => f.exportable)
+  Object.entries(fields).filter(([, f]) => f.exportable)
 );
 
 function exportCSV(event: any) {
@@ -234,7 +229,7 @@ function exportCSV(event: any) {
 
 let toggleableMultiSelect = ref(null);
 let toggleableFields = ref(
-  Object.entries(props.value.fields ?? {}).flatMap(([, f]) => {
+  Object.entries(fields).flatMap(([, f]) => {
     if (f.toggleable) {
       return {
         field: f.columnName,
@@ -299,12 +294,12 @@ const fetchTable = () => {
   if (pageEvent?.value) {
     data.page = pageEvent?.value
       ? pageEvent.value?.page + 1
-      : props.value.paginator?.currentPage ?? 1;
+      : pageProps.value.paginator?.currentPage ?? 1;
   }
 
   if (pageEvent?.value?.rows) {
     data.perPage =
-      pageEvent?.value?.rows ?? props.value.paginator?.perPage ?? 10;
+      pageEvent?.value?.rows ?? pageProps.value.paginator?.perPage ?? 10;
   }
 
   if (sortEvent?.value?.multiSortMeta) {
@@ -320,9 +315,7 @@ const fetchTable = () => {
   }
 
   Inertia.get(
-    `/${
-      configStore.configs.prefix
-    }/${props.value.resource?.pluralLabel.toLowerCase()}`,
+    `/${configStore.configs.prefix}/${resource?.pluralLabel.toLowerCase()}`,
     data,
     {
       preserveState: true,
@@ -338,7 +331,8 @@ const items = ref<Array<any>>([]);
 const selectedItems = ref([]);
 const multiSortMeta = ref<Array<any>>([]);
 watchEffect(() => {
-  const { fields, paginator } = props.value;
+  const { paginator } = pageProps.value;
+
   const urlParams = useUrlParams();
 
   multiSortMeta.value = [];
@@ -352,9 +346,7 @@ watchEffect(() => {
   items.value = [];
   for (const it of paginator?.data ?? []) {
     let item = {} as any;
-    for (const key in fields) {
-      const field = fields[key];
-
+    for (const field of fields) {
       if (field.relationshipName) {
         const relations = field.relationshipName.split(".");
         let record = it;

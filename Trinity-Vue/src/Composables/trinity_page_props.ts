@@ -14,7 +14,6 @@ export const usePageProps = (): Ref<
       resources?: Array<Resource>;
       resource?: Resource;
       paginator?: IPaginator;
-      fields?: { [key: string]: Field };
       errors?: Errors;
     } & { [key: string]: object }
   >
@@ -23,7 +22,6 @@ export const usePageProps = (): Ref<
     controller: {
       resource: Resource;
       paginator: IPaginator;
-      fields: { [key: string]: Field };
     };
     sharedProps: {};
   }>();

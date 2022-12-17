@@ -17,6 +17,7 @@ import BadgeDirective from "primevue/badgedirective";
 import { createMemoryHistory, createRouter } from "vue-router";
 import GridLayout from "@/Layouts/GridLayout.vue";
 import TextField from "@/Fields/TextField.vue";
+import FieldsetLayout from "@/Layouts/FieldsetLayout.vue";
 
 createInertiaApp({
   resolve: async (name) => {
@@ -50,6 +51,7 @@ createInertiaApp({
       .directive("badge", BadgeDirective)
       .component("AppHead", AppHead)
       .component("GridLayout", GridLayout)
+      .component("FieldsetLayout", FieldsetLayout)
       .component("TextField", TextField);
 
     app.provide(

@@ -44,7 +44,7 @@ public abstract class TrinityResource
         await Task.CompletedTask;
     }
 
-    public abstract List<BaseComponent> GetSchema();
+    public abstract List<IBaseComponent> GetSchema();
 
     public List<object> Schema
     {
@@ -61,33 +61,34 @@ public abstract class TrinityResource
         }
     }
 
+    [JsonIgnore]
     public Dictionary<string, object> Fields
     {
         get
         {
             if (_fields.Count != 0) return _fields;
 
-            foreach (var field in GetSchema())
+            foreach (var field in Schema)
             {
-                GetInnerFields(field);
+                GetInnerFields((IBaseComponent)field);
             }
 
             return _fields;
         }
     }
 
-    private void GetInnerFields(BaseComponent component)
+    private void GetInnerFields(IBaseComponent component)
     {
         switch (component)
         {
-            case BaseField baseField:
+            case IBaseField baseField:
                 _fields.Add(baseField.ColumnName, baseField);
                 break;
-            case BaseLayout baseLayout:
+            case IBaseLayout baseLayout:
             {
                 foreach (var innerComponent in baseLayout.Schema)
                 {
-                    GetInnerFields((BaseComponent)innerComponent);
+                    GetInnerFields((IBaseComponent)innerComponent);
                 }
 
                 break;
@@ -148,7 +149,7 @@ public abstract class TrinityResource
 
             query.From($"{Table:raw} AS t");
 
-            foreach (BaseField field in Fields.Values)
+            foreach (IBaseField field in Fields.Values)
             {
                 field.SelectQuery(query);
 
@@ -192,7 +193,7 @@ public abstract class TrinityResource
 
             if (result.Any())
             {
-                foreach (BaseField filed in Fields.Values)
+                foreach (IBaseField filed in Fields.Values)
                 {
                     if (filed is not HasRelationshipField field) continue;
                     result = await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result,
@@ -203,7 +204,7 @@ public abstract class TrinityResource
 
             foreach (var record in result)
             {
-                foreach (BaseField field in Fields.Values)
+                foreach (IBaseField field in Fields.Values)
                 {
                     field.Format(record);
                 }

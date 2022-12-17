@@ -1,10 +1,22 @@
-using AbanoubNassem.Trinity.Components;
 using DapperQueryBuilder;
 using Humanizer;
 
-namespace AbanoubNassem.Trinity.Fields;
+namespace AbanoubNassem.Trinity.Components;
 
-public abstract class BaseField : BaseComponent
+public interface IBaseField : IBaseComponent
+{
+    public string ColumnName { get; set; }
+
+    public void Format(IDictionary<string, object?> record);
+
+    public void SelectQuery(FluentQueryBuilder query);
+
+    public void FilterQuery(Filters filters, string globalSearch);
+
+    public bool IsGloballySearchable { get; set; }
+}
+
+public abstract class BaseField<T> : BaseComponent<BaseField<T>>, IBaseField where T : BaseField<T>
 {
     protected BaseField(string columnName)
     {
@@ -13,9 +25,8 @@ public abstract class BaseField : BaseComponent
         Title = columnName;
     }
 
-    protected virtual void SetUp(string propertyName, Type propertyType)
-    {
-    }
+    public override string Type => "Field";
+
 
     public virtual void SelectQuery(FluentQueryBuilder query)
     {
@@ -31,38 +42,38 @@ public abstract class BaseField : BaseComponent
     public delegate void ActionWithRecord(IDictionary<string, object?> record);
 
 
-    public string ColumnName { get; protected set; }
+    public string ColumnName { get; set; }
 
-    public BaseField SetColumnName(string value)
+    public T SetColumnName(string value)
     {
         ColumnName = value;
-        return this;
+        return (this as T)!;
     }
 
 
     public string Label { get; protected set; }
 
-    public BaseField SetLabel(string value)
+    public T SetLabel(string value)
     {
         Label = value;
-        return this;
+        return (this as T)!;
     }
 
     public string Title { get; protected set; }
 
-    public BaseField SetTitle(string value)
+    public T SetTitle(string value)
     {
         Title = value;
-        return this;
+        return (this as T)!;
     }
 
 
     private ActionWithRecord? _formatUsing;
 
-    public BaseField FormatUsing(ActionWithRecord formatUsing)
+    public T FormatUsing(ActionWithRecord formatUsing)
     {
         _formatUsing = formatUsing;
-        return this;
+        return (this as T)!;
     }
 
     public void Format(IDictionary<string, object?> record)
@@ -72,39 +83,39 @@ public abstract class BaseField : BaseComponent
 
     public bool Sortable { get; protected set; }
 
-    public BaseField SetAsSortable(bool sortable = true)
+    public T SetAsSortable(bool sortable = true)
     {
         Sortable = sortable;
-        return this;
+        return (this as T)!;
     }
 
     public bool Searchable { get; protected set; }
 
-    public bool IsGloballySearchable { get; protected set; }
+    public bool IsGloballySearchable { get; set; }
 
-    public BaseField SetAsSearchable(bool searchable = true, bool globallySearchable = true)
+    public T SetAsSearchable(bool searchable = true, bool globallySearchable = true)
     {
         Searchable = searchable;
         IsGloballySearchable = globallySearchable;
-        return this;
+        return (this as T)!;
     }
 
     public bool Toggleable { get; protected set; }
 
     public bool IsToggledHiddenByDefault { get; protected set; }
 
-    public BaseField SetAsToggleable(bool toggleable = true, bool isToggledHiddenByDefault = true)
+    public T SetAsToggleable(bool toggleable = true, bool isToggledHiddenByDefault = true)
     {
         Toggleable = toggleable;
         IsToggledHiddenByDefault = isToggledHiddenByDefault;
-        return this;
+        return (this as T)!;
     }
-    
+
     public bool Exportable { get; protected set; }
 
-    public BaseField SetAsExportable(bool exportable = true)
+    public T SetAsExportable(bool exportable = true)
     {
         Exportable = exportable;
-        return this;
+        return (this as T)!;
     }
 }
