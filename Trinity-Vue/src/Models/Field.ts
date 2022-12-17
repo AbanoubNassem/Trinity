@@ -1,5 +1,6 @@
-export default interface Field {
-  componentName: string;
+import type BaseComponent from "@/Models/BaseComponent";
+
+export default interface Field extends BaseComponent {
   label: string;
   columnName: string;
   initialValue: string;

@@ -1,6 +1,7 @@
 using System.Data;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Fields;
 using AbanoubNassem.Trinity.RequestHelpers;
@@ -21,6 +22,8 @@ public abstract class TrinityResource
     protected ILogger Logger { get; init; } = null!;
     [JsonIgnore] protected Func<IDbConnection> ConnectionFactory { get; init; } = null!;
 
+    public string Name { get; init; } = null!;
+
     private string? _label = null;
     public virtual string? Label => _label;
 
@@ -34,13 +37,29 @@ public abstract class TrinityResource
     [JsonIgnore] public virtual string? Table => _table;
 
     private readonly Dictionary<string, object> _fields = new();
-    
+    private readonly List<object> _schema = new();
+
     public virtual async Task Setup()
     {
         await Task.CompletedTask;
     }
 
-    public abstract IList<BaseField> GetFields();
+    public abstract List<BaseComponent> GetSchema();
+
+    public List<object> Schema
+    {
+        get
+        {
+            if (_schema.Count != 0) return _schema;
+
+            foreach (var component in GetSchema())
+            {
+                _schema.Add(component);
+            }
+
+            return _schema;
+        }
+    }
 
     public Dictionary<string, object> Fields
     {
@@ -48,12 +67,31 @@ public abstract class TrinityResource
         {
             if (_fields.Count != 0) return _fields;
 
-            foreach (var field in GetFields())
+            foreach (var field in GetSchema())
             {
-                _fields.Add(field.ColumnName, field);
+                GetInnerFields(field);
             }
 
             return _fields;
+        }
+    }
+
+    private void GetInnerFields(BaseComponent component)
+    {
+        switch (component)
+        {
+            case BaseField baseField:
+                _fields.Add(baseField.ColumnName, baseField);
+                break;
+            case BaseLayout baseLayout:
+            {
+                foreach (var innerComponent in baseLayout.Schema)
+                {
+                    GetInnerFields((BaseComponent)innerComponent);
+                }
+
+                break;
+            }
         }
     }
 

@@ -5,15 +5,9 @@
         class="p-button-success mr-2"
         icon="pi pi-plus"
         label="New"
-        @click="openNew"
+        @click="useTrinityLink(`/${props.resource?.name}/create`)"
       />
-      <Button
-        :disabled="!selectedProducts || !selectedProducts.length"
-        class="p-button-danger"
-        icon="pi pi-trash"
-        label="Delete"
-        @click="confirmDeleteSelected"
-      />
+      <Button class="p-button-danger" icon="pi pi-trash" label="Delete" />
     </template>
   </Toolbar>
 
@@ -136,18 +130,16 @@
     </Column>
 
     <Column :exportable="false" headerStyle="min-width:10rem;">
-      <template #body="slotProps">
+      <template #body>
         <Skeleton v-if="loading" />
         <template v-else>
           <Button
             class="p-button-rounded p-button-warning mr-2"
             icon="pi pi-pencil"
-            @click="editProduct(slotProps.data)"
           />
           <Button
             class="p-button-rounded p-button-danger mt-2"
             icon="pi pi-trash"
-            @click="confirmDeleteProduct(slotProps.data)"
           />
         </template>
       </template>
@@ -183,6 +175,7 @@ import Toolbar from "primevue/toolbar";
 import { useUrlParams } from "@/Composables/trinity_url_params";
 import { usePageProps } from "@/Composables/trinity_page_props";
 import type { Resource } from "@/Models/Resource";
+import { useTrinityLink } from "@/Composables/trinity_link";
 
 const configStore = useConfigStore();
 
@@ -235,8 +228,8 @@ let exportableFields = computed(() =>
   Object.entries(props.value.fields ?? {}).filter(([, f]) => f.exportable)
 );
 
-function exportCSV() {
-  dt.value.exportCSV();
+function exportCSV(event: any) {
+  dt.value.exportCSV(event);
 }
 
 let toggleableMultiSelect = ref(null);

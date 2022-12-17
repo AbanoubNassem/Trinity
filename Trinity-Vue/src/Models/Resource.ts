@@ -1,7 +1,11 @@
+import type BaseComponent from "@/Models/BaseComponent";
+
 export interface Resource {
-  label: String;
-  pluralLabel: String;
+  name: string;
+  label: string;
+  pluralLabel: string;
   icon: string;
   showGridlines: boolean;
   stripedRows: boolean;
+  schema: Array<BaseComponent>;
 }

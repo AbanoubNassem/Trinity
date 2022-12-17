@@ -35,20 +35,23 @@ public class TrinityManager
             var properties = new Dictionary<string, PropertyInfo>();
 
             var resource = (TrinityResource)Activator.CreateInstance(resourceType)!;
-            
+
+
+            trinityResourceType.GetProperty("Name", flags)!
+                .SetValue(resource, plural.ToLower());
 
             if (resource.Label == null)
             {
                 trinityResourceType.GetField("_label", flags)!
                     .SetValue(resource, plural);
             }
-            
+
             if (resource.PluralLabel == null)
             {
                 trinityResourceType.GetField("_pluralLabel", flags)!
                     .SetValue(resource, plural);
             }
-            
+
             if (resource.Table == null)
             {
                 trinityResourceType.GetField("_table", flags)!
