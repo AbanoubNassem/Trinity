@@ -21,7 +21,7 @@ public abstract class BaseField<T> : BaseComponent<BaseField<T>>, IBaseField whe
     protected BaseField(string columnName)
     {
         ColumnName = columnName;
-        Label = ColumnName.Titleize();
+        SetLabel(ColumnName.Titleize());
         Title = columnName;
     }
 
@@ -50,14 +50,6 @@ public abstract class BaseField<T> : BaseComponent<BaseField<T>>, IBaseField whe
         return (this as T)!;
     }
 
-
-    public string Label { get; protected set; }
-
-    public T SetLabel(string value)
-    {
-        Label = value;
-        return (this as T)!;
-    }
 
     public string Title { get; protected set; }
 
@@ -99,17 +91,7 @@ public abstract class BaseField<T> : BaseComponent<BaseField<T>>, IBaseField whe
         IsGloballySearchable = globallySearchable;
         return (this as T)!;
     }
-
-    public bool Toggleable { get; protected set; }
-
-    public bool IsToggledHiddenByDefault { get; protected set; }
-
-    public T SetAsToggleable(bool toggleable = true, bool isToggledHiddenByDefault = true)
-    {
-        Toggleable = toggleable;
-        IsToggledHiddenByDefault = isToggledHiddenByDefault;
-        return (this as T)!;
-    }
+    
 
     public bool Exportable { get; protected set; }
 

@@ -5,7 +5,7 @@
     <div class="col-12">
       <h5 class="mb-6">Create {{ props.resource?.pluralLabel }}</h5>
 
-      <div class="p-fluid formgrid grid">
+      <div class="p-fluid formgrid grid col-12">
         <template
           v-for="(component, index) of props.resource?.schema"
           :key="`form_${index}_${component.componentName}`"

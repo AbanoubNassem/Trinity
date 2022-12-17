@@ -6,8 +6,10 @@ public class FieldsetLayout : BaseLayout<FieldsetLayout>
 {
     public override string ComponentName => "FieldsetLayout";
 
-
-    public FieldsetLayout(List<IBaseComponent> schema, int columns = 1) : base(schema, columns)
+    public FieldsetLayout(List<IBaseComponent> schema, int columns = 0) : base(schema, columns)
     {
     }
+
+
+    public override string Label { get; protected set; } = "Fieldset";
 }

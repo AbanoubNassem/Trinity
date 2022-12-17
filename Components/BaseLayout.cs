@@ -9,7 +9,7 @@ public interface IBaseLayout : IBaseComponent
 
 public abstract class BaseLayout<T> : BaseComponent<BaseLayout<T>> where T : BaseLayout<T>
 {
-    protected BaseLayout(List<IBaseComponent> schema, int columns = 1)
+    protected BaseLayout(List<IBaseComponent> schema, int columns = 0)
     {
         Schema = schema.Cast<object>().ToList();
         Columns = columns;
@@ -28,7 +28,7 @@ public abstract class BaseLayout<T> : BaseComponent<BaseLayout<T>> where T : Bas
 
     public int Columns { get; protected set; }
 
-    public T SetColumns(int columns = 1)
+    public T SetColumns(int columns = 0)
     {
         Columns = columns;
         return (this as T)!;

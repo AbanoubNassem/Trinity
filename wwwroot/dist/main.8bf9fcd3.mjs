@@ -3220,9 +3220,9 @@ function KO(t, e) {
       let Vt, bt = 0;
       const Jt = nt - ut + 1;
       let Ne = !1, ft = 0;
-      const Et = new Array(Jt);
+      const Dt = new Array(Jt);
       for (B = 0; B < Jt; B++)
-        Et[B] = 0;
+        Dt[B] = 0;
       for (B = rt; B <= $; B++) {
         const kt = d[B];
         if (bt >= Jt) {
@@ -3234,16 +3234,16 @@ function KO(t, e) {
           Yt = dt.get(kt.key);
         else
           for (Vt = ut; Vt <= nt; Vt++)
-            if (Et[Vt - ut] === 0 && Oo(kt, N[Vt])) {
+            if (Dt[Vt - ut] === 0 && Oo(kt, N[Vt])) {
               Yt = Vt;
               break;
             }
-        Yt === void 0 ? Ut(kt, F, G, !0) : (Et[Yt - ut] = B + 1, Yt >= ft ? ft = Yt : Ne = !0, P(kt, N[Yt], h, null, F, G, X, W, k), bt++);
+        Yt === void 0 ? Ut(kt, F, G, !0) : (Dt[Yt - ut] = B + 1, Yt >= ft ? ft = Yt : Ne = !0, P(kt, N[Yt], h, null, F, G, X, W, k), bt++);
       }
-      const Rt = Ne ? Cc(Et) : pi;
+      const Rt = Ne ? Cc(Dt) : pi;
       for (Vt = Rt.length - 1, B = Jt - 1; B >= 0; B--) {
         const kt = ut + B, Yt = N[kt], io = kt + 1 < Z ? N[kt + 1].el : w;
-        Et[B] === 0 ? P(null, Yt, h, io, F, G, X, W, k) : Ne && (Vt < 0 || B !== Rt[Vt] ? oe(Yt, h, io, 2) : Vt--);
+        Dt[B] === 0 ? P(null, Yt, h, io, F, G, X, W, k) : Ne && (Vt < 0 || B !== Rt[Vt] ? oe(Yt, h, io, 2) : Vt--);
       }
     }
   }, oe = (d, N, h, w, F = null) => {
@@ -3494,7 +3494,7 @@ function qO(t) {
   return t.dynamicChildren = xn > 0 ? he || pi : null, QO(), xn > 0 && he && he.push(t), t;
 }
 function Tt(t, e, o, n, i, s) {
-  return qO(Dt(t, e, o, n, i, s, !0));
+  return qO(Et(t, e, o, n, i, s, !0));
 }
 function Ie(t, e, o, n, i) {
   return qO(It(t, e, o, n, i, !0));
@@ -3510,7 +3510,7 @@ function Rc(t) {
   vm = t;
 }
 const gc = (...t) => tT(...vm ? vm(t, $t) : t), mr = "__vInternal", ZO = ({ key: t }) => t != null ? t : null, ba = ({ ref: t, ref_key: e, ref_for: o }) => t != null ? Wt(t) || Gt(t) || lt(t) ? { i: $t, r: t, k: e, f: !!o } : t : null;
-function Dt(t, e = null, o = null, n = 0, i = null, s = t === yt ? 0 : 1, a = !1, r = !1) {
+function Et(t, e = null, o = null, n = 0, i = null, s = t === yt ? 0 : 1, a = !1, r = !1) {
   const l = {
     __v_isVNode: !0,
     __v_skip: !0,
@@ -3554,7 +3554,7 @@ function tT(t, e = null, o = null, n = 0, i = null, s = !1) {
   }
   const a = Wt(t) ? 1 : VO(t) ? 128 : hc(t) ? 64 : Lt(t) ? 4 : lt(t) ? 2 : 0;
   return { DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", __INTELLIJ_COMMAND_HISTFILE__: "/Users/abanoub/Library/Caches/JetBrains/Rider2022.3/terminal/history/Inertia-history2", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", LOGIN_SHELL: "1", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.g7F4P3QdKs/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "3e76f3cc-8718-4d6c-af67-4b46b9cd2501", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "en_AE.UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue", _: "/usr/local/bin/vite" }.NODE_ENV !== "production" && a & 4 && Ls(t) && (t = pt(t), H("Vue received a Component which was made a reactive object. This can lead to unnecessary performance overhead, and should be avoided by marking the component with `markRaw` or using `shallowRef` instead of `ref`.", `
-Component that was made reactive: `, t)), Dt(t, e, o, n, i, a, s, !0);
+Component that was made reactive: `, t)), Et(t, e, o, n, i, a, s, !0);
 }
 function eT(t) {
   return t ? Ls(t) || mr in t ? Bt({}, t) : t : null;
@@ -4980,7 +4980,7 @@ const YI = () => {
   createBlock: Ie,
   createCommentVNode: xt,
   createElementBlock: Tt,
-  createElementVNode: Dt,
+  createElementVNode: Et,
   createHydrationRenderer: XO,
   createPropsRestProxy: Qc,
   createRenderer: YO,
@@ -6073,7 +6073,7 @@ var Lm = { exports: {} };
     return _ ? "Symbol(src)_1." + _ : "";
   }(), Ne = ut.toString, ft = RegExp(
     "^" + Vt.call(bt).replace(oe, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
-  ), Et = _t ? z.Buffer : void 0, Rt = z.Symbol, kt = z.Uint8Array, Yt = ut.propertyIsEnumerable, io = nt.splice, Ke = Rt ? Rt.toStringTag : void 0, zn = Object.getOwnPropertySymbols, Hi = Et ? Et.isBuffer : void 0, cn = Z(Object.keys, Object), Fi = Eo(z, "DataView"), In = Eo(z, "Map"), wi = Eo(z, "Promise"), xi = Eo(z, "Set"), Bi = Eo(z, "WeakMap"), ko = Eo(Object, "create"), zs = Se(Fi), So = Se(In), br = Se(wi), Nr = Se(xi), Mr = Se(Bi), $s = Rt ? Rt.prototype : void 0, Wi = $s ? $s.valueOf : void 0;
+  ), Dt = _t ? z.Buffer : void 0, Rt = z.Symbol, kt = z.Uint8Array, Yt = ut.propertyIsEnumerable, io = nt.splice, Ke = Rt ? Rt.toStringTag : void 0, zn = Object.getOwnPropertySymbols, Hi = Dt ? Dt.isBuffer : void 0, cn = Z(Object.keys, Object), Fi = Eo(z, "DataView"), In = Eo(z, "Map"), wi = Eo(z, "Promise"), xi = Eo(z, "Set"), Bi = Eo(z, "WeakMap"), ko = Eo(Object, "create"), zs = Se(Fi), So = Se(In), br = Se(wi), Nr = Se(xi), Mr = Se(Bi), $s = Rt ? Rt.prototype : void 0, Wi = $s ? $s.valueOf : void 0;
   function ne(_) {
     var T = -1, D = _ == null ? 0 : _.length;
     for (this.clear(); ++T < D; ) {
@@ -6547,7 +6547,7 @@ var Am = { exports: {} };
     return _ ? "Symbol(src)_1." + _ : "";
   }(), Z = X.toString, $ = W.hasOwnProperty, nt = W.toString, rt = RegExp(
     "^" + Z.call($).replace(et, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
-  ), ut = q ? Ut.Buffer : void 0, dt = Ut.Symbol, Vt = Ut.Uint8Array, bt = w(Object.getPrototypeOf, Object), Jt = Object.create, Ne = W.propertyIsEnumerable, ft = G.splice, Et = Object.getOwnPropertySymbols, Rt = ut ? ut.isBuffer : void 0, kt = w(Object.keys, Object), Yt = ze(Ut, "DataView"), io = ze(Ut, "Map"), Ke = ze(Ut, "Promise"), zn = ze(Ut, "Set"), Hi = ze(Ut, "WeakMap"), cn = ze(Object, "create"), Fi = Se(Yt), In = Se(io), wi = Se(Ke), xi = Se(zn), Bi = Se(Hi), ko = dt ? dt.prototype : void 0, zs = ko ? ko.valueOf : void 0;
+  ), ut = q ? Ut.Buffer : void 0, dt = Ut.Symbol, Vt = Ut.Uint8Array, bt = w(Object.getPrototypeOf, Object), Jt = Object.create, Ne = W.propertyIsEnumerable, ft = G.splice, Dt = Object.getOwnPropertySymbols, Rt = ut ? ut.isBuffer : void 0, kt = w(Object.keys, Object), Yt = ze(Ut, "DataView"), io = ze(Ut, "Map"), Ke = ze(Ut, "Promise"), zn = ze(Ut, "Set"), Hi = ze(Ut, "WeakMap"), cn = ze(Object, "create"), Fi = Se(Yt), In = Se(io), wi = Se(Ke), xi = Se(zn), Bi = Se(Hi), ko = dt ? dt.prototype : void 0, zs = ko ? ko.valueOf : void 0;
   function So(_) {
     var T = -1, D = _ ? _.length : 0;
     for (this.clear(); ++T < D; ) {
@@ -6799,7 +6799,7 @@ var Am = { exports: {} };
     var D = d(_, T);
     return Jr(D) ? D : void 0;
   }
-  var Eo = Et ? w(Et, Object) : sl, Do = kr;
+  var Eo = Dt ? w(Dt, Object) : sl, Do = kr;
   (Yt && Do(new Yt(new ArrayBuffer(1))) != L || io && Do(new io()) != O || Ke && Do(Ke.resolve()) != P || zn && Do(new zn()) != E || Hi && Do(new Hi()) != C) && (Do = function(_) {
     var T = nt.call(_), D = T == c ? _.constructor : void 0, g = D ? Se(D) : void 0;
     if (g)
@@ -9069,10 +9069,10 @@ var WD = Ai, GD = WD;
       } : W, B = j.onSuccess, Z = B === void 0 ? function() {
       } : B, $ = j.onError, nt = $ === void 0 ? function() {
       } : $, rt = j.queryStringArrayFormat, ut = rt === void 0 ? "brackets" : rt, dt = typeof v == "string" ? O(v) : v;
-      if (!function ft(Et) {
-        return Et instanceof File || Et instanceof Blob || Et instanceof FileList && Et.length > 0 || Et instanceof FormData && Array.from(Et.values()).some(function(Rt) {
+      if (!function ft(Dt) {
+        return Dt instanceof File || Dt instanceof Blob || Dt instanceof FileList && Dt.length > 0 || Dt instanceof FormData && Array.from(Dt.values()).some(function(Rt) {
           return ft(Rt);
-        }) || typeof Et == "object" && Et !== null && Object.values(Et).some(function(Rt) {
+        }) || typeof Dt == "object" && Dt !== null && Object.values(Dt).some(function(Rt) {
           return ft(Rt);
         });
       }(K) && !vt || K instanceof FormData || (K = m(K)), !(K instanceof FormData)) {
@@ -9090,32 +9090,32 @@ var WD = Ai, GD = WD;
         } }), function(ft) {
           P("start", { detail: { visit: ft } });
         }(Jt), h(Jt), o({ method: Y, url: c(dt).href, data: Y === t.Method.GET ? {} : K, params: Y === t.Method.GET ? K : {}, cancelToken: this.activeVisit.cancelToken.token, headers: s({}, y, { Accept: "text/html, application/xhtml+xml", "X-Requested-With": "XMLHttpRequest", "X-Inertia": !0 }, Ut.length ? { "X-Inertia-Partial-Component": this.page.component, "X-Inertia-Partial-Data": Ut.join(",") } : {}, J && J.length ? { "X-Inertia-Error-Bag": J } : {}, this.page.version ? { "X-Inertia-Version": this.page.version } : {}), onUploadProgress: function(ft) {
-          K instanceof FormData && (ft.percentage = Math.round(ft.loaded / ft.total * 100), function(Et) {
-            P("progress", { detail: { progress: Et } });
+          K instanceof FormData && (ft.percentage = Math.round(ft.loaded / ft.total * 100), function(Dt) {
+            P("progress", { detail: { progress: Dt } });
           }(ft), F(ft));
         } }).then(function(ft) {
-          var Et;
+          var Dt;
           if (!b.isInertiaResponse(ft))
             return Promise.reject({ response: ft });
           var Rt = ft.data;
-          Ut.length && Rt.component === b.page.component && (Rt.props = s({}, b.page.props, Rt.props)), jt = b.resolvePreserveOption(jt, Rt), (Zt = b.resolvePreserveOption(Zt, Rt)) && (Et = window.history.state) != null && Et.rememberedState && Rt.component === b.page.component && (Rt.rememberedState = window.history.state.rememberedState);
+          Ut.length && Rt.component === b.page.component && (Rt.props = s({}, b.page.props, Rt.props)), jt = b.resolvePreserveOption(jt, Rt), (Zt = b.resolvePreserveOption(Zt, Rt)) && (Dt = window.history.state) != null && Dt.rememberedState && Rt.component === b.page.component && (Rt.rememberedState = window.history.state.rememberedState);
           var kt = dt, Yt = O(Rt.url);
           return kt.hash && !Yt.hash && c(kt).href === Yt.href && (Yt.hash = kt.hash, Rt.url = Yt.href), b.setPage(Rt, { visitId: Ne, replace: ot, preserveScroll: jt, preserveState: Zt });
         }).then(function() {
           var ft = b.page.props.errors || {};
           if (Object.keys(ft).length > 0) {
-            var Et = J ? ft[J] ? ft[J] : {} : ft;
+            var Dt = J ? ft[J] ? ft[J] : {} : ft;
             return function(Rt) {
               P("error", { detail: { errors: Rt } });
-            }(Et), nt(Et);
+            }(Dt), nt(Dt);
           }
           return P("success", { detail: { page: b.page } }), Z(b.page);
         }).catch(function(ft) {
           if (b.isInertiaResponse(ft.response))
             return b.setPage(ft.response.data, { visitId: Ne });
           if (b.isLocationVisitResponse(ft.response)) {
-            var Et = O(ft.response.headers["x-inertia-location"]), Rt = dt;
-            Rt.hash && !Et.hash && c(Rt).href === Et.href && (Et.hash = Rt.hash), b.locationVisit(Et, jt === !0);
+            var Dt = O(ft.response.headers["x-inertia-location"]), Rt = dt;
+            Rt.hash && !Dt.hash && c(Rt).href === Dt.href && (Dt.hash = Rt.hash), b.locationVisit(Dt, jt === !0);
           } else {
             if (!ft.response)
               return Promise.reject(ft);
@@ -9125,8 +9125,8 @@ var WD = Ai, GD = WD;
           b.activeVisit && b.finishVisit(b.activeVisit);
         }).catch(function(ft) {
           if (!o.isCancel(ft)) {
-            var Et = P("exception", { cancelable: !0, detail: { exception: ft } });
-            if (b.activeVisit && b.finishVisit(b.activeVisit), Et)
+            var Dt = P("exception", { cancelable: !0, detail: { exception: ft } });
+            if (b.activeVisit && b.finishVisit(b.activeVisit), Dt)
               return Promise.reject(ft);
           }
         });
@@ -10799,7 +10799,7 @@ function Ib(t, e, o, n, i, s) {
         key: 1,
         class: Ft(s.iconStyleClass)
       }, null, 2)) : xt("", !0),
-      Dt("span", cb, ye(o.label || "\xA0"), 1),
+      Et("span", cb, ye(o.label || "\xA0"), 1),
       o.badge ? (it(), Tt("span", {
         key: 2,
         class: Ft(s.badgeStyleClass)
@@ -10905,7 +10905,7 @@ function Pb(t, e, o, n, i, s) {
     "aria-label": s.label(),
     "aria-disabled": s.disabled()
   }, [
-    Dt("div", {
+    Et("div", {
       class: "p-menuitem-content",
       onClick: e[0] || (e[0] = (l) => s.onItemClick(l))
     }, [
@@ -10930,7 +10930,7 @@ function Pb(t, e, o, n, i, s) {
                 key: 0,
                 class: Ft(["p-menuitem-icon", o.item.icon])
               }, null, 2)) : xt("", !0),
-              Dt("span", bb, ye(s.label()), 1)
+              Et("span", bb, ye(s.label()), 1)
             ], 10, Db)), [
               [r]
             ])
@@ -10948,7 +10948,7 @@ function Pb(t, e, o, n, i, s) {
             key: 0,
             class: Ft(["p-menuitem-icon", o.item.icon])
           }, null, 2)) : xt("", !0),
-          Dt("span", Mb, ye(s.label()), 1)
+          Et("span", Mb, ye(s.label()), 1)
         ], 10, Nb)), [
           [r]
         ])
@@ -11212,7 +11212,7 @@ function hb(t, e, o, n, i, s) {
           }, t.$attrs, {
             onClick: e[3] || (e[3] = (...l) => s.onOverlayClick && s.onOverlayClick(...l))
           }), [
-            Dt("ul", {
+            Et("ul", {
               ref: s.listRef,
               id: s.id + "_list",
               class: "p-menu-list p-reset",
@@ -11323,9 +11323,9 @@ function wv() {
   const { configs: t } = Ks();
   return Ye("appState").darkTheme ? (o = t.whiteLogo) != null ? o : "/trinity/dist/logo.svg" : (n = t.darkLogo) != null ? n : "/trinity/dist/logo.svg";
 }
-const Rb = { class: "layout-topbar" }, gb = { class: "layout-topbar-logo" }, Ub = ["src"], Hb = /* @__PURE__ */ Dt("i", { class: "pi pi-bars" }, null, -1), Fb = { class: "p-link layout-topbar-menu-button layout-topbar-button" }, wb = /* @__PURE__ */ Dt("i", { class: "pi pi-ellipsis-v" }, null, -1), xb = [
+const Rb = { class: "layout-topbar" }, gb = { class: "layout-topbar-logo" }, Ub = ["src"], Hb = /* @__PURE__ */ Et("i", { class: "pi pi-bars" }, null, -1), Fb = { class: "p-link layout-topbar-menu-button layout-topbar-button" }, wb = /* @__PURE__ */ Et("i", { class: "pi pi-ellipsis-v" }, null, -1), xb = [
   wb
-], Bb = { class: "layout-topbar-menu hidden lg:flex origin-top" }, Wb = /* @__PURE__ */ Dt("i", { class: "pi pi-user" }, null, -1), Gb = /* @__PURE__ */ Dt("span", null, "Profile", -1), kb = /* @__PURE__ */ Ue({
+], Bb = { class: "layout-topbar-menu hidden lg:flex origin-top" }, Wb = /* @__PURE__ */ Et("i", { class: "pi pi-user" }, null, -1), Gb = /* @__PURE__ */ Et("span", null, "Profile", -1), kb = /* @__PURE__ */ Ue({
   __name: "AppTopbar",
   emits: ["menu-toggle", "topbar-menu-toggle"],
   setup(t, { emit: e }) {
@@ -11353,12 +11353,12 @@ const Rb = { class: "layout-topbar" }, gb = { class: "layout-topbar-logo" }, Ub 
     return (l, m) => {
       const u = ji("styleclass");
       return it(), Tt("div", Rb, [
-        Dt("a", gb, [
-          Dt("img", {
+        Et("a", gb, [
+          Et("img", {
             alt: "Logo",
             src: Ht(i)
           }, null, 8, Ub),
-          Dt("span", null, ye(Ht(o).configs.title), 1)
+          Et("span", null, ye(Ht(o).configs.title), 1)
         ]),
         It(Ht(xm), {
           class: "p-link layout-menu-button layout-topbar-button",
@@ -11379,8 +11379,8 @@ const Rb = { class: "layout-topbar" }, gb = { class: "layout-topbar-logo" }, Ub 
             hideOnOutsideClick: !0
           }]
         ]),
-        Dt("ul", Bb, [
-          Dt("li", null, [
+        Et("ul", Bb, [
+          Et("li", null, [
             It(Ht(xm), {
               class: "p-link layout-topbar-button",
               onClick: r
@@ -11407,12 +11407,12 @@ const Rb = { class: "layout-topbar" }, gb = { class: "layout-topbar-logo" }, Ub 
   for (const [n, i] of e)
     o[n] = i;
   return o;
-}, Jb = /* @__PURE__ */ Go(kb, [["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Components/AppTopbar.vue"]]), Yb = { class: "layout-footer" }, Xb = ["src"], Kb = /* @__PURE__ */ Dt("span", { class: "font-medium ml-2" }, "Abanoub Nassem", -1), zb = /* @__PURE__ */ Ue({
+}, Jb = /* @__PURE__ */ Go(kb, [["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Components/AppTopbar.vue"]]), Yb = { class: "layout-footer" }, Xb = ["src"], Kb = /* @__PURE__ */ Et("span", { class: "font-medium ml-2" }, "Abanoub Nassem", -1), zb = /* @__PURE__ */ Ue({
   __name: "AppFooter",
   setup(t) {
     const e = wv();
     return (o, n) => (it(), Tt("div", Yb, [
-      Dt("img", {
+      Et("img", {
         alt: "Logo",
         src: Ht(e),
         height: "20",
@@ -11507,7 +11507,7 @@ const qb = { key: 0 }, Zb = ["aria-label"], tN = {
               role: "none"
             }, [
               t.root ? (it(), Tt(yt, { key: 0 }, [
-                Dt("div", {
+                Et("div", {
                   class: "layout-menuitem-root-text",
                   "aria-label": u.label
                 }, ye(u.label), 9, Zb),
@@ -11535,10 +11535,10 @@ const qb = { key: 0 }, Zb = ["aria-label"], tN = {
                   role: "menuitem"
                 }, {
                   default: ge(() => [
-                    Dt("i", {
+                    Et("i", {
                       class: Ft(u.icon)
                     }, null, 2),
-                    Dt("span", null, ye(u.label), 1),
+                    Et("span", null, ye(u.label), 1),
                     u.items ? (it(), Tt("i", tN)) : xt("v-if", !0),
                     u.badge ? (it(), Ie(Ht(Bm), {
                       key: 1,
@@ -11559,10 +11559,10 @@ const qb = { key: 0 }, Zb = ["aria-label"], tN = {
                   "aria-label": u.label,
                   role: "menuitem"
                 }, [
-                  Dt("i", {
+                  Et("i", {
                     class: Ft(u.icon)
                   }, null, 2),
-                  Dt("span", null, ye(u.label), 1),
+                  Et("span", null, ye(u.label), 1),
                   u.items ? (it(), Tt("i", oN)) : xt("v-if", !0),
                   u.badge ? (it(), Ie(Ht(Bm), {
                     key: 1,
@@ -11700,12 +11700,12 @@ const qb = { key: 0 }, Zb = ["aria-label"], tN = {
       const A = Ei("AppHead");
       return it(), Tt(yt, null, [
         It(A),
-        Dt("div", {
+        Et("div", {
           class: Ft(Ht(m)),
           onClick: O
         }, [
           It(Jb, { onMenuToggle: c }),
-          Dt("div", {
+          Et("div", {
             class: "layout-sidebar",
             onClick: p
           }, [
@@ -11714,8 +11714,8 @@ const qb = { key: 0 }, Zb = ["aria-label"], tN = {
               onMenuitemClick: u
             }, null, 8, ["items"])
           ]),
-          Dt("div", mN, [
-            Dt("div", _N, [
+          Et("div", mN, [
+            Et("div", _N, [
               eo(E.$slots, "default")
             ]),
             It($b)
@@ -11742,7 +11742,7 @@ const qb = { key: 0 }, Zb = ["aria-label"], tN = {
         var i;
         return [
           eo(o.$slots, "default"),
-          Dt("link", {
+          Et("link", {
             rel: "icon",
             type: "image/x-icon",
             href: (i = Ht(e).configs.favIcon) != null ? i : "/trinity/dist/favicon.ico"
@@ -13410,12 +13410,15 @@ const xM = /* @__PURE__ */ Ue({
   },
   setup(t) {
     return (e, o) => (it(), Tt("div", {
-      class: Ft(["p-fluid formgrid grid", `col-${t.component.columnSpan}`])
+      class: Ft(["p-fluid grid px-0 mx-0 col-12", [
+        t.component.columnSpan > 0 && t.component.columnSpan < 12 ? `md:col-${t.component.columnSpan}` : ""
+      ]])
     }, [
       (it(!0), Tt(yt, null, Di(t.component.schema, (n, i) => (it(), Ie(lr(n.componentName), {
         key: `gird_${i}_${n.componentName}`,
-        component: n
-      }, null, 8, ["component"]))), 128))
+        component: n,
+        extraClasses: t.component.columns ? `md:col-${12 / t.component.columns}` : ""
+      }, null, 8, ["component", "extraClasses"]))), 128))
     ], 2));
   }
 }), BM = /* @__PURE__ */ Go(xM, [["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Layouts/GridLayout.vue"]]);
@@ -13445,23 +13448,27 @@ function GM(t, e, o, n, i, s) {
   }, null, 42, WM);
 }
 _d.render = GM;
-const kM = { class: "field w-full md:col" }, JM = ["for"], YM = /* @__PURE__ */ Ue({
+const kM = ["for"], JM = /* @__PURE__ */ Ue({
   __name: "TextField",
   props: {
-    component: { type: null, required: !0 }
+    component: { type: null, required: !0 },
+    extraClasses: { type: String, required: !1 }
   },
   setup(t) {
-    return (e, o) => (it(), Tt("div", kM, [
-      Dt("label", {
+    return (e, o) => (it(), Tt("div", {
+      class: Ft(["field col-12 md:col", t.extraClasses])
+    }, [
+      Et("label", {
         for: t.component.columnName
-      }, ye(t.component.label), 9, JM),
+      }, ye(t.component.label), 9, kM),
       It(Ht(_d), {
         id: t.component.columnName,
-        type: "text"
+        type: "text",
+        class: ""
       }, null, 8, ["id"])
-    ]));
+    ], 2));
   }
-}), XM = /* @__PURE__ */ Go(YM, [["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Fields/TextField.vue"]]);
+}), YM = /* @__PURE__ */ Go(JM, [["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Fields/TextField.vue"]]);
 var ud = {
   name: "Fieldset",
   emits: ["update:collapsed", "toggle"],
@@ -13516,18 +13523,18 @@ var ud = {
     ripple: Sr
   }
 };
-const KM = { class: "p-fieldset-legend" }, zM = ["id"], $M = ["id", "aria-controls", "aria-expanded", "aria-label"], QM = { class: "p-fieldset-legend-text" }, qM = ["id", "aria-labelledby"], ZM = { class: "p-fieldset-content" };
-function tP(t, e, o, n, i, s) {
+const XM = { class: "p-fieldset-legend" }, KM = ["id"], zM = ["id", "aria-controls", "aria-expanded", "aria-label"], $M = { class: "p-fieldset-legend-text" }, QM = ["id", "aria-labelledby"], qM = { class: "p-fieldset-content" };
+function ZM(t, e, o, n, i, s) {
   const a = ji("ripple");
   return it(), Tt("fieldset", {
     class: Ft(["p-fieldset p-component", { "p-fieldset-toggleable": o.toggleable }])
   }, [
-    Dt("legend", KM, [
+    Et("legend", XM, [
       o.toggleable ? xt("", !0) : eo(t.$slots, "legend", { key: 0 }, () => [
-        Dt("span", {
+        Et("span", {
           id: s.ariaId + "_header",
           class: "p-fieldset-legend-text"
-        }, ye(o.legend), 9, zM)
+        }, ye(o.legend), 9, KM)
       ]),
       o.toggleable ? co((it(), Tt("a", _r({
         key: 1,
@@ -13540,28 +13547,28 @@ function tP(t, e, o, n, i, s) {
         onClick: e[0] || (e[0] = (...r) => s.toggle && s.toggle(...r)),
         onKeydown: e[1] || (e[1] = (...r) => s.onKeyDown && s.onKeyDown(...r))
       }, o.toggleButtonProps), [
-        Dt("span", {
+        Et("span", {
           class: Ft(s.iconClass)
         }, null, 2),
         eo(t.$slots, "legend", {}, () => [
-          Dt("span", QM, ye(o.legend), 1)
+          Et("span", $M, ye(o.legend), 1)
         ])
-      ], 16, $M)), [
+      ], 16, zM)), [
         [a]
       ]) : xt("", !0)
     ]),
     It(Yn, { name: "p-toggleable-content" }, {
       default: ge(() => [
-        co(Dt("div", {
+        co(Et("div", {
           id: s.ariaId + "_content",
           class: "p-toggleable-content",
           role: "region",
           "aria-labelledby": s.ariaId + "_header"
         }, [
-          Dt("div", ZM, [
+          Et("div", qM, [
             eo(t.$slots, "default")
           ])
-        ], 8, qM), [
+        ], 8, QM), [
           [vr, !i.d_collapsed]
         ])
       ]),
@@ -13569,7 +13576,7 @@ function tP(t, e, o, n, i, s) {
     })
   ], 2);
 }
-function eP(t, e) {
+function tP(t, e) {
   e === void 0 && (e = {});
   var o = e.insertAt;
   if (!(!t || typeof document > "u")) {
@@ -13577,7 +13584,7 @@ function eP(t, e) {
     i.type = "text/css", o === "top" && n.firstChild ? n.insertBefore(i, n.firstChild) : n.appendChild(i), i.styleSheet ? i.styleSheet.cssText = t : i.appendChild(document.createTextNode(t));
   }
 }
-var oP = `
+var eP = `
 .p-fieldset-legend > a,
 .p-fieldset-legend > span {
     display: -webkit-box;
@@ -13604,37 +13611,43 @@ var oP = `
     line-height: 1;
 }
 `;
-eP(oP);
-ud.render = tP;
-const nP = /* @__PURE__ */ Ue({
+tP(eP);
+ud.render = ZM;
+const oP = { class: "p-fluid formgrid grid px-0 mx-0 col-12" }, nP = /* @__PURE__ */ Ue({
   __name: "FieldsetLayout",
   props: {
     component: { type: null, required: !0 }
   },
   setup(t) {
     return (e, o) => (it(), Ie(Ht(ud), {
-      class: Ft(`col-${t.component.columnSpan}`)
+      class: Ft(["col-12", `md:col-${t.component.columnSpan}`]),
+      legend: t.component.label,
+      toggleable: t.component.toggleable,
+      collapsed: t.component.isToggledHiddenByDefault
     }, {
       default: ge(() => [
-        (it(!0), Tt(yt, null, Di(t.component.schema, (n, i) => (it(), Ie(lr(n.componentName), {
-          key: `gird_${i}_${n.componentName}`,
-          component: n
-        }, null, 8, ["component"]))), 128))
+        Et("div", oP, [
+          (it(!0), Tt(yt, null, Di(t.component.schema, (n, i) => (it(), Ie(lr(n.componentName), {
+            key: `fieldset_${i}_${n.componentName}`,
+            component: n,
+            extraClasses: t.component.columns ? `md:col-${12 / t.component.columns}` : ""
+          }, null, 8, ["component", "extraClasses"]))), 128))
+        ])
       ]),
       _: 1
-    }, 8, ["class"]));
+    }, 8, ["class", "legend", "toggleable", "collapsed"]));
   }
 }), iP = /* @__PURE__ */ Go(nP, [["__file", "/Volumes/Data/Websites/Inertia/Trinity/Trinity-Vue/src/Layouts/FieldsetLayout.vue"]]);
 Dv({
   resolve: async (t) => {
-    const e = (await pd(/* @__PURE__ */ Object.assign({ "./Pages/Create.vue": () => import("./Create.f247131e.mjs"), "./Pages/Home.vue": () => import("./Home.2f622b4c.mjs"), "./Pages/Index.vue": () => import("./Index.487b7d1b.mjs"), "./Pages/Login.vue": () => import("./Login.f2d8ad2b.mjs") }), `./Pages/${t[0].toUpperCase() + t.slice(1)}.vue`)).default;
+    const e = (await pd(/* @__PURE__ */ Object.assign({ "./Pages/Create.vue": () => import("./Create.8fb3e80b.mjs"), "./Pages/Home.vue": () => import("./Home.f3b97781.mjs"), "./Pages/Index.vue": () => import("./Index.e482e4c5.mjs"), "./Pages/Login.vue": () => import("./Login.44cdb695.mjs") }), `./Pages/${t[0].toUpperCase() + t.slice(1)}.vue`)).default;
     return e.layout === void 0 && (e.layout = ON), e;
   },
   setup({ el: t, App: e, props: o, plugin: n }) {
     const i = [{ path: "/:catchAll(.*)", component: e }], s = FM({
       history: HN(),
       routes: i
-    }), a = AT({ render: () => Js(e, o) }).use(n).use(fV()).use(s).use(ZD, { ripple: !0, inputStyle: "outlined" }).directive("styleclass", rb).directive("tooltip", SN).directive("ripple", Sr).directive("badge", EN).component("AppHead", dN).component("GridLayout", BM).component("FieldsetLayout", iP).component("TextField", XM);
+    }), a = AT({ render: () => Js(e, o) }).use(n).use(fV()).use(s).use(ZD, { ripple: !0, inputStyle: "outlined" }).directive("styleclass", rb).directive("tooltip", SN).directive("ripple", Sr).directive("badge", EN).component("AppHead", dN).component("GridLayout", BM).component("FieldsetLayout", iP).component("TextField", YM);
     a.provide(
       "appState",
       Vo({
@@ -13682,7 +13695,7 @@ export {
   Ht as b,
   Tt as c,
   Ue as d,
-  Dt as e,
+  Et as e,
   Di as f,
   Ie as g,
   lr as h,
