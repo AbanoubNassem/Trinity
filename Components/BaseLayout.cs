@@ -3,11 +3,9 @@ namespace AbanoubNassem.Trinity.Components;
 public interface IBaseLayout : IBaseComponent
 {
     public List<object> Schema { get; set; }
-
-    public int Columns { get; set; }
 }
 
-public abstract class BaseLayout<T> : BaseComponent<BaseLayout<T>> where T : BaseLayout<T>
+public abstract class BaseLayout<T> : BaseComponent<BaseLayout<T>>, IBaseLayout where T : BaseLayout<T>
 {
     protected BaseLayout(List<IBaseComponent> schema, int columns = 0)
     {

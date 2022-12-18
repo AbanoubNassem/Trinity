@@ -148,9 +148,6 @@
     </Column>
 
     <template #loading></template>
-    <template #footer>
-      <ScrollTop />
-    </template>
   </DataTable>
 </template>
 
@@ -170,7 +167,6 @@ import Skeleton from "primevue/skeleton";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
 import MultiSelect from "primevue/multiselect";
-import ScrollTop from "primevue/scrolltop";
 import Toolbar from "primevue/toolbar";
 import { useUrlParams } from "@/Composables/trinity_url_params";
 import { usePageProps } from "@/Composables/trinity_page_props";

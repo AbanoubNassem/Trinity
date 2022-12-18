@@ -16,7 +16,7 @@ public interface IBaseField : IBaseComponent
     public bool IsGloballySearchable { get; set; }
 }
 
-public abstract class BaseField<T> : BaseComponent<BaseField<T>>, IBaseField where T : BaseField<T>
+public abstract partial class BaseField<T> : BaseComponent<BaseField<T>> , IBaseField where T : BaseField<T>
 {
     protected BaseField(string columnName)
     {
@@ -91,7 +91,7 @@ public abstract class BaseField<T> : BaseComponent<BaseField<T>>, IBaseField whe
         IsGloballySearchable = globallySearchable;
         return (this as T)!;
     }
-    
+
 
     public bool Exportable { get; protected set; }
 
@@ -100,4 +100,38 @@ public abstract class BaseField<T> : BaseComponent<BaseField<T>>, IBaseField whe
         Exportable = exportable;
         return (this as T)!;
     }
+
+    public string? Placeholder { get; protected set; }
+
+    public T SetPlaceholder(string placeholder)
+    {
+        Placeholder = placeholder;
+        return (this as T)!;
+    }
+    
+    public string? ToolTip { get; protected set; }
+
+    public T SetToolTip(string toolTip)
+    {
+        ToolTip = toolTip;
+        return (this as T)!;
+    }
+
+    public string? HelperText { get; protected set; }
+
+    public T SetHelperText(string helperText)
+    {
+        HelperText = helperText;
+        return (this as T)!;
+    }
+
+    public bool Disabled { get; protected set; }
+
+    public T SetAsDisabled(bool value = true)
+    {
+        Disabled = value;
+        return (this as T)!;
+    }
+    
+  
 }

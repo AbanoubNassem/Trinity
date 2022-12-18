@@ -18,6 +18,9 @@ import { createMemoryHistory, createRouter } from "vue-router";
 import GridLayout from "@/Layouts/GridLayout.vue";
 import TextField from "@/Fields/TextField.vue";
 import FieldsetLayout from "@/Layouts/FieldsetLayout.vue";
+import IdField from "@/Fields/IdField.vue";
+import InputText from "primevue/inputtext";
+import InputMask from "primevue/inputmask";
 
 createInertiaApp({
   resolve: async (name) => {
@@ -49,9 +52,12 @@ createInertiaApp({
       .directive("ripple", Ripple)
       // .directive('code', CodeHighlight),
       .directive("badge", BadgeDirective)
+      .component("InputText", InputText)
+      .component("InputMask", InputMask)
       .component("AppHead", AppHead)
       .component("GridLayout", GridLayout)
       .component("FieldsetLayout", FieldsetLayout)
+      .component("IdField", IdField)
       .component("TextField", TextField);
 
     app.provide(
