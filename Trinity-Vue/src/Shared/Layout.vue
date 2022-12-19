@@ -24,8 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import Configs from "@/Models/Configs";
-import type { Resource } from "@/Models/Resource";
+import type Configs from "@/Types/Configs";
+import type { Resource } from "@/Types/Resource";
 import { useConfigStore } from "@/Stores/ConfigStore";
 import { InertiaProgress } from "@inertiajs/progress";
 import { computed, ref } from "vue";

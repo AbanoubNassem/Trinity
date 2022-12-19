@@ -14,19 +14,30 @@
       <component
         :is="innerComponent.componentName"
         :component="innerComponent"
-        :extraClasses="
+        :containerClass="
           component.columns ? `md:col-${12 / component.columns}` : ''
         "
+        :form="form"
+        :errors="errors"
+        :setFieldValue="setFieldValue"
       ></component>
     </template>
   </div>
 </template>
 
 <script lang="ts" setup>
-import type GridLayout from "@/Models/Layouts/GridLayout";
-import type Field from "@/Models/Field";
+import type BaseLayout from "@/Types/BaseLayout";
+import type Field from "@/Types/Field";
+import type { InertiaFormProps } from "@inertiajs/inertia-vue3";
+import type Errors from "@/Types/errors";
 
-defineProps<{ component: GridLayout | Field }>();
+defineProps<{
+  component: BaseLayout | Field;
+  containerClass?: string;
+  form?: InertiaFormProps<any>;
+  setFieldValue?: (attr: string, value: any) => void;
+  errors?: Errors;
+}>();
 </script>
 
 <style scoped></style>

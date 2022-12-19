@@ -1,23 +1,24 @@
 <template>
-  <TextField
-    :component="component"
+  <BaseField
+    :is="Dropdown"
     :extraClasses="extraClasses"
+    :component="component"
     :form="form"
-    :errors="errors"
     :setFieldValue="setFieldValue"
-  />
+    :errors="errors"
+  >
+  </BaseField>
 </template>
 
 <script lang="ts" setup>
-import TextField from "@/Fields/TextField.vue";
-
-import type BaseLayout from "@/Types/BaseLayout";
-import type Field from "@/Types/Field";
 import type { InertiaFormProps } from "@inertiajs/inertia-vue3";
 import type Errors from "@/Types/errors";
+import BaseField from "@/Fields/BaseField.vue";
+import type SelectField from "@/Types/SelectField";
+import Dropdown from "primevue/dropdown";
 
 defineProps<{
-  component: BaseLayout | Field;
+  component: SelectField;
   extraClasses?: string;
   form?: InertiaFormProps<any>;
   errors?: Errors;

@@ -145,9 +145,15 @@ public static class AppExtensions
 
             endpoints.MapControllerRoute(
                 name: "trinity-resources",
-                pattern: configs?.Prefix + "/{name}/{view=Index}/{id?}",
+                pattern: configs?.Prefix + "/{name}/{view=index}/{id?}",
                 defaults: new { controller = "Trinity", action = "Handle" }
             );
+            
+            // endpoints.MapControllerRoute(
+            //     name: "trinity-create",
+            //     pattern: configs?.Prefix + "/{name}/create",
+            //     defaults: new { controller = "Trinity", action = "Create" }
+            // );
         });
 
 

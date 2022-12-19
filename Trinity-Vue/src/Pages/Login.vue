@@ -110,8 +110,9 @@
               <a
                 class="font-medium no-underline ml-2 text-right cursor-pointer"
                 style="color: var(--primary-color)"
-                >Forgot password?</a
               >
+                Forgot password?
+              </a>
             </div>
 
             <div class="field">
@@ -160,9 +161,7 @@ const form = useForm({
 });
 
 function submit() {
-  form.post("", {
-    onFinish: () => {},
-  });
+  form.post("");
 }
 </script>
 

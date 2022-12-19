@@ -1,3 +1,4 @@
+using AbanoubNassem.Trinity.Validators;
 using DapperQueryBuilder;
 using Humanizer;
 
@@ -14,9 +15,13 @@ public interface IBaseField : IBaseComponent
     public void FilterQuery(Filters filters, string globalSearch);
 
     public bool IsGloballySearchable { get; set; }
+
+    public void AddValidator(ResourceValidator validator);
+
+    public void Validate();
 }
 
-public abstract partial class BaseField<T> : BaseComponent<BaseField<T>> , IBaseField where T : BaseField<T>
+public abstract partial class BaseField<T> : BaseComponent<T>, IBaseField where T : BaseField<T>
 {
     protected BaseField(string columnName)
     {
@@ -40,7 +45,6 @@ public abstract partial class BaseField<T> : BaseComponent<BaseField<T>> , IBase
 
 
     public delegate void ActionWithRecord(IDictionary<string, object?> record);
-
 
     public string ColumnName { get; set; }
 
@@ -85,6 +89,7 @@ public abstract partial class BaseField<T> : BaseComponent<BaseField<T>> , IBase
 
     public bool IsGloballySearchable { get; set; }
 
+
     public T SetAsSearchable(bool searchable = true, bool globallySearchable = true)
     {
         Searchable = searchable;
@@ -108,7 +113,7 @@ public abstract partial class BaseField<T> : BaseComponent<BaseField<T>> , IBase
         Placeholder = placeholder;
         return (this as T)!;
     }
-    
+
     public string? ToolTip { get; protected set; }
 
     public T SetToolTip(string toolTip)
@@ -132,6 +137,4 @@ public abstract partial class BaseField<T> : BaseComponent<BaseField<T>> , IBase
         Disabled = value;
         return (this as T)!;
     }
-    
-  
 }

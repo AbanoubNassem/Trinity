@@ -14,9 +14,7 @@
   <DataTable
     ref="dt"
     v-model:selection="selectedItems"
-    :first="
-      (pageProps.paginator?.currentPage - 1) * pageProps.paginator?.perPage
-    "
+    :first="(pageProps.data?.currentPage - 1) * pageProps.data?.perPage"
     :lazy="true"
     :loading="loading"
     :multiSortMeta="multiSortMeta"
@@ -26,11 +24,11 @@
       default:
         'CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown',
     }"
-    :rows="pageProps.paginator?.perPage"
+    :rows="pageProps.data?.perPage"
     :rowsPerPageOptions="configStore.configs.rowsPerPageOptions"
     :showGridlines="pageProps.resource?.showGridlines"
     :stripedRows="pageProps.resource?.stripedRows"
-    :totalRecords="pageProps.paginator?.totalCount"
+    :totalRecords="pageProps.data?.totalCount"
     :value="items"
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
     filterDisplay="row"
@@ -159,8 +157,8 @@ import debounce from "lodash/debounce";
 import { useConfigStore } from "@/Stores/ConfigStore";
 
 import DataTable, {
-  DataTablePageEvent,
-  DataTableSortEvent,
+  type DataTablePageEvent,
+  type DataTableSortEvent,
 } from "primevue/datatable";
 import Column from "primevue/column";
 import Skeleton from "primevue/skeleton";
@@ -172,10 +170,11 @@ import { useUrlParams } from "@/Composables/trinity_url_params";
 import { usePageProps } from "@/Composables/trinity_page_props";
 import { useTrinityLink } from "@/Composables/trinity_link";
 import { useGetResourceFields } from "@/Composables/trinity_resource_fields";
+import type IPaginator from "@/Types/Paginator";
 
 const configStore = useConfigStore();
 
-const pageProps = usePageProps();
+const pageProps = usePageProps<IPaginator>();
 const resource = pageProps.value.resource;
 
 const urlParams = useUrlParams();
@@ -202,8 +201,8 @@ const onSort = (event: DataTableSortEvent) => {
 let pageEvent = ref<DataTablePageEvent>();
 const onPage = (event: DataTablePageEvent) => {
   if (
-    event.page + 1 === pageProps.value.paginator?.currentPage &&
-    event.rows === pageProps.value.paginator?.perPage
+    event.page + 1 === pageProps.value.data?.currentPage &&
+    event.rows === pageProps.value.data?.perPage
   )
     return;
 
@@ -290,12 +289,12 @@ const fetchTable = () => {
   if (pageEvent?.value) {
     data.page = pageEvent?.value
       ? pageEvent.value?.page + 1
-      : pageProps.value.paginator?.currentPage ?? 1;
+      : pageProps.value.data?.currentPage ?? 1;
   }
 
   if (pageEvent?.value?.rows) {
     data.perPage =
-      pageEvent?.value?.rows ?? pageProps.value.paginator?.perPage ?? 10;
+      pageEvent?.value?.rows ?? pageProps.value.data?.perPage ?? 10;
   }
 
   if (sortEvent?.value?.multiSortMeta) {
@@ -327,7 +326,7 @@ const items = ref<Array<any>>([]);
 const selectedItems = ref([]);
 const multiSortMeta = ref<Array<any>>([]);
 watchEffect(() => {
-  const { paginator } = pageProps.value;
+  const { data: paginator } = pageProps.value;
 
   const urlParams = useUrlParams();
 

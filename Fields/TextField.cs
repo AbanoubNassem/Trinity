@@ -10,14 +10,5 @@ public class TextField : BaseField<TextField>
     {
     }
 
-    public string? InputMask { get; protected set; }
 
-    public string? SlotChar { get; protected set; }
-
-    public TextField SetInputMask(string mask, string? slotChar = null)
-    {
-        InputMask = mask;
-        SlotChar = slotChar;
-        return this;
-    }
 }

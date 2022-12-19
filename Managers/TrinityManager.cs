@@ -69,6 +69,10 @@ public class TrinityManager
                 resourceType.GetProperty("Logger", flags)!
             );
 
+            properties.Add("ModelState",
+                resourceType.GetProperty("ModelState", flags)!
+            );
+
             properties.Add("Request",
                 resourceType.GetProperty("Request", flags)!
             );

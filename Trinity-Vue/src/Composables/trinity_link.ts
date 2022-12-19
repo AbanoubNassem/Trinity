@@ -1,11 +1,15 @@
 import { Inertia } from "@inertiajs/inertia";
 import { useConfigStore } from "@/Stores/ConfigStore";
 
-export function useTrinityLink(href: string) {
+export function useTrinityLink(
+  href: string,
+  preserveScroll: boolean = false,
+  preserveState: boolean = true
+) {
   const configStore = useConfigStore();
 
   Inertia.visit(`/${configStore.configs.prefix}${href}`, {
-    preserveState: true,
-    preserveScroll: true,
+    preserveState: preserveState,
+    preserveScroll: preserveScroll,
   });
 }

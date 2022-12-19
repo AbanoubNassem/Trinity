@@ -74,8 +74,7 @@ public class TrinityController : Controller
         };
         claims.AddRange(loggedIn.ExtraClaims);
 
-        var claimsIdentity = new ClaimsIdentity(
-            claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
         var authProperties = new AuthenticationProperties
         {
@@ -85,12 +84,13 @@ public class TrinityController : Controller
         await HttpContext.SignInAsync(
             CookieAuthenticationDefaults.AuthenticationScheme,
             new ClaimsPrincipal(claimsIdentity),
-            authProperties);
+            authProperties
+        );
 
 
         return Inertia.Location(returnUrl ?? $"/{_configurations.Prefix}/");
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Logout()
     {
@@ -117,28 +117,43 @@ public class TrinityController : Controller
 
         await resource.Setup();
 
+        var responseData = new TrinityResponse()
+        {
+            Resource = resourceObject
+        };
+
         if (!Request.IsInertiaRequest())
         {
-            return Inertia.Render(view, new
-                {
-                    configs = _configurations,
-                    resources = _trinityManager.Resources,
-                    resource = resourceObject,
-                    paginator = await resource.GetIndexData(),
-                }
-            );
+            responseData.Configs = _configurations;
+            responseData.Resources = _trinityManager.Resources;
         }
 
-
-        return Inertia.Render(view, new
+        switch (Request.Method)
         {
-            resource = resourceObject,
-            paginator = await resource.GetIndexData(),
-        });
+            case "GET" when view == "index":
+                responseData.Data = await resource.GetIndexData();
+                break;
+            case "POST" when view == "create":
+                responseData.Data = await resource.Create();
+                break;
+            case "PUT" when view == "update":
+                break;
+            case "DELETE" when view == "delete":
+                break;
+        }
+
+        if (!ModelState.IsValid)
+        {
+            responseData.Errors = BadRequest(ModelState);
+        }
+        
+        return Inertia.Render(view, responseData);
     }
+
 
     private void InjectServices(string resourceName, TrinityResource resource)
     {
+        //TODO:: maybe use public setter instead of relaying on reflection!?
         _trinityManager.ResourcesTypes[resourceName].Item2["ServiceProvider"]
             .SetValue(resource, HttpContext.RequestServices);
 
@@ -150,6 +165,7 @@ public class TrinityController : Controller
                 )
             );
 
+        _trinityManager.ResourcesTypes[resourceName].Item2["ModelState"].SetValue(resource, ModelState);
         _trinityManager.ResourcesTypes[resourceName].Item2["Request"].SetValue(resource, Request);
         _trinityManager.ResourcesTypes[resourceName].Item2["Response"].SetValue(resource, Response);
     }

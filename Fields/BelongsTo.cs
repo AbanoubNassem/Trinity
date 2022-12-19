@@ -6,20 +6,20 @@ namespace AbanoubNassem.Trinity.Fields;
 
 public class BelongsTo : HasRelationshipField
 {
-    public override string ComponentName => "BelongsTo";
+    public override string ComponentName => "BelongsToField";
 
     public BelongsTo(string localColumnNames, string relationTables, string foreignColumnNames,
-        string relationshipName, string relationTitleColumn)
+        string relationshipName, string relationSelectColumn)
         : base(localColumnNames, foreignColumnNames, relationTables)
     {
-        SetTitle(relationTitleColumn);
+        SetTitle(relationSelectColumn);
 
         SetRelationshipName(relationshipName);
     }
 
-    public BelongsTo(string columnName, string relationTitleColumn, string? relationshipName = null) : base(columnName)
+    public BelongsTo(string columnName, string relationSelectColumn, string? relationshipName = null) : base(columnName)
     {
-        SetTitle(relationTitleColumn);
+        SetTitle(relationSelectColumn);
 
         if (relationshipName != null)
         {

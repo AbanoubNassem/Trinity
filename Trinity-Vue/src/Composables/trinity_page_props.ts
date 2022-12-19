@@ -1,32 +1,28 @@
 import { usePage } from "@inertiajs/inertia-vue3";
-import type { Resource } from "@/Models/Resource";
-import type IPaginator from "@/Models/Paginator";
-import type Field from "@/Models/Field";
-import type Configs from "@/Models/Configs";
-import type { Ref, UnwrapRef } from "vue";
-import { ref, watch } from "vue";
-import type Errors from "@/Models/errors";
+import type { Resource } from "@/Types/Resource";
+import type Configs from "@/Types/Configs";
+import { shallowRef, watch } from "vue";
+import type Errors from "@/Types/errors";
 
-export const usePageProps = (): Ref<
-  UnwrapRef<
-    {
+export function usePageProps<T extends object>() {
+  const { props: $props } = usePage<{
+    controller: {
       configs?: Configs;
       resources?: Array<Resource>;
       resource?: Resource;
-      paginator?: IPaginator;
+      data?: T;
       errors?: Errors;
-    } & { [key: string]: object }
-  >
-> => {
-  const { props: $props } = usePage<{
-    controller: {
-      resource: Resource;
-      paginator: IPaginator;
     };
     sharedProps: {};
   }>();
 
-  const trinityProps = ref({
+  const trinityProps = shallowRef<{
+    configs?: Configs;
+    resources?: Array<Resource>;
+    resource?: Resource;
+    data?: T;
+    errors?: Errors;
+  }>({
     ...$props.value.controller,
     ...$props.value.sharedProps,
   });
@@ -39,4 +35,4 @@ export const usePageProps = (): Ref<
   });
 
   return trinityProps;
-};
+}

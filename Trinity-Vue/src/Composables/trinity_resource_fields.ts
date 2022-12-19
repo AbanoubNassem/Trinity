@@ -1,7 +1,7 @@
 import { usePageProps } from "@/Composables/trinity_page_props";
-import type Field from "@/Models/Field";
-import type BaseComponent from "@/Models/BaseComponent";
-import type BaseLayout from "@/Models/BaseLayout";
+import type Field from "@/Types/Field";
+import type BaseComponent from "@/Types/BaseComponent";
+import type BaseLayout from "@/Types/BaseLayout";
 
 export function useGetResourceFields() {
   const pageProps = usePageProps();

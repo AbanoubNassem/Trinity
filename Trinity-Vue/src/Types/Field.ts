@@ -1,4 +1,4 @@
-import type BaseComponent from "@/Models/BaseComponent";
+import type BaseComponent from "@/Types/BaseComponent";
 
 export default interface Field extends BaseComponent {
   columnName: string;
@@ -13,8 +13,6 @@ export default interface Field extends BaseComponent {
   toolTip?: string;
   helperText?: string;
   disabled: boolean;
-  inputMask?: string;
-  slotChar?: string;
   prefixes?: Array<string>;
   suffixes?: Array<string>;
   prefixIcons?: Array<string>;

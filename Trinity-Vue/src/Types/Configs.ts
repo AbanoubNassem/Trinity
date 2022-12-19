@@ -1,4 +1,5 @@
 import type { ProgressSettings } from "@inertiajs/progress";
+export type { ProgressSettings } from "@inertiajs/progress";
 
 export default interface Configs {
   prefix: String;

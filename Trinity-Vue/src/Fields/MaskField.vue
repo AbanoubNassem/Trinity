@@ -1,24 +1,30 @@
 <template>
-  <TextField
+  <BaseField
+    :is="InputMask"
     :component="component"
-    :extraClasses="extraClasses"
+    :containerClass="containerClass"
     :form="form"
     :errors="errors"
     :setFieldValue="setFieldValue"
-  />
+    :attrs="{
+      mask: component.inputMask,
+      slotChar: component.slotChar ?? '_',
+      autoClear: component.autoClear,
+    }"
+  >
+  </BaseField>
 </template>
 
 <script lang="ts" setup>
-import TextField from "@/Fields/TextField.vue";
-
-import type BaseLayout from "@/Types/BaseLayout";
-import type Field from "@/Types/Field";
 import type { InertiaFormProps } from "@inertiajs/inertia-vue3";
 import type Errors from "@/Types/errors";
+import BaseField from "@/Fields/BaseField.vue";
+import InputMask from "primevue/inputmask";
+import type MaskField from "@/Types/MaskField";
 
 defineProps<{
-  component: BaseLayout | Field;
-  extraClasses?: string;
+  component: MaskField;
+  containerClass?: string;
   form?: InertiaFormProps<any>;
   errors?: Errors;
   setFieldValue?: (attr: string, value: any) => void;

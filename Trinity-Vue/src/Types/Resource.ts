@@ -1,4 +1,4 @@
-import type BaseComponent from "@/Models/BaseComponent";
+import type BaseComponent from "@/Types/BaseComponent";
 
 export interface Resource {
   name: string;
