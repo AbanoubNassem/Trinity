@@ -1,4 +1,4 @@
-import { l as i, m as p, o as c, c as d, g as a, n as r, u as b } from "./main.a429b92d.mjs";
+import { l as i, m as p, o as c, c as d, f as a, n as r, u as b } from "./main.ced9e4dc.mjs";
 function $(e, t = !1, s = !0) {
   const n = i();
   p.Inertia.visit(`/${n.configs.prefix}${e}`, {
@@ -6,7 +6,7 @@ function $(e, t = !1, s = !0) {
     preserveScroll: t
   });
 }
-var u = {
+var f = {
   name: "Toolbar",
   props: {
     "aria-labelledby": {
@@ -15,7 +15,7 @@ var u = {
     }
   }
 };
-const f = ["aria-labelledby"], g = { class: "p-toolbar-group-start p-toolbar-group-left" }, y = { class: "p-toolbar-group-center" }, m = { class: "p-toolbar-group-end p-toolbar-group-right" };
+const u = ["aria-labelledby"], g = { class: "p-toolbar-group-start p-toolbar-group-left" }, y = { class: "p-toolbar-group-center" }, m = { class: "p-toolbar-group-end p-toolbar-group-right" };
 function x(e, t, s, n, o, w) {
   return c(), d("div", {
     class: "p-toolbar p-component",
@@ -31,7 +31,7 @@ function x(e, t, s, n, o, w) {
     a("div", m, [
       r(e.$slots, "end")
     ])
-  ], 8, f);
+  ], 8, u);
 }
 function h(e, t) {
   t === void 0 && (t = {});
@@ -76,7 +76,7 @@ var k = `
 }
 `;
 h(k);
-u.render = x;
+f.render = x;
 function C() {
   var s, n;
   const e = b(), t = [];
@@ -98,6 +98,6 @@ function l(e, t) {
 }
 export {
   $ as a,
-  u as s,
+  f as s,
   C as u
 };

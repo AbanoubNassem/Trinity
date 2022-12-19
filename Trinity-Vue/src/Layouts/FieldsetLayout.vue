@@ -28,18 +28,11 @@
 
 <script lang="ts" setup>
 import Fieldset from "primevue/fieldset";
-import type BaseLayout from "@/Types/BaseLayout";
+import ComponentProps from "@/Types/ComponentProps";
 import type Field from "@/Types/Field";
-import type { InertiaFormProps } from "@inertiajs/inertia-vue3";
-import type Errors from "@/Types/errors";
+import type BaseLayout from "@/Types/BaseLayout";
 
-defineProps<{
-  component: BaseLayout | Field;
-  containerClass?: string;
-  form?: InertiaFormProps<any>;
-  errors?: Errors;
-  setFieldValue?: (attr: string, value: any) => void;
-}>();
+defineProps<ComponentProps<Field | BaseLayout>>();
 </script>
 
 <style scoped></style>

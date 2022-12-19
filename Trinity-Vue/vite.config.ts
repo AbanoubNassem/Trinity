@@ -3,9 +3,11 @@ import { fileURLToPath, URL } from "node:url";
 import { defineConfig, splitVendorChunkPlugin } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import ImportProps from "unplugin-vue-import-props/vite";
 import { resolve } from "path";
 
 // https://vitejs.dev/config/
+
 export default defineConfig({
   define: {
     "process.env": process.env,
@@ -23,9 +25,10 @@ export default defineConfig({
       formats: ["es"],
     },
   },
-  plugins: [vue(), vueJsx(), splitVendorChunkPlugin()],
+  plugins: [vue(), vueJsx(), ImportProps(), splitVendorChunkPlugin()],
   resolve: {
     alias: {
+      // @ts-ignore
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },

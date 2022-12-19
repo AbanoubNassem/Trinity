@@ -77,20 +77,10 @@
 </template>
 
 <script lang="ts" setup>
-import type { Component as VueComponent } from "vue";
+import ComponentProps from "@/Types/ComponentProps";
 import type Field from "@/Types/Field";
-import type { InertiaFormProps } from "@inertiajs/inertia-vue3";
-import type Errors from "@/Types/errors";
 
-defineProps<{
-  component: Field;
-  is: string | VueComponent | object;
-  containerClass?: string;
-  attrs?: object;
-  form: InertiaFormProps<any>;
-  errors: Errors;
-  setFieldValue: (attr: string, value: any) => void;
-}>();
+defineProps<ComponentProps<Field>>();
 </script>
 
 <style scoped></style>
