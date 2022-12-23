@@ -19,11 +19,10 @@ import GridLayout from "@/Layouts/GridLayout.vue";
 import TextField from "@/Fields/TextField.vue";
 import FieldsetLayout from "@/Layouts/FieldsetLayout.vue";
 import IdField from "@/Fields/IdField.vue";
-import InputText from "primevue/inputtext";
-import InputMask from "primevue/inputmask";
-import Textarea from "primevue/textarea";
 import TextAreaField from "@/Fields/TextAreaField.vue";
 import MaskField from "@/Fields/MaskField.vue";
+import BelongsToField from "@/Fields/BelongsToField.vue";
+import SelectInputField from "@/Fields/SelectInputField.vue";
 
 createInertiaApp({
   resolve: async (name) => {
@@ -60,6 +59,8 @@ createInertiaApp({
       .component("FieldsetLayout", FieldsetLayout)
       .component("IdField", IdField)
       .component("TextAreaField", TextAreaField)
+      .component("SelectInputField", SelectInputField)
+      .component("BelongsToField", BelongsToField)
       .component("MaskField", MaskField)
       .component("TextField", TextField);
 

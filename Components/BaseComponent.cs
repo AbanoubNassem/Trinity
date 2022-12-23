@@ -21,7 +21,7 @@ public abstract class BaseComponent<T> : IBaseComponent where T : BaseComponent<
 
     public virtual int ColumnSpan { get; protected set; }
 
-    public T SetColumnSpan(int columnSpan = 12)
+    public T SetColumnSpan(int columnSpan = 0)
     {
         ColumnSpan = columnSpan;
         return (this as T)!;

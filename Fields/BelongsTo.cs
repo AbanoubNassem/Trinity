@@ -4,7 +4,7 @@ using Filter = DapperQueryBuilder.Filter;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class BelongsTo : HasRelationshipField
+public class BelongsTo : HasRelationshipField 
 {
     public override string ComponentName => "BelongsToField";
 
@@ -147,5 +147,21 @@ public class BelongsTo : HasRelationshipField
             entities = entities.OrderByDescending(x => GetNestedRelationship(x, relationshipNames)?[columnTitle])
                 .ToList();
         }
+    }
+
+    public override async Task RelationshipQuery(FluentQueryBuilder query, string? search)
+    {
+        query.Select($"*");
+
+        if (search != null)
+        {
+            query.Where(new Filter($"LOWER({Title:raw}) LIKE {search} "));
+        }
+
+        query.Limit(1, 10);
+
+        var res = await query.QueryAsync<Dictionary<string, Object>>();
+
+        var count = res.Count();
     }
 }

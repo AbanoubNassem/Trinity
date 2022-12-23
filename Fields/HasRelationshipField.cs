@@ -27,6 +27,11 @@ public abstract class HasRelationshipField : BaseField<HasRelationshipField>
     {
     }
 
+    public virtual Task RelationshipQuery(FluentQueryBuilder query, string? search)
+    {
+        return Task.CompletedTask;
+    }
+
     public string RelationshipName { get; protected set; }
 
     public HasRelationshipField SetRelationshipName(string value)

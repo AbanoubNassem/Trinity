@@ -1,4 +1,3 @@
-using System.Collections.Concurrent;
 using System.Data;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -10,6 +9,7 @@ using AbanoubNassem.Trinity.Validators;
 using DapperQueryBuilder;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 
@@ -43,13 +43,13 @@ public abstract class TrinityResource
     private string? _table = null;
     [JsonIgnore] public virtual string? Table => _table;
 
-    private readonly ConcurrentDictionary<string, object> _fields = new();
+    private readonly Dictionary<string, object> _fields = new();
 
-    private readonly ConcurrentBag<object> _schema = new();
+    private readonly List<object> _schema = new();
 
     public virtual async Task Setup()
     {
-        if (_fields.IsEmpty)
+        if (_fields.Count == 0)
         {
             foreach (var field in Schema)
             {
@@ -62,11 +62,11 @@ public abstract class TrinityResource
 
     public abstract List<IBaseComponent> GetSchema();
 
-    public ConcurrentBag<object> Schema
+    public List<object> Schema
     {
         get
         {
-            if (!_schema.IsEmpty) return _schema;
+            if (_schema.Count != 0) return _schema;
 
             foreach (var component in GetSchema())
             {
@@ -77,7 +77,7 @@ public abstract class TrinityResource
         }
     }
 
-    [JsonIgnore] public ConcurrentDictionary<string, object> Fields => _fields;
+    [JsonIgnore] public Dictionary<string, object> Fields => _fields;
 
     private void GetInnerFields(IBaseComponent component)
     {
@@ -229,6 +229,29 @@ public abstract class TrinityResource
             Logger.LogError(ex, ex.Message);
             throw;
         }
+    }
+
+    public virtual async Task<IActionResult> GetRelationData()
+    {
+        if (!Request.Query.TryGetValue("column", out var columnName) ||
+            !Fields.TryGetValue(columnName.ToString(), out var objField))
+            return new BadRequestResult();
+
+        var field = (HasRelationshipField)objField;
+
+        string? search = null;
+        if (Request.Query.TryGetValue("search", out var searchStrings))
+        {
+            search = $"%{searchStrings[0].ToLower()}%";
+        }
+
+        var query = (FluentQueryBuilder)ConnectionFactory().FluentQueryBuilder();
+
+        query.From($"{Table!.Split('.').Last():raw}");
+
+        await field.RelationshipQuery(query, search);
+
+        return new OkResult();
     }
 
     public async Task<object?> Create()

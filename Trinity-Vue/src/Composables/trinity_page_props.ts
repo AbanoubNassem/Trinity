@@ -1,8 +1,8 @@
 import { usePage } from "@inertiajs/inertia-vue3";
-import type { Resource } from "@/Types/Resource";
-import type Configs from "@/Types/Configs";
+import type { Resource } from "@/Types/Models/Resource";
+import type Configs from "@/Types/Models/Configs";
 import { shallowRef, watch } from "vue";
-import type Errors from "@/Types/errors";
+import type Errors from "@/Types/Models/errors";
 
 export function usePageProps<T extends object>() {
   const { props: $props } = usePage<{

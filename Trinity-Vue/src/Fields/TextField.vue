@@ -1,29 +1,28 @@
 <template>
-  <BaseField
-    :is="InputText"
-    :component="component"
-    :containerClass="containerClass"
-    :form="form"
-    :errors="errors"
-    :setFieldValue="setFieldValue"
-  >
-  </BaseField>
+  <BaseFieldComponent :component="props.component" :errors="errors">
+    <InputText
+      :id="props.component.columnName"
+      :name="props.component.columnName"
+      :modelValue="form.data()[props.component.columnName]"
+      @update:modelValue="
+        (value) => props.setFieldValue(props.component.columnName, value)
+      "
+      v-tooltip.top.focus="props.component.toolTip"
+      :disabled="props.component.disabled"
+      :placeholder="props.component.placeholder"
+      type="text"
+      :class="{ 'p-invalid': errors?.value[props.component.columnName] }"
+    />
+  </BaseFieldComponent>
 </template>
 
 <script lang="ts" setup>
-import type { InertiaFormProps } from "@inertiajs/inertia-vue3";
-import type Errors from "@/Types/errors";
-import BaseField from "@/Fields/BaseField.vue";
 import InputText from "primevue/inputtext";
-import type Field from "@/Types/Field";
+import BaseFieldComponent from "@/Fields/BaseFieldComponent.vue";
+import type FieldProps from "@/Types/Props/FieldProps";
+import type BaseField from "@/Types/Models/BaseField";
 
-defineProps<{
-  component: Field;
-  containerClass?: string;
-  form?: InertiaFormProps<any>;
-  errors?: Errors;
-  setFieldValue?: (attr: string, value: any) => void;
-}>();
+const props = defineProps<FieldProps<BaseField>>();
 </script>
 
 <style scoped></style>

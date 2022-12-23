@@ -1,7 +1,6 @@
 <template>
   <TextField
-    :component="component"
-    :extraClasses="extraClasses"
+    :component="props.component"
     :form="form"
     :errors="errors"
     :setFieldValue="setFieldValue"
@@ -9,20 +8,10 @@
 </template>
 
 <script lang="ts" setup>
-import TextField from "@/Fields/TextField.vue";
+import type FieldProps from "@/Types/Props/FieldProps";
+import type BaseField from "@/Types/Models/BaseField";
 
-import type BaseLayout from "@/Types/BaseLayout";
-import type Field from "@/Types/Field";
-import type { InertiaFormProps } from "@inertiajs/inertia-vue3";
-import type Errors from "@/Types/errors";
-
-defineProps<{
-  component: BaseLayout | Field;
-  extraClasses?: string;
-  form?: InertiaFormProps<any>;
-  errors?: Errors;
-  setFieldValue?: (attr: string, value: any) => void;
-}>();
+const props = defineProps<FieldProps<BaseField>>();
 </script>
 
 <style scoped></style>

@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineEmits, ref } from "vue";
+import { ref } from "vue";
 import Button from "primevue/button";
 import Menu from "primevue/menu";
 import { useConfigStore } from "@/Stores/ConfigStore";

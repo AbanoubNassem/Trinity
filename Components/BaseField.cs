@@ -97,6 +97,13 @@ public abstract partial class BaseField<T> : BaseComponent<T>, IBaseField where 
         return (this as T)!;
     }
 
+    public string? SearchPlaceholder { get; protected set; }
+
+    public T SetSearchPlaceholder(string searchPlaceholder)
+    {
+        SearchPlaceholder = searchPlaceholder;
+        return (this as T)!;
+    }
 
     public bool Exportable { get; protected set; }
 

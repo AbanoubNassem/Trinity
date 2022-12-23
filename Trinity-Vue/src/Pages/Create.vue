@@ -87,12 +87,14 @@ const form = useForm(data);
 const addAnother = ref(false);
 
 function setFieldValue(attr: string, value: any) {
+  if (form.data()[attr] === value) return;
   form.defaults({ ...form.data(), ...{ [attr]: !value ? null : value } });
+  form.reset();
 }
 
 function create(createAddAnother: boolean = false) {
   addAnother.value = createAddAnother;
-  form.reset();
+
   form.post("", {
     preserveScroll: true,
     preserveState: true,

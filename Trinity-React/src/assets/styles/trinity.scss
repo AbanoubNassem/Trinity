@@ -1,0 +1,30 @@
+@import './layout/_variables';
+@import "./layout/_mixins";
+@import "./layout/_preloading";
+@import "./layout/_main";
+@import "./layout/_topbar";
+@import "./layout/_menu";
+@import "./layout/_config";
+@import "./layout/_content";
+@import "./layout/_footer";
+@import "./layout/_responsive";
+@import "./layout/_utils";
+@import "./layout/_typography";
+
+
+
+
+.p-datatable .p-datatable-loading-overlay {
+  display: none !important;
+}
+
+.global-search-icon{
+  position: absolute;
+  right: 1rem;
+}
+
+.toggleableFields {
+  left: unset !important;
+  right: 0 !important;
+  top: 5rem !important;
+}

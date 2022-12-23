@@ -170,7 +170,7 @@ import { useUrlParams } from "@/Composables/trinity_url_params";
 import { usePageProps } from "@/Composables/trinity_page_props";
 import { useTrinityLink } from "@/Composables/trinity_link";
 import { useGetResourceFields } from "@/Composables/trinity_resource_fields";
-import type IPaginator from "@/Types/Paginator";
+import type IPaginator from "@/Types/Models/Paginator";
 
 const configStore = useConfigStore();
 
