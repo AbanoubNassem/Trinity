@@ -10,12 +10,13 @@ const AppSidebar = () => {
 
     model.push({
         label: 'Home',
+        visible: true,
         items: [
             {
                 label: 'Dashboard',
+                visible: true,
                 icon: 'pi pi-fw pi-home',
-                to: '/',
-                visible: true
+                to: '/'
             }
         ]
     });
@@ -39,7 +40,19 @@ const AppSidebar = () => {
     return (
         <ul className="layout-menu">
             {model.map((item, i) => {
-                return !item.seperator ? <AppMenuItem item={item} root={true} index={i} key={item.label} /> : <li key={i} className="menu-separator"></li>;
+                return !item.seperator ? (
+                    <AppMenuItem
+                        item={item}
+                        root={true}
+                        index={i}
+                        key={item.label}
+                    />
+                ) : (
+                    <li
+                        key={i}
+                        className="menu-separator"
+                    ></li>
+                );
             })}
 
             {/*<Link href="https://www.primefaces.org/primeblocks-react" target="_blank" style={{ cursor: 'pointer' }}>*/}

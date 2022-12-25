@@ -12,13 +12,11 @@
 @import "./layout/_typography";
 
 
-
-
 .p-datatable .p-datatable-loading-overlay {
   display: none !important;
 }
 
-.global-search-icon{
+.global-search-icon {
   position: absolute;
   right: 1rem;
 }
@@ -27,4 +25,13 @@
   left: unset !important;
   right: 0 !important;
   top: 5rem !important;
+}
+
+.trinity-dropdown .p-dropdown-item-empty {
+  display: none !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+  align-items: center;
+  display: flex;
 }

@@ -1,6 +1,7 @@
 using AbanoubNassem.Trinity.Validators;
 using DapperQueryBuilder;
 using Humanizer;
+using Newtonsoft.Json;
 
 namespace AbanoubNassem.Trinity.Components;
 
@@ -9,6 +10,8 @@ public interface IBaseField : IBaseComponent
     public string ColumnName { get; set; }
 
     public void Format(IDictionary<string, object?> record);
+
+    public void Fill(ref IDictionary<string, object?> record);
 
     public void SelectQuery(FluentQueryBuilder query);
 
@@ -19,9 +22,12 @@ public interface IBaseField : IBaseComponent
     public void AddValidator(ResourceValidator validator);
 
     public void Validate();
+
+    Type GetDeserializationType();
 }
 
-public abstract partial class BaseField<T> : BaseComponent<T>, IBaseField where T : BaseField<T>
+public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T>, IBaseField
+    where T : BaseField<T, TDeserialization>
 {
     protected BaseField(string columnName)
     {
@@ -32,6 +38,10 @@ public abstract partial class BaseField<T> : BaseComponent<T>, IBaseField where 
 
     public override string Type => "Field";
 
+    public Type GetDeserializationType()
+    {
+        return typeof(TDeserialization);
+    }
 
     public virtual void SelectQuery(FluentQueryBuilder query)
     {
@@ -45,6 +55,10 @@ public abstract partial class BaseField<T> : BaseComponent<T>, IBaseField where 
 
 
     public delegate void ActionWithRecord(IDictionary<string, object?> record);
+
+    public delegate object? ActionWithRecordProperty(TDeserialization? property);
+
+    public delegate Task AsyncActionWithRecord(IDictionary<string, object?> record);
 
     public string ColumnName { get; set; }
 
@@ -72,10 +86,35 @@ public abstract partial class BaseField<T> : BaseComponent<T>, IBaseField where 
         return (this as T)!;
     }
 
+
     public void Format(IDictionary<string, object?> record)
     {
         _formatUsing?.Invoke(record);
     }
+
+    private ActionWithRecord? _fillUsing;
+
+    private ActionWithRecordProperty? _fillUsingProperty;
+
+    public T FillUsing(ActionWithRecord fillUsing)
+    {
+        _fillUsing = fillUsing;
+        return (this as T)!;
+    }
+
+    public T FillUsing(ActionWithRecordProperty fillUsingProperty)
+    {
+        _fillUsingProperty = fillUsingProperty;
+        return (this as T)!;
+    }
+
+    public virtual void Fill(ref IDictionary<string, object?> record)
+    {
+        if (record.ContainsKey(ColumnName) && _fillUsingProperty != null)
+            record[ColumnName] = _fillUsingProperty((TDeserialization?)record[ColumnName]);
+        _fillUsing?.Invoke(record);
+    }
+
 
     public bool Sortable { get; protected set; }
 
@@ -88,7 +127,6 @@ public abstract partial class BaseField<T> : BaseComponent<T>, IBaseField where 
     public bool Searchable { get; protected set; }
 
     public bool IsGloballySearchable { get; set; }
-
 
     public T SetAsSearchable(bool searchable = true, bool globallySearchable = true)
     {
@@ -142,6 +180,15 @@ public abstract partial class BaseField<T> : BaseComponent<T>, IBaseField where 
     public T SetAsDisabled(bool value = true)
     {
         Disabled = value;
+        return (this as T)!;
+    }
+
+
+    public string? Locale { get; protected set; }
+
+    public T SetLocale(string locale)
+    {
+        Locale = locale;
         return (this as T)!;
     }
 }

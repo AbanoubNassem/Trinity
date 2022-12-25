@@ -1,7 +1,7 @@
-export default interface IPaginator {
-  currentPage: number;
-  data: Array<any>;
-  totalCount: number;
-  perPage: number;
-  totalPages: number;
+export default interface IPaginator<T> {
+    currentPage: number;
+    data: Array<T>;
+    totalCount: number;
+    perPage: number;
+    totalPages: number;
 }

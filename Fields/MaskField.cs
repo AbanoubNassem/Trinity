@@ -2,7 +2,7 @@ using AbanoubNassem.Trinity.Components;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class MaskField : BaseField<MaskField>
+public class MaskField : BaseField<MaskField, string>
 {
     public override string ComponentName => "MaskField";
 

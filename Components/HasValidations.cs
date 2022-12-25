@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace AbanoubNassem.Trinity.Components;
 
-public abstract partial class BaseField<T>
+public abstract partial class BaseField<T, TDeserialization>
 
 {
     protected ResourceValidator Validator { get; set; } = null!;
@@ -14,25 +14,21 @@ public abstract partial class BaseField<T>
         Validator = validator;
     }
 
-    public virtual T SetValidationRules(Action<IRuleBuilderInitial<Dictionary<string, JsonElement>, string>> rules)
-    {
-        return SetValidationRules<string>(rules);
-    }
-
-    public virtual T SetValidationRules(Action<IRuleBuilderInitial<Dictionary<string, JsonElement>, int>> rules)
-    {
-        return SetValidationRules<int>(rules);
-    }
-
     private bool _isRulesAdded;
 
-    public T SetValidationRules<TType>(Action<IRuleBuilderInitial<Dictionary<string, JsonElement>, TType>> rules)
+
+    public T SetValidationRules(Action<IRuleBuilderInitial<IDictionary<string, object?>, TDeserialization?>> rules)
     {
         _validation = validator =>
         {
-            var rule = validator.RuleFor(x => x[ColumnName].Deserialize<TType>(new JsonSerializerOptions())!);
+            var rule = validator.RuleFor<TDeserialization?>(x =>
+                    x.ContainsKey(ColumnName) && x[ColumnName] != null ? (TDeserialization)x[ColumnName]! : default
+                )
+                .Cascade(CascadeMode.Stop);
+
             rules(rule);
-            ((IRuleBuilderOptions<Dictionary<string, JsonElement>, TType>)rule)
+
+            ((IRuleBuilderOptions<IDictionary<string, object?>, TDeserialization?>)rule)
                 .WithName(Label)
                 .OverridePropertyName(ColumnName);
             _isRulesAdded = true;

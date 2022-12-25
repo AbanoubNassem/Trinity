@@ -1,7 +1,9 @@
-import type BaseField from "@/Types/Models/BaseField";
+import type BaseField from '@/Types/Models/BaseField';
+import { SelectItemOptionsType } from 'primereact/selectitem';
 
 export default interface SelectField extends BaseField {
-  options?: { [key: string]: string };
-  optionLabel: string;
-  optionValue: string;
+    options: SelectItemOptionsType;
+    multiple: boolean;
+    selectionLimit?: number;
+    display?: string;
 }

@@ -180,7 +180,7 @@ public abstract class TrinityResource
             {
                 foreach (var sort in sorts)
                 {
-                    if (!Fields.TryGetValue(sort.Field, out var field) || field is HasRelationshipField) continue;
+                    if (!Fields.TryGetValue(sort.Field, out var field) || field is IHasRelationshipField) continue;
 
                     var direction = sort.Order == 1 ? "ASC" : "DESC";
 
@@ -198,7 +198,7 @@ public abstract class TrinityResource
             {
                 foreach (IBaseField filed in Fields.Values)
                 {
-                    if (filed is not HasRelationshipField field) continue;
+                    if (filed is not IHasRelationshipField field) continue;
                     result = await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result,
                         sorts?.SingleOrDefault(x => x.Field == field.ColumnName)
                     );
@@ -237,21 +237,21 @@ public abstract class TrinityResource
             !Fields.TryGetValue(columnName.ToString(), out var objField))
             return new BadRequestResult();
 
-        var field = (HasRelationshipField)objField;
+        var field = (IHasRelationshipField)objField;
 
         string? search = null;
-        if (Request.Query.TryGetValue("search", out var searchStrings))
+        if (Request.Query.TryGetValue("search", out var searchStrings) && !string.IsNullOrEmpty(searchStrings[0]))
         {
-            search = $"%{searchStrings[0].ToLower()}%";
+            search = $"%{searchStrings[0]!.ToLower()}%";
         }
 
         var query = (FluentQueryBuilder)ConnectionFactory().FluentQueryBuilder();
 
-        query.From($"{Table!.Split('.').Last():raw}");
+        // query.From($"{Table!.Split('.').Last():raw}");
 
-        await field.RelationshipQuery(query, search);
+        var res = await field.RelationshipQuery(query, search);
 
-        return new OkResult();
+        return new OkObjectResult(res);
     }
 
     public async Task<object?> Create()
@@ -261,8 +261,23 @@ public abstract class TrinityResource
             ((IBaseField)field).Validate();
         }
 
-        var form = await Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>();
-        var validation = await ResourceValidator.ValidateAsync(form!);
+        var jsonForm = await Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>() ??
+                       new Dictionary<string, JsonElement>();
+
+
+        IDictionary<string, object?> form = new Dictionary<string, object?>();
+        foreach (var kv in jsonForm)
+        {
+            if (!_fields.ContainsKey(kv.Key)) continue;
+            form.Add(kv.Key,
+                kv.Value.ValueKind == JsonValueKind.Null
+                    ? null
+                    : kv.Value.Deserialize(((IBaseField)_fields[kv.Key]).GetDeserializationType())
+            );
+        }
+
+
+        var validation = await ResourceValidator.ValidateAsync(form);
 
         if (!validation.IsValid)
         {
@@ -270,13 +285,16 @@ public abstract class TrinityResource
             return new { };
         }
 
+        foreach (var field in Fields.Values)
+        {
+            ((IBaseField)field).Fill(ref form);
+        }
+
         using var conn = ConnectionFactory();
 
-        var validated = form!.Where(x => Fields.ContainsKey(x.Key))
-            .ToDictionary(x => x.Key, v => v.Value.ToString());
 
         var cmd = conn.CommandBuilder(
-            $@"INSERT INTO {Table:raw} ({string.Join(',', validated.Keys):raw}) VALUES {validated.Values}"
+            $@"INSERT INTO {Table:raw} ({string.Join(',', form.Keys):raw}) VALUES {form.Values}"
         );
 
         var res = await cmd.ExecuteAsync();

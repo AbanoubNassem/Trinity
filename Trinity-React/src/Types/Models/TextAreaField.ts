@@ -1,9 +1,9 @@
-import type BaseField from "@/Types/Models/BaseField";
+import type BaseField from '@/Types/Models/BaseField';
 
 export default interface TextAreaField extends BaseField {
-  autoResize: boolean;
+    autoResize: boolean;
 
-  rows: number;
+    rows: number;
 
-  cols: number;
+    cols: number;
 }

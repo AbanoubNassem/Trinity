@@ -8,6 +8,7 @@ import { useEventListener, useUnmountEffect } from 'primereact/hooks';
 import { LayoutContext } from '@/contexts/LayoutContext';
 import AppSidebar from '@/components/AppSidebar';
 import { Inertia } from '@inertiajs/inertia';
+import AppFooter from '@/components/AppFooter';
 
 const MainLayout = (props: any) => {
     const { layoutConfig, layoutState, setLayoutState } = useContext(LayoutContext);
@@ -105,12 +106,15 @@ const MainLayout = (props: any) => {
             <Head />
             <div className={containerClass}>
                 <AppTopbar ref={topbarRef} />
-                <div ref={sidebarRef} className="layout-sidebar">
+                <div
+                    ref={sidebarRef}
+                    className="layout-sidebar"
+                >
                     <AppSidebar />
                 </div>
                 <div className="layout-main-container">
                     <div className="layout-main">{props.children}</div>
-                    {/*<AppFooter />*/}
+                    <AppFooter />
                 </div>
                 {/*<AppConfig />*/}
                 <div className="layout-mask"></div>

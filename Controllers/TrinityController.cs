@@ -135,7 +135,6 @@ public class TrinityController : Controller
                 break;
             case "GET" when view == "relationship":
                 return await resource.GetRelationData();
-                break;
             case "POST" when view == "create":
                 responseData.Data = await resource.Create();
                 break;

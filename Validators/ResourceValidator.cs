@@ -3,6 +3,6 @@ using FluentValidation;
 
 namespace AbanoubNassem.Trinity.Validators;
 
-public class ResourceValidator : AbstractValidator<Dictionary<string, JsonElement>>
+public class ResourceValidator : AbstractValidator<IDictionary<string, object?>>
 {
 }

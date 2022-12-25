@@ -2,14 +2,14 @@ using AbanoubNassem.Trinity.Components;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class TextAreaField : BaseField<TextAreaField>
+public class TextAreaField : BaseField<TextAreaField, string?>
 {
     public override string ComponentName => "TextAreaField";
 
     public TextAreaField(string columnName) : base(columnName)
     {
     }
-    
+
     public bool AutoResize { get; protected set; }
 
     public int Rows { get; protected set; } = 5;

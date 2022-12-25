@@ -3,7 +3,7 @@ import BaseField from '@/Types/Models/BaseField';
 import BaseComponent from '@/Types/Models/BaseComponent';
 import BaseLayout from '@/Types/Models/BaseLayout';
 
-export function useGetResourceFields() {
+export function useTrinityFields() {
     const pageProps = usePageProps();
 
     const fields: Array<BaseField> = [];

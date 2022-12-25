@@ -128,24 +128,24 @@ public static class AppExtensions
         {
             endpoints.MapControllerRoute(
                 name: "trinity-login",
-                pattern: configs?.Prefix + "/login",
+                pattern: configs.Prefix + "/login",
                 defaults: new { controller = "Trinity", action = "Login" }
             );
 
             endpoints.MapControllerRoute(
                 name: "trinity-logout",
-                pattern: configs?.Prefix + "/logout",
+                pattern: configs.Prefix + "/logout",
                 defaults: new { controller = "Trinity", action = "Logout" }
             );
 
             endpoints.MapControllerRoute(
                 name: "trinity-initial",
-                pattern: configs?.Prefix + "/{controller=Trinity}/{action=Index}"
+                pattern: configs.Prefix + "/{controller=Trinity}/{action=Index}"
             );
 
             endpoints.MapControllerRoute(
                 name: "trinity-resources",
-                pattern: configs?.Prefix + "/{name}/{view=index}/{id?}",
+                pattern: configs.Prefix + "/{name}/{view=index}/{id?}",
                 defaults: new { controller = "Trinity", action = "Handle" }
             );
             

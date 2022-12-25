@@ -4,10 +4,10 @@ using Filter = DapperQueryBuilder.Filter;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class BelongsTo : HasRelationshipField 
+public class BelongsTo : HasRelationshipField<string>
 {
     public override string ComponentName => "BelongsToField";
-
+    
     public BelongsTo(string localColumnNames, string relationTables, string foreignColumnNames,
         string relationshipName, string relationSelectColumn)
         : base(localColumnNames, foreignColumnNames, relationTables)
@@ -17,15 +17,30 @@ public class BelongsTo : HasRelationshipField
         SetRelationshipName(relationshipName);
     }
 
-    public BelongsTo(string columnName, string relationSelectColumn, string? relationshipName = null) : base(columnName)
+    public BelongsTo(string columnName, string relationSelectColumn, string? foreignTable = null,
+        string? relationshipName = null) : base(columnName)
     {
         SetTitle(relationSelectColumn);
 
+        if (!string.IsNullOrWhiteSpace(foreignTable))
+            SetForeignTable(foreignTable);
+        
         if (relationshipName != null)
         {
             SetRelationshipName(relationshipName);
         }
     }
+
+    public List<KeyValuePair<string, string>>? Options { get; protected set; } = new();
+
+    public BelongsTo SetOptions(List<KeyValuePair<string, string>> options)
+    {
+        Options = options;
+        return this;
+    }
+
+
+
 
     public override void FilterQuery(Filters filters, string globalSearch)
     {
@@ -149,19 +164,25 @@ public class BelongsTo : HasRelationshipField
         }
     }
 
-    public override async Task RelationshipQuery(FluentQueryBuilder query, string? search)
+    public override async Task<List<KeyValuePair<string, string>>> RelationshipQuery(FluentQueryBuilder query,
+        string? search)
     {
         query.Select($"*");
+
+        query.From($"{ForeignTable.Split('.').Last():raw}");
 
         if (search != null)
         {
             query.Where(new Filter($"LOWER({Title:raw}) LIKE {search} "));
         }
 
-        query.Limit(1, 10);
+        query.Limit(0, 10);
 
-        var res = await query.QueryAsync<Dictionary<string, Object>>();
+        var res = (await query.QueryAsync()).Cast<IDictionary<string, object?>>().ToList();
 
-        var count = res.Count();
+        return res.Select(x =>
+                new KeyValuePair<string, string>(x[ForeignColumn.Split('.').Last()]!.ToString()!,
+                    x[Title]!.ToString()!))
+            .ToList();
     }
 }

@@ -1,6 +1,6 @@
 namespace AbanoubNassem.Trinity.Components;
 
-public abstract partial class BaseField<T>
+public abstract partial class BaseField<T, TDeserialization>
 {
     public string[]? Prefixes { get; protected set; }
 

@@ -5,7 +5,7 @@ import { Toolbar } from 'primereact/toolbar';
 import { DataTable, DataTableFilterMeta, DataTablePFSEvent, DataTableSortMeta, DataTableSortParams } from 'primereact/datatable';
 import IPaginator from '@/Types/Models/Paginator';
 import { useConfigs } from '@/hooks/trinity_configs';
-import { useGetResourceFields } from '@/hooks/trinity_resource_fields';
+import { useTrinityFields } from '@/hooks/trinity_resource_fields';
 import { Column } from 'primereact/column';
 import { Inertia } from '@inertiajs/inertia';
 import { Skeleton } from 'primereact/skeleton';
@@ -14,13 +14,15 @@ import debounce from 'lodash/debounce';
 import { useUrlParams } from '@/hooks/trinity_url_params';
 import { FilterMatchMode } from 'primereact/api';
 import { MultiSelect } from 'primereact/multiselect';
+import { trinityLink } from '@/utilities/trinity_link';
 
 const Table = () => {
     const configs = useConfigs();
-    const { resource, data: paginator } = usePageProps<IPaginator>();
-    const fields = useGetResourceFields();
+    const { resource, data: paginator } = usePageProps<IPaginator<any>>();
+    const fields = useTrinityFields();
     const urlParams = useUrlParams();
     const [loading, setLoading] = useState(false);
+    const dtRef = useRef<DataTable>(null);
     const globalSearchInput = useRef<HTMLInputElement>(null);
     const toggleableFieldsDiv = useRef<HTMLDivElement>();
     const toggleableMultiSelect = useRef<MultiSelect>(null);
@@ -143,6 +145,11 @@ const Table = () => {
         fetchTable();
     }
 
+    let exportableFields = fields.filter((f) => f.exportable);
+    const exportCSV = (event: any) => {
+        dtRef.current?.exportCSV(event);
+    };
+
     const toolbarLeftContents = <React.Fragment></React.Fragment>;
 
     const toolbarRightContents = (
@@ -151,6 +158,7 @@ const Table = () => {
                 className="p-button-success mr-2"
                 icon="pi pi-plus"
                 label="New"
+                onClick={() => trinityLink(`/${configs.prefix}/${resource?.name}/create`)}
             />
             <Button
                 className="p-button-danger"
@@ -163,6 +171,14 @@ const Table = () => {
     const header = (
         <div className="flex justify-content-between flex-column sm:flex-row">
             <div className="flex mb-3">
+                {!!exportableFields.length && (
+                    <Button
+                        icon="pi pi-external-link"
+                        className="p-button-primary mb-2 mr-2"
+                        label="Export"
+                        onClick={exportCSV}
+                    />
+                )}
                 {showClearFilters && (
                     <Button
                         type="button"
@@ -227,6 +243,7 @@ const Table = () => {
             />
 
             <DataTable
+                ref={dtRef}
                 selection={selectedItems}
                 onSelectionChange={(e) => setSelectedItems(e.value)}
                 header={header}
