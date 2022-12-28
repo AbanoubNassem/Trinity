@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import { Button } from 'primereact/button';
@@ -10,53 +10,53 @@ import { useForm } from '@inertiajs/inertia-react';
 import { useTrinityFields } from '@/hooks/trinity_resource_fields';
 import last from 'lodash/last';
 
-const Create = () => {
+const Edit = () => {
     const configs = useConfigs();
-    const { resource, errors, data: inserted } = usePageProps();
+    const { resource, errors, data: record } = usePageProps<any>();
     const fields = useTrinityFields();
     const { components } = useContext(AppContext);
-    const [createAddAnother, setCreateAddAnother] = useState(false);
 
-    const data = {} as any;
-    for (const field of fields) {
-        data[last(field.columnName.split('.'))!] = undefined;
-    }
-    const form = useForm();
-
-    useEffect(() => {
-        if (inserted) {
-            trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${inserted}`, false, false);
+    const data = useMemo<any>(() => {
+        let innerData = {} as any;
+        for (const field of fields) {
+            innerData[last(field.columnName.split('.'))!] = record[last(field.columnName.split('.'))!] ?? '';
         }
-    }, [inserted]);
+        return innerData;
+    }, [configs]);
+
+    const form = useForm<any>(data);
 
     const setFieldValue = (name: string, value: any) => {
         data[name] = value;
     };
 
-    const create = (_createAddAnother: boolean = false) => {
-        setCreateAddAnother(_createAddAnother);
+    const update = () => {
+        // console.log(data);
         form.setDefaults(data);
-        form.post('', {
+        form.reset();
+        console.log(form.data);
+        // form.reset();
+        // console.log(form.data);
+        // // form.reset();
+        form.put('', {
             preserveScroll: true,
             preserveState: true
         });
     };
+    // useEffect(() => {
+    //     if (inserted) {
+    //         trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${inserted}`, false, false);
+    //     }
+    // }, [inserted]);
 
     const toolbarRight = (
         <div className="grid">
             <Button
-                label="Create"
-                className="m-2 p-button-primary"
+                label="Update"
+                className="m-2 p-button-info"
                 disabled={form.processing}
-                loading={form.processing && !createAddAnother}
-                onClick={() => create(false)}
-            />
-            <Button
-                label="Create & create another"
-                className="m-2 p-button-help"
-                disabled={form.processing}
-                loading={form.processing && createAddAnother}
-                onClick={() => create(true)}
+                loading={form.processing}
+                onClick={() => update()}
             />
             <Button
                 label="Cancel"
@@ -65,7 +65,7 @@ const Create = () => {
             />
         </div>
     );
-
+    console.log('render');
     return (
         <>
             <Head title={resource?.pluralLabel}></Head>
@@ -79,7 +79,7 @@ const Create = () => {
                             components?.get(component.componentName)!({
                                 key: `form_${index}_${component.componentName}`,
                                 component,
-                                formData : data,
+                                formData: data,
                                 setFieldValue,
                                 errors
                             })
@@ -114,4 +114,4 @@ const Create = () => {
     );
 };
 
-export default Create;
+export default React.memo(Edit);

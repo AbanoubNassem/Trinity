@@ -2,6 +2,7 @@ import type BaseComponent from '@/Types/Models/BaseComponent';
 
 export default interface Resource {
     name: string;
+    primaryKeyColumn: string;
     label: string;
     pluralLabel: string;
     icon: string;

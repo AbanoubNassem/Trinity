@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { Dropdown, DropdownProps } from 'primereact/dropdown';
@@ -17,14 +17,29 @@ const EMPTY = [
     }
 ];
 const SelectInputField = (props: SelectFieldProps) => {
-    const { component, errors, search, lazy, form } = props;
+    const { component, errors, search, lazy, formData, setFieldValue } = props;
     const [fetching, setFetching] = useState(false);
-    const [value, setValue] = useState(form?.data[component.columnName]);
+
+    const getValue = () =>
+        props.value ??
+        (formData[component.columnName] === undefined
+            ? undefined
+            : component.multiple
+            ? typeof formData[component.columnName] === 'string'
+                ? formData[component.columnName]?.split(',')
+                : formData[component.columnName]
+            : formData[component.columnName].toString());
+    const [value, setValue] = useState(getValue());
     const getItems = () => (!!props.options?.length ? props.options : !!component.options?.length ? component.options : EMPTY);
     const [options, setOptions] = useState(getItems);
 
     useEffect(() => {
-        setOptions(getItems);
+        if (props.value) {
+            loadItems({} as any).then(() => {});
+            // setValue(getValue());
+        }
+        setOptions(getItems());
+        setFieldValue(component.columnName, getValue());
     }, [props.options]);
     const loadItems = async (e: VirtualScrollerLazyParams & { filter: string }) => {
         if (fetching || !search) return;
@@ -58,7 +73,7 @@ const SelectInputField = (props: SelectFieldProps) => {
         value: value,
         onChange: (e: any) => {
             setValue(e.value);
-            form?.setData(component.columnName, e.value);
+            setFieldValue(component.columnName, component.multiple ? e.value.toString().split(',') : e.value.toString());
         },
         onFilter: (e: any) => filter(e.filter),
         virtualScrollerOptions: {
@@ -92,9 +107,13 @@ const SelectInputField = (props: SelectFieldProps) => {
                     {...(fieldProps as any)}
                     selectionLimit={component.selectionLimit}
                     display={component.display}
+                    hidden={component.hidden}
                 />
             ) : (
-                <Dropdown {...(fieldProps as any)} />
+                <Dropdown
+                    {...(fieldProps as any)}
+                    hidden={component.hidden}
+                />
             )}
         </BaseFieldComponent>
     );

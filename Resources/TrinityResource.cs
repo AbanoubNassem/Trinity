@@ -3,8 +3,10 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Configurations;
+using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Fields;
 using AbanoubNassem.Trinity.RequestHelpers;
+using AbanoubNassem.Trinity.Utilities;
 using AbanoubNassem.Trinity.Validators;
 using DapperQueryBuilder;
 using FluentValidation.AspNetCore;
@@ -39,6 +41,8 @@ public abstract class TrinityResource
     public virtual bool ShowGridlines => false;
     public virtual bool StripedRows => false;
     public virtual string? Icon => null;
+
+    public virtual string PrimaryKeyColumn => "id";
 
     private string? _table = null;
     [JsonIgnore] public virtual string? Table => _table;
@@ -152,6 +156,8 @@ public abstract class TrinityResource
 
             query.From($"{Table:raw} AS t");
 
+            query.Select($"t.{PrimaryKeyColumn:raw}");
+
             foreach (IBaseField field in Fields.Values)
             {
                 field.SelectQuery(query);
@@ -254,7 +260,7 @@ public abstract class TrinityResource
         return new OkObjectResult(res);
     }
 
-    public async Task<object?> Create()
+    private async Task<IDictionary<string, object?>?> ValidateRequest()
     {
         foreach (var field in Fields.Values)
         {
@@ -279,11 +285,17 @@ public abstract class TrinityResource
 
         var validation = await ResourceValidator.ValidateAsync(form);
 
-        if (!validation.IsValid)
-        {
-            validation.AddToModelState(ModelState);
-            return new { };
-        }
+        if (validation.IsValid) return form;
+
+        validation.AddToModelState(ModelState);
+        TrinityNotifications.NotifyError("Please correct the validation errors.", "Validation Errors!");
+        return null;
+    }
+
+    public async Task<object?> Create()
+    {
+        var form = await ValidateRequest();
+        if (form == null) return form;
 
         foreach (var field in Fields.Values)
         {
@@ -294,11 +306,106 @@ public abstract class TrinityResource
 
 
         var cmd = conn.CommandBuilder(
-            $@"INSERT INTO {Table:raw} ({string.Join(',', form.Keys):raw}) VALUES {form.Values}"
+            $@"INSERT INTO {Table:raw} ({string.Join(',', form.Keys):raw}) VALUES {form.Values} {conn.GetLastInsertedId(PrimaryKeyColumn):raw}"
         );
 
-        var res = await cmd.ExecuteAsync();
+        var res = await cmd.ExecuteScalarAsync();
 
-        return new { };
+        if (res != null)
+        {
+            TrinityNotifications.NotifySuccess("A new record was added successfully!");
+        }
+        else
+        {
+            TrinityNotifications.NotifyError("Something wrong happened please try again.");
+            return null;
+        }
+
+        return res;
+    }
+
+    public async Task<object?> GetEditData()
+    {
+        if (!Request.RouteValues.TryGetValue("id", out var key))
+            return null;
+
+        var queryBuilder = (FluentQueryBuilder)ConnectionFactory().FluentQueryBuilder();
+        foreach (IBaseField field in _fields.Values)
+        {
+            field.SelectQuery(queryBuilder);
+        }
+
+        var record = (IDictionary<string, object>?)await queryBuilder.From($"{Table:raw} t")
+            .Where($"{PrimaryKeyColumn:raw} = {key}")
+            .QuerySingleOrDefaultAsync();
+
+        if (record == null) return record;
+
+        foreach (IBaseField filed in Fields.Values)
+        {
+            if (filed is not IHasRelationshipField field) continue;
+            record = (await field.RunRelationQuery((FluentQueryBuilder)ConnectionFactory().FluentQueryBuilder(),
+                new List<IDictionary<string, object?>>() { record! })).Last()!;
+        }
+
+
+        return record;
+    }
+
+    public async Task<object?> Update()
+    {
+        var record = (IDictionary<string, object?>?)await GetEditData();
+
+        if (record == null)
+        {
+            if (!Request.RouteValues.TryGetValue("id", out var key)) return record;
+
+            ModelState.AddModelError("", $"The entity with {PrimaryKeyColumn}={key} doesn't exist.");
+            TrinityNotifications.NotifyError($"The entity with {PrimaryKeyColumn}={key} doesn't exist.");
+
+            return record;
+        }
+
+
+        var form = await ValidateRequest();
+        if (form == null) return record;
+
+        using var conn = ConnectionFactory();
+
+        var cmd = conn.CommandBuilder(
+            $@"UPDATE {Table:raw} SET "
+        );
+
+        for (var i = 0; i < form.Count; i++)
+        {
+            var field = (IBaseField)_fields[form.ElementAt(i).Key];
+            if (field.ColumnName == PrimaryKeyColumn) continue;
+
+            field.Fill(ref form);
+            record[field.ColumnName] = form[field.ColumnName];
+            cmd.Append($@"{field.ColumnName:raw} = {form[field.ColumnName]}");
+            if (i < form.Count - 1)
+                cmd.Append($",");
+        }
+
+        cmd.Append($"WHERE {PrimaryKeyColumn:raw} = {record[PrimaryKeyColumn]}");
+
+        var res = await cmd.ExecuteScalarAsync<int>();
+
+        if (res == 0)
+        {
+            TrinityNotifications.NotifySuccess("The record updated successfully!");
+        }
+        else
+        {
+            TrinityNotifications.NotifyError("Something went wrong while updating the record!");
+        }
+
+        return record;
+    }
+
+    public async Task<object?> Delete()
+    {
+        return Task.CompletedTask;
     }
 }

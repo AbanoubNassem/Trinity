@@ -46,6 +46,7 @@ const Table = () => {
                 item[field.columnName] = it[field.columnName];
             }
         }
+        item[resource?.primaryKeyColumn!] = it[resource?.primaryKeyColumn!];
         items.push(item);
     }
 
@@ -235,6 +236,25 @@ const Table = () => {
         </div>
     );
 
+    const actionBodyTemplate = (rowData: any) => {
+        return (
+            <>
+                <Button
+                    icon="pi pi-pencil"
+                    className="p-button-rounded p-button-success mr-2"
+                    onClick={() => {
+                        trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${rowData[resource?.primaryKeyColumn!]}`, false, false);
+                    }}
+                />
+                <Button
+                    icon="pi pi-trash"
+                    className="p-button-rounded p-button-danger"
+                    onClick={() => {}}
+                />
+            </>
+        );
+    };
+
     return (
         <>
             <Toolbar
@@ -297,6 +317,11 @@ const Table = () => {
                         />
                     );
                 })}
+                <Column
+                    body={loading ? <Skeleton /> : actionBodyTemplate}
+                    headerStyle={{ minWidth: '10rem' }}
+                    filter={false}
+                ></Column>
             </DataTable>
         </>
     );

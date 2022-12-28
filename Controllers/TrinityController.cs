@@ -4,6 +4,7 @@ using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Managers;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Resources;
+using AbanoubNassem.Trinity.Utilities;
 using Humanizer;
 using InertiaAdapter;
 using InertiaAdapter.Extensions;
@@ -101,7 +102,7 @@ public class TrinityController : Controller
             : Redirect($"/{_configurations.Prefix}/");
     }
 
-    public async Task<IActionResult> Handle(string name, string view, int? id)
+    public async Task<IActionResult> Handle(string name, string view)
     {
         var resourceName = name.Titleize();
         if (!_trinityManager.Resources.TryGetValue(resourceName, out var resourceObject))
@@ -119,7 +120,7 @@ public class TrinityController : Controller
 
         var responseData = new TrinityResponse()
         {
-            Resource = resourceObject
+            Resource = resourceObject,
         };
 
         if (!Request.IsInertiaRequest())
@@ -133,14 +134,24 @@ public class TrinityController : Controller
             case "GET" when view == "index":
                 responseData.Data = await resource.GetIndexData();
                 break;
+            case "GET" when view == "edit":
+                responseData.Data = await resource.GetEditData();
+                if (responseData.Data == null)
+                {
+                    return NotFound();
+                }
+
+                break;
             case "GET" when view == "relationship":
                 return await resource.GetRelationData();
             case "POST" when view == "create":
                 responseData.Data = await resource.Create();
                 break;
-            case "PUT" when view == "update":
+            case "PUT" when view == "edit":
+                responseData.Data = await resource.Update();
                 break;
             case "DELETE" when view == "delete":
+                responseData.Data = await resource.Delete();
                 break;
         }
 
@@ -149,6 +160,7 @@ public class TrinityController : Controller
             responseData.Errors = BadRequest(ModelState);
         }
 
+        responseData.Notifications = TrinityNotifications.Flush();
         return Inertia.Render(view, responseData);
     }
 

@@ -2,9 +2,9 @@ import type BaseComponent from '@/Types/Models/BaseComponent';
 
 export default interface BaseField extends BaseComponent {
     columnName: string;
+    relationshipName?: string;
     initialValue: string;
     title: string;
-    relationshipName?: string;
     sortable: boolean;
     searchable: boolean;
     isGloballySearchable: boolean;
@@ -14,6 +14,7 @@ export default interface BaseField extends BaseComponent {
     toolTip?: string;
     helperText?: string;
     disabled: boolean;
+    hidden: boolean;
     prefixes?: Array<string>;
     suffixes?: Array<string>;
     prefixIcons?: Array<string>;

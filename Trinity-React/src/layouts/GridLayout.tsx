@@ -4,7 +4,7 @@ import LayoutProps from '@/Types/Props/LayoutProps';
 import BaseLayout from '@/Types/Models/BaseLayout';
 import { AppContext } from '@/contexts/AppContext';
 
-const GirdLayout = ({ component, form, errors }: LayoutProps<BaseLayout>) => {
+const GirdLayout = ({ component, formData, setFieldValue, errors }: LayoutProps<BaseLayout>) => {
     const { components } = useContext(AppContext);
 
     return (
@@ -15,7 +15,8 @@ const GirdLayout = ({ component, form, errors }: LayoutProps<BaseLayout>) => {
                         key: `grid_${index}_${innerComponent.componentName}`,
                         component: innerComponent,
                         containerClass: component.columns ? `md:col-${12 / component.columns}` : '',
-                        form,
+                        formData,
+                        setFieldValue,
                         errors
                     })
                 ) : (

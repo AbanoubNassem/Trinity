@@ -5,8 +5,8 @@ import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 
-const TextField = ({ component, form, errors }: FieldProps<BaseField>) => {
-    const [value, setValue] = useState(form?.data[component.columnName]);
+const TextField = ({ component, formData, setFieldValue, errors }: FieldProps<BaseField>) => {
+    const [value, setValue] = useState(formData[component.columnName] ?? '');
     return (
         <BaseFieldComponent
             component={component}
@@ -16,14 +16,15 @@ const TextField = ({ component, form, errors }: FieldProps<BaseField>) => {
                 id={component.columnName}
                 name={component.columnName}
                 disabled={component.disabled}
+                hidden={component.hidden}
                 placeholder={component.placeholder}
                 className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
                 tooltip={component.toolTip}
                 tooltipOptions={{ event: 'focus', position: 'top' }}
                 value={value}
                 onChange={(event) => {
-                    form?.setData(component.columnName, event.target.value);
-                    setValue(value);
+                    setValue(event.target.value);
+                    setFieldValue(component.columnName, event.target.value);
                 }}
             />
         </BaseFieldComponent>

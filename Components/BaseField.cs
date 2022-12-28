@@ -1,7 +1,6 @@
 using AbanoubNassem.Trinity.Validators;
 using DapperQueryBuilder;
 using Humanizer;
-using Newtonsoft.Json;
 
 namespace AbanoubNassem.Trinity.Components;
 
@@ -191,4 +190,13 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T>,
         Locale = locale;
         return (this as T)!;
     }
+    
+    public bool Hidden { get; protected set; }
+
+    public T SetAsHidden(bool value = true)
+    {
+        Hidden = value;
+        return (this as T)!;
+    }
+
 }

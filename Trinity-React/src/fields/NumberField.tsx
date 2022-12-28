@@ -5,7 +5,7 @@ import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { InputNumber } from 'primereact/inputnumber';
 
-const NumberField = ({ component, form, errors }: FieldProps<NumberField>) => {
+const NumberField = ({ component, formData, setFieldValue, errors }: FieldProps<NumberField>) => {
     return (
         <BaseFieldComponent
             component={component}
@@ -15,13 +15,14 @@ const NumberField = ({ component, form, errors }: FieldProps<NumberField>) => {
                 id={component.columnName}
                 name={component.columnName}
                 disabled={component.disabled}
+                hidden={component.hidden}
                 placeholder={component.placeholder}
                 className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
                 tooltip={component.toolTip}
                 tooltipOptions={{ event: 'hover', position: 'top' }}
-                value={form?.data[component.columnName]}
+                value={formData[component.columnName]}
                 onValueChange={(event) => {
-                    form?.setData(component.columnName, event.value);
+                    setFieldValue(component.columnName, event.value);
                 }}
                 mode={component.formatMode}
                 minFractionDigits={component.minFractionDigits}

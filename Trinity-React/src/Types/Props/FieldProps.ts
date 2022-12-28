@@ -5,6 +5,7 @@ import { InertiaFormProps } from '@inertiajs/inertia-react';
 
 export default interface FieldProps<T extends BaseField> {
     component: T;
-    form: InertiaFormProps<any>;
+    formData: any;
+    setFieldValue: (name: string, value: any) => void;
     errors: Errors;
 }

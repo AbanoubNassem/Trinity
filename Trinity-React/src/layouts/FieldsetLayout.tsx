@@ -5,7 +5,7 @@ import BaseLayout from '@/Types/Models/BaseLayout';
 import { AppContext } from '@/contexts/AppContext';
 import { Fieldset } from 'primereact/fieldset';
 
-const FieldsetLayout = ({ component, form, errors }: LayoutProps<BaseLayout>) => {
+const FieldsetLayout = ({ component, formData, setFieldValue, errors }: LayoutProps<BaseLayout>) => {
     const { components } = useContext(AppContext);
 
     return (
@@ -22,7 +22,8 @@ const FieldsetLayout = ({ component, form, errors }: LayoutProps<BaseLayout>) =>
                             key: `fieldset_${index}_${innerComponent.componentName}`,
                             component: innerComponent,
                             containerClass: component.columns ? `md:col-${12 / component.columns}` : '',
-                            form,
+                            formData,
+                            setFieldValue,
                             errors
                         })
                     ) : (

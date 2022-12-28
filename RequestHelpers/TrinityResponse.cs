@@ -20,4 +20,7 @@ public class TrinityResponse
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public BadRequestObjectResult? Errors { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public List<object>? Notifications { get; set; }
 }

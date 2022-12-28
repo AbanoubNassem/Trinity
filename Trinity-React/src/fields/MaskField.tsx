@@ -5,7 +5,7 @@ import { classNames } from 'primereact/utils';
 import MaskField from '@/Types/Models/MaskField';
 import { InputMask } from 'primereact/inputmask';
 
-const MaskField = ({ component, form, errors }: FieldProps<MaskField>) => {
+const MaskField = ({ component, formData, setFieldValue, errors }: FieldProps<MaskField>) => {
     return (
         <BaseFieldComponent
             component={component}
@@ -15,16 +15,16 @@ const MaskField = ({ component, form, errors }: FieldProps<MaskField>) => {
                 id={component.columnName}
                 name={component.columnName}
                 disabled={component.disabled}
+                hidden={component.hidden}
                 placeholder={component.placeholder}
-                type="text"
                 className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
                 tooltip={component.toolTip}
                 tooltipOptions={{ event: 'focus', position: 'top' }}
                 mask={component.inputMask}
                 slotChar={component.slotChar ?? '_'}
                 autoClear={component.autoClear}
-                value={form?.data[component.columnName]}
-                onChange={(event) => form?.setData(component.columnName, event.target.value)}
+                value={formData[component.columnName]}
+                onChange={(event) => setFieldValue(component.columnName, event.target.value)}
             />
         </BaseFieldComponent>
     );

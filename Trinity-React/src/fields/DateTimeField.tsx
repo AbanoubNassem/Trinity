@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FieldProps from '@/Types/Props/FieldProps';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { Calendar } from 'primereact/calendar';
 import { classNames } from 'primereact/utils';
 import DateTimeField from '@/Types/Models/DateTimeField';
-import moment from 'moment';
 
-const DateTimeField = ({ component, form, errors }: FieldProps<DateTimeField>) => {
-    // const [value, setValue] = useState(form?.data[component.columnName]);
+const DateTimeField = ({ component, formData, setFieldValue, errors }: FieldProps<DateTimeField>) => {
+    const [value, setValue] = useState(formData[component.columnName] ? new Date(Date.parse(formData[component.columnName])) : undefined);
+
+    useEffect(() => {
+        setFieldValue(component.columnName, new Date(Date.parse(formData[component.columnName])));
+    }, [component]);
+
     return (
         <BaseFieldComponent
             component={component}
@@ -22,11 +26,11 @@ const DateTimeField = ({ component, form, errors }: FieldProps<DateTimeField>) =
                 className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
                 tooltip={component.toolTip}
                 tooltipOptions={{ event: 'focus', position: 'top' }}
-                value={form?.data[component.columnName]}
+                value={value}
                 onChange={(event) => {
                     // const formatted = moment(event.target.value as any).format(component.dateFormat);
-                    form?.setData(component.columnName, event.target.value);
-                    // setValue(value);
+                    setValue(event.target.value as any);
+                    setFieldValue(component.columnName, event.target.value);
                 }}
                 inline={component.inline}
                 selectionMode={component.selectionMode}

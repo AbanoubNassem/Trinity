@@ -5,7 +5,7 @@ import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { InputTextarea } from 'primereact/inputtextarea';
 
-const TextAreaField = ({ component, form, errors }: FieldProps<TextAreaField>) => {
+const TextAreaField = ({ component, formData, setFieldValue, errors }: FieldProps<TextAreaField>) => {
     return (
         <BaseFieldComponent
             component={component}
@@ -15,6 +15,7 @@ const TextAreaField = ({ component, form, errors }: FieldProps<TextAreaField>) =
                 id={component.columnName}
                 name={component.columnName}
                 disabled={component.disabled}
+                hidden={component.hidden}
                 placeholder={component.placeholder}
                 className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
                 tooltip={component.toolTip}
@@ -22,8 +23,8 @@ const TextAreaField = ({ component, form, errors }: FieldProps<TextAreaField>) =
                 autoResize={component.autoResize}
                 rows={component.rows}
                 cols={component.cols}
-                value={form?.data[component.columnName]}
-                onChange={(event) => form?.setData(component.columnName, event.target.value)}
+                value={formData[component.columnName]}
+                onChange={(event) => setFieldValue(component.columnName, event.target.value)}
             />
         </BaseFieldComponent>
     );

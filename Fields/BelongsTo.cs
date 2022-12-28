@@ -7,7 +7,7 @@ namespace AbanoubNassem.Trinity.Fields;
 public class BelongsTo : HasRelationshipField<string>
 {
     public override string ComponentName => "BelongsToField";
-    
+
     public BelongsTo(string localColumnNames, string relationTables, string foreignColumnNames,
         string relationshipName, string relationSelectColumn)
         : base(localColumnNames, foreignColumnNames, relationTables)
@@ -24,7 +24,7 @@ public class BelongsTo : HasRelationshipField<string>
 
         if (!string.IsNullOrWhiteSpace(foreignTable))
             SetForeignTable(foreignTable);
-        
+
         if (relationshipName != null)
         {
             SetRelationshipName(relationshipName);
@@ -39,7 +39,10 @@ public class BelongsTo : HasRelationshipField<string>
         return this;
     }
 
-
+    public override void SelectQuery(FluentQueryBuilder query)
+    {
+        query.Select($"t.{ColumnName.Split('.').First():raw}");
+    }
 
 
     public override void FilterQuery(Filters filters, string globalSearch)

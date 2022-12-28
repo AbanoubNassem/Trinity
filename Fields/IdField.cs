@@ -8,6 +8,7 @@ public class IdField<T> : BaseField<IdField<T>, T>
     {
         SetAsToggleable();
         SetAsSortable();
+        SetAsHidden();
     }
 
     public override string ComponentName => "IdField";

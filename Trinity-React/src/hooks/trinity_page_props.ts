@@ -13,8 +13,11 @@ export default function usePageProps<T>() {
                 resource?: Resource;
                 data?: T;
                 errors?: Errors;
+                notifications?: Array<string>;
             };
-            sharedProps: { [key: string]: string };
+            sharedProps: {
+                [key: string]: string;
+            };
         }>
     >();
 

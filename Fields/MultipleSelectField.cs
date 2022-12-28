@@ -4,10 +4,7 @@ namespace AbanoubNassem.Trinity.Fields;
 
 public class MultipleSelectField<T> : SelectField<T[]?>
 {
-    public override string ComponentName => "TextField";
-
     public bool Multiple => true;
-
     public int? SelectionLimit { get; protected set; }
 
     public string? Display { get; protected set; }

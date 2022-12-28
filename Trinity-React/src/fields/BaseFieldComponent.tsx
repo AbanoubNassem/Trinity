@@ -4,6 +4,8 @@ import Errors from '@/Types/Models/errors';
 import BaseField from '@/Types/Models/BaseField';
 
 const BaseFieldComponent = ({ component, errors, children }: { component: BaseField; errors: Errors; children?: React.ReactNode }) => {
+    if (component.hidden) return <></>;
+
     return (
         <div className={classNames(['field col-12 md:col', component.columnSpan > 0 && component.columnSpan < 12 ? `md:col-${component.columnSpan}` : ''])}>
             <label htmlFor={component.columnName}>{component.label}</label>

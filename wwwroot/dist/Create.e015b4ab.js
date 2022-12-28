@@ -1,61 +1,67 @@
-import { u as f, a as g, r as u, A as p, l as y, b as h, j as e, B as n, F as C, H as v } from "./main.c6c28297.js";
-import { u as x, t as D, T as R } from "./trinity_resource_fields.01609cb6.js";
-const W = () => {
-  const b = f(), { resource: a, errors: s } = g(), N = x(), { components: t } = u.exports.useContext(p), [m, d] = u.exports.useState(!1), o = {};
-  for (const i of N)
-    o[y(i.columnName.split("."))] = void 0;
-  const l = h(a.name, o), c = (i = !1) => {
-    d(i), l.post("", {
+import { u as y, a as h, r as c, A as C, l as v, b as x, j as e, B as u, F as D, H as V } from "./main.39d08f6f.js";
+import { u as R, t as d, T as I } from "./trinity_resource_fields.97868387.js";
+const A = () => {
+  const n = y(), { resource: a, errors: t, data: o } = h(), f = R(), { components: s } = c.exports.useContext(C), [b, T] = c.exports.useState(!1), m = {};
+  for (const i of f)
+    m[v(i.columnName.split("."))] = void 0;
+  const l = x();
+  c.exports.useEffect(() => {
+    o && d(`/${n == null ? void 0 : n.prefix}/${a == null ? void 0 : a.name}/edit/${o}`, !1, !1);
+  }, [o]);
+  const g = (i, r) => {
+    m[i] = r;
+  }, N = (i = !1) => {
+    T(i), l.setDefaults(m), l.post("", {
       preserveScroll: !0,
       preserveState: !0
     });
-  }, T = /* @__PURE__ */ e("div", {
+  }, p = /* @__PURE__ */ e("div", {
     className: "grid",
     children: [
-      /* @__PURE__ */ e(n, {
+      /* @__PURE__ */ e(u, {
         label: "Create",
         className: "m-2 p-button-primary",
         disabled: l.processing,
-        loading: l.processing && !m,
-        onClick: () => c(!1)
+        loading: l.processing && !b,
+        onClick: () => N(!1)
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-        lineNumber: 37,
+        lineNumber: 47,
         columnNumber: 13
       }, globalThis),
-      /* @__PURE__ */ e(n, {
+      /* @__PURE__ */ e(u, {
         label: "Create & create another",
         className: "m-2 p-button-help",
         disabled: l.processing,
-        loading: l.processing && m,
-        onClick: () => c(!0)
+        loading: l.processing && b,
+        onClick: () => N(!0)
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-        lineNumber: 44,
+        lineNumber: 54,
         columnNumber: 13
       }, globalThis),
-      /* @__PURE__ */ e(n, {
+      /* @__PURE__ */ e(u, {
         label: "Cancel",
         className: "m-2 p-button-secondary",
-        onClick: () => D(`/${b.prefix}/${a == null ? void 0 : a.name}`)
+        onClick: () => d(`/${n.prefix}/${a == null ? void 0 : a.name}`)
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-        lineNumber: 51,
+        lineNumber: 61,
         columnNumber: 13
       }, globalThis)
     ]
   }, void 0, !0, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-    lineNumber: 36,
+    lineNumber: 46,
     columnNumber: 9
   }, globalThis);
-  return /* @__PURE__ */ e(C, {
+  return /* @__PURE__ */ e(D, {
     children: [
-      /* @__PURE__ */ e(v, {
+      /* @__PURE__ */ e(V, {
         title: a == null ? void 0 : a.pluralLabel
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-        lineNumber: 61,
+        lineNumber: 71,
         columnNumber: 13
       }, globalThis),
       /* @__PURE__ */ e("div", {
@@ -69,84 +75,85 @@ const W = () => {
             ]
           }, void 0, !0, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-            lineNumber: 64,
+            lineNumber: 74,
             columnNumber: 17
           }, globalThis),
           /* @__PURE__ */ e("form", {
             className: "p-fluid formgrid grid col-12",
             children: a == null ? void 0 : a.schema.map(
-              (i, r) => t != null && t.has(i.componentName) ? t == null ? void 0 : t.get(i.componentName)({
+              (i, r) => s != null && s.has(i.componentName) ? s == null ? void 0 : s.get(i.componentName)({
                 key: `form_${r}_${i.componentName}`,
                 component: i,
-                form: l,
-                errors: s
+                formData: m,
+                setFieldValue: g,
+                errors: t
               }) : /* @__PURE__ */ e("div", {}, `form_${r}_${i.componentName}`, !1, {
                 fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-                lineNumber: 76,
+                lineNumber: 87,
                 columnNumber: 29
               }, globalThis)
             )
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-            lineNumber: 66,
+            lineNumber: 76,
             columnNumber: 17
           }, globalThis),
           /* @__PURE__ */ e("div", {
             className: "grid",
             children: /* @__PURE__ */ e("div", {
               className: "field",
-              children: (s == null ? void 0 : s.value[""]) && /* @__PURE__ */ e("small", {
+              children: (t == null ? void 0 : t.value[""]) && /* @__PURE__ */ e("small", {
                 className: "p-error",
-                children: s == null ? void 0 : s.value[""].map((i, r) => /* @__PURE__ */ e("span", {
+                children: t == null ? void 0 : t.value[""].map((i, r) => /* @__PURE__ */ e("span", {
                   className: "flex",
                   children: i
                 }, r, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-                  lineNumber: 86,
+                  lineNumber: 97,
                   columnNumber: 37
                 }, globalThis))
               }, void 0, !1, {
                 fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-                lineNumber: 84,
+                lineNumber: 95,
                 columnNumber: 29
               }, globalThis)
             }, void 0, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-              lineNumber: 82,
+              lineNumber: 93,
               columnNumber: 21
             }, globalThis)
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-            lineNumber: 81,
+            lineNumber: 92,
             columnNumber: 17
           }, globalThis),
           /* @__PURE__ */ e("div", {
             className: "mt-3",
-            children: /* @__PURE__ */ e(R, {
-              right: T
+            children: /* @__PURE__ */ e(I, {
+              right: p
             }, void 0, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-              lineNumber: 99,
+              lineNumber: 110,
               columnNumber: 21
             }, globalThis)
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-            lineNumber: 98,
+            lineNumber: 109,
             columnNumber: 17
           }, globalThis)
         ]
       }, void 0, !0, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-        lineNumber: 63,
+        lineNumber: 73,
         columnNumber: 13
       }, globalThis)
     ]
   }, void 0, !0, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Create.tsx",
-    lineNumber: 60,
+    lineNumber: 70,
     columnNumber: 9
   }, globalThis);
 };
 export {
-  W as default
+  A as default
 };

@@ -9,11 +9,15 @@ import { LayoutContext } from '@/contexts/LayoutContext';
 import AppSidebar from '@/components/AppSidebar';
 import { Inertia } from '@inertiajs/inertia';
 import AppFooter from '@/components/AppFooter';
+import usePageProps from '@/hooks/trinity_page_props';
+import { AppContext } from '@/contexts/AppContext';
 
 const MainLayout = (props: any) => {
     const { layoutConfig, layoutState, setLayoutState } = useContext(LayoutContext);
     const topbarRef = useRef<any>(null);
     const sidebarRef = useRef<any>(null);
+    const { toast } = useContext(AppContext);
+    const { notifications } = usePageProps();
 
     const [bindMenuOutsideClickListener, unbindMenuOutsideClickListener] = useEventListener({
         type: 'click',
@@ -43,7 +47,12 @@ const MainLayout = (props: any) => {
     });
 
     const hideMenu = () => {
-        setLayoutState((prevLayoutState) => ({ ...prevLayoutState, overlayMenuActive: false, staticMenuMobileActive: false, menuHoverActive: false }));
+        setLayoutState((prevLayoutState) => ({
+            ...prevLayoutState,
+            overlayMenuActive: false,
+            staticMenuMobileActive: false,
+            menuHoverActive: false
+        }));
         unbindMenuOutsideClickListener();
         unblockBodyScroll();
     };
@@ -60,6 +69,12 @@ const MainLayout = (props: any) => {
     const unblockBodyScroll = () => {
         DomHandler.removeClass(document.body, 'blocked-scroll');
     };
+
+    useEffect(() => {
+        if (!!notifications?.length) {
+            toast?.current?.show(notifications as any);
+        }
+    }, [notifications]);
 
     useEffect(() => {
         if (layoutState.overlayMenuActive || layoutState.staticMenuMobileActive) {
