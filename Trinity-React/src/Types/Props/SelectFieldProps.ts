@@ -5,8 +5,10 @@ import { VirtualScrollerLazyParams } from 'primereact/virtualscroller';
 
 export default interface SelectFieldProps extends FieldProps<SelectField> {
     value?: any;
-    search?: (e: VirtualScrollerLazyParams & { filter: string }) => Promise<SelectItemOptionsType>;
+    search?: (e: VirtualScrollerLazyParams & { filter: string; value: any }) => Promise<SelectItemOptionsType>;
     disabled?: boolean;
     options?: SelectItemOptionsType;
     lazy?: boolean;
+
+    lazyItemsCount?: number;
 }

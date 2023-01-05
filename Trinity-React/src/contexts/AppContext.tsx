@@ -14,6 +14,7 @@ import BelongsToField from '@/fields/BelongsToField';
 import DateTimeField from '@/fields/DateTimeField';
 import NumberField from '@/fields/NumberField';
 import { Toast } from 'primereact/toast';
+import SwitchInputField from '@/fields/SwitchInputField';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
@@ -36,7 +37,8 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['SelectInputField', (props) => <SelectInputField {...props} />],
         ['BelongsToField', (props) => <BelongsToField {...props} />],
         ['DateTimeField', (props) => <DateTimeField {...props} />],
-        ['NumberField', (props) => <NumberField {...props} />]
+        ['NumberField', (props) => <NumberField {...props} />],
+        ['SwitchInputField', (props) => <SwitchInputField {...props} />]
     ]);
 
     const toast = useRef<Toast>(null);

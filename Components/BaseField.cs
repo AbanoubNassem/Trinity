@@ -10,7 +10,7 @@ public interface IBaseField : IBaseComponent
 
     public void Format(IDictionary<string, object?> record);
 
-    public void Fill(ref IDictionary<string, object?> record);
+    public void Fill(ref IDictionary<string, object?> form, in IDictionary<string, object?>? record = null);
 
     public void SelectQuery(FluentQueryBuilder query);
 
@@ -53,11 +53,13 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T>,
     }
 
 
-    public delegate void ActionWithRecord(IDictionary<string, object?> record);
+    public delegate void ActionFormWithRecord(IDictionary<string, object?> form,
+        in IDictionary<string, object?>? record = null);
 
     public delegate object? ActionWithRecordProperty(TDeserialization? property);
 
-    public delegate Task AsyncActionWithRecord(IDictionary<string, object?> record);
+    public delegate object? ActionWithRecordProperties(TDeserialization? property,
+        in IDictionary<string, object?>? record = null);
 
     public string ColumnName { get; set; }
 
@@ -77,9 +79,9 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T>,
     }
 
 
-    private ActionWithRecord? _formatUsing;
+    private ActionFormWithRecord? _formatUsing;
 
-    public T FormatUsing(ActionWithRecord formatUsing)
+    public T FormatUsing(ActionFormWithRecord formatUsing)
     {
         _formatUsing = formatUsing;
         return (this as T)!;
@@ -91,27 +93,40 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T>,
         _formatUsing?.Invoke(record);
     }
 
-    private ActionWithRecord? _fillUsing;
+    protected ActionFormWithRecord? FillUsing;
+    protected ActionWithRecordProperty? FillUsingProperty;
+    protected ActionWithRecordProperties? FillUsingProperties;
 
-    private ActionWithRecordProperty? _fillUsingProperty;
-
-    public T FillUsing(ActionWithRecord fillUsing)
+    public T SetFillUsing(ActionFormWithRecord fillUsing)
     {
-        _fillUsing = fillUsing;
+        FillUsing = fillUsing;
         return (this as T)!;
     }
 
-    public T FillUsing(ActionWithRecordProperty fillUsingProperty)
+    public T SetFillUsingProperty(ActionWithRecordProperty fillUsingProperty)
     {
-        _fillUsingProperty = fillUsingProperty;
+        FillUsingProperty = fillUsingProperty;
         return (this as T)!;
     }
 
-    public virtual void Fill(ref IDictionary<string, object?> record)
+    public T SetFillUsingProperties(ActionWithRecordProperties fillUsingProperties)
     {
-        if (record.ContainsKey(ColumnName) && _fillUsingProperty != null)
-            record[ColumnName] = _fillUsingProperty((TDeserialization?)record[ColumnName]);
-        _fillUsing?.Invoke(record);
+        FillUsingProperties = fillUsingProperties;
+        return (this as T)!;
+    }
+
+    public virtual void Fill(ref IDictionary<string, object?> form, in IDictionary<string, object?>? record = null)
+    {
+        if (form.TryGetValue(ColumnName, out var value))
+        {
+            if (FillUsingProperties != null)
+                form[ColumnName] = FillUsingProperties((TDeserialization?)value, record);
+
+            if (FillUsingProperty != null)
+                form[ColumnName] = FillUsingProperty((TDeserialization?)value);
+        }
+
+        FillUsing?.Invoke(form);
     }
 
 
@@ -190,7 +205,7 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T>,
         Locale = locale;
         return (this as T)!;
     }
-    
+
     public bool Hidden { get; protected set; }
 
     public T SetAsHidden(bool value = true)
@@ -199,4 +214,12 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T>,
         return (this as T)!;
     }
 
+
+    public TDeserialization? DefaultValue { get; protected set; }
+
+    public T SetDefaultValue(TDeserialization value)
+    {
+        DefaultValue = value;
+        return (this as T)!;
+    }
 }

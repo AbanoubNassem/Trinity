@@ -79,7 +79,7 @@ const Create = () => {
                             components?.get(component.componentName)!({
                                 key: `form_${index}_${component.componentName}`,
                                 component,
-                                formData : data,
+                                formData: data,
                                 setFieldValue,
                                 errors
                             })

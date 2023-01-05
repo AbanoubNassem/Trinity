@@ -6,6 +6,9 @@ using StackExchange.Profiling;
 
 namespace AbanoubNassem.Trinity.Configurations;
 
+/// <summary>
+/// Trinity Configurations
+/// </summary>
 public class TrinityConfigurations
 {
     public delegate Task<LoginConcern?> Authenticate(HttpContext httpContext, string email, string password);

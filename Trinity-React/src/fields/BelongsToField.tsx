@@ -8,6 +8,7 @@ import { SelectItemOptionsType } from 'primereact/selectitem';
 import RelationshipField from '@/Types/Models/RelationshipField';
 import { VirtualScrollerLazyParams } from 'primereact/virtualscroller';
 import last from 'lodash/last';
+import modal from '@/utilities/inertia_modal';
 
 const BelongsToField = (props: FieldProps<RelationshipField>) => {
     const { component, errors, formData, setFieldValue } = props;
@@ -20,15 +21,18 @@ const BelongsToField = (props: FieldProps<RelationshipField>) => {
         if (relation && relation[r]) relation = relation[r];
     }
 
-    async function fetchAssociates(e: (VirtualScrollerLazyParams & { filter: string }) | null): Promise<SelectItemOptionsType> {
+    async function fetchAssociates(e: (VirtualScrollerLazyParams & { filter: string; value: any }) | null): Promise<SelectItemOptionsType> {
         const res = await axios
             .get(`/${configs.prefix}/${resource?.name}/relationship`, {
                 params: {
                     column: component.columnName,
-                    search: e?.filter
+                    search: e?.filter,
+                    offset: e?.last as number,
+                    value: e?.value
                 }
             })
-            .then((res) => res.data);
+            .then((res) => res.data)
+            .catch((err) => modal.show(err.response.data, false));
 
         return res ?? [];
     }
@@ -37,7 +41,6 @@ const BelongsToField = (props: FieldProps<RelationshipField>) => {
         if (!component.lazy)
             fetchAssociates(null).then((opts) => {
                 setOptions(opts);
-                console.log(opts);
             });
     }, [component]);
 
@@ -47,6 +50,7 @@ const BelongsToField = (props: FieldProps<RelationshipField>) => {
             errors={errors}
             search={fetchAssociates}
             lazy={component.lazy}
+            lazyItemsCount={component.lazyItemsCount}
             formData={formData}
             setFieldValue={setFieldValue}
             options={options}

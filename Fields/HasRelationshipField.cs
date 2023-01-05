@@ -1,3 +1,4 @@
+using System.Data;
 using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
@@ -10,7 +11,11 @@ public interface IHasRelationshipField : IBaseField
     public Task<List<IDictionary<string, object?>>> RunRelationQuery(FluentQueryBuilder query,
         List<IDictionary<string, object?>> list, Sort? sort = null);
 
-    public Task<List<KeyValuePair<string, string>>> RelationshipQuery(FluentQueryBuilder query, string? search);
+    public Task<List<KeyValuePair<string, string>>> RelationshipQuery(IDbConnection connection, string? value,
+        int offset, string? search = null);
+
+    public string ForeignTable { get; protected set; }
+    public string ForeignColumn { get; protected set; }
 }
 
 public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T>, T>, IHasRelationshipField
@@ -35,7 +40,9 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
     {
     }
 
-    public virtual Task<List<KeyValuePair<string, string>>> RelationshipQuery(FluentQueryBuilder query, string? search)
+    public virtual Task<List<KeyValuePair<string, string>>> RelationshipQuery(IDbConnection connection, string? value,
+        int offset,
+        string? search = null)
     {
         return Task.FromResult(new List<KeyValuePair<string, string>>());
     }
@@ -48,7 +55,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
         return this;
     }
 
-    public string ForeignTable { get; protected set; }
+    public string ForeignTable { get; set; }
 
     public HasRelationshipField<T> SetForeignTable(string value)
     {
@@ -56,7 +63,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
         return this;
     }
 
-    public string ForeignColumn { get; protected set; }
+    public string ForeignColumn { get; set; }
 
     public HasRelationshipField<T> SetForeignColumn(string value)
     {
@@ -67,9 +74,12 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
 
     public bool Lazy { get; protected set; }
 
-    public HasRelationshipField<T> SetAsLazy(bool lazy = true)
+    public int LazyItemsCount { get; protected set; } = 10;
+
+    public HasRelationshipField<T> SetAsLazy(bool lazy = true, int lazyItemsCount = 10)
     {
         Lazy = lazy;
+        LazyItemsCount = lazyItemsCount;
         return this;
     }
 }

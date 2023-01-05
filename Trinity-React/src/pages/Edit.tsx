@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import { Button } from 'primereact/button';
@@ -34,7 +34,7 @@ const Edit = () => {
         // console.log(data);
         form.setDefaults(data);
         form.reset();
-        console.log(form.data);
+        //console.log(form.data);
         // form.reset();
         // console.log(form.data);
         // // form.reset();
@@ -65,7 +65,7 @@ const Edit = () => {
             />
         </div>
     );
-    console.log('render');
+
     return (
         <>
             <Head title={resource?.pluralLabel}></Head>

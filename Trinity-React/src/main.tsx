@@ -11,7 +11,6 @@ import { LayoutProvider } from '@/contexts/LayoutContext';
 import { AppContextProvider } from './contexts/AppContext';
 import MainLayout from '@/MainLayout';
 import axios from 'axios';
-import { Inertia } from '@inertiajs/inertia';
 
 createInertiaApp({
     resolve: async (name) => {

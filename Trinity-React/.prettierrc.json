@@ -7,5 +7,5 @@
   "jsxSingleQuote": false,
   "printWidth": 250,
   "bracketSameLine": false,
-  "singleAttributePerLine" : true
+  "singleAttributePerLine": true
 }

@@ -2,7 +2,6 @@ using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Resources;
 using Humanizer;
-using Microsoft.Extensions.Logging;
 using StackExchange.Profiling;
 
 namespace AbanoubNassem.Trinity.Managers;

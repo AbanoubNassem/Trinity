@@ -1,5 +1,5 @@
-import { R as p, u as y, a as h, r as c, A as v, l as u, b as x, j as e, B as b, F as D, H as E } from "./main.39d08f6f.js";
-import { u as R, t as V, T as I } from "./trinity_resource_fields.97868387.js";
+import { R as p, u as y, a as h, r as c, A as v, l as u, b as x, j as e, B as b, F as D, H as E } from "./main.b59fcee8.js";
+import { u as R, t as V, T as I } from "./trinity_resource_fields.2a9ae9b3.js";
 const W = () => {
   const m = y(), { resource: i, errors: s, data: d } = h(), N = R(), { components: l } = c.exports.useContext(v), n = c.exports.useMemo(() => {
     var t;
@@ -10,7 +10,7 @@ const W = () => {
   }, [m]), r = x(n), T = (a, t) => {
     n[a] = t;
   }, f = () => {
-    r.setDefaults(n), r.reset(), console.log(r.data), r.put("", {
+    r.setDefaults(n), r.reset(), r.put("", {
       preserveScroll: !0,
       preserveState: !0
     });
@@ -43,7 +43,7 @@ const W = () => {
     lineNumber: 53,
     columnNumber: 9
   }, globalThis);
-  return console.log("render"), /* @__PURE__ */ e(D, {
+  return /* @__PURE__ */ e(D, {
     children: [
       /* @__PURE__ */ e(E, {
         title: i == null ? void 0 : i.pluralLabel

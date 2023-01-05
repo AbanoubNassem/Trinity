@@ -1,14 +1,16 @@
+using System.Data;
 using AbanoubNassem.Trinity.RequestHelpers;
+using Dapper;
 using DapperQueryBuilder;
 using Filter = DapperQueryBuilder.Filter;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class BelongsTo : HasRelationshipField<string>
+public class BelongsToField : HasRelationshipField<string>
 {
     public override string ComponentName => "BelongsToField";
 
-    public BelongsTo(string localColumnNames, string relationTables, string foreignColumnNames,
+    public BelongsToField(string localColumnNames, string relationTables, string foreignColumnNames,
         string relationshipName, string relationSelectColumn)
         : base(localColumnNames, foreignColumnNames, relationTables)
     {
@@ -17,7 +19,7 @@ public class BelongsTo : HasRelationshipField<string>
         SetRelationshipName(relationshipName);
     }
 
-    public BelongsTo(string columnName, string relationSelectColumn, string? foreignTable = null,
+    public BelongsToField(string columnName, string relationSelectColumn, string? foreignTable = null,
         string? relationshipName = null) : base(columnName)
     {
         SetTitle(relationSelectColumn);
@@ -33,7 +35,7 @@ public class BelongsTo : HasRelationshipField<string>
 
     public List<KeyValuePair<string, string>>? Options { get; protected set; } = new();
 
-    public BelongsTo SetOptions(List<KeyValuePair<string, string>> options)
+    public BelongsToField SetOptions(List<KeyValuePair<string, string>> options)
     {
         Options = options;
         return this;
@@ -167,25 +169,67 @@ public class BelongsTo : HasRelationshipField<string>
         }
     }
 
-    public override async Task<List<KeyValuePair<string, string>>> RelationshipQuery(FluentQueryBuilder query,
-        string? search)
+    public override async Task<List<KeyValuePair<string, string>>> RelationshipQuery(IDbConnection connection,
+        string? value, int offset,
+        string? search = null)
     {
-        query.Select($"*");
+        // var test =
+        //     "(SELECT * FROM store t  LEFT JOIN staff o ON o.store_id = t.store_id  WHERE t.store_id = '2' LIMIT 1)  UNION (SELECT * FROM  store t LEFT JOIN staff o ON o.store_id = t.store_id  WHERE t.store_id != '2'  OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY)";
+        //
+        // var rs = await connection.QueryAsync<dynamic, dynamic, dynamic>(test, (store, staff) => new
+        // {
+        //     store,
+        //     staff
+        // }, null, null, true, "store_id");
+        //
 
-        query.From($"{ForeignTable.Split('.').Last():raw}");
+        var table = ForeignTable.Split('.').Last();
+        var column = ForeignColumn.Split('.').Last();
+        var query = "";
+
+        if (value != null)
+        {
+            query += $"(SELECT * FROM {table} WHERE {column} = @value LIMIT 1) UNION ";
+        }
+
+
+        query += $"(SELECT * FROM  {table} " + (value != null ? $"WHERE {column} != @value" : "");
 
         if (search != null)
         {
-            query.Where(new Filter($"LOWER({Title:raw}) LIKE {search} "));
+            query += $"AND LOWER({Title}) like '@search' ";
         }
 
-        query.Limit(0, 10);
 
-        var res = (await query.QueryAsync()).Cast<IDictionary<string, object?>>().ToList();
+        query += $" OFFSET 0 ROWS FETCH NEXT {(value != null ? LazyItemsCount - 1 : LazyItemsCount)} ROWS ONLY)";
+
+
+        var res = (await connection.QueryAsync(query, new
+        {
+            value,
+            search,
+            offset
+        })).Cast<IDictionary<string, object?>>().ToList();
 
         return res.Select(x =>
                 new KeyValuePair<string, string>(x[ForeignColumn.Split('.').Last()]!.ToString()!,
                     x[Title]!.ToString()!))
             .ToList();
+    }
+
+    public override void Fill(ref IDictionary<string, object?> form, in IDictionary<string, object?>? record = null)
+    {
+        if (FillUsing != null || FillUsingProperty != null || FillUsingProperties != null)
+        {
+            base.Fill(ref form, in record);
+            return;
+        }
+
+        var foreignColumns = ForeignColumn.Split('.');
+
+        if (foreignColumns.Length <= 1) return;
+
+
+        var relationshipNames = RelationshipName.Split('.');
     }
 }

@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AbanoubNassem.Trinity.Validators;
 using FluentValidation;
 

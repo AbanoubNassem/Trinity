@@ -1,7 +1,4 @@
 using System.Data;
-using AbanoubNassem.Trinity.RequestHelpers;
-using Dapper;
-using DapperQueryBuilder;
 using StackExchange.Profiling.Data;
 
 namespace AbanoubNassem.Trinity.Extensions;

@@ -20,4 +20,5 @@ export default interface BaseField extends BaseComponent {
     prefixIcons?: Array<string>;
     suffixIcons?: Array<string>;
     locale?: string;
+    defaultValue?: any;
 }

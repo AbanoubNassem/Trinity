@@ -251,11 +251,20 @@ public abstract class TrinityResource
             search = $"%{searchStrings[0]!.ToLower()}%";
         }
 
-        var query = (FluentQueryBuilder)ConnectionFactory().FluentQueryBuilder();
+        var offset = 1;
+        if (Request.Query.TryGetValue("offset", out var offsetStr) && !string.IsNullOrEmpty(offsetStr[0]))
+        {
+            if (int.TryParse(offsetStr[0], out offset)) offset = 1;
+        }
 
+        string? value = null;
+        if (Request.Query.TryGetValue("value", out var valueStr) && !string.IsNullOrEmpty(valueStr[0]))
+        {
+            value = valueStr[0];
+        }
         // query.From($"{Table!.Split('.').Last():raw}");
 
-        var res = await field.RelationshipQuery(query, search);
+        var res = await field.RelationshipQuery(ConnectionFactory(), value, offset, search);
 
         return new OkObjectResult(res);
     }
@@ -381,9 +390,11 @@ public abstract class TrinityResource
             var field = (IBaseField)_fields[form.ElementAt(i).Key];
             if (field.ColumnName == PrimaryKeyColumn) continue;
 
-            field.Fill(ref form);
-            record[field.ColumnName] = form[field.ColumnName];
-            cmd.Append($@"{field.ColumnName:raw} = {form[field.ColumnName]}");
+            field.Fill(ref form, record);
+            if (field is IHasRelationshipField relationshipField)
+                cmd.Append($@"{relationshipField.ForeignColumn.Split('.').Last():raw} = {form[field.ColumnName]}");
+            else
+                cmd.Append($@"{field.ColumnName:raw} = {form[field.ColumnName]}");
             if (i < form.Count - 1)
                 cmd.Append($",");
         }
@@ -401,7 +412,7 @@ public abstract class TrinityResource
             TrinityNotifications.NotifyError("Something went wrong while updating the record!");
         }
 
-        return record;
+        return await GetEditData();
     }
 
     public async Task<object?> Delete()

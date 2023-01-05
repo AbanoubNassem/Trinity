@@ -1,5 +1,3 @@
-using AbanoubNassem.Trinity.Components;
-
 namespace AbanoubNassem.Trinity.Fields;
 
 public class MultipleSelectField<T> : SelectField<T[]?>
@@ -17,10 +15,10 @@ public class MultipleSelectField<T> : SelectField<T[]?>
     }
 
 
-    public override void Fill(ref IDictionary<string, object?> record)
+    public override void Fill(ref IDictionary<string, object?> form, in IDictionary<string, object?>? record = null)
     {
-        if (!record.ContainsKey(ColumnName)) return;
+        if (!form.ContainsKey(ColumnName)) return;
 
-        record[ColumnName] = string.Join(",", ((T[]?)record[ColumnName]!));
+        form[ColumnName] = string.Join(",", (T[]?)form[ColumnName]!);
     }
 }

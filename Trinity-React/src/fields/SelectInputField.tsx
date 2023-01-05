@@ -30,21 +30,22 @@ const SelectInputField = (props: SelectFieldProps) => {
                 : formData[component.columnName]
             : formData[component.columnName].toString());
     const [value, setValue] = useState(getValue());
-    const getItems = () => (!!props.options?.length ? props.options : !!component.options?.length ? component.options : EMPTY);
-    const [options, setOptions] = useState(getItems);
+    const getOptions = () => ((!!props.options?.length ? props.options : !!component.options?.length) ? component.options : EMPTY);
+    const [options, setOptions] = useState(getOptions);
 
     useEffect(() => {
         if (props.value) {
             loadItems({} as any).then(() => {});
             // setValue(getValue());
         }
-        setOptions(getItems());
+        setOptions(getOptions());
         setFieldValue(component.columnName, getValue());
     }, [props.options]);
-    const loadItems = async (e: VirtualScrollerLazyParams & { filter: string }) => {
+    const loadItems = async (e: VirtualScrollerLazyParams & { filter: string; value: any }) => {
         if (fetching || !search) return;
         setFetching(true);
-        const res = await search(e);
+        const res = await search({ ...e, ...{ value: getValue() } });
+        //TODO:: fix lazy loading !?
         setOptions(!!res.length ? res : EMPTY);
         setFetching(false);
     };
@@ -80,7 +81,8 @@ const SelectInputField = (props: SelectFieldProps) => {
             lazy: lazy,
             loading: fetching,
             showLoader: true,
-            itemSize: options.length,
+            itemSize: 38,
+            scrollHeight: `${(options.length + 1) * 38}px`,
             items: options,
             delay: 250,
             loadingTemplate: (options: any) => (
