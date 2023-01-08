@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { classNames } from 'primereact/utils';
-import LayoutProps from '@/Types/Props/LayoutProps';
-import BaseLayout from '@/Types/Models/BaseLayout';
 import { AppContext } from '@/contexts/AppContext';
 import { Fieldset } from 'primereact/fieldset';
+import LayoutProps from '@/types/Props/Layouts/LayoutProps';
+import BaseLayout from '@/types/Models/Layouts/BaseLayout';
 
 const FieldsetLayout = ({ component, formData, setFieldValue, errors }: LayoutProps<BaseLayout>) => {
     const { components } = useContext(AppContext);

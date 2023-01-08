@@ -132,7 +132,7 @@ public class TrinityController : Controller
         switch (Request.Method)
         {
             case "GET" when view == "index":
-                responseData.Data = await resource.GetIndexData();
+                responseData.Data = await resource.GetTableData();
                 break;
             case "GET" when view == "edit":
                 responseData.Data = await resource.GetEditData();

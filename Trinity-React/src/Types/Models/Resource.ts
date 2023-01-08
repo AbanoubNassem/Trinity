@@ -1,4 +1,5 @@
-import type BaseComponent from '@/Types/Models/BaseComponent';
+import BaseComponent from '@/types/Models/BaseComponent';
+import BaseColumn from '@/types/Models/Columns/BaseColumn';
 
 export default interface Resource {
     name: string;
@@ -8,5 +9,6 @@ export default interface Resource {
     icon: string;
     showGridlines: boolean;
     stripedRows: boolean;
-    schema: Array<BaseComponent>;
+    schema?: Array<BaseComponent>;
+    columns?: Array<BaseColumn>;
 }

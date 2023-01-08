@@ -1,6 +1,4 @@
 import React, { RefObject, useRef } from 'react';
-import type Configs from '@/Types/Models/Configs';
-import type Resource from '@/Types/Models/Resource';
 import * as Inertia from '@inertiajs/inertia';
 import { InertiaProgress } from '@inertiajs/progress';
 import GridLayout from '@/layouts/GridLayout';
@@ -15,11 +13,16 @@ import DateTimeField from '@/fields/DateTimeField';
 import NumberField from '@/fields/NumberField';
 import { Toast } from 'primereact/toast';
 import SwitchInputField from '@/fields/SwitchInputField';
+import TextColumn from '@/columns/TextColumn';
+import Configs from "@/types/Models/Configs";
+import Resource from "@/types/Models/Resource";
+
 
 export const AppContext = React.createContext<{
     configs?: Configs;
     resources?: Array<Resource>;
     components?: Map<string, (props: any) => React.ReactNode>;
+    columns?: Map<string, (props: any) => React.ReactNode>;
     toast?: RefObject<Toast>;
 }>({});
 
@@ -41,12 +44,15 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['SwitchInputField', (props) => <SwitchInputField {...props} />]
     ]);
 
+    const columns = new Map<string, (props: any) => React.ReactNode>([['TextColumn', (props) => <TextColumn {...props} />]]);
+
     const toast = useRef<Toast>(null);
 
     let value = {
         configs,
         resources,
         components,
+        columns,
         toast: toast
     };
 

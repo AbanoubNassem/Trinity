@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
 import { DataTable, DataTableFilterMeta, DataTablePFSEvent, DataTableSortMeta, DataTableSortParams } from 'primereact/datatable';
-import IPaginator from '@/Types/Models/Paginator';
 import { useConfigs } from '@/hooks/trinity_configs';
-import { useTrinityFields } from '@/hooks/trinity_resource_fields';
 import { Column } from 'primereact/column';
 import { Inertia } from '@inertiajs/inertia';
 import { Skeleton } from 'primereact/skeleton';
@@ -15,11 +13,15 @@ import { useUrlParams } from '@/hooks/trinity_url_params';
 import { FilterMatchMode } from 'primereact/api';
 import { MultiSelect } from 'primereact/multiselect';
 import { trinityLink } from '@/utilities/trinity_link';
+import { AppContext } from '@/contexts/AppContext';
+import BaseColumnComponent from '@/columns/BaseColumnComponent';
+import IPaginator from '@/types/Models/Paginator';
 
 const Table = () => {
+    const { columns: columnsComponents } = useContext(AppContext);
     const configs = useConfigs();
     const { resource, data: paginator } = usePageProps<IPaginator<any>>();
-    const fields = useTrinityFields();
+    const resourceColumns = resource?.columns ?? [];
     const urlParams = useUrlParams();
     const [loading, setLoading] = useState(false);
     const dtRef = useRef<DataTable>(null);
@@ -28,33 +30,33 @@ const Table = () => {
     const toggleableMultiSelect = useRef<MultiSelect>(null);
     const [selectedItems, setSelectedItems] = useState(null);
 
-    const items = Array<any>();
-    for (const it of paginator?.data ?? []) {
-        let item = {} as any;
-        for (const field of fields) {
-            if (field.relationshipName) {
-                const relations = field.relationshipName.split('.');
-                let record = it;
-
-                for (let i = 0; i < relations.length; i++) {
-                    if (record === null) continue;
-                    record = record[relations[i]];
-                }
-
-                item[field.columnName] = record !== null ? record[field.title] : null;
-            } else {
-                item[field.columnName] = it[field.columnName];
-            }
-        }
-        item[resource?.primaryKeyColumn!] = it[resource?.primaryKeyColumn!];
-        items.push(item);
-    }
+    // const items = Array<any>();
+    // for (const it of paginator?.data ?? []) {
+    //     let item = {} as any;
+    //     for (const col of resourceColumns) {
+    //         if (col.relationshipName) {
+    //             const relations = col.relationshipName.split('.');
+    //             let record = it;
+    //
+    //             for (let i = 0; i < relations.length; i++) {
+    //                 if (record === null) continue;
+    //                 record = record[relations[i]];
+    //             }
+    //             item[col.columnName] = record !== null ? record[col.title] : null;
+    //         } else {
+    //             item[col.columnName] = it[col.columnName];
+    //         }
+    //     }
+    //     item[resource?.primaryKeyColumn!] = it[resource?.primaryKeyColumn!];
+    //     items.push(item);
+    // }
+    // console.log(items);
 
     useEffect(() => {
         if (globalSearchInput.current && !loading) globalSearchInput.current.value = urlParams.globalSearch;
     }, [loading, paginator]);
 
-    const toggleableColumns = fields.flatMap((f) => {
+    const toggleableColumns = resourceColumns.flatMap((f) => {
         if (f.toggleable) {
             return {
                 field: f.columnName,
@@ -68,7 +70,7 @@ const Table = () => {
 
     const [selectedColumns, setSelectedColumns] = useState(toggleableColumns.filter((col) => !col.isToggledHiddenByDefault));
 
-    const columns = fields.filter((f) => !f.toggleable || selectedColumns.find((el) => el.field === f.columnName));
+    const columns = resourceColumns.filter((f) => !f.toggleable || selectedColumns.find((el) => el.field === f.columnName));
 
     let tableEvent: DataTablePFSEvent | any = undefined;
     const onTableEvent = (e: DataTableSortParams) => {
@@ -88,7 +90,7 @@ const Table = () => {
 
     let filters: DataTableFilterMeta = {};
     const urlFilters = JSON.parse(urlParams.columnsSearch) ?? {};
-    fields.forEach((field) => {
+    resourceColumns.forEach((field) => {
         if (field.searchable && !field.isGloballySearchable)
             filters[field.columnName] = {
                 value: urlFilters[field.columnName],
@@ -146,7 +148,7 @@ const Table = () => {
         fetchTable();
     }
 
-    let exportableFields = fields.filter((f) => f.exportable);
+    let exportableFields = resourceColumns.filter((f) => f.exportable);
     const exportCSV = (event: any) => {
         dtRef.current?.exportCSV(event);
     };
@@ -278,7 +280,7 @@ const Table = () => {
                 showGridlines={resource?.showGridlines}
                 stripedRows={resource?.stripedRows}
                 totalRecords={paginator?.totalCount}
-                value={items}
+                value={paginator?.data}
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
                 filterDisplay="row"
                 globalFilter={'contains'}
@@ -296,24 +298,46 @@ const Table = () => {
                     style={{ width: '3rem' }}
                     filter={false}
                 />
-                {columns.map((field) => {
-                    const body = (data: any) => (loading ? <Skeleton /> : <div>{data[field.columnName]}</div>);
+                {columns.map((column) => {
+                    const body = (data: any) => {
+                        return loading ? (
+                            <Skeleton />
+                        ) : (
+                            <BaseColumnComponent
+                                column={column}
+                                columnValue={data[column.columnName]}
+                                record={data}
+                            >
+                                {columnsComponents?.has(column.componentName) ? (
+                                    columnsComponents?.get(column.componentName)!({
+                                        column,
+                                        columnValue: data[column.columnName],
+                                        record: data
+                                    })
+                                ) : (
+                                    <div>{data[column.columnName] ?? data['defaultValue']}</div>
+                                )}
+                            </BaseColumnComponent>
+                        );
+                    };
+
                     return (
                         <Column
-                            key={field.columnName}
+                            key={column.columnName}
                             body={body}
-                            field={field.columnName}
-                            header={field.label}
-                            sortable={field.sortable}
+                            field={column.columnName}
+                            header={column.label}
+                            sortable={column.sortable}
                             showFilterMenu={false}
                             showFilterMatchModes={false}
                             showFilterOperator={false}
                             showClearButton
                             filterMatchMode={'contains'}
-                            excludeGlobalFilter={!field.isGloballySearchable}
-                            filter={field.searchable && !field.isGloballySearchable}
-                            filterPlaceholder={field.searchPlaceholder ?? `Search by ${field.label}`}
-                            exportable={field.exportable}
+                            excludeGlobalFilter={!column.isGloballySearchable}
+                            filter={column.searchable && !column.isGloballySearchable}
+                            filterPlaceholder={column.searchPlaceholder ?? `Search by ${column.label}`}
+                            exportable={column.exportable}
+                            hidden={column.hidden}
                         />
                     );
                 })}
@@ -326,5 +350,4 @@ const Table = () => {
         </>
     );
 };
-
 export default Table;

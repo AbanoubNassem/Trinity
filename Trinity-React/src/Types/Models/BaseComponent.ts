@@ -5,4 +5,7 @@ export default interface BaseComponent {
     columnSpan: number;
     toggleable: boolean;
     isToggledHiddenByDefault: boolean;
+    hidden: boolean;
+    visible: boolean;
+    tooltip?: string;
 }

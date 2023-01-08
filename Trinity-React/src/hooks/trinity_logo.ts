@@ -1,5 +1,5 @@
 import { useConfigs } from '@/hooks/trinity_configs';
-import { ThemeMode } from '@/Types/Models/Configs';
+import { ThemeMode } from '@/types/Models/Configs';
 
 export function useLogo() {
     const configs = useConfigs();

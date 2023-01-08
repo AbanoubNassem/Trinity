@@ -1,4 +1,5 @@
 using AbanoubNassem.Trinity.Components;
+using AbanoubNassem.Trinity.Components.BaseLayout;
 
 namespace AbanoubNassem.Trinity.Layouts;
 

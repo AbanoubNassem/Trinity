@@ -2,9 +2,10 @@ using System.Data;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components;
+using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.BaseLayout;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Extensions;
-using AbanoubNassem.Trinity.Fields;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Utilities;
 using AbanoubNassem.Trinity.Validators;
@@ -17,7 +18,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Resources;
 
-public abstract class TrinityResource
+public abstract partial class TrinityResource
 {
     protected TrinityConfigurations Configurations { get; init; } = null!;
 
@@ -162,18 +163,18 @@ public abstract class TrinityResource
             {
                 field.SelectQuery(query);
 
-                if (globalSearch != null && field.IsGloballySearchable)
-                {
-                    field.FilterQuery(countFilters, globalSearch);
-                    field.FilterQuery(filters, globalSearch);
-                }
-                else if (requestFilters != null && requestFilters.ContainsKey(field.ColumnName))
-                {
-                    var search = $@"%{requestFilters[field.ColumnName].ToLower()}%";
-
-                    field.FilterQuery(countFilters, search);
-                    field.FilterQuery(filters, search);
-                }
+                // if (globalSearch != null && field.IsGloballySearchable)
+                // {
+                //     field.FilterQuery(countFilters, globalSearch);
+                //     field.FilterQuery(filters, globalSearch);
+                // }
+                // else if (requestFilters != null && requestFilters.ContainsKey(field.ColumnName))
+                // {
+                //     var search = $@"%{requestFilters[field.ColumnName].ToLower()}%";
+                //
+                //     field.FilterQuery(countFilters, search);
+                //     field.FilterQuery(filters, search);
+                // }
             }
 
             if (filters.Any())
@@ -186,7 +187,7 @@ public abstract class TrinityResource
             {
                 foreach (var sort in sorts)
                 {
-                    if (!Fields.TryGetValue(sort.Field, out var field) || field is IHasRelationshipField) continue;
+                    if (!Fields.TryGetValue(sort.Field, out var field) || field is IHasRelationship) continue;
 
                     var direction = sort.Order == 1 ? "ASC" : "DESC";
 
@@ -204,7 +205,7 @@ public abstract class TrinityResource
             {
                 foreach (IBaseField filed in Fields.Values)
                 {
-                    if (filed is not IHasRelationshipField field) continue;
+                    if (filed is not IHasRelationship field) continue;
                     result = await field.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result,
                         sorts?.SingleOrDefault(x => x.Field == field.ColumnName)
                     );
@@ -243,7 +244,7 @@ public abstract class TrinityResource
             !Fields.TryGetValue(columnName.ToString(), out var objField))
             return new BadRequestResult();
 
-        var field = (IHasRelationshipField)objField;
+        var field = (IHasRelationship)objField;
 
         string? search = null;
         if (Request.Query.TryGetValue("search", out var searchStrings) && !string.IsNullOrEmpty(searchStrings[0]))
@@ -352,7 +353,7 @@ public abstract class TrinityResource
 
         foreach (IBaseField filed in Fields.Values)
         {
-            if (filed is not IHasRelationshipField field) continue;
+            if (filed is not IHasRelationship field) continue;
             record = (await field.RunRelationQuery((FluentQueryBuilder)ConnectionFactory().FluentQueryBuilder(),
                 new List<IDictionary<string, object?>>() { record! })).Last()!;
         }
@@ -391,7 +392,7 @@ public abstract class TrinityResource
             if (field.ColumnName == PrimaryKeyColumn) continue;
 
             field.Fill(ref form, record);
-            if (field is IHasRelationshipField relationshipField)
+            if (field is IHasRelationship relationshipField)
                 cmd.Append($@"{relationshipField.ForeignColumn.Split('.').Last():raw} = {form[field.ColumnName]}");
             else
                 cmd.Append($@"{field.ColumnName:raw} = {form[field.ColumnName]}");

@@ -74,7 +74,7 @@ const Edit = () => {
                 <h5 className="mb-6">Create {resource?.pluralLabel}</h5>
 
                 <form className="p-fluid formgrid grid col-12">
-                    {resource?.schema.map((component, index) =>
+                    {resource?.schema?.map((component, index) =>
                         components?.has(component.componentName) ? (
                             components?.get(component.componentName)!({
                                 key: `form_${index}_${component.componentName}`,

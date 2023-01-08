@@ -1,7 +1,7 @@
 import usePageProps from '@/hooks/trinity_page_props';
-import BaseField from '@/Types/Models/BaseField';
-import BaseComponent from '@/Types/Models/BaseComponent';
-import BaseLayout from '@/Types/Models/BaseLayout';
+import BaseField from '@/types/Models/Fields/BaseField';
+import BaseComponent from '@/types/Models/BaseComponent';
+import BaseLayout from '@/types/Models/Layouts/BaseLayout';
 
 export function useTrinityFields() {
     const pageProps = usePageProps();

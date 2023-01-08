@@ -1,24 +1,13 @@
 using System.Data;
 using AbanoubNassem.Trinity.Components;
+using AbanoubNassem.Trinity.Components.BaseField;
 using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
 using Humanizer;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public interface IHasRelationshipField : IBaseField
-{
-    public Task<List<IDictionary<string, object?>>> RunRelationQuery(FluentQueryBuilder query,
-        List<IDictionary<string, object?>> list, Sort? sort = null);
-
-    public Task<List<KeyValuePair<string, string>>> RelationshipQuery(IDbConnection connection, string? value,
-        int offset, string? search = null);
-
-    public string ForeignTable { get; protected set; }
-    public string ForeignColumn { get; protected set; }
-}
-
-public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T>, T>, IHasRelationshipField
+public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T>, T>, IHasRelationship
 {
     protected HasRelationshipField(string columnName, string? foreignColumn = null, string? foreignTable = null) :
         base(columnName)
@@ -47,7 +36,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
         return Task.FromResult(new List<KeyValuePair<string, string>>());
     }
 
-    public string RelationshipName { get; protected set; }
+    public string RelationshipName { get; set; }
 
     public HasRelationshipField<T> SetRelationshipName(string value)
     {

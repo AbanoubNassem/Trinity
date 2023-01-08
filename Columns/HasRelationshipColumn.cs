@@ -1,0 +1,75 @@
+using System.Data;
+using AbanoubNassem.Trinity.Components;
+using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.RequestHelpers;
+using DapperQueryBuilder;
+using Humanizer;
+
+namespace AbanoubNassem.Trinity.Columns;
+
+public abstract class HasRelationshipColumn<T> : BaseColumn<HasRelationshipColumn<T>, T>, IHasRelationship
+{
+    protected HasRelationshipColumn(string columnName, string? foreignColumn = null, string? foreignTable = null) :
+        base(columnName)
+    {
+        ForeignColumn = foreignColumn ?? columnName;
+        ForeignTable = foreignTable ?? ForeignColumn.Titleize().Split(' ').First().ToLower().Pluralize();
+        RelationshipName = ForeignTable.Singularize().Camelize();
+    }
+
+    public abstract Task<List<IDictionary<string, object?>>> RunRelationQuery(FluentQueryBuilder query,
+        List<IDictionary<string, object?>> list, Sort? sort = null);
+
+    public override void SelectQuery(FluentQueryBuilder query)
+    {
+        query.Select($"t.{ColumnName.Split('.')[0]:raw}");
+    }
+
+    public override void Search(FluentQueryBuilder query, string globalSearch)
+    {
+    }
+
+    public virtual Task<List<KeyValuePair<string, string>>> RelationshipQuery(IDbConnection connection, string? value,
+        int offset,
+        string? search = null)
+    {
+        return Task.FromResult(new List<KeyValuePair<string, string>>());
+    }
+
+    public string RelationshipName { get; set; }
+
+    public HasRelationshipColumn<T> SetRelationshipName(string value)
+    {
+        RelationshipName = value;
+        return this;
+    }
+
+    public string ForeignTable { get; set; }
+
+    public HasRelationshipColumn<T> SetForeignTable(string value)
+    {
+        ForeignTable = value;
+        return this;
+    }
+
+    public string ForeignColumn { get; set; }
+
+    public HasRelationshipColumn<T> SetForeignColumn(string value)
+    {
+        ForeignColumn = value;
+        return this;
+    }
+
+
+    public bool Lazy { get; protected set; }
+
+    public int LazyItemsCount { get; protected set; } = 10;
+
+    public HasRelationshipColumn<T> SetAsLazy(bool lazy = true, int lazyItemsCount = 10)
+    {
+        Lazy = lazy;
+        LazyItemsCount = lazyItemsCount;
+        return this;
+    }
+}

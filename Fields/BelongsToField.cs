@@ -6,9 +6,11 @@ using Filter = DapperQueryBuilder.Filter;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class BelongsToField : HasRelationshipField<string>
+public class BelongsToField : HasRelationshipField<BelongsToField>
 {
     public override string ComponentName => "BelongsToField";
+
+    public override string Type => "Field";
 
     public BelongsToField(string localColumnNames, string relationTables, string foreignColumnNames,
         string relationshipName, string relationSelectColumn)
@@ -215,21 +217,5 @@ public class BelongsToField : HasRelationshipField<string>
                 new KeyValuePair<string, string>(x[ForeignColumn.Split('.').Last()]!.ToString()!,
                     x[Title]!.ToString()!))
             .ToList();
-    }
-
-    public override void Fill(ref IDictionary<string, object?> form, in IDictionary<string, object?>? record = null)
-    {
-        if (FillUsing != null || FillUsingProperty != null || FillUsingProperties != null)
-        {
-            base.Fill(ref form, in record);
-            return;
-        }
-
-        var foreignColumns = ForeignColumn.Split('.');
-
-        if (foreignColumns.Length <= 1) return;
-
-
-        var relationshipNames = RelationshipName.Split('.');
     }
 }
