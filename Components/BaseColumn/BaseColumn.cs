@@ -136,27 +136,4 @@ public abstract partial class BaseColumn<T, TDeserialization> : BaseComponent<T,
         return (this as T)!;
     }
 
-    public string? Size { get; protected set; }
-
-    public T SetSize(string size)
-    {
-        Size = size;
-        return (this as T)!;
-    }
-
-    public string? Weight { get; protected set; }
-
-    public T SetWeight(string weight)
-    {
-        Weight = weight;
-        return (this as T)!;
-    }
-
-    public string? FontFamily { get; protected set; }
-
-    public T SetFontFamily(string fontFamily)
-    {
-        FontFamily = fontFamily;
-        return (this as T)!;
-    }
 }

@@ -16,6 +16,7 @@ import SwitchInputField from '@/fields/SwitchInputField';
 import TextColumn from '@/columns/TextColumn';
 import Configs from "@/types/Models/Configs";
 import Resource from "@/types/Models/Resource";
+import IconColumn from "@/columns/IconColumn";
 
 
 export const AppContext = React.createContext<{
@@ -44,7 +45,10 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['SwitchInputField', (props) => <SwitchInputField {...props} />]
     ]);
 
-    const columns = new Map<string, (props: any) => React.ReactNode>([['TextColumn', (props) => <TextColumn {...props} />]]);
+    const columns = new Map<string, (props: any) => React.ReactNode>([
+        ['TextColumn', (props) => <TextColumn {...props} />],
+        ['IconColumn', (props) => <IconColumn {...props} />],
+    ]);
 
     const toast = useRef<Toast>(null);
 
