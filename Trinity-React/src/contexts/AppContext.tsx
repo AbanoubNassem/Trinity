@@ -18,6 +18,7 @@ import Configs from '@/types/Models/Configs';
 import Resource from '@/types/Models/Resource';
 import IconColumn from '@/columns/IconColumn';
 import BadgeColumn from '@/columns/BadgeColumn';
+import ImageColumn from '@/columns/ImageColumn';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
@@ -48,7 +49,8 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
     const columns = new Map<string, (props: any) => React.ReactNode>([
         ['TextColumn', (props) => <TextColumn {...props} />],
         ['IconColumn', (props) => <IconColumn {...props} />],
-        ['BadgeColumn', (props) => <BadgeColumn {...props} />]
+        ['BadgeColumn', (props) => <BadgeColumn {...props} />],
+        ['ImageColumn', (props) => <ImageColumn {...props} />]
     ]);
 
     const toast = useRef<Toast>(null);
