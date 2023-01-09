@@ -13,7 +13,8 @@ const IconColumn = ({ column, columnValue }: ColumnProps<IconColumn>) => {
                     { [`${column.trueIcon ?? 'pi pi-check-circle'}`]: isTrue },
                     { [`text-${column.trueColor ?? 'green'}-600`]: isTrue },
                     { [`${column.falseIcon ?? 'pi pi-times-circle'}`]: isFalse },
-                    { [`text-${column.falseColor ?? 'red'}-600`]: isFalse }
+                    { [`text-${column.falseColor ?? 'red'}-600`]: isFalse },
+                    { [`text-${column.size}`]: column.size }
                 )}
             />
         );

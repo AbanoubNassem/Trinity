@@ -66,11 +66,11 @@ public abstract class BaseComponent<T, TDeserialization> : IBaseComponent where 
         return (this as T)!;
     }
     
-    public string? ToolTip { get; protected set; }
+    public string? Tooltip { get; protected set; }
 
-    public T SetToolTip(string toolTip)
+    public T SetTooltip(string toolTip)
     {
-        ToolTip = toolTip;
+        Tooltip = toolTip;
         return (this as T)!;
     }
 }

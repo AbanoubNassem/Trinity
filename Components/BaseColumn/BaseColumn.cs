@@ -95,9 +95,9 @@ public abstract partial class BaseColumn<T, TDeserialization> : BaseComponent<T,
 
     protected CallbackWithRecord<string>? TooltipCallback { get; set; }
 
-    public T SetToolTip(CallbackWithRecord<string> toolTipCallback)
+    public T SetTooltip(CallbackWithRecord<string> tooltipCallback)
     {
-        TooltipCallback = toolTipCallback;
+        TooltipCallback = tooltipCallback;
         return (this as T)!;
     }
 

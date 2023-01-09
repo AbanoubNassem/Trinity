@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components.BaseColumn;
 
 namespace AbanoubNassem.Trinity.Columns;
@@ -7,6 +6,7 @@ public class IconColumn<T> : BaseColumn<IconColumn<T>, T>
 {
     public IconColumn(string columnName) : base(columnName)
     {
+        SetSize(SizeTypes.Lg);
     }
 
     public override string ComponentName => "IconColumn";
