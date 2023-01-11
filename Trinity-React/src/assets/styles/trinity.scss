@@ -36,3 +36,12 @@
 //  align-items: center;
 //  display: flex;
 //}
+
+.badge-column {
+  min-width: 4rem;
+  font-size: 0.95rem;
+
+  .p-tag-icon {
+    font-size: 0.90rem;
+  }
+}

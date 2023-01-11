@@ -4,14 +4,14 @@ namespace AbanoubNassem.Trinity.Components.BaseColumn;
 
 public abstract partial class BaseColumn<T, TDeserialization>
 {
-    protected QueryCallbackWithString? SearchCallback { get; set; }
+    protected FiltersCallback? SearchCallback { get; set; }
 
     public bool Searchable { get; protected set; }
 
     public bool IsGloballySearchable { get; set; }
 
     public T SetAsSearchable(bool searchable = true, bool globallySearchable = true,
-        QueryCallbackWithString? searchCallback = null)
+        FiltersCallback? searchCallback = null)
     {
         Searchable = searchable;
         IsGloballySearchable = globallySearchable;
@@ -19,16 +19,17 @@ public abstract partial class BaseColumn<T, TDeserialization>
         return (this as T)!;
     }
 
-    public virtual void Search(FluentQueryBuilder query, string search)
+    public virtual void Filter(Filters filters, string search)
     {
         if (SearchCallback != null)
         {
-            SearchCallback.Invoke(query, search);
+            SearchCallback.Invoke(filters, search);
             return;
         }
 
         var s = $"%{search.ToLower()}%";
-        var filters = new Filters(Filters.FiltersType.OR) { new Filter($@"LOWER(t.{ColumnName:raw}) LIKE {s}") };
-        query.Where(filters);
+        // var filters = new Filters(Filters.FiltersType.OR) { new Filter($@"LOWER(t.{ColumnName:raw}) LIKE {s}") };
+        // query.Where(filters);
+        filters.Add(new Filter($@"LOWER(t.{ColumnName:raw}) LIKE {s}"));
     }
 }

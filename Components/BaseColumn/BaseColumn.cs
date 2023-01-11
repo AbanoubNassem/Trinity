@@ -8,7 +8,7 @@ public interface IBaseColumn : IBaseComponent
     public string ColumnName { get; set; }
     bool IsGloballySearchable { get; set; }
     void SelectQuery(FluentQueryBuilder query);
-    void Search(FluentQueryBuilder query, string globalSearch);
+    void Filter(Filters filters, string globalSearch);
     void Format(IDictionary<string, object?> record);
     void Sort(FluentQueryBuilder query, string direction);
 }
@@ -26,6 +26,8 @@ public abstract partial class BaseColumn<T, TDeserialization> : BaseComponent<T,
     }
 
     public delegate void QueryCallbackWithString(FluentQueryBuilder query, string str);
+    
+    public delegate void FiltersCallback(Filters filters, string str);
 
     public delegate TCallBack CallbackWithRecord<out TCallBack>(IDictionary<string, object?> record);
 
@@ -135,5 +137,4 @@ public abstract partial class BaseColumn<T, TDeserialization> : BaseComponent<T,
         IconPosition = iconPosition;
         return (this as T)!;
     }
-
 }

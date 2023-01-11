@@ -19,6 +19,8 @@ import Resource from '@/types/Models/Resource';
 import IconColumn from '@/columns/IconColumn';
 import BadgeColumn from '@/columns/BadgeColumn';
 import ImageColumn from '@/columns/ImageColumn';
+import ColorColumn from '@/columns/ColorColumn';
+import BelongsToColumn from '@/columns/BelongsToColumn';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
@@ -50,7 +52,9 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['TextColumn', (props) => <TextColumn {...props} />],
         ['IconColumn', (props) => <IconColumn {...props} />],
         ['BadgeColumn', (props) => <BadgeColumn {...props} />],
-        ['ImageColumn', (props) => <ImageColumn {...props} />]
+        ['ImageColumn', (props) => <ImageColumn {...props} />],
+        ['ColorColumn', (props) => <ColorColumn {...props} />],
+        ['BelongsToColumn', (props) => <BelongsToColumn {...props} />]
     ]);
 
     const toast = useRef<Toast>(null);

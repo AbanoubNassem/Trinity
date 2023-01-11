@@ -1,15 +1,13 @@
 using System.Data;
-using AbanoubNassem.Trinity.Components;
-using AbanoubNassem.Trinity.Components.BaseField;
 using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
 using Humanizer;
 
-namespace AbanoubNassem.Trinity.Fields;
+namespace AbanoubNassem.Trinity.Components.BaseColumn;
 
-public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T>, T>, IHasRelationship
+public abstract class BaseHasRelationshipColumn<T> : BaseColumn<BaseHasRelationshipColumn<T>, T>, IHasRelationship
 {
-    protected HasRelationshipField(string columnName, string? foreignColumn = null, string? foreignTable = null) :
+    protected BaseHasRelationshipColumn(string columnName, string? foreignColumn = null, string? foreignTable = null) :
         base(columnName)
     {
         ForeignColumn = foreignColumn ?? columnName;
@@ -25,7 +23,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
         query.Select($"t.{ColumnName.Split('.')[0]:raw}");
     }
 
-    public override void FilterQuery(Filters filters, string globalSearch)
+    public override void Filter(Filters filters, string globalSearch)
     {
     }
 
@@ -38,7 +36,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
 
     public string RelationshipName { get; set; }
 
-    public HasRelationshipField<T> SetRelationshipName(string value)
+    public BaseHasRelationshipColumn<T> SetRelationshipName(string value)
     {
         RelationshipName = value;
         return this;
@@ -46,7 +44,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
 
     public string ForeignTable { get; set; }
 
-    public HasRelationshipField<T> SetForeignTable(string value)
+    public BaseHasRelationshipColumn<T> SetForeignTable(string value)
     {
         ForeignTable = value;
         return this;
@@ -54,7 +52,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
 
     public string ForeignColumn { get; set; }
 
-    public HasRelationshipField<T> SetForeignColumn(string value)
+    public BaseHasRelationshipColumn<T> SetForeignColumn(string value)
     {
         ForeignColumn = value;
         return this;
@@ -65,7 +63,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
 
     public int LazyItemsCount { get; protected set; } = 10;
 
-    public HasRelationshipField<T> SetAsLazy(bool lazy = true, int lazyItemsCount = 10)
+    public BaseHasRelationshipColumn<T> SetAsLazy(bool lazy = true, int lazyItemsCount = 10)
     {
         Lazy = lazy;
         LazyItemsCount = lazyItemsCount;

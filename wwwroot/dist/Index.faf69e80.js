@@ -1,6 +1,6 @@
-import { j as t, c as ie, T as ae, F as T, r as m, A as le, u as se, a as _, y as M, k as ne, R as k, B as b, x as re, z as oe, S as L, d as me, H as ce } from "./main.de00ce70.js";
-import { t as O, T as ue } from "./trinity_link.df74fdf7.js";
-import { D as be, C as R } from "./column.esm.a08ab889.js";
+import { j as t, c as ie, T as ae, F as p, r as m, A as le, u as se, a as _, y as M, k as ne, R as k, B as N, x as re, z as oe, S as L, d as me, H as ce } from "./main.c1f91949.js";
+import { t as O, T as ue } from "./trinity_link.acbe24b5.js";
+import { D as be, C as R } from "./column.esm.f890e459.js";
 function Ne() {
   return new Proxy(new URLSearchParams(window.location.search), {
     get(i, s) {
@@ -8,8 +8,9 @@ function Ne() {
     }
   });
 }
-const Te = ({ column: i, record: s, children: a }) => {
-  var l;
+const Te = ({ column: i, record: s, children: a, resource: l }) => {
+  var T;
+  const u = `${i.columnName}_${s[l.primaryKeyColumn]}_tooltip`;
   return /* @__PURE__ */ t("div", {
     ...s[`${i.columnName}_extraAttributes`],
     className: ie(s[`${i.columnName}_extraAttributes`] && "className" in s[`${i.columnName}_extraAttributes`] ? s[`${i.columnName}_extraAttributes`].className : "", {
@@ -18,15 +19,15 @@ const Te = ({ column: i, record: s, children: a }) => {
     style: { fontFamily: i.fontFamily },
     children: [
       (s[`${i.columnName}_tooltip`] || i.tooltip) && /* @__PURE__ */ t(ae, {
-        target: `.${i.columnName}_tooltip`
+        target: `#${u}`
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-        lineNumber: 16,
+        lineNumber: 18,
         columnNumber: 76
       }, globalThis),
       /* @__PURE__ */ t("div", {
-        className: `${i.columnName}_tooltip`,
-        "data-pr-tooltip": (l = s[`${i.columnName}_tooltip`]) != null ? l : i.tooltip,
+        id: u,
+        "data-pr-tooltip": (T = s[`${i.columnName}_tooltip`]) != null ? T : i.tooltip,
         "data-pr-position": "top",
         children: [
           i.descriptionPosition === "above" ? /* @__PURE__ */ t("div", {
@@ -35,16 +36,16 @@ const Te = ({ column: i, record: s, children: a }) => {
               children: i.description
             }, void 0, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-              lineNumber: 25,
+              lineNumber: 27,
               columnNumber: 25
             }, globalThis)
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-            lineNumber: 24,
+            lineNumber: 26,
             columnNumber: 21
-          }, globalThis) : /* @__PURE__ */ t(T, {}, void 0, !1, {
+          }, globalThis) : /* @__PURE__ */ t(p, {}, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-            lineNumber: 28,
+            lineNumber: 30,
             columnNumber: 21
           }, globalThis),
           /* @__PURE__ */ t("div", {
@@ -54,7 +55,7 @@ const Te = ({ column: i, record: s, children: a }) => {
                 className: `mx-2 ${i.icon}`
               }, void 0, !1, {
                 fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-                lineNumber: 32,
+                lineNumber: 34,
                 columnNumber: 72
               }, globalThis),
               a,
@@ -62,13 +63,13 @@ const Te = ({ column: i, record: s, children: a }) => {
                 className: `mx-2 ${i.icon}`
               }, void 0, !1, {
                 fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-                lineNumber: 34,
+                lineNumber: 36,
                 columnNumber: 71
               }, globalThis)
             ]
           }, void 0, !0, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-            lineNumber: 31,
+            lineNumber: 33,
             columnNumber: 17
           }, globalThis),
           i.descriptionPosition === "bellow" ? /* @__PURE__ */ t("div", {
@@ -77,66 +78,66 @@ const Te = ({ column: i, record: s, children: a }) => {
               children: i.description
             }, void 0, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-              lineNumber: 39,
+              lineNumber: 41,
               columnNumber: 25
             }, globalThis)
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-            lineNumber: 38,
+            lineNumber: 40,
             columnNumber: 21
-          }, globalThis) : /* @__PURE__ */ t(T, {}, void 0, !1, {
+          }, globalThis) : /* @__PURE__ */ t(p, {}, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-            lineNumber: 42,
+            lineNumber: 44,
             columnNumber: 21
           }, globalThis)
         ]
       }, void 0, !0, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-        lineNumber: 18,
+        lineNumber: 20,
         columnNumber: 13
       }, globalThis)
     ]
   }, void 0, !0, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
-    lineNumber: 9,
+    lineNumber: 11,
     columnNumber: 9
   }, globalThis);
 }, de = () => {
   var w, F, B, $;
-  const { columns: i } = m.exports.useContext(le), s = se(), { resource: a, data: l } = _(), f = (w = a == null ? void 0 : a.columns) != null ? w : [], y = Ne(), [N, I] = m.exports.useState(!1), D = m.exports.useRef(null), r = m.exports.useRef(null), V = m.exports.useRef(), C = m.exports.useRef(null), [A, j] = m.exports.useState(null);
+  const { columns: i } = m.exports.useContext(le), s = se(), { resource: a, data: l } = _(), u = (w = a == null ? void 0 : a.columns) != null ? w : [], T = Ne(), [d, I] = m.exports.useState(!1), D = m.exports.useRef(null), r = m.exports.useRef(null), C = m.exports.useRef(), V = m.exports.useRef(null), [A, j] = m.exports.useState(null);
   m.exports.useEffect(() => {
-    r.current && !N && (r.current.value = y.globalSearch);
-  }, [N, l]);
-  const g = f.flatMap((e) => e.toggleable ? {
+    r.current && !d && (r.current.value = T.globalSearch);
+  }, [d, l]);
+  const g = u.flatMap((e) => e.toggleable ? {
     field: e.columnName,
     header: e.label,
     isToggledHiddenByDefault: e.isToggledHiddenByDefault
-  } : []), [W, G] = m.exports.useState(g.filter((e) => !e.isToggledHiddenByDefault)), H = f.filter((e) => !e.toggleable || W.find((c) => c.field === e.columnName));
+  } : []), [W, G] = m.exports.useState(g.filter((e) => !e.isToggledHiddenByDefault)), H = u.filter((e) => !e.toggleable || W.find((c) => c.field === e.columnName));
   let n;
   const S = (e) => {
-    n = e, h();
-  }, J = M(() => h(), 300), P = Array();
-  for (const e of (F = JSON.parse(y.sort)) != null ? F : [])
+    n = e, y();
+  }, J = M(() => y(), 300), P = Array();
+  for (const e of (F = JSON.parse(T.sort)) != null ? F : [])
     P.push({
       field: e.field,
       order: e.order
     });
-  let u = {};
-  const z = (B = JSON.parse(y.columnsSearch)) != null ? B : {};
-  f.forEach((e) => {
-    e.searchable && !e.isGloballySearchable && (u[e.columnName] = {
-      value: z[e.columnName],
+  let b = {};
+  const K = (B = JSON.parse(T.columnsSearch)) != null ? B : {};
+  u.forEach((e) => {
+    e.searchable && !e.isGloballySearchable && (b[e.columnName] = {
+      value: K[e.columnName],
       matchMode: ne.CONTAINS
     });
   });
-  const K = M((e) => {
-    u = e.filters, h();
-  }, 300), h = () => {
-    var c, d, o, p;
+  const z = M((e) => {
+    b = e.filters, y();
+  }, 300), y = () => {
+    var c, f, o, h;
     let e = {};
-    if (e.page = n === void 0 || n.page === void 0 ? (c = l == null ? void 0 : l.currentPage) != null ? c : 1 : n.page + 1, e.perPage = (o = (d = n == null ? void 0 : n.rows) != null ? d : l == null ? void 0 : l.perPage) != null ? o : 10, n != null && n.multiSortMeta && (e.sort = JSON.stringify(n.multiSortMeta)), (p = r.current) != null && p.value && (e.globalSearch = r.current.value), u) {
+    if (e.page = n === void 0 || n.page === void 0 ? (c = l == null ? void 0 : l.currentPage) != null ? c : 1 : n.page + 1, e.perPage = (o = (f = n == null ? void 0 : n.rows) != null ? f : l == null ? void 0 : l.perPage) != null ? o : 10, n != null && n.multiSortMeta && (e.sort = JSON.stringify(n.multiSortMeta)), (h = r.current) != null && h.value && (e.globalSearch = r.current.value), b) {
       const x = {};
-      Object.entries(u).forEach(([te, v]) => {
+      Object.entries(b).forEach(([te, v]) => {
         "value" in v && v.value && (x[te] = v.value);
       }), Object.keys(x).length && (e.columnsSearch = JSON.stringify(x));
     }
@@ -149,43 +150,43 @@ const Te = ({ column: i, record: s, children: a }) => {
         I(!1);
       }
     });
-  }, U = (($ = r.current) == null ? void 0 : $.value) || (n == null ? void 0 : n.multiSortMeta) || !!Object.entries(u).filter(([, e]) => e.value).length;
+  }, U = (($ = r.current) == null ? void 0 : $.value) || (n == null ? void 0 : n.multiSortMeta) || !!Object.entries(b).filter(([, e]) => e.value).length;
   function E() {
-    u = {}, r.current.value = "", n = void 0, h();
+    b = {}, r.current.value = "", n = void 0, y();
   }
-  let q = f.filter((e) => e.exportable);
+  let q = u.filter((e) => e.exportable);
   const Q = (e) => {
     var c;
     (c = D.current) == null || c.exportCSV(e);
   }, X = /* @__PURE__ */ t(k.Fragment, {}, void 0, !1, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-    lineNumber: 156,
+    lineNumber: 134,
     columnNumber: 33
   }, globalThis), Y = /* @__PURE__ */ t(k.Fragment, {
     children: [
-      /* @__PURE__ */ t(b, {
+      /* @__PURE__ */ t(N, {
         className: "p-button-success mr-2",
         icon: "pi pi-plus",
         label: "New",
         onClick: () => O(`/${s.prefix}/${a == null ? void 0 : a.name}/create`)
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-        lineNumber: 160,
+        lineNumber: 138,
         columnNumber: 13
       }, globalThis),
-      /* @__PURE__ */ t(b, {
+      /* @__PURE__ */ t(N, {
         className: "p-button-danger",
         icon: "pi pi-trash",
         label: "Delete"
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-        lineNumber: 166,
+        lineNumber: 144,
         columnNumber: 13
       }, globalThis)
     ]
   }, void 0, !0, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-    lineNumber: 159,
+    lineNumber: 137,
     columnNumber: 9
   }, globalThis), Z = /* @__PURE__ */ t("div", {
     className: "flex justify-content-between flex-column sm:flex-row",
@@ -193,17 +194,17 @@ const Te = ({ column: i, record: s, children: a }) => {
       /* @__PURE__ */ t("div", {
         className: "flex mb-3",
         children: [
-          !!q.length && /* @__PURE__ */ t(b, {
+          !!q.length && /* @__PURE__ */ t(N, {
             icon: "pi pi-external-link",
             className: "p-button-primary mb-2 mr-2",
             label: "Export",
             onClick: Q
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-            lineNumber: 178,
+            lineNumber: 156,
             columnNumber: 21
           }, globalThis),
-          U && /* @__PURE__ */ t(b, {
+          U && /* @__PURE__ */ t(N, {
             type: "button",
             icon: "pi pi-filter-slash",
             label: "Clear",
@@ -211,13 +212,13 @@ const Te = ({ column: i, record: s, children: a }) => {
             onClick: E
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-            lineNumber: 186,
+            lineNumber: 164,
             columnNumber: 21
           }, globalThis)
         ]
       }, void 0, !0, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-        lineNumber: 176,
+        lineNumber: 154,
         columnNumber: 13
       }, globalThis),
       /* @__PURE__ */ t("div", {
@@ -231,7 +232,7 @@ const Te = ({ column: i, record: s, children: a }) => {
                   className: "pi pi-search"
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 198,
+                  lineNumber: 176,
                   columnNumber: 25
                 }, globalThis),
                 /* @__PURE__ */ t(re, {
@@ -240,45 +241,45 @@ const Te = ({ column: i, record: s, children: a }) => {
                   onChange: J
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 199,
+                  lineNumber: 177,
                   columnNumber: 25
                 }, globalThis),
-                r.current && r.current.value && N && /* @__PURE__ */ t("i", {
+                r.current && r.current.value && d && /* @__PURE__ */ t("i", {
                   className: "pi pi-spin pi-spinner global-search-icon"
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 204,
+                  lineNumber: 182,
                   columnNumber: 101
                 }, globalThis)
               ]
             }, void 0, !0, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-              lineNumber: 197,
+              lineNumber: 175,
               columnNumber: 21
             }, globalThis)
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-            lineNumber: 196,
+            lineNumber: 174,
             columnNumber: 17
           }, globalThis),
           /* @__PURE__ */ t("div", {
             id: "toggleableFields",
             className: "mx-2",
-            ref: V,
-            children: g.length > 0 && /* @__PURE__ */ t(T, {
+            ref: C,
+            children: g.length > 0 && /* @__PURE__ */ t(p, {
               children: [
-                /* @__PURE__ */ t(b, {
+                /* @__PURE__ */ t(N, {
                   className: "p-button-rounded p-button-text",
                   icon: "pi pi-table",
-                  onClick: () => C.current.show()
+                  onClick: () => V.current.show()
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 215,
+                  lineNumber: 193,
                   columnNumber: 29
                 }, globalThis),
                 /* @__PURE__ */ t(oe, {
-                  ref: C,
-                  appendTo: V.current,
+                  ref: V,
+                  appendTo: C.current,
                   className: "hidden",
                   optionLabel: "header",
                   panelClassName: "toggleableFields",
@@ -290,34 +291,34 @@ const Te = ({ column: i, record: s, children: a }) => {
                   }
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 221,
+                  lineNumber: 199,
                   columnNumber: 29
                 }, globalThis)
               ]
             }, void 0, !0, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-              lineNumber: 214,
+              lineNumber: 192,
               columnNumber: 25
             }, globalThis)
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-            lineNumber: 208,
+            lineNumber: 186,
             columnNumber: 17
           }, globalThis)
         ]
       }, void 0, !0, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-        lineNumber: 195,
+        lineNumber: 173,
         columnNumber: 13
       }, globalThis)
     ]
   }, void 0, !0, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-    lineNumber: 175,
+    lineNumber: 153,
     columnNumber: 9
-  }, globalThis), ee = (e) => /* @__PURE__ */ t(T, {
+  }, globalThis), ee = (e) => /* @__PURE__ */ t(p, {
     children: [
-      /* @__PURE__ */ t(b, {
+      /* @__PURE__ */ t(N, {
         icon: "pi pi-pencil",
         className: "p-button-rounded p-button-success mr-2",
         onClick: () => {
@@ -325,33 +326,33 @@ const Te = ({ column: i, record: s, children: a }) => {
         }
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-        lineNumber: 244,
+        lineNumber: 222,
         columnNumber: 17
       }, globalThis),
-      /* @__PURE__ */ t(b, {
+      /* @__PURE__ */ t(N, {
         icon: "pi pi-trash",
         className: "p-button-rounded p-button-danger",
         onClick: () => {
         }
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-        lineNumber: 251,
+        lineNumber: 229,
         columnNumber: 17
       }, globalThis)
     ]
   }, void 0, !0, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-    lineNumber: 243,
+    lineNumber: 221,
     columnNumber: 13
   }, globalThis);
-  return /* @__PURE__ */ t(T, {
+  return /* @__PURE__ */ t(p, {
     children: [
       /* @__PURE__ */ t(ue, {
         left: X,
         right: Y
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-        lineNumber: 262,
+        lineNumber: 240,
         columnNumber: 13
       }, globalThis),
       /* @__PURE__ */ t(be, {
@@ -361,7 +362,7 @@ const Te = ({ column: i, record: s, children: a }) => {
         header: Z,
         first: (l.currentPage - 1) * l.perPage,
         lazy: !0,
-        loading: N,
+        loading: d,
         multiSortMeta: P,
         paginator: !0,
         paginatorTemplate: "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown",
@@ -378,8 +379,8 @@ const Te = ({ column: i, record: s, children: a }) => {
         responsiveLayout: "scroll",
         sortMode: "multiple",
         onPage: S,
-        onFilter: K,
-        filters: u,
+        onFilter: z,
+        filters: b,
         onSort: S,
         children: [
           /* @__PURE__ */ t(R, {
@@ -389,36 +390,38 @@ const Te = ({ column: i, record: s, children: a }) => {
             filter: !1
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-            lineNumber: 295,
+            lineNumber: 273,
             columnNumber: 17
           }, globalThis),
           H.map((e) => {
-            var d;
+            var f;
             return /* @__PURE__ */ t(R, {
               body: (o) => {
-                var p;
-                return N ? /* @__PURE__ */ t(L, {}, void 0, !1, {
+                var h;
+                return d ? /* @__PURE__ */ t(L, {}, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 304,
+                  lineNumber: 282,
                   columnNumber: 29
                 }, globalThis) : /* @__PURE__ */ t(Te, {
+                  resource: a,
                   column: e,
                   columnValue: o[e.columnName],
                   record: o,
                   children: i != null && i.has(e.componentName) ? i == null ? void 0 : i.get(e.componentName)({
                     column: e,
                     columnValue: o[e.columnName],
-                    record: o
+                    record: o,
+                    resource: a
                   }) : /* @__PURE__ */ t("div", {
-                    children: (p = o[e.columnName]) != null ? p : o.defaultValue
+                    children: (h = o[e.columnName]) != null ? h : o.defaultValue
                   }, void 0, !1, {
                     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                    lineNumber: 318,
+                    lineNumber: 298,
                     columnNumber: 37
                   }, globalThis)
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 306,
+                  lineNumber: 284,
                   columnNumber: 29
                 }, globalThis);
               },
@@ -432,43 +435,43 @@ const Te = ({ column: i, record: s, children: a }) => {
               filterMatchMode: "contains",
               excludeGlobalFilter: !e.isGloballySearchable,
               filter: e.searchable && !e.isGloballySearchable,
-              filterPlaceholder: (d = e.searchPlaceholder) != null ? d : `Search by ${e.label}`,
+              filterPlaceholder: (f = e.searchPlaceholder) != null ? f : `Search by ${e.label}`,
               exportable: e.exportable,
               hidden: e.hidden
             }, e.columnName, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-              lineNumber: 325,
+              lineNumber: 305,
               columnNumber: 25
             }, globalThis);
           }),
           /* @__PURE__ */ t(R, {
-            body: N ? /* @__PURE__ */ t(L, {}, void 0, !1, {
+            body: d ? /* @__PURE__ */ t(L, {}, void 0, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-              lineNumber: 345,
+              lineNumber: 325,
               columnNumber: 37
             }, globalThis) : ee,
             headerStyle: { minWidth: "10rem" },
             filter: !1
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-            lineNumber: 344,
+            lineNumber: 324,
             columnNumber: 17
           }, globalThis)
         ]
       }, void 0, !0, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-        lineNumber: 267,
+        lineNumber: 245,
         columnNumber: 13
       }, globalThis)
     ]
   }, void 0, !0, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-    lineNumber: 261,
+    lineNumber: 239,
     columnNumber: 9
   }, globalThis);
 }, ye = () => {
   const { resource: i } = _();
-  return /* @__PURE__ */ t(T, {
+  return /* @__PURE__ */ t(p, {
     children: [
       /* @__PURE__ */ t(ce, {
         title: i == null ? void 0 : i.pluralLabel

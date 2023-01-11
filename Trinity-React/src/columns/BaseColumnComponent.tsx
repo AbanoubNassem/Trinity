@@ -4,7 +4,9 @@ import BaseColumn from '@/types/Models/Columns/BaseColumn';
 import { Tooltip } from 'primereact/tooltip';
 import { classNames } from 'primereact/utils';
 
-const BaseColumnComponent = ({ column, record, children }: ColumnProps<BaseColumn>) => {
+const BaseColumnComponent = ({ column, record, children, resource }: ColumnProps<BaseColumn>) => {
+    const tooltipId = `${column.columnName}_${record[resource.primaryKeyColumn]}_tooltip`;
+
     return (
         <div
             {...record[`${column.columnName}_extraAttributes`]}
@@ -13,10 +15,10 @@ const BaseColumnComponent = ({ column, record, children }: ColumnProps<BaseColum
             })}
             style={{ fontFamily: column.fontFamily }}
         >
-            {(record[`${column.columnName}_tooltip`] || column.tooltip) && <Tooltip target={`.${column.columnName}_tooltip`} />}
+            {(record[`${column.columnName}_tooltip`] || column.tooltip) && <Tooltip target={`#${tooltipId}`} />}
 
             <div
-                className={`${column.columnName}_tooltip`}
+                id={tooltipId}
                 data-pr-tooltip={record[`${column.columnName}_tooltip`] ?? column.tooltip}
                 data-pr-position="top"
             >

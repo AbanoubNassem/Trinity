@@ -30,28 +30,6 @@ const Table = () => {
     const toggleableMultiSelect = useRef<MultiSelect>(null);
     const [selectedItems, setSelectedItems] = useState(null);
 
-    // const items = Array<any>();
-    // for (const it of paginator?.data ?? []) {
-    //     let item = {} as any;
-    //     for (const col of resourceColumns) {
-    //         if (col.relationshipName) {
-    //             const relations = col.relationshipName.split('.');
-    //             let record = it;
-    //
-    //             for (let i = 0; i < relations.length; i++) {
-    //                 if (record === null) continue;
-    //                 record = record[relations[i]];
-    //             }
-    //             item[col.columnName] = record !== null ? record[col.title] : null;
-    //         } else {
-    //             item[col.columnName] = it[col.columnName];
-    //         }
-    //     }
-    //     item[resource?.primaryKeyColumn!] = it[resource?.primaryKeyColumn!];
-    //     items.push(item);
-    // }
-    // console.log(items);
-
     useEffect(() => {
         if (globalSearchInput.current && !loading) globalSearchInput.current.value = urlParams.globalSearch;
     }, [loading, paginator]);
@@ -304,6 +282,7 @@ const Table = () => {
                             <Skeleton />
                         ) : (
                             <BaseColumnComponent
+                                resource={resource!}
                                 column={column}
                                 columnValue={data[column.columnName]}
                                 record={data}
@@ -312,7 +291,8 @@ const Table = () => {
                                     columnsComponents?.get(column.componentName)!({
                                         column,
                                         columnValue: data[column.columnName],
-                                        record: data
+                                        record: data,
+                                        resource: resource!
                                     })
                                 ) : (
                                     <div>{data[column.columnName] ?? data['defaultValue']}</div>

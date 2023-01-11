@@ -1,5 +1,6 @@
 using System.Text.Json;
 using AbanoubNassem.Trinity.Columns;
+using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.BaseColumn;
 using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
@@ -78,6 +79,9 @@ public abstract partial class TrinityResource
 
             var query = (FluentQueryBuilder)conn.FluentQueryBuilder();
             var countQuery = (FluentQueryBuilder)conn.FluentQueryBuilder();
+            
+            var filters = new Filters(Filters.FiltersType.OR);
+            var countFilters = new Filters(Filters.FiltersType.OR);
 
             countQuery
                 .Select($"COUNT(*)")
@@ -95,30 +99,30 @@ public abstract partial class TrinityResource
 
                 if (globalSearch != null && column.IsGloballySearchable)
                 {
-                    column.Search(countQuery, globalSearch);
-                    column.Search(query, globalSearch);
+                    column.Filter(countFilters, globalSearch);
+                    column.Filter(filters, globalSearch);
                 }
                 else if (requestFilters != null && requestFilters.ContainsKey(column.ColumnName))
                 {
                     var search = requestFilters[column.ColumnName];
 
-                    column.Search(countQuery, search);
-                    column.Search(query, search);
+                    column.Filter(countFilters, search);
+                    column.Filter(filters, search);
                 }
             }
 
-            // if (filters.Any())
-            // {
-            //     countQuery.Where(countFilters);
-            //     query.Where(filters);
-            // }
+            if (filters.Any())
+            {
+                countQuery.Where(countFilters);
+                query.Where(filters);
+            }
 
             if (sorts != null)
             {
                 foreach (var sort in sorts)
                 {
                     var column = (IBaseColumn?)Columns.SingleOrDefault(x => ((IBaseColumn)x).ColumnName == sort.Field);
-                    if (column is null or IHasRelationshipColumn) continue;
+                    if (column is null or IHasRelationship) continue;
 
                     var direction = sort.Order == 1 ? "ASC" : "DESC";
 
@@ -136,7 +140,7 @@ public abstract partial class TrinityResource
             {
                 foreach (IBaseColumn baseColumn in Columns)
                 {
-                    if (baseColumn is not IHasRelationshipColumn column) continue;
+                    if (baseColumn is not IHasRelationship column) continue;
                     result = await column.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result,
                         sorts?.SingleOrDefault(x => x.Field == column.ColumnName)
                     );

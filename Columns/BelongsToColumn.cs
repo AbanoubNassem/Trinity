@@ -1,4 +1,5 @@
 using System.Data;
+using AbanoubNassem.Trinity.Components.BaseColumn;
 using AbanoubNassem.Trinity.RequestHelpers;
 using Dapper;
 using DapperQueryBuilder;
@@ -6,7 +7,7 @@ using Filter = DapperQueryBuilder.Filter;
 
 namespace AbanoubNassem.Trinity.Columns;
 
-public class BelongsToColumn : HasRelationshipColumn<string>
+public class BelongsToColumn : BaseHasRelationshipColumn<string>
 {
     public override string ComponentName => "BelongsToColumn";
     public override string Type => "Column";
@@ -48,7 +49,7 @@ public class BelongsToColumn : HasRelationshipColumn<string>
     }
 
 
-    public override void Search(FluentQueryBuilder query, string str)
+    public override void Filter(Filters filters, string str)
     {
         var localColumns = ColumnName.Split('.');
         var foreignTables = ForeignTable.Split('.');
@@ -56,7 +57,7 @@ public class BelongsToColumn : HasRelationshipColumn<string>
         var relationshipNames = RelationshipName.Split('.');
 
         var search = $"%{str}%";
-        
+
         var innerFilters = new Filters(Filters.FiltersType.AND);
 
         for (var i = 0; i < foreignTables.Length; i++)
@@ -78,7 +79,7 @@ public class BelongsToColumn : HasRelationshipColumn<string>
             }
         }
 
-        query.Where(innerFilters);
+        filters.Add(innerFilters);
     }
 
     public override async Task<List<IDictionary<string, object?>>> RunRelationQuery(FluentQueryBuilder query,

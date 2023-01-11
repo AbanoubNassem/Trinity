@@ -29,3 +29,11 @@ const BadgeColumn = ({ column, columnValue }: ColumnProps<BadgeColumn>) => {
 };
 
 export default BadgeColumn;
+
+//TODO:: check which is better:
+// <Tag
+//     value={option?.value ?? columnValue}
+//     severity={option?.severity as any}
+//     icon={option?.icon}
+//     className="badge-column"
+// />
