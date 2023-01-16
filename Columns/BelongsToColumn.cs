@@ -1,7 +1,6 @@
-using System.Data;
 using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Fields;
 using AbanoubNassem.Trinity.RequestHelpers;
-using Dapper;
 using DapperQueryBuilder;
 using Filter = DapperQueryBuilder.Filter;
 
@@ -35,14 +34,6 @@ public class BelongsToColumn : BaseHasRelationshipColumn<string>
         }
     }
 
-    public List<KeyValuePair<string, string>>? Options { get; protected set; } = new();
-
-    public BelongsToColumn SetOptions(List<KeyValuePair<string, string>> options)
-    {
-        Options = options;
-        return this;
-    }
-
     public override void SelectQuery(FluentQueryBuilder query)
     {
         query.Select($"t.{ColumnName.Split('.').First():raw}");
@@ -56,7 +47,7 @@ public class BelongsToColumn : BaseHasRelationshipColumn<string>
         var foreignColumns = ForeignColumn.Split('.');
         var relationshipNames = RelationshipName.Split('.');
 
-        var search = $"%{str}%";
+        var search = $"%{str.ToLower()}%";
 
         var innerFilters = new Filters(Filters.FiltersType.AND);
 
@@ -173,51 +164,60 @@ public class BelongsToColumn : BaseHasRelationshipColumn<string>
         }
     }
 
-    public override async Task<List<KeyValuePair<string, string>>> RelationshipQuery(IDbConnection connection,
-        string? value, int offset,
-        string? search = null)
+    public override BaseHasRelationshipColumn<string> SetAsSearchable(bool searchable = true,
+        bool globallySearchable = true,
+        FiltersCallback? searchCallback = null)
     {
-        // var test =
-        //     "(SELECT * FROM store t  LEFT JOIN staff o ON o.store_id = t.store_id  WHERE t.store_id = '2' LIMIT 1)  UNION (SELECT * FROM  store t LEFT JOIN staff o ON o.store_id = t.store_id  WHERE t.store_id != '2'  OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY)";
-        //
-        // var rs = await connection.QueryAsync<dynamic, dynamic, dynamic>(test, (store, staff) => new
-        // {
-        //     store,
-        //     staff
-        // }, null, null, true, "store_id");
-        //
-
-        var table = ForeignTable.Split('.').Last();
-        var column = ForeignColumn.Split('.').Last();
-        var query = "";
-
-        if (value != null)
-        {
-            query += $"(SELECT * FROM {table} WHERE {column} = @value LIMIT 1) UNION ";
-        }
-
-
-        query += $"(SELECT * FROM  {table} " + (value != null ? $"WHERE {column} != @value" : "");
-
-        if (search != null)
-        {
-            query += $"AND LOWER({Title}) like '@search' ";
-        }
-
-
-        query += $" OFFSET 0 ROWS FETCH NEXT {(value != null ? LazyItemsCount - 1 : LazyItemsCount)} ROWS ONLY)";
-
-
-        var res = (await connection.QueryAsync(query, new
-        {
-            value,
-            search,
-            offset
-        })).Cast<IDictionary<string, object?>>().ToList();
-
-        return res.Select(x =>
-                new KeyValuePair<string, string>(x[ForeignColumn.Split('.').Last()]!.ToString()!,
-                    x[Title]!.ToString()!))
-            .ToList();
+        base.SetAsSearchable(searchable, globallySearchable, searchCallback);
+        // SetCustomFilter(new BelongsToField(ColumnName, Title, ForeignTable, ForeignColumn, RelationshipName));
+        return this;
     }
+
+    // public override async Task<List<KeyValuePair<string, string>>> RelationshipQuery(IDbConnection connection,
+    //     string? value, int offset,
+    //     string? search = null)
+    // {
+    //     // var test =
+    //     //     "(SELECT * FROM store t  LEFT JOIN staff o ON o.store_id = t.store_id  WHERE t.store_id = '2' LIMIT 1)  UNION (SELECT * FROM  store t LEFT JOIN staff o ON o.store_id = t.store_id  WHERE t.store_id != '2'  OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY)";
+    //     //
+    //     // var rs = await connection.QueryAsync<dynamic, dynamic, dynamic>(test, (store, staff) => new
+    //     // {
+    //     //     store,
+    //     //     staff
+    //     // }, null, null, true, "store_id");
+    //     //
+    //
+    //     var table = ForeignTable.Split('.').Last();
+    //     var column = ForeignColumn.Split('.').Last();
+    //     var query = "";
+    //
+    //     if (value != null)
+    //     {
+    //         query += $"(SELECT * FROM {table} WHERE {column} = @value LIMIT 1) UNION ";
+    //     }
+    //
+    //
+    //     query += $"(SELECT * FROM  {table} " + (value != null ? $"WHERE {column} != @value" : "");
+    //
+    //     if (search != null)
+    //     {
+    //         query += $"AND LOWER({Title}) like '@search' ";
+    //     }
+    //
+    //
+    //     query += $" OFFSET 0 ROWS FETCH NEXT {(value != null ? LazyItemsCount - 1 : LazyItemsCount)} ROWS ONLY)";
+    //
+    //
+    //     var res = (await connection.QueryAsync(query, new
+    //     {
+    //         value,
+    //         search,
+    //         offset
+    //     })).Cast<IDictionary<string, object?>>().ToList();
+    //
+    //     return res.Select(x =>
+    //             new KeyValuePair<string, string>(x[ForeignColumn.Split('.').Last()]!.ToString()!,
+    //                 x[Title]!.ToString()!))
+    //         .ToList();
+    // }
 }

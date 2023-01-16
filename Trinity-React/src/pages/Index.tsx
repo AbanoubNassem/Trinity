@@ -12,9 +12,11 @@ const Index = () => {
 
             <div className="grid">
                 <div className="col-12">
-                    <h5>{resource?.pluralLabel}</h5>
+                    <div className="card">
+                        <h5>{resource?.pluralLabel}</h5>
 
-                    <Table />
+                        <Table />
+                    </div>
                 </div>
             </div>
         </>

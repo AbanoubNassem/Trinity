@@ -21,6 +21,7 @@ import BadgeColumn from '@/columns/BadgeColumn';
 import ImageColumn from '@/columns/ImageColumn';
 import ColorColumn from '@/columns/ColorColumn';
 import BelongsToColumn from '@/columns/BelongsToColumn';
+import AggregateColumn from '@/columns/AggregateColumn';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
@@ -54,7 +55,8 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['BadgeColumn', (props) => <BadgeColumn {...props} />],
         ['ImageColumn', (props) => <ImageColumn {...props} />],
         ['ColorColumn', (props) => <ColorColumn {...props} />],
-        ['BelongsToColumn', (props) => <BelongsToColumn {...props} />]
+        ['BelongsToColumn', (props) => <BelongsToColumn {...props} />],
+        ['AggregateColumn', (props) => <AggregateColumn {...props} />]
     ]);
 
     const toast = useRef<Toast>(null);

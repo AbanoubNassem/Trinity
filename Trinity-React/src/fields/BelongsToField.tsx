@@ -1,14 +1,16 @@
 import React, { useLayoutEffect, useState } from 'react';
-import FieldProps from '@/Types/Props/FieldProps';
+
 import SelectInputField from '@/fields/SelectInputField';
 import axios from 'axios';
 import { useConfigs } from '@/hooks/trinity_configs';
 import usePageProps from '@/hooks/trinity_page_props';
 import { SelectItemOptionsType } from 'primereact/selectitem';
-import RelationshipField from '@/Types/Models/RelationshipField';
+
 import { VirtualScrollerLazyParams } from 'primereact/virtualscroller';
 import last from 'lodash/last';
 import modal from '@/utilities/inertia_modal';
+import FieldProps from '@/types/Props/Fields/FieldProps';
+import RelationshipField from '@/types/Models/Fields/RelationshipField';
 
 const BelongsToField = (props: FieldProps<RelationshipField>) => {
     const { component, errors, formData, setFieldValue } = props;

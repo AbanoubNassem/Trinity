@@ -1,5 +1,6 @@
 using AbanoubNassem.Trinity.Components.BaseColumn;
 using AbanoubNassem.Trinity.Extensions;
+using DapperQueryBuilder;
 
 namespace AbanoubNassem.Trinity.Columns;
 
@@ -84,6 +85,4 @@ public class TextColumn : BaseColumn<TextColumn, string>
         Currency = currency;
         return this;
     }
-
-
 }

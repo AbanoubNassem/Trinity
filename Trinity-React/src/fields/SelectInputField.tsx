@@ -3,12 +3,12 @@ import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { Dropdown, DropdownProps } from 'primereact/dropdown';
 
-import SelectFieldProps from '@/Types/Props/SelectFieldProps';
 import debounce from 'lodash/debounce';
 import { VirtualScrollerLazyParams } from 'primereact/virtualscroller';
 import { Skeleton } from 'primereact/skeleton';
 import last from 'lodash/last';
 import { MultiSelect, MultiSelectProps } from 'primereact/multiselect';
+import SelectFieldProps from '@/types/Props/Fields/SelectFieldProps';
 
 const EMPTY = [
     {
@@ -28,7 +28,7 @@ const SelectInputField = (props: SelectFieldProps) => {
             ? typeof formData[component.columnName] === 'string'
                 ? formData[component.columnName]?.split(',')
                 : formData[component.columnName]
-            : formData[component.columnName].toString());
+            : formData[component.columnName]?.toString());
     const [value, setValue] = useState(getValue());
     const getOptions = () => ((!!props.options?.length ? props.options : !!component.options?.length) ? component.options : EMPTY);
     const [options, setOptions] = useState(getOptions);
@@ -62,7 +62,7 @@ const SelectInputField = (props: SelectFieldProps) => {
         placeholder: component.placeholder,
         panelClassName: 'trinity-dropdown',
         className: classNames({ 'p-invalid': errors?.value[component.columnName] }),
-        tooltip: component.toolTip,
+        tooltip: component.tooltip,
         tooltipOptions: { event: 'focus', position: 'top' },
         options: options,
         optionLabel: 'value',
@@ -74,7 +74,7 @@ const SelectInputField = (props: SelectFieldProps) => {
         value: value,
         onChange: (e: any) => {
             setValue(e.value);
-            setFieldValue(component.columnName, component.multiple ? e.value.toString().split(',') : e.value.toString());
+            setFieldValue(component.columnName, component.multiple ? e.value.toString().split(',') : e.value?.toString());
         },
         onFilter: (e: any) => filter(e.filter),
         virtualScrollerOptions: {

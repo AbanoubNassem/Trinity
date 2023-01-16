@@ -1,9 +1,9 @@
 import React from 'react';
-import FieldProps from '@/Types/Props/FieldProps';
-import TextAreaField from '@/Types/Models/TextAreaField';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { InputTextarea } from 'primereact/inputtextarea';
+import FieldProps from "@/types/Props/Fields/FieldProps";
+import TextAreaField from '@/types/Models/Fields/TextAreaField';
 
 const TextAreaField = ({ component, formData, setFieldValue, errors }: FieldProps<TextAreaField>) => {
     return (
@@ -18,7 +18,7 @@ const TextAreaField = ({ component, formData, setFieldValue, errors }: FieldProp
                 hidden={component.hidden}
                 placeholder={component.placeholder}
                 className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
-                tooltip={component.toolTip}
+                tooltip={component.tooltip}
                 tooltipOptions={{ event: 'focus', position: 'top' }}
                 autoResize={component.autoResize}
                 rows={component.rows}

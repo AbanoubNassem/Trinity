@@ -1,9 +1,9 @@
 import React from 'react';
-import FieldProps from '@/Types/Props/FieldProps';
-import NumberField from '@/Types/Models/NumberField';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { InputNumber } from 'primereact/inputnumber';
+import FieldProps from '@/types/Props/Fields/FieldProps';
+import NumberField from '@/types/Models/Fields/NumberField';
 
 const NumberField = ({ component, formData, setFieldValue, errors }: FieldProps<NumberField>) => {
     return (
@@ -18,7 +18,7 @@ const NumberField = ({ component, formData, setFieldValue, errors }: FieldProps<
                 hidden={component.hidden}
                 placeholder={component.placeholder}
                 className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
-                tooltip={component.toolTip}
+                tooltip={component.tooltip}
                 tooltipOptions={{ event: 'hover', position: 'top' }}
                 value={formData[component.columnName]}
                 onValueChange={(event) => {

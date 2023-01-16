@@ -1,7 +1,8 @@
 import React from 'react';
-import FieldProps from '@/Types/Props/FieldProps';
-import BaseField from '@/Types/Models/BaseField';
+
 import TextField from '@/fields/TextField';
+import FieldProps from '@/types/Props/Fields/FieldProps';
+import BaseField from '@/types/Models/Fields/BaseField';
 
 const IdField = ({ component, errors, formData, setFieldValue }: FieldProps<BaseField>) => {
     return (

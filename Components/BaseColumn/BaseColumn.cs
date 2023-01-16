@@ -1,3 +1,4 @@
+using AbanoubNassem.Trinity.Components.BaseField;
 using DapperQueryBuilder;
 using Humanizer;
 
@@ -26,10 +27,12 @@ public abstract partial class BaseColumn<T, TDeserialization> : BaseComponent<T,
     }
 
     public delegate void QueryCallbackWithString(FluentQueryBuilder query, string str);
-    
+
     public delegate void FiltersCallback(Filters filters, string str);
 
     public delegate TCallBack CallbackWithRecord<out TCallBack>(IDictionary<string, object?> record);
+
+    public delegate void QueryCallback(FluentQueryBuilder query);
 
     public string ColumnName { get; set; }
 
@@ -135,6 +138,17 @@ public abstract partial class BaseColumn<T, TDeserialization> : BaseComponent<T,
     {
         Icon = icon;
         IconPosition = iconPosition;
+        return (this as T)!;
+    }
+
+
+    public object? CustomFilter { get; protected set; }
+
+    public T SetCustomFilter(IBaseField filter, FiltersCallback? filterCallback = null)
+    {
+        CustomFilter = filter;
+        if (filterCallback != null)
+            SearchCallback = filterCallback;
         return (this as T)!;
     }
 }

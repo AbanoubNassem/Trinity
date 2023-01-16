@@ -1,7 +1,8 @@
 import React from 'react';
 import { classNames } from 'primereact/utils';
 import Errors from '@/Types/Models/errors';
-import BaseField from '@/Types/Models/BaseField';
+import BaseField from "@/types/Models/Fields/BaseField";
+
 
 const BaseFieldComponent = ({ component, errors, children }: { component: BaseField; errors: Errors; children?: React.ReactNode }) => {
     if (component.hidden) return <></>;

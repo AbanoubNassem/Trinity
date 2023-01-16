@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import FieldProps from '@/Types/Props/FieldProps';
-import BaseField from '@/Types/Models/BaseField';
+
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { InputSwitch } from 'primereact/inputswitch';
 import { classNames } from 'primereact/utils';
-import SwitchInputField from '@/Types/Models/SwitchInputField';
+import FieldProps from "@/types/Props/Fields/FieldProps";
+import SwitchInputField from '@/types/Models/Fields/SwitchInputField';
+
 
 const SwitchInputField = ({ component, errors, formData, setFieldValue }: FieldProps<SwitchInputField>) => {
     const [value, setValue] = useState(formData[component.columnName] ?? component.defaultValue ?? false);
@@ -21,7 +22,7 @@ const SwitchInputField = ({ component, errors, formData, setFieldValue }: FieldP
                 hidden={component.hidden}
                 placeholder={component.placeholder}
                 className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
-                tooltip={component.toolTip}
+                tooltip={component.tooltip}
                 tooltipOptions={{ event: 'focus', position: 'top' }}
                 checked={value}
                 onChange={(e) => {

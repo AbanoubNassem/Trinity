@@ -1,4 +1,5 @@
 import BaseComponent from '@/types/Models/BaseComponent';
+import BaseField from '@/types/Models/Fields/BaseField';
 
 export default interface BaseColumn extends BaseComponent {
     columnName: string;
@@ -19,4 +20,5 @@ export default interface BaseColumn extends BaseComponent {
     size?: string;
     weight?: string;
     fontFamily?: string;
+    customFilter?: BaseField;
 }

@@ -57,16 +57,4 @@ public abstract class BaseHasRelationshipColumn<T> : BaseColumn<BaseHasRelations
         ForeignColumn = value;
         return this;
     }
-
-
-    public bool Lazy { get; protected set; }
-
-    public int LazyItemsCount { get; protected set; } = 10;
-
-    public BaseHasRelationshipColumn<T> SetAsLazy(bool lazy = true, int lazyItemsCount = 10)
-    {
-        Lazy = lazy;
-        LazyItemsCount = lazyItemsCount;
-        return this;
-    }
 }

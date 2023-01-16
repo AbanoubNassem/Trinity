@@ -18,7 +18,7 @@ import BaseColumnComponent from '@/columns/BaseColumnComponent';
 import IPaginator from '@/types/Models/Paginator';
 
 const Table = () => {
-    const { columns: columnsComponents } = useContext(AppContext);
+    const { columns: columnsComponents, components } = useContext(AppContext);
     const configs = useConfigs();
     const { resource, data: paginator } = usePageProps<IPaginator<any>>();
     const resourceColumns = resource?.columns ?? [];
@@ -69,15 +69,20 @@ const Table = () => {
     let filters: DataTableFilterMeta = {};
     const urlFilters = JSON.parse(urlParams.columnsSearch) ?? {};
     resourceColumns.forEach((field) => {
-        if (field.searchable && !field.isGloballySearchable)
+        if (field.customFilter || (field.searchable && !field.isGloballySearchable)) {
             filters[field.columnName] = {
                 value: urlFilters[field.columnName],
-                matchMode: FilterMatchMode.CONTAINS
+                matchMode: FilterMatchMode.CUSTOM
             };
+        }
     });
 
     const onFilter = debounce((ev: DataTablePFSEvent) => {
-        filters = ev.filters;
+        filters = {};
+        Object.entries(ev.filters).forEach((el: any) => {
+            filters[el[0]] = el[1]; //['value'] ? el[1] : el[1]['constraints'][0];
+        });
+        console.log(filters);
         fetchTable();
     }, 300);
 
@@ -155,7 +160,7 @@ const Table = () => {
                 {!!exportableFields.length && (
                     <Button
                         icon="pi pi-external-link"
-                        className="p-button-primary mb-2 mr-2"
+                        className="p-button-primary  mr-2"
                         label="Export"
                         onClick={exportCSV}
                     />
@@ -244,9 +249,11 @@ const Table = () => {
 
             <DataTable
                 ref={dtRef}
+                dataKey={resource?.primaryKeyColumn ?? 'id'}
                 selection={selectedItems}
                 onSelectionChange={(e) => setSelectedItems(e.value)}
                 header={header}
+                size={'small'}
                 first={(paginator!.currentPage - 1) * paginator!.perPage}
                 lazy
                 loading={loading}
@@ -260,15 +267,15 @@ const Table = () => {
                 totalRecords={paginator?.totalCount}
                 value={paginator?.data}
                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-                filterDisplay="row"
+                filterDisplay="menu"
                 globalFilter={'contains'}
                 removableSort
                 responsiveLayout="scroll"
                 sortMode="multiple"
+                onSort={onTableEvent}
                 onPage={onTableEvent}
                 onFilter={onFilter}
                 filters={filters}
-                onSort={onTableEvent}
             >
                 <Column
                     exportable={false}
@@ -290,7 +297,7 @@ const Table = () => {
                                 {columnsComponents?.has(column.componentName) ? (
                                     columnsComponents?.get(column.componentName)!({
                                         column,
-                                        columnValue: data[column.columnName],
+                                        columnValue: data[column.columnName] ?? data['defaultValue'],
                                         record: data,
                                         resource: resource!
                                     })
@@ -308,16 +315,60 @@ const Table = () => {
                             field={column.columnName}
                             header={column.label}
                             sortable={column.sortable}
-                            showFilterMenu={false}
+                            // showFilterMenu={false}
                             showFilterMatchModes={false}
-                            showFilterOperator={false}
+                            // showFilterOperator={false}
                             showClearButton
-                            filterMatchMode={'contains'}
+                            filterMatchMode={'custom'}
                             excludeGlobalFilter={!column.isGloballySearchable}
-                            filter={column.searchable && !column.isGloballySearchable}
-                            filterPlaceholder={column.searchPlaceholder ?? `Search by ${column.label}`}
+                            filterField={column.columnName}
+                            style={{ minWidth: '8rem' }}
                             exportable={column.exportable}
                             hidden={column.hidden}
+                            filter={!!column.customFilter || (column.searchable && !column.isGloballySearchable)}
+                            filterPlaceholder={column.searchPlaceholder ?? `Search by ${column.label}`}
+                            filterElement={
+                                !!column.customFilter
+                                    ? (options) => {
+                                          // console.log(filters);
+                                          // console.log(options);
+                                          // console.log(column.customFilter);
+                                          return (
+                                              <div>
+                                                  {components?.has(column.customFilter!.componentName) ? (
+                                                      components?.get(column.customFilter!.componentName)!({
+                                                          key: `${column.columnName}_filter`,
+                                                          component: column.customFilter!,
+                                                          setFieldValue: (name: string, value: any) => {
+                                                              options.filterCallback(value);
+                                                          },
+                                                          formData: { [column.columnName]: options.value }
+                                                      })
+                                                  ) : (
+                                                      <>{column.customFilter!.componentName}</>
+                                                  )}
+                                              </div>
+                                          );
+                                      }
+                                    : undefined
+                            }
+
+                            // filterClear={(options) => {
+                            //     return (
+                            //         <Button
+                            //             type="button"
+                            //             icon="pi pi-times"
+                            //             className="p-button-secondary"
+                            //             onClick={() => {
+                            //                 const ev = options as any;
+                            //                 ev.filterModel.value = undefined;
+                            //                 ev.filterModel.constraints[0].value = undefined;
+                            //
+                            //                 onFilter(ev.filterModel);
+                            //             }}
+                            //         ></Button>
+                            //     );
+                            // }}
                         />
                     );
                 })}
