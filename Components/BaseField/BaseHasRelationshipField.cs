@@ -5,7 +5,9 @@ using Humanizer;
 
 namespace AbanoubNassem.Trinity.Components.BaseField;
 
-public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T>, T>, IHasRelationship
+public abstract class
+    HasRelationshipField<T, TDeserialization> : BaseField<HasRelationshipField<T, TDeserialization>, TDeserialization>,
+        IHasRelationship
 {
     protected HasRelationshipField(string columnName, string? foreignColumn = null, string? foreignTable = null) :
         base(columnName)
@@ -36,7 +38,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
 
     public string RelationshipName { get; set; }
 
-    public HasRelationshipField<T> SetRelationshipName(string value)
+    public HasRelationshipField<T, TDeserialization> SetRelationshipName(string value)
     {
         RelationshipName = value;
         return this;
@@ -44,7 +46,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
 
     public string ForeignTable { get; set; }
 
-    public HasRelationshipField<T> SetForeignTable(string value)
+    public HasRelationshipField<T, TDeserialization> SetForeignTable(string value)
     {
         ForeignTable = value;
         return this;
@@ -52,7 +54,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
 
     public string ForeignColumn { get; set; }
 
-    public HasRelationshipField<T> SetForeignColumn(string value)
+    public HasRelationshipField<T, TDeserialization> SetForeignColumn(string value)
     {
         ForeignColumn = value;
         return this;
@@ -63,7 +65,7 @@ public abstract class HasRelationshipField<T> : BaseField<HasRelationshipField<T
 
     public int LazyItemsCount { get; protected set; } = 10;
 
-    public HasRelationshipField<T> SetAsLazy(bool lazy = true, int lazyItemsCount = 10)
+    public HasRelationshipField<T, TDeserialization> SetAsLazy(bool lazy = true, int lazyItemsCount = 10)
     {
         Lazy = lazy;
         LazyItemsCount = lazyItemsCount;

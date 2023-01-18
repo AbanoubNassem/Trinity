@@ -56,7 +56,7 @@ const BelongsToField = (props: FieldProps<RelationshipField>) => {
             formData={formData}
             setFieldValue={setFieldValue}
             options={options}
-            value={relation ? relation[last(component.foreignColumn?.split('.'))!].toString() : undefined}
+            value={relation ? relation[last(component.foreignColumn?.split('.'))!]?.toString() : undefined}
         />
     );
 };

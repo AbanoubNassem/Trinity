@@ -26,10 +26,12 @@ const SelectInputField = (props: SelectFieldProps) => {
             ? undefined
             : component.multiple
             ? typeof formData[component.columnName] === 'string'
-                ? formData[component.columnName]?.split(',')
+                ? formData[component.columnName]?.split(',').filter((r: string) => r !== '')
                 : formData[component.columnName]
             : formData[component.columnName]?.toString());
+
     const [value, setValue] = useState(getValue());
+
     const getOptions = () => ((!!props.options?.length ? props.options : !!component.options?.length) ? component.options : EMPTY);
     const [options, setOptions] = useState(getOptions);
 

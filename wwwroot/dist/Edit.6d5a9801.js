@@ -1,6 +1,6 @@
-import { R as y, u as h, a as v, r as u, A as x, l as b, b as D, j as e, B as d, F as E, H as R } from "./main.96aef409.js";
-import { t as V, T as I } from "./trinity_link.1c87d127.js";
-import { u as W } from "./trinity_resource_fields.b69918fe.js";
+import { R as y, u as h, a as v, r as u, A as x, l as b, b as D, j as e, B as d, F as E, H as R } from "./main.4bf0ebf4.js";
+import { t as V, T as I } from "./trinity_link.faf4d848.js";
+import { u as W } from "./trinity_resource_fields.5430555a.js";
 const C = () => {
   var o;
   const n = h(), { resource: i, errors: s, data: N } = v(), f = W(), { components: l } = u.exports.useContext(x), m = u.exports.useMemo(() => {

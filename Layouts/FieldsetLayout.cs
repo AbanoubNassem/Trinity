@@ -7,7 +7,7 @@ public class FieldsetLayout : BaseLayout<FieldsetLayout>
 {
     public override string ComponentName => "FieldsetLayout";
 
-    public FieldsetLayout(List<IBaseComponent> schema, int columns = 0) : base(schema, columns)
+    public FieldsetLayout(List<IFormComponent> schema, int columns = 0) : base(schema, columns)
     {
     }
 

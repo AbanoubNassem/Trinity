@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { InputTextarea } from 'primereact/inputtextarea';
-import FieldProps from "@/types/Props/Fields/FieldProps";
+import FieldProps from '@/types/Props/Fields/FieldProps';
 import TextAreaField from '@/types/Models/Fields/TextAreaField';
 
 const TextAreaField = ({ component, formData, setFieldValue, errors }: FieldProps<TextAreaField>) => {
+    const [value, setValue] = useState(formData[component.columnName]);
+
     return (
         <BaseFieldComponent
             component={component}
@@ -23,8 +25,11 @@ const TextAreaField = ({ component, formData, setFieldValue, errors }: FieldProp
                 autoResize={component.autoResize}
                 rows={component.rows}
                 cols={component.cols}
-                value={formData[component.columnName]}
-                onChange={(event) => setFieldValue(component.columnName, event.target.value)}
+                value={value}
+                onChange={(event) => {
+                    setFieldValue(component.columnName, event.target.value);
+                    setValue(event.target.value);
+                }}
             />
         </BaseFieldComponent>
     );

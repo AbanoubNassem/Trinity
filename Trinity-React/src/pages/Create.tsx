@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import { Button } from 'primereact/button';
@@ -9,6 +9,7 @@ import { AppContext } from '@/contexts/AppContext';
 import { useForm } from '@inertiajs/inertia-react';
 import { useTrinityFields } from '@/hooks/trinity_resource_fields';
 import last from 'lodash/last';
+import { Inertia } from '@inertiajs/inertia';
 
 const Create = () => {
     const configs = useConfigs();
@@ -17,15 +18,23 @@ const Create = () => {
     const { components } = useContext(AppContext);
     const [createAddAnother, setCreateAddAnother] = useState(false);
 
-    const data = {} as any;
-    for (const field of fields) {
-        data[last(field.columnName.split('.'))!] = undefined;
-    }
-    const form = useForm();
+    let data = useMemo<any>(() => {
+        let innerData = {} as any;
+        for (const field of fields) {
+            innerData[last(field.columnName.split('.'))!] = undefined;
+        }
+        return innerData;
+    }, [configs]);
+
+    const form = useForm(data);
 
     useEffect(() => {
         if (inserted) {
-            trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${inserted}`, false, false);
+            if (!createAddAnother) {
+                trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${inserted}`, false, false);
+            } else {
+                Inertia.get('');
+            }
         }
     }, [inserted]);
 
@@ -35,7 +44,6 @@ const Create = () => {
 
     const create = (_createAddAnother: boolean = false) => {
         setCreateAddAnother(_createAddAnother);
-        form.setDefaults(data);
         form.post('', {
             preserveScroll: true,
             preserveState: true
@@ -114,4 +122,4 @@ const Create = () => {
     );
 };
 
-export default Create;
+export default React.memo(Create);

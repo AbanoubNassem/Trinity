@@ -5,9 +5,9 @@ public interface IBaseLayout : IBaseComponent
     public List<object> Schema { get; set; }
 }
 
-public abstract class BaseLayout<T> : BaseComponent<T, object?>, IBaseLayout where T : BaseLayout<T>
+public abstract class BaseLayout<T> : BaseComponent<T, object?>, IBaseLayout,IFormComponent where T : BaseLayout<T>
 {
-    protected BaseLayout(List<IBaseComponent> schema, int columns = 0)
+    protected BaseLayout(List<IFormComponent> schema, int columns = 0)
     {
         Schema = schema.Cast<object>().ToList();
         Columns = columns;
@@ -18,7 +18,7 @@ public abstract class BaseLayout<T> : BaseComponent<T, object?>, IBaseLayout whe
     public override string Type => "Layout";
     public List<object> Schema { get; set; }
 
-    public T SetSchema(List<IBaseComponent> schema)
+    public T SetSchema(List<IFormComponent> schema)
     {
         Schema = schema.Cast<object>().ToList();
         return (this as T)!;

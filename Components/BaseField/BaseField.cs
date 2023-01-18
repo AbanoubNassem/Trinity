@@ -23,7 +23,8 @@ public interface IBaseField : IBaseComponent
     Type GetDeserializationType();
 }
 
-public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T, TDeserialization>, IBaseField
+public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T, TDeserialization>, IBaseField,
+    IFormComponent
     where T : BaseField<T, TDeserialization>
 {
     protected BaseField(string columnName)
@@ -135,7 +136,7 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T, 
         Placeholder = placeholder;
         return (this as T)!;
     }
-    
+
     public string? HelperText { get; protected set; }
 
     public T SetHelperText(string helperText)
@@ -160,6 +161,4 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T, 
         Locale = locale;
         return (this as T)!;
     }
-
-
 }

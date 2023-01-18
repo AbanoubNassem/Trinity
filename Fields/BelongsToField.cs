@@ -7,7 +7,7 @@ using Filter = DapperQueryBuilder.Filter;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class BelongsToField : HasRelationshipField<BelongsToField>
+public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
 {
     public override string ComponentName => "BelongsToField";
 
@@ -38,7 +38,7 @@ public class BelongsToField : HasRelationshipField<BelongsToField>
 
     public List<KeyValuePair<string, string>>? Options { get; protected set; } = new();
 
-    public BelongsToField SetOptions(List<KeyValuePair<string, string>> options)
+    public BelongsToField<T> SetOptions(List<KeyValuePair<string, string>> options)
     {
         Options = options;
         return this;
@@ -218,5 +218,19 @@ public class BelongsToField : HasRelationshipField<BelongsToField>
                 new KeyValuePair<string, string>(x[ForeignColumn.Split('.').Last()]!.ToString()!,
                     x[Title]!.ToString()!))
             .ToList();
+    }
+}
+
+public class BelongsToField : BelongsToField<string>
+{
+    public BelongsToField(string localColumnNames, string relationTables, string foreignColumnNames,
+        string relationshipName, string relationSelectColumn) : base(localColumnNames, relationTables,
+        foreignColumnNames, relationshipName, relationSelectColumn)
+    {
+    }
+
+    public BelongsToField(string columnName, string relationSelectColumn, string? foreignTable = null,
+        string? relationshipName = null) : base(columnName, relationSelectColumn, foreignTable, relationshipName)
+    {
     }
 }

@@ -26,5 +26,6 @@ public class SwitchInputField : SwitchInputField<bool>
 {
     public SwitchInputField(string columnName) : base(columnName)
     {
+        SetTrueFalseValue(true, false);
     }
 }

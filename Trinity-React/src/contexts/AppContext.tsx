@@ -22,6 +22,8 @@ import ImageColumn from '@/columns/ImageColumn';
 import ColorColumn from '@/columns/ColorColumn';
 import BelongsToColumn from '@/columns/BelongsToColumn';
 import AggregateColumn from '@/columns/AggregateColumn';
+import SliderField from '@/fields/SliderField';
+import EditorField from '@/fields/EditorField';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
@@ -46,7 +48,9 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['BelongsToField', (props) => <BelongsToField {...props} />],
         ['DateTimeField', (props) => <DateTimeField {...props} />],
         ['NumberField', (props) => <NumberField {...props} />],
-        ['SwitchInputField', (props) => <SwitchInputField {...props} />]
+        ['SwitchInputField', (props) => <SwitchInputField {...props} />],
+        ['SliderField', (props) => <SliderField {...props} />],
+        ['EditorField', (props) => <EditorField {...props} />]
     ]);
 
     const columns = new Map<string, (props: any) => React.ReactNode>([
