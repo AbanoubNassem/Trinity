@@ -3,7 +3,10 @@ using AbanoubNassem.Trinity.Columns;
 using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.BaseColumn;
 using AbanoubNassem.Trinity.RequestHelpers;
+using AbanoubNassem.Trinity.Utilities;
+using Dapper;
 using DapperQueryBuilder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Resources;
@@ -11,6 +14,8 @@ namespace AbanoubNassem.Trinity.Resources;
 public abstract partial class TrinityResource
 {
     private readonly List<object> _columns = new();
+
+    public abstract string TitleColumn { get; }
 
     public List<object> Columns
     {
@@ -79,7 +84,7 @@ public abstract partial class TrinityResource
 
             var query = (FluentQueryBuilder)conn.FluentQueryBuilder();
             var countQuery = (FluentQueryBuilder)conn.FluentQueryBuilder();
-            
+
             var filters = new Filters(Filters.FiltersType.OR);
             var countFilters = new Filters(Filters.FiltersType.OR);
 
@@ -173,5 +178,33 @@ public abstract partial class TrinityResource
             Logger.LogError(ex, ex.Message);
             throw;
         }
+    }
+
+    public async Task<object?> Delete()
+    {
+        var body = await Request.ReadFromJsonAsync<IDictionary<string, IList<string>>>();
+
+        if (body == null || !body.TryGetValue(PrimaryKeyColumn, out var keys))
+            return null;
+
+        using var connection = ConnectionFactory();
+
+        var deleteQueryResult =
+            await connection.ExecuteScalarAsync<int>($"DELETE FROM {Table} WHERE {PrimaryKeyColumn} in @keys",
+                new { keys }
+            );
+
+
+        if (deleteQueryResult == 0)
+        {
+            var recordStr = keys.Count == 1 ? "record was" : "records were";
+            TrinityNotifications.NotifySuccess($"The {recordStr} deleted successfully!");
+        }
+        else
+        {
+            TrinityNotifications.NotifyError("Something went wrong while deleting the record!");
+        }
+
+        return await GetTableData();
     }
 }

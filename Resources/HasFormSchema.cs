@@ -97,7 +97,8 @@ public abstract partial class TrinityResource
         }
         // query.From($"{Table!.Split('.').Last():raw}");
 
-        var res = await field.RelationshipQuery(ConnectionFactory(), value, offset, search);
+        using var connection = ConnectionFactory();
+        var res = await field.RelationshipQuery(connection, value, offset, search);
 
         return new OkObjectResult(res);
     }
@@ -171,10 +172,11 @@ public abstract partial class TrinityResource
         if (!Request.RouteValues.TryGetValue("id", out var key))
             return null;
 
-        var queryBuilder = (FluentQueryBuilder)ConnectionFactory().FluentQueryBuilder();
-        
+        using var connection = ConnectionFactory();
+        var queryBuilder = (FluentQueryBuilder)connection.FluentQueryBuilder();
+
         queryBuilder.Select($"{PrimaryKeyColumn:raw}");
-        
+
         foreach (IBaseField field in _fields.Values)
         {
             field.SelectQuery(queryBuilder);
@@ -189,7 +191,8 @@ public abstract partial class TrinityResource
         foreach (IBaseField filed in Fields.Values)
         {
             if (filed is not IHasRelationship field) continue;
-            record = (await field.RunRelationQuery((FluentQueryBuilder)ConnectionFactory().FluentQueryBuilder(),
+
+            record = (await field.RunRelationQuery((FluentQueryBuilder)connection.FluentQueryBuilder(),
                 new List<IDictionary<string, object?>>() { record! })).Last()!;
         }
 
@@ -249,10 +252,5 @@ public abstract partial class TrinityResource
         }
 
         return await GetEditData();
-    }
-
-    public async Task<object?> Delete()
-    {
-        return Task.CompletedTask;
     }
 }

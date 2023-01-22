@@ -16,6 +16,7 @@ import { trinityLink } from '@/utilities/trinity_link';
 import { AppContext } from '@/contexts/AppContext';
 import BaseColumnComponent from '@/columns/BaseColumnComponent';
 import IPaginator from '@/types/Models/Paginator';
+import { Dialog } from 'primereact/dialog';
 
 const Table = () => {
     const { columns: columnsComponents, components } = useContext(AppContext);
@@ -28,7 +29,9 @@ const Table = () => {
     const globalSearchInput = useRef<HTMLInputElement>(null);
     const toggleableFieldsDiv = useRef<HTMLDivElement>();
     const toggleableMultiSelect = useRef<MultiSelect>(null);
-    const [selectedItems, setSelectedItems] = useState(null);
+    const [selectedItems, setSelectedItems] = useState<Array<any>>([]);
+    const [deleteDialog, showDeleteDialog] = useState(false);
+    const [selectedItemToDelete, setSelectedItemToDelete] = useState(null);
 
     useEffect(() => {
         if (globalSearchInput.current && !loading) globalSearchInput.current.value = urlParams.globalSearch;
@@ -80,9 +83,8 @@ const Table = () => {
     const onFilter = debounce((ev: DataTablePFSEvent) => {
         filters = {};
         Object.entries(ev.filters).forEach((el: any) => {
-            filters[el[0]] = el[1]; //['value'] ? el[1] : el[1]['constraints'][0];
+            filters[el[0]] = el[1];
         });
-        console.log(filters);
         fetchTable();
     }, 300);
 
@@ -136,6 +138,39 @@ const Table = () => {
         dtRef.current?.exportCSV(event);
     };
 
+    const deleteDialogFooter = (
+        <React.Fragment>
+            <Button
+                label="No"
+                icon="pi pi-times"
+                className="p-button-text"
+                onClick={() => {
+                    showDeleteDialog(false);
+                    setSelectedItemToDelete(null);
+                }}
+            />
+            <Button
+                label="Yes"
+                icon="pi pi-check"
+                className="p-button-text"
+                onClick={() => {
+                    if (selectedItemToDelete !== null || selectedItems !== null) {
+                        Inertia.delete('', {
+                            data: {
+                                [resource?.primaryKeyColumn ?? 'id']: selectedItemToDelete !== null ? [String(selectedItemToDelete![resource?.primaryKeyColumn ?? 'id'])] : selectedItems!.map((r: any) => String(r[resource?.primaryKeyColumn ?? 'id']))
+                            },
+                            preserveState: true,
+                            preserveScroll: true
+                        });
+                    }
+                    setSelectedItems([]);
+                    setSelectedItemToDelete(null);
+                    showDeleteDialog(false);
+                }}
+            />
+        </React.Fragment>
+    );
+
     const toolbarLeftContents = <React.Fragment></React.Fragment>;
 
     const toolbarRightContents = (
@@ -150,6 +185,9 @@ const Table = () => {
                 className="p-button-danger"
                 icon="pi pi-trash"
                 label="Delete"
+                onClick={() => {
+                    if (selectedItems.length) showDeleteDialog(true);
+                }}
             />
         </React.Fragment>
     );
@@ -234,7 +272,10 @@ const Table = () => {
                 <Button
                     icon="pi pi-trash"
                     className="p-button-rounded p-button-danger"
-                    onClick={() => {}}
+                    onClick={() => {
+                        setSelectedItemToDelete(rowData);
+                        showDeleteDialog(true);
+                    }}
                 />
             </>
         );
@@ -352,23 +393,6 @@ const Table = () => {
                                       }
                                     : undefined
                             }
-
-                            // filterClear={(options) => {
-                            //     return (
-                            //         <Button
-                            //             type="button"
-                            //             icon="pi pi-times"
-                            //             className="p-button-secondary"
-                            //             onClick={() => {
-                            //                 const ev = options as any;
-                            //                 ev.filterModel.value = undefined;
-                            //                 ev.filterModel.constraints[0].value = undefined;
-                            //
-                            //                 onFilter(ev.filterModel);
-                            //             }}
-                            //         ></Button>
-                            //     );
-                            // }}
                         />
                     );
                 })}
@@ -378,6 +402,35 @@ const Table = () => {
                     filter={false}
                 ></Column>
             </DataTable>
+
+            <Dialog
+                visible={deleteDialog}
+                style={{ width: '450px' }}
+                header="Confirm"
+                modal
+                footer={deleteDialogFooter}
+                onHide={() => {
+                    showDeleteDialog(false);
+                    setSelectedItemToDelete(null);
+                }}
+            >
+                <div className="confirmation-content">
+                    <i
+                        className="pi pi-exclamation-triangle mr-3"
+                        style={{ fontSize: '2rem' }}
+                    />
+                    {selectedItemToDelete && (
+                        <span>
+                            Are you sure you want to delete <b>{selectedItemToDelete[resource?.titleColumn ?? 'id']}</b>?
+                        </span>
+                    )}
+                    {selectedItemToDelete === null && selectedItems.length && (
+                        <span>
+                            Are you sure you want to delete the <b>{selectedItems.length} selected records</b>?
+                        </span>
+                    )}
+                </div>
+            </Dialog>
         </>
     );
 };

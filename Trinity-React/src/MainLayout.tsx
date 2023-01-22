@@ -11,6 +11,7 @@ import { Inertia } from '@inertiajs/inertia';
 import AppFooter from '@/components/AppFooter';
 import usePageProps from '@/hooks/trinity_page_props';
 import { AppContext } from '@/contexts/AppContext';
+import { ScrollTop } from 'primereact/scrolltop';
 
 const MainLayout = (props: any) => {
     const { layoutConfig, layoutState, setLayoutState } = useContext(LayoutContext);
@@ -119,6 +120,7 @@ const MainLayout = (props: any) => {
     return (
         <>
             <Head />
+            <ScrollTop />
             <div className={containerClass}>
                 <AppTopbar ref={topbarRef} />
                 <div

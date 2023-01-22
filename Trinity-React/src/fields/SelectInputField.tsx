@@ -84,7 +84,7 @@ const SelectInputField = (props: SelectFieldProps) => {
             loading: fetching,
             showLoader: true,
             itemSize: 38,
-            scrollHeight: `${(options.length + 1) * 38}px`,
+            scrollHeight: `${(options.length + 2) * 38}px`,
             items: options,
             delay: 250,
             loadingTemplate: (options: any) => (

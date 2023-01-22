@@ -139,6 +139,12 @@ public static class AppExtensions
             );
 
             endpoints.MapControllerRoute(
+                name: "trinity-upload",
+                pattern: configs.Prefix + "/upload",
+                defaults: new { controller = "Trinity", action = "Upload" }
+            );
+
+            endpoints.MapControllerRoute(
                 name: "trinity-initial",
                 pattern: configs.Prefix + "/{controller=Trinity}/{action=Index}"
             );
@@ -148,7 +154,7 @@ public static class AppExtensions
                 pattern: configs.Prefix + "/{name}/{view=index}/{id?}",
                 defaults: new { controller = "Trinity", action = "Handle" }
             );
-            
+
             // endpoints.MapControllerRoute(
             //     name: "trinity-create",
             //     pattern: configs?.Prefix + "/{name}/create",

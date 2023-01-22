@@ -11,4 +11,5 @@ export default interface Resource {
     stripedRows: boolean;
     schema?: Array<BaseComponent>;
     columns?: Array<BaseColumn>;
+    titleColumn: string;
 }

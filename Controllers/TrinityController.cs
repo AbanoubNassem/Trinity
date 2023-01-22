@@ -11,6 +11,7 @@ using InertiaAdapter.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -150,7 +151,7 @@ public class TrinityController : Controller
             case "PUT" when view == "edit":
                 responseData.Data = await resource.Update();
                 break;
-            case "DELETE" when view == "delete":
+            case "DELETE" when view is "delete" or "index" or "edit":
                 responseData.Data = await resource.Delete();
                 break;
         }
@@ -164,6 +165,11 @@ public class TrinityController : Controller
         return Inertia.Render(view, responseData);
     }
 
+    [HttpPost]
+    public async Task<IActionResult> Upload(IFormFileCollection files, [FromForm] string resource, [FromForm] string field)
+    {
+        return Ok();
+    }
 
     private void InjectServices(string resourceName, TrinityResource resource)
     {

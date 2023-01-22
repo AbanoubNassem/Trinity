@@ -24,6 +24,7 @@ import BelongsToColumn from '@/columns/BelongsToColumn';
 import AggregateColumn from '@/columns/AggregateColumn';
 import SliderField from '@/fields/SliderField';
 import EditorField from '@/fields/EditorField';
+import FileUploadField from '@/fields/FileUploadField';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
@@ -50,7 +51,8 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['NumberField', (props) => <NumberField {...props} />],
         ['SwitchInputField', (props) => <SwitchInputField {...props} />],
         ['SliderField', (props) => <SliderField {...props} />],
-        ['EditorField', (props) => <EditorField {...props} />]
+        ['EditorField', (props) => <EditorField {...props} />],
+        ['FileUploadField', (props) => <FileUploadField {...props} />]
     ]);
 
     const columns = new Map<string, (props: any) => React.ReactNode>([
