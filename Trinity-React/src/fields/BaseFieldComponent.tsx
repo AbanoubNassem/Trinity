@@ -1,10 +1,9 @@
 import React from 'react';
 import { classNames } from 'primereact/utils';
-import Errors from '@/Types/Models/errors';
-import BaseField from "@/types/Models/Fields/BaseField";
+import BaseField from '@/types/Models/Fields/BaseField';
+import { Errors, ErrorBag } from '@inertiajs/core/types/types';
 
-
-const BaseFieldComponent = ({ component, errors, children }: { component: BaseField; errors: Errors; children?: React.ReactNode }) => {
+const BaseFieldComponent = ({ component, errors, children }: { component: BaseField; errors: Errors & ErrorBag; children?: React.ReactNode }) => {
     if (component.hidden) return <></>;
 
     return (
@@ -53,16 +52,9 @@ const BaseFieldComponent = ({ component, errors, children }: { component: BaseFi
 
             <small id={`${component.columnName}-help`}>{component.helperText}</small>
 
-            {errors?.value[component.columnName] && (
+            {errors[component.columnName] && (
                 <div className="p-error mt-1">
-                    {errors?.value[component.columnName].map((e, index) => (
-                        <span
-                            className="flex"
-                            key={index}
-                        >
-                            {e}
-                        </span>
-                    ))}
+                    <span className="flex">{errors[component.columnName]}</span>
                 </div>
             )}
         </div>

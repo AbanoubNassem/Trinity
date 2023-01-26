@@ -5,7 +5,7 @@ import { Toolbar } from 'primereact/toolbar';
 import { DataTable, DataTableFilterMeta, DataTablePFSEvent, DataTableSortMeta, DataTableSortParams } from 'primereact/datatable';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { Column } from 'primereact/column';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react';
 import { Skeleton } from 'primereact/skeleton';
 import { InputText } from 'primereact/inputtext';
 import debounce from 'lodash/debounce';
@@ -96,7 +96,11 @@ const Table = () => {
         data.perPage = tableEvent?.rows ?? paginator?.perPage ?? 10;
 
         if (tableEvent?.multiSortMeta) {
-            data.sort = JSON.stringify(tableEvent.multiSortMeta);
+            const sorts = JSON.stringify(tableEvent.multiSortMeta);
+
+            if (sorts.length > 2) {
+                data.sort = sorts;
+            }
         }
 
         if (globalSearchInput.current?.value) {
@@ -113,7 +117,7 @@ const Table = () => {
             if (Object.keys(columnsSearch).length) data.columnsSearch = JSON.stringify(columnsSearch);
         }
 
-        Inertia.get(`/${configs.prefix}/${resource?.pluralLabel.toLowerCase()}`, data, {
+        router.get(`/${configs.prefix}/${resource?.pluralLabel.toLowerCase()}`, data, {
             preserveState: true,
             preserveScroll: true,
             replace: true,
@@ -155,7 +159,7 @@ const Table = () => {
                 className="p-button-text"
                 onClick={() => {
                     if (selectedItemToDelete !== null || selectedItems !== null) {
-                        Inertia.delete('', {
+                        router.delete('', {
                             data: {
                                 [resource?.primaryKeyColumn ?? 'id']: selectedItemToDelete !== null ? [String(selectedItemToDelete![resource?.primaryKeyColumn ?? 'id'])] : selectedItems!.map((r: any) => String(r[resource?.primaryKeyColumn ?? 'id']))
                             },

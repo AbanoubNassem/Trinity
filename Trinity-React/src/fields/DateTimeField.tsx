@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { Calendar } from 'primereact/calendar';
 import { classNames } from 'primereact/utils';
-import FieldProps from "@/types/Props/Fields/FieldProps";
+import FieldProps from '@/types/Props/Fields/FieldProps';
 import DateTimeField from '@/types/Models/Fields/DateTimeField';
 
 const DateTimeField = ({ component, formData, setFieldValue, errors }: FieldProps<DateTimeField>) => {
@@ -23,7 +23,7 @@ const DateTimeField = ({ component, formData, setFieldValue, errors }: FieldProp
                 disabled={component.disabled}
                 readOnlyInput={component.disabled}
                 placeholder={component.placeholder}
-                className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
+                className={classNames({ 'p-invalid': errors[component.columnName] })}
                 tooltip={component.tooltip}
                 tooltipOptions={{ event: 'focus', position: 'top' }}
                 value={value}

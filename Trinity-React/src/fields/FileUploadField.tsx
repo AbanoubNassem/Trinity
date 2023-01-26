@@ -1,192 +1,179 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useMemo } from 'react';
 import axios from 'axios';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import FieldProps from '@/types/Props/Fields/FieldProps';
 import FileUploadField from '@/types/Models/Fields/FileUploadField';
-import { FileUpload, FileUploadHeaderTemplateOptions, FileUploadSelectParams, ItemTemplateOptions, FileUploadHandlerParam } from 'primereact/fileupload';
 import { classNames } from 'primereact/utils';
-import { ProgressBar } from 'primereact/progressbar';
-import { Button } from 'primereact/button';
-import { Tag } from 'primereact/tag';
 import usePageProps from '@/hooks/trinity_page_props';
 import { useConfigs } from '@/hooks/trinity_configs';
-import { useForm } from '@inertiajs/inertia-react';
+import { AppContext } from '@/contexts/AppContext';
+import { FilePond, registerPlugin } from 'react-filepond';
 
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import FilePondPluginImageCrop from 'filepond-plugin-image-crop';
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginImageResize from 'filepond-plugin-image-resize';
+import FilePondPluginImageTransform from 'filepond-plugin-image-transform';
+import FilePondPluginImageValidateSize from 'filepond-plugin-image-validate-size';
+// @ts-ignore
+import FilePondPluginMediaPreview from 'filepond-plugin-media-preview';
+
+// Import the plugin styles
+import 'filepond/dist/filepond.min.css';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+import 'filepond-plugin-media-preview/dist/filepond-plugin-media-preview.css';
+
+registerPlugin(
+    FilePondPluginImageExifOrientation,
+    FilePondPluginFileValidateSize,
+    FilePondPluginFileValidateType,
+    FilePondPluginImageValidateSize,
+    FilePondPluginImagePreview,
+    FilePondPluginImageCrop,
+    FilePondPluginImageResize,
+    FilePondPluginImageTransform,
+    FilePondPluginMediaPreview
+);
 const FileUploadField = ({ component, formData, setFieldValue, errors }: FieldProps<FileUploadField>) => {
+    const { toast } = useContext(AppContext);
     const configs = useConfigs();
     const { resource } = usePageProps();
-    const form = useForm({
-        files: [],
-        resource: undefined,
-        filed: undefined
-    });
-
-    const fileUploadRef = useRef<FileUpload>(null);
-    const [totalSize, setTotalSize] = useState(0);
-
-    let headerTemplate = undefined;
-    let itemTemplate = undefined;
-    let emptyTemplate = undefined;
-    let chooseOptions = undefined;
-    let uploadOptions = undefined;
-    let cancelOptions = undefined;
-
-    const uploadHandler = (e: FileUploadHandlerParam) => {
-        if (e.files.length <= 0) return;
-
-        const form = new FormData();
-        e.files.forEach((f) => form.append('files', f));
-        form.append('resource', resource?.pluralLabel.toLowerCase() ?? '');
-        form.append('field', component.columnName);
-
-        axios.post(`/${configs.prefix}/upload`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-    };
-    const onTemplateSelect = (e: FileUploadSelectParams) => {
-        let _totalSize = component.multiple ? totalSize : 0;
-
-        Object.values(e.files).forEach((file) => {
-            _totalSize += file.size;
-        });
-
-        // if (component.maximumFileSize && _totalSize >= component.maximumFileSize) return;
-        setTotalSize(_totalSize);
-    };
-    const onTemplateRemove = (file: any, callback: any) => {
-        setTotalSize(totalSize - file.size);
-        callback();
-    };
-
-    if ((component.template as string) === 'image') {
-        headerTemplate = (options: FileUploadHeaderTemplateOptions) => {
-            const { className, chooseButton, uploadButton, cancelButton } = options;
-            const value = (totalSize / (component.maximumFileSize ?? 1)) * 100;
-            const formattedValue = fileUploadRef && fileUploadRef.current ? fileUploadRef.current.formatSize(totalSize) : '0 B';
-            const formattedMax = fileUploadRef.current?.formatSize(component.maximumFileSize ?? 0);
-
-            return (
-                <div
-                    className={className}
-                    style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center' }}
-                >
-                    <div>
-                        {chooseButton}
-                        {uploadButton}
-                        {cancelButton}
-                    </div>
-                    {component.maximumFileSize && (
-                        <ProgressBar
-                            value={value}
-                            displayValueTemplate={() => `${formattedValue} / ${formattedMax}`}
-                            style={{ width: '300px', height: '20px', marginLeft: 'auto' }}
-                        />
-                    )}
-                </div>
-            );
-        };
-
-        itemTemplate = (file: any, props: ItemTemplateOptions) => {
-            return (
-                <div className="flex align-items-center flex-wrap">
-                    <div
-                        className="flex align-items-center"
-                        style={{ width: '40%' }}
-                    >
-                        <img
-                            alt={file.name}
-                            role="presentation"
-                            src={file.objectURL}
-                            width={100}
-                        />
-                        <span className="flex flex-column text-left ml-3">
-                            {file.name}
-                            <small>{new Date().toLocaleDateString()}</small>
-                        </span>
-                    </div>
-                    <Tag
-                        value={props.formatSize}
-                        severity="warning"
-                        className="px-3 py-2"
-                    />
-                    <Button
-                        type="button"
-                        icon="pi pi-times"
-                        className="w-3rem p-button-outlined p-button-rounded p-button-danger ml-auto"
-                        onClick={() => onTemplateRemove(file, props.onRemove)}
-                    />
-                </div>
-            );
-        };
-
-        emptyTemplate = () => {
-            return (
-                <div className="flex align-items-center flex-column">
-                    <i
-                        className={`${component.icon} mt-3 p-5`}
-                        style={{
-                            fontSize: '5em',
-                            borderRadius: '50%',
-                            backgroundColor: 'var(--surface-b)',
-                            color: 'var(--surface-d)'
-                        }}
-                    ></i>
-                    <span
-                        style={{ fontSize: '1.2em', color: 'var(--text-color-secondary)' }}
-                        className="my-5"
-                    >
-                        Drag and Drop Here
-                    </span>
-                </div>
-            );
-        };
-
-        chooseOptions = {
-            icon: 'pi pi-fw pi-images',
-            iconOnly: true,
-            className: 'w-3rem custom-choose-btn p-button-rounded p-button-outlined'
-        };
-        uploadOptions = {
-            icon: 'pi pi-fw pi-cloud-upload',
-            iconOnly: true,
-            className: 'w-3rem custom-upload-btn p-button-success p-button-rounded p-button-outlined'
-        };
-        cancelOptions = {
-            icon: 'pi pi-fw pi-times',
-            iconOnly: true,
-            className: 'w-3rem custom-cancel-btn p-button-danger p-button-rounded p-button-outlined'
-        };
-    }
+    const uploaded = useMemo<Array<any>>(() => [], [configs]);
 
     return (
         <BaseFieldComponent
             component={component}
             errors={errors}
         >
-            <FileUpload
-                ref={fileUploadRef}
+            <FilePond
                 id={component.columnName}
                 name={component.columnName}
                 disabled={component.disabled}
-                className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
-                multiple={component.multiple}
-                auto={component.autoUploads}
-                accept={component.fileTypes}
-                maxFileSize={component.maximumFileSize}
-                mode={(component.template as string) === 'image' ? undefined : component.template}
-                headerTemplate={headerTemplate}
-                itemTemplate={itemTemplate}
-                emptyTemplate={emptyTemplate}
-                chooseOptions={chooseOptions}
-                uploadOptions={uploadOptions}
-                cancelOptions={cancelOptions}
-                onSelect={onTemplateSelect}
-                onClear={() => setTotalSize(0)}
-                onError={() => setTotalSize(0)}
-                customUpload
-                uploadHandler={uploadHandler}
+                className={classNames({ 'p-invalid': errors[component.columnName] })}
+                credits={false}
+                allowPaste={false}
+                allowMultiple={component.multiple}
+                acceptedFileTypes={component.fileTypes}
+                allowReorder={component.allowReorder}
+                allowImageExifOrientation={component.shouldOrientImageFromExif}
+                allowImagePreview={component.canPreview}
+                allowImageTransform={component.allowImageTransform}
+                files={
+                    formData[component.columnName]?.length
+                        ? formData[component.columnName]?.split(',').map((e: string) => {
+                              return {
+                                  source: e,
+                                  options: {
+                                      type: 'local'
+                                  }
+                              };
+                          })
+                        : undefined
+                }
+                imageCropAspectRatio={component.imageCropAspectRatio}
+                imagePreviewHeight={component.imagePreviewHeight}
+                imageResizeTargetHeight={component.imageResizeTargetHeight}
+                imageResizeTargetWidth={component.imageResizeTargetWidth}
+                imageResizeMode={component.imageResizeMode}
+                imageResizeUpscale={component.imageResizeUpscale}
+                itemInsertLocation={component.itemInsertLocation}
+                labelIdle={component.placeholder ?? 'Drag & Drop your files or <span class="filepond--label-action" tabindex="0">Browse</span>'}
+                maxFileSize={component.maxFileSize}
+                minFileSize={component.minFileSize}
+                styleButtonProcessItemPosition={component.buttonProcessItemPosition}
+                styleButtonRemoveItemPosition={component.buttonRemoveItemPosition}
+                styleLoadIndicatorPosition={component.loadIndicatorPosition}
+                stylePanelAspectRatio={component.panelAspectRatio}
+                stylePanelLayout={component.panelLayout}
+                styleProgressIndicatorPosition={component.progressIndicatorPosition}
+                server={{
+                    url: `/${configs.prefix}`,
+                    load: (source, load, error, progress, abort, headers) => {
+                        axios({
+                            method: 'get',
+                            url: source,
+                            responseType: 'blob',
+                            onDownloadProgress: (e) => {
+                                progress(e.download ?? false, e.loaded, e.total ?? 0);
+                            }
+                        })
+                            .then((response) => {
+                                load(response.data);
+                            })
+                            .catch((err) => err(err));
+                    },
+
+                    remove: (source, load, error) => {
+                        axios
+                            .post(`/${configs.prefix}/delete/file`, {
+                                UniqueFileIdOrUrl: source,
+                                resourceName: resource?.pluralLabel.toLowerCase() ?? '',
+                                fieldName: component.columnName,
+                                reverting: false
+                            })
+                            .then(() => {
+                                load();
+                                setFieldValue(component.columnName, null);
+                            })
+                            .catch((err) => error(err));
+                    },
+                    revert: (uniqueFileId, load, error) => {
+                        axios
+                            .post(`/${configs.prefix}/delete/file`, {
+                                UniqueFileIdOrUrl: uniqueFileId,
+                                resourceName: resource?.pluralLabel.toLowerCase() ?? '',
+                                fieldName: component.columnName,
+                                reverting: true
+                            })
+                            .then(() => load())
+                            .catch((err) => error(err));
+                    },
+
+                    process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+                        const formData = new FormData();
+                        formData.append('files', file, file.name);
+                        formData.append('resourceName', resource?.pluralLabel.toLowerCase() ?? '');
+                        formData.append('fieldName', component.columnName);
+
+                        const cancelToken = axios.CancelToken.source();
+
+                        axios
+                            .post(`/${configs.prefix}/upload/file`, formData, {
+                                cancelToken: cancelToken.token,
+                                headers: {
+                                    'Content-Type': 'multipart/form-data'
+                                },
+                                onUploadProgress: (e) => {
+                                    progress(e.upload ?? false, e.loaded, e.total ?? 0);
+                                }
+                            })
+                            .then(({ data }) => {
+                                if (data['data'] !== null && !!data['data'].length) {
+                                    load(data['data'][0]);
+                                    setFieldValue(component.columnName, data['data'][0]);
+                                    uploaded.push(data['data'][0]);
+                                } else {
+                                    error(data['notifications']);
+                                }
+                                toast?.current?.show(data['notifications'] as any);
+                            })
+                            .catch((er) => error(er));
+
+                        return {
+                            abort: () => {
+                                cancelToken.cancel('Operation canceled by the user.');
+                                abort();
+                            }
+                        };
+                    }
+                }}
+                // @ts-ignore
+                uploadProgressIndicatorPosition={component.uploadProgressIndicatorPosition}
+                removeUploadedFileButtonPosition={component.removeUploadedFileButtonPosition}
+                allowVideoPreview={component.canPreview}
+                allowAudioPreview={component.canPreview}
             />
         </BaseFieldComponent>
     );

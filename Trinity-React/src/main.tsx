@@ -6,13 +6,14 @@ import '@/assets/styles/trinity.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createInertiaApp } from '@inertiajs/inertia-react';
 import { LayoutProvider } from '@/contexts/LayoutContext';
 import { AppContextProvider } from './contexts/AppContext';
 import MainLayout from '@/MainLayout';
 import axios from 'axios';
+import { createInertiaApp } from '@inertiajs/react';
 
 createInertiaApp({
+    progress: false,
     resolve: async (name) => {
         const page = (await import(`./pages/${name[0].toUpperCase() + name.slice(1)}.tsx`)).default;
 

@@ -9,7 +9,7 @@ export default defineConfig({
         'process.env': [process.env]
     },
     build: {
-        outDir: resolve(__dirname, '../wwwroot/dist'),
+        outDir: resolve(__dirname, '../Trinity/wwwroot/dist'),
         emptyOutDir: true,
         lib: {
             entry: resolve(__dirname, 'src/main.tsx'),

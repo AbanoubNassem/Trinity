@@ -63,7 +63,7 @@ const SelectInputField = (props: SelectFieldProps) => {
         disabled: component.disabled,
         placeholder: component.placeholder,
         panelClassName: 'trinity-dropdown',
-        className: classNames({ 'p-invalid': errors?.value[component.columnName] }),
+        className: classNames({ 'p-invalid': errors[component.columnName] }),
         tooltip: component.tooltip,
         tooltipOptions: { event: 'focus', position: 'top' },
         options: options,

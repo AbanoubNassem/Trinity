@@ -6,10 +6,10 @@ import { Toolbar } from 'primereact/toolbar';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { trinityLink } from '@/utilities/trinity_link';
 import { AppContext } from '@/contexts/AppContext';
-import { useForm } from '@inertiajs/inertia-react';
+
 import { useTrinityFields } from '@/hooks/trinity_resource_fields';
 import last from 'lodash/last';
-import { Inertia } from '@inertiajs/inertia';
+import { useForm, router } from '@inertiajs/react';
 
 const Create = () => {
     const configs = useConfigs();
@@ -33,7 +33,7 @@ const Create = () => {
             if (!createAddAnother) {
                 trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${inserted}`, false, false);
             } else {
-                Inertia.get('');
+                router.get('');
             }
         }
     }, [inserted]);
@@ -96,23 +96,6 @@ const Create = () => {
                         )
                     )}
                 </form>
-
-                <div className="grid">
-                    <div className="field">
-                        {errors?.value[''] && (
-                            <small className="p-error">
-                                {errors?.value[''].map((e, index) => (
-                                    <span
-                                        className="flex"
-                                        key={index}
-                                    >
-                                        {e}
-                                    </span>
-                                ))}
-                            </small>
-                        )}
-                    </div>
-                </div>
 
                 <div className="mt-3">
                     <Toolbar right={toolbarRight} />

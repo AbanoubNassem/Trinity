@@ -1,6 +1,4 @@
 import React, { RefObject, useRef } from 'react';
-import * as Inertia from '@inertiajs/inertia';
-import { InertiaProgress } from '@inertiajs/progress';
 import GridLayout from '@/layouts/GridLayout';
 import FieldsetLayout from '@/layouts/FieldsetLayout';
 import TextField from '@/fields/TextField';
@@ -25,6 +23,7 @@ import AggregateColumn from '@/columns/AggregateColumn';
 import SliderField from '@/fields/SliderField';
 import EditorField from '@/fields/EditorField';
 import FileUploadField from '@/fields/FileUploadField';
+import { Page, setupProgress } from '@inertiajs/core';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
@@ -34,9 +33,10 @@ export const AppContext = React.createContext<{
     toast?: RefObject<Toast>;
 }>({});
 
-export const AppContextProvider = (props: { children: React.ReactNode; initialPage: Inertia.Page<any> }) => {
-    const { configs, resources } = props.initialPage.props.controller;
-    InertiaProgress.init(configs?.progressSettings);
+export const AppContextProvider = (props: { children: React.ReactNode; initialPage: Page<any> }) => {
+    const { configs, resources } = props.initialPage.props;
+
+    setupProgress(configs?.progressSettings);
 
     const components = new Map<string, (props: any) => React.ReactNode>([
         ['GridLayout', (props) => <GridLayout {...props} />],

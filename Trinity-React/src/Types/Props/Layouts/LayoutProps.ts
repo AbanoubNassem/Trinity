@@ -1,9 +1,9 @@
 import BaseComponent from '@/types/Models/BaseComponent';
-import type Errors from '@/Types/Models/errors';
+import { Errors, ErrorBag } from '@inertiajs/core/types/types';
 
 export default interface LayoutProps<T extends BaseComponent> {
     component: T;
     formData: any;
     setFieldValue: (name: string, value: any) => void;
-    errors: Errors;
+    errors: Errors & ErrorBag;
 }

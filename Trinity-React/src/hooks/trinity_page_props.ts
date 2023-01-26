@@ -1,29 +1,23 @@
-import { usePage } from '@inertiajs/inertia-react';
-import Errors from '../Types/Models/errors';
-import type { Page } from '@inertiajs/inertia';
 import Configs from '@/types/Models/Configs';
 import Resource from '@/types/Models/Resource';
+import { usePage } from '@inertiajs/react';
+import { ErrorBag, Errors } from '@inertiajs/core/types/types';
 
-export default function usePageProps<T>() {
-    const { props, component } = usePage<
-        Page<{
-            controller: {
-                configs?: Configs;
-                resources?: Array<Resource>;
-                resource?: Resource;
-                data?: T;
-                errors?: Errors;
-                notifications?: Array<string>;
-            };
-            sharedProps: {
-                [key: string]: string;
-            };
-        }>
-    >();
-
+export default function usePageProps<T>(): {
+    component: string;
+    configs?: Configs;
+    resources?: Array<Resource>;
+    resource?: Resource;
+    data?: T;
+    errors: Errors & ErrorBag;
+    notifications?: Array<string>;
+    sharedProps: {
+        [key: string]: string;
+    };
+} {
+    const page = usePage();
     return {
-        ...{ component },
-        ...props.controller,
-        ...props.sharedProps
+        component: page.component,
+        ...(page.props as any)
     };
 }

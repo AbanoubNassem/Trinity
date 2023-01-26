@@ -1,17 +1,16 @@
 import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
 import { LayoutContext } from '@/contexts/LayoutContext';
-import { Link } from '@inertiajs/inertia-react';
+import { Link, router } from '@inertiajs/react';
 import { classNames } from 'primereact/utils';
 import { useLogo } from '@/hooks/trinity_logo';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
-import { Inertia } from '@inertiajs/inertia';
 
 const AppTopbar = forwardRef((props, ref) => {
     const configs = useConfigs();
     const logo = useLogo();
-    const { layoutConfig, layoutState, onMenuToggle, showProfileSidebar } = useContext(LayoutContext);
+    const { layoutState, onMenuToggle, showProfileSidebar } = useContext(LayoutContext);
     const menubuttonRef = useRef(null);
     const topbarmenuRef = useRef(null);
     const topbarmenubuttonRef = useRef(null);
@@ -32,7 +31,7 @@ const AppTopbar = forwardRef((props, ref) => {
                     icon: 'pi pi-sign-out',
                     href: '',
                     command: () => {
-                        Inertia.post(`/${configs.prefix}/logout`);
+                        router.post(`/${configs.prefix}/logout`);
                     }
                 }
             ]

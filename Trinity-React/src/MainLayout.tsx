@@ -7,7 +7,7 @@ import AppTopbar from '@/components/AppTopbar';
 import { useEventListener, useUnmountEffect } from 'primereact/hooks';
 import { LayoutContext } from '@/contexts/LayoutContext';
 import AppSidebar from '@/components/AppSidebar';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react';
 import AppFooter from '@/components/AppFooter';
 import usePageProps from '@/hooks/trinity_page_props';
 import { AppContext } from '@/contexts/AppContext';
@@ -92,7 +92,7 @@ const MainLayout = (props: any) => {
     }, [layoutState.profileSidebarVisible]);
 
     useEffect(() => {
-        Inertia.on('navigate', () => {
+        router.on('navigate', () => {
             hideMenu();
             hideProfileMenu();
         });

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { classNames } from 'primereact/utils';
 import { Ripple } from 'primereact/ripple';
-import { Link } from '@inertiajs/inertia-react';
+import { Link } from '@inertiajs/react'
 import usePageProps from '@/hooks/trinity_page_props';
 import { CSSTransition as Transition } from 'react-transition-group';
 import { useConfigs } from '@/hooks/trinity_configs';

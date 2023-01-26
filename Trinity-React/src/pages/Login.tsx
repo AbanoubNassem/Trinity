@@ -9,8 +9,8 @@ import { classNames } from 'primereact/utils';
 import { LayoutContext } from '@/contexts/LayoutContext';
 import { useLogo } from '@/hooks/trinity_logo';
 import { useConfigs } from '@/hooks/trinity_configs';
-import { useForm } from '@inertiajs/inertia-react';
-import { Method } from '@inertiajs/inertia';
+import { useForm } from '@inertiajs/react';
+import { Method } from '@inertiajs/core';
 
 const Login = () => {
     const configs = useConfigs();
@@ -65,23 +65,12 @@ const Login = () => {
                                         type="email"
                                         required
                                         placeholder="Email address"
-                                        className={classNames('w-full md:w-30rem mb-3', { 'p-invalid': pageProps.errors?.value['Email'] })}
+                                        className={classNames('w-full md:w-30rem mb-3', { 'p-invalid': pageProps.errors.email })}
                                         value={data.email}
                                         onChange={(e) => setData('email', e.target.value)}
                                         style={{ padding: '1rem' }}
                                     />
-                                    {pageProps.errors?.value['Email'] && (
-                                        <small className="p-error w-full block md:w-30rem">
-                                            {pageProps.errors?.value['Email'].map((e, index) => (
-                                                <span
-                                                    className="flex"
-                                                    key={index}
-                                                >
-                                                    {e}
-                                                </span>
-                                            ))}
-                                        </small>
-                                    )}
+                                    {pageProps.errors.email && <small className="p-error w-full block md:w-30rem">{pageProps.errors.email}</small>}
                                 </div>
                                 <div className="field">
                                     <label className="block text-900 font-medium text-xl mb-2">Password</label>
@@ -95,21 +84,10 @@ const Login = () => {
                                         type="password"
                                         required
                                         toggleMask
-                                        className={classNames('w-full mb-3', { 'p-invalid': pageProps.errors?.value['Password'] })}
+                                        className={classNames('w-full mb-3', { 'p-invalid': pageProps.errors.password })}
                                         inputClassName="w-full p-3 md:w-30rem"
                                     />
-                                    {pageProps.errors?.value['Password'] && (
-                                        <small className="p-error w-full block md:w-30rem">
-                                            {pageProps.errors?.value['Password'].map((e, index) => (
-                                                <span
-                                                    className="flex"
-                                                    key={index}
-                                                >
-                                                    {e}
-                                                </span>
-                                            ))}
-                                        </small>
-                                    )}
+                                    {pageProps.errors.password && <small className="p-error w-full block md:w-30rem">{pageProps.errors.password}</small>}
                                 </div>
                                 <div className="flex align-items-center justify-content-between mb-5 gap-5">
                                     <div className="flex align-items-center">
@@ -129,20 +107,6 @@ const Login = () => {
                                     >
                                         Forgot password?
                                     </a>
-                                </div>
-                                <div className="field">
-                                    {pageProps.errors?.value[''] && (
-                                        <small className="p-error w-full block md:w-30rem">
-                                            {pageProps.errors?.value[''].map((e, index) => (
-                                                <span
-                                                    className="flex"
-                                                    key={index}
-                                                >
-                                                    {e}
-                                                </span>
-                                            ))}
-                                        </small>
-                                    )}
                                 </div>
 
                                 <Button

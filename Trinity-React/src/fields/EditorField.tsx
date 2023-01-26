@@ -33,7 +33,7 @@ const EditorField = ({ component, formData, setFieldValue, errors }: FieldProps<
                 disabled={component.disabled}
                 hidden={component.hidden}
                 placeholder={component.placeholder}
-                className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
+                className={classNames({ 'p-invalid': errors[component.columnName] })}
                 value={value}
                 onTextChange={(e) => {
                     setFieldValue(component.columnName, e.htmlValue);

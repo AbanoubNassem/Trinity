@@ -3,7 +3,7 @@ import React from 'react';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { InputMask } from 'primereact/inputmask';
-import FieldProps from "@/types/Props/Fields/FieldProps";
+import FieldProps from '@/types/Props/Fields/FieldProps';
 import MaskField from '@/types/Models/Fields/MaskField';
 
 const MaskField = ({ component, formData, setFieldValue, errors }: FieldProps<MaskField>) => {
@@ -18,7 +18,7 @@ const MaskField = ({ component, formData, setFieldValue, errors }: FieldProps<Ma
                 disabled={component.disabled}
                 hidden={component.hidden}
                 placeholder={component.placeholder}
-                className={classNames({ 'p-invalid': errors?.value[component.columnName] })}
+                className={classNames({ 'p-invalid': errors[component.columnName] })}
                 tooltip={component.tooltip}
                 tooltipOptions={{ event: 'focus', position: 'top' }}
                 mask={component.inputMask}

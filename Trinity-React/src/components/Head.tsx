@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Head as InertiaHead } from '@inertiajs/inertia-react';
+import { Head as InertiaHead } from '@inertiajs/react'
 import { AppContext } from '@/contexts/AppContext';
 
 export const Head = (props: { title?: string; children?: React.ReactNode }) => {
