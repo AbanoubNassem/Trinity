@@ -10,6 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AspNetCore.InertiaCore" Version="0.0.4" />
         <PackageReference Include="Dapper" Version="2.0.123" />
         <PackageReference Include="Dapper-QueryBuilder" Version="1.2.9" />
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
@@ -26,7 +27,7 @@
     </ItemGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\..\InertiaCore\InertiaCore\InertiaCore.csproj" />
+      <Folder Include="wwwroot" />
     </ItemGroup>
     
 </Project>

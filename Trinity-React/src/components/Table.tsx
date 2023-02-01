@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
-import { DataTable, DataTableFilterMeta, DataTablePFSEvent, DataTableSortMeta, DataTableSortParams } from 'primereact/datatable';
+import { DataTable, DataTableFilterEvent, DataTableFilterMeta, DataTablePageEvent, DataTableSortEvent, DataTableSortMeta } from 'primereact/datatable';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { Column } from 'primereact/column';
 import { router } from '@inertiajs/react';
@@ -25,7 +25,7 @@ const Table = () => {
     const resourceColumns = resource?.columns ?? [];
     const urlParams = useUrlParams();
     const [loading, setLoading] = useState(false);
-    const dtRef = useRef<DataTable>(null);
+    const dtRef = useRef<DataTable<Array<any>>>(null);
     const globalSearchInput = useRef<HTMLInputElement>(null);
     const toggleableFieldsDiv = useRef<HTMLDivElement>();
     const toggleableMultiSelect = useRef<MultiSelect>(null);
@@ -53,8 +53,8 @@ const Table = () => {
 
     const columns = resourceColumns.filter((f) => !f.toggleable || selectedColumns.find((el) => el.field === f.columnName));
 
-    let tableEvent: DataTablePFSEvent | any = undefined;
-    const onTableEvent = (e: DataTableSortParams) => {
+    let tableEvent: DataTablePageEvent | DataTableSortEvent | DataTableFilterEvent | any = undefined;
+    const onTableEvent = (e: DataTablePageEvent | DataTableSortEvent) => {
         tableEvent = e as any;
         fetchTable();
     };
@@ -80,7 +80,7 @@ const Table = () => {
         }
     });
 
-    const onFilter = debounce((ev: DataTablePFSEvent) => {
+    const onFilter = debounce((ev: DataTableFilterEvent) => {
         filters = {};
         Object.entries(ev.filters).forEach((el: any) => {
             filters[el[0]] = el[1];
@@ -288,15 +288,15 @@ const Table = () => {
     return (
         <>
             <Toolbar
-                left={toolbarLeftContents}
-                right={toolbarRightContents}
+                start={toolbarLeftContents}
+                end={toolbarRightContents}
             />
 
             <DataTable
                 ref={dtRef}
                 dataKey={resource?.primaryKeyColumn ?? 'id'}
                 selection={selectedItems}
-                onSelectionChange={(e) => setSelectedItems(e.value)}
+                onSelectionChange={(e) => setSelectedItems(e.value as any)}
                 header={header}
                 size={'small'}
                 first={(paginator!.currentPage - 1) * paginator!.perPage}
@@ -387,7 +387,8 @@ const Table = () => {
                                                           setFieldValue: (name: string, value: any) => {
                                                               options.filterCallback(value);
                                                           },
-                                                          formData: { [column.columnName]: options.value }
+                                                          formData: { [column.columnName]: options.value },
+                                                          errors: {}
                                                       })
                                                   ) : (
                                                       <>{column.customFilter!.componentName}</>

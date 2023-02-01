@@ -18,7 +18,7 @@ const Create = () => {
     const { components } = useContext(AppContext);
     const [createAddAnother, setCreateAddAnother] = useState(false);
 
-    let data = useMemo<any>(() => {
+    let data = useMemo<{ [k: string]: any }>(() => {
         let innerData = {} as any;
         for (const field of fields) {
             innerData[last(field.columnName.split('.'))!] = undefined;
@@ -43,6 +43,7 @@ const Create = () => {
     };
 
     const create = (_createAddAnother: boolean = false) => {
+        form.setData(data);
         setCreateAddAnother(_createAddAnother);
         form.post('', {
             preserveScroll: true,
@@ -86,7 +87,10 @@ const Create = () => {
                         components?.has(component.componentName) ? (
                             components?.get(component.componentName)!({
                                 key: `form_${index}_${component.componentName}`,
+                                configs: configs,
+                                resource: resource,
                                 component,
+                                record: {},
                                 formData: data,
                                 setFieldValue,
                                 errors

@@ -4,11 +4,12 @@ import { classNames } from 'primereact/utils';
 import { Dropdown, DropdownProps } from 'primereact/dropdown';
 
 import debounce from 'lodash/debounce';
-import { VirtualScrollerLazyParams } from 'primereact/virtualscroller';
+
 import { Skeleton } from 'primereact/skeleton';
 import last from 'lodash/last';
 import { MultiSelect, MultiSelectProps } from 'primereact/multiselect';
 import SelectFieldProps from '@/types/Props/Fields/SelectFieldProps';
+import { VirtualScrollerLazyEvent } from 'primereact/virtualscroller';
 
 const EMPTY = [
     {
@@ -43,7 +44,7 @@ const SelectInputField = (props: SelectFieldProps) => {
         setOptions(getOptions());
         setFieldValue(component.columnName, getValue());
     }, [props.options]);
-    const loadItems = async (e: VirtualScrollerLazyParams & { filter: string; value: any }) => {
+    const loadItems = async (e: VirtualScrollerLazyEvent & { filter: string; value: any }) => {
         if (fetching || !search) return;
         setFetching(true);
         const res = await search({ ...e, ...{ value: getValue() } });

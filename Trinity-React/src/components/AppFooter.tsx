@@ -1,10 +1,7 @@
-import { useContext } from 'react';
-import { LayoutContext } from '@/contexts/LayoutContext';
 import { useLogo } from '@/hooks/trinity_logo';
 import { useConfigs } from '@/hooks/trinity_configs';
 
 const AppFooter = () => {
-    const { layoutConfig } = useContext(LayoutContext);
     const configs = useConfigs();
     const logo = useLogo();
 

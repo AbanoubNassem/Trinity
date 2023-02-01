@@ -96,7 +96,7 @@ public class TrinityController : Controller
             authProperties
         );
 
-        return Redirect(returnUrl ?? $"/{_configurations.Prefix}/");
+        return Inertia.Render("Login", new { Data = returnUrl ?? $"/{_configurations.Prefix}/" });
     }
 
     [HttpPost]
@@ -172,7 +172,7 @@ public class TrinityController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> UploadFile(IFormFileCollection? files, [FromForm] string resourceName,
+    public async Task<IActionResult> UploadFile(IFormFile? file, [FromForm] string resourceName,
         [FromForm] string fieldName)
     {
         if (!_trinityManager.Resources.TryGetValue(resourceName.Titleize(), out var resourceObject))
@@ -185,28 +185,28 @@ public class TrinityController : Controller
 
         if (field is not ICanUploadField uploadField) return UnprocessableEntity();
 
-        if (files == null || files.Count == 0)
-            return BadRequest("files not selected");
+        if (file == null)
+            return BadRequest("file not selected");
 
         return Ok(new
         {
-            data = await uploadField.Upload(_webHostEnvironment, files),
+            data = await uploadField.Upload(_webHostEnvironment, file),
             notifications = TrinityNotifications.Flush(),
         });
     }
 
     [HttpPost]
-    public async Task<IActionResult> DeleteFile([FromBody] DeleteFileRequest request)
+    public Task<IActionResult> DeleteFile([FromBody] DeleteFileRequest request)
     {
         if (!_trinityManager.Resources.TryGetValue(request.ResourceName.Titleize(), out var resourceObject))
         {
-            return NotFound(request.ResourceName);
+            return Task.FromResult<IActionResult>(NotFound(request.ResourceName));
         }
 
         var resource = (resourceObject as TrinityResource)!;
         var field = resource.Fields[request.FieldName];
 
-        if (field is not ICanUploadField uploadField) return UnprocessableEntity();
+        if (field is not ICanUploadField uploadField) return Task.FromResult<IActionResult>(UnprocessableEntity());
 
         dynamic? data = null;
 
@@ -221,27 +221,18 @@ public class TrinityController : Controller
             if (!filesToDelete.Any())
             {
                 TrinityNotifications.NotifyError("Nothing to delete/revert!");
-                return BadRequest("Nothing to delete/revert!");
+                return Task.FromResult<IActionResult>(BadRequest("Nothing to delete/revert!"));
             }
 
             Parallel.ForEach(filesToDelete, System.IO.File.Delete);
         }
-        else
-        {
-            //if the url belongs to local uploads then we pass it to the field to be deleted
-            //otherwise we do nothing , and when the update request is sent , we set the column value to empty string.
-            if (_urlHelper.IsLocalUrl(request.UniqueFileIdOrUrl))
-            {
-                data = await uploadField.Delete(request.UniqueFileIdOrUrl);
-            }
-        }
 
 
-        return Ok(new
+        return Task.FromResult<IActionResult>(Ok(new
         {
             data,
             notifications = TrinityNotifications.Flush(),
-        });
+        }));
     }
 
     private void InjectServices(string resourceName, TrinityResource resource)

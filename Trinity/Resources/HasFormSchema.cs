@@ -17,7 +17,7 @@ public abstract partial class TrinityResource
     private readonly Dictionary<string, object> _fields = new();
 
     private readonly List<object> _schema = new();
-    
+
 
     public virtual async Task Setup()
     {
@@ -213,7 +213,7 @@ public abstract partial class TrinityResource
 
         if (record == null)
         {
-            if (!Request.RouteValues.TryGetValue("id", out var key)) return record;
+            if (!Request.RouteValues.TryGetValue("id", out var key)) return null;
 
             ModelState.AddModelError("", $"The entity with {PrimaryKeyColumn}={key} doesn't exist.");
             TrinityNotifications.NotifyError($"The entity with {PrimaryKeyColumn}={key} doesn't exist.");

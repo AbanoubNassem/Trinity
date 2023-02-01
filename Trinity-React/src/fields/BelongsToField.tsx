@@ -6,7 +6,7 @@ import { useConfigs } from '@/hooks/trinity_configs';
 import usePageProps from '@/hooks/trinity_page_props';
 import { SelectItemOptionsType } from 'primereact/selectitem';
 
-import { VirtualScrollerLazyParams } from 'primereact/virtualscroller';
+import { VirtualScrollerLazyEvent } from 'primereact/virtualscroller';
 import last from 'lodash/last';
 import modal from '@/utilities/inertia_modal';
 import FieldProps from '@/types/Props/Fields/FieldProps';
@@ -23,7 +23,14 @@ const BelongsToField = (props: FieldProps<RelationshipField>) => {
         if (relation && relation[r]) relation = relation[r];
     }
 
-    async function fetchAssociates(e: (VirtualScrollerLazyParams & { filter: string; value: any }) | null): Promise<SelectItemOptionsType> {
+    async function fetchAssociates(
+        e:
+            | (VirtualScrollerLazyEvent & {
+                  filter: string;
+                  value: any;
+              })
+            | null
+    ): Promise<SelectItemOptionsType> {
         const res = await axios
             .get(`/${configs.prefix}/${resource?.name}/relationship`, {
                 params: {
@@ -48,13 +55,16 @@ const BelongsToField = (props: FieldProps<RelationshipField>) => {
 
     return (
         <SelectInputField
+            {...props}
             component={component}
             errors={errors}
             search={fetchAssociates}
             lazy={component.lazy}
             lazyItemsCount={component.lazyItemsCount}
             formData={formData}
-            setFieldValue={setFieldValue}
+            setFieldValue={(name, value) => {
+                setFieldValue(name, String(value));
+            }}
             options={options}
             value={relation ? relation[last(component.foreignColumn?.split('.'))!]?.toString() : undefined}
         />

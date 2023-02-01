@@ -5,9 +5,11 @@ import ImageColumn from '@/types/Models/Columns/ImageColumn';
 import { classNames } from 'primereact/utils';
 
 const ImageColumn = ({ column, columnValue, record }: ColumnProps<ImageColumn>) => {
+    const value = columnValue ? columnValue.split(',')[0] : undefined;
+
     return (
         <Image
-            src={columnValue}
+            src={value ? (value.startsWith('http') ? value : `/${value}`) : value}
             alt={record[`${column.columnName}_alt`] ?? column.alt}
             preview={column.isPreviewable}
             downloadable={column.isDownloadable}

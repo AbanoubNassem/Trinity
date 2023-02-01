@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import { Button } from 'primereact/button';
@@ -14,7 +14,7 @@ import { Method } from '@inertiajs/core';
 
 const Login = () => {
     const configs = useConfigs();
-    const pageProps = usePageProps();
+    const { errors, data: responseData } = usePageProps();
     const [password, setPassword] = useState('');
     const [checked, setChecked] = useState(false);
     const { layoutConfig } = useContext(LayoutContext);
@@ -26,6 +26,12 @@ const Login = () => {
         password: '',
         remember: false
     });
+
+    useEffect(() => {
+        if (responseData) {
+            location.href = String(responseData);
+        }
+    }, [responseData]);
 
     return (
         <>
@@ -65,12 +71,12 @@ const Login = () => {
                                         type="email"
                                         required
                                         placeholder="Email address"
-                                        className={classNames('w-full md:w-30rem mb-3', { 'p-invalid': pageProps.errors.email })}
+                                        className={classNames('w-full md:w-30rem mb-3', { 'p-invalid': errors.email })}
                                         value={data.email}
                                         onChange={(e) => setData('email', e.target.value)}
                                         style={{ padding: '1rem' }}
                                     />
-                                    {pageProps.errors.email && <small className="p-error w-full block md:w-30rem">{pageProps.errors.email}</small>}
+                                    {errors.email && <small className="p-error w-full block md:w-30rem">{errors.email}</small>}
                                 </div>
                                 <div className="field">
                                     <label className="block text-900 font-medium text-xl mb-2">Password</label>
@@ -84,18 +90,18 @@ const Login = () => {
                                         type="password"
                                         required
                                         toggleMask
-                                        className={classNames('w-full mb-3', { 'p-invalid': pageProps.errors.password })}
+                                        className={classNames('w-full mb-3', { 'p-invalid': errors.password })}
                                         inputClassName="w-full p-3 md:w-30rem"
                                     />
-                                    {pageProps.errors.password && <small className="p-error w-full block md:w-30rem">{pageProps.errors.password}</small>}
+                                    {errors.password && <small className="p-error w-full block md:w-30rem">{errors.password}</small>}
                                 </div>
                                 <div className="flex align-items-center justify-content-between mb-5 gap-5">
                                     <div className="flex align-items-center">
                                         <Checkbox
                                             checked={checked}
                                             onChange={(e) => {
-                                                setChecked(e.checked);
-                                                setData('remember', e.checked);
+                                                setChecked(e.checked ?? false);
+                                                setData('remember', e.checked ?? false);
                                             }}
                                             className="mr-2"
                                         />

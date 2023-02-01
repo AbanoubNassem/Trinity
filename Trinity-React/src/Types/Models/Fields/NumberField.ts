@@ -1,7 +1,7 @@
 import BaseField from '@/types/Models/Fields/BaseField';
 
 export default interface NumberField extends BaseField {
-    formatMode?: string;
+    formatMode?: 'decimal' | 'currency' | undefined;
     minFractionDigits?: number;
     maxFractionDigits?: number;
     currency?: string;
@@ -12,7 +12,7 @@ export default interface NumberField extends BaseField {
     max?: number;
     step?: number;
     showButtons?: boolean;
-    buttonLayout?: string;
+    buttonLayout?: 'stacked' | 'horizontal' | 'vertical' | undefined;
     incrementButtonClassName?: string;
     decrementButtonClassName?: string;
     incrementButtonIcon?: string;

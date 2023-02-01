@@ -1,7 +1,6 @@
 using System.Text.RegularExpressions;
 using AbanoubNassem.Trinity.Components.BaseField;
 using AbanoubNassem.Trinity.Utilities;
-using Humanizer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
@@ -44,68 +43,114 @@ public class FileUploadField : CanUploadField<FileUploadField>
     {
     }
 
-    public override async Task<List<string>?> Upload(IWebHostEnvironment webHostEnvironment, IFormFileCollection files)
+    public override async Task<string?> Upload(IWebHostEnvironment webHostEnvironment, IFormFile file)
     {
-        var randIds = new List<string>();
-
-        foreach (var file in files)
+        if (MaximumFileSize != null && file.Length > MaximumFileSize)
         {
-            if (MaximumFileSize != null && file.Length > MaximumFileSize)
+            TrinityNotifications.NotifyError(
+                $"{file.FileName} was not uploaded size exceeded the maximum allowed size."
+            );
+            return null;
+        }
+
+        if (FileTypes != null)
+        {
+            var pattern = $"{string.Join("|", FileTypes)}";
+            var match = Regex.Match(file.ContentType, pattern, RegexOptions.IgnoreCase);
+
+            if (!match.Success)
             {
                 TrinityNotifications.NotifyError(
-                    $"{file.FileName} was not uploaded size exceeded the maximum allowed size."
+                    $"{file.FileName} was not uploaded file type doesn't match ${pattern}."
                 );
-                continue;
+                return null;
             }
+        }
 
-            if (FileTypes != null)
+        var res = ExtraUploadValidation?.Invoke(file);
+
+        if (res != null)
+        {
+            TrinityNotifications.NotifyError(res);
+            return null;
+        }
+
+        if (!Directory.Exists(UploadTempDirectory))
+        {
+            Directory.CreateDirectory(UploadTempDirectory);
+        }
+
+        var randId = Guid.NewGuid().ToString();
+        var path = Path.Combine(UploadTempDirectory, $"{randId}_{file.FileName}");
+
+        await using var stream = new FileStream(path, FileMode.Create);
+        await file.CopyToAsync(stream);
+
+        TrinityNotifications.NotifySuccess(
+            $"{file.FileName} was uploaded successfully."
+        );
+
+        MoveUploadedFromTempToDirectory = Path.Combine(webHostEnvironment.WebRootPath, GetUploadDirectory());
+
+        if (!Directory.Exists(MoveUploadedFromTempToDirectory))
+            Directory.CreateDirectory(MoveUploadedFromTempToDirectory);
+
+        return randId;
+    }
+
+    public override void Fill(ref IDictionary<string, object?> form,
+        in IDictionary<string, object?>? oldRecord = null)
+    {
+        var oldFiles = oldRecord?[ColumnName]?.ToString()?.Split(',').Where(x => !string.IsNullOrEmpty(x)).ToArray() ??
+                       Array.Empty<string>();
+        var formFilesIds = form[ColumnName]?.ToString()?.Split(',').Where(x => !string.IsNullOrEmpty(x)).ToArray() ??
+                           Array.Empty<string>();
+
+        var files = new List<string>();
+        
+            foreach (var file in oldFiles)
             {
-                var pattern = $"{string.Join("|", FileTypes)}";
-                var match = Regex.Match(file.ContentType, pattern, RegexOptions.IgnoreCase);
+                var removed = formFilesIds.All(id => !file.Contains(id));
 
-                if (!match.Success)
+                if (removed)
                 {
-                    TrinityNotifications.NotifyError(
-                        $"{file.FileName} was not uploaded file type doesn't match ${pattern}."
-                    );
-                    continue;
+                    try
+                    {
+                        File.Delete(Path.Combine("wwwroot", file));
+                    }
+                    catch
+                    {
+                    }
+                }
+                else
+                {
+                    files.Add(file);
                 }
             }
 
-            var res = ExtraUploadValidation?.Invoke(file);
+        if (formFilesIds.Any())
+        {
+            var tempFiles = Directory.EnumerateFiles(UploadTempDirectory).ToList();
 
-            if (res != null)
+            foreach (var fileId in formFilesIds)
             {
-                TrinityNotifications.NotifyError(res);
-                continue;
+                var shouldBeAdded = oldFiles.All(x => !x.Contains(fileId));
+
+                if (!shouldBeAdded) continue;
+
+                var tempFile = tempFiles.FirstOrDefault(file => Path.GetFileName(file).StartsWith(fileId));
+
+                if (tempFile == null) continue;
+
+                var fileName = Path.GetFileName(tempFile);
+                var newPath = Path.Combine(MoveUploadedFromTempToDirectory, fileName);
+                File.Move(tempFile, newPath);
+
+                files.Add(Path.Combine(GetUploadDirectory(), fileName));
             }
-
-            var basePath = Path.Combine(webHostEnvironment.WebRootPath, "trinity_temp");
-            if (!Directory.Exists(basePath))
-            {
-                Directory.CreateDirectory(basePath);
-            }
-
-            var randId = Guid.NewGuid().ToString();
-            var path = Path.Combine(basePath, $"{randId}_{file.FileName}");
-
-            await using var stream = new FileStream(path, FileMode.Create);
-            await file.CopyToAsync(stream);
-
-            TrinityNotifications.NotifySuccess(
-                $"{file.FileName} was uploaded successfully."
-            );
-
-            randIds.Add(randId);
         }
 
-
-        return randIds;
-    }
-
-    public override Task<string?> Delete(string uniqueFileId)
-    {
-        throw new NotImplementedException();
+        form[ColumnName] = string.Join(',', files);
     }
 
     public string Template { get; protected set; } = "basic";
@@ -167,14 +212,6 @@ public class FileUploadField : CanUploadField<FileUploadField>
     {
         MaximumFileSize = maxBytes;
         MaxFileSize = FileFormatter.FormatBytes(maxBytes);
-        return this;
-    }
-
-    protected string? UploadDirectory { get; set; }
-
-    public FileUploadField SetUploadDirectory(string directory)
-    {
-        UploadDirectory = directory;
         return this;
     }
 

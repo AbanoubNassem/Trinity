@@ -1,13 +1,13 @@
-import { r as a, O as f, h as Le, q as I, c as k, z as De, T as Ve, f as F, p as Pe, b as Ae, Z as q, w as re, C as We, s as je, m as $e, P as Z, u as Fe, a as Me, L as _e, E as He, K as Ke, j as i, F as Ue, H as Be, G as qe, B as Ze } from "./main.a6341423.js";
-function P() {
-  return P = Object.assign ? Object.assign.bind() : function(e) {
+import { r as a, q as k, O as m, h as Le, c as C, z as De, T as Ve, f as _, p as Pe, b as Ae, Z, w as re, P as A, C as We, s as je, m as $e, u as Fe, a as Me, L as _e, E as He, K as Ke, j as i, F as Ue, H as Be, G as qe, B as Ze } from "./main.74d2364d.js";
+function W() {
+  return W = Object.assign ? Object.assign.bind() : function(e) {
     for (var n = 1; n < arguments.length; n++) {
       var t = arguments[n];
       for (var l in t)
         Object.prototype.hasOwnProperty.call(t, l) && (e[l] = t[l]);
     }
     return e;
-  }, P.apply(this, arguments);
+  }, W.apply(this, arguments);
 }
 function ze(e) {
   if (Array.isArray(e))
@@ -16,24 +16,24 @@ function ze(e) {
 function Je(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
-    var l, d, g, m, s = [], u = !0, b = !1;
+    var l, f, d, c, s = [], u = !0, v = !1;
     try {
-      if (g = (t = t.call(e)).next, n === 0) {
+      if (d = (t = t.call(e)).next, n === 0) {
         if (Object(t) !== t)
           return;
         u = !1;
       } else
-        for (; !(u = (l = g.call(t)).done) && (s.push(l.value), s.length !== n); u = !0)
+        for (; !(u = (l = d.call(t)).done) && (s.push(l.value), s.length !== n); u = !0)
           ;
-    } catch (h) {
-      b = !0, d = h;
+    } catch (N) {
+      v = !0, f = N;
     } finally {
       try {
-        if (!u && t.return != null && (m = t.return(), Object(m) !== m))
+        if (!u && t.return != null && (c = t.return(), Object(c) !== c))
           return;
       } finally {
-        if (b)
-          throw d;
+        if (v)
+          throw f;
       }
     }
     return s;
@@ -63,14 +63,14 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
 function Ge(e, n) {
   return ze(e) || Je(e, n) || Xe(e, n) || Ye();
 }
-var M = /* @__PURE__ */ a.exports.memo(/* @__PURE__ */ a.exports.forwardRef(function(e, n) {
-  var t = a.exports.useState(!1), l = Ge(t, 2), d = l[0], g = l[1], m = a.exports.useRef(null), s = a.exports.useRef(e.inputRef), u = function(v) {
+var H = /* @__PURE__ */ a.exports.memo(/* @__PURE__ */ a.exports.forwardRef(function(e, n) {
+  var t = a.exports.useState(!1), l = Ge(t, 2), f = l[0], d = l[1], c = a.exports.useRef(null), s = a.exports.useRef(e.inputRef), u = function(b) {
     if (!e.disabled && !e.readOnly && e.onChange) {
-      var W = x(), j = v.target instanceof HTMLDivElement || v.target instanceof HTMLSpanElement, $ = v.target === s.current, U = j && v.target.checked !== W;
-      if ($ || U) {
-        var p = W ? e.falseValue : e.trueValue;
+      var $ = T(), F = b.target instanceof HTMLDivElement || b.target instanceof HTMLSpanElement, M = b.target === s.current, B = F && b.target.checked !== $;
+      if (M || B) {
+        var p = $ ? e.falseValue : e.trueValue;
         e.onChange({
-          originalEvent: v,
+          originalEvent: b,
           value: e.value,
           checked: p,
           stopPropagation: function() {
@@ -86,79 +86,82 @@ var M = /* @__PURE__ */ a.exports.memo(/* @__PURE__ */ a.exports.forwardRef(func
           }
         });
       }
-      I.focus(s.current), v.preventDefault();
+      k.focus(s.current), b.preventDefault();
     }
-  }, b = function() {
-    g(!0);
-  }, h = function() {
-    g(!1);
-  }, O = function(v) {
-    v.code === "Space" && u(v);
-  }, x = function() {
+  }, v = function() {
+    d(!0);
+  }, N = function() {
+    d(!1);
+  }, E = function(b) {
+    (b.code === "Space" || b.key === " ") && u(b);
+  }, T = function() {
     return e.checked === e.trueValue;
   };
   a.exports.useImperativeHandle(n, function() {
     return {
       props: e,
+      focus: function() {
+        return k.focus(s.current);
+      },
       getElement: function() {
-        return m.current;
+        return c.current;
       },
       getInput: function() {
         return s.current;
       }
     };
   }), a.exports.useEffect(function() {
-    f.combinedRefs(s, e.inputRef);
+    m.combinedRefs(s, e.inputRef);
   }, [s, e.inputRef]), Le(function() {
-    s.current.checked = x();
+    s.current.checked = T();
   }, [e.checked, e.trueValue]);
-  var c = x(), H = f.isNotEmpty(e.tooltip), L = f.findDiffKeys(e, M.defaultProps), D = f.reduceKeys(L, I.ARIA_PROPS), V = k("p-checkbox p-component", {
-    "p-checkbox-checked": c,
+  var h = T(), g = m.isNotEmpty(e.tooltip), S = m.findDiffKeys(e, H.defaultProps), I = m.reduceKeys(S, k.ARIA_PROPS), P = C("p-checkbox p-component", {
+    "p-checkbox-checked": h,
     "p-checkbox-disabled": e.disabled,
-    "p-checkbox-focused": d
-  }, e.className), K = k("p-checkbox-box", {
-    "p-highlight": c,
+    "p-checkbox-focused": f
+  }, e.className), U = C("p-checkbox-box", {
+    "p-highlight": h,
     "p-disabled": e.disabled,
-    "p-focus": d
-  }), A = De.getJSXIcon(c ? e.icon : "", {
+    "p-focus": f
+  }), j = De.getJSXIcon(h ? e.icon : "", {
     className: "p-checkbox-icon p-c"
   }, {
     props: e,
-    checked: c
+    checked: h
   });
-  return /* @__PURE__ */ a.exports.createElement(a.exports.Fragment, null, /* @__PURE__ */ a.exports.createElement("div", P({
-    ref: m,
+  return /* @__PURE__ */ a.exports.createElement(a.exports.Fragment, null, /* @__PURE__ */ a.exports.createElement("div", W({
+    ref: c,
     id: e.id,
-    className: V,
+    className: P,
     style: e.style
-  }, L, {
+  }, S, {
     onClick: u,
     onContextMenu: e.onContextMenu,
     onMouseDown: e.onMouseDown
   }), /* @__PURE__ */ a.exports.createElement("div", {
     className: "p-hidden-accessible"
-  }, /* @__PURE__ */ a.exports.createElement("input", P({
+  }, /* @__PURE__ */ a.exports.createElement("input", W({
     ref: s,
     type: "checkbox",
     id: e.inputId,
     name: e.name,
     tabIndex: e.tabIndex,
-    defaultChecked: c,
-    onFocus: b,
-    onBlur: h,
-    onKeyDown: O,
+    defaultChecked: h,
+    onFocus: v,
+    onBlur: N,
+    onKeyDown: E,
     disabled: e.disabled,
     readOnly: e.readOnly,
     required: e.required
-  }, D))), /* @__PURE__ */ a.exports.createElement("div", {
-    className: K
-  }, A)), H && /* @__PURE__ */ a.exports.createElement(Ve, P({
-    target: m,
+  }, I))), /* @__PURE__ */ a.exports.createElement("div", {
+    className: U
+  }, j)), g && /* @__PURE__ */ a.exports.createElement(Ve, W({
+    target: c,
     content: e.tooltip
   }, e.tooltipOptions)));
 }));
-M.displayName = "Checkbox";
-M.defaultProps = {
+H.displayName = "Checkbox";
+H.defaultProps = {
   __TYPE: "Checkbox",
   id: null,
   inputRef: null,
@@ -198,24 +201,24 @@ function Qe(e) {
 function et(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
-    var l, d, g, m, s = [], u = !0, b = !1;
+    var l, f, d, c, s = [], u = !0, v = !1;
     try {
-      if (g = (t = t.call(e)).next, n === 0) {
+      if (d = (t = t.call(e)).next, n === 0) {
         if (Object(t) !== t)
           return;
         u = !1;
       } else
-        for (; !(u = (l = g.call(t)).done) && (s.push(l.value), s.length !== n); u = !0)
+        for (; !(u = (l = d.call(t)).done) && (s.push(l.value), s.length !== n); u = !0)
           ;
-    } catch (h) {
-      b = !0, d = h;
+    } catch (N) {
+      v = !0, f = N;
     } finally {
       try {
-        if (!u && t.return != null && (m = t.return(), Object(m) !== m))
+        if (!u && t.return != null && (c = t.return(), Object(c) !== c))
           return;
       } finally {
-        if (b)
-          throw d;
+        if (v)
+          throw f;
       }
     }
     return s;
@@ -242,156 +245,162 @@ function nt() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function C(e, n) {
+function V(e, n) {
   return Qe(e) || et(e, n) || tt(e, n) || nt();
 }
-var _ = /* @__PURE__ */ a.exports.memo(/* @__PURE__ */ a.exports.forwardRef(function(e, n) {
-  var t = e.promptLabel || F("passwordPrompt"), l = e.weakLabel || F("weak"), d = e.mediumLabel || F("medium"), g = e.strongLabel || F("strong"), m = a.exports.useState(!1), s = C(m, 2), u = s[0], b = s[1], h = a.exports.useState(null), O = C(h, 2), x = O[0], c = O[1], H = a.exports.useState(t), L = C(H, 2), D = L[0], V = L[1], K = a.exports.useState(!1), A = C(K, 2), T = A[0], v = A[1], W = a.exports.useState(!1), j = C(W, 2), $ = j[0], U = j[1], p = a.exports.useRef(null), N = a.exports.useRef(null), w = a.exports.useRef(e.inputRef), J = a.exports.useRef(new RegExp(e.mediumRegex)), X = a.exports.useRef(new RegExp(e.strongRegex)), le = $ ? "text" : "password", ie = Pe({
+var K = /* @__PURE__ */ a.exports.memo(/* @__PURE__ */ a.exports.forwardRef(function(e, n) {
+  var t = e.promptLabel || _("passwordPrompt"), l = e.weakLabel || _("weak"), f = e.mediumLabel || _("medium"), d = e.strongLabel || _("strong"), c = a.exports.useState(!1), s = V(c, 2), u = s[0], v = s[1], N = a.exports.useState(null), E = V(N, 2), T = E[0], h = E[1], g = a.exports.useState(t), S = V(g, 2), I = S[0], P = S[1], U = a.exports.useState(!1), j = V(U, 2), w = j[0], b = j[1], $ = a.exports.useState(!1), F = V($, 2), M = F[0], B = F[1], p = a.exports.useRef(null), x = a.exports.useRef(null), R = a.exports.useRef(e.inputRef), J = a.exports.useRef(new RegExp(e.mediumRegex)), X = a.exports.useRef(new RegExp(e.strongRegex)), le = M ? "text" : "password", ie = Pe({
     target: p,
-    overlay: N,
+    overlay: x,
     listener: function(r, y) {
-      var R = y.valid;
-      R && te();
+      var O = y.valid;
+      O && te();
     },
     when: u
-  }), Y = C(ie, 2), se = Y[0], oe = Y[1], G = w.current && w.current.value, B = a.exports.useMemo(function() {
-    return f.isNotEmpty(e.value) || f.isNotEmpty(e.defaultValue) || f.isNotEmpty(G);
+  }), Y = V(ie, 2), se = Y[0], oe = Y[1], G = R.current && R.current.value, q = a.exports.useMemo(function() {
+    return m.isNotEmpty(e.value) || m.isNotEmpty(e.defaultValue) || m.isNotEmpty(G);
   }, [e.value, e.defaultValue, G]), ue = function() {
-    if (x) {
+    if (T) {
       var r = null;
-      switch (x.strength) {
+      switch (T.strength) {
         case "weak":
           r = l;
           break;
         case "medium":
-          r = d;
+          r = f;
           break;
         case "strong":
-          r = g;
+          r = d;
           break;
       }
-      r && D !== r && V(r);
+      r && I !== r && P(r);
     } else
-      D !== t && V(t);
+      I !== t && P(t);
   }, ce = function(r) {
     e.feedback && $e.emit("overlay-click", {
       originalEvent: r,
       target: p.current
     });
   }, Q = function() {
-    U(function(r) {
+    B(function(r) {
       return !r;
     });
   }, ee = function() {
-    ue(), b(!0);
+    ue(), v(!0);
   }, te = function() {
-    b(!1);
+    v(!1);
   }, me = function() {
-    w.current && I.alignOverlay(N.current, w.current.parentElement, e.appendTo || Z.appendTo);
+    R.current && k.alignOverlay(x.current, R.current.parentElement, e.appendTo || A.appendTo);
   }, fe = function() {
-    q.set("overlay", N.current, Z.autoZIndex, Z.zIndex.overlay), me();
+    Z.set("overlay", x.current, A.autoZIndex, A.zIndex.overlay), me();
   }, de = function() {
     se(), e.onShow && e.onShow();
   }, ge = function() {
     oe();
   }, be = function() {
-    q.clear(N.current), e.onHide && e.onHide();
+    Z.clear(x.current), e.onHide && e.onHide();
   }, ve = function(r) {
-    v(!0), e.feedback && ee(), e.onFocus && e.onFocus(r);
+    b(!0), e.feedback && ee(), e.onFocus && e.onFocus(r);
   }, ye = function(r) {
-    v(!1), e.feedback && te(), e.onBlur && e.onBlur(r);
-  }, he = function(r) {
+    b(!1), e.feedback && te(), e.onBlur && e.onBlur(r);
+  }, pe = function(r) {
     var y = r.keyCode || r.which;
     if (e.feedback) {
-      var R = r.target.value, E = null, S = null;
-      switch (xe(R)) {
+      var O = r.target.value, L = null, D = null;
+      switch (xe(O)) {
         case 1:
-          E = l, S = {
+          L = l, D = {
             strength: "weak",
             width: "33.33%"
           };
           break;
         case 2:
-          E = d, S = {
+          L = f, D = {
             strength: "medium",
             width: "66.66%"
           };
           break;
         case 3:
-          E = g, S = {
+          L = d, D = {
             strength: "strong",
             width: "100%"
           };
           break;
         default:
-          E = t, S = null;
+          L = t, D = null;
           break;
       }
-      c(S), V(E), !!y && !u && ee();
+      h(D), P(L), !!y && !u && ee();
     }
     e.onKeyUp && e.onKeyUp(r);
-  }, pe = function(r, y) {
-    e.onInput && e.onInput(r, y), e.onChange || (f.isNotEmpty(r.target.value) ? I.addClass(p.current, "p-inputwrapper-filled") : I.removeClass(p.current, "p-inputwrapper-filled"));
+  }, he = function(r, y) {
+    e.onInput && e.onInput(r, y), e.onChange || (m.isNotEmpty(r.target.value) ? k.addClass(p.current, "p-inputwrapper-filled") : k.removeClass(p.current, "p-inputwrapper-filled"));
   }, xe = function(r) {
     return X.current.test(r) ? 3 : J.current.test(r) ? 2 : r.length ? 1 : 0;
   };
   a.exports.useImperativeHandle(n, function() {
     return {
       props: e,
+      focus: function() {
+        return k.focus(R.current);
+      },
       getElement: function() {
         return p.current;
       },
       getOverlay: function() {
-        return N.current;
+        return x.current;
       },
       getInput: function() {
-        return w.current;
+        return R.current;
       }
     };
   }), a.exports.useEffect(function() {
-    f.combinedRefs(w, e.inputRef);
-  }, [w, e.inputRef]), a.exports.useEffect(function() {
+    m.combinedRefs(R, e.inputRef);
+  }, [R, e.inputRef]), a.exports.useEffect(function() {
     J.current = new RegExp(e.mediumRegex);
   }, [e.mediumRegex]), a.exports.useEffect(function() {
     X.current = new RegExp(e.strongRegex);
   }, [e.strongRegex]), a.exports.useEffect(function() {
-    !B && I.hasClass(p.current, "p-inputwrapper-filled") && I.removeClass(p.current, "p-inputwrapper-filled");
-  }, [B]), Ae(function() {
-    q.clear(N.current);
+    !q && k.hasClass(p.current, "p-inputwrapper-filled") && k.removeClass(p.current, "p-inputwrapper-filled");
+  }, [q]), Ae(function() {
+    Z.clear(x.current);
   });
   var Ne = function() {
     if (e.toggleMask) {
-      var r = $ ? "pi pi-eye-slash" : "pi pi-eye", y = /* @__PURE__ */ a.exports.createElement("i", {
+      var r = M ? "pi pi-eye-slash" : "pi pi-eye", y = /* @__PURE__ */ a.exports.createElement("i", {
         className: r,
         onClick: Q
       });
       if (e.icon) {
-        var R = {
+        var O = {
           onClick: Q,
           className: r,
           element: y,
           props: e
         };
-        y = f.getJSXElement(e.icon, R);
+        y = m.getJSXElement(e.icon, O);
       }
       return y;
     }
     return null;
   }, Te = function() {
-    var r = k("p-password-panel p-component", e.panelClassName), y = x || {
+    var r = C("p-password-panel p-component", e.panelClassName, {
+      "p-input-filled": A.inputStyle === "filled",
+      "p-ripple-disabled": A.ripple === !1
+    }), y = T || {
       strength: "",
       width: "0%"
-    }, R = y.strength, E = y.width, S = f.getJSXElement(e.header, e), Ie = f.getJSXElement(e.footer, e), Oe = e.content ? f.getJSXElement(e.content, e) : /* @__PURE__ */ a.exports.createElement(a.exports.Fragment, null, /* @__PURE__ */ a.exports.createElement("div", {
+    }, O = y.strength, L = y.width, D = m.getJSXElement(e.header, e), Ie = m.getJSXElement(e.footer, e), Oe = e.content ? m.getJSXElement(e.content, e) : /* @__PURE__ */ a.exports.createElement(a.exports.Fragment, null, /* @__PURE__ */ a.exports.createElement("div", {
       className: "p-password-meter"
     }, /* @__PURE__ */ a.exports.createElement("div", {
-      className: "p-password-strength ".concat(R),
+      className: "p-password-strength ".concat(O),
       style: {
-        width: E
+        width: L
       }
     })), /* @__PURE__ */ a.exports.createElement("div", {
-      className: "p-password-info ".concat(R)
-    }, D)), Ce = /* @__PURE__ */ a.exports.createElement(We, {
-      nodeRef: N,
+      className: "p-password-info ".concat(O)
+    }, I)), Ce = /* @__PURE__ */ a.exports.createElement(We, {
+      nodeRef: x,
       classNames: "p-connected-overlay",
       in: u,
       timeout: {
@@ -405,27 +414,27 @@ var _ = /* @__PURE__ */ a.exports.memo(/* @__PURE__ */ a.exports.forwardRef(func
       onExit: ge,
       onExited: be
     }, /* @__PURE__ */ a.exports.createElement("div", {
-      ref: N,
+      ref: x,
       className: r,
       style: e.panelStyle,
       onClick: ce
-    }, S, Oe, Ie));
+    }, D, Oe, Ie));
     return /* @__PURE__ */ a.exports.createElement(je, {
       element: Ce,
       appendTo: e.appendTo
     });
-  }, we = k("p-password p-component p-inputwrapper", {
-    "p-inputwrapper-filled": B,
-    "p-inputwrapper-focus": T,
+  }, we = C("p-password p-component p-inputwrapper", {
+    "p-inputwrapper-filled": q,
+    "p-inputwrapper-focus": w,
     "p-input-icon-right": e.toggleMask
-  }, e.className), Re = k("p-password-input", e.inputClassName), ke = f.findDiffKeys(e, _.defaultProps), Ee = Ne(), Se = Te();
+  }, e.className), Re = C("p-password-input", e.inputClassName), ke = m.findDiffKeys(e, K.defaultProps), Ee = Ne(), Se = Te();
   return /* @__PURE__ */ a.exports.createElement("div", {
     ref: p,
     id: e.id,
     className: we,
     style: e.style
   }, /* @__PURE__ */ a.exports.createElement(re, z({
-    ref: w,
+    ref: R,
     id: e.inputId
   }, ke, {
     type: le,
@@ -433,14 +442,14 @@ var _ = /* @__PURE__ */ a.exports.memo(/* @__PURE__ */ a.exports.forwardRef(func
     style: e.inputStyle,
     onFocus: ve,
     onBlur: ye,
-    onKeyUp: he,
-    onInput: pe,
+    onKeyUp: pe,
+    onInput: he,
     tooltip: e.tooltip,
     tooltipOptions: e.tooltipOptions
   })), Ee, Se);
 }));
-_.displayName = "Password";
-_.defaultProps = {
+K.displayName = "Password";
+K.defaultProps = {
   __TYPE: "Password",
   id: null,
   inputId: null,
@@ -472,30 +481,32 @@ _.defaultProps = {
   onHide: null
 };
 const at = () => {
-  const e = Fe(), n = Me(), [t, l] = a.exports.useState(""), [d, g] = a.exports.useState(!1), { layoutConfig: m } = a.exports.useContext(_e), s = He(), u = k("surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden", { "p-input-filled": m.inputStyle === "filled" }), { data: b, setData: h, submit: O, processing: x } = Ke({
+  const e = Fe(), { errors: n, data: t } = Me(), [l, f] = a.exports.useState(""), [d, c] = a.exports.useState(!1), { layoutConfig: s } = a.exports.useContext(_e), u = He(), v = C("surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden", { "p-input-filled": s.inputStyle === "filled" }), { data: N, setData: E, submit: T, processing: h } = Ke({
     email: "",
     password: "",
     remember: !1
   });
-  return /* @__PURE__ */ i(Ue, {
+  return a.exports.useEffect(() => {
+    t && (location.href = String(t));
+  }, [t]), /* @__PURE__ */ i(Ue, {
     children: [
       /* @__PURE__ */ i(Be, {}, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-        lineNumber: 32,
+        lineNumber: 38,
         columnNumber: 13
       }, globalThis),
       /* @__PURE__ */ i("div", {
-        className: u,
+        className: v,
         children: /* @__PURE__ */ i("div", {
           className: "flex flex-column align-items-center justify-content-center",
           children: [
             /* @__PURE__ */ i("img", {
-              src: s,
+              src: u,
               alt: e.title,
               className: "mb-5 w-6rem flex-shrink-0"
             }, void 0, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-              lineNumber: 36,
+              lineNumber: 42,
               columnNumber: 21
             }, globalThis),
             /* @__PURE__ */ i("div", {
@@ -507,8 +518,8 @@ const at = () => {
               children: /* @__PURE__ */ i("form", {
                 className: "w-full surface-card py-8 px-5 sm:px-8",
                 style: { borderRadius: "53px" },
-                onSubmit: (c) => {
-                  c.preventDefault(), O(qe.POST, "");
+                onSubmit: (g) => {
+                  g.preventDefault(), T(qe.POST, "");
                 },
                 children: /* @__PURE__ */ i("div", {
                   children: [
@@ -521,34 +532,34 @@ const at = () => {
                           children: "Email"
                         }, void 0, !1, {
                           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                          lineNumber: 58,
+                          lineNumber: 64,
                           columnNumber: 37
                         }, globalThis),
                         /* @__PURE__ */ i(re, {
                           type: "email",
                           required: !0,
                           placeholder: "Email address",
-                          className: k("w-full md:w-30rem mb-3", { "p-invalid": n.errors.email }),
-                          value: b.email,
-                          onChange: (c) => h("email", c.target.value),
+                          className: C("w-full md:w-30rem mb-3", { "p-invalid": n.email }),
+                          value: N.email,
+                          onChange: (g) => E("email", g.target.value),
                           style: { padding: "1rem" }
                         }, void 0, !1, {
                           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                          lineNumber: 64,
+                          lineNumber: 70,
                           columnNumber: 37
                         }, globalThis),
-                        n.errors.email && /* @__PURE__ */ i("small", {
+                        n.email && /* @__PURE__ */ i("small", {
                           className: "p-error w-full block md:w-30rem",
-                          children: n.errors.email
+                          children: n.email
                         }, void 0, !1, {
                           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                          lineNumber: 73,
-                          columnNumber: 64
+                          lineNumber: 79,
+                          columnNumber: 54
                         }, globalThis)
                       ]
                     }, void 0, !0, {
                       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                      lineNumber: 57,
+                      lineNumber: 63,
                       columnNumber: 33
                     }, globalThis),
                     /* @__PURE__ */ i("div", {
@@ -559,37 +570,37 @@ const at = () => {
                           children: "Password"
                         }, void 0, !1, {
                           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                          lineNumber: 76,
+                          lineNumber: 82,
                           columnNumber: 37
                         }, globalThis),
-                        /* @__PURE__ */ i(_, {
-                          value: t,
-                          onChange: (c) => {
-                            l(c.target.value), h("password", c.target.value);
+                        /* @__PURE__ */ i(K, {
+                          value: l,
+                          onChange: (g) => {
+                            f(g.target.value), E("password", g.target.value);
                           },
                           placeholder: "Password",
                           type: "password",
                           required: !0,
                           toggleMask: !0,
-                          className: k("w-full mb-3", { "p-invalid": n.errors.password }),
+                          className: C("w-full mb-3", { "p-invalid": n.password }),
                           inputClassName: "w-full p-3 md:w-30rem"
                         }, void 0, !1, {
                           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                          lineNumber: 77,
+                          lineNumber: 83,
                           columnNumber: 37
                         }, globalThis),
-                        n.errors.password && /* @__PURE__ */ i("small", {
+                        n.password && /* @__PURE__ */ i("small", {
                           className: "p-error w-full block md:w-30rem",
-                          children: n.errors.password
+                          children: n.password
                         }, void 0, !1, {
                           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                          lineNumber: 90,
-                          columnNumber: 67
+                          lineNumber: 96,
+                          columnNumber: 57
                         }, globalThis)
                       ]
                     }, void 0, !0, {
                       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                      lineNumber: 75,
+                      lineNumber: 81,
                       columnNumber: 33
                     }, globalThis),
                     /* @__PURE__ */ i("div", {
@@ -598,15 +609,16 @@ const at = () => {
                         /* @__PURE__ */ i("div", {
                           className: "flex align-items-center",
                           children: [
-                            /* @__PURE__ */ i(M, {
+                            /* @__PURE__ */ i(H, {
                               checked: d,
-                              onChange: (c) => {
-                                g(c.checked), h("remember", c.checked);
+                              onChange: (g) => {
+                                var S, I;
+                                c((S = g.checked) != null ? S : !1), E("remember", (I = g.checked) != null ? I : !1);
                               },
                               className: "mr-2"
                             }, void 0, !1, {
                               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                              lineNumber: 94,
+                              lineNumber: 100,
                               columnNumber: 41
                             }, globalThis),
                             /* @__PURE__ */ i("label", {
@@ -614,13 +626,13 @@ const at = () => {
                               children: "Remember me"
                             }, void 0, !1, {
                               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                              lineNumber: 102,
+                              lineNumber: 108,
                               columnNumber: 41
                             }, globalThis)
                           ]
                         }, void 0, !0, {
                           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                          lineNumber: 93,
+                          lineNumber: 99,
                           columnNumber: 37
                         }, globalThis),
                         /* @__PURE__ */ i("a", {
@@ -629,57 +641,57 @@ const at = () => {
                           children: "Forgot password?"
                         }, void 0, !1, {
                           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                          lineNumber: 104,
+                          lineNumber: 110,
                           columnNumber: 37
                         }, globalThis)
                       ]
                     }, void 0, !0, {
                       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                      lineNumber: 92,
+                      lineNumber: 98,
                       columnNumber: 33
                     }, globalThis),
                     /* @__PURE__ */ i(Ze, {
                       label: "Sign In",
                       className: "w-full p-3 text-xl",
                       type: "submit",
-                      loading: x,
-                      disabled: x
+                      loading: h,
+                      disabled: h
                     }, void 0, !1, {
                       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                      lineNumber: 112,
+                      lineNumber: 118,
                       columnNumber: 33
                     }, globalThis)
                   ]
                 }, void 0, !0, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                  lineNumber: 56,
+                  lineNumber: 62,
                   columnNumber: 29
                 }, globalThis)
               }, void 0, !1, {
                 fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-                lineNumber: 48,
+                lineNumber: 54,
                 columnNumber: 25
               }, globalThis)
             }, void 0, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-              lineNumber: 41,
+              lineNumber: 47,
               columnNumber: 21
             }, globalThis)
           ]
         }, void 0, !0, {
           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-          lineNumber: 35,
+          lineNumber: 41,
           columnNumber: 17
         }, globalThis)
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-        lineNumber: 34,
+        lineNumber: 40,
         columnNumber: 13
       }, globalThis)
     ]
   }, void 0, !0, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Login.tsx",
-    lineNumber: 31,
+    lineNumber: 37,
     columnNumber: 9
   }, globalThis);
 };

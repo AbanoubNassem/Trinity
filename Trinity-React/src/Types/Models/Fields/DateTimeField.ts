@@ -1,11 +1,10 @@
-import { CalendarIconPosType } from 'primereact/calendar';
 import BaseField from '@/types/Models/Fields/BaseField';
 
 export default interface DateTimeField extends BaseField {
     inline: boolean;
-    selectionMode: string;
+    selectionMode?: 'single' | 'multiple' | 'range' | undefined;
     dateFormat?: string;
-    hourFormat: string;
+    hourFormat?: '12' | '24' | undefined;
     showTime: boolean;
     timeOnly: boolean;
     minDate?: string;
@@ -13,6 +12,6 @@ export default interface DateTimeField extends BaseField {
     disabledDates?: string[];
     disabledDays?: number[];
     showIcon: boolean;
-    iconPos: CalendarIconPosType;
-    view?: string;
+    iconPos?: 'left' | 'right' | undefined;
+    view?: 'date' | 'month' | undefined;
 }

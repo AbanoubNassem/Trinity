@@ -1,11 +1,9 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import axios from 'axios';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import FieldProps from '@/types/Props/Fields/FieldProps';
 import FileUploadField from '@/types/Models/Fields/FileUploadField';
 import { classNames } from 'primereact/utils';
-import usePageProps from '@/hooks/trinity_page_props';
-import { useConfigs } from '@/hooks/trinity_configs';
 import { AppContext } from '@/contexts/AppContext';
 import { FilePond, registerPlugin } from 'react-filepond';
 
@@ -36,11 +34,15 @@ registerPlugin(
     FilePondPluginImageTransform,
     FilePondPluginMediaPreview
 );
-const FileUploadField = ({ component, formData, setFieldValue, errors }: FieldProps<FileUploadField>) => {
+const FileUploadField = ({ configs, resource, component, formData, record, setFieldValue, errors }: FieldProps<FileUploadField>) => {
     const { toast } = useContext(AppContext);
-    const configs = useConfigs();
-    const { resource } = usePageProps();
-    const uploaded = useMemo<Array<any>>(() => [], [configs]);
+    const pond = useRef<FilePond>(null);
+
+    const getFiles = (): Array<string> => formData[component.columnName]?.split(',')?.filter((e: string) => e !== '') ?? [];
+
+    useEffect(() => {
+        setFieldValue(component.columnName, record[component.columnName]);
+    }, [record[component.columnName]]);
 
     return (
         <BaseFieldComponent
@@ -48,10 +50,12 @@ const FileUploadField = ({ component, formData, setFieldValue, errors }: FieldPr
             errors={errors}
         >
             <FilePond
+                ref={pond}
                 id={component.columnName}
                 name={component.columnName}
                 disabled={component.disabled}
                 className={classNames({ 'p-invalid': errors[component.columnName] })}
+                instantUpload={component.autoUploads}
                 credits={false}
                 allowPaste={false}
                 allowMultiple={component.multiple}
@@ -60,18 +64,6 @@ const FileUploadField = ({ component, formData, setFieldValue, errors }: FieldPr
                 allowImageExifOrientation={component.shouldOrientImageFromExif}
                 allowImagePreview={component.canPreview}
                 allowImageTransform={component.allowImageTransform}
-                files={
-                    formData[component.columnName]?.length
-                        ? formData[component.columnName]?.split(',').map((e: string) => {
-                              return {
-                                  source: e,
-                                  options: {
-                                      type: 'local'
-                                  }
-                              };
-                          })
-                        : undefined
-                }
                 imageCropAspectRatio={component.imageCropAspectRatio}
                 imagePreviewHeight={component.imagePreviewHeight}
                 imageResizeTargetHeight={component.imageResizeTargetHeight}
@@ -88,21 +80,30 @@ const FileUploadField = ({ component, formData, setFieldValue, errors }: FieldPr
                 stylePanelAspectRatio={component.panelAspectRatio}
                 stylePanelLayout={component.panelLayout}
                 styleProgressIndicatorPosition={component.progressIndicatorPosition}
+                files={getFiles()?.map((e: string) => {
+                    return {
+                        source: e,
+                        options: {
+                            type: 'local'
+                        }
+                    };
+                })}
                 server={{
                     url: `/${configs.prefix}`,
-                    load: (source, load, error, progress, abort, headers) => {
-                        axios({
-                            method: 'get',
-                            url: source,
-                            responseType: 'blob',
-                            onDownloadProgress: (e) => {
-                                progress(e.download ?? false, e.loaded, e.total ?? 0);
-                            }
-                        })
-                            .then((response) => {
-                                load(response.data);
+                    load: async (source, load, error, progress, abort, headers) => {
+                        if (source?.includes('/'))
+                            axios({
+                                method: 'get',
+                                url: source.startsWith('http') ? source : `/${source}`,
+                                responseType: 'blob',
+                                onDownloadProgress: (e) => {
+                                    progress(e.download ?? false, e.loaded, e.total ?? 0);
+                                }
                             })
-                            .catch((err) => err(err));
+                                .then((response) => {
+                                    load(response.data);
+                                })
+                                .catch((err) => error(err));
                     },
 
                     remove: (source, load, error) => {
@@ -114,8 +115,13 @@ const FileUploadField = ({ component, formData, setFieldValue, errors }: FieldPr
                                 reverting: false
                             })
                             .then(() => {
+                                setFieldValue(
+                                    component.columnName,
+                                    getFiles()
+                                        .filter((f: string) => f !== source)
+                                        .join(',')
+                                );
                                 load();
-                                setFieldValue(component.columnName, null);
                             })
                             .catch((err) => error(err));
                     },
@@ -127,20 +133,28 @@ const FileUploadField = ({ component, formData, setFieldValue, errors }: FieldPr
                                 fieldName: component.columnName,
                                 reverting: true
                             })
-                            .then(() => load())
+                            .then(() => {
+                                setFieldValue(
+                                    component.columnName,
+                                    getFiles()
+                                        .filter((f: string) => f !== uniqueFileId)
+                                        .join(',')
+                                );
+                                load();
+                            })
                             .catch((err) => error(err));
                     },
 
                     process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
-                        const formData = new FormData();
-                        formData.append('files', file, file.name);
-                        formData.append('resourceName', resource?.pluralLabel.toLowerCase() ?? '');
-                        formData.append('fieldName', component.columnName);
+                        const uploadData = new FormData();
+                        uploadData.append('file', file, file.name);
+                        uploadData.append('resourceName', resource?.pluralLabel.toLowerCase() ?? '');
+                        uploadData.append('fieldName', component.columnName);
 
                         const cancelToken = axios.CancelToken.source();
 
                         axios
-                            .post(`/${configs.prefix}/upload/file`, formData, {
+                            .post(`/${configs.prefix}/upload/file`, uploadData, {
                                 cancelToken: cancelToken.token,
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
@@ -150,10 +164,11 @@ const FileUploadField = ({ component, formData, setFieldValue, errors }: FieldPr
                                 }
                             })
                             .then(({ data }) => {
-                                if (data['data'] !== null && !!data['data'].length) {
-                                    load(data['data'][0]);
-                                    setFieldValue(component.columnName, data['data'][0]);
-                                    uploaded.push(data['data'][0]);
+                                if (data['data'] !== null) {
+                                    const files = getFiles();
+                                    files.push(data['data']);
+                                    setFieldValue(component.columnName, files.join(','));
+                                    load(data['data']);
                                 } else {
                                     error(data['notifications']);
                                 }

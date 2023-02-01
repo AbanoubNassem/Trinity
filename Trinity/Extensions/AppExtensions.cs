@@ -96,11 +96,12 @@ public static class AppExtensions
         app.UseDefaultFiles();
 
 #if DEBUG
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            FileProvider = new PhysicalFileProvider(physicalTrinityWwwRootPath),
-            RequestPath = "/trinity"
-        });
+        if (physicalTrinityWwwRootPath != null)
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(physicalTrinityWwwRootPath),
+                RequestPath = "/trinity"
+            });
 #else
         var assembly = typeof(Controllers.TrinityController).GetTypeInfo().Assembly;
         app.UseStaticFiles(new StaticFileOptions
@@ -117,14 +118,6 @@ public static class AppExtensions
         var basePath = Path.Combine(app.Environment.WebRootPath, "trinity_temp");
         if (!Directory.Exists(basePath))
             Directory.CreateDirectory(basePath);
-        
-        //TODO:: maybe not needed!?
-        app.UseFileServer(new FileServerOptions()
-        {
-            FileProvider = new PhysicalFileProvider(basePath),
-            RequestPath = new PathString("/trinity-temp"),
-            EnableDirectoryBrowsing = false,
-        });
 
         TrinityTemp.ClearTrinityTempDirectory(app.Environment);
 

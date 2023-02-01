@@ -6,8 +6,7 @@ namespace AbanoubNassem.Trinity.Components.BaseField;
 
 public interface ICanUploadField
 {
-    public Task<List<string>?> Upload(IWebHostEnvironment webHostEnvironment, IFormFileCollection files);
-    public Task<string?> Delete(string uniqueFileId);
+    public Task<string?> Upload(IWebHostEnvironment webHostEnvironment, IFormFile files);
 }
 
 public abstract class CanUploadField<T> : BaseField<T, string>, ICanUploadField where T : CanUploadField<T>
@@ -16,7 +15,22 @@ public abstract class CanUploadField<T> : BaseField<T, string>, ICanUploadField 
     {
     }
 
-    public abstract Task<List<string>?> Upload(IWebHostEnvironment webHostEnvironment, IFormFileCollection files);
+    public abstract Task<string?> Upload(IWebHostEnvironment webHostEnvironment, IFormFile files);
 
-    public abstract Task<string?> Delete(string uniqueFileId);
+    protected string UploadTempDirectory { get; set; } = Path.Combine("wwwroot", "trinity_temp");
+
+    protected string MoveUploadedFromTempToDirectory { get; set; } = null!;
+
+    protected string UploadDirectory = "trinity_public";
+
+    public T SetUploadDirectory(string directory)
+    {
+        UploadDirectory = directory;
+        return (this as T)!;
+    }
+
+    protected string GetUploadDirectory()
+    {
+        return UploadDirectory;
+    }
 }

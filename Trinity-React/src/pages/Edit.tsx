@@ -6,7 +6,7 @@ import { Toolbar } from 'primereact/toolbar';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { trinityLink } from '@/utilities/trinity_link';
 import { AppContext } from '@/contexts/AppContext';
-import { useForm } from '@inertiajs/react';
+import { router, useForm } from '@inertiajs/react';
 import { useTrinityFields } from '@/hooks/trinity_resource_fields';
 import last from 'lodash/last';
 
@@ -16,38 +16,27 @@ const Edit = () => {
     const fields = useTrinityFields();
     const { components } = useContext(AppContext);
 
-    const data = useMemo<any>(() => {
+    const data = useMemo<{ [k: string]: any }>(() => {
         let innerData = {} as any;
         for (const field of fields) {
-            innerData[last(field.columnName.split('.'))!] = record[last(field.columnName.split('.'))!] ?? '';
+            innerData[last(field.columnName.split('.'))!] = record[last(field.columnName.split('.'))!];
         }
         return innerData;
     }, [configs]);
 
-    const form = useForm<any>(data);
+    const form = useForm(data);
 
     const setFieldValue = (name: string, value: any) => {
         data[name] = value;
     };
 
     const update = () => {
-        // console.log(data);
-        form.setDefaults(data);
-        form.reset();
-        //console.log(form.data);
-        // form.reset();
-        // console.log(form.data);
-        // // form.reset();
+        form.setData(data);
         form.put('', {
             preserveScroll: true,
             preserveState: true
         });
     };
-    // useEffect(() => {
-    //     if (inserted) {
-    //         trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${inserted}`, false, false);
-    //     }
-    // }, [inserted]);
 
     const toolbarRight = (
         <div className="grid">
@@ -78,7 +67,10 @@ const Edit = () => {
                         components?.has(component.componentName) ? (
                             components?.get(component.componentName)!({
                                 key: `form_${index}_${component.componentName}`,
+                                configs,
+                                resource,
                                 component,
+                                record,
                                 formData: data,
                                 setFieldValue,
                                 errors
@@ -90,7 +82,7 @@ const Edit = () => {
                 </form>
 
                 <div className="mt-3">
-                    <Toolbar right={toolbarRight} />
+                    <Toolbar end={toolbarRight} />
                 </div>
             </div>
         </>

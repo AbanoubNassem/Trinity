@@ -10,7 +10,7 @@ public interface IBaseField : IBaseComponent
 
     public void Format(IDictionary<string, object?> record);
 
-    public void Fill(ref IDictionary<string, object?> form, in IDictionary<string, object?>? record = null);
+    public void Fill(ref IDictionary<string, object?> form, in IDictionary<string, object?>? oldRecord = null);
 
     public void SelectQuery(FluentQueryBuilder query);
 
