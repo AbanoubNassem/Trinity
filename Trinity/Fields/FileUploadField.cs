@@ -99,7 +99,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
     }
 
     public override void Fill(ref IDictionary<string, object?> form,
-        in IDictionary<string, object?>? oldRecord = null)
+        IReadOnlyDictionary<string, object?>? oldRecord = null)
     {
         var oldFiles = oldRecord?[ColumnName]?.ToString()?.Split(',').Where(x => !string.IsNullOrEmpty(x)).ToArray() ??
                        Array.Empty<string>();
@@ -120,6 +120,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
                     }
                     catch
                     {
+                        // ignored
                     }
                 }
                 else

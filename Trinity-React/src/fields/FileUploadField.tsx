@@ -104,6 +104,7 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
                                     load(response.data);
                                 })
                                 .catch((err) => error(err));
+                        else abort();
                     },
 
                     remove: (source, load, error) => {

@@ -375,9 +375,6 @@ const Table = () => {
                             filterElement={
                                 !!column.customFilter
                                     ? (options) => {
-                                          // console.log(filters);
-                                          // console.log(options);
-                                          // console.log(column.customFilter);
                                           return (
                                               <div>
                                                   {components?.has(column.customFilter!.componentName) ? (

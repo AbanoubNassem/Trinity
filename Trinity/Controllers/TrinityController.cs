@@ -26,15 +26,13 @@ public class TrinityController : Controller
 {
     private readonly TrinityConfigurations _configurations;
     private readonly TrinityManager _trinityManager;
-    private readonly IUrlHelper _urlHelper;
     private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public TrinityController(TrinityConfigurations configurations, TrinityManager trinityManager, IUrlHelper urlHelper,
+    public TrinityController(TrinityConfigurations configurations, TrinityManager trinityManager,
         IWebHostEnvironment webHostEnvironment)
     {
         _configurations = configurations;
         _trinityManager = trinityManager;
-        _urlHelper = urlHelper;
         _webHostEnvironment = webHostEnvironment;
     }
 
@@ -162,10 +160,10 @@ public class TrinityController : Controller
                 break;
         }
 
-        if (!ModelState.IsValid)
-        {
-            responseData.Errors = BadRequest(ModelState);
-        }
+        // if (!ModelState.IsValid)
+        // {
+        //     responseData.Errors = BadRequest(ModelState);
+        // }
 
         responseData.Notifications = TrinityNotifications.Flush();
         return Inertia.Render(view, responseData);
@@ -206,7 +204,7 @@ public class TrinityController : Controller
         var resource = (resourceObject as TrinityResource)!;
         var field = resource.Fields[request.FieldName];
 
-        if (field is not ICanUploadField uploadField) return Task.FromResult<IActionResult>(UnprocessableEntity());
+        if (field is not ICanUploadField) return Task.FromResult<IActionResult>(UnprocessableEntity());
 
         dynamic? data = null;
 

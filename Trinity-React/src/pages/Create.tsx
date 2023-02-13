@@ -77,7 +77,7 @@ const Create = () => {
 
     return (
         <>
-            <Head title={resource?.pluralLabel}></Head>
+            <Head title={`Create - ${resource?.pluralLabel}`}></Head>
 
             <div className="card">
                 <h5 className="mb-6">Create {resource?.pluralLabel}</h5>

@@ -1,8 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components;
-using AbanoubNassem.Trinity.Components.BaseField;
-using AbanoubNassem.Trinity.Components.BaseLayout;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Utilities;
 using DapperQueryBuilder;
@@ -50,30 +48,10 @@ public abstract partial class TrinityResource
 
             foreach (var field in Schema)
             {
-                GetInnerFields((IBaseComponent)field);
+                TrinityUtils.GetInnerFields(in _fields, (IBaseComponent)field);
             }
 
             return _fields;
-        }
-    }
-
-    private void GetInnerFields(IBaseComponent component)
-    {
-        switch (component)
-        {
-            case IBaseField baseField:
-                baseField.AddValidator(ResourceValidator);
-                _fields.TryAdd(baseField.ColumnName, baseField);
-                break;
-            case IBaseLayout baseLayout:
-            {
-                foreach (var innerComponent in baseLayout.Schema)
-                {
-                    GetInnerFields((IBaseComponent)innerComponent);
-                }
-
-                break;
-            }
         }
     }
 
@@ -112,16 +90,10 @@ public abstract partial class TrinityResource
 
     private async Task<IDictionary<string, object?>?> ValidateRequest()
     {
-        foreach (var field in Fields.Values)
-        {
-            ((IBaseField)field).Validate();
-        }
-
         var jsonForm = await Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>() ??
                        new Dictionary<string, JsonElement>();
 
-
-        IDictionary<string, object?> form = new Dictionary<string, object?>();
+        var form = new Dictionary<string, object?>();
         foreach (var kv in jsonForm)
         {
             if (!Fields.ContainsKey(kv.Key)) continue;
@@ -132,10 +104,14 @@ public abstract partial class TrinityResource
             );
         }
 
+        foreach (var field in Fields.Values)
+        {
+            ((IBaseField)field).PrepareForValidation(ResourceValidator, form, ModelState);
+        }
 
         var validation = await ResourceValidator.ValidateAsync(form);
 
-        if (validation.IsValid) return form;
+        if (validation.IsValid && ModelState.IsValid) return form;
 
         validation.AddToModelState(ModelState);
         TrinityNotifications.NotifyError("Please correct the validation errors.", "Validation Errors!");
@@ -236,7 +212,7 @@ public abstract partial class TrinityResource
             var field = (IBaseField)Fields[form.ElementAt(i).Key];
             if (field.ColumnName == PrimaryKeyColumn) continue;
 
-            field.Fill(ref form, record);
+            field.Fill(ref form, (IReadOnlyDictionary<string, object?>?)record);
             if (field is IHasRelationship relationshipField)
                 cmd.Append($@"{relationshipField.ForeignColumn.Split('.').Last():raw} = {form[field.ColumnName]}");
             else

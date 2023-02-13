@@ -1,4 +1,3 @@
-using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Managers;
 using AbanoubNassem.Trinity.Utilities;
@@ -9,13 +8,19 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Profiling;
+
+#if !DEBUG
+using System.Reflection;
+#endif
 
 namespace AbanoubNassem.Trinity.Extensions;
 
@@ -89,6 +94,20 @@ public static class AppExtensions
             app.UseStatusCodePages();
             app.UseDeveloperExceptionPage();
             app.UseMiniProfiler();
+        }
+        else
+        {
+            app.UseExceptionHandler(new ExceptionHandlerOptions
+            {
+                ExceptionHandler = async (context) =>
+                {
+                    await Inertia.Render("Error", new
+                    {
+                        statusCode = context.Response.StatusCode,
+                        reasonPhrase = ReasonPhrases.GetReasonPhrase(context.Response.StatusCode)
+                    }).ExecuteResultAsync(new ActionContext(context, context.GetRouteData(), new ActionDescriptor()));
+                }
+            });
         }
 
 

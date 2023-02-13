@@ -2,6 +2,7 @@ import BaseComponent from '@/types/Models/BaseComponent';
 import { Errors, ErrorBag } from '@inertiajs/core/types/types';
 import Resource from '@/types/Models/Resource';
 import Configs from '@/types/Models/Configs';
+import {CSSProperties} from "react";
 
 export default interface LayoutProps<T extends BaseComponent> {
     configs: Configs;
@@ -11,4 +12,5 @@ export default interface LayoutProps<T extends BaseComponent> {
     formData: any;
     setFieldValue: (name: string, value: any) => void;
     errors: Errors & ErrorBag;
+    style?: CSSProperties | undefined;
 }

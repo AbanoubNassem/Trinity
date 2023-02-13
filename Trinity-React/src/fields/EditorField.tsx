@@ -11,7 +11,10 @@ const EditorField = ({ component, formData, setFieldValue, errors }: FieldProps<
     let header = null;
     if (component.headerButtons) {
         header = (
-            <span className="ql-formats">
+            <span
+                className="ql-formats"
+                style={{ zIndex: 400 }}
+            >
                 {component.headerButtons.map((button) => (
                     <button
                         key={button}
@@ -26,6 +29,7 @@ const EditorField = ({ component, formData, setFieldValue, errors }: FieldProps<
         <BaseFieldComponent
             component={component}
             errors={errors}
+            style={{ zIndex: 200 }}
         >
             <Editor
                 id={component.columnName}
@@ -39,7 +43,7 @@ const EditorField = ({ component, formData, setFieldValue, errors }: FieldProps<
                     setFieldValue(component.columnName, e.htmlValue);
                     setValue(e.htmlValue);
                 }}
-                style={{ height: component.height }}
+                style={{ height: component.height, zIndex: 300 }}
                 headerTemplate={header}
                 modules={component.modules}
                 maxLength={component.maxLength}

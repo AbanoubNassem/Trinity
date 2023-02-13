@@ -16,7 +16,7 @@ public class SliderField<T> : BaseField<SliderField<T>, T>
     {
     }
 
-    public int Min { get; protected set; } = 0;
+    public int Min { get; protected set; }
 
     public SliderField<T> SetMin(int min)
     {

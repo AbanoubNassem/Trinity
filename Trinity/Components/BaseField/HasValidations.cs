@@ -1,45 +1,57 @@
-using AbanoubNassem.Trinity.Validators;
 using FluentValidation;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace AbanoubNassem.Trinity.Components.BaseField;
 
 public abstract partial class BaseField<T, TDeserialization>
 
 {
-    protected ResourceValidator Validator { get; set; } = null!;
+    public delegate void ValidateUsingDelegate(IValidator validator,
+        Action<IRuleBuilderInitial<IDictionary<string, object?>, TDeserialization?>> rules,
+        IReadOnlyDictionary<string, object?> form);
 
-    public void AddValidator(ResourceValidator validator)
+    protected ValidateUsingDelegate? ValidateUsingCallback;
+
+    protected Action<IRuleBuilderInitial<IDictionary<string, object?>, TDeserialization?>>? Rules;
+
+    private bool _isValidationRegistered;
+
+    public virtual T SetValidateUsing(ValidateUsingDelegate validateUsingCallback)
     {
-        Validator = validator;
-    }
-
-    private bool _isRulesAdded;
-
-
-    public T SetValidationRules(Action<IRuleBuilderInitial<IDictionary<string, object?>, TDeserialization?>> rules)
-    {
-        _validation = validator =>
-        {
-            var rule = validator.RuleFor<TDeserialization?>(x =>
-                    x.ContainsKey(ColumnName) && x[ColumnName] != null ? (TDeserialization)x[ColumnName]! : default
-                )
-                .Cascade(CascadeMode.Stop);
-
-            rules(rule);
-
-            ((IRuleBuilderOptions<IDictionary<string, object?>, TDeserialization?>)rule)
-                .WithName(Label)
-                .OverridePropertyName(ColumnName);
-            _isRulesAdded = true;
-        };
+        ValidateUsingCallback = validateUsingCallback;
         return (this as T)!;
     }
 
-    private Action<ResourceValidator>? _validation;
-
-    public void Validate()
+    public virtual T SetValidationRules(
+        Action<IRuleBuilderInitial<IDictionary<string, object?>, TDeserialization?>> rules)
     {
-        if (!_isRulesAdded)
-            _validation?.Invoke(Validator);
+        Rules = rules;
+
+        return (this as T)!;
+    }
+
+    public virtual void PrepareForValidation(IValidator validator, IReadOnlyDictionary<string, object?> form,
+        ModelStateDictionary _)
+    {
+        if (_isValidationRegistered || Rules == null) return;
+
+        if (ValidateUsingCallback != null)
+        {
+            ValidateUsingCallback.Invoke(validator, Rules, form);
+            return;
+        }
+
+        var rule = (validator as AbstractValidator<IDictionary<string, object?>>)!.RuleFor<TDeserialization?>(x =>
+                x.ContainsKey(ColumnName) && x[ColumnName] != null ? (TDeserialization)x[ColumnName]! : default
+            )
+            .Cascade(CascadeMode.Stop);
+
+        Rules(rule);
+
+        ((IRuleBuilderOptions<IDictionary<string, object?>, TDeserialization?>)rule)
+            .WithName(Label)
+            .OverridePropertyName(ColumnName);
+
+        _isValidationRegistered = true;
     }
 }

@@ -1,11 +1,11 @@
 namespace AbanoubNassem.Trinity.Components.BaseLayout;
 
-public interface IBaseLayout : IBaseComponent
+public interface IBaseLayout : IBaseComponent, IHasSchema
 {
-    public List<object> Schema { get; set; }
+
 }
 
-public abstract class BaseLayout<T> : BaseComponent<T, object?>, IBaseLayout,IFormComponent where T : BaseLayout<T>
+public abstract class BaseLayout<T> : BaseComponent<T, object?>, IBaseLayout, IFormComponent where T : BaseLayout<T>
 {
     protected BaseLayout(List<IFormComponent> schema, int columns = 0)
     {
@@ -16,7 +16,7 @@ public abstract class BaseLayout<T> : BaseComponent<T, object?>, IBaseLayout,IFo
     public override int ColumnSpan { get; protected set; } = 12;
 
     public override string Type => "Layout";
-    public List<object> Schema { get; set; }
+    public List<object>? Schema { get; set; }
 
     public T SetSchema(List<IFormComponent> schema)
     {

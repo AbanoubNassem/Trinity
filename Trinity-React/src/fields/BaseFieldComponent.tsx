@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { classNames } from 'primereact/utils';
 import BaseField from '@/types/Models/Fields/BaseField';
 import { Errors, ErrorBag } from '@inertiajs/core/types/types';
 
-const BaseFieldComponent = ({ component, errors, children }: { component: BaseField; errors: Errors & ErrorBag; children?: React.ReactNode }) => {
+const BaseFieldComponent = ({ component, errors, children, style }: { component: BaseField; errors: Errors & ErrorBag; children?: React.ReactNode; style?: CSSProperties | undefined }) => {
     if (component.hidden) return <></>;
 
     return (
-        <div className={classNames(['field col-12 md:col', component.columnSpan > 0 && component.columnSpan < 12 ? `md:col-${component.columnSpan}` : ''])}>
+        <div
+            style={style}
+            className={classNames(['field col-12 md:col', component.columnSpan > 0 && component.columnSpan < 12 ? `md:col-${component.columnSpan}` : ''])}
+        >
             <label htmlFor={component.columnName}>{component.label}</label>
 
             <div className={component.prefixes || component.suffixes || component.prefixIcons || component.suffixIcons ? 'p-inputgroup' : ''}>

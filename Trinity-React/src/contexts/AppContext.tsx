@@ -24,6 +24,7 @@ import SliderField from '@/fields/SliderField';
 import EditorField from '@/fields/EditorField';
 import FileUploadField from '@/fields/FileUploadField';
 import { Page, setupProgress } from '@inertiajs/core';
+import RepeaterField from '@/fields/RepeaterField';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
@@ -52,7 +53,8 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['SwitchInputField', (props) => <SwitchInputField {...props} />],
         ['SliderField', (props) => <SliderField {...props} />],
         ['EditorField', (props) => <EditorField {...props} />],
-        ['FileUploadField', (props) => <FileUploadField {...props} />]
+        ['FileUploadField', (props) => <FileUploadField {...props} />],
+        ['RepeaterField', (props) => <RepeaterField {...props} />]
     ]);
 
     const columns = new Map<string, (props: any) => React.ReactNode>([

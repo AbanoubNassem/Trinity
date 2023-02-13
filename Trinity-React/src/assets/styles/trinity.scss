@@ -45,6 +45,21 @@
   }
 }
 
-.p-progressbar-value{
+.p-progressbar-value {
   max-width: 100% !important;
+}
+
+.p-orderlist .p-orderlist-controls {
+  display: none !important;
+
+}
+
+.p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
+  color: unset !important;
+  background: unset !important;
+}
+
+.p-editor-container {
+  z-index: 500 !important;
+  position: relative !important;
 }

@@ -1,6 +1,5 @@
 using AbanoubNassem.Trinity.Components.BaseColumn;
 using AbanoubNassem.Trinity.Extensions;
-using DapperQueryBuilder;
 
 namespace AbanoubNassem.Trinity.Columns;
 

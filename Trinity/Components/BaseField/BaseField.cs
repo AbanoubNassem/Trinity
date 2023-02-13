@@ -1,31 +1,12 @@
-using AbanoubNassem.Trinity.Validators;
 using DapperQueryBuilder;
 using Humanizer;
 
 namespace AbanoubNassem.Trinity.Components.BaseField;
 
-public interface IBaseField : IBaseComponent
-{
-    public string ColumnName { get; set; }
-
-    public void Format(IDictionary<string, object?> record);
-
-    public void Fill(ref IDictionary<string, object?> form, in IDictionary<string, object?>? oldRecord = null);
-
-    public void SelectQuery(FluentQueryBuilder query);
-
-    public void FilterQuery(Filters filters, string globalSearch);
-
-    public void AddValidator(ResourceValidator validator);
-
-    public void Validate();
-
-    Type GetDeserializationType();
-}
-
-public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T, TDeserialization>, IBaseField,
+public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T, TDeserialization>,
+    IBaseField,
     IFormComponent
-    where T : BaseField<T, TDeserialization>
+    where T : BaseField<T, TDeserialization>, IBaseField
 {
     protected BaseField(string columnName)
     {
@@ -53,12 +34,12 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T, 
 
 
     public delegate void ActionFormWithRecord(IDictionary<string, object?> form,
-        in IDictionary<string, object?>? record = null);
+        IReadOnlyDictionary<string, object?>? record = null);
 
     public delegate object? ActionWithRecordProperty(TDeserialization? property);
 
     public delegate object? ActionWithRecordProperties(TDeserialization? property,
-        in IDictionary<string, object?>? record = null);
+        IReadOnlyDictionary<string, object?>? record = null);
 
     public string ColumnName { get; set; }
 
@@ -114,7 +95,7 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T, 
         return (this as T)!;
     }
 
-    public virtual void Fill(ref IDictionary<string, object?> form, in IDictionary<string, object?>? record = null)
+    public virtual void Fill(ref IDictionary<string, object?> form, IReadOnlyDictionary<string, object?>? record = null)
     {
         if (form.TryGetValue(ColumnName, out var value))
         {

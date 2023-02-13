@@ -57,7 +57,7 @@ const Edit = () => {
 
     return (
         <>
-            <Head title={resource?.pluralLabel}></Head>
+            <Head title={`Edit - ${record[resource?.titleColumn ?? resource?.primaryKeyColumn ?? 'id']}`}></Head>
 
             <div className="card">
                 <h5 className="mb-6">Create {resource?.pluralLabel}</h5>
