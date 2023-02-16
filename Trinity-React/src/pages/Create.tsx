@@ -102,7 +102,7 @@ const Create = () => {
                 </form>
 
                 <div className="mt-3">
-                    <Toolbar right={toolbarRight} />
+                    <Toolbar end={toolbarRight} />
                 </div>
             </div>
         </>

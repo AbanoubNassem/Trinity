@@ -42,9 +42,9 @@ public class BelongsToColumn : BaseHasRelationshipColumn<string>
     public override void Filter(Filters filters, string str)
     {
         var localColumns = ColumnName.Split('.');
-        var foreignTables = ForeignTable.Split('.');
-        var foreignColumns = ForeignColumn.Split('.');
-        var relationshipNames = RelationshipName.Split('.');
+        var foreignTables = ForeignTable?.Split('.')?? Array.Empty<string>();
+        var foreignColumns = ForeignColumn?.Split('.')?? Array.Empty<string>();
+        var relationshipNames = RelationshipName?.Split('.')?? Array.Empty<string>();
 
         var search = $"%{str.ToLower()}%";
 
@@ -72,13 +72,13 @@ public class BelongsToColumn : BaseHasRelationshipColumn<string>
         filters.Add(innerFilters);
     }
 
-    public override async Task<List<IDictionary<string, object?>>> RunRelationQuery(FluentQueryBuilder query,
+    public override async Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(FluentQueryBuilder query,
         List<IDictionary<string, object?>> entities, Sort? sort = null)
     {
         var localColumns = ColumnName.Split('.');
-        var foreignTables = ForeignTable.Split('.');
-        var foreignColumns = ForeignColumn.Split('.');
-        var relationshipNames = RelationshipName.Split('.');
+        var foreignTables = ForeignTable?.Split('.')?? Array.Empty<string>();
+        var foreignColumns = ForeignColumn?.Split('.')?? Array.Empty<string>();
+        var relationshipNames = RelationshipName?.Split('.')?? Array.Empty<string>();
 
 
         var temp = entities;

@@ -263,3 +263,4 @@ FakesAssemblies/
 *.opt
 
 .idea/
+Trinity-React/package-lock.json

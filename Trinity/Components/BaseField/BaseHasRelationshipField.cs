@@ -17,7 +17,7 @@ public abstract class
         RelationshipName = ForeignTable.Singularize().Camelize();
     }
 
-    public abstract Task<List<IDictionary<string, object?>>> RunRelationQuery(FluentQueryBuilder query,
+    public abstract Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(FluentQueryBuilder query,
         List<IDictionary<string, object?>> list, Sort? sort = null);
 
     public override void SelectQuery(FluentQueryBuilder query)
@@ -29,14 +29,16 @@ public abstract class
     {
     }
 
-    public virtual Task<List<KeyValuePair<string, string>>> RelationshipQuery(IDbConnection connection, string? value,
+    public virtual Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(IDbConnection connection, string? value,
         int offset,
         string? search = null)
     {
         return Task.FromResult(new List<KeyValuePair<string, string>>());
     }
 
-    public string RelationshipName { get; set; }
+    public string? RelationshipName { get; set; }
+
+    public bool HasRelationshipByDefault { get; set; } = true;
 
     public HasRelationshipField<T, TDeserialization> SetRelationshipName(string value)
     {
@@ -44,7 +46,7 @@ public abstract class
         return this;
     }
 
-    public string ForeignTable { get; set; }
+    public string? ForeignTable { get; set; }
 
     public HasRelationshipField<T, TDeserialization> SetForeignTable(string value)
     {
@@ -52,7 +54,7 @@ public abstract class
         return this;
     }
 
-    public string ForeignColumn { get; set; }
+    public string? ForeignColumn { get; set; }
 
     public HasRelationshipField<T, TDeserialization> SetForeignColumn(string value)
     {

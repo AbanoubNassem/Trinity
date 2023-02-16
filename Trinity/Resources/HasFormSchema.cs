@@ -83,7 +83,7 @@ public abstract partial class TrinityResource
         // query.From($"{Table!.Split('.').Last():raw}");
 
         using var connection = ConnectionFactory();
-        var res = await field.RelationshipQuery(connection, value, offset, search);
+        var res = await field.GetAssociatesRelationshipQuery(connection, value, offset, search);
 
         return new OkObjectResult(res);
     }
@@ -171,12 +171,14 @@ public abstract partial class TrinityResource
 
         if (record == null) return record;
 
-        foreach (IBaseField filed in Fields.Values)
+        foreach (IBaseField field in Fields.Values)
         {
-            if (filed is not IHasRelationship field) continue;
+            if (field is  IHasRelationship { HasRelationshipByDefault: true } relationshipField)
+            {
 
-            record = (await field.RunRelationQuery((FluentQueryBuilder)connection.FluentQueryBuilder(),
-                new List<IDictionary<string, object?>>() { record! })).Last()!;
+                record = (await relationshipField.SelectRelationshipQuery((FluentQueryBuilder)connection.FluentQueryBuilder(),
+                    new List<IDictionary<string, object?>>() { record! })).Last()!;
+            }
         }
 
 
@@ -213,8 +215,8 @@ public abstract partial class TrinityResource
             if (field.ColumnName == PrimaryKeyColumn) continue;
 
             field.Fill(ref form, (IReadOnlyDictionary<string, object?>?)record);
-            if (field is IHasRelationship relationshipField)
-                cmd.Append($@"{relationshipField.ForeignColumn.Split('.').Last():raw} = {form[field.ColumnName]}");
+            if (field is IHasRelationship { HasRelationshipByDefault: true } relationshipField)
+                cmd.Append($@"{relationshipField.ForeignColumn?.Split('.').Last():raw} = {form[field.ColumnName]}");
             else
                 cmd.Append($@"{field.ColumnName:raw} = {form[field.ColumnName]}");
             if (i < form.Count - 1)

@@ -53,9 +53,9 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
     public override void FilterQuery(Filters filters, string globalSearch)
     {
         var localColumns = ColumnName.Split('.');
-        var foreignTables = ForeignTable.Split('.');
-        var foreignColumns = ForeignColumn.Split('.');
-        var relationshipNames = RelationshipName.Split('.');
+        var foreignTables = ForeignTable?.Split('.') ?? Array.Empty<string>();
+        var foreignColumns = ForeignColumn?.Split('.') ?? Array.Empty<string>();
+        var relationshipNames = RelationshipName?.Split('.') ?? Array.Empty<string>();
 
         var innerFilters = new Filters(Filters.FiltersType.AND);
 
@@ -81,13 +81,13 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
         filters.Add(innerFilters);
     }
 
-    public override async Task<List<IDictionary<string, object?>>> RunRelationQuery(FluentQueryBuilder query,
+    public override async Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(FluentQueryBuilder query,
         List<IDictionary<string, object?>> entities, Sort? sort = null)
     {
         var localColumns = ColumnName.Split('.');
-        var foreignTables = ForeignTable.Split('.');
-        var foreignColumns = ForeignColumn.Split('.');
-        var relationshipNames = RelationshipName.Split('.');
+        var foreignTables = ForeignTable?.Split('.') ?? Array.Empty<string>();
+        var foreignColumns = ForeignColumn?.Split('.') ?? Array.Empty<string>();
+        var relationshipNames = RelationshipName?.Split('.') ?? Array.Empty<string>();
 
 
         var temp = entities;
@@ -172,7 +172,8 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
         }
     }
 
-    public override async Task<List<KeyValuePair<string, string>>> RelationshipQuery(IDbConnection connection,
+    public override async Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(
+        IDbConnection connection,
         string? value, int offset,
         string? search = null)
     {
@@ -186,8 +187,8 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
         // }, null, null, true, "store_id");
         //
 
-        var table = ForeignTable.Split('.').Last();
-        var column = ForeignColumn.Split('.').Last();
+        var table = ForeignTable!.Split('.').Last();
+        var column = ForeignColumn!.Split('.').Last();
         var query = "";
 
         if (value != null)

@@ -10,7 +10,6 @@ import { LayoutContext } from '@/contexts/LayoutContext';
 import { useLogo } from '@/hooks/trinity_logo';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { useForm } from '@inertiajs/react';
-import { Method } from '@inertiajs/core';
 
 const Login = () => {
     const configs = useConfigs();
@@ -21,7 +20,7 @@ const Login = () => {
     const logo = useLogo();
     const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
 
-    const { data, setData, submit, processing } = useForm({
+    const { data, setData, post, processing } = useForm({
         email: '',
         password: '',
         remember: false
@@ -56,7 +55,7 @@ const Login = () => {
                             style={{ borderRadius: '53px' }}
                             onSubmit={(e) => {
                                 e.preventDefault();
-                                submit(Method.POST, '');
+                                post('');
                             }}
                         >
                             <div>

@@ -63,3 +63,7 @@
   z-index: 500 !important;
   position: relative !important;
 }
+
+.p-blockui-container .p-invalid, .p-editor-container.p-invalid {
+  border: 1px solid #f0a9a7;
+}

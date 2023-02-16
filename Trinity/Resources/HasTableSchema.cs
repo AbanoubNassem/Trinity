@@ -145,10 +145,13 @@ public abstract partial class TrinityResource
             {
                 foreach (IBaseColumn baseColumn in Columns)
                 {
-                    if (baseColumn is not IHasRelationship column) continue;
-                    result = await column.RunRelationQuery((FluentQueryBuilder)conn.FluentQueryBuilder(), result,
-                        sorts?.SingleOrDefault(x => x.Field == column.ColumnName)
-                    );
+                    if (baseColumn is IHasRelationship { HasRelationshipByDefault: true } relationshipColumn)
+                    {
+                        result = await relationshipColumn.SelectRelationshipQuery((FluentQueryBuilder)conn.FluentQueryBuilder(),
+                            result,
+                            sorts?.SingleOrDefault(x => x.Field == relationshipColumn.ColumnName)
+                        );
+                    }
                 }
             }
 
