@@ -1,3 +1,5 @@
+using AbanoubNassem.Trinity.Components.Interfaces;
+
 namespace AbanoubNassem.Trinity.Components.BaseLayout;
 
 public interface IBaseLayout : IBaseComponent, IHasSchema
@@ -7,7 +9,7 @@ public interface IBaseLayout : IBaseComponent, IHasSchema
 
 public abstract class BaseLayout<T> : BaseComponent<T, object?>, IBaseLayout, IFormComponent where T : BaseLayout<T>
 {
-    protected BaseLayout(List<IFormComponent> schema, int columns = 0)
+    protected BaseLayout(IEnumerable<IFormComponent> schema , int columns = 0)
     {
         Schema = schema.Cast<object>().ToList();
         Columns = columns;

@@ -182,13 +182,14 @@ const Table = () => {
             <Button
                 className="p-button-success mr-2"
                 icon="pi pi-plus"
-                label="New"
+                label="Create"
                 onClick={() => trinityLink(`/${configs.prefix}/${resource?.name}/create`)}
             />
             <Button
                 className="p-button-danger"
                 icon="pi pi-trash"
                 label="Delete"
+                disabled={selectedItems.length === 0}
                 onClick={() => {
                     if (selectedItems.length) showDeleteDialog(true);
                 }}

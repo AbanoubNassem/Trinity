@@ -2,7 +2,7 @@ import React from 'react';
 
 import { classNames } from 'primereact/utils';
 import { Ripple } from 'primereact/ripple';
-import { Link } from '@inertiajs/react'
+import { Link } from '@inertiajs/react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { CSSTransition as Transition } from 'react-transition-group';
 import { useConfigs } from '@/hooks/trinity_configs';
@@ -57,7 +57,6 @@ const AppMenuItem = (props: { root?: any; index: number; parentKey?: any; item: 
             {(!item.to || item.items) && item.visible ? (
                 <Link
                     href={item.url}
-                    preserveState
                     onClick={(e) => itemClick(e)}
                     className={classNames(item.class, 'p-ripple')}
                     target={item.target}
@@ -72,7 +71,6 @@ const AppMenuItem = (props: { root?: any; index: number; parentKey?: any; item: 
             {item.to && !item.items && item.visible ? (
                 <Link
                     href={`/${configs?.prefix}${item.to}`}
-                    preserveState
                     onClick={(e) => itemClick(e)}
                     className={classNames(item.class, 'p-ripple', { 'active-route': isActive(item) })}
                     target={item.target}

@@ -1,3 +1,4 @@
+using AbanoubNassem.Trinity.Components.Interfaces;
 using DapperQueryBuilder;
 using Humanizer;
 
@@ -22,14 +23,38 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T, 
         return typeof(TDeserialization);
     }
 
+    protected Action<FluentQueryBuilder>? SelectQueryUsing { get; set; }
+
     public virtual void SelectQuery(FluentQueryBuilder query)
     {
-        query.Select($"t.{ColumnName:raw}");
+        if (SelectQueryUsing != null)
+            SelectQueryUsing(query);
+        else
+        {
+            query.Select($"t.{ColumnName:raw}");
+        }
     }
+
+    public void SetSelectQueryUsing(Action<FluentQueryBuilder> query)
+    {
+        SelectQueryUsing = query;
+    }
+
+    protected Action<Filters, string>? FilterQueryUsing { get; set; }
 
     public virtual void FilterQuery(Filters filters, string globalSearch)
     {
-        filters.Add(new Filter($@"LOWER(t.{ColumnName:raw}) LIKE {globalSearch}"));
+        if (FilterQueryUsing != null)
+            FilterQueryUsing(filters, globalSearch);
+        else
+        {
+            filters.Add(new Filter($@"LOWER(t.{ColumnName:raw}) LIKE {globalSearch}"));
+        }
+    }
+
+    public void SetFilterQueryUsing(Action<Filters, string> filter)
+    {
+        FilterQueryUsing = filter;
     }
 
 
@@ -123,14 +148,6 @@ public abstract partial class BaseField<T, TDeserialization> : BaseComponent<T, 
     public T SetHelperText(string helperText)
     {
         HelperText = helperText;
-        return (this as T)!;
-    }
-
-    public bool Disabled { get; protected set; }
-
-    public T SetAsDisabled(bool value = true)
-    {
-        Disabled = value;
         return (this as T)!;
     }
 

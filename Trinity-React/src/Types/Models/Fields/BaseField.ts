@@ -13,7 +13,6 @@ export default interface BaseField extends BaseComponent {
     placeholder?: string;
     helperText?: string;
     tooltip?: string;
-    disabled: boolean;
     prefixes?: Array<string>;
     suffixes?: Array<string>;
     prefixIcons?: Array<string>;

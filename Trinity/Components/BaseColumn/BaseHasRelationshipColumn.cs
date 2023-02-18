@@ -1,4 +1,5 @@
 using System.Data;
+using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
 using Humanizer;

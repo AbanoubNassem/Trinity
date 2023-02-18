@@ -1,11 +1,6 @@
-namespace AbanoubNassem.Trinity.Components;
+using AbanoubNassem.Trinity.Components.Interfaces;
 
-public interface IBaseComponent
-{
-    public string ComponentName { get; }
-    
-    bool Hidden { get; set; }
-}
+namespace AbanoubNassem.Trinity.Components;
 
 public abstract class BaseComponent<T, TDeserialization> : IBaseComponent where T : BaseComponent<T, TDeserialization>
 {
@@ -18,6 +13,15 @@ public abstract class BaseComponent<T, TDeserialization> : IBaseComponent where 
     public T SetLabel(string value)
     {
         Label = value;
+        return (this as T)!;
+    }
+
+    private string? _id;
+    public string Id => $"id_{_id ?? GetHashCode().ToString()}";
+
+    public T SetId(string value)
+    {
+        _id = value;
         return (this as T)!;
     }
 
@@ -48,7 +52,7 @@ public abstract class BaseComponent<T, TDeserialization> : IBaseComponent where 
         return (this as T)!;
     }
 
-    public bool Hidden { get;  set; }
+    public bool Hidden { get; set; }
 
     public T SetAsHidden(bool value = true)
     {
@@ -65,12 +69,28 @@ public abstract class BaseComponent<T, TDeserialization> : IBaseComponent where 
         Hidden = !value;
         return (this as T)!;
     }
-    
+
     public string? Tooltip { get; protected set; }
 
     public T SetTooltip(string toolTip)
     {
         Tooltip = toolTip;
+        return (this as T)!;
+    }
+
+    public Dictionary<string, object>? Style { get; protected set; }
+
+    public T SetStyle(Dictionary<string, object> style)
+    {
+        Style = style;
+        return (this as T)!;
+    }
+    
+    public bool Disabled { get; protected set; }
+
+    public T SetAsDisabled(bool value = true)
+    {
+        Disabled = value;
         return (this as T)!;
     }
 }

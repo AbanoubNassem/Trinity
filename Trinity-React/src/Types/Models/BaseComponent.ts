@@ -1,6 +1,9 @@
+import { CSSProperties } from 'react';
+
 export default interface BaseComponent {
     componentName: string;
     type: string;
+    id: string;
     label: string;
     columnSpan: number;
     toggleable: boolean;
@@ -8,4 +11,6 @@ export default interface BaseComponent {
     hidden: boolean;
     visible: boolean;
     tooltip?: string;
+    style?: CSSProperties;
+    disabled: boolean;
 }

@@ -1,4 +1,4 @@
-namespace AbanoubNassem.Trinity.Components;
+namespace AbanoubNassem.Trinity.Components.Interfaces;
 
 public interface IHasSchema
 {

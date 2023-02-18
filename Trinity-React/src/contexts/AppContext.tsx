@@ -25,6 +25,10 @@ import EditorField from '@/fields/EditorField';
 import FileUploadField from '@/fields/FileUploadField';
 import { Page, setupProgress } from '@inertiajs/core';
 import RepeaterField from '@/fields/RepeaterField';
+import DividerComponent from '@/components/DividerComponent';
+import TabsLayout from '@/layouts/TabsLayout';
+import PanelLayout from '@/layouts/PanelLayout';
+import CardLayout from '@/layouts/CardLayout';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
@@ -41,7 +45,10 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
 
     const components = new Map<string, (props: any) => React.ReactNode>([
         ['GridLayout', (props) => <GridLayout {...props} />],
+        ['PanelLayout', (props) => <PanelLayout {...props} />],
+        ['CardLayout', (props) => <CardLayout {...props} />],
         ['FieldsetLayout', (props) => <FieldsetLayout {...props} />],
+        ['TabsLayout', (props) => <TabsLayout {...props} />],
         ['TextField', (props) => <TextField {...props} />],
         ['IdField', (props) => <IdField {...props} />],
         ['TextAreaField', (props) => <TextAreaField {...props} />],
@@ -54,7 +61,8 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['SliderField', (props) => <SliderField {...props} />],
         ['EditorField', (props) => <EditorField {...props} />],
         ['FileUploadField', (props) => <FileUploadField {...props} />],
-        ['RepeaterField', (props) => <RepeaterField {...props} />]
+        ['RepeaterField', (props) => <RepeaterField {...props} />],
+        ['DividerComponent', (props) => <DividerComponent {...props} />]
     ]);
 
     const columns = new Map<string, (props: any) => React.ReactNode>([

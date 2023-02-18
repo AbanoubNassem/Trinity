@@ -1,5 +1,6 @@
 using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.BaseLayout;
+using AbanoubNassem.Trinity.Components.Interfaces;
 
 namespace AbanoubNassem.Trinity.Layouts;
 

@@ -2,7 +2,7 @@ using System.Data;
 using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
 
-namespace AbanoubNassem.Trinity.Components;
+namespace AbanoubNassem.Trinity.Components.Interfaces;
 
 public interface IHasRelationship
 {
