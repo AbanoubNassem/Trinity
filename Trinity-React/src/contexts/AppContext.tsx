@@ -29,12 +29,14 @@ import DividerComponent from '@/components/DividerComponent';
 import TabsLayout from '@/layouts/TabsLayout';
 import PanelLayout from '@/layouts/PanelLayout';
 import CardLayout from '@/layouts/CardLayout';
+import StatsWidget from '@/widgets/StatsWidget';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
     resources?: Array<Resource>;
     components?: Map<string, (props: any) => React.ReactNode>;
     columns?: Map<string, (props: any) => React.ReactNode>;
+    widgets?: Map<string, (props: any) => React.ReactNode>;
     toast?: RefObject<Toast>;
 }>({});
 
@@ -75,6 +77,8 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['AggregateColumn', (props) => <AggregateColumn {...props} />]
     ]);
 
+    const widgets = new Map<string, (props: any) => React.ReactNode>([['StatsWidget', (props) => <StatsWidget {...props} />]]);
+
     const toast = useRef<Toast>(null);
 
     let value = {
@@ -82,6 +86,7 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         resources,
         components,
         columns,
+        widgets,
         toast: toast
     };
 

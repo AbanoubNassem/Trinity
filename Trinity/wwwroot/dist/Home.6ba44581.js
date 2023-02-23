@@ -1,102 +1,6 @@
-import { r, c as D, e as I, O as h, L as V, j as e, F as W, B as g, M as y } from "./main.2cd52deb.js";
-import { D as H, C as b } from "./datatable.esm.de0c652e.js";
-function f() {
-  return f = Object.assign ? Object.assign.bind() : function(a) {
-    for (var t = 1; t < arguments.length; t++) {
-      var i = arguments[t];
-      for (var n in i)
-        Object.prototype.hasOwnProperty.call(i, n) && (a[n] = i[n]);
-    }
-    return a;
-  }, f.apply(this, arguments);
-}
-var N = {
-  defaultProps: {
-    __TYPE: "Chart",
-    id: null,
-    type: null,
-    data: null,
-    options: null,
-    plugins: null,
-    width: null,
-    height: null,
-    style: null,
-    className: null,
-    children: void 0
-  },
-  getProps: function(t) {
-    return h.getMergedProps(t, N.defaultProps);
-  },
-  getOtherProps: function(t) {
-    return h.getDiffProps(t, N.defaultProps);
-  }
-}, p = function() {
-  try {
-    return Chart;
-  } catch {
-    return null;
-  }
-}(), x = /* @__PURE__ */ r.exports.memo(/* @__PURE__ */ r.exports.forwardRef(function(a, t) {
-  var i = N.getProps(a), n = r.exports.useRef(null), s = r.exports.useRef(null), m = r.exports.useRef(null), d = function() {
-    c();
-    var T = {
-      type: i.type,
-      data: i.data,
-      options: i.options,
-      plugins: i.plugins
-    };
-    p ? s.current = new p(m.current, T) : import("./auto.15017637.js").then(function(u) {
-      c(), !!m.current && u && (u.default ? s.current = new u.default(m.current, T) : s.current = new u(m.current, T));
-    });
-  }, c = function() {
-    s.current && (s.current.destroy(), s.current = null);
-  };
-  r.exports.useImperativeHandle(t, function() {
-    return {
-      props: i,
-      getCanvas: function() {
-        return m.current;
-      },
-      getChart: function() {
-        return s.current;
-      },
-      getBase64Image: function() {
-        return s.current.toBase64Image();
-      },
-      getElement: function() {
-        return n.current;
-      },
-      generateLegend: function() {
-        return s.current && s.current.generateLegend();
-      },
-      refresh: function() {
-        return s.current && s.current.update();
-      }
-    };
-  }), r.exports.useEffect(function() {
-    d();
-  }), D(function() {
-    c();
-  });
-  var l = N.getOtherProps(i), v = I("p-chart", i.className), R = Object.assign({
-    width: i.width,
-    height: i.height
-  }, i.style);
-  return /* @__PURE__ */ r.exports.createElement("div", f({
-    id: i.id,
-    ref: n,
-    style: R,
-    className: v
-  }, l), /* @__PURE__ */ r.exports.createElement("canvas", {
-    ref: m,
-    width: i.width,
-    height: i.height
-  }));
-}), function(a, t) {
-  return a.data === t.data && a.options === t.options && a.type === t.type;
-});
-x.displayName = "Chart";
-const w = {
+import { r as t, L as d, j as e, F as T, B as a, M as o, P as g } from "./main.cc3d6ba0.js";
+import { D as f, C as s } from "./datatable.esm.c506727c.js";
+const y = {
   labels: ["January", "February", "March", "April", "May", "June", "July"],
   datasets: [
     {
@@ -116,9 +20,9 @@ const w = {
       tension: 0.4
     }
   ]
-}, j = () => {
-  const a = r.exports.useRef(null), t = r.exports.useRef(null), [i, n] = r.exports.useState(null), { layoutConfig: s } = r.exports.useContext(V), m = () => {
-    n({
+}, x = () => {
+  const l = t.exports.useRef(null), r = t.exports.useRef(null), [c, m] = t.exports.useState(null), { layoutConfig: n } = t.exports.useContext(d), u = () => {
+    m({
       plugins: {
         legend: {
           labels: {
@@ -145,8 +49,8 @@ const w = {
         }
       }
     });
-  }, d = () => {
-    n({
+  }, b = () => {
+    m({
       plugins: {
         legend: {
           labels: {
@@ -174,10 +78,10 @@ const w = {
       }
     });
   };
-  r.exports.useEffect(() => {
-    s.colorScheme === "light" ? m() : d();
-  }, [s.colorScheme]);
-  const c = (l) => l.toLocaleString("en-US", { style: "currency", currency: "USD" });
+  t.exports.useEffect(() => {
+    n.colorScheme === "light" ? u() : b();
+  }, [n.colorScheme]);
+  const N = (i) => i.toLocaleString("en-US", { style: "currency", currency: "USD" });
   return /* @__PURE__ */ e("div", {
     className: "grid",
     children: [
@@ -514,17 +418,17 @@ const w = {
                 lineNumber: 190,
                 columnNumber: 21
               }, globalThis),
-              /* @__PURE__ */ e(H, {
+              /* @__PURE__ */ e(f, {
                 rows: 5,
                 paginator: !0,
                 responsiveLayout: "scroll",
                 children: [
-                  /* @__PURE__ */ e(b, {
+                  /* @__PURE__ */ e(s, {
                     header: "Image",
-                    body: (l) => /* @__PURE__ */ e("img", {
+                    body: (i) => /* @__PURE__ */ e("img", {
                       className: "shadow-2",
-                      src: `/demo/images/product/${l.image}`,
-                      alt: l.image,
+                      src: `/demo/images/product/${i.image}`,
+                      alt: i.image,
                       width: "50"
                     }, void 0, !1, {
                       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Home.tsx",
@@ -536,7 +440,7 @@ const w = {
                     lineNumber: 196,
                     columnNumber: 25
                   }, globalThis),
-                  /* @__PURE__ */ e(b, {
+                  /* @__PURE__ */ e(s, {
                     field: "name",
                     header: "Name",
                     sortable: !0,
@@ -546,22 +450,22 @@ const w = {
                     lineNumber: 207,
                     columnNumber: 25
                   }, globalThis),
-                  /* @__PURE__ */ e(b, {
+                  /* @__PURE__ */ e(s, {
                     field: "price",
                     header: "Price",
                     sortable: !0,
                     style: { width: "35%" },
-                    body: (l) => c(l.price)
+                    body: (i) => N(i.price)
                   }, void 0, !1, {
                     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Home.tsx",
                     lineNumber: 213,
                     columnNumber: 25
                   }, globalThis),
-                  /* @__PURE__ */ e(b, {
+                  /* @__PURE__ */ e(s, {
                     header: "View",
                     style: { width: "15%" },
-                    body: () => /* @__PURE__ */ e(W, {
-                      children: /* @__PURE__ */ e(g, {
+                    body: () => /* @__PURE__ */ e(T, {
+                      children: /* @__PURE__ */ e(a, {
                         icon: "pi pi-search",
                         type: "button",
                         className: "p-button-text"
@@ -607,18 +511,18 @@ const w = {
                   }, globalThis),
                   /* @__PURE__ */ e("div", {
                     children: [
-                      /* @__PURE__ */ e(g, {
+                      /* @__PURE__ */ e(a, {
                         type: "button",
                         icon: "pi pi-ellipsis-v",
                         className: "p-button-rounded p-button-text p-button-plain",
-                        onClick: (l) => a.current.toggle(l)
+                        onClick: (i) => l.current.toggle(i)
                       }, void 0, !1, {
                         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Home.tsx",
                         lineNumber: 239,
                         columnNumber: 29
                       }, globalThis),
-                      /* @__PURE__ */ e(y, {
-                        ref: a,
+                      /* @__PURE__ */ e(o, {
+                        ref: l,
                         popup: !0,
                         model: [
                           { label: "Add New", icon: "pi pi-fw pi-plus" },
@@ -1071,10 +975,10 @@ const w = {
                 lineNumber: 370,
                 columnNumber: 21
               }, globalThis),
-              /* @__PURE__ */ e(x, {
+              /* @__PURE__ */ e(g, {
                 type: "line",
-                data: w,
-                options: i
+                data: y,
+                options: c
               }, void 0, !1, {
                 fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Home.tsx",
                 lineNumber: 371,
@@ -1101,18 +1005,18 @@ const w = {
                   }, globalThis),
                   /* @__PURE__ */ e("div", {
                     children: [
-                      /* @__PURE__ */ e(g, {
+                      /* @__PURE__ */ e(a, {
                         type: "button",
                         icon: "pi pi-ellipsis-v",
                         className: "p-button-rounded p-button-text p-button-plain",
-                        onClick: (l) => t.current.toggle(l)
+                        onClick: (i) => r.current.toggle(i)
                       }, void 0, !1, {
                         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Home.tsx",
                         lineNumber: 382,
                         columnNumber: 29
                       }, globalThis),
-                      /* @__PURE__ */ e(y, {
-                        ref: t,
+                      /* @__PURE__ */ e(o, {
+                        ref: r,
                         popup: !0,
                         model: [
                           { label: "Add New", icon: "pi pi-fw pi-plus" },
@@ -1376,5 +1280,5 @@ const w = {
   }, globalThis);
 };
 export {
-  j as default
+  x as default
 };

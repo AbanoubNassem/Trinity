@@ -22,6 +22,8 @@ public class TrinityConfigurations
 
     public string Title { get; set; } = "Trinity";
 
+    public TimeSpan CacheWidgetsFor { get; set; } = TimeSpan.FromMinutes(5);
+
     public ProgressConfigurations ProgressSettings { get; set; } = new();
 
     public int MaxPaginationPerPageCount { get; set; } = 250;
@@ -46,7 +48,6 @@ public class ProgressConfigurations
 {
     public int Delay { get; set; } = 250;
     public string Color { get; set; } = "#4F46E5";
-
     public bool ShowSpinner { get; set; } = true;
 }
 

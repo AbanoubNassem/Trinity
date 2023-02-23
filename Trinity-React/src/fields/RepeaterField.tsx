@@ -104,7 +104,10 @@ const RepeaterField = ({ configs, resource, component, formData, record, setFiel
             component={component}
             errors={errors}
         >
-            <BlockUI blocked={component.disabled}>
+            <BlockUI
+                blocked={component.disabled}
+                style={component.style}
+            >
                 <OrderList
                     id={component.columnName}
                     hidden={component.hidden}
@@ -119,6 +122,7 @@ const RepeaterField = ({ configs, resource, component, formData, record, setFiel
                         setFieldValue(component.columnName, JSON.stringify(value));
                     }}
                     onBlur={() => setFieldValue(component.columnName, JSON.stringify(value))}
+                    style={component.style}
                 />
             </BlockUI>
         </BaseFieldComponent>

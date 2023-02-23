@@ -14,6 +14,7 @@ const TabsLayout = ({ configs, resource, component, record, formData, setFieldVa
             className={`col-12 md:col-${component.columnSpan}`}
             activeIndex={component.activeTabIndex}
             scrollable={component.scrollable}
+            style={component.style}
         >
             {component?.schema.map((tab, tabIndex) => (
                 <TabPanel

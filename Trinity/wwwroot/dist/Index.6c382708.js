@@ -1,33 +1,33 @@
-import { j as i, e as X, y as pt, F as j, r as s, U as ft, n as te, t as p, o as gt, f as Re, Z as Se, P as ae, c as yt, O as ne, x as Nt, C as Tt, k as vt, i as Pe, A as ht, u as xt, a as Oe, E as We, m as Dt, R as Ce, B as M, g as ze, z as Rt, G as St, T as Ct, S as Le, H as It } from "./main.2cd52deb.js";
-import { D as Vt, C as Ie } from "./datatable.esm.de0c652e.js";
-import { t as Me } from "./trinity_link.5486019e.js";
+import { j as i, e as F, z as gt, F as K, r as o, U as Nt, m as te, s as f, n as yt, c as Re, Z as Se, t as ae, o as Tt, O as ne, y as ht, C as vt, i as xt, h as ze, A as Oe, u as _e, a as $e, G as Pe, k as Dt, R as Ie, B as M, g as we, E as Rt, J as St, T as It, S as Le, H as Ct } from "./main.cc3d6ba0.js";
+import { D as Vt, C as Ce } from "./datatable.esm.c506727c.js";
+import { t as Me } from "./trinity_link.24040162.js";
 function Et() {
   return new Proxy(new URLSearchParams(window.location.search), {
-    get(a, o) {
-      return a.get(o.toString());
+    get(a, l) {
+      return a.get(l.toString());
     }
   });
 }
-const kt = ({ column: a, record: o, children: e, resource: r }) => {
-  var D;
-  const m = `${a.columnName}_${o[r.primaryKeyColumn]}_tooltip`;
+const Wt = ({ column: a, record: l, children: e, resource: r }) => {
+  var m;
+  const u = `${a.columnName}_${l[r.primaryKeyColumn]}_tooltip`;
   return /* @__PURE__ */ i("div", {
-    ...o[`${a.columnName}_extraAttributes`],
-    className: X(o[`${a.columnName}_extraAttributes`] && "className" in o[`${a.columnName}_extraAttributes`] ? o[`${a.columnName}_extraAttributes`].className : "", {
+    ...l[`${a.columnName}_extraAttributes`],
+    className: F(l[`${a.columnName}_extraAttributes`] && "className" in l[`${a.columnName}_extraAttributes`] ? l[`${a.columnName}_extraAttributes`].className : "", {
       [`text-${a.color}-600`]: a.color
     }),
     style: { fontFamily: a.fontFamily },
     children: [
-      (o[`${a.columnName}_tooltip`] || a.tooltip) && /* @__PURE__ */ i(pt, {
-        target: `#${m}`
+      (l[`${a.columnName}_tooltip`] || a.tooltip) && /* @__PURE__ */ i(gt, {
+        target: `#${u}`
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
         lineNumber: 18,
         columnNumber: 76
       }, globalThis),
       /* @__PURE__ */ i("div", {
-        id: m,
-        "data-pr-tooltip": (D = o[`${a.columnName}_tooltip`]) != null ? D : a.tooltip,
+        id: u,
+        "data-pr-tooltip": (m = l[`${a.columnName}_tooltip`]) != null ? m : a.tooltip,
         "data-pr-position": "top",
         children: [
           a.descriptionPosition === "above" ? /* @__PURE__ */ i("div", {
@@ -43,7 +43,7 @@ const kt = ({ column: a, record: o, children: e, resource: r }) => {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
             lineNumber: 26,
             columnNumber: 21
-          }, globalThis) : /* @__PURE__ */ i(j, {}, void 0, !1, {
+          }, globalThis) : /* @__PURE__ */ i(K, {}, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
             lineNumber: 30,
             columnNumber: 21
@@ -85,7 +85,7 @@ const kt = ({ column: a, record: o, children: e, resource: r }) => {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
             lineNumber: 40,
             columnNumber: 21
-          }, globalThis) : /* @__PURE__ */ i(j, {}, void 0, !1, {
+          }, globalThis) : /* @__PURE__ */ i(K, {}, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/columns/BaseColumnComponent.tsx",
             lineNumber: 44,
             columnNumber: 21
@@ -105,71 +105,71 @@ const kt = ({ column: a, record: o, children: e, resource: r }) => {
 };
 function Ve() {
   return Ve = Object.assign ? Object.assign.bind() : function(a) {
-    for (var o = 1; o < arguments.length; o++) {
-      var e = arguments[o];
+    for (var l = 1; l < arguments.length; l++) {
+      var e = arguments[l];
       for (var r in e)
         Object.prototype.hasOwnProperty.call(e, r) && (a[r] = e[r]);
     }
     return a;
   }, Ve.apply(this, arguments);
 }
-function Ee(a, o) {
-  (o == null || o > a.length) && (o = a.length);
-  for (var e = 0, r = new Array(o); e < o; e++)
+function Ee(a, l) {
+  (l == null || l > a.length) && (l = a.length);
+  for (var e = 0, r = new Array(l); e < l; e++)
     r[e] = a[e];
   return r;
 }
-function wt(a) {
+function kt(a) {
   if (Array.isArray(a))
     return Ee(a);
 }
-function Pt(a) {
+function zt(a) {
   if (typeof Symbol < "u" && a[Symbol.iterator] != null || a["@@iterator"] != null)
     return Array.from(a);
 }
-function Fe(a, o) {
+function Fe(a, l) {
   if (!!a) {
     if (typeof a == "string")
-      return Ee(a, o);
+      return Ee(a, l);
     var e = Object.prototype.toString.call(a).slice(8, -1);
     if (e === "Object" && a.constructor && (e = a.constructor.name), e === "Map" || e === "Set")
       return Array.from(a);
     if (e === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(e))
-      return Ee(a, o);
+      return Ee(a, l);
   }
 }
-function Wt() {
+function Pt() {
   throw new TypeError(`Invalid attempt to spread non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function zt(a) {
-  return wt(a) || Pt(a) || Fe(a) || Wt();
+function wt(a) {
+  return kt(a) || zt(a) || Fe(a) || Pt();
 }
 function Lt(a) {
   if (Array.isArray(a))
     return a;
 }
-function Mt(a, o) {
+function Mt(a, l) {
   var e = a == null ? null : typeof Symbol < "u" && a[Symbol.iterator] || a["@@iterator"];
   if (e != null) {
-    var r, m, D, y, S = [], V = !0, C = !1;
+    var r, u, m, g, S = [], V = !0, I = !1;
     try {
-      if (D = (e = e.call(a)).next, o === 0) {
+      if (m = (e = e.call(a)).next, l === 0) {
         if (Object(e) !== e)
           return;
         V = !1;
       } else
-        for (; !(V = (r = D.call(e)).done) && (S.push(r.value), S.length !== o); V = !0)
+        for (; !(V = (r = m.call(e)).done) && (S.push(r.value), S.length !== l); V = !0)
           ;
     } catch (v) {
-      C = !0, m = v;
+      I = !0, u = v;
     } finally {
       try {
-        if (!V && e.return != null && (y = e.return(), Object(y) !== y))
+        if (!V && e.return != null && (g = e.return(), Object(g) !== g))
           return;
       } finally {
-        if (C)
-          throw m;
+        if (I)
+          throw u;
       }
     }
     return S;
@@ -179,8 +179,8 @@ function Ot() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function O(a, o) {
-  return Lt(a) || Mt(a, o) || Fe(a, o) || Ot();
+function O(a, l) {
+  return Lt(a) || Mt(a, l) || Fe(a, l) || Ot();
 }
 var ge = {
   defaultProps: {
@@ -232,184 +232,184 @@ var ge = {
     visible: !1,
     children: void 0
   },
-  getProps: function(o) {
-    return ne.getMergedProps(o, ge.defaultProps);
+  getProps: function(l) {
+    return ne.getMergedProps(l, ge.defaultProps);
   },
-  getOtherProps: function(o) {
-    return ne.getDiffProps(o, ge.defaultProps);
+  getOtherProps: function(l) {
+    return ne.getDiffProps(l, ge.defaultProps);
   }
-}, _e = /* @__PURE__ */ s.exports.forwardRef(function(a, o) {
-  var e = ge.getProps(a), r = e.id ? e.id : ft(), m = s.exports.useState(r), D = O(m, 2), y = D[0];
-  D[1];
-  var S = s.exports.useState(!1), V = O(S, 2), C = V[0], v = V[1], ie = s.exports.useState(!1), Y = O(ie, 2), E = Y[0], U = Y[1], ye = s.exports.useState(e.maximized), F = O(ye, 2), W = F[0], K = F[1], u = s.exports.useRef(null), k = s.exports.useRef(null), re = s.exports.useRef(null), le = s.exports.useRef(null), g = s.exports.useRef(null), G = s.exports.useRef(null), $ = s.exports.useRef(!1), B = s.exports.useRef(!1), N = s.exports.useRef(null), z = s.exports.useRef(null), J = s.exports.useRef(null), A = s.exports.useRef(r), w = e.onMaximize ? e.maximized : W, Ne = te({
+}, Be = /* @__PURE__ */ o.exports.forwardRef(function(a, l) {
+  var e = ge.getProps(a), r = e.id ? e.id : Nt(), u = o.exports.useState(r), m = O(u, 2), g = m[0];
+  m[1];
+  var S = o.exports.useState(!1), V = O(S, 2), I = V[0], v = V[1], ie = o.exports.useState(!1), X = O(ie, 2), E = X[0], Y = X[1], Ne = o.exports.useState(e.maximized), _ = O(Ne, 2), P = _[0], G = _[1], c = o.exports.useRef(null), W = o.exports.useRef(null), re = o.exports.useRef(null), le = o.exports.useRef(null), y = o.exports.useRef(null), U = o.exports.useRef(null), B = o.exports.useRef(!1), A = o.exports.useRef(!1), T = o.exports.useRef(null), w = o.exports.useRef(null), J = o.exports.useRef(null), H = o.exports.useRef(r), k = e.onMaximize ? e.maximized : P, ye = te({
     type: "keydown",
     listener: function(t) {
-      return Ae(t);
+      return je(t);
     }
-  }), se = O(Ne, 2), Te = se[0], ve = se[1], he = te({
+  }), se = O(ye, 2), Te = se[0], he = se[1], ve = te({
     type: "mousemove",
-    target: function() {
-      return window.document;
-    },
-    listener: function(t) {
-      return Xe(t);
-    }
-  }), oe = O(he, 2), xe = oe[0], De = oe[1], ue = te({
-    type: "mouseup",
     target: function() {
       return window.document;
     },
     listener: function(t) {
       return Ye(t);
     }
-  }), Z = O(ue, 2), ce = Z[0], me = Z[1], be = te({
-    type: "mousemove",
-    target: function() {
-      return window.document;
-    },
-    listener: function(t) {
-      return je(t);
-    }
-  }), q = O(be, 2), n = q[0], T = q[1], L = te({
+  }), oe = O(ve, 2), xe = oe[0], De = oe[1], ce = te({
     type: "mouseup",
     target: function() {
       return window.document;
     },
     listener: function(t) {
-      return Ke(t);
+      return Je(t);
     }
-  }), f = O(L, 2), _ = f[0], R = f[1], Q = function(t) {
+  }), Z = O(ce, 2), ue = Z[0], me = Z[1], de = te({
+    type: "mousemove",
+    target: function() {
+      return window.document;
+    },
+    listener: function(t) {
+      return Ge(t);
+    }
+  }), q = O(de, 2), n = q[0], h = q[1], L = te({
+    type: "mouseup",
+    target: function() {
+      return window.document;
+    },
+    listener: function(t) {
+      return Ue(t);
+    }
+  }), N = O(L, 2), $ = N[0], R = N[1], Q = function(t) {
     e.onHide(), t.preventDefault();
   }, ee = function() {
-    var t = document.activeElement, c = t && u.current && u.current.contains(t);
-    !c && e.closable && e.showHeader && G.current.focus();
-  }, $e = function(t) {
-    e.dismissableMask && e.modal && k.current === t.target && Q(t), e.onMaskClick && e.onMaskClick(t);
-  }, Be = function(t) {
+    var t = document.activeElement, d = t && c.current && c.current.contains(t);
+    !d && e.closable && e.showHeader && U.current.focus();
+  }, Ae = function(t) {
+    e.dismissableMask && e.modal && W.current === t.target && Q(t), e.onMaskClick && e.onMaskClick(t);
+  }, He = function(t) {
     e.onMaximize ? e.onMaximize({
       originalEvent: t,
-      maximized: !w
-    }) : K(function(c) {
-      return !c;
+      maximized: !k
+    }) : G(function(d) {
+      return !d;
     }), t.preventDefault();
-  }, Ae = function(t) {
-    var c = t.currentTarget;
-    if (!(!c || !c.primeDialogParams)) {
-      var b = c.primeDialogParams, x = b.length, P = b[x - 1] ? b[x - 1].id : void 0;
-      if (P === y) {
-        var I = document.getElementById(P);
+  }, je = function(t) {
+    var d = t.currentTarget;
+    if (!(!d || !d.primeDialogParams)) {
+      var b = d.primeDialogParams, D = b.length, z = b[D - 1] ? b[D - 1].id : void 0;
+      if (z === g) {
+        var C = document.getElementById(z);
         if (e.closable && e.closeOnEscape && t.key === "Escape")
-          Q(t), t.stopImmediatePropagation(), b.splice(x - 1, 1);
+          Q(t), t.stopImmediatePropagation(), b.splice(D - 1, 1);
         else if (t.key === "Tab") {
           t.preventDefault();
-          var d = p.getFocusableElements(I);
-          if (d && d.length > 0)
+          var p = f.getFocusableElements(C);
+          if (p && p.length > 0)
             if (!document.activeElement)
-              d[0].focus();
+              p[0].focus();
             else {
-              var h = d.indexOf(document.activeElement);
-              t.shiftKey ? h === -1 || h === 0 ? d[d.length - 1].focus() : d[h - 1].focus() : h === -1 || h === d.length - 1 ? d[0].focus() : d[h + 1].focus();
+              var x = p.indexOf(document.activeElement);
+              t.shiftKey ? x === -1 || x === 0 ? p[p.length - 1].focus() : p[x - 1].focus() : x === -1 || x === p.length - 1 ? p[0].focus() : p[x + 1].focus();
             }
         }
       }
     }
-  }, He = function(t) {
-    p.hasClass(t.target, "p-dialog-header-icon") || p.hasClass(t.target.parentElement, "p-dialog-header-icon") || e.draggable && ($.current = !0, N.current = t.pageX, z.current = t.pageY, u.current.style.margin = "0", p.addClass(document.body, "p-unselectable-text"), e.onDragStart && e.onDragStart(t));
-  }, je = function(t) {
-    if ($.current) {
-      var c = p.getOuterWidth(u.current), b = p.getOuterHeight(u.current), x = t.pageX - N.current, P = t.pageY - z.current, I = u.current.getBoundingClientRect(), d = I.left + x, h = I.top + P, H = p.getViewport();
-      u.current.style.position = "fixed", e.keepInViewport ? (d >= e.minX && d + c < H.width && (N.current = t.pageX, u.current.style.left = d + "px"), h >= e.minY && h + b < H.height && (z.current = t.pageY, u.current.style.top = h + "px")) : (N.current = t.pageX, u.current.style.left = d + "px", z.current = t.pageY, u.current.style.top = h + "px"), e.onDrag && e.onDrag(t);
-    }
   }, Ke = function(t) {
-    $.current && ($.current = !1, p.removeClass(document.body, "p-unselectable-text"), e.onDragEnd && e.onDragEnd(t));
+    f.hasClass(t.target, "p-dialog-header-icon") || f.hasClass(t.target.parentElement, "p-dialog-header-icon") || e.draggable && (B.current = !0, T.current = t.pageX, w.current = t.pageY, c.current.style.margin = "0", f.addClass(document.body, "p-unselectable-text"), e.onDragStart && e.onDragStart(t));
   }, Ge = function(t) {
-    e.resizable && (B.current = !0, N.current = t.pageX, z.current = t.pageY, p.addClass(document.body, "p-unselectable-text"), e.onResizeStart && e.onResizeStart(t));
-  }, ke = function(t, c, b) {
-    !b && (b = p.getViewport());
-    var x = parseInt(t);
-    return /^(\d+|(\.\d+))(\.\d+)?%$/.test(t) ? x * (b[c] / 100) : x;
-  }, Xe = function(t) {
     if (B.current) {
-      var c = t.pageX - N.current, b = t.pageY - z.current, x = p.getOuterWidth(u.current), P = p.getOuterHeight(u.current), I = u.current.getBoundingClientRect(), d = p.getViewport(), h = !parseInt(u.current.style.top) || !parseInt(u.current.style.left), H = ke(u.current.style.minWidth, "width", d), de = ke(u.current.style.minHeight, "height", d), pe = x + c, fe = P + b;
-      h && (pe += c, fe += b), (!H || pe > H) && I.left + pe < d.width && (u.current.style.width = pe + "px"), (!de || fe > de) && I.top + fe < d.height && (u.current.style.height = fe + "px"), N.current = t.pageX, z.current = t.pageY, e.onResize && e.onResize(t);
+      var d = f.getOuterWidth(c.current), b = f.getOuterHeight(c.current), D = t.pageX - T.current, z = t.pageY - w.current, C = c.current.getBoundingClientRect(), p = C.left + D, x = C.top + z, j = f.getViewport();
+      c.current.style.position = "fixed", e.keepInViewport ? (p >= e.minX && p + d < j.width && (T.current = t.pageX, c.current.style.left = p + "px"), x >= e.minY && x + b < j.height && (w.current = t.pageY, c.current.style.top = x + "px")) : (T.current = t.pageX, c.current.style.left = p + "px", w.current = t.pageY, c.current.style.top = x + "px"), e.onDrag && e.onDrag(t);
     }
+  }, Ue = function(t) {
+    B.current && (B.current = !1, f.removeClass(document.body, "p-unselectable-text"), e.onDragEnd && e.onDragEnd(t));
+  }, Xe = function(t) {
+    e.resizable && (A.current = !0, T.current = t.pageX, w.current = t.pageY, f.addClass(document.body, "p-unselectable-text"), e.onResizeStart && e.onResizeStart(t));
+  }, We = function(t, d, b) {
+    !b && (b = f.getViewport());
+    var D = parseInt(t);
+    return /^(\d+|(\.\d+))(\.\d+)?%$/.test(t) ? D * (b[d] / 100) : D;
   }, Ye = function(t) {
-    B.current && (B.current = !1, p.removeClass(document.body, "p-unselectable-text"), e.onResizeEnd && e.onResizeEnd(t));
-  }, Ue = function() {
-    u.current.style.position = "", u.current.style.left = "", u.current.style.top = "", u.current.style.margin = "";
-  }, Je = function() {
-    var t = ["center", "left", "right", "top", "top-left", "top-right", "bottom", "bottom-left", "bottom-right"], c = t.find(function(b) {
+    if (A.current) {
+      var d = t.pageX - T.current, b = t.pageY - w.current, D = f.getOuterWidth(c.current), z = f.getOuterHeight(c.current), C = c.current.getBoundingClientRect(), p = f.getViewport(), x = !parseInt(c.current.style.top) || !parseInt(c.current.style.left), j = We(c.current.style.minWidth, "width", p), be = We(c.current.style.minHeight, "height", p), pe = D + d, fe = z + b;
+      x && (pe += d, fe += b), (!j || pe > j) && C.left + pe < p.width && (c.current.style.width = pe + "px"), (!be || fe > be) && C.top + fe < p.height && (c.current.style.height = fe + "px"), T.current = t.pageX, w.current = t.pageY, e.onResize && e.onResize(t);
+    }
+  }, Je = function(t) {
+    A.current && (A.current = !1, f.removeClass(document.body, "p-unselectable-text"), e.onResizeEnd && e.onResizeEnd(t));
+  }, Ze = function() {
+    c.current.style.position = "", c.current.style.left = "", c.current.style.top = "", c.current.style.margin = "";
+  }, qe = function() {
+    var t = ["center", "left", "right", "top", "top-left", "top-right", "bottom", "bottom-left", "bottom-right"], d = t.find(function(b) {
       return b === e.position || b.replace("-", "") === e.position;
     });
-    return c ? "p-dialog-".concat(c) : "";
-  }, Ze = function() {
-    u.current.setAttribute(A.current, "");
-  }, qe = function() {
-    e.onShow && e.onShow(), e.focusOnShow && ee(), tt();
+    return d ? "p-dialog-".concat(d) : "";
   }, Qe = function() {
-    e.modal && p.addClass(k.current, "p-component-overlay-leave"), e.blockScroll && p.removeClass(document.body, "p-overflow-hidden");
+    c.current.setAttribute(H.current, "");
   }, et = function() {
-    $.current = !1, Se.clear(k.current), v(!1), we();
+    e.onShow && e.onShow(), e.focusOnShow && ee(), nt();
   }, tt = function() {
-    at(), (e.blockScroll || e.maximizable && w) && p.addClass(document.body, "p-overflow-hidden");
-  }, we = function() {
-    nt();
-    var t = e.maximizable && w;
+    e.modal && f.addClass(W.current, "p-component-overlay-leave"), e.blockScroll && f.removeClass(document.body, "p-overflow-hidden");
+  }, at = function() {
+    B.current = !1, Se.clear(W.current), v(!1), ke();
+  }, nt = function() {
+    it(), (e.blockScroll || e.maximizable && k) && f.addClass(document.body, "p-overflow-hidden");
+  }, ke = function() {
+    rt();
+    var t = e.maximizable && k;
     if (e.modal) {
-      var c = document.primeDialogParams && document.primeDialogParams.some(function(b) {
+      var d = document.primeDialogParams && document.primeDialogParams.some(function(b) {
         return b.hasBlockScroll;
       });
-      (c || t) && p.removeClass(document.body, "p-overflow-hidden");
+      (d || t) && f.removeClass(document.body, "p-overflow-hidden");
     } else
-      (e.blockScroll || t) && p.removeClass(document.body, "p-overflow-hidden");
-  }, at = function() {
-    e.draggable && (n(), _()), e.resizable && (xe(), ce()), Te();
+      (e.blockScroll || t) && f.removeClass(document.body, "p-overflow-hidden");
+  }, it = function() {
+    e.draggable && (n(), $()), e.resizable && (xe(), ue()), Te();
     var t = {
-      id: y,
+      id: g,
       hasBlockScroll: e.blockScroll
     };
-    document.primeDialogParams = document.primeDialogParams ? [].concat(zt(document.primeDialogParams), [t]) : [t];
-  }, nt = function() {
-    T(), R(), De(), me(), ve(), document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter(function(t) {
-      return t.id !== y;
+    document.primeDialogParams = document.primeDialogParams ? [].concat(wt(document.primeDialogParams), [t]) : [t];
+  }, rt = function() {
+    h(), R(), De(), me(), he(), document.primeDialogParams = document.primeDialogParams && document.primeDialogParams.filter(function(t) {
+      return t.id !== g;
     });
-  }, it = function() {
-    J.current = p.createInlineStyle(ae.nonce);
+  }, lt = function() {
+    J.current = f.createInlineStyle(ae.nonce);
     var t = "";
-    for (var c in e.breakpoints)
+    for (var d in e.breakpoints)
       t += `
-                @media screen and (max-width: `.concat(c, `) {
-                    .p-dialog[`).concat(A.current, `] {
-                        width: `).concat(e.breakpoints[c], ` !important;
+                @media screen and (max-width: `.concat(d, `) {
+                    .p-dialog[`).concat(H.current, `] {
+                        width: `).concat(e.breakpoints[d], ` !important;
                     }
                 }
             `);
     J.current.innerHTML = t;
-  }, rt = function() {
+  }, st = function() {
     if (!e.blockScroll) {
-      var t = w ? "addClass" : "removeClass";
-      p[t](document.body, "p-overflow-hidden");
+      var t = k ? "addClass" : "removeClass";
+      f[t](document.body, "p-overflow-hidden");
     }
   };
-  gt(function() {
-    e.visible && v(!0), e.breakpoints && it();
+  yt(function() {
+    e.visible && v(!0), e.breakpoints && lt();
   }), Re(function() {
-    e.visible && !C && v(!0), e.visible !== E && C && U(e.visible);
+    e.visible && !I && v(!0), e.visible !== E && I && Y(e.visible);
   }), Re(function() {
-    C && (Se.set("modal", k.current, ae.autoZIndex, e.baseZIndex || ae.zIndex.modal), U(!0));
-  }, [C]), Re(function() {
-    rt();
-  }, [e.maximized, W]), yt(function() {
-    we(), p.removeInlineStyle(J.current), Se.clear(k.current);
-  }), s.exports.useImperativeHandle(o, function() {
+    I && (Se.set("modal", W.current, ae.autoZIndex, e.baseZIndex || ae.zIndex.modal), Y(!0));
+  }, [I]), Re(function() {
+    st();
+  }, [e.maximized, P]), Tt(function() {
+    ke(), f.removeInlineStyle(J.current), Se.clear(W.current);
+  }), o.exports.useImperativeHandle(l, function() {
     return {
       props: e,
-      resetPosition: Ue,
+      resetPosition: Ze,
       getElement: function() {
-        return u.current;
+        return c.current;
       },
       getMask: function() {
-        return k.current;
+        return W.current;
       },
       getContent: function() {
         return re.current;
@@ -418,179 +418,179 @@ var ge = {
         return le.current;
       },
       getFooter: function() {
-        return g.current;
+        return y.current;
       },
       getCloseButton: function() {
-        return G.current;
+        return U.current;
       }
     };
   });
-  var lt = function() {
+  var ot = function() {
     if (e.closable) {
-      var t = e.ariaCloseIconLabel || vt("close");
-      return /* @__PURE__ */ s.exports.createElement("button", {
-        ref: G,
+      var t = e.ariaCloseIconLabel || xt("close");
+      return /* @__PURE__ */ o.exports.createElement("button", {
+        ref: U,
         type: "button",
         className: "p-dialog-header-icon p-dialog-header-close p-link",
         "aria-label": t,
         onClick: Q
-      }, /* @__PURE__ */ s.exports.createElement("span", {
+      }, /* @__PURE__ */ o.exports.createElement("span", {
         className: "p-dialog-header-close-icon pi pi-times",
         "aria-hidden": "true"
-      }), /* @__PURE__ */ s.exports.createElement(Pe, null));
+      }), /* @__PURE__ */ o.exports.createElement(ze, null));
     }
     return null;
-  }, st = function() {
-    var t = X("p-dialog-header-maximize-icon pi", {
-      "pi-window-maximize": !w,
-      "pi-window-minimize": w
+  }, ct = function() {
+    var t = F("p-dialog-header-maximize-icon pi", {
+      "pi-window-maximize": !k,
+      "pi-window-minimize": k
     });
-    return e.maximizable ? /* @__PURE__ */ s.exports.createElement("button", {
+    return e.maximizable ? /* @__PURE__ */ o.exports.createElement("button", {
       type: "button",
       className: "p-dialog-header-icon p-dialog-header-maximize p-link",
-      onClick: Be
-    }, /* @__PURE__ */ s.exports.createElement("span", {
+      onClick: He
+    }, /* @__PURE__ */ o.exports.createElement("span", {
       className: t
-    }), /* @__PURE__ */ s.exports.createElement(Pe, null)) : null;
-  }, ot = function() {
+    }), /* @__PURE__ */ o.exports.createElement(ze, null)) : null;
+  }, ut = function() {
     if (e.showHeader) {
-      var t = lt(), c = st(), b = ne.getJSXElement(e.icons, e), x = ne.getJSXElement(e.header, e), P = y + "_header", I = X("p-dialog-header", e.headerClassName);
-      return /* @__PURE__ */ s.exports.createElement("div", {
+      var t = ot(), d = ct(), b = ne.getJSXElement(e.icons, e), D = ne.getJSXElement(e.header, e), z = g + "_header", C = F("p-dialog-header", e.headerClassName);
+      return /* @__PURE__ */ o.exports.createElement("div", {
         ref: le,
         style: e.headerStyle,
-        className: I,
-        onMouseDown: He
-      }, /* @__PURE__ */ s.exports.createElement("div", {
-        id: P,
+        className: C,
+        onMouseDown: Ke
+      }, /* @__PURE__ */ o.exports.createElement("div", {
+        id: z,
         className: "p-dialog-title"
-      }, x), /* @__PURE__ */ s.exports.createElement("div", {
+      }, D), /* @__PURE__ */ o.exports.createElement("div", {
         className: "p-dialog-header-icons"
-      }, b, c, t));
+      }, b, d, t));
     }
     return null;
-  }, ut = function() {
-    var t = X("p-dialog-content", e.contentClassName), c = y + "_content";
-    return /* @__PURE__ */ s.exports.createElement("div", {
-      id: c,
+  }, mt = function() {
+    var t = F("p-dialog-content", e.contentClassName), d = g + "_content";
+    return /* @__PURE__ */ o.exports.createElement("div", {
+      id: d,
       ref: re,
       className: t,
       style: e.contentStyle
     }, e.children);
-  }, ct = function() {
+  }, dt = function() {
     var t = ne.getJSXElement(e.footer, e);
-    return t && /* @__PURE__ */ s.exports.createElement("div", {
-      ref: g,
+    return t && /* @__PURE__ */ o.exports.createElement("div", {
+      ref: y,
       className: "p-dialog-footer"
     }, t);
-  }, mt = function() {
-    return e.resizable ? /* @__PURE__ */ s.exports.createElement("span", {
+  }, bt = function() {
+    return e.resizable ? /* @__PURE__ */ o.exports.createElement("span", {
       className: "p-resizable-handle",
       style: {
         zIndex: 90
       },
-      onMouseDown: Ge
+      onMouseDown: Xe
     }) : null;
-  }, bt = function() {
-    var t = ge.getOtherProps(e), c = X("p-dialog p-component", e.className, {
+  }, pt = function() {
+    var t = ge.getOtherProps(e), d = F("p-dialog p-component", e.className, {
       "p-dialog-rtl": e.rtl,
-      "p-dialog-maximized": w,
-      "p-dialog-default": !w,
+      "p-dialog-maximized": k,
+      "p-dialog-default": !k,
       "p-input-filled": ae.inputStyle === "filled",
       "p-ripple-disabled": ae.ripple === !1
-    }), b = X("p-dialog-mask", Je(), {
+    }), b = F("p-dialog-mask", qe(), {
       "p-component-overlay p-component-overlay-enter": e.modal,
-      "p-dialog-visible": C,
+      "p-dialog-visible": I,
       "p-dialog-draggable": e.draggable,
       "p-dialog-resizable": e.resizable
-    }, e.maskClassName), x = ot(), P = ut(), I = ct(), d = mt(), h = y + "_header", H = y + "_content", de = {
+    }, e.maskClassName), D = ut(), z = mt(), C = dt(), p = bt(), x = g + "_header", j = g + "_content", be = {
       enter: e.position === "center" ? 150 : 300,
       exit: e.position === "center" ? 150 : 300
     };
-    return /* @__PURE__ */ s.exports.createElement("div", {
-      ref: k,
+    return /* @__PURE__ */ o.exports.createElement("div", {
+      ref: W,
       style: e.maskStyle,
       className: b,
-      onClick: $e
-    }, /* @__PURE__ */ s.exports.createElement(Tt, {
-      nodeRef: u,
+      onClick: Ae
+    }, /* @__PURE__ */ o.exports.createElement(vt, {
+      nodeRef: c,
       classNames: "p-dialog",
-      timeout: de,
+      timeout: be,
       in: E,
       options: e.transitionOptions,
       unmountOnExit: !0,
-      onEnter: Ze,
-      onEntered: qe,
-      onExiting: Qe,
-      onExited: et
-    }, /* @__PURE__ */ s.exports.createElement("div", Ve({
-      ref: u,
-      id: y,
-      className: c,
+      onEnter: Qe,
+      onEntered: et,
+      onExiting: tt,
+      onExited: at
+    }, /* @__PURE__ */ o.exports.createElement("div", Ve({
+      ref: c,
+      id: g,
+      className: d,
       style: e.style,
       onClick: e.onClick,
       role: "dialog"
     }, t, {
-      "aria-labelledby": h,
-      "aria-describedby": H,
+      "aria-labelledby": x,
+      "aria-describedby": j,
       "aria-modal": e.modal
-    }), x, P, I, d)));
-  }, dt = function() {
-    var t = bt();
-    return /* @__PURE__ */ s.exports.createElement(Nt, {
+    }), D, z, C, p)));
+  }, ft = function() {
+    var t = pt();
+    return /* @__PURE__ */ o.exports.createElement(ht, {
       element: t,
       appendTo: e.appendTo,
       visible: !0
     });
   };
-  return C && dt();
+  return I && ft();
 });
-_e.displayName = "Dialog";
-const Ft = () => {
-  var ue, Z, ce, me, be, q;
-  const { columns: a, components: o } = s.exports.useContext(ht), e = xt(), { resource: r, data: m } = Oe(), D = (ue = r == null ? void 0 : r.columns) != null ? ue : [], y = Et(), [S, V] = s.exports.useState(!1), C = s.exports.useRef(null), v = s.exports.useRef(null), ie = s.exports.useRef(), Y = s.exports.useRef(null), [E, U] = s.exports.useState([]), [ye, F] = s.exports.useState(!1), [W, K] = s.exports.useState(null);
-  s.exports.useEffect(() => {
-    v.current && !S && (v.current.value = y.globalSearch);
-  }, [S, m]);
-  const u = D.flatMap((n) => n.toggleable ? {
+Be.displayName = "Dialog";
+const _t = () => {
+  var ce, Z, ue, me, de, q;
+  const { columns: a, components: l } = o.exports.useContext(Oe), e = _e(), { resource: r, data: u } = $e(), m = (ce = r == null ? void 0 : r.columns) != null ? ce : [], g = Et(), [S, V] = o.exports.useState(!1), I = o.exports.useRef(null), v = o.exports.useRef(null), ie = o.exports.useRef(), X = o.exports.useRef(null), [E, Y] = o.exports.useState([]), [Ne, _] = o.exports.useState(!1), [P, G] = o.exports.useState(null);
+  o.exports.useEffect(() => {
+    v.current && !S && (v.current.value = g.globalSearch);
+  }, [S, u]);
+  const c = m.flatMap((n) => n.toggleable ? {
     field: n.columnName,
     header: n.label,
     isToggledHiddenByDefault: n.isToggledHiddenByDefault
-  } : []), [k, re] = s.exports.useState(u.filter((n) => !n.isToggledHiddenByDefault)), le = D.filter((n) => !n.toggleable || k.find((T) => T.field === n.columnName));
-  let g;
-  const G = (n) => {
-    g = n, A();
-  }, $ = We(() => A(), 300), B = Array();
-  for (const n of (Z = JSON.parse(y.sort)) != null ? Z : [])
-    B.push({
+  } : []), [W, re] = o.exports.useState(c.filter((n) => !n.isToggledHiddenByDefault)), le = m.filter((n) => !n.toggleable || W.find((h) => h.field === n.columnName));
+  let y;
+  const U = (n) => {
+    y = n, H();
+  }, B = Pe(() => H(), 300), A = Array();
+  for (const n of (Z = JSON.parse(g.sort)) != null ? Z : [])
+    A.push({
       field: n.field,
       order: n.order
     });
-  let N = {};
-  const z = (ce = JSON.parse(y.columnsSearch)) != null ? ce : {};
-  D.forEach((n) => {
-    (n.customFilter || n.searchable && !n.isGloballySearchable) && (N[n.columnName] = {
-      value: z[n.columnName],
+  let T = {};
+  const w = (ue = JSON.parse(g.columnsSearch)) != null ? ue : {};
+  m.forEach((n) => {
+    (n.customFilter || n.searchable && !n.isGloballySearchable) && (T[n.columnName] = {
+      value: w[n.columnName],
       matchMode: Dt.CUSTOM
     });
   });
-  const J = We((n) => {
-    N = {}, Object.entries(n.filters).forEach((T) => {
-      N[T[0]] = T[1];
-    }), A();
-  }, 300), A = () => {
-    var T, L, f, _;
+  const J = Pe((n) => {
+    T = {}, Object.entries(n.filters).forEach((h) => {
+      T[h[0]] = h[1];
+    }), H();
+  }, 300), H = () => {
+    var h, L, N, $;
     let n = {};
-    if (n.page = g === void 0 || g.page === void 0 ? (T = m == null ? void 0 : m.currentPage) != null ? T : 1 : g.page + 1, n.perPage = (f = (L = g == null ? void 0 : g.rows) != null ? L : m == null ? void 0 : m.perPage) != null ? f : 10, g != null && g.multiSortMeta) {
-      const R = JSON.stringify(g.multiSortMeta);
+    if (n.page = y === void 0 || y.page === void 0 ? (h = u == null ? void 0 : u.currentPage) != null ? h : 1 : y.page + 1, n.perPage = (N = (L = y == null ? void 0 : y.rows) != null ? L : u == null ? void 0 : u.perPage) != null ? N : 10, y != null && y.multiSortMeta) {
+      const R = JSON.stringify(y.multiSortMeta);
       R.length > 2 && (n.sort = R);
     }
-    if ((_ = v.current) != null && _.value && (n.globalSearch = v.current.value), N) {
+    if (($ = v.current) != null && $.value && (n.globalSearch = v.current.value), T) {
       const R = {};
-      Object.entries(N).forEach(([Q, ee]) => {
+      Object.entries(T).forEach(([Q, ee]) => {
         "value" in ee && ee.value && (R[Q] = ee.value);
       }), Object.keys(R).length && (n.columnsSearch = JSON.stringify(R));
     }
-    ze.get(`/${e.prefix}/${r == null ? void 0 : r.pluralLabel.toLowerCase()}`, n, {
+    we.get(`/${e.prefix}/${r == null ? void 0 : r.pluralLabel.toLowerCase()}`, n, {
       preserveState: !0,
       preserveScroll: !0,
       replace: !0,
@@ -599,22 +599,22 @@ const Ft = () => {
         V(!1);
       }
     });
-  }, w = ((me = v.current) == null ? void 0 : me.value) || (g == null ? void 0 : g.multiSortMeta) || !!Object.entries(N).filter(([, n]) => n.value).length;
-  function Ne() {
-    N = {}, v.current.value = "", g = void 0, A();
+  }, k = ((me = v.current) == null ? void 0 : me.value) || (y == null ? void 0 : y.multiSortMeta) || !!Object.entries(T).filter(([, n]) => n.value).length;
+  function ye() {
+    T = {}, v.current.value = "", y = void 0, H();
   }
-  let se = D.filter((n) => n.exportable);
+  let se = m.filter((n) => n.exportable);
   const Te = (n) => {
-    var T;
-    (T = C.current) == null || T.exportCSV(n);
-  }, ve = /* @__PURE__ */ i(Ce.Fragment, {
+    var h;
+    (h = I.current) == null || h.exportCSV(n);
+  }, he = /* @__PURE__ */ i(Ie.Fragment, {
     children: [
       /* @__PURE__ */ i(M, {
         label: "No",
         icon: "pi pi-times",
         className: "p-button-text",
         onClick: () => {
-          F(!1), K(null);
+          _(!1), G(null);
         }
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
@@ -626,17 +626,17 @@ const Ft = () => {
         icon: "pi pi-check",
         className: "p-button-text",
         onClick: () => {
-          var n, T;
-          (W !== null || E !== null) && ze.delete("", {
+          var n, h;
+          (P !== null || E !== null) && we.delete("", {
             data: {
-              [(n = r == null ? void 0 : r.primaryKeyColumn) != null ? n : "id"]: W !== null ? [String(W[(T = r == null ? void 0 : r.primaryKeyColumn) != null ? T : "id"])] : E.map((L) => {
-                var f;
-                return String(L[(f = r == null ? void 0 : r.primaryKeyColumn) != null ? f : "id"]);
+              [(n = r == null ? void 0 : r.primaryKeyColumn) != null ? n : "id"]: P !== null ? [String(P[(h = r == null ? void 0 : r.primaryKeyColumn) != null ? h : "id"])] : E.map((L) => {
+                var N;
+                return String(L[(N = r == null ? void 0 : r.primaryKeyColumn) != null ? N : "id"]);
               })
             },
             preserveState: !0,
             preserveScroll: !0
-          }), U([]), K(null), F(!1);
+          }), Y([]), G(null), _(!1);
         }
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
@@ -648,11 +648,11 @@ const Ft = () => {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
     lineNumber: 146,
     columnNumber: 9
-  }, globalThis), he = /* @__PURE__ */ i(Ce.Fragment, {}, void 0, !1, {
+  }, globalThis), ve = /* @__PURE__ */ i(Ie.Fragment, {}, void 0, !1, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
     lineNumber: 178,
     columnNumber: 33
-  }, globalThis), oe = /* @__PURE__ */ i(Ce.Fragment, {
+  }, globalThis), oe = /* @__PURE__ */ i(Ie.Fragment, {
     children: [
       /* @__PURE__ */ i(M, {
         className: "p-button-success mr-2",
@@ -670,7 +670,7 @@ const Ft = () => {
         label: "Delete",
         disabled: E.length === 0,
         onClick: () => {
-          E.length && F(!0);
+          E.length && _(!0);
         }
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
@@ -698,12 +698,12 @@ const Ft = () => {
             lineNumber: 204,
             columnNumber: 21
           }, globalThis),
-          w && /* @__PURE__ */ i(M, {
+          k && /* @__PURE__ */ i(M, {
             type: "button",
             icon: "pi pi-filter-slash",
             label: "Clear",
             className: "p-button-outlined",
-            onClick: Ne
+            onClick: ye
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
             lineNumber: 212,
@@ -732,7 +732,7 @@ const Ft = () => {
                 /* @__PURE__ */ i(Rt, {
                   ref: v,
                   placeholder: "Keyword Search",
-                  onChange: $
+                  onChange: B
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
                   lineNumber: 225,
@@ -760,25 +760,25 @@ const Ft = () => {
             id: "toggleableFields",
             className: "mx-2",
             ref: ie,
-            children: u.length > 0 && /* @__PURE__ */ i(j, {
+            children: c.length > 0 && /* @__PURE__ */ i(K, {
               children: [
                 /* @__PURE__ */ i(M, {
                   className: "p-button-rounded p-button-text",
                   icon: "pi pi-table",
-                  onClick: () => Y.current.show()
+                  onClick: () => X.current.show()
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
                   lineNumber: 241,
                   columnNumber: 29
                 }, globalThis),
                 /* @__PURE__ */ i(St, {
-                  ref: Y,
+                  ref: X,
                   appendTo: ie.current,
                   className: "hidden",
                   optionLabel: "header",
                   panelClassName: "toggleableFields",
-                  options: u,
-                  value: k,
+                  options: c,
+                  value: W,
                   multiple: !0,
                   onChange: (n) => {
                     re(n.value);
@@ -810,7 +810,7 @@ const Ft = () => {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
     lineNumber: 201,
     columnNumber: 9
-  }, globalThis), De = (n) => /* @__PURE__ */ i(j, {
+  }, globalThis), De = (n) => /* @__PURE__ */ i(K, {
     children: [
       /* @__PURE__ */ i(M, {
         icon: "pi pi-pencil",
@@ -827,7 +827,7 @@ const Ft = () => {
         icon: "pi pi-trash",
         className: "p-button-rounded p-button-danger",
         onClick: () => {
-          K(n), F(!0);
+          G(n), _(!0);
         }
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
@@ -840,10 +840,10 @@ const Ft = () => {
     lineNumber: 269,
     columnNumber: 13
   }, globalThis);
-  return /* @__PURE__ */ i(j, {
+  return /* @__PURE__ */ i(K, {
     children: [
-      /* @__PURE__ */ i(Ct, {
-        start: he,
+      /* @__PURE__ */ i(It, {
+        start: ve,
         end: oe
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
@@ -851,36 +851,36 @@ const Ft = () => {
         columnNumber: 13
       }, globalThis),
       /* @__PURE__ */ i(Vt, {
-        ref: C,
-        dataKey: (be = r == null ? void 0 : r.primaryKeyColumn) != null ? be : "id",
+        ref: I,
+        dataKey: (de = r == null ? void 0 : r.primaryKeyColumn) != null ? de : "id",
         selection: E,
-        onSelectionChange: (n) => U(n.value),
+        onSelectionChange: (n) => Y(n.value),
         header: xe,
         size: "small",
-        first: (m.currentPage - 1) * m.perPage,
+        first: (u.currentPage - 1) * u.perPage,
         lazy: !0,
         loading: S,
-        multiSortMeta: B,
+        multiSortMeta: A,
         paginator: !0,
         paginatorTemplate: "FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown",
-        rows: m == null ? void 0 : m.perPage,
+        rows: u == null ? void 0 : u.perPage,
         rowsPerPageOptions: e.rowsPerPageOptions,
         showGridlines: r == null ? void 0 : r.showGridlines,
         stripedRows: r == null ? void 0 : r.stripedRows,
-        totalRecords: m == null ? void 0 : m.totalCount,
-        value: m == null ? void 0 : m.data,
+        totalRecords: u == null ? void 0 : u.totalCount,
+        value: u == null ? void 0 : u.data,
         currentPageReportTemplate: "Showing {first} to {last} of {totalRecords}",
         filterDisplay: "menu",
         globalFilter: "contains",
         removableSort: !0,
         responsiveLayout: "scroll",
         sortMode: "multiple",
-        onSort: G,
-        onPage: G,
+        onSort: U,
+        onPage: U,
         onFilter: J,
-        filters: N,
+        filters: T,
         children: [
-          /* @__PURE__ */ i(Ie, {
+          /* @__PURE__ */ i(Ce, {
             exportable: !1,
             selectionMode: "multiple",
             style: { width: "3rem" },
@@ -892,25 +892,25 @@ const Ft = () => {
           }, globalThis),
           le.map((n) => {
             var L;
-            return /* @__PURE__ */ i(Ie, {
-              body: (f) => {
-                var _, R;
+            return /* @__PURE__ */ i(Ce, {
+              body: (N) => {
+                var $, R;
                 return S ? /* @__PURE__ */ i(Le, {}, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
                   lineNumber: 335,
                   columnNumber: 29
-                }, globalThis) : /* @__PURE__ */ i(kt, {
+                }, globalThis) : /* @__PURE__ */ i(Wt, {
                   resource: r,
                   column: n,
-                  columnValue: f[n.columnName],
-                  record: f,
+                  columnValue: N[n.columnName],
+                  record: N,
                   children: a != null && a.has(n.componentName) ? a == null ? void 0 : a.get(n.componentName)({
                     column: n,
-                    columnValue: (_ = f[n.columnName]) != null ? _ : f.defaultValue,
-                    record: f,
+                    columnValue: ($ = N[n.columnName]) != null ? $ : N.defaultValue,
+                    record: N,
                     resource: r
                   }) : /* @__PURE__ */ i("div", {
-                    children: (R = f[n.columnName]) != null ? R : f.defaultValue
+                    children: (R = N[n.columnName]) != null ? R : N.defaultValue
                   }, void 0, !1, {
                     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
                     lineNumber: 351,
@@ -935,16 +935,16 @@ const Ft = () => {
               hidden: n.hidden,
               filter: !!n.customFilter || n.searchable && !n.isGloballySearchable,
               filterPlaceholder: (L = n.searchPlaceholder) != null ? L : `Search by ${n.label}`,
-              filterElement: n.customFilter ? (f) => /* @__PURE__ */ i("div", {
-                children: o != null && o.has(n.customFilter.componentName) ? o == null ? void 0 : o.get(n.customFilter.componentName)({
+              filterElement: n.customFilter ? (N) => /* @__PURE__ */ i("div", {
+                children: l != null && l.has(n.customFilter.componentName) ? l == null ? void 0 : l.get(n.customFilter.componentName)({
                   key: `${n.columnName}_filter`,
                   component: n.customFilter,
-                  setFieldValue: (_, R) => {
-                    f.filterCallback(R);
+                  setFieldValue: ($, R) => {
+                    N.filterCallback(R);
                   },
-                  formData: { [n.columnName]: f.value },
+                  formData: { [n.columnName]: N.value },
                   errors: {}
-                }) : /* @__PURE__ */ i(j, {
+                }) : /* @__PURE__ */ i(K, {
                   children: n.customFilter.componentName
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
@@ -962,7 +962,7 @@ const Ft = () => {
               columnNumber: 25
             }, globalThis);
           }),
-          /* @__PURE__ */ i(Ie, {
+          /* @__PURE__ */ i(Ce, {
             body: S ? /* @__PURE__ */ i(Le, {}, void 0, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
               lineNumber: 403,
@@ -981,14 +981,14 @@ const Ft = () => {
         lineNumber: 296,
         columnNumber: 13
       }, globalThis),
-      /* @__PURE__ */ i(_e, {
-        visible: ye,
+      /* @__PURE__ */ i(Be, {
+        visible: Ne,
         style: { width: "450px" },
         header: "Confirm",
         modal: !0,
-        footer: ve,
+        footer: he,
         onHide: () => {
-          F(!1), K(null);
+          _(!1), G(null);
         },
         children: /* @__PURE__ */ i("div", {
           className: "confirmation-content",
@@ -1001,11 +1001,11 @@ const Ft = () => {
               lineNumber: 421,
               columnNumber: 21
             }, globalThis),
-            W && /* @__PURE__ */ i("span", {
+            P && /* @__PURE__ */ i("span", {
               children: [
                 "Are you sure you want to delete ",
                 /* @__PURE__ */ i("b", {
-                  children: W[(q = r == null ? void 0 : r.titleColumn) != null ? q : "id"]
+                  children: P[(q = r == null ? void 0 : r.titleColumn) != null ? q : "id"]
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
                   lineNumber: 427,
@@ -1018,7 +1018,7 @@ const Ft = () => {
               lineNumber: 426,
               columnNumber: 25
             }, globalThis),
-            W === null && E.length && /* @__PURE__ */ i("span", {
+            P === null && E.length && /* @__PURE__ */ i("span", {
               children: [
                 "Are you sure you want to delete the ",
                 /* @__PURE__ */ i("b", {
@@ -1056,14 +1056,15 @@ const Ft = () => {
     columnNumber: 9
   }, globalThis);
 }, At = () => {
-  const { resource: a } = Oe();
-  return /* @__PURE__ */ i(j, {
+  var r, u;
+  const { resource: a } = $e(), { widgets: l } = o.exports.useContext(Oe), e = _e();
+  return /* @__PURE__ */ i(K, {
     children: [
-      /* @__PURE__ */ i(It, {
+      /* @__PURE__ */ i(Ct, {
         title: a == null ? void 0 : a.pluralLabel
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
-        lineNumber: 11,
+        lineNumber: 16,
         columnNumber: 13
       }, globalThis),
       /* @__PURE__ */ i("div", {
@@ -1077,34 +1078,88 @@ const Ft = () => {
                 children: a == null ? void 0 : a.pluralLabel
               }, void 0, !1, {
                 fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
-                lineNumber: 16,
+                lineNumber: 21,
                 columnNumber: 25
               }, globalThis),
-              /* @__PURE__ */ i(Ft, {}, void 0, !1, {
+              /* @__PURE__ */ i("div", {
+                className: "grid",
+                children: (r = a == null ? void 0 : a.topWidgets) == null ? void 0 : r.map(
+                  (m, g) => l != null && l.has(m.componentName) ? /* @__PURE__ */ i("div", {
+                    className: F("col-12", m.columnSpan > 0 && m.columnSpan < 12 ? `md:col-${m.columnSpan}` : "md:col"),
+                    children: l == null ? void 0 : l.get(m.componentName)({
+                      configs: e,
+                      resource: a,
+                      widget: m
+                    })
+                  }, `widget_${g}_${m.componentName}`, !1, {
+                    fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
+                    lineNumber: 26,
+                    columnNumber: 37
+                  }, globalThis) : /* @__PURE__ */ i("div", {
+                    children: "Unknown Widget"
+                  }, void 0, !1, {
+                    fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
+                    lineNumber: 37,
+                    columnNumber: 37
+                  }, globalThis)
+                )
+              }, void 0, !1, {
                 fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
-                lineNumber: 18,
+                lineNumber: 23,
+                columnNumber: 25
+              }, globalThis),
+              /* @__PURE__ */ i(_t, {}, void 0, !1, {
+                fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
+                lineNumber: 42,
+                columnNumber: 25
+              }, globalThis),
+              /* @__PURE__ */ i("div", {
+                className: "grid",
+                children: (u = a == null ? void 0 : a.bottomWidgets) == null ? void 0 : u.map(
+                  (m, g) => l != null && l.has(m.componentName) ? /* @__PURE__ */ i("div", {
+                    className: F("col-12", m.columnSpan > 0 && m.columnSpan < 12 ? `md:col-${m.columnSpan}` : "md:col"),
+                    children: l == null ? void 0 : l.get(m.componentName)({
+                      configs: e,
+                      resource: a,
+                      widget: m
+                    })
+                  }, `widget_${g}_${m.componentName}`, !1, {
+                    fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
+                    lineNumber: 47,
+                    columnNumber: 37
+                  }, globalThis) : /* @__PURE__ */ i("div", {
+                    children: "Unknown Widget"
+                  }, void 0, !1, {
+                    fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
+                    lineNumber: 58,
+                    columnNumber: 37
+                  }, globalThis)
+                )
+              }, void 0, !1, {
+                fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
+                lineNumber: 44,
                 columnNumber: 25
               }, globalThis)
             ]
           }, void 0, !0, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
-            lineNumber: 15,
+            lineNumber: 20,
             columnNumber: 21
           }, globalThis)
         }, void 0, !1, {
           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
-          lineNumber: 14,
+          lineNumber: 19,
           columnNumber: 17
         }, globalThis)
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
-        lineNumber: 13,
+        lineNumber: 18,
         columnNumber: 13
       }, globalThis)
     ]
   }, void 0, !0, {
     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/pages/Index.tsx",
-    lineNumber: 10,
+    lineNumber: 15,
     columnNumber: 9
   }, globalThis);
 };

@@ -1,5 +1,6 @@
 import BaseComponent from '@/types/Models/BaseComponent';
 import BaseColumn from '@/types/Models/Columns/BaseColumn';
+import BaseWidget from '@/types/Models/Widgets/BaseWidget';
 
 export default interface Resource {
     name: string;
@@ -12,4 +13,6 @@ export default interface Resource {
     schema?: Array<BaseComponent>;
     columns?: Array<BaseColumn>;
     titleColumn: string;
+    topWidgets?: Array<BaseWidget>;
+    bottomWidgets?: Array<BaseWidget>;
 }

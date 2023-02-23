@@ -23,7 +23,7 @@ public abstract partial class TrinityResource
         await Task.CompletedTask;
     }
 
-    public abstract List<IFormComponent> GetSchema();
+    protected abstract List<IFormComponent> GetFormSchema();
 
     public List<object> Schema
     {
@@ -31,7 +31,7 @@ public abstract partial class TrinityResource
         {
             if (_schema.Count != 0) return _schema;
 
-            foreach (var component in GetSchema())
+            foreach (var component in GetFormSchema())
             {
                 _schema.Add(component);
             }

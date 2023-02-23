@@ -29,6 +29,10 @@ public static class AppExtensions
     public static IServiceCollection AddTrinity(this IServiceCollection services,
         Action<TrinityConfigurations>? configure = null)
     {
+        var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+    
+        var isDevelopment = env == Environments.Development;
+
         services.AddMvc()
             .AddApplicationPart(typeof(TrinityConfigurations).Assembly);
 
@@ -65,15 +69,15 @@ public static class AppExtensions
 
         services.AddInertia(opts => { opts.RootView = "~/Views/TrinityApp.cshtml"; });
 
-        services.AddMiniProfiler(conf =>
-        {
-            conf.PopupRenderPosition = RenderPosition.BottomLeft;
-            conf.ColorScheme = ColorScheme.Auto;
-            conf.ShowControls = true;
-            conf.PopupMaxTracesToShow = 4;
-
-            configs.MiniProfilerConfigures?.Invoke(conf);
-        });
+        if (isDevelopment)
+            services.AddMiniProfiler(conf =>
+            {
+                conf.PopupRenderPosition = RenderPosition.BottomLeft;
+                conf.ColorScheme = ColorScheme.Auto;
+                conf.ShowControls = true;
+                conf.PopupMaxTracesToShow = 4;
+                configs.MiniProfilerConfigures?.Invoke(conf);
+            });
 
         return services;
     }
