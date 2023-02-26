@@ -1,6 +1,5 @@
 using System.Data;
 using System.Text.Json;
-using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.BaseField;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.RequestHelpers;
@@ -25,13 +24,8 @@ public class RepeaterField : BaseField<RepeaterField, string>, IHasSchema, IHasR
 
     public override void SelectQuery(FluentQueryBuilder query)
     {
-        if (!HasRelationshipByDefault)
-        {
-            base.SelectQuery(query);
-            return;
-        }
-
-        var newQuery = query.Connection.QueryBuilder();
+        if (HasRelationshipByDefault) return;
+        base.SelectQuery(query);
     }
 
     public override void PrepareForValidation(IValidator validator, IReadOnlyDictionary<string, object?> form,

@@ -41,7 +41,7 @@ const Index = () => {
 
                         <Table />
 
-                        <div className="grid">
+                        <div className="grid mt-2">
                             {resource?.bottomWidgets?.map((w, index) =>
                                 widgets?.has(w.componentName) ? (
                                     <div

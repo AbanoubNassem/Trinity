@@ -1,6 +1,6 @@
-import { j as i, e as F, z as gt, F as K, r as o, U as Nt, m as te, s as f, n as yt, c as Re, Z as Se, t as ae, o as Tt, O as ne, y as ht, C as vt, i as xt, h as ze, A as Oe, u as _e, a as $e, G as Pe, k as Dt, R as Ie, B as M, g as we, E as Rt, J as St, T as It, S as Le, H as Ct } from "./main.cc3d6ba0.js";
-import { D as Vt, C as Ce } from "./datatable.esm.c506727c.js";
-import { t as Me } from "./trinity_link.24040162.js";
+import { j as i, e as F, z as gt, F as K, r as o, U as Nt, m as te, s as f, n as yt, c as Re, Z as Se, t as ae, o as Tt, O as ne, y as ht, C as vt, i as xt, h as ze, A as Oe, u as _e, a as $e, G as Pe, k as Dt, R as Ie, B as M, g as we, E as Rt, J as St, T as It, S as Le, H as Ct } from "./main.086a0e49.js";
+import { D as Vt, C as Ce } from "./datatable.esm.a1dba80b.js";
+import { t as Me } from "./trinity_link.8b9e7be3.js";
 function Et() {
   return new Proxy(new URLSearchParams(window.location.search), {
     get(a, l) {
@@ -873,7 +873,6 @@ const _t = () => {
         filterDisplay: "menu",
         globalFilter: "contains",
         removableSort: !0,
-        responsiveLayout: "scroll",
         sortMode: "multiple",
         onSort: U,
         onPage: U,
@@ -887,7 +886,7 @@ const _t = () => {
             filter: !1
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-            lineNumber: 326,
+            lineNumber: 325,
             columnNumber: 17
           }, globalThis),
           le.map((n) => {
@@ -897,7 +896,7 @@ const _t = () => {
                 var $, R;
                 return S ? /* @__PURE__ */ i(Le, {}, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 335,
+                  lineNumber: 334,
                   columnNumber: 29
                 }, globalThis) : /* @__PURE__ */ i(Wt, {
                   resource: r,
@@ -913,12 +912,12 @@ const _t = () => {
                     children: (R = N[n.columnName]) != null ? R : N.defaultValue
                   }, void 0, !1, {
                     fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                    lineNumber: 351,
+                    lineNumber: 350,
                     columnNumber: 37
                   }, globalThis)
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 337,
+                  lineNumber: 336,
                   columnNumber: 29
                 }, globalThis);
               },
@@ -948,31 +947,31 @@ const _t = () => {
                   children: n.customFilter.componentName
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 392,
+                  lineNumber: 391,
                   columnNumber: 55
                 }, globalThis)
               }, void 0, !1, {
                 fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                lineNumber: 380,
+                lineNumber: 379,
                 columnNumber: 47
               }, globalThis) : void 0
             }, n.columnName, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-              lineNumber: 358,
+              lineNumber: 357,
               columnNumber: 25
             }, globalThis);
           }),
           /* @__PURE__ */ i(Ce, {
             body: S ? /* @__PURE__ */ i(Le, {}, void 0, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-              lineNumber: 403,
+              lineNumber: 402,
               columnNumber: 37
             }, globalThis) : De,
             headerStyle: { minWidth: "10rem" },
             filter: !1
           }, void 0, !1, {
             fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-            lineNumber: 402,
+            lineNumber: 401,
             columnNumber: 17
           }, globalThis)
         ]
@@ -998,7 +997,7 @@ const _t = () => {
               style: { fontSize: "2rem" }
             }, void 0, !1, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-              lineNumber: 421,
+              lineNumber: 420,
               columnNumber: 21
             }, globalThis),
             P && /* @__PURE__ */ i("span", {
@@ -1008,14 +1007,14 @@ const _t = () => {
                   children: P[(q = r == null ? void 0 : r.titleColumn) != null ? q : "id"]
                 }, void 0, !1, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 427,
+                  lineNumber: 426,
                   columnNumber: 61
                 }, globalThis),
                 "?"
               ]
             }, void 0, !0, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-              lineNumber: 426,
+              lineNumber: 425,
               columnNumber: 25
             }, globalThis),
             P === null && E.length && /* @__PURE__ */ i("span", {
@@ -1028,25 +1027,25 @@ const _t = () => {
                   ]
                 }, void 0, !0, {
                   fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-                  lineNumber: 432,
+                  lineNumber: 431,
                   columnNumber: 65
                 }, globalThis),
                 "?"
               ]
             }, void 0, !0, {
               fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-              lineNumber: 431,
+              lineNumber: 430,
               columnNumber: 25
             }, globalThis)
           ]
         }, void 0, !0, {
           fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-          lineNumber: 420,
+          lineNumber: 419,
           columnNumber: 17
         }, globalThis)
       }, void 0, !1, {
         fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/components/Table.tsx",
-        lineNumber: 409,
+        lineNumber: 408,
         columnNumber: 13
       }, globalThis)
     ]
@@ -1114,7 +1113,7 @@ const _t = () => {
                 columnNumber: 25
               }, globalThis),
               /* @__PURE__ */ i("div", {
-                className: "grid",
+                className: "grid mt-2",
                 children: (u = a == null ? void 0 : a.bottomWidgets) == null ? void 0 : u.map(
                   (m, g) => l != null && l.has(m.componentName) ? /* @__PURE__ */ i("div", {
                     className: F("col-12", m.columnSpan > 0 && m.columnSpan < 12 ? `md:col-${m.columnSpan}` : "md:col"),

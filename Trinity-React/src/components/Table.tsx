@@ -316,7 +316,6 @@ const Table = () => {
                 filterDisplay="menu"
                 globalFilter={'contains'}
                 removableSort
-                responsiveLayout="scroll"
                 sortMode="multiple"
                 onSort={onTableEvent}
                 onPage={onTableEvent}

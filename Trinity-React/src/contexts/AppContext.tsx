@@ -30,6 +30,15 @@ import TabsLayout from '@/layouts/TabsLayout';
 import PanelLayout from '@/layouts/PanelLayout';
 import CardLayout from '@/layouts/CardLayout';
 import StatsWidget from '@/widgets/StatsWidget';
+import BarChartWidget from '@/widgets/BarChartWidget';
+import PieChartWidget from '@/widgets/PieChartWidget';
+import DoughnutChartWidget from '@/widgets/DoughnutChartWidget';
+import VerticalBarChartWidget from '@/widgets/VerticalBarChartWidget';
+import HorizontalBarChartWidget from '@/widgets/HorizontalBarChartWidget';
+import StackedBarChartWidget from '@/widgets/StackedBarChartWidget';
+import LineChartWidget from '@/widgets/LineChartWidget';
+import PolarAreaChartWidget from '@/widgets/PolarAreaChartWidget';
+import RadarChartWidget from '@/widgets/RadarChartWidget';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
@@ -77,7 +86,18 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
         ['AggregateColumn', (props) => <AggregateColumn {...props} />]
     ]);
 
-    const widgets = new Map<string, (props: any) => React.ReactNode>([['StatsWidget', (props) => <StatsWidget {...props} />]]);
+    const widgets = new Map<string, (props: any) => React.ReactNode>([
+        ['StatsWidget', (props) => <StatsWidget {...props} />],
+        ['BarChartWidget', (props) => <BarChartWidget {...props} />],
+        ['PieChartWidget', (props) => <PieChartWidget {...props} />],
+        ['DoughnutChartWidget', (props) => <DoughnutChartWidget {...props} />],
+        ['VerticalBarChartWidget', (props) => <VerticalBarChartWidget {...props} />],
+        ['HorizontalBarChartWidget', (props) => <HorizontalBarChartWidget {...props} />],
+        ['StackedBarChartWidget', (props) => <StackedBarChartWidget {...props} />],
+        ['LineChartWidget', (props) => <LineChartWidget {...props} />],
+        ['PolarAreaChartWidget', (props) => <PolarAreaChartWidget {...props} />],
+        ['RadarChartWidget', (props) => <RadarChartWidget {...props} />]
+    ]);
 
     const toast = useRef<Toast>(null);
 

@@ -8,8 +8,6 @@ export default interface StatsWidget extends BaseWidget {
     iconBackgroundColor?: string;
     description?: string;
     descriptionColor?: string;
-    chartLabels?: Array<any>;
-    chartValues?: Array<any>;
     chartBackgroundColor?: string;
     chartBorderColor?: string;
 }
