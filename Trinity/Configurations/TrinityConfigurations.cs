@@ -1,6 +1,7 @@
 using System.Data.Common;
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Concerns;
+using AbanoubNassem.Trinity.Pages;
 using Microsoft.AspNetCore.Http;
 using StackExchange.Profiling;
 
@@ -21,6 +22,8 @@ public class TrinityConfigurations
     public string Prefix { get; set; } = "admin";
 
     public string Title { get; set; } = "Trinity";
+
+    public BasePage DashboardPage { get; set; } = new DashboardPage();
 
     public TimeSpan CacheWidgetsFor { get; set; } = TimeSpan.FromMinutes(5);
 

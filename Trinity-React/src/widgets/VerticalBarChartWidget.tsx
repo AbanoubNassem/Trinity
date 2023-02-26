@@ -15,7 +15,7 @@ const VerticalBarChartWidget = ({ widget }: WidgetProps<VerticalBarChart>) => {
             <Chart
                 ref={chart}
                 type="bar"
-                className="h-11rem"
+                style={{ height: widget.height ?? '11rem' }}
                 data={{
                     labels: widget.chartLabels,
                     datasets: widget.chartValues

@@ -56,4 +56,6 @@ public abstract class BaseChartWidget<T> : BaseWidget<T> where T : BaseChartWidg
         Options = options;
         return (this as T)!;
     }
+
+  
 }

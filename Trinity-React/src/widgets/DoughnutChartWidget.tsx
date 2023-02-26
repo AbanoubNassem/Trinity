@@ -10,7 +10,7 @@ const DoughnutChartWidget = ({ widget }: WidgetProps<DoughnutChartWidget>) => {
         <div className="card my-0 py-0 flex justify-content-center">
             <Chart
                 ref={chart}
-                className="h-11rem"
+                style={{ height: widget.height ?? '11rem' }}
                 type="doughnut"
                 data={{
                     labels: widget.chartLabels,

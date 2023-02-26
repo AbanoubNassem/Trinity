@@ -7,11 +7,11 @@ const BarChartWidget = ({ widget }: WidgetProps<BarChartWidget>) => {
     const chart = useRef<Chart>(null);
 
     return (
-        <div className="card my-0 py-0">
+        <div className="card my-0 py-0 flex justify-content-center">
             <Chart
                 ref={chart}
                 type="bar"
-                className="h-11rem"
+                style={{ height: widget.height ?? '11rem' }}
                 data={{
                     labels: widget.chartLabels,
                     datasets: [

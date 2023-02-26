@@ -1,6 +1,4 @@
-import type { ProgressSettings } from '@inertiajs/progress';
-
-export type { ProgressSettings } from '@inertiajs/progress';
+import BasePage from '@/types/Models/Pages/BasePage';
 
 export default interface Configs {
     prefix: string;
@@ -8,8 +6,9 @@ export default interface Configs {
     whiteLogo?: string;
     darkLogo?: string;
     favIcon?: string;
-    progressSettings: ProgressSettings;
+    progressSettings: any;
     rowsPerPageOptions: Array<number>;
+    dashboardPage: BasePage;
     themeMode: ThemeMode;
 }
 

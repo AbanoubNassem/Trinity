@@ -7,16 +7,21 @@ const StatsWidget = ({ widget }: WidgetProps<StatsWidget>) => {
     const chart = useRef<Chart>(null);
 
     useEffect(() => {
-        chart.current?.getCanvas().classList.add('h-2rem');
+        // chart.current?.getCanvas().classList.add('w-full');
         chart.current?.getCanvas().classList.add('border-round-xl');
     }, []);
 
     return (
         <div
-            className="card m-0 p-0"
-            style={widget.style}
+            className="card m-0 p-0 flex flex-column justify-content-between"
+            style={{
+                ...{
+                    height: widget.height ?? '11rem'
+                },
+                ...widget.style
+            }}
         >
-            <div className="p-4">
+            <div className="flex flex-column p-4">
                 <div className="flex justify-content-between mb-3">
                     <div>
                         <span className="block text-500 font-medium mb-3">{widget.title}</span>
@@ -49,6 +54,7 @@ const StatsWidget = ({ widget }: WidgetProps<StatsWidget>) => {
             </div>
             {widget.chartValues && (
                 <Chart
+                    height={`27%`}
                     ref={chart}
                     type={'line'}
                     data={{

@@ -1,7 +1,7 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
 import React, { useRef } from 'react';
 import { Chart } from 'primereact/chart';
-import BaseWidget from "@/types/Models/Widgets/BaseWidget";
+import BaseWidget from '@/types/Models/Widgets/BaseWidget';
 
 const StackedBarChartWidget = ({ widget }: WidgetProps<BaseWidget>) => {
     const chart = useRef<Chart>(null);
@@ -15,7 +15,7 @@ const StackedBarChartWidget = ({ widget }: WidgetProps<BaseWidget>) => {
             <Chart
                 ref={chart}
                 type="bar"
-                className="h-11rem"
+                style={{ height: widget.height ?? '11rem' }}
                 data={{
                     labels: widget.chartLabels,
                     datasets: widget.chartValues

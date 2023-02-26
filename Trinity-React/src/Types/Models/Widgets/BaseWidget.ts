@@ -5,4 +5,5 @@ export default interface BaseWidget extends BaseComponent {
     chartValues: Array<any>;
     backgroundColors?: Array<string>;
     options?: object;
+    height?: string;
 }

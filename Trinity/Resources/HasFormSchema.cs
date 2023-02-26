@@ -28,12 +28,8 @@ public abstract partial class TrinityResource
     {
         get
         {
-            if (_schema.Count != 0) return _schema;
-
-            foreach (var component in GetFormSchema())
-            {
-                _schema.Add(component);
-            }
+            if (!_schema.Any())
+                _schema.AddRange(GetFormSchema());
 
             return _schema;
         }
@@ -173,10 +169,10 @@ public abstract partial class TrinityResource
 
         foreach (IBaseField field in Fields.Values)
         {
-            if (field is  IHasRelationship { HasRelationshipByDefault: true } relationshipField)
+            if (field is IHasRelationship { HasRelationshipByDefault: true } relationshipField)
             {
-
-                record = (await relationshipField.SelectRelationshipQuery((FluentQueryBuilder)connection.FluentQueryBuilder(),
+                record = (await relationshipField.SelectRelationshipQuery(
+                    (FluentQueryBuilder)connection.FluentQueryBuilder(),
                     new List<IDictionary<string, object?>>() { record! })).Last()!;
             }
         }
