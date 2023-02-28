@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseWidget;
+using AbanoubNassem.Trinity.Components.TrinityWidget;
 
 namespace AbanoubNassem.Trinity.Widgets;
 
-public class PolarAreaChartWidget : BaseChartWidget<PolarAreaChartWidget>
+public class PolarAreaChartWidget : TrinityChartWidget<PolarAreaChartWidget>
 {
     public override string ComponentName => "PolarAreaChartWidget";
 }

@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.TrinityField;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class EditorField : BaseField<EditorField, string?>
+public class EditorField : TrinityField<EditorField, string?>
 {
     public override string ComponentName => "EditorField";
 

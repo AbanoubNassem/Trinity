@@ -23,9 +23,9 @@ public abstract partial class TrinityResource
         }
     }
 
-    protected virtual List<IBaseWidget> GetTopWidgets()
+    protected virtual List<ITrinityWidget> GetTopWidgets()
     {
-        return new List<IBaseWidget>(0);
+        return new List<ITrinityWidget>(0);
     }
 
 
@@ -46,8 +46,8 @@ public abstract partial class TrinityResource
         }
     }
 
-    protected virtual List<IBaseWidget> GetBottomWidgets()
+    protected virtual List<ITrinityWidget> GetBottomWidgets()
     {
-        return new List<IBaseWidget>(0);
+        return new List<ITrinityWidget>(0);
     }
 }

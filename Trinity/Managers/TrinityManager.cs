@@ -1,5 +1,6 @@
 using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
+using AbanoubNassem.Trinity.Pages;
 using AbanoubNassem.Trinity.Resources;
 using Humanizer;
 using StackExchange.Profiling;
@@ -8,6 +9,7 @@ namespace AbanoubNassem.Trinity.Managers;
 
 public class TrinityManager
 {
+    private const BindingFlags Flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
     private readonly TrinityConfigurations _configurations;
     private readonly Dictionary<string, object> _resources = new();
     private readonly Dictionary<string, Tuple<Type, Dictionary<string, PropertyInfo>>> _resourcesTypes = new();
@@ -17,84 +19,107 @@ public class TrinityManager
         _configurations = configurations;
     }
 
-    public void LoadResources(bool isDevelopment)
+    private readonly Dictionary<string, object> _pages = new();
+    public Dictionary<string, object> Pages => _pages;
+
+    public void LoadPages()
+    {
+        var trinityPageType = typeof(TrinityPage);
+        var types = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(p => trinityPageType.IsAssignableFrom(p) && !p.IsAbstract &&
+                        p.Namespace != "AbanoubNassem.Trinity.Pages");
+
+
+        foreach (var pageType in types)
+        {
+            var name = pageType.Name.Replace("Page", "").ToLower();
+
+            var page = (TrinityPage)Activator.CreateInstance(pageType)!;
+
+            Pages.Add(name, page);
+        }
+    }
+
+    public void LoadResources()
     {
         var trinityResourceType = typeof(TrinityResource);
         var types = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
             .Where(p => trinityResourceType.IsAssignableFrom(p) && !p.IsAbstract);
 
-        const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
 
         foreach (var resourceType in types)
         {
-            var name = resourceType.Name.Replace("Resource", "").Titleize();
-            var plural = name.Pluralize();
+            var name = resourceType.Name.Replace("Resource", "").ToLower();
+            var label = name.Titleize();
+            var plural = label.Pluralize();
 
             var properties = new Dictionary<string, PropertyInfo>();
 
             var resource = (TrinityResource)Activator.CreateInstance(resourceType)!;
 
 
-            trinityResourceType.GetProperty("Name", flags)!
+            trinityResourceType.GetProperty("Name", Flags)!
                 .SetValue(resource, plural.ToLower());
 
             if (resource.Label == null)
             {
-                trinityResourceType.GetField("_label", flags)!
+                trinityResourceType.GetField("_label", Flags)!
                     .SetValue(resource, plural);
             }
 
             if (resource.PluralLabel == null)
             {
-                trinityResourceType.GetField("_pluralLabel", flags)!
+                trinityResourceType.GetField("_pluralLabel", Flags)!
                     .SetValue(resource, plural);
             }
 
             if (resource.Table == null)
             {
-                trinityResourceType.GetField("_table", flags)!
+                trinityResourceType.GetField("_table", Flags)!
                     .SetValue(resource, plural.ToLower());
             }
 
-            resourceType.GetProperty("Configurations", flags)!
+            resourceType.GetProperty("Configurations", Flags)!
                 .SetValue(resource, _configurations);
 
             properties.Add("ServiceProvider",
-                resourceType.GetProperty("ServiceProvider", flags)!
+                resourceType.GetProperty("ServiceProvider", Flags)!
             );
 
             properties.Add("Logger",
-                resourceType.GetProperty("Logger", flags)!
+                resourceType.GetProperty("Logger", Flags)!
             );
 
             properties.Add("ModelState",
-                resourceType.GetProperty("ModelState", flags)!
+                resourceType.GetProperty("ModelState", Flags)!
             );
 
             properties.Add("Request",
-                resourceType.GetProperty("Request", flags)!
+                resourceType.GetProperty("Request", Flags)!
             );
 
             properties.Add("Response",
-                resourceType.GetProperty("Response", flags)!
+                resourceType.GetProperty("Response", Flags)!
             );
 
-            if (isDevelopment)
+            if (_configurations.IsDevelopment)
             {
-                resourceType.GetProperty("ConnectionFactory", flags)!
+                resourceType.GetProperty("ConnectionFactory", Flags)!
                     .SetValue(resource,
                         () => new StackExchange.Profiling.Data.ProfiledDbConnection(_configurations.ConnectionFactory(),
                             MiniProfiler.Current));
             }
             else
             {
-                resourceType.GetProperty("ConnectionFactory", flags)!
+                resourceType.GetProperty("ConnectionFactory", Flags)!
                     .SetValue(resource, _configurations.ConnectionFactory);
             }
 
-            _resources.Add(plural, resource);
-            _resourcesTypes.Add(plural, new Tuple<Type, Dictionary<string, PropertyInfo>>(resourceType, properties));
+            _resources.Add(plural.ToLower(), resource);
+            _resourcesTypes.Add(plural.ToLower(),
+                new Tuple<Type, Dictionary<string, PropertyInfo>>(resourceType, properties));
         }
     }
 

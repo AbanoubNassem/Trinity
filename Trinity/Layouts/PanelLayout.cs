@@ -1,9 +1,9 @@
-using AbanoubNassem.Trinity.Components.BaseLayout;
+using AbanoubNassem.Trinity.Components.TrinityLayout;
 using AbanoubNassem.Trinity.Components.Interfaces;
 
 namespace AbanoubNassem.Trinity.Layouts;
 
-public class PanelLayout : BaseLayout<PanelLayout>
+public class PanelLayout : TrinityLayout<PanelLayout>
 {
     public override string ComponentName => "PanelLayout";
 

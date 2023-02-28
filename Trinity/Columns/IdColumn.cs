@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Components.TrinityColumn;
 
 namespace AbanoubNassem.Trinity.Columns;
 
-public class IdColumn<T> : BaseColumn<IdColumn<T>, T>
+public class IdColumn<T> : TrinityColumn<IdColumn<T>, T>
 {
     public override string ComponentName => "IdField";
 

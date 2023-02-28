@@ -4,11 +4,11 @@ namespace AbanoubNassem.Trinity.Utilities;
 
 public static class TrinityUtils
 {
-    public static void GetInnerFields(in Dictionary<string, object> fields, IBaseComponent component)
+    public static void GetInnerFields(in Dictionary<string, object> fields, ITrinityComponent component)
     {
         switch (component)
         {
-            case IBaseField baseField:
+            case ITrinityField baseField:
                 fields.TryAdd(baseField.ColumnName, baseField);
                 break;
             case IHasSchema baseLayout:
@@ -16,7 +16,7 @@ public static class TrinityUtils
                 if (baseLayout.Schema != null)
                     foreach (var innerComponent in baseLayout.Schema)
                     {
-                        GetInnerFields(in fields, (IBaseComponent)innerComponent);
+                        GetInnerFields(in fields, (ITrinityComponent)innerComponent);
                     }
 
                 break;

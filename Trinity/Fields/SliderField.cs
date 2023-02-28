@@ -1,4 +1,4 @@
-using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.TrinityField;
 
 namespace AbanoubNassem.Trinity.Fields;
 
@@ -8,7 +8,7 @@ public enum OrientationType : byte
     Vertical
 }
 
-public class SliderField<T> : BaseField<SliderField<T>, T>
+public class SliderField<T> : TrinityField<SliderField<T>, T>
 {
     public override string ComponentName => "SliderField";
 

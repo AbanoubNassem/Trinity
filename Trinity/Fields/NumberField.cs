@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.TrinityField;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class NumberField<T> : BaseField<NumberField<T>, T>
+public class NumberField<T> : TrinityField<NumberField<T>, T>
 {
     public enum FormatModeTypes : byte
     {

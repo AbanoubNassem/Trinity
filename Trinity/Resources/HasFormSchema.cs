@@ -44,7 +44,7 @@ public abstract partial class TrinityResource
 
             foreach (var field in Schema)
             {
-                TrinityUtils.GetInnerFields(in _fields, (IBaseComponent)field);
+                TrinityUtils.GetInnerFields(in _fields, (ITrinityComponent)field);
             }
 
             return _fields;
@@ -96,13 +96,13 @@ public abstract partial class TrinityResource
             form.Add(kv.Key,
                 kv.Value.ValueKind == JsonValueKind.Null
                     ? null
-                    : kv.Value.Deserialize(((IBaseField)Fields[kv.Key]).GetDeserializationType())
+                    : kv.Value.Deserialize(((ITrinityField)Fields[kv.Key]).GetDeserializationType())
             );
         }
 
         foreach (var field in Fields.Values)
         {
-            ((IBaseField)field).PrepareForValidation(ResourceValidator, form, ModelState);
+            ((ITrinityField)field).PrepareForValidation(ResourceValidator, form, ModelState);
         }
 
         var validation = await ResourceValidator.ValidateAsync(form);
@@ -121,7 +121,7 @@ public abstract partial class TrinityResource
 
         foreach (var field in Fields.Values)
         {
-            ((IBaseField)field).Fill(ref form);
+            ((ITrinityField)field).Fill(ref form);
         }
 
         using var conn = ConnectionFactory();
@@ -156,7 +156,7 @@ public abstract partial class TrinityResource
 
         queryBuilder.Select($"{PrimaryKeyColumn:raw}");
 
-        foreach (IBaseField field in Fields.Values)
+        foreach (ITrinityField field in Fields.Values)
         {
             field.SelectQuery(queryBuilder);
         }
@@ -167,7 +167,7 @@ public abstract partial class TrinityResource
 
         if (record == null) return record;
 
-        foreach (IBaseField field in Fields.Values)
+        foreach (ITrinityField field in Fields.Values)
         {
             if (field is IHasRelationship { HasRelationshipByDefault: true } relationshipField)
             {
@@ -207,7 +207,7 @@ public abstract partial class TrinityResource
 
         for (var i = 0; i < form.Count; i++)
         {
-            var field = (IBaseField)Fields[form.ElementAt(i).Key];
+            var field = (ITrinityField)Fields[form.ElementAt(i).Key];
             if (field.ColumnName == PrimaryKeyColumn) continue;
 
             field.Fill(ref form, (IReadOnlyDictionary<string, object?>?)record);

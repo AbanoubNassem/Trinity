@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseWidget;
+using AbanoubNassem.Trinity.Components.TrinityWidget;
 
 namespace AbanoubNassem.Trinity.Widgets;
 
-public class RadarChartWidget : BaseChartWidget<RadarChartWidget>
+public class RadarChartWidget : TrinityChartWidget<RadarChartWidget>
 {
     public override string ComponentName => "RadarChartWidget";
 

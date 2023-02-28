@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseWidget;
+using AbanoubNassem.Trinity.Components.TrinityWidget;
 
 namespace AbanoubNassem.Trinity.Widgets;
 
-public class BarChartWidget : BaseChartWidget<BarChartWidget>
+public class BarChartWidget : TrinityChartWidget<BarChartWidget>
 {
     public override string ComponentName => "BarChartWidget";
 

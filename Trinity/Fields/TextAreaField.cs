@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.TrinityField;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class TextAreaField : BaseField<TextAreaField, string?>
+public class TextAreaField : TrinityField<TextAreaField, string?>
 {
     public override string ComponentName => "TextAreaField";
 

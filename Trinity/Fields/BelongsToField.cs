@@ -1,5 +1,5 @@
 using System.Data;
-using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.TrinityField;
 using AbanoubNassem.Trinity.RequestHelpers;
 using Dapper;
 using DapperQueryBuilder;

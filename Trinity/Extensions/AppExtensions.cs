@@ -30,7 +30,7 @@ public static class AppExtensions
         Action<TrinityConfigurations>? configure = null)
     {
         var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
-    
+
         var isDevelopment = env == Environments.Development;
 
         services.AddMvc()
@@ -48,7 +48,8 @@ public static class AppExtensions
 
         services.AddDirectoryBrowser();
 
-        var configs = new TrinityConfigurations();
+        var configs = new TrinityConfigurations(isDevelopment);
+
         configure?.Invoke(configs);
         if (configs.ConnectionFactory == null) throw new Exception("Connection Factory must be configured!");
 
@@ -216,9 +217,9 @@ public static class AppExtensions
             // );
         });
 
-
-        trinityManager.LoadResources(app.Environment.IsDevelopment());
-
+        trinityManager.LoadResources();
+        trinityManager.LoadPages();
+        
         return app;
     }
 }

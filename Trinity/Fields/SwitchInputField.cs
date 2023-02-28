@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.TrinityField;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class SwitchInputField<T> : BaseField<SwitchInputField<T>, T>
+public class SwitchInputField<T> : TrinityField<SwitchInputField<T>, T>
 {
     public override string ComponentName => "SwitchInputField";
 

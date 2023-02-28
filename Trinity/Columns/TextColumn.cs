@@ -1,9 +1,9 @@
-using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Components.TrinityColumn;
 using AbanoubNassem.Trinity.Extensions;
 
 namespace AbanoubNassem.Trinity.Columns;
 
-public class TextColumn : BaseColumn<TextColumn, string>
+public class TextColumn : TrinityColumn<TextColumn, string>
 {
     public override string ComponentName => "TextColumn";
 

@@ -15,7 +15,7 @@ public enum DividerLayouts : byte
     Horizontal,
 }
 
-public class DividerComponent : BaseComponent<DividerComponent, string>, IFormComponent
+public class DividerComponent : TrinityComponent<DividerComponent, string>, IFormComponent
 {
     public override string ComponentName => "DividerComponent";
     public override string Type => "Component";

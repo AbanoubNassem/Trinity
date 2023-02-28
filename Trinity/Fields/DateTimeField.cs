@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.TrinityField;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class DateTimeField : BaseField<DateTimeField, DateTime>
+public class DateTimeField : TrinityField<DateTimeField, DateTime>
 {
     public enum SelectionModeTypes : byte
     {

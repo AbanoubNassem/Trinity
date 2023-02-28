@@ -1,9 +1,9 @@
-using AbanoubNassem.Trinity.Components.BaseLayout;
+using AbanoubNassem.Trinity.Components.TrinityLayout;
 using AbanoubNassem.Trinity.Components.Interfaces;
 
 namespace AbanoubNassem.Trinity.Layouts;
 
-public class GridLayout : BaseLayout<GridLayout>
+public class GridLayout : TrinityLayout<GridLayout>
 {
     public override string ComponentName => "GridLayout";
 

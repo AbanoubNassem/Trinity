@@ -1,6 +1,6 @@
 using System.Data;
 using System.Text.Json;
-using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.TrinityField;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Utilities;
@@ -12,7 +12,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class RepeaterField : BaseField<RepeaterField, string>, IHasSchema, IHasRelationship
+public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IHasRelationship
 {
     private readonly ResourceValidator _repeaterFieldValidator = new();
 
@@ -53,7 +53,7 @@ public class RepeaterField : BaseField<RepeaterField, string>, IHasSchema, IHasR
                 repeaterForm.Add(input.Key,
                     input.Value.ValueKind == JsonValueKind.Null
                         ? null
-                        : input.Value.Deserialize(((IBaseField)Fields[input.Key]).GetDeserializationType())
+                        : input.Value.Deserialize(((ITrinityField)Fields[input.Key]).GetDeserializationType())
                 );
             }
 
@@ -84,7 +84,7 @@ public class RepeaterField : BaseField<RepeaterField, string>, IHasSchema, IHasR
         foreach (dynamic component in schema)
         {
             Schema.Add(component);
-            TrinityUtils.GetInnerFields(Fields, (component as IBaseComponent)!);
+            TrinityUtils.GetInnerFields(Fields, (component as ITrinityComponent)!);
         }
 
         return this;

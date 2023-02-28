@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseWidget;
+using AbanoubNassem.Trinity.Components.TrinityWidget;
 
 namespace AbanoubNassem.Trinity.Widgets;
 
-public class StatsWidget : BaseWidget<StatsWidget>
+public class StatsWidget : TrinityWidget<StatsWidget>
 {
     public override string ComponentName => "StatsWidget";
 

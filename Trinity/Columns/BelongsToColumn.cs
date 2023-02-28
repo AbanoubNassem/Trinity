@@ -1,11 +1,11 @@
-using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Components.TrinityColumn;
 using AbanoubNassem.Trinity.RequestHelpers;
 using DapperQueryBuilder;
 using Filter = DapperQueryBuilder.Filter;
 
 namespace AbanoubNassem.Trinity.Columns;
 
-public class BelongsToColumn : BaseHasRelationshipColumn<string>
+public class BelongsToColumn : TrinityHasRelationshipColumn<string>
 {
     public override string ComponentName => "BelongsToColumn";
     public override string Type => "Column";
@@ -163,7 +163,7 @@ public class BelongsToColumn : BaseHasRelationshipColumn<string>
         }
     }
 
-    public override BaseHasRelationshipColumn<string> SetAsSearchable(bool searchable = true,
+    public override TrinityHasRelationshipColumn<string> SetAsSearchable(bool searchable = true,
         bool globallySearchable = true,
         FiltersCallback? searchCallback = null)
     {

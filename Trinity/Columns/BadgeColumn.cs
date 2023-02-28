@@ -1,4 +1,4 @@
-using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Components.TrinityColumn;
 
 namespace AbanoubNassem.Trinity.Columns;
 
@@ -18,7 +18,7 @@ public enum BadgeSizeType
     XLarge
 }
 
-public class BadgeColumn<T> : BaseColumn<BadgeColumn<T>, string>
+public class BadgeColumn<T> : TrinityColumn<BadgeColumn<T>, string>
 {
     public BadgeColumn(string columnName) : base(columnName)
     {

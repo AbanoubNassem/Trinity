@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.TrinityField;
 
 namespace AbanoubNassem.Trinity.Fields;
 
-public class SelectField<T> : BaseField<SelectField<T> , T>
+public class SelectField<T> : TrinityField<SelectField<T> , T>
 {
     public override string ComponentName => "SelectInputField";
 

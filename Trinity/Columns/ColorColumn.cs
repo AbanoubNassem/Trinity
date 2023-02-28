@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Components.TrinityColumn;
 
 namespace AbanoubNassem.Trinity.Columns;
 
-public class ColorColumn : BaseColumn<ColorColumn, string>
+public class ColorColumn : TrinityColumn<ColorColumn, string>
 {
     public override string ComponentName => "ColorColumn";
 

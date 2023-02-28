@@ -4,18 +4,18 @@ using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Pages;
 
-public class DashboardPage : BasePage
+public class DashboardPage : TrinityPage
 {
     public override string PageName => "Dashboard";
     public override string Label => "Dashboard";
     public override string To => "/";
     public override string Icon => "pi pi-fw pi-home";
 
-    protected override List<IBaseWidget> GetSchema()
+    protected override List<ITrinityWidget> GetSchema()
     {
         Logger.LogInformation("this is a debug message!");
         
-        return new List<IBaseWidget>()
+        return new List<ITrinityWidget>()
         {
             new StatsWidget("Unique views", "192.1k")
                 .SetIcon("pi pi-shopping-cart", "red", "black")

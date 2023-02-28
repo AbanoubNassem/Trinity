@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Components.TrinityColumn;
 
 namespace AbanoubNassem.Trinity.Columns;
 
-public class ImageColumn : BaseColumn<ImageColumn, string>
+public class ImageColumn : TrinityColumn<ImageColumn, string>
 {
     public ImageColumn(string columnName) : base(columnName)
     {

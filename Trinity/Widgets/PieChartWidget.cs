@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseWidget;
+using AbanoubNassem.Trinity.Components.TrinityWidget;
 
 namespace AbanoubNassem.Trinity.Widgets;
 
-public class PieChartWidget : BaseChartWidget<PieChartWidget>
+public class PieChartWidget : TrinityChartWidget<PieChartWidget>
 {
     public override string ComponentName => "PieChartWidget";
 

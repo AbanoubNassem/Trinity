@@ -1,9 +1,9 @@
-using AbanoubNassem.Trinity.Components.BaseLayout;
+using AbanoubNassem.Trinity.Components.TrinityLayout;
 using AbanoubNassem.Trinity.Components.Interfaces;
 
 namespace AbanoubNassem.Trinity.Layouts;
 
-public class Tab : BaseLayout<Tab>
+public class Tab : TrinityLayout<Tab>
 {
     public override string ComponentName => "TabLayout";
 
@@ -13,7 +13,7 @@ public class Tab : BaseLayout<Tab>
     }
 }
 
-public class TabsLayout : BaseLayout<TabsLayout>
+public class TabsLayout : TrinityLayout<TabsLayout>
 {
     public override string ComponentName => "TabsLayout";
 

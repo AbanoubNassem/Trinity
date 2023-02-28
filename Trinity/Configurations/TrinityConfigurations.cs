@@ -12,8 +12,9 @@ namespace AbanoubNassem.Trinity.Configurations;
 /// </summary>
 public class TrinityConfigurations
 {
-    public TrinityConfigurations()
+    public TrinityConfigurations(bool isDevelopment)
     {
+        IsDevelopment = isDevelopment;
         DashboardPage = new DashboardPage()
         {
             Configurations = this
@@ -22,6 +23,7 @@ public class TrinityConfigurations
 
     public delegate Task<LoginConcern?> Authenticate(HttpContext httpContext, string email, string password);
 
+    [JsonIgnore] public bool IsDevelopment { get; init; }
     [JsonIgnore] public Func<DbConnection> ConnectionFactory { get; set; } = null!;
 
     [JsonIgnore] public Action<MiniProfilerOptions>? MiniProfilerConfigures { get; set; }
@@ -31,7 +33,7 @@ public class TrinityConfigurations
 
     public string Title { get; set; } = "Trinity";
 
-    [JsonIgnore] public BasePage DashboardPage { get; set; }
+    [JsonIgnore] public TrinityPage DashboardPage { get; set; }
     [JsonIgnore] public TimeSpan CacheWidgetsFor { get; set; } = TimeSpan.FromMinutes(5);
 
     public ProgressConfigurations ProgressSettings { get; set; } = new();

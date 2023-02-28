@@ -1,9 +1,9 @@
-using AbanoubNassem.Trinity.Components.BaseLayout;
+using AbanoubNassem.Trinity.Components.TrinityLayout;
 using AbanoubNassem.Trinity.Components.Interfaces;
 
 namespace AbanoubNassem.Trinity.Layouts;
 
-public class FieldsetLayout : BaseLayout<FieldsetLayout>
+public class FieldsetLayout : TrinityLayout<FieldsetLayout>
 {
     public override string ComponentName => "FieldsetLayout";
 

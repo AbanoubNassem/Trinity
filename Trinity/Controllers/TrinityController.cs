@@ -1,13 +1,12 @@
 using System.Security.Claims;
 using AbanoubNassem.Trinity.Attributes;
-using AbanoubNassem.Trinity.Components.BaseField;
+using AbanoubNassem.Trinity.Components.TrinityField;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Managers;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Resources;
 using AbanoubNassem.Trinity.Utilities;
-using Humanizer;
 using InertiaCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -38,6 +37,7 @@ public class TrinityController : Controller
 
     public IActionResult Index()
     {
+        _configurations.DashboardPage.Configurations = _configurations;
         _configurations.DashboardPage.Request = Request;
         _configurations.DashboardPage.Response = Response;
         _configurations.DashboardPage.ServiceProvider = HttpContext.RequestServices;
@@ -122,8 +122,8 @@ public class TrinityController : Controller
 
     public async Task<IActionResult> Handle(string name, string view)
     {
-        var resourceName = name.Titleize();
-        if (!_trinityManager.Resources.TryGetValue(resourceName, out var resourceObject))
+        // var resourceName = name.Titleize();
+        if (!_trinityManager.Resources.TryGetValue(name, out var resourceObject))
         {
             return NotFound(name);
         }
@@ -132,7 +132,7 @@ public class TrinityController : Controller
         var resource = (resourceObject as TrinityResource)!;
 
 
-        InjectServices(resourceName, resource);
+        InjectServices(name, resource);
 
         await resource.Setup();
 
@@ -186,7 +186,7 @@ public class TrinityController : Controller
     public async Task<IActionResult> UploadFile(IFormFile? file, [FromForm] string resourceName,
         [FromForm] string fieldName)
     {
-        if (!_trinityManager.Resources.TryGetValue(resourceName.Titleize(), out var resourceObject))
+        if (!_trinityManager.Resources.TryGetValue(resourceName, out var resourceObject))
         {
             return NotFound(resourceName);
         }
@@ -209,7 +209,7 @@ public class TrinityController : Controller
     [HttpPost]
     public Task<IActionResult> DeleteFile([FromBody] DeleteFileRequest request)
     {
-        if (!_trinityManager.Resources.TryGetValue(request.ResourceName.Titleize(), out var resourceObject))
+        if (!_trinityManager.Resources.TryGetValue(request.ResourceName, out var resourceObject))
         {
             return Task.FromResult<IActionResult>(NotFound(request.ResourceName));
         }

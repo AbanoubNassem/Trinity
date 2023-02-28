@@ -1,10 +1,10 @@
-using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Components.TrinityColumn;
 using DapperQueryBuilder;
 using Humanizer;
 
 namespace AbanoubNassem.Trinity.Columns;
 
-public class AggregateColumn : BaseColumn<AggregateColumn, object>
+public class AggregateColumn : TrinityColumn<AggregateColumn, object>
 {
     public AggregateColumn(string columnName, string? aggregateAlias = null) : base(columnName)
     {

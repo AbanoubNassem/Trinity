@@ -1,8 +1,8 @@
-using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Components.TrinityColumn;
 
 namespace AbanoubNassem.Trinity.Columns;
 
-public class IconColumn<T> : BaseColumn<IconColumn<T>, T>
+public class IconColumn<T> : TrinityColumn<IconColumn<T>, T>
 {
     public IconColumn(string columnName) : base(columnName)
     {

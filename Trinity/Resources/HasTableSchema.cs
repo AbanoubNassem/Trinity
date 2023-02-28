@@ -1,6 +1,6 @@
 using System.Text.Json;
 using AbanoubNassem.Trinity.Columns;
-using AbanoubNassem.Trinity.Components.BaseColumn;
+using AbanoubNassem.Trinity.Components.TrinityColumn;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Utilities;
@@ -29,9 +29,9 @@ public abstract partial class TrinityResource
         }
     }
 
-    protected virtual List<IBaseColumn> GetTableSchema()
+    protected virtual List<ITrinityColumn> GetTableSchema()
     {
-        return new List<IBaseColumn>()
+        return new List<ITrinityColumn>()
         {
             new IdColumn(PrimaryKeyColumn)
         };
@@ -96,7 +96,7 @@ public abstract partial class TrinityResource
 
             query.Select($"t.{PrimaryKeyColumn:raw}");
 
-            foreach (IBaseColumn column in Columns)
+            foreach (ITrinityColumn column in Columns)
             {
                 if (column.Hidden) continue;
 
@@ -126,7 +126,7 @@ public abstract partial class TrinityResource
             {
                 foreach (var sort in sorts)
                 {
-                    var column = (IBaseColumn?)Columns.SingleOrDefault(x => ((IBaseColumn)x).ColumnName == sort.Field);
+                    var column = (ITrinityColumn?)Columns.SingleOrDefault(x => ((ITrinityColumn)x).ColumnName == sort.Field);
                     if (column is null or IHasRelationship) continue;
 
                     var direction = sort.Order == 1 ? "ASC" : "DESC";
@@ -143,7 +143,7 @@ public abstract partial class TrinityResource
 
             if (result.Any())
             {
-                foreach (IBaseColumn baseColumn in Columns)
+                foreach (ITrinityColumn baseColumn in Columns)
                 {
                     if (baseColumn is IHasRelationship { HasRelationshipByDefault: true } relationshipColumn)
                     {
@@ -157,7 +157,7 @@ public abstract partial class TrinityResource
 
             foreach (var record in result)
             {
-                foreach (IBaseColumn column in Columns)
+                foreach (ITrinityColumn column in Columns)
                 {
                     if (column.Hidden) continue;
 
