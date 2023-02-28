@@ -38,7 +38,20 @@ public class TrinityController : Controller
 
     public IActionResult Index()
     {
-        return Inertia.Render("Home", new { configs = _configurations, _trinityManager.Resources });
+        _configurations.DashboardPage.Request = Request;
+        _configurations.DashboardPage.Response = Response;
+        _configurations.DashboardPage.ServiceProvider = HttpContext.RequestServices;
+        _configurations.DashboardPage.Logger = (ILogger)HttpContext.RequestServices.GetRequiredService(
+            typeof(ILogger<>).MakeGenericType(_configurations.DashboardPage.GetType())
+        );
+
+        return Inertia.Render("Home",
+            new
+            {
+                configs = _configurations,
+                _trinityManager.Resources,
+                data = _configurations.DashboardPage.Schema
+            });
     }
 
     [AllowAnonymous]

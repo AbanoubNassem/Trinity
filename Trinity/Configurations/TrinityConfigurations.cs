@@ -12,6 +12,14 @@ namespace AbanoubNassem.Trinity.Configurations;
 /// </summary>
 public class TrinityConfigurations
 {
+    public TrinityConfigurations()
+    {
+        DashboardPage = new DashboardPage()
+        {
+            Configurations = this
+        };
+    }
+
     public delegate Task<LoginConcern?> Authenticate(HttpContext httpContext, string email, string password);
 
     [JsonIgnore] public Func<DbConnection> ConnectionFactory { get; set; } = null!;
@@ -23,9 +31,8 @@ public class TrinityConfigurations
 
     public string Title { get; set; } = "Trinity";
 
-    public BasePage DashboardPage { get; set; } = new DashboardPage();
-
-    public TimeSpan CacheWidgetsFor { get; set; } = TimeSpan.FromMinutes(5);
+    [JsonIgnore] public BasePage DashboardPage { get; set; }
+    [JsonIgnore] public TimeSpan CacheWidgetsFor { get; set; } = TimeSpan.FromMinutes(5);
 
     public ProgressConfigurations ProgressSettings { get; set; } = new();
 

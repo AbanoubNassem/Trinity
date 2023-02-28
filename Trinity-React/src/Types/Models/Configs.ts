@@ -1,5 +1,3 @@
-import BasePage from '@/types/Models/Pages/BasePage';
-
 export default interface Configs {
     prefix: string;
     title: string;
@@ -8,7 +6,6 @@ export default interface Configs {
     favIcon?: string;
     progressSettings: any;
     rowsPerPageOptions: Array<number>;
-    dashboardPage: BasePage;
     themeMode: ThemeMode;
 }
 

@@ -14,6 +14,7 @@ export default function usePageProps<T>(): {
     sharedProps: {
         [key: string]: string;
     };
+    [key: string]: any;
 } {
     const page = usePage();
     return {

@@ -1,5 +1,6 @@
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Widgets;
+using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Pages;
 
@@ -12,6 +13,8 @@ public class DashboardPage : BasePage
 
     protected override List<IBaseWidget> GetSchema()
     {
+        Logger.LogInformation("this is a debug message!");
+        
         return new List<IBaseWidget>()
         {
             new StatsWidget("Unique views", "192.1k")
