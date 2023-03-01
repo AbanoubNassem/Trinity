@@ -1,6 +1,6 @@
-import BaseColumn from '@/types/Models/Columns/BaseColumn';
+import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 
-export default interface IconColumn extends BaseColumn {
+export default interface IconColumn extends TrinityColumn {
     options?: Array<{ value: any; icon: string; color?: string }>;
     isBoolean: boolean;
     trueValue?: string;

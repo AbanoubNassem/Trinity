@@ -1,6 +1,6 @@
-import BaseField from '@/types/Models/Fields/BaseField';
+import TrinityField from '@/types/Models/Fields/TrinityField';
 
-export default interface TextAreaField extends BaseField {
+export default interface TextAreaField extends TrinityField {
     autoResize: boolean;
 
     rows: number;

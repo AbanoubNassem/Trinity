@@ -1,7 +1,7 @@
-import BaseField from '@/types/Models/Fields/BaseField';
-import BaseComponent from '@/types/Models/BaseComponent';
+import TrinityField from '@/types/Models/Fields/TrinityField';
+import BaseComponent from '@/types/Models/TrinityComponent';
 
-export default interface RepeaterField extends BaseField {
+export default interface RepeaterField extends TrinityField {
     schema?: Array<BaseComponent>;
     isCollapsible: boolean;
 }

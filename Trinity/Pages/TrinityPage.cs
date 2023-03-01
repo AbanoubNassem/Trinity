@@ -8,7 +8,7 @@ namespace AbanoubNassem.Trinity.Pages;
 
 public abstract class TrinityPage
 {
-    [JsonIgnore] public TrinityConfigurations Configurations { get; set; } = null!;
+    [JsonIgnore] public TrinityConfigurations Configurations { get; init; } = null!;
     [JsonIgnore] public IServiceProvider ServiceProvider { get; set; } = null!;
     [JsonIgnore] public HttpRequest Request { get; set; } = null!;
     [JsonIgnore] public HttpResponse Response { get; set; } = null!;
@@ -20,10 +20,14 @@ public abstract class TrinityPage
 
     public virtual string? To { get; set; }
 
-    public virtual string? Icon { get; set; }
+    public virtual string? Icon { get; set; } = "pi pi-file";
 
     private readonly List<object> _schema = new();
     private DateTime _lastWidgetsCacheTime = DateTime.Now;
+
+    public virtual void Setup()
+    {
+    }
 
     public List<object> Schema
     {

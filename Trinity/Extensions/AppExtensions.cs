@@ -173,6 +173,9 @@ public static class AppExtensions
             return next(context);
         });
 
+        trinityManager.LoadResources();
+        trinityManager.LoadPages();
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(
@@ -205,6 +208,12 @@ public static class AppExtensions
             );
 
             endpoints.MapControllerRoute(
+                name: "trinity-pages",
+                pattern: configs.Prefix + "/pages/{pageName}/",
+                defaults: new { controller = "Trinity", action = "RenderPage" }
+            );
+            
+            endpoints.MapControllerRoute(
                 name: "trinity-resources",
                 pattern: configs.Prefix + "/{name}/{view=index}/{id?}",
                 defaults: new { controller = "Trinity", action = "Handle" }
@@ -217,9 +226,7 @@ public static class AppExtensions
             // );
         });
 
-        trinityManager.LoadResources();
-        trinityManager.LoadPages();
-        
+
         return app;
     }
 }

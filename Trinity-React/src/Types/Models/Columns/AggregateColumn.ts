@@ -1,5 +1,5 @@
-import BaseColumn from '@/types/Models/Columns/BaseColumn';
+import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 
-export default interface AggregateColumn extends BaseColumn {
+export default interface AggregateColumn extends TrinityColumn {
     aggregateAlias: string;
 }

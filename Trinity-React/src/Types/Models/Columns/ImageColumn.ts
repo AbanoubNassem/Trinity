@@ -1,6 +1,6 @@
-import BaseColumn from '@/types/Models/Columns/BaseColumn';
+import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 
-export default interface ImageColumn extends BaseColumn {
+export default interface ImageColumn extends TrinityColumn {
     alt?: string;
     width?: string;
     height: string;

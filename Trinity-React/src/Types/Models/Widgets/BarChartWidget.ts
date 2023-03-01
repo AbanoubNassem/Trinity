@@ -1,6 +1,6 @@
-import BaseWidget from '@/types/Models/Widgets/BaseWidget';
+import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 
-export default interface BarChartWidget extends BaseWidget {
+export default interface BarChartWidget extends TrinityWidget {
     borderColors?: Array<string>;
     borderWidth: number;
 }

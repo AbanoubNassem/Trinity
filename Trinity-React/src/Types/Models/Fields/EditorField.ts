@@ -1,6 +1,6 @@
-import BaseField from '@/types/Models/Fields/BaseField';
+import TrinityField from '@/types/Models/Fields/TrinityField';
 
-export default interface EditorField extends BaseField {
+export default interface EditorField extends TrinityField {
     height: string;
     headerButtons?: string[];
     modules?: object;

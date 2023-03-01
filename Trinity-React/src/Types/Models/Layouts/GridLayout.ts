@@ -1,4 +1,3 @@
-import BaseLayout from "@/types/Models/Layouts/BaseLayout";
+import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 
-
-export default interface GridLayout extends BaseLayout {}
+export default interface GridLayout extends TrinityLayout {}

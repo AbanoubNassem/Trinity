@@ -4,22 +4,25 @@ import AppMenuItem from '@/components/AppMenuItem';
 import { AppContext } from '@/contexts/AppContext';
 
 const AppSidebar = () => {
-    const { resources } = useContext(AppContext);
+    const { resources, pages } = useContext(AppContext);
     const { layoutConfig } = useContext(LayoutContext);
     const model: Array<any> = [];
 
+    const dashboard = pages!['dashboard'];
+
     model.push({
-        label: 'Home',
+        label: 'Dashboard',
         visible: true,
         items: [
             {
-                label: 'Dashboard',
+                label: dashboard.label,
                 visible: true,
-                icon: 'pi pi-fw pi-home',
-                to: '/'
+                icon: dashboard.icon,
+                to: dashboard.to
             }
         ]
     });
+
     model.push({
         label: 'Resources',
         items: [],
@@ -28,12 +31,30 @@ const AppSidebar = () => {
 
     for (let r in resources ?? []) {
         const resource = resources![r];
-        model[1].items.push({
+        model[model.length - 1].items.push({
             label: resource.pluralLabel,
             icon: resource.icon,
             to: `/${resource.pluralLabel.toLowerCase()}`,
             visible: true,
             resource
+        });
+    }
+
+    model.push({
+        label: 'Pages',
+        items: [],
+        visible: true
+    });
+    for (let p in pages ?? []) {
+        const page = pages![p];
+        if (page.pageName === 'Dashboard') continue;
+
+        model[model.length - 1].items.push({
+            label: page.label ?? page.pageName,
+            icon: page.icon,
+            to: `/pages/${page.pageName?.toLowerCase()}`,
+            visible: true,
+            page
         });
     }
 

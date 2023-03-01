@@ -1,7 +1,7 @@
-import Resource from '@/types/Models/Resource';
-import BaseWidget from '@/types/Models/Widgets/BaseWidget';
+import TrinityResource from '@/types/Models/TrinityResource';
+import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 
-export default interface WidgetProps<T extends BaseWidget> {
-    resource?: Resource;
+export default interface WidgetProps<T extends TrinityWidget> {
+    resource?: TrinityResource;
     widget: T;
 }

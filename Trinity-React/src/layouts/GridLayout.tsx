@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { classNames } from 'primereact/utils';
 import { AppContext } from '@/contexts/AppContext';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
-import BaseLayout from '@/types/Models/Layouts/BaseLayout';
+import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 
-const GirdLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, style }: LayoutProps<BaseLayout>) => {
+const GirdLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, style }: LayoutProps<TrinityLayout>) => {
     const { components } = useContext(AppContext);
 
     return (

@@ -1,6 +1,6 @@
-import BaseColumn from '@/types/Models/Columns/BaseColumn';
+import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 
-export default interface RelationshipColumn extends BaseColumn {
+export default interface RelationshipColumn extends TrinityColumn {
     relationshipName?: string;
     foreignColumn?: string;
     foreignTable?: string;

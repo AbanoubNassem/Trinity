@@ -1,6 +1,6 @@
-import BaseField from '@/types/Models/Fields/BaseField';
+import TrinityField from '@/types/Models/Fields/TrinityField';
 
-export default interface MaskField extends BaseField {
+export default interface MaskField extends TrinityField {
     autoClear: boolean;
     inputMask?: string;
     slotChar?: string;

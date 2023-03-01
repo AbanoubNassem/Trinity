@@ -1,6 +1,6 @@
-import BaseWidget from '@/types/Models/Widgets/BaseWidget';
+import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 
-export default interface StatsWidget extends BaseWidget {
+export default interface StatsWidget extends TrinityWidget {
     title: string;
     value: string;
     icon?: string;

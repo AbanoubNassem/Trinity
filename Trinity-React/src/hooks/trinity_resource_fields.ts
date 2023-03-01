@@ -1,25 +1,25 @@
 import usePageProps from '@/hooks/trinity_page_props';
-import BaseField from '@/types/Models/Fields/BaseField';
+import TrinityField from '@/types/Models/Fields/TrinityField';
 import BaseComponent from '@/types/Models/BaseComponent';
-import BaseLayout from '@/types/Models/Layouts/BaseLayout';
+import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 
 export function useTrinityFields() {
     const pageProps = usePageProps();
 
-    const fields: Array<BaseField> = [];
+    const fields: Array<TrinityField> = [];
     for (const component of pageProps.resource?.schema ?? []) {
         getInnerFields(fields, component);
     }
     return fields;
 }
 
-function getInnerFields(fields: Array<BaseField>, component: BaseComponent) {
+function getInnerFields(fields: Array<TrinityField>, component: BaseComponent) {
     switch (component.type) {
         case 'Field':
-            fields.push(component as BaseField);
+            fields.push(component as TrinityField);
             break;
         case 'Layout': {
-            for (const innerComponent of (component as BaseLayout).schema) {
+            for (const innerComponent of (component as TrinityLayout).schema) {
                 getInnerFields(fields, innerComponent);
             }
             break;

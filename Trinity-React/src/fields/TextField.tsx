@@ -3,9 +3,9 @@ import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import BaseField from '@/types/Models/Fields/BaseField';
+import TrinityField from '@/types/Models/Fields/TrinityField';
 
-const TextField = ({ component, formData, setFieldValue, errors }: FieldProps<BaseField>) => {
+const TextField = ({ component, formData, setFieldValue, errors }: FieldProps<TrinityField>) => {
     const [value, setValue] = useState(formData[component.columnName] ?? '');
     return (
         <BaseFieldComponent

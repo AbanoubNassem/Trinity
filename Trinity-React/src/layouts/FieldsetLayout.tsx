@@ -3,9 +3,9 @@ import { classNames } from 'primereact/utils';
 import { AppContext } from '@/contexts/AppContext';
 import { Fieldset } from 'primereact/fieldset';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
-import BaseLayout from '@/types/Models/Layouts/BaseLayout';
+import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 
-const FieldsetLayout = ({ configs, resource, component, record, formData, setFieldValue, errors }: LayoutProps<BaseLayout>) => {
+const FieldsetLayout = ({ configs, resource, component, record, formData, setFieldValue, errors }: LayoutProps<TrinityLayout>) => {
     const { components } = useContext(AppContext);
 
     return (

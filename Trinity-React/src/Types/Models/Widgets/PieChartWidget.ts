@@ -1,5 +1,5 @@
-import BaseWidget from '@/types/Models/Widgets/BaseWidget';
+import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 
-export default interface PieChartWidget extends BaseWidget {
+export default interface PieChartWidget extends TrinityWidget {
     hoverBackgroundColor?: Array<string>;
 }

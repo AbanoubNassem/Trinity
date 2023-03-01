@@ -1,6 +1,6 @@
-import BaseColumn from '@/types/Models/Columns/BaseColumn';
+import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 
-export default interface TextColumn extends BaseColumn {
+export default interface TextColumn extends TrinityColumn {
     url?: string;
     openUrlInNewTab: boolean;
     dateTimeFormat?: string;

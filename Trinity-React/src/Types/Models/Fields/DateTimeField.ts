@@ -1,6 +1,6 @@
-import BaseField from '@/types/Models/Fields/BaseField';
+import TrinityField from '@/types/Models/Fields/TrinityField';
 
-export default interface DateTimeField extends BaseField {
+export default interface DateTimeField extends TrinityField {
     inline: boolean;
     selectionMode?: 'single' | 'multiple' | 'range' | undefined;
     dateFormat?: string;

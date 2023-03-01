@@ -1,13 +1,15 @@
 import Configs from '@/types/Models/Configs';
-import Resource from '@/types/Models/Resource';
+import TrinityResource from '@/types/Models/TrinityResource';
 import { usePage } from '@inertiajs/react';
 import { ErrorBag, Errors } from '@inertiajs/core/types/types';
+import TrinityPage from '@/types/Models/Pages/TrinityPage';
 
 export default function usePageProps<T>(): {
     component: string;
     configs?: Configs;
-    resources?: Array<Resource>;
-    resource?: Resource;
+    resources?: Array<TrinityResource>;
+    pages?: { [key: string]: TrinityPage };
+    resource?: TrinityResource;
     data?: T;
     errors: Errors & ErrorBag;
     notifications?: Array<string>;

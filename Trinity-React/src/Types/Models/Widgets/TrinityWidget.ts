@@ -1,6 +1,6 @@
-import BaseComponent from '@/types/Models/BaseComponent';
+import TrinityComponent from '@/types/Models/TrinityComponent';
 
-export default interface BaseWidget extends BaseComponent {
+export default interface TrinityWidget extends TrinityComponent {
     chartLabels: Array<any>;
     chartValues: Array<any>;
     backgroundColors?: Array<string>;

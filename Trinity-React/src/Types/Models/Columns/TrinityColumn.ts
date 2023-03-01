@@ -1,7 +1,7 @@
-import BaseComponent from '@/types/Models/BaseComponent';
-import BaseField from '@/types/Models/Fields/BaseField';
+import TrinityComponent from '@/types/Models/TrinityComponent';
+import TrinityField from '@/types/Models/Fields/TrinityField';
 
-export default interface BaseColumn extends BaseComponent {
+export default interface TrinityColumn extends TrinityComponent {
     columnName: string;
     relationshipName?: string;
     initialValue: string;
@@ -20,5 +20,5 @@ export default interface BaseColumn extends BaseComponent {
     size?: string;
     weight?: string;
     fontFamily?: string;
-    customFilter?: BaseField;
+    customFilter?: TrinityField;
 }

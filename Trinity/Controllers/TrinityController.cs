@@ -4,6 +4,7 @@ using AbanoubNassem.Trinity.Components.TrinityField;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Managers;
+using AbanoubNassem.Trinity.Pages;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Resources;
 using AbanoubNassem.Trinity.Utilities;
@@ -37,21 +38,21 @@ public class TrinityController : Controller
 
     public IActionResult Index()
     {
-        _configurations.DashboardPage.Configurations = _configurations;
-        _configurations.DashboardPage.Request = Request;
-        _configurations.DashboardPage.Response = Response;
-        _configurations.DashboardPage.ServiceProvider = HttpContext.RequestServices;
-        _configurations.DashboardPage.Logger = (ILogger)HttpContext.RequestServices.GetRequiredService(
-            typeof(ILogger<>).MakeGenericType(_configurations.DashboardPage.GetType())
+        var dashboard = (TrinityPage)_trinityManager.Pages["dashboard"];
+        dashboard.Request = Request;
+        dashboard.Response = Response;
+        dashboard.ServiceProvider = HttpContext.RequestServices;
+        dashboard.Logger = (ILogger)HttpContext.RequestServices.GetRequiredService(
+            typeof(ILogger<>).MakeGenericType(dashboard.GetType())
         );
 
-        return Inertia.Render("Home",
-            new
-            {
-                configs = _configurations,
-                _trinityManager.Resources,
-                data = _configurations.DashboardPage.Schema
-            });
+        dashboard.Setup();
+
+        var response = CreateResponse();
+
+        response.Data = dashboard.Schema;
+
+        return Inertia.Render("Home", response);
     }
 
     [AllowAnonymous]
@@ -122,7 +123,6 @@ public class TrinityController : Controller
 
     public async Task<IActionResult> Handle(string name, string view)
     {
-        // var resourceName = name.Titleize();
         if (!_trinityManager.Resources.TryGetValue(name, out var resourceObject))
         {
             return NotFound(name);
@@ -136,16 +136,10 @@ public class TrinityController : Controller
 
         await resource.Setup();
 
-        var responseData = new TrinityResponse()
-        {
-            Resource = resourceObject,
-        };
+        var responseData = CreateResponse();
 
-        if (!Request.IsInertiaRequest())
-        {
-            responseData.Configs = _configurations;
-            responseData.Resources = _trinityManager.Resources;
-        }
+        responseData.Resource = resourceObject;
+
 
         switch (Request.Method)
         {
@@ -172,11 +166,6 @@ public class TrinityController : Controller
                 responseData.Data = await resource.Delete();
                 break;
         }
-
-        // if (!ModelState.IsValid)
-        // {
-        //     responseData.Errors = BadRequest(ModelState);
-        // }
 
         responseData.Notifications = TrinityNotifications.Flush();
         return Inertia.Render(view, responseData);
@@ -263,5 +252,39 @@ public class TrinityController : Controller
         _trinityManager.ResourcesTypes[resourceName].Item2["ModelState"].SetValue(resource, ModelState);
         _trinityManager.ResourcesTypes[resourceName].Item2["Request"].SetValue(resource, Request);
         _trinityManager.ResourcesTypes[resourceName].Item2["Response"].SetValue(resource, Response);
+    }
+
+    public IActionResult RenderPage(string pageName)
+    {
+        if (!_trinityManager.Pages.TryGetValue(pageName, out var pageObj)) return NotFound();
+
+        var page = (TrinityPage)pageObj;
+
+        page.Request = Request;
+        page.Response = Response;
+        page.ServiceProvider = HttpContext.RequestServices;
+        page.Logger = (ILogger)HttpContext.RequestServices.GetRequiredService(
+            typeof(ILogger<>).MakeGenericType(page.GetType())
+        );
+
+        page.Setup();
+
+        var response = CreateResponse();
+        response.Page = pageObj;
+
+        return Inertia.Render(pageName, response);
+    }
+
+    private TrinityResponse CreateResponse()
+    {
+        var response = new TrinityResponse();
+
+        if (Request.IsInertiaRequest()) return response;
+
+        response.Configs = _configurations;
+        response.Resources = _trinityManager.Resources;
+        response.Pages = _trinityManager.Pages;
+
+        return response;
     }
 }

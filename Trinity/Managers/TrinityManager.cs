@@ -33,12 +33,14 @@ public class TrinityManager
 
         foreach (var pageType in types)
         {
-            var name = pageType.Name.Replace("Page", "").ToLower();
-
             var page = (TrinityPage)Activator.CreateInstance(pageType)!;
 
-            Pages.Add(name, page);
+            pageType.GetProperty("Configurations")?.SetValue(page, _configurations);
+
+            Pages.TryAdd(page.PageName.ToLower(), page);
         }
+
+        Pages.TryAdd("dashboard", new DashboardPage { Configurations = _configurations });
     }
 
     public void LoadResources()
@@ -117,8 +119,8 @@ public class TrinityManager
                     .SetValue(resource, _configurations.ConnectionFactory);
             }
 
-            _resources.Add(plural.ToLower(), resource);
-            _resourcesTypes.Add(plural.ToLower(),
+            _resources.TryAdd(plural.ToLower(), resource);
+            _resourcesTypes.TryAdd(plural.ToLower(),
                 new Tuple<Type, Dictionary<string, PropertyInfo>>(resourceType, properties));
         }
     }

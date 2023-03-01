@@ -1,9 +1,9 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
 import React, { useRef } from 'react';
 import { Chart } from 'primereact/chart';
-import BaseWidget from '@/types/Models/Widgets/BaseWidget';
+import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 
-const RadarChartWidget = ({ widget }: WidgetProps<BaseWidget>) => {
+const RadarChartWidget = ({ widget }: WidgetProps<TrinityWidget>) => {
     const chart = useRef<Chart>(null);
 
     const documentStyle = getComputedStyle(document.documentElement);

@@ -4,7 +4,7 @@ import { AppContext } from '@/contexts/AppContext';
 import { TabView, TabPanel } from 'primereact/tabview';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
 import TabsLayout, { TabLayout } from '@/types/Models/Layouts/TabsLayout';
-import BaseLayout from '@/types/Models/Layouts/BaseLayout';
+import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 
 const TabsLayout = ({ configs, resource, component, record, formData, setFieldValue, errors }: LayoutProps<TabsLayout>) => {
     const { components } = useContext(AppContext);
@@ -26,7 +26,7 @@ const TabsLayout = ({ configs, resource, component, record, formData, setFieldVa
                     rightIcon={(tab as TabLayout).rightHeaderIcon}
                 >
                     <div className={classNames(['p-fluid grid px-0 mx-0 col-12', tab.columnSpan > 0 && tab.columnSpan < 12 ? `md:col-${tab.columnSpan}` : ''])}>
-                        {(tab as BaseLayout)?.schema.map((innerComponent, index) =>
+                        {(tab as TrinityLayout)?.schema.map((innerComponent, index) =>
                             components?.has(innerComponent.componentName) ? (
                                 components?.get(innerComponent.componentName)!({
                                     key: `fieldset_${index}_${innerComponent.componentName}`,
@@ -34,7 +34,7 @@ const TabsLayout = ({ configs, resource, component, record, formData, setFieldVa
                                     resource: resource,
                                     component: innerComponent,
                                     record: record,
-                                    containerClass: (tab as BaseLayout).columns ? `md:col-${12 / (tab as BaseLayout).columns}` : '',
+                                    containerClass: (tab as TrinityLayout).columns ? `md:col-${12 / (tab as TrinityLayout).columns}` : '',
                                     formData,
                                     setFieldValue,
                                     errors

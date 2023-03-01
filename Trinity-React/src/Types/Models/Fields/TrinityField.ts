@@ -1,6 +1,6 @@
-import BaseComponent from '@/types/Models/BaseComponent';
+import TrinityComponent from '@/types/Models/TrinityComponent';
 
-export default interface BaseField extends BaseComponent {
+export default interface TrinityField extends TrinityComponent {
     columnName: string;
     relationshipName?: string;
     initialValue: string;

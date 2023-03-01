@@ -3,11 +3,11 @@ import { classNames } from 'primereact/utils';
 import React, { useContext } from 'react';
 import { AppContext } from '@/contexts/AppContext';
 import usePageProps from '@/hooks/trinity_page_props';
-import BaseWidget from '@/types/Models/Widgets/BaseWidget';
+import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 
 const Dashboard = () => {
     const configs = useConfigs();
-    const { data: schema } = usePageProps<Array<BaseWidget>>();
+    const { data: schema } = usePageProps<Array<TrinityWidget>>();
     const { widgets } = useContext(AppContext);
 
     return (

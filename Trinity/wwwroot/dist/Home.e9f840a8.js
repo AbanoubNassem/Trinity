@@ -1,4 +1,4 @@
-import { u as i, a as l, r as m, A as r, j as n, c } from "./main.d4a481b6.js";
+import { u as i, a as l, r as m, A as r, j as n, c } from "./main.c82dd26e.js";
 const p = () => {
   const o = i(), { data: s } = l(), { widgets: a } = m.exports.useContext(r);
   return /* @__PURE__ */ n("div", {

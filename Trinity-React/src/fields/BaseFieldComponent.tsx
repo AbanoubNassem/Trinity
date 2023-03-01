@@ -1,9 +1,9 @@
 import React, { CSSProperties } from 'react';
 import { classNames } from 'primereact/utils';
-import BaseField from '@/types/Models/Fields/BaseField';
+import TrinityField from '@/types/Models/Fields/TrinityField';
 import { Errors, ErrorBag } from '@inertiajs/core/types/types';
 
-const BaseFieldComponent = ({ component, errors, children, style }: { component: BaseField; errors: Errors & ErrorBag; children?: React.ReactNode; style?: CSSProperties | undefined }) => {
+const BaseFieldComponent = ({ component, errors, children, style }: { component: TrinityField; errors: Errors & ErrorBag; children?: React.ReactNode; style?: CSSProperties | undefined }) => {
     if (component.hidden) return <></>;
 
     return (

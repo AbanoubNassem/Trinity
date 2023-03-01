@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 
-export default interface BaseComponent {
+export default interface TrinityComponent {
     componentName: string;
     type: string;
     id: string;

@@ -1,9 +1,9 @@
-import BaseColumn from '@/types/Models/Columns/BaseColumn';
+import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 import React from 'react';
-import Resource from '@/types/Models/Resource';
+import TrinityResource from '@/types/Models/TrinityResource';
 
-export default interface ColumnProps<T extends BaseColumn> {
-    resource: Resource;
+export default interface ColumnProps<T extends TrinityColumn> {
+    resource: TrinityResource;
     column: T;
     columnValue: any;
     record: { [key: string]: any };

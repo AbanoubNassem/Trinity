@@ -1,3 +1,3 @@
-import BaseWidget from '@/types/Models/Widgets/BaseWidget';
+import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 
-export default interface VerticalBarChart extends BaseWidget {}
+export default interface VerticalBarChart extends TrinityWidget {}

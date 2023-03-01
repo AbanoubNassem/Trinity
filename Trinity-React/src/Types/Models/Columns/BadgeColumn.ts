@@ -1,5 +1,5 @@
-import BaseColumn from '@/types/Models/Columns/BaseColumn';
+import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 
-export default interface BadgeColumn extends BaseColumn {
+export default interface BadgeColumn extends TrinityColumn {
     options?: Array<{ value: any; icon: string; severity?: string }>;
 }

@@ -1,6 +1,6 @@
-import BaseField from '@/types/Models/Fields/BaseField';
+import TrinityField from '@/types/Models/Fields/TrinityField';
 
-export default interface FileUploadField extends BaseField {
+export default interface FileUploadField extends TrinityField {
     multiple: boolean;
     allowReorder?: boolean;
     autoUploads: boolean;

@@ -1,6 +1,6 @@
-import BaseField from '@/types/Models/Fields/BaseField';
+import TrinityField from '@/types/Models/Fields/TrinityField';
 
-export default interface SwitchInputField extends BaseField {
+export default interface SwitchInputField extends TrinityField {
     trueValue?: any;
     falseValue?: any;
 }

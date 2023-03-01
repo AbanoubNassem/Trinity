@@ -1,12 +1,12 @@
-import BaseComponent from '@/types/Models/BaseComponent';
+import BaseComponent from '@/types/Models/TrinityComponent';
 import { Errors, ErrorBag } from '@inertiajs/core/types/types';
-import Resource from '@/types/Models/Resource';
+import TrinityResource from '@/types/Models/TrinityResource';
 import Configs from '@/types/Models/Configs';
-import {CSSProperties} from "react";
+import { CSSProperties } from 'react';
 
 export default interface LayoutProps<T extends BaseComponent> {
     configs: Configs;
-    resource: Resource;
+    resource: TrinityResource;
     component: T;
     record: object;
     formData: any;

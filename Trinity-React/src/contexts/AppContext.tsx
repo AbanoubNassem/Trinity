@@ -13,7 +13,7 @@ import { Toast } from 'primereact/toast';
 import SwitchInputField from '@/fields/SwitchInputField';
 import TextColumn from '@/columns/TextColumn';
 import Configs from '@/types/Models/Configs';
-import Resource from '@/types/Models/Resource';
+import TrinityResource from '@/types/Models/TrinityResource';
 import IconColumn from '@/columns/IconColumn';
 import BadgeColumn from '@/columns/BadgeColumn';
 import ImageColumn from '@/columns/ImageColumn';
@@ -39,10 +39,12 @@ import StackedBarChartWidget from '@/widgets/StackedBarChartWidget';
 import LineChartWidget from '@/widgets/LineChartWidget';
 import PolarAreaChartWidget from '@/widgets/PolarAreaChartWidget';
 import RadarChartWidget from '@/widgets/RadarChartWidget';
+import TrinityPage from '@/types/Models/Pages/TrinityPage';
 
 export const AppContext = React.createContext<{
     configs?: Configs;
-    resources?: Array<Resource>;
+    resources?: Array<TrinityResource>;
+    pages?: { [key: string]: TrinityPage };
     components?: Map<string, (props: any) => React.ReactNode>;
     columns?: Map<string, (props: any) => React.ReactNode>;
     widgets?: Map<string, (props: any) => React.ReactNode>;
@@ -50,7 +52,7 @@ export const AppContext = React.createContext<{
 }>({});
 
 export const AppContextProvider = (props: { children: React.ReactNode; initialPage: Page<any> }) => {
-    const { configs, resources } = props.initialPage.props;
+    const { configs, resources, pages } = props.initialPage.props;
 
     setupProgress(configs?.progressSettings);
 
@@ -104,6 +106,7 @@ export const AppContextProvider = (props: { children: React.ReactNode; initialPa
     let value = {
         configs,
         resources,
+        pages,
         components,
         columns,
         widgets,

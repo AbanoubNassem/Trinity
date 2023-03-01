@@ -1,9 +1,9 @@
 import React from 'react';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
-import BaseColumn from '@/types/Models/Columns/BaseColumn';
+import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 import { ColorPicker } from 'primereact/colorpicker';
 
-const ColorColumn = ({ columnValue }: ColumnProps<BaseColumn>) => {
+const ColorColumn = ({ columnValue }: ColumnProps<TrinityColumn>) => {
     return (
         <ColorPicker
             value={columnValue}

@@ -3,18 +3,15 @@ import React from 'react';
 import { classNames } from 'primereact/utils';
 import { Ripple } from 'primereact/ripple';
 import { Link } from '@inertiajs/react';
-import usePageProps from '@/hooks/trinity_page_props';
 import { CSSTransition as Transition } from 'react-transition-group';
 import { useConfigs } from '@/hooks/trinity_configs';
 
 const AppMenuItem = (props: { root?: any; index: number; parentKey?: any; item: any; className?: any }) => {
-    const pageProps = usePageProps();
     const configs = useConfigs();
 
     const item = props.item;
     const key = props.parentKey ? props.parentKey + '-' + props.index : String(props.index);
-    const isActive = (item: any) => (pageProps?.resource !== null ? pageProps?.resource?.pluralLabel.toLowerCase() === item.resource?.pluralLabel.toLowerCase() : pageProps.component === 'Home');
-
+    const isActive = (item: any) => item.to === window.location.pathname.split(configs.prefix)[1];
     const itemClick = (event: any) => {
         //avoid processing disabled items
         if (item.disabled) {
