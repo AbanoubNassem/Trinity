@@ -12,11 +12,9 @@ using InertiaCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Controllers;
 
@@ -26,25 +24,17 @@ public class TrinityController : Controller
 {
     private readonly TrinityConfigurations _configurations;
     private readonly TrinityManager _trinityManager;
-    private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public TrinityController(TrinityConfigurations configurations, TrinityManager trinityManager,
-        IWebHostEnvironment webHostEnvironment)
+    public TrinityController(TrinityConfigurations configurations, TrinityManager trinityManager)
     {
         _configurations = configurations;
         _trinityManager = trinityManager;
-        _webHostEnvironment = webHostEnvironment;
     }
 
     public IActionResult Index()
     {
-        var dashboard = (TrinityPage)_trinityManager.Pages["dashboard"];
-        dashboard.Request = Request;
-        dashboard.Response = Response;
-        dashboard.ServiceProvider = HttpContext.RequestServices;
-        dashboard.Logger = (ILogger)HttpContext.RequestServices.GetRequiredService(
-            typeof(ILogger<>).MakeGenericType(dashboard.GetType())
-        );
+        var page = HttpContext.RequestServices.GetRequiredService(_trinityManager.Pages["dashboard"].Key);
+        var dashboard = (TrinityPage)page;
 
         dashboard.Setup();
 
@@ -123,16 +113,14 @@ public class TrinityController : Controller
 
     public async Task<IActionResult> Handle(string name, string view)
     {
-        if (!_trinityManager.Resources.TryGetValue(name, out var resourceObject))
+        if (!_trinityManager.Resources.TryGetValue(name, out var resourceKv))
         {
             return NotFound(name);
         }
 
+        var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceKv.Key);
         //to serialize the public properties of TrinityResource class not ITrinityResource the interface.
         var resource = (resourceObject as TrinityResource)!;
-
-
-        InjectServices(name, resource);
 
         await resource.Setup();
 
@@ -175,11 +163,12 @@ public class TrinityController : Controller
     public async Task<IActionResult> UploadFile(IFormFile? file, [FromForm] string resourceName,
         [FromForm] string fieldName)
     {
-        if (!_trinityManager.Resources.TryGetValue(resourceName, out var resourceObject))
+        if (!_trinityManager.Resources.TryGetValue(resourceName, out var resourceKv))
         {
             return NotFound(resourceName);
         }
 
+        var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceKv.Key);
         var resource = (resourceObject as TrinityResource)!;
         var field = resource.Fields[fieldName];
 
@@ -190,29 +179,30 @@ public class TrinityController : Controller
 
         return Ok(new
         {
-            data = await uploadField.Upload(_webHostEnvironment, file),
+            data = await uploadField.Upload(file),
             notifications = TrinityNotifications.Flush(),
         });
     }
 
     [HttpPost]
-    public Task<IActionResult> DeleteFile([FromBody] DeleteFileRequest request)
+    public async Task<IActionResult> DeleteFile([FromBody] DeleteFileRequest request)
     {
-        if (!_trinityManager.Resources.TryGetValue(request.ResourceName, out var resourceObject))
+        if (!_trinityManager.Resources.TryGetValue(request.ResourceName, out var resourceKv))
         {
-            return Task.FromResult<IActionResult>(NotFound(request.ResourceName));
+            return await Task.FromResult<IActionResult>(NotFound(request.ResourceName));
         }
 
+        var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceKv.Key);
         var resource = (resourceObject as TrinityResource)!;
         var field = resource.Fields[request.FieldName];
 
-        if (field is not ICanUploadField) return Task.FromResult<IActionResult>(UnprocessableEntity());
+        if (field is not ICanUploadField) return await Task.FromResult<IActionResult>(UnprocessableEntity());
 
         dynamic? data = null;
 
         if (request.Reverting is true)
         {
-            var basePath = Path.Combine(_webHostEnvironment.WebRootPath, "trinity_temp");
+            var basePath = Path.Combine("wwwroot", "trinity_temp");
 
             var filesToDelete = Directory.EnumerateFiles(basePath)
                 .Where(file => Path.GetFileName(file).StartsWith(request.UniqueFileIdOrUrl))
@@ -221,51 +211,28 @@ public class TrinityController : Controller
             if (!filesToDelete.Any())
             {
                 TrinityNotifications.NotifyError("Nothing to delete/revert!");
-                return Task.FromResult<IActionResult>(BadRequest("Nothing to delete/revert!"));
+                return await Task.FromResult<IActionResult>(BadRequest("Nothing to delete/revert!"));
             }
 
             Parallel.ForEach(filesToDelete, System.IO.File.Delete);
         }
 
 
-        return Task.FromResult<IActionResult>(Ok(new
+        return await Task.FromResult<IActionResult>(Ok(new
         {
             data,
             notifications = TrinityNotifications.Flush(),
         }));
     }
 
-    private void InjectServices(string resourceName, TrinityResource resource)
-    {
-        //TODO:: maybe use public setter instead of relaying on reflection!?
-        _trinityManager.ResourcesTypes[resourceName].Item2["ServiceProvider"]
-            .SetValue(resource, HttpContext.RequestServices);
-
-
-        _trinityManager.ResourcesTypes[resourceName].Item2["Logger"]
-            .SetValue(resource,
-                HttpContext.RequestServices.GetRequiredService(
-                    typeof(ILogger<>).MakeGenericType(resource.GetType())
-                )
-            );
-
-        _trinityManager.ResourcesTypes[resourceName].Item2["ModelState"].SetValue(resource, ModelState);
-        _trinityManager.ResourcesTypes[resourceName].Item2["Request"].SetValue(resource, Request);
-        _trinityManager.ResourcesTypes[resourceName].Item2["Response"].SetValue(resource, Response);
-    }
 
     public IActionResult RenderPage(string pageName)
     {
-        if (!_trinityManager.Pages.TryGetValue(pageName, out var pageObj)) return NotFound();
+        if (!_trinityManager.Pages.TryGetValue(pageName, out var pageKv)) return NotFound();
 
+        var pageObj = HttpContext.RequestServices.GetRequiredService(pageKv.Key);
         var page = (TrinityPage)pageObj;
 
-        page.Request = Request;
-        page.Response = Response;
-        page.ServiceProvider = HttpContext.RequestServices;
-        page.Logger = (ILogger)HttpContext.RequestServices.GetRequiredService(
-            typeof(ILogger<>).MakeGenericType(page.GetType())
-        );
 
         page.Setup();
 
@@ -282,8 +249,8 @@ public class TrinityController : Controller
         if (Request.IsInertiaRequest()) return response;
 
         response.Configs = _configurations;
-        response.Resources = _trinityManager.Resources;
-        response.Pages = _trinityManager.Pages;
+        response.Resources = _trinityManager.Resources.Values.Select(x => x.Value);
+        response.Pages = _trinityManager.Pages.ToDictionary(x => x.Key, v => v.Value.Value);
 
         return response;
     }

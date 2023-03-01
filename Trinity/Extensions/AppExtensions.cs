@@ -55,7 +55,8 @@ public static class AppExtensions
 
         services.AddSingleton(configs);
 
-        services.AddSingleton(new TrinityManager(configs));
+        var trinityManager = new TrinityManager(configs, services);
+        services.AddSingleton(trinityManager);
 
         services.AddAuthorization();
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -80,6 +81,9 @@ public static class AppExtensions
                 configs.MiniProfilerConfigures?.Invoke(conf);
             });
 
+
+        trinityManager.LoadResources();
+        trinityManager.LoadPages();
         return services;
     }
 
@@ -153,8 +157,6 @@ public static class AppExtensions
 
 
         var configs = app.Services.GetService<TrinityConfigurations>()!;
-        var trinityManager = app.Services.GetService<TrinityManager>()!;
-
 
         var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
 
@@ -173,8 +175,6 @@ public static class AppExtensions
             return next(context);
         });
 
-        trinityManager.LoadResources();
-        trinityManager.LoadPages();
 
         app.UseEndpoints(endpoints =>
         {
@@ -212,7 +212,7 @@ public static class AppExtensions
                 pattern: configs.Prefix + "/pages/{pageName}/",
                 defaults: new { controller = "Trinity", action = "RenderPage" }
             );
-            
+
             endpoints.MapControllerRoute(
                 name: "trinity-resources",
                 pattern: configs.Prefix + "/{name}/{view=index}/{id?}",

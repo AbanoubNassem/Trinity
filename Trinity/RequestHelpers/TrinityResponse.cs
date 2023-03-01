@@ -10,7 +10,7 @@ public class TrinityResponse
     public TrinityConfigurations? Configs { get; set; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public Dictionary<string, object>? Resources { get; set; }
+    public IEnumerable<object>? Resources { get; set; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Dictionary<string, object>? Pages { get; set; }

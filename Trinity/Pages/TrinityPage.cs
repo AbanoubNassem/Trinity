@@ -2,17 +2,20 @@ using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Configurations;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Pages;
 
 public abstract class TrinityPage
 {
-    [JsonIgnore] public TrinityConfigurations Configurations { get; init; } = null!;
-    [JsonIgnore] public IServiceProvider ServiceProvider { get; set; } = null!;
-    [JsonIgnore] public HttpRequest Request { get; set; } = null!;
-    [JsonIgnore] public HttpResponse Response { get; set; } = null!;
-    [JsonIgnore] public ILogger Logger { get; set; } = null!;
+    protected TrinityConfigurations Configurations { get; init; } = null!;
+    protected IServiceProvider ServiceProvider { get; init; } = null!;
+    protected HttpRequest Request { get; init; } = null!;
+    protected HttpResponse Response { get; init; } = null!;
+    protected ILogger Logger { get; init; } = null!;
+
+    protected ModelStateDictionary ModelState { get; init; } = null!;
 
     public abstract string PageName { get; }
 
@@ -23,29 +26,12 @@ public abstract class TrinityPage
     public virtual string? Icon { get; set; } = "pi pi-file";
 
     private readonly List<object> _schema = new();
-    private DateTime _lastWidgetsCacheTime = DateTime.Now;
 
     public virtual void Setup()
     {
     }
 
-    public List<object> Schema
-    {
-        get
-        {
-            if (_schema.Any() ||
-                (Configurations.CacheWidgetsFor != TimeSpan.Zero &&
-                 _lastWidgetsCacheTime.Add(Configurations.CacheWidgetsFor) < DateTime.Now)
-               )
-                return _schema;
-
-            _schema.Clear();
-            _schema.AddRange(GetSchema());
-            _lastWidgetsCacheTime = DateTime.Now;
-
-            return _schema;
-        }
-    }
+    public List<object> Schema => new(GetSchema());
 
     protected virtual List<ITrinityWidget> GetSchema()
     {

@@ -1,7 +1,6 @@
 using System.Text.RegularExpressions;
 using AbanoubNassem.Trinity.Components.TrinityField;
 using AbanoubNassem.Trinity.Utilities;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace AbanoubNassem.Trinity.Fields;
@@ -43,7 +42,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
     {
     }
 
-    public override async Task<string?> Upload(IWebHostEnvironment webHostEnvironment, IFormFile file)
+    public override async Task<string?> Upload( IFormFile file)
     {
         if (MaximumFileSize != null && file.Length > MaximumFileSize)
         {
@@ -90,10 +89,10 @@ public class FileUploadField : CanUploadField<FileUploadField>
             $"{file.FileName} was uploaded successfully."
         );
 
-        MoveUploadedFromTempToDirectory = Path.Combine(webHostEnvironment.WebRootPath, GetUploadDirectory());
+        var moveUploadedFromTempToDirectory = Path.Combine("wwwroot", GetUploadDirectory());
 
-        if (!Directory.Exists(MoveUploadedFromTempToDirectory))
-            Directory.CreateDirectory(MoveUploadedFromTempToDirectory);
+        if (!Directory.Exists(moveUploadedFromTempToDirectory))
+            Directory.CreateDirectory(moveUploadedFromTempToDirectory);
 
         return randId;
     }
@@ -144,7 +143,8 @@ public class FileUploadField : CanUploadField<FileUploadField>
                 if (tempFile == null) continue;
 
                 var fileName = Path.GetFileName(tempFile);
-                var newPath = Path.Combine(MoveUploadedFromTempToDirectory, fileName);
+                var moveUploadedFromTempToDirectory = Path.Combine("wwwroot", GetUploadDirectory());
+                var newPath = Path.Combine(moveUploadedFromTempToDirectory, fileName);
                 File.Move(tempFile, newPath);
 
                 files.Add(Path.Combine(GetUploadDirectory(), fileName));

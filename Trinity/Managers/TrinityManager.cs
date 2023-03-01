@@ -3,6 +3,11 @@ using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Pages;
 using AbanoubNassem.Trinity.Resources;
 using Humanizer;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 using StackExchange.Profiling;
 
 namespace AbanoubNassem.Trinity.Managers;
@@ -11,16 +16,17 @@ public class TrinityManager
 {
     private const BindingFlags Flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
     private readonly TrinityConfigurations _configurations;
-    private readonly Dictionary<string, object> _resources = new();
-    private readonly Dictionary<string, Tuple<Type, Dictionary<string, PropertyInfo>>> _resourcesTypes = new();
 
-    public TrinityManager(TrinityConfigurations configurations)
+    private readonly IServiceCollection _serviceProvider;
+
+    public Dictionary<string, KeyValuePair<Type, object>> Resources { get; } = new();
+    public Dictionary<string, KeyValuePair<Type, object>> Pages { get; } = new();
+
+    public TrinityManager(TrinityConfigurations configurations, IServiceCollection serviceProvider)
     {
         _configurations = configurations;
+        _serviceProvider = serviceProvider;
     }
-
-    private readonly Dictionary<string, object> _pages = new();
-    public Dictionary<string, object> Pages => _pages;
 
     public void LoadPages()
     {
@@ -28,19 +34,50 @@ public class TrinityManager
         var types = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
             .Where(p => trinityPageType.IsAssignableFrom(p) && !p.IsAbstract &&
-                        p.Namespace != "AbanoubNassem.Trinity.Pages");
+                        p.Namespace != "AbanoubNassem.Trinity.Pages")
+            .ToList();
 
+        if (!types.Any(x => x.Name is "Dashboard" or "DashboardPage"))
+        {
+            types.Add(typeof(TrinityDashboardPage));
+        }
 
         foreach (var pageType in types)
         {
+            _serviceProvider.TryAddScoped(pageType, provider =>
+            {
+                var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
+                var httpContext = httpContextAccessor.HttpContext!;
+
+                var page = (TrinityPage)Activator.CreateInstance(pageType)!;
+
+                pageType.GetProperty("Configurations", Flags)!.SetValue(page, _configurations);
+                pageType.GetProperty("ServiceProvider", Flags)!.SetValue(page, httpContext.RequestServices);
+                pageType.GetProperty("Request", Flags)!.SetValue(page, httpContext.Request);
+                pageType.GetProperty("Response", Flags)!.SetValue(page, httpContext.Response);
+                pageType.GetProperty("Logger", Flags)!
+                    .SetValue(page, httpContext.RequestServices
+                        .GetRequiredService(typeof(ILogger<>)
+                            .MakeGenericType(pageType))
+                    );
+
+                var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
+                    .ActionContext!.ModelState;
+
+                pageType.GetProperty("ModelState", Flags)!.SetValue(page, modelState);
+
+                return page;
+            });
+
             var page = (TrinityPage)Activator.CreateInstance(pageType)!;
-
-            pageType.GetProperty("Configurations")?.SetValue(page, _configurations);
-
-            Pages.TryAdd(page.PageName.ToLower(), page);
+            Pages.TryAdd(page.PageName.ToLower(), new KeyValuePair<Type, object>(pageType, new
+            {
+                page.PageName,
+                page.Label,
+                page.To,
+                page.Icon
+            }));
         }
-
-        Pages.TryAdd("dashboard", new DashboardPage { Configurations = _configurations });
     }
 
     public void LoadResources()
@@ -57,75 +94,99 @@ public class TrinityManager
             var label = name.Titleize();
             var plural = label.Pluralize();
 
-            var properties = new Dictionary<string, PropertyInfo>();
-
-            var resource = (TrinityResource)Activator.CreateInstance(resourceType)!;
-
-
-            trinityResourceType.GetProperty("Name", Flags)!
-                .SetValue(resource, plural.ToLower());
-
-            if (resource.Label == null)
+            _serviceProvider.TryAddScoped(resourceType, provider =>
             {
-                trinityResourceType.GetField("_label", Flags)!
-                    .SetValue(resource, plural);
-            }
+                var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
+                var httpContext = httpContextAccessor.HttpContext!;
 
-            if (resource.PluralLabel == null)
-            {
-                trinityResourceType.GetField("_pluralLabel", Flags)!
-                    .SetValue(resource, plural);
-            }
+                var resource = CreateResource(trinityResourceType, resourceType, plural);
 
-            if (resource.Table == null)
-            {
-                trinityResourceType.GetField("_table", Flags)!
-                    .SetValue(resource, plural.ToLower());
-            }
 
-            resourceType.GetProperty("Configurations", Flags)!
-                .SetValue(resource, _configurations);
+                resourceType.GetProperty("ServiceProvider", Flags)!.SetValue(resource, httpContext.RequestServices);
 
-            properties.Add("ServiceProvider",
-                resourceType.GetProperty("ServiceProvider", Flags)!
+
+                resourceType.GetProperty("Logger", Flags)!.SetValue(resource,
+                    httpContext.RequestServices.GetRequiredService(typeof(ILogger<>)
+                        .MakeGenericType(resourceType)
+                    ));
+
+                var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
+                    .ActionContext!.ModelState;
+
+                resourceType.GetProperty("ModelState", Flags)!.SetValue(resource, modelState);
+
+
+                resourceType.GetProperty("Request", Flags)!.SetValue(resource, httpContext.Request);
+
+                resourceType.GetProperty("Response", Flags)!.SetValue(resource, httpContext.Response);
+
+                if (_configurations.IsDevelopment)
+                {
+                    resourceType.GetProperty("ConnectionFactory", Flags)!
+                        .SetValue(resource,
+                            () => new StackExchange.Profiling.Data.ProfiledDbConnection(
+                                _configurations.ConnectionFactory(),
+                                MiniProfiler.Current));
+                }
+                else
+                {
+                    resourceType.GetProperty("ConnectionFactory", Flags)!
+                        .SetValue(resource, _configurations.ConnectionFactory);
+                }
+
+                return resource;
+            });
+
+
+            var resource = CreateResource(trinityResourceType, resourceType, plural);
+
+            Resources.Add(plural.ToLower(),
+                new KeyValuePair<Type, object>(resourceType,
+                    new
+                    {
+                        resource.Icon,
+                        resource.Label,
+                        resource.Name,
+                        resource.PluralLabel,
+                        resource.PrimaryKeyColumn,
+                        resource.ShowGridlines,
+                        resource.StripedRows,
+                        resource.Table,
+                        resource.TitleColumn
+                    }
+                )
             );
-
-            properties.Add("Logger",
-                resourceType.GetProperty("Logger", Flags)!
-            );
-
-            properties.Add("ModelState",
-                resourceType.GetProperty("ModelState", Flags)!
-            );
-
-            properties.Add("Request",
-                resourceType.GetProperty("Request", Flags)!
-            );
-
-            properties.Add("Response",
-                resourceType.GetProperty("Response", Flags)!
-            );
-
-            if (_configurations.IsDevelopment)
-            {
-                resourceType.GetProperty("ConnectionFactory", Flags)!
-                    .SetValue(resource,
-                        () => new StackExchange.Profiling.Data.ProfiledDbConnection(_configurations.ConnectionFactory(),
-                            MiniProfiler.Current));
-            }
-            else
-            {
-                resourceType.GetProperty("ConnectionFactory", Flags)!
-                    .SetValue(resource, _configurations.ConnectionFactory);
-            }
-
-            _resources.TryAdd(plural.ToLower(), resource);
-            _resourcesTypes.TryAdd(plural.ToLower(),
-                new Tuple<Type, Dictionary<string, PropertyInfo>>(resourceType, properties));
         }
     }
 
-    public Dictionary<string, object> Resources => _resources;
+    private TrinityResource CreateResource(IReflect trinityResourceType, Type resourceType, string plural)
+    {
+        var resource = (TrinityResource)Activator.CreateInstance(resourceType)!;
 
-    public Dictionary<string, Tuple<Type, Dictionary<string, PropertyInfo>>> ResourcesTypes => _resourcesTypes;
+        trinityResourceType.GetProperty("Name", Flags)!
+            .SetValue(resource, plural.ToLower());
+
+        if (resource.Label == null)
+        {
+            trinityResourceType.GetField("_label", Flags)!
+                .SetValue(resource, plural);
+        }
+
+        if (resource.PluralLabel == null)
+        {
+            trinityResourceType.GetField("_pluralLabel", Flags)!
+                .SetValue(resource, plural);
+        }
+
+        if (resource.Table == null)
+        {
+            trinityResourceType.GetField("_table", Flags)!
+                .SetValue(resource, plural.ToLower());
+        }
+
+        resourceType.GetProperty("Configurations", Flags)!
+            .SetValue(resource, _configurations);
+
+        return resource;
+    }
 }

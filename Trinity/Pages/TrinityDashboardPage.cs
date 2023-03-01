@@ -1,10 +1,9 @@
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Widgets;
-using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Pages;
 
-public class DashboardPage : TrinityPage
+public class TrinityDashboardPage : TrinityPage
 {
     public override string PageName => "Dashboard";
     public override string Label => "Dashboard";
@@ -13,7 +12,7 @@ public class DashboardPage : TrinityPage
 
     protected override List<ITrinityWidget> GetSchema()
     {
-        Logger.LogInformation("this is a debug message!");
+        // Logger.LogInformation("this is a debug message!");
         
         return new List<ITrinityWidget>()
         {

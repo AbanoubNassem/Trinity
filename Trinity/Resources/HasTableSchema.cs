@@ -13,21 +13,9 @@ namespace AbanoubNassem.Trinity.Resources;
 
 public abstract partial class TrinityResource
 {
-    private readonly List<object> _columns = new();
-
     public abstract string TitleColumn { get; }
 
-    public List<object> Columns
-    {
-        get
-        {
-            if (_columns.Any()) return _columns;
-
-            _columns.AddRange(GetTableSchema());
-
-            return _columns;
-        }
-    }
+    public List<object> Columns => new(GetTableSchema());
 
     protected virtual List<ITrinityColumn> GetTableSchema()
     {
@@ -126,7 +114,8 @@ public abstract partial class TrinityResource
             {
                 foreach (var sort in sorts)
                 {
-                    var column = (ITrinityColumn?)Columns.SingleOrDefault(x => ((ITrinityColumn)x).ColumnName == sort.Field);
+                    var column =
+                        (ITrinityColumn?)Columns.SingleOrDefault(x => ((ITrinityColumn)x).ColumnName == sort.Field);
                     if (column is null or IHasRelationship) continue;
 
                     var direction = sort.Order == 1 ? "ASC" : "DESC";
@@ -147,7 +136,8 @@ public abstract partial class TrinityResource
                 {
                     if (baseColumn is IHasRelationship { HasRelationshipByDefault: true } relationshipColumn)
                     {
-                        result = await relationshipColumn.SelectRelationshipQuery((FluentQueryBuilder)conn.FluentQueryBuilder(),
+                        result = await relationshipColumn.SelectRelationshipQuery(
+                            (FluentQueryBuilder)conn.FluentQueryBuilder(),
                             result,
                             sorts?.SingleOrDefault(x => x.Field == relationshipColumn.ColumnName)
                         );

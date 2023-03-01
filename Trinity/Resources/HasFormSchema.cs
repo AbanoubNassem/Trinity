@@ -14,9 +14,6 @@ public abstract partial class TrinityResource
 {
     private readonly Dictionary<string, object> _fields = new();
 
-    private readonly List<object> _schema = new();
-
-
     public virtual async Task Setup()
     {
         await Task.CompletedTask;
@@ -24,16 +21,7 @@ public abstract partial class TrinityResource
 
     protected abstract List<IFormComponent> GetFormSchema();
 
-    public List<object> Schema
-    {
-        get
-        {
-            if (!_schema.Any())
-                _schema.AddRange(GetFormSchema());
-
-            return _schema;
-        }
-    }
+    public List<object> Schema => new(GetFormSchema());
 
     [JsonIgnore]
     public Dictionary<string, object> Fields

@@ -1,11 +1,10 @@
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 namespace AbanoubNassem.Trinity.Components.TrinityField;
 
 public interface ICanUploadField
 {
-    public Task<string?> Upload(IWebHostEnvironment webHostEnvironment, IFormFile files);
+    public Task<string?> Upload(IFormFile files);
 }
 
 public abstract class CanUploadField<T> : TrinityField<T, string>, ICanUploadField where T : CanUploadField<T>
@@ -14,11 +13,10 @@ public abstract class CanUploadField<T> : TrinityField<T, string>, ICanUploadFie
     {
     }
 
-    public abstract Task<string?> Upload(IWebHostEnvironment webHostEnvironment, IFormFile files);
+    public abstract Task<string?> Upload(IFormFile files);
 
     protected string UploadTempDirectory { get; set; } = Path.Combine("wwwroot", "trinity_temp");
-
-    protected string MoveUploadedFromTempToDirectory { get; set; } = null!;
+    
 
     protected string UploadDirectory = "trinity_public";
 
