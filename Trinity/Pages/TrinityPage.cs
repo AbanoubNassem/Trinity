@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Configurations;
 using Microsoft.AspNetCore.Http;
@@ -14,21 +13,17 @@ public abstract class TrinityPage
     protected HttpRequest Request { get; init; } = null!;
     protected HttpResponse Response { get; init; } = null!;
     protected ILogger Logger { get; init; } = null!;
-
     protected ModelStateDictionary ModelState { get; init; } = null!;
 
     public abstract string PageName { get; }
 
-    public virtual string? Label { get; set; }
+    public virtual string PageView { get; protected init; } = "Default";
+    public virtual string? Label { get; protected init; }
+    public virtual string? Icon { get; protected init; } = "pi pi-file";
 
-    public virtual string? To { get; set; }
-
-    public virtual string? Icon { get; set; } = "pi pi-file";
-
-    private readonly List<object> _schema = new();
-
-    public virtual void Setup()
+    public virtual Task Setup()
     {
+        return Task.CompletedTask;
     }
 
     public List<object> Schema => new(GetSchema());

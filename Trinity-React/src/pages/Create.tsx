@@ -1,21 +1,20 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { trinityLink } from '@/utilities/trinity_link';
-import { AppContext } from '@/contexts/AppContext';
 
 import { useTrinityFields } from '@/hooks/trinity_resource_fields';
 import last from 'lodash/last';
 import { useForm, router } from '@inertiajs/react';
+import trinityApp from '@/TrinityApp';
 
 const Create = () => {
     const configs = useConfigs();
     const { resource, errors, data: inserted } = usePageProps();
     const fields = useTrinityFields();
-    const { components } = useContext(AppContext);
     const [createAddAnother, setCreateAddAnother] = useState(false);
 
     let data = useMemo<{ [k: string]: any }>(() => {
@@ -84,8 +83,8 @@ const Create = () => {
 
                 <form className="p-fluid formgrid grid col-12">
                     {resource?.schema?.map((component, index) =>
-                        components?.has(component.componentName) ? (
-                            components?.get(component.componentName)!({
+                        trinityApp.registeredComponents?.has(component.componentName) ? (
+                            trinityApp.registeredComponents?.get(component.componentName)!({
                                 key: `form_${index}_${component.componentName}`,
                                 configs: configs,
                                 resource: resource,

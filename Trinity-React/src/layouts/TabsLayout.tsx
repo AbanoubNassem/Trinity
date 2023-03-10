@@ -1,14 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { classNames } from 'primereact/utils';
-import { AppContext } from '@/contexts/AppContext';
 import { TabView, TabPanel } from 'primereact/tabview';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
 import TabsLayout, { TabLayout } from '@/types/Models/Layouts/TabsLayout';
 import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
+import trinityApp from '@/TrinityApp';
 
 const TabsLayout = ({ configs, resource, component, record, formData, setFieldValue, errors }: LayoutProps<TabsLayout>) => {
-    const { components } = useContext(AppContext);
-
     return (
         <TabView
             className={`col-12 md:col-${component.columnSpan}`}
@@ -27,8 +25,8 @@ const TabsLayout = ({ configs, resource, component, record, formData, setFieldVa
                 >
                     <div className={classNames(['p-fluid grid px-0 mx-0 col-12', tab.columnSpan > 0 && tab.columnSpan < 12 ? `md:col-${tab.columnSpan}` : ''])}>
                         {(tab as TrinityLayout)?.schema.map((innerComponent, index) =>
-                            components?.has(innerComponent.componentName) ? (
-                                components?.get(innerComponent.componentName)!({
+                            trinityApp.registeredComponents?.has(innerComponent.componentName) ? (
+                                trinityApp.registeredComponents?.get(innerComponent.componentName)!({
                                     key: `fieldset_${index}_${innerComponent.componentName}`,
                                     configs: configs,
                                     resource: resource,

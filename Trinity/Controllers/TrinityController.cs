@@ -39,10 +39,10 @@ public class TrinityController : Controller
         dashboard.Setup();
 
         var response = CreateResponse();
+        
+        response.Page = page;
 
-        response.Data = dashboard.Schema;
-
-        return Inertia.Render("Home", response);
+        return Inertia.Render("Default", response);
     }
 
     [AllowAnonymous]
@@ -111,7 +111,7 @@ public class TrinityController : Controller
             : Redirect($"/{_configurations.Prefix}/login?returnUrl={Request.Headers.Referer}");
     }
 
-    public async Task<IActionResult> Handle(string name, string view)
+    public async Task<IActionResult> HandleResource(string name, string view)
     {
         if (!_trinityManager.Resources.TryGetValue(name, out var resourceKv))
         {
@@ -226,7 +226,7 @@ public class TrinityController : Controller
     }
 
 
-    public IActionResult RenderPage(string pageName)
+    public async Task<IActionResult> RenderPage(string pageName)
     {
         if (!_trinityManager.Pages.TryGetValue(pageName, out var pageKv)) return NotFound();
 
@@ -234,12 +234,12 @@ public class TrinityController : Controller
         var page = (TrinityPage)pageObj;
 
 
-        page.Setup();
+        await page.Setup();
 
         var response = CreateResponse();
         response.Page = pageObj;
 
-        return Inertia.Render(pageName, response);
+        return Inertia.Render(page.PageView, response);
     }
 
     private TrinityResponse CreateResponse()

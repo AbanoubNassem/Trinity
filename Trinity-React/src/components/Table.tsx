@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
@@ -13,13 +13,12 @@ import { useUrlParams } from '@/hooks/trinity_url_params';
 import { FilterMatchMode } from 'primereact/api';
 import { MultiSelect } from 'primereact/multiselect';
 import { trinityLink } from '@/utilities/trinity_link';
-import { AppContext } from '@/contexts/AppContext';
 import BaseColumnComponent from '@/columns/BaseColumnComponent';
 import IPaginator from '@/types/Models/Paginator';
 import { Dialog } from 'primereact/dialog';
+import trinityApp from '@/TrinityApp';
 
 const Table = () => {
-    const { columns: columnsComponents, components } = useContext(AppContext);
     const configs = useConfigs();
     const { resource, data: paginator } = usePageProps<IPaginator<any>>();
     const resourceColumns = resource?.columns ?? [];
@@ -339,8 +338,8 @@ const Table = () => {
                                 columnValue={data[column.columnName]}
                                 record={data}
                             >
-                                {columnsComponents?.has(column.componentName) ? (
-                                    columnsComponents?.get(column.componentName)!({
+                                {trinityApp.registeredColumns?.has(column.componentName) ? (
+                                    trinityApp.registeredColumns?.get(column.componentName)!({
                                         column,
                                         columnValue: data[column.columnName] ?? data['defaultValue'],
                                         record: data,
@@ -377,8 +376,8 @@ const Table = () => {
                                     ? (options) => {
                                           return (
                                               <div>
-                                                  {components?.has(column.customFilter!.componentName) ? (
-                                                      components?.get(column.customFilter!.componentName)!({
+                                                  {trinityApp.registeredComponents?.has(column.customFilter!.componentName) ? (
+                                                      trinityApp.registeredComponents?.get(column.customFilter!.componentName)!({
                                                           key: `${column.columnName}_filter`,
                                                           component: column.customFilter!,
                                                           setFieldValue: (name: string, value: any) => {

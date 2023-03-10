@@ -70,12 +70,12 @@ public class TrinityManager
             });
 
             var page = (TrinityPage)Activator.CreateInstance(pageType)!;
+            
             Pages.TryAdd(page.PageName.ToLower(), new KeyValuePair<Type, object>(pageType, new
             {
                 page.PageName,
                 page.Label,
-                page.To,
-                page.Icon
+                page.Icon,
             }));
         }
     }
@@ -139,7 +139,7 @@ public class TrinityManager
 
 
             var resource = CreateResource(trinityResourceType, resourceType, plural);
-
+       
             Resources.Add(plural.ToLower(),
                 new KeyValuePair<Type, object>(resourceType,
                     new

@@ -29,10 +29,10 @@ const Error = ({ statusCode, reasonPhrase }: { statusCode: number; reasonPhrase:
                             style={{ borderRadius: '53px' }}
                         >
                             <span className="text-red-500 font-bold text-3xl">{statusCode}</span>
-                            <h1 className="text-900 font-bold text-5xl mb-2">Whoops, something went wrong on our servers.</h1>
+                            <h1 className="text-900 font-bold text-5xl mb-2">Whoops, something went wrong!</h1>
                             <div className="text-600 mb-5">{reasonPhrase}</div>
                             <Link href={`/${configs.prefix}`}>
-                                <a className="w-full flex align-items-center py-5 border-300 border-bottom-1">
+                                <div className="w-full flex align-items-center py-5 border-300 border-bottom-1">
                                     <span
                                         className="flex justify-content-center align-items-center bg-cyan-400 border-round"
                                         style={{ height: '3.5rem', width: '3.5rem' }}
@@ -42,7 +42,7 @@ const Error = ({ statusCode, reasonPhrase }: { statusCode: number; reasonPhrase:
                                     <span className="ml-4 flex flex-column">
                                         <span className="text-900 lg:text-xl font-medium mb-1">Home</span>
                                     </span>
-                                </a>
+                                </div>
                             </Link>
                         </div>
                     </div>

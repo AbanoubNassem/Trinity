@@ -1,10 +1,6 @@
-
-import { useContext } from 'react';
-import { AppContext } from '@/contexts/AppContext';
-import Configs from "@/types/Models/Configs";
+import Configs from '@/types/Models/Configs';
+import trinityApp from '@/TrinityApp';
 
 export function useConfigs(): Configs {
-    const { configs } = useContext(AppContext);
-
-    return configs!;
+    return trinityApp.configs;
 }

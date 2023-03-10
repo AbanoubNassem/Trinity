@@ -4,32 +4,42 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import '@/assets/styles/trinity.scss';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import ReactDOM from 'react-dom/client';
 import { LayoutProvider } from '@/contexts/LayoutContext';
-import { AppContextProvider } from './contexts/AppContext';
 import MainLayout from '@/MainLayout';
 import axios from 'axios';
 import { createInertiaApp } from '@inertiajs/react';
+import trinityApp from '@/TrinityApp';
+import Error from '@/pages/Error';
 
 createInertiaApp({
     progress: false,
     resolve: async (name) => {
-        const page = (await import(`./pages/${name[0].toUpperCase() + name.slice(1)}.tsx`)).default;
+        try {
+            let page = trinityApp.registeredPages.has(name) ? trinityApp.registeredPages.get(name) : (await import(`./pages/${name[0].toUpperCase() + name.slice(1)}.tsx`)).default;
 
-        if (page.layout === undefined) {
-            page.layout = (page: any) => <MainLayout children={page} />;
+            if (page.layout === undefined) {
+                page.layout = (page: any) => <MainLayout children={page} />;
+            }
+
+            return page;
+        } catch {
+            return () => (
+                <Error
+                    statusCode={404}
+                    reasonPhrase={`The ${name} page is not found!`}
+                />
+            );
         }
-
-        return page;
     },
     setup({ el, App, props }) {
+        trinityApp.init(props.initialPage.props);
+
         ReactDOM.createRoot(el).render(
-            <AppContextProvider initialPage={props.initialPage}>
-                <LayoutProvider>
-                    <App {...props} />
-                </LayoutProvider>
-            </AppContextProvider>
+            <LayoutProvider>
+                <App {...props} />
+            </LayoutProvider>
         );
     }
 }).then(() => {
@@ -42,4 +52,12 @@ createInertiaApp({
         }
         return response;
     });
+
+    window.dispatchEvent(
+        new CustomEvent('trinity_ready', {
+            detail: {
+                trinityApp
+            }
+        })
+    );
 });

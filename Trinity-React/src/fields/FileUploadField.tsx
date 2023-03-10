@@ -4,7 +4,6 @@ import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import FieldProps from '@/types/Props/Fields/FieldProps';
 import FileUploadField from '@/types/Models/Fields/FileUploadField';
 import { classNames } from 'primereact/utils';
-import { AppContext } from '@/contexts/AppContext';
 import { FilePond, registerPlugin } from 'react-filepond';
 
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
@@ -22,6 +21,7 @@ import FilePondPluginMediaPreview from 'filepond-plugin-media-preview';
 import 'filepond/dist/filepond.min.css';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import 'filepond-plugin-media-preview/dist/filepond-plugin-media-preview.css';
+import trinityApp from '@/TrinityApp';
 
 registerPlugin(
     FilePondPluginImageExifOrientation,
@@ -35,7 +35,6 @@ registerPlugin(
     FilePondPluginMediaPreview
 );
 const FileUploadField = ({ configs, resource, component, formData, record, setFieldValue, errors }: FieldProps<FileUploadField>) => {
-    const { toast } = useContext(AppContext);
     const pond = useRef<FilePond>(null);
 
     const getFiles = (): Array<string> => formData[component.columnName]?.split(',')?.filter((e: string) => e !== '') ?? [];
@@ -173,7 +172,8 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
                                 } else {
                                     error(data['notifications']);
                                 }
-                                toast?.current?.show(data['notifications'] as any);
+                                // trinityApp. toast?.current?.show(data['notifications'] as any);
+                                trinityApp.toast?.show(data['notifications'] as any);
                             })
                             .catch((er) => error(er));
 

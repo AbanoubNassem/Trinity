@@ -10,14 +10,14 @@ import AppSidebar from '@/components/AppSidebar';
 import { router } from '@inertiajs/react';
 import AppFooter from '@/components/AppFooter';
 import usePageProps from '@/hooks/trinity_page_props';
-import { AppContext } from '@/contexts/AppContext';
 import { ScrollTop } from 'primereact/scrolltop';
+import { Toast } from 'primereact/toast';
+import trinityApp from '@/TrinityApp';
 
 const MainLayout = (props: any) => {
     const { layoutConfig, layoutState, setLayoutState } = useContext(LayoutContext);
     const topbarRef = useRef<any>(null);
     const sidebarRef = useRef<any>(null);
-    const { toast } = useContext(AppContext);
     const { notifications } = usePageProps();
 
     const [bindMenuOutsideClickListener, unbindMenuOutsideClickListener] = useEventListener({
@@ -117,10 +117,15 @@ const MainLayout = (props: any) => {
         'p-ripple-disabled': !layoutConfig.ripple
     });
 
+    const toast = useRef<Toast>(null);
+
+    trinityApp.toast = toast.current!;
+
     return (
         <>
             <Head />
             <ScrollTop />
+            <Toast ref={toast} />
             <div className={containerClass}>
                 <AppTopbar ref={topbarRef} />
                 <div

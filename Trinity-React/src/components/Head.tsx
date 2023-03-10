@@ -1,17 +1,15 @@
-import React, { useContext } from 'react';
-import { Head as InertiaHead } from '@inertiajs/react'
-import { AppContext } from '@/contexts/AppContext';
+import React from 'react';
+import { Head as InertiaHead } from '@inertiajs/react';
+import trinityApp from '@/TrinityApp';
 
 export const Head = (props: { title?: string; children?: React.ReactNode }) => {
-    const { configs } = useContext(AppContext);
-
     return (
         // @ts-ignore
-        <InertiaHead title={props.title ? `${props.title} - ${configs?.title}` : configs?.title}>
+        <InertiaHead title={props.title ? `${props.title} - ${trinityApp.configs?.title}` : trinityApp.configs?.title}>
             <link
                 rel="icon"
                 type="image/x-icon"
-                href={configs?.favIcon ?? '/trinity/dist/favicon.ico'}
+                href={trinityApp.configs?.favIcon ?? '/trinity/dist/favicon.ico'}
             />
             {props.children}
         </InertiaHead>

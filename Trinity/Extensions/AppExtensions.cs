@@ -216,7 +216,7 @@ public static class AppExtensions
             endpoints.MapControllerRoute(
                 name: "trinity-resources",
                 pattern: configs.Prefix + "/{name}/{view=index}/{id?}",
-                defaults: new { controller = "Trinity", action = "Handle" }
+                defaults: new { controller = "Trinity", action = "HandleResource" }
             );
 
             // endpoints.MapControllerRoute(

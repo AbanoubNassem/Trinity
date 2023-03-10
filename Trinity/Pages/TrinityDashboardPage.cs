@@ -7,7 +7,6 @@ public class TrinityDashboardPage : TrinityPage
 {
     public override string PageName => "Dashboard";
     public override string Label => "Dashboard";
-    public override string To => "/";
     public override string Icon => "pi pi-fw pi-home";
 
     protected override List<ITrinityWidget> GetSchema()

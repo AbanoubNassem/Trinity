@@ -1,14 +1,11 @@
-import React, { useContext } from 'react';
-import { LayoutContext } from '@/contexts/LayoutContext';
+import React from 'react';
 import AppMenuItem from '@/components/AppMenuItem';
-import { AppContext } from '@/contexts/AppContext';
+import trinityApp from '@/TrinityApp';
 
 const AppSidebar = () => {
-    const { resources, pages } = useContext(AppContext);
-    const { layoutConfig } = useContext(LayoutContext);
     const model: Array<any> = [];
 
-    const dashboard = pages!['dashboard'];
+    const dashboard = trinityApp.pages['dashboard'];
 
     model.push({
         label: 'Dashboard',
@@ -18,7 +15,7 @@ const AppSidebar = () => {
                 label: dashboard.label,
                 visible: true,
                 icon: dashboard.icon,
-                to: dashboard.to
+                to: '/'
             }
         ]
     });
@@ -29,8 +26,8 @@ const AppSidebar = () => {
         visible: true
     });
 
-    for (let r in resources ?? []) {
-        const resource = resources![r];
+    for (let r in trinityApp.resources ?? []) {
+        const resource = trinityApp.resources![r];
         model[model.length - 1].items.push({
             label: resource.pluralLabel,
             icon: resource.icon,
@@ -45,8 +42,8 @@ const AppSidebar = () => {
         items: [],
         visible: true
     });
-    for (let p in pages ?? []) {
-        const page = pages![p];
+    for (let p in trinityApp.pages ?? []) {
+        const page = trinityApp.pages![p];
         if (page.pageName === 'Dashboard') continue;
 
         model[model.length - 1].items.push({
