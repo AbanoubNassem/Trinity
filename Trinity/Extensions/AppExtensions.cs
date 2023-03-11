@@ -63,8 +63,8 @@ public static class AppExtensions
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, ops =>
             {
-                ops.LoginPath = $"/{configs.Prefix}/login";
-                ops.LogoutPath = $"/{configs.Prefix}/logout";
+                ops.LoginPath = "/login";
+                ops.LogoutPath = "/logout";
                 ops.Cookie.Name = "Trinity";
             });
 
@@ -103,6 +103,7 @@ public static class AppExtensions
         var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
 
         app.UsePathBase(new PathString($"/{configs.Prefix}"));
+        
 
         if (app.Environment.IsDevelopment())
         {
@@ -165,7 +166,7 @@ public static class AppExtensions
 
         app.Use((context, next) =>
         {
-            var requestPath = context.Request.Path.Value;
+            var requestPath = context.Request.PathBase.Value;
 
             if (requestPath == null ||
                 !requestPath.StartsWith($"/{configs.Prefix}", StringComparison.OrdinalIgnoreCase))

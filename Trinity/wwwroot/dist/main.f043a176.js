@@ -288,7 +288,7 @@ var FT = { exports: {} };
 var aM;
 function ZW() {
   return aM || (aM = 1, function(e, n) {
-    [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && function() {
+    [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && function() {
       typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
       var t = "18.2.0", a = Symbol.for("react.element"), l = Symbol.for("react.portal"), f = Symbol.for("react.fragment"), c = Symbol.for("react.strict_mode"), m = Symbol.for("react.profiler"), h = Symbol.for("react.provider"), g = Symbol.for("react.context"), T = Symbol.for("react.forward_ref"), S = Symbol.for("react.suspense"), w = Symbol.for("react.suspense_list"), O = Symbol.for("react.memo"), I = Symbol.for("react.lazy"), C = Symbol.for("react.offscreen"), V = Symbol.iterator, M = "@@iterator";
       function A(F) {
@@ -1464,7 +1464,7 @@ Check the top-level render call using <` + Ue + ">.");
   }(FT, FT.exports)), FT.exports;
 }
 (function(e) {
-  [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production" ? e.exports = QW() : e.exports = ZW();
+  [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production" ? e.exports = QW() : e.exports = ZW();
 })(b);
 const Ho = /* @__PURE__ */ iL(b.exports);
 /**
@@ -1478,7 +1478,7 @@ const Ho = /* @__PURE__ */ iL(b.exports);
  */
 var iM;
 function e$() {
-  return iM || (iM = 1, [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && function() {
+  return iM || (iM = 1, [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && function() {
     var e = b.exports, n = Symbol.for("react.element"), t = Symbol.for("react.portal"), a = Symbol.for("react.fragment"), l = Symbol.for("react.strict_mode"), f = Symbol.for("react.profiler"), c = Symbol.for("react.provider"), m = Symbol.for("react.context"), h = Symbol.for("react.forward_ref"), g = Symbol.for("react.suspense"), T = Symbol.for("react.suspense_list"), S = Symbol.for("react.memo"), w = Symbol.for("react.lazy"), O = Symbol.for("react.offscreen"), I = Symbol.iterator, C = "@@iterator";
     function V(ue) {
       if (ue === null || typeof ue != "object")
@@ -2049,7 +2049,7 @@ Check the top-level render call using <` + Ot + ">.");
   }()), VT;
 }
 (function(e) {
-  [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production" ? e.exports = JW() : e.exports = e$();
+  [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production" ? e.exports = JW() : e.exports = e$();
 })(cD);
 const xp = cD.exports.Fragment, Ee = cD.exports.jsxDEV;
 var Ty = {}, fD = { exports: {} }, dl = {}, rI = { exports: {} }, aI = {};
@@ -2293,7 +2293,7 @@ var iI = {};
 var lM;
 function n$() {
   return lM || (lM = 1, function(e) {
-    [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && function() {
+    [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && function() {
       typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
       var n = !1, t = !1, a = 5;
       function l(at, Tt) {
@@ -2558,7 +2558,7 @@ function n$() {
 var sM;
 function oL() {
   return sM || (sM = 1, function(e) {
-    [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production" ? e.exports = t$() : e.exports = n$();
+    [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production" ? e.exports = t$() : e.exports = n$();
   }(rI)), rI.exports;
 }
 /**
@@ -8210,7 +8210,7 @@ var pl = {};
  */
 var cM;
 function a$() {
-  return cM || (cM = 1, [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && function() {
+  return cM || (cM = 1, [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && function() {
     typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
     var e = b.exports, n = oL(), t = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED, a = !1;
     function l(r) {
@@ -12505,7 +12505,7 @@ Check the render method of \`` + r + "`." : "";
     }
     function Ta(r, i) {
       g0.has(r) || c('Did not expect a listenToNonDelegatedEvent() call for "%s". This is a bug in React. Please file an issue.', r);
-      var u = !1, d = Z2(i), v = wU(r, u);
+      var u = !1, d = Zj(i), v = wU(r, u);
       d.has(v) || (LC(i, r, gd, u), d.add(v));
     }
     function y0(r, i, u) {
@@ -13273,7 +13273,7 @@ Check the render method of \`` + r + "`." : "";
     function ZU(r, i) {
       r.appendChild(i);
     }
-    function e2(r, i, u, d, v) {
+    function ej(r, i, u, d, v) {
       switch (LU(r, i, u, d), i) {
         case "button":
         case "input":
@@ -13286,7 +13286,7 @@ Check the render method of \`` + r + "`." : "";
           return !1;
       }
     }
-    function t2(r, i, u, d, v, E) {
+    function tj(r, i, u, d, v, E) {
       {
         var R = E;
         if (typeof d.children != typeof u.children && (typeof d.children == "string" || typeof d.children == "number")) {
@@ -13299,7 +13299,7 @@ Check the render method of \`` + r + "`." : "";
     function w0(r, i) {
       return r === "textarea" || r === "noscript" || typeof i.children == "string" || typeof i.children == "number" || typeof i.dangerouslySetInnerHTML == "object" && i.dangerouslySetInnerHTML !== null && i.dangerouslySetInnerHTML.__html != null;
     }
-    function n2(r, i, u, d) {
+    function nj(r, i, u, d) {
       {
         var v = u;
         vg(null, r, v.ancestorInfo);
@@ -13307,19 +13307,19 @@ Check the render method of \`` + r + "`." : "";
       var E = PU(r, i);
       return Tg(d, E), E;
     }
-    function r2() {
+    function rj() {
       var r = window.event;
       return r === void 0 ? gs : zi(r.type);
     }
-    var D0 = typeof setTimeout == "function" ? setTimeout : void 0, a2 = typeof clearTimeout == "function" ? clearTimeout : void 0, C0 = -1, GC = typeof Promise == "function" ? Promise : void 0, i2 = typeof queueMicrotask == "function" ? queueMicrotask : typeof GC < "u" ? function(r) {
-      return GC.resolve(null).then(r).catch(o2);
+    var D0 = typeof setTimeout == "function" ? setTimeout : void 0, aj = typeof clearTimeout == "function" ? clearTimeout : void 0, C0 = -1, GC = typeof Promise == "function" ? Promise : void 0, ij = typeof queueMicrotask == "function" ? queueMicrotask : typeof GC < "u" ? function(r) {
+      return GC.resolve(null).then(r).catch(oj);
     } : D0;
-    function o2(r) {
+    function oj(r) {
       setTimeout(function() {
         throw r;
       });
     }
-    function l2(r, i, u, d) {
+    function lj(r, i, u, d) {
       switch (i) {
         case "button":
         case "input":
@@ -13333,34 +13333,34 @@ Check the render method of \`` + r + "`." : "";
         }
       }
     }
-    function s2(r, i, u, d, v, E) {
+    function sj(r, i, u, d, v, E) {
       VU(r, i, u, d, v), P0(r, v);
     }
     function YC(r) {
       x(r, "");
     }
-    function u2(r, i, u) {
+    function uj(r, i, u) {
       r.nodeValue = u;
     }
-    function c2(r, i) {
+    function cj(r, i) {
       r.appendChild(i);
     }
-    function f2(r, i) {
+    function fj(r, i) {
       var u;
       r.nodeType === Ia ? (u = r.parentNode, u.insertBefore(i, r)) : (u = r, u.appendChild(i));
       var d = r._reactRootContainer;
       d == null && u.onclick === null && hb(u);
     }
-    function d2(r, i, u) {
+    function dj(r, i, u) {
       r.insertBefore(i, u);
     }
-    function p2(r, i, u) {
+    function pj(r, i, u) {
       r.nodeType === Ia ? r.parentNode.insertBefore(i, u) : r.insertBefore(i, u);
     }
-    function m2(r, i) {
+    function mj(r, i) {
       r.removeChild(i);
     }
-    function v2(r, i) {
+    function vj(r, i) {
       r.nodeType === Ia ? r.parentNode.removeChild(i) : r.removeChild(i);
     }
     function x0(r, i) {
@@ -13382,35 +13382,35 @@ Check the render method of \`` + r + "`." : "";
       } while (u);
       rr(i);
     }
-    function h2(r, i) {
+    function hj(r, i) {
       r.nodeType === Ia ? x0(r.parentNode, i) : r.nodeType === xi && x0(r, i), rr(r);
     }
-    function g2(r) {
+    function gj(r) {
       r = r;
       var i = r.style;
       typeof i.setProperty == "function" ? i.setProperty("display", "none", "important") : i.display = "none";
     }
-    function y2(r) {
+    function yj(r) {
       r.nodeValue = "";
     }
-    function E2(r, i) {
+    function Ej(r, i) {
       r = r;
       var u = i[YU], d = u != null && u.hasOwnProperty("display") ? u.display : null;
       r.style.display = dt("display", d);
     }
-    function b2(r, i) {
+    function bj(r, i) {
       r.nodeValue = i;
     }
-    function T2(r) {
+    function Tj(r) {
       r.nodeType === xi ? r.textContent = "" : r.nodeType === Do && r.documentElement && r.removeChild(r.documentElement);
     }
-    function S2(r, i, u) {
+    function Sj(r, i, u) {
       return r.nodeType !== xi || i.toLowerCase() !== r.nodeName.toLowerCase() ? null : r;
     }
-    function _2(r, i) {
+    function _j(r, i) {
       return i === "" || r.nodeType !== _l ? null : r;
     }
-    function O2(r) {
+    function Oj(r) {
       return r.nodeType !== Ia ? null : r;
     }
     function qC(r) {
@@ -13419,7 +13419,7 @@ Check the render method of \`` + r + "`." : "";
     function N0(r) {
       return r.data === yg;
     }
-    function R2(r) {
+    function Rj(r) {
       var i = r.nextSibling && r.nextSibling.dataset, u, d, v;
       return i && (u = i.dgst, d = i.msg, v = i.stck), {
         message: d,
@@ -13427,7 +13427,7 @@ Check the render method of \`` + r + "`." : "";
         stack: v
       };
     }
-    function I2(r, i) {
+    function Ij(r, i) {
       r._reactRetry = i;
     }
     function bb(r) {
@@ -13448,16 +13448,16 @@ Check the render method of \`` + r + "`." : "";
     function Eg(r) {
       return bb(r.nextSibling);
     }
-    function w2(r) {
+    function wj(r) {
       return bb(r.firstChild);
     }
-    function D2(r) {
+    function Dj(r) {
       return bb(r.firstChild);
     }
-    function C2(r) {
+    function Cj(r) {
       return bb(r.nextSibling);
     }
-    function x2(r, i, u, d, v, E, R) {
+    function xj(r, i, u, d, v, E, R) {
       Tg(E, r), P0(r, u);
       var N;
       {
@@ -13467,13 +13467,13 @@ Check the render method of \`` + r + "`." : "";
       var Y = (E.mode & Jn) !== _n;
       return UU(r, i, u, N, d, Y, R);
     }
-    function N2(r, i, u, d) {
+    function Nj(r, i, u, d) {
       return Tg(u, r), u.mode & Jn, jU(r, i);
     }
-    function M2(r, i) {
+    function Mj(r, i) {
       Tg(i, r);
     }
-    function A2(r) {
+    function Aj(r) {
       for (var i = r.nextSibling, u = 0; i; ) {
         if (i.nodeType === Ia) {
           var d = i.data;
@@ -13503,70 +13503,70 @@ Check the render method of \`` + r + "`." : "";
       }
       return null;
     }
-    function P2(r) {
+    function Pj(r) {
       rr(r);
     }
-    function L2(r) {
+    function Lj(r) {
       rr(r);
     }
-    function k2(r) {
+    function kj(r) {
       return r !== "head" && r !== "body";
     }
-    function V2(r, i, u, d) {
+    function Vj(r, i, u, d) {
       var v = !0;
       vb(i.nodeValue, u, d, v);
     }
-    function F2(r, i, u, d, v, E) {
+    function Fj(r, i, u, d, v, E) {
       if (i[gb] !== !0) {
         var R = !0;
         vb(d.nodeValue, v, E, R);
       }
     }
-    function U2(r, i) {
+    function Uj(r, i) {
       i.nodeType === xi ? T0(r, i) : i.nodeType === Ia || S0(r, i);
     }
-    function j2(r, i) {
+    function jj(r, i) {
       {
         var u = r.parentNode;
         u !== null && (i.nodeType === xi ? T0(u, i) : i.nodeType === Ia || S0(u, i));
       }
     }
-    function B2(r, i, u, d, v) {
+    function Bj(r, i, u, d, v) {
       (v || i[gb] !== !0) && (d.nodeType === xi ? T0(u, d) : d.nodeType === Ia || S0(u, d));
     }
-    function H2(r, i, u) {
+    function Hj(r, i, u) {
       _0(r, i);
     }
-    function W2(r, i) {
+    function Wj(r, i) {
       O0(r, i);
     }
-    function $2(r, i, u) {
+    function $j(r, i, u) {
       {
         var d = r.parentNode;
         d !== null && _0(d, i);
       }
     }
-    function z2(r, i) {
+    function zj(r, i) {
       {
         var u = r.parentNode;
         u !== null && O0(u, i);
       }
     }
-    function G2(r, i, u, d, v, E) {
+    function Gj(r, i, u, d, v, E) {
       (E || i[gb] !== !0) && _0(u, d);
     }
-    function Y2(r, i, u, d, v) {
+    function Yj(r, i, u, d, v) {
       (v || i[gb] !== !0) && O0(u, d);
     }
-    function q2(r) {
+    function qj(r) {
       c("An error occurred during hydration. The server HTML was replaced with client content in <%s>.", r.nodeName.toLowerCase());
     }
-    function K2(r) {
+    function Kj(r) {
       fg(r);
     }
-    var Gm = Math.random().toString(36).slice(2), Ym = "__reactFiber$" + Gm, M0 = "__reactProps$" + Gm, bg = "__reactContainer$" + Gm, A0 = "__reactEvents$" + Gm, X2 = "__reactListeners$" + Gm, J2 = "__reactHandles$" + Gm;
-    function Q2(r) {
-      delete r[Ym], delete r[M0], delete r[A0], delete r[X2], delete r[J2];
+    var Gm = Math.random().toString(36).slice(2), Ym = "__reactFiber$" + Gm, M0 = "__reactProps$" + Gm, bg = "__reactContainer$" + Gm, A0 = "__reactEvents$" + Gm, Xj = "__reactListeners$" + Gm, Jj = "__reactHandles$" + Gm;
+    function Qj(r) {
+      delete r[Ym], delete r[M0], delete r[A0], delete r[Xj], delete r[Jj];
     }
     function Tg(r, i) {
       i[Ym] = r;
@@ -13615,7 +13615,7 @@ Check the render method of \`` + r + "`." : "";
     function P0(r, i) {
       r[M0] = i;
     }
-    function Z2(r) {
+    function Zj(r) {
       var i = r[A0];
       return i === void 0 && (i = r[A0] = /* @__PURE__ */ new Set()), i;
     }
@@ -13757,7 +13757,7 @@ Check the render method of \`` + r + "`." : "";
           fo(pu, r), po(pu, u, r);
       }
     }
-    function ej(r) {
+    function e2(r) {
       {
         if (!Rh(r) || r.tag !== g)
           throw new Error("Expected subtree parent to be a mounted class component. This error is likely caused by a bug in React. Please file an issue.");
@@ -13782,7 +13782,7 @@ Check the render method of \`` + r + "`." : "";
     function rx(r) {
       Ec === null ? Ec = [r] : Ec.push(r);
     }
-    function tj(r) {
+    function t2(r) {
       U0 = !0, rx(r);
     }
     function ax() {
@@ -13810,14 +13810,14 @@ Check the render method of \`` + r + "`." : "";
       return null;
     }
     var Jm = [], Qm = 0, Cb = null, xb = 0, Gl = [], Yl = 0, Xd = null, bc = 1, Tc = "";
-    function nj(r) {
+    function n2(r) {
       return Qd(), (r.flags & Sh) !== bn;
     }
-    function rj(r) {
+    function r2(r) {
       return Qd(), xb;
     }
-    function aj() {
-      var r = Tc, i = bc, u = i & ~ij(i);
+    function a2() {
+      var r = Tc, i = bc, u = i & ~i2(i);
       return u.toString(32) + r;
     }
     function Jd(r, i) {
@@ -13845,7 +13845,7 @@ Check the render method of \`` + r + "`." : "";
     function Nb(r) {
       return 32 - im(r);
     }
-    function ij(r) {
+    function i2(r) {
       return 1 << Nb(r) - 1;
     }
     function H0(r) {
@@ -13854,44 +13854,44 @@ Check the render method of \`` + r + "`." : "";
       for (; r === Xd; )
         Xd = Gl[--Yl], Gl[Yl] = null, Tc = Gl[--Yl], Gl[Yl] = null, bc = Gl[--Yl], Gl[Yl] = null;
     }
-    function oj() {
+    function o2() {
       return Qd(), Xd !== null ? {
         id: bc,
         overflow: Tc
       } : null;
     }
-    function lj(r, i) {
+    function l2(r, i) {
       Qd(), Gl[Yl++] = bc, Gl[Yl++] = Tc, Gl[Yl++] = Xd, bc = i.id, Tc = i.overflow, Xd = r;
     }
     function Qd() {
       Yi() || c("Expected to be hydrating. This is a bug in React. Please file an issue.");
     }
     var Gi = null, ql = null, _s = !1, Zd = !1, Lf = null;
-    function sj() {
+    function s2() {
       _s && c("We should not be hydrating here. This is a bug in React. Please file a bug.");
     }
     function ox() {
       Zd = !0;
     }
-    function uj() {
+    function u2() {
       return Zd;
     }
-    function cj(r) {
+    function c2(r) {
       var i = r.stateNode.containerInfo;
-      return ql = D2(i), Gi = r, _s = !0, Lf = null, Zd = !1, !0;
+      return ql = Dj(i), Gi = r, _s = !0, Lf = null, Zd = !1, !0;
     }
-    function fj(r, i, u) {
-      return ql = C2(i), Gi = r, _s = !0, Lf = null, Zd = !1, u !== null && lj(r, u), !0;
+    function f2(r, i, u) {
+      return ql = Cj(i), Gi = r, _s = !0, Lf = null, Zd = !1, u !== null && l2(r, u), !0;
     }
     function lx(r, i) {
       switch (r.tag) {
         case S: {
-          U2(r.stateNode.containerInfo, i);
+          Uj(r.stateNode.containerInfo, i);
           break;
         }
         case O: {
           var u = (r.mode & Jn) !== _n;
-          B2(
+          Bj(
             r.type,
             r.memoizedProps,
             r.stateNode,
@@ -13902,7 +13902,7 @@ Check the render method of \`` + r + "`." : "";
         }
         case j: {
           var d = r.memoizedState;
-          d.dehydrated !== null && j2(d.dehydrated, i);
+          d.dehydrated !== null && jj(d.dehydrated, i);
           break;
         }
       }
@@ -13924,11 +13924,11 @@ Check the render method of \`` + r + "`." : "";
             switch (i.tag) {
               case O:
                 var d = i.type;
-                i.pendingProps, H2(u, d);
+                i.pendingProps, Hj(u, d);
                 break;
               case I:
                 var v = i.pendingProps;
-                W2(u, v);
+                Wj(u, v);
                 break;
             }
             break;
@@ -13938,7 +13938,7 @@ Check the render method of \`` + r + "`." : "";
             switch (i.tag) {
               case O: {
                 var U = i.type, Y = i.pendingProps, J = (r.mode & Jn) !== _n;
-                G2(
+                Gj(
                   E,
                   R,
                   N,
@@ -13950,7 +13950,7 @@ Check the render method of \`` + r + "`." : "";
               }
               case I: {
                 var Ce = i.pendingProps, we = (r.mode & Jn) !== _n;
-                Y2(
+                Yj(
                   E,
                   R,
                   N,
@@ -13968,11 +13968,11 @@ Check the render method of \`` + r + "`." : "";
               switch (i.tag) {
                 case O:
                   var Qe = i.type;
-                  i.pendingProps, $2(Ke, Qe);
+                  i.pendingProps, $j(Ke, Qe);
                   break;
                 case I:
                   var qt = i.pendingProps;
-                  z2(Ke, qt);
+                  zj(Ke, qt);
                   break;
               }
             break;
@@ -13990,19 +13990,19 @@ Check the render method of \`` + r + "`." : "";
         case O: {
           var u = r.type;
           r.pendingProps;
-          var d = S2(i, u);
-          return d !== null ? (r.stateNode = d, Gi = r, ql = w2(d), !0) : !1;
+          var d = Sj(i, u);
+          return d !== null ? (r.stateNode = d, Gi = r, ql = wj(d), !0) : !1;
         }
         case I: {
-          var v = r.pendingProps, E = _2(i, v);
+          var v = r.pendingProps, E = _j(i, v);
           return E !== null ? (r.stateNode = E, Gi = r, ql = null, !0) : !1;
         }
         case j: {
-          var R = O2(i);
+          var R = Oj(i);
           if (R !== null) {
             var N = {
               dehydrated: R,
-              treeContext: oj(),
+              treeContext: o2(),
               retryLane: uo
             };
             r.memoizedState = N;
@@ -14040,19 +14040,19 @@ Check the render method of \`` + r + "`." : "";
         }
       }
     }
-    function dj(r, i, u) {
-      var d = r.stateNode, v = !Zd, E = x2(d, r.type, r.memoizedProps, i, u, r, v);
+    function d2(r, i, u) {
+      var d = r.stateNode, v = !Zd, E = xj(d, r.type, r.memoizedProps, i, u, r, v);
       return r.updateQueue = E, E !== null;
     }
-    function pj(r) {
-      var i = r.stateNode, u = r.memoizedProps, d = N2(i, u, r);
+    function p2(r) {
+      var i = r.stateNode, u = r.memoizedProps, d = Nj(i, u, r);
       if (d) {
         var v = Gi;
         if (v !== null)
           switch (v.tag) {
             case S: {
               var E = v.stateNode.containerInfo, R = (v.mode & Jn) !== _n;
-              V2(
+              Vj(
                 E,
                 i,
                 u,
@@ -14062,7 +14062,7 @@ Check the render method of \`` + r + "`." : "";
             }
             case O: {
               var N = v.type, U = v.memoizedProps, Y = v.stateNode, J = (v.mode & Jn) !== _n;
-              F2(
+              Fj(
                 N,
                 U,
                 Y,
@@ -14076,17 +14076,17 @@ Check the render method of \`` + r + "`." : "";
       }
       return d;
     }
-    function mj(r) {
+    function m2(r) {
       var i = r.memoizedState, u = i !== null ? i.dehydrated : null;
       if (!u)
         throw new Error("Expected to have a hydrated suspense instance. This error is likely caused by a bug in React. Please file an issue.");
-      M2(u, r);
+      Mj(u, r);
     }
-    function vj(r) {
+    function v2(r) {
       var i = r.memoizedState, u = i !== null ? i.dehydrated : null;
       if (!u)
         throw new Error("Expected to have a hydrated suspense instance. This error is likely caused by a bug in React. Please file an issue.");
-      return A2(u);
+      return Aj(u);
     }
     function fx(r) {
       for (var i = r.return; i !== null && i.tag !== O && i.tag !== S && i.tag !== j; )
@@ -14098,7 +14098,7 @@ Check the render method of \`` + r + "`." : "";
         return !1;
       if (!_s)
         return fx(r), _s = !0, !1;
-      if (r.tag !== S && (r.tag !== O || k2(r.type) && !w0(r.type, r.memoizedProps))) {
+      if (r.tag !== S && (r.tag !== O || kj(r.type) && !w0(r.type, r.memoizedProps))) {
         var i = ql;
         if (i)
           if ($0(r))
@@ -14107,9 +14107,9 @@ Check the render method of \`` + r + "`." : "";
             for (; i; )
               sx(r, i), i = Eg(i);
       }
-      return fx(r), r.tag === j ? ql = vj(r) : ql = Gi ? Eg(r.stateNode) : null, !0;
+      return fx(r), r.tag === j ? ql = v2(r) : ql = Gi ? Eg(r.stateNode) : null, !0;
     }
-    function hj() {
+    function h2() {
       return _s && ql !== null;
     }
     function dx(r) {
@@ -14128,9 +14128,9 @@ Check the render method of \`` + r + "`." : "";
     function Y0(r) {
       Lf === null ? Lf = [r] : Lf.push(r);
     }
-    var gj = t.ReactCurrentBatchConfig, yj = null;
-    function Ej() {
-      return gj.transition;
+    var g2 = t.ReactCurrentBatchConfig, y2 = null;
+    function E2() {
+      return g2.transition;
     }
     var Os = {
       recordUnsafeLifecycleWarnings: function(r, i) {
@@ -14145,7 +14145,7 @@ Check the render method of \`` + r + "`." : "";
       }
     };
     {
-      var bj = function(r) {
+      var b2 = function(r) {
         for (var i = null, u = r; u !== null; )
           u.mode & Ea && (i = u), u = u.return;
         return i;
@@ -14237,7 +14237,7 @@ Please update the following components: %s`, Ce);
       };
       var Ab = /* @__PURE__ */ new Map(), mx = /* @__PURE__ */ new Set();
       Os.recordLegacyContextWarning = function(r, i) {
-        var u = bj(r);
+        var u = b2(r);
         if (u === null) {
           c("Expected to find a StrictMode component in a strict mode tree. This error is likely caused by a bug in React. Please file an issue.");
           return;
@@ -14308,10 +14308,10 @@ Learn more about this warning here: https://reactjs.org/link/legacy-context`, v)
       }
       d !== u && c("Expected to find the propagation root when scheduling context work. This error is likely caused by a bug in React. Please file an issue.");
     }
-    function Tj(r, i, u) {
-      Sj(r, i, u);
+    function T2(r, i, u) {
+      S2(r, i, u);
     }
-    function Sj(r, i, u) {
+    function S2(r, i, u) {
       var d = r.child;
       for (d !== null && (d.return = r); d !== null; ) {
         var v = void 0, E = d.dependencies;
@@ -14397,7 +14397,7 @@ Learn more about this warning here: https://reactjs.org/link/legacy-context`, v)
     function Z0(r) {
       np === null ? np = [r] : np.push(r);
     }
-    function _j() {
+    function _2() {
       if (np !== null) {
         for (var r = 0; r < np.length; r++) {
           var i = np[r], u = i.interleaved;
@@ -14418,18 +14418,18 @@ Learn more about this warning here: https://reactjs.org/link/legacy-context`, v)
       var v = i.interleaved;
       return v === null ? (u.next = u, Z0(i)) : (u.next = v.next, v.next = u), i.interleaved = u, Vb(r, d);
     }
-    function Oj(r, i, u, d) {
+    function O2(r, i, u, d) {
       var v = i.interleaved;
       v === null ? (u.next = u, Z0(i)) : (u.next = v.next, v.next = u), i.interleaved = u;
     }
-    function Rj(r, i, u, d) {
+    function R2(r, i, u, d) {
       var v = i.interleaved;
       return v === null ? (u.next = u, Z0(i)) : (u.next = v.next, v.next = u), i.interleaved = u, Vb(r, d);
     }
     function sl(r, i) {
       return Vb(r, i);
     }
-    var Ij = Vb;
+    var I2 = Vb;
     function Vb(r, i) {
       r.lanes = zn(r.lanes, i);
       var u = r.alternate;
@@ -14489,9 +14489,9 @@ Learn more about this warning here: https://reactjs.org/link/legacy-context`, v)
       var v = d.shared;
       if (jb === v && !tO && (c("An update (setState, replaceState, or forceUpdate) was scheduled from inside an update function. Update functions should be pure, with zero side-effects. Consider using componentDidUpdate or a callback."), tO = !0), IH()) {
         var E = v.pending;
-        return E === null ? i.next = i : (i.next = E.next, E.next = i), v.pending = i, Ij(r, u);
+        return E === null ? i.next = i : (i.next = E.next, E.next = i), v.pending = i, I2(r, u);
       } else
-        return Rj(r, v, i, u);
+        return R2(r, v, i, u);
     }
     function Bb(r, i, u) {
       var d = i.updateQueue;
@@ -14540,7 +14540,7 @@ Learn more about this warning here: https://reactjs.org/link/legacy-context`, v)
       var J = u.lastBaseUpdate;
       J === null ? u.firstBaseUpdate = i : J.next = i, u.lastBaseUpdate = i;
     }
-    function wj(r, i, u, d, v, E) {
+    function w2(r, i, u, d, v, E) {
       switch (u.tag) {
         case bx: {
           var R = u.payload;
@@ -14618,7 +14618,7 @@ Learn more about this warning here: https://reactjs.org/link/legacy-context`, v)
               };
               Sn = Sn.next = Ze;
             }
-            Ye = wj(r, v, fn, Ye, i, u);
+            Ye = w2(r, v, fn, Ye, i, u);
             var We = fn.callback;
             if (We !== null && fn.lane !== ur) {
               r.flags |= jl;
@@ -14656,7 +14656,7 @@ Learn more about this warning here: https://reactjs.org/link/legacy-context`, v)
       }
       jb = null;
     }
-    function Dj(r, i) {
+    function D2(r, i) {
       if (typeof r != "function")
         throw new Error("Invalid argument passed as callback. Expected a function. Instead " + ("received: " + r));
       r.call(i);
@@ -14672,7 +14672,7 @@ Learn more about this warning here: https://reactjs.org/link/legacy-context`, v)
       if (i.effects = null, d !== null)
         for (var v = 0; v < d.length; v++) {
           var E = d[v], R = E.callback;
-          R !== null && (E.callback = null, Dj(R, u));
+          R !== null && (E.callback = null, D2(R, u));
         }
     }
     var aO = {}, Ox = new e.Component().refs, iO, oO, lO, sO, uO, Rx, $b, cO, fO, dO;
@@ -14755,7 +14755,7 @@ Learn more about this warning here: https://reactjs.org/link/legacy-context`, v)
       }
       return i.prototype && i.prototype.isPureReactComponent ? !yn(u, d) || !yn(v, E) : !0;
     }
-    function Cj(r, i, u) {
+    function C2(r, i, u) {
       var d = r.stateNode;
       {
         var v = Fn(i) || "Component", E = d.render;
@@ -14820,7 +14820,7 @@ https://reactjs.org/link/unsafe-component-lifecycles`, qt, Sn, Ye !== null ? `
       }
       return d && ZC(r, v, E), J;
     }
-    function xj(r, i) {
+    function x2(r, i) {
       var u = i.state;
       typeof i.componentWillMount == "function" && i.componentWillMount(), typeof i.UNSAFE_componentWillMount == "function" && i.UNSAFE_componentWillMount(), u !== i.state && (c("%s.componentWillMount(): Assigning directly to this.state is deprecated (except inside a component's constructor). Use setState instead.", Dn(r) || "Component"), mO.enqueueReplaceState(i, i.state, null));
     }
@@ -14835,7 +14835,7 @@ https://reactjs.org/link/unsafe-component-lifecycles`, qt, Sn, Ye !== null ? `
       }
     }
     function vO(r, i, u, d) {
-      Cj(r, i, u);
+      C2(r, i, u);
       var v = r.stateNode;
       v.props = u, v.state = r.memoizedState, v.refs = Ox, nO(r);
       var E = i.contextType;
@@ -14854,12 +14854,12 @@ https://reactjs.org/link/unsafe-component-lifecycles`, qt, Sn, Ye !== null ? `
       }
       v.state = r.memoizedState;
       var U = i.getDerivedStateFromProps;
-      if (typeof U == "function" && (pO(r, i, U, u), v.state = r.memoizedState), typeof i.getDerivedStateFromProps != "function" && typeof v.getSnapshotBeforeUpdate != "function" && (typeof v.UNSAFE_componentWillMount == "function" || typeof v.componentWillMount == "function") && (xj(r, v), Hb(r, u, v, d), v.state = r.memoizedState), typeof v.componentDidMount == "function") {
+      if (typeof U == "function" && (pO(r, i, U, u), v.state = r.memoizedState), typeof i.getDerivedStateFromProps != "function" && typeof v.getSnapshotBeforeUpdate != "function" && (typeof v.UNSAFE_componentWillMount == "function" || typeof v.componentWillMount == "function") && (x2(r, v), Hb(r, u, v, d), v.state = r.memoizedState), typeof v.componentDidMount == "function") {
         var Y = $n;
         Y |= ao, (r.mode & tl) !== _n && (Y |= io), r.flags |= Y;
       }
     }
-    function Nj(r, i, u, d) {
+    function N2(r, i, u, d) {
       var v = r.stateNode, E = r.memoizedProps;
       v.props = E;
       var R = v.context, N = i.contextType, U = Dl;
@@ -14895,7 +14895,7 @@ https://reactjs.org/link/unsafe-component-lifecycles`, qt, Sn, Ye !== null ? `
       }
       return v.props = u, v.state = Ye, v.context = U, Qe;
     }
-    function Mj(r, i, u, d, v) {
+    function M2(r, i, u, d, v) {
       var E = i.stateNode;
       Tx(r, i);
       var R = i.memoizedProps, N = i.type === i.elementType ? R : Rs(i.type, R);
@@ -15341,7 +15341,7 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
       return ar;
     }
     var nv = Ax(!0), Px = Ax(!1);
-    function Aj(r, i) {
+    function A2(r, i) {
       if (r !== null && i.child !== r.child)
         throw new Error("Resuming work not yet implemented.");
       if (i.child !== null) {
@@ -15351,7 +15351,7 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
         d.sibling = null;
       }
     }
-    function Pj(r, i) {
+    function P2(r, i) {
       for (var u = r.child; u !== null; )
         uW(u, i), u = u.sibling;
     }
@@ -15385,7 +15385,7 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
     function _O(r) {
       Ng.current === r && (fo(Vf, r), fo(Ng, r));
     }
-    var Lj = 0, Vx = 1, Fx = 1, Mg = 2, Is = Mf(Lj);
+    var L2 = 0, Vx = 1, Fx = 1, Mg = 2, Is = Mf(L2);
     function OO(r, i) {
       return (r & i) !== 0;
     }
@@ -15395,7 +15395,7 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
     function RO(r, i) {
       return r & Vx | i;
     }
-    function kj(r, i) {
+    function k2(r, i) {
       return r | i;
     }
     function Ff(r, i) {
@@ -15404,7 +15404,7 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
     function iv(r) {
       fo(Is, r);
     }
-    function Vj(r, i) {
+    function V2(r, i) {
       var u = r.memoizedState;
       return u !== null ? u.dehydrated !== null : (r.memoizedProps, !0);
     }
@@ -15444,13 +15444,13 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
       }
       IO.length = 0;
     }
-    function Fj(r, i) {
+    function F2(r, i) {
       var u = i._getVersion, d = u(i._source);
       r.mutableSourceEagerHydrationData == null ? r.mutableSourceEagerHydrationData = [i, d] : r.mutableSourceEagerHydrationData.push(i, d);
     }
     var Yt = t.ReactCurrentDispatcher, Ag = t.ReactCurrentBatchConfig, DO, ov;
     DO = /* @__PURE__ */ new Set();
-    var rp = nt, Br = null, bi = null, Ti = null, Xb = !1, Pg = !1, Lg = 0, Uj = 0, jj = 25, lt = null, Kl = null, Uf = -1, CO = !1;
+    var rp = nt, Br = null, bi = null, Ti = null, Xb = !1, Pg = !1, Lg = 0, U2 = 0, j2 = 25, lt = null, Kl = null, Uf = -1, CO = !1;
     function Mr() {
       {
         var r = lt;
@@ -15460,13 +15460,13 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
     function Ft() {
       {
         var r = lt;
-        Kl !== null && (Uf++, Kl[Uf] !== r && Bj(r));
+        Kl !== null && (Uf++, Kl[Uf] !== r && B2(r));
       }
     }
     function lv(r) {
       r != null && !er(r) && c("%s received a final argument that is not an array (instead, received `%s`). When specified, the final argument must be an array.", lt, typeof r);
     }
-    function Bj(r) {
+    function B2(r) {
       {
         var i = Dn(Br);
         if (!DO.has(i) && (DO.add(i), Kl !== null)) {
@@ -15512,7 +15512,7 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
       if (Pg) {
         var N = 0;
         do {
-          if (Pg = !1, Lg = 0, N >= jj)
+          if (Pg = !1, Lg = 0, N >= j2)
             throw new Error("Too many re-renders. React limits the number of renders to prevent an infinite loop.");
           N += 1, CO = !1, bi = null, Ti = null, i.updateQueue = null, Uf = -1, Yt.current = lN, R = u(d, v);
         } while (Pg);
@@ -15596,7 +15596,7 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
         lastRenderedState: v
       };
       d.queue = E;
-      var R = E.dispatch = zj.bind(null, Br, E);
+      var R = E.dispatch = z2.bind(null, Br, E);
       return [d.memoizedState, R];
     }
     function AO(r, i, u) {
@@ -15768,7 +15768,7 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
         lastRenderedState: r
       };
       i.queue = u;
-      var d = u.dispatch = Gj.bind(null, Br, u);
+      var d = u.dispatch = G2.bind(null, Br, u);
       return [i.memoizedState, d];
     }
     function kO(r) {
@@ -15873,9 +15873,9 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
       var d = u != null ? u.concat([r]) : null;
       return eT($n, Ei, Yx.bind(null, i, r), d);
     }
-    function Hj(r, i) {
+    function H2(r, i) {
     }
-    var iT = Hj;
+    var iT = H2;
     function HO(r, i) {
       var u = hu(), d = i === void 0 ? null : i;
       return u.memoizedState = [r, d], r;
@@ -15929,7 +15929,7 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
       } else
         return r.baseState && (r.baseState = !1, Hg()), r.memoizedState = u, u;
     }
-    function Wj(r, i, u) {
+    function W2(r, i, u) {
       var d = rl();
       qa(Ai(d, gi)), r(!0);
       var v = Ag.transition;
@@ -15946,7 +15946,7 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
       }
     }
     function zO() {
-      var r = Qb(!1), i = r[0], u = r[1], d = Wj.bind(null, u), v = hu();
+      var r = Qb(!1), i = r[0], u = r[1], d = W2.bind(null, u), v = hu();
       return v.memoizedState = d, [i, d];
     }
     function Jx() {
@@ -15958,18 +15958,18 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
       return [i, d];
     }
     var Zx = !1;
-    function $j() {
+    function $2() {
       return Zx;
     }
     function GO() {
       var r = hu(), i = wT(), u = i.identifierPrefix, d;
       if (Yi()) {
-        var v = aj();
+        var v = a2();
         d = ":" + u + "R" + v;
         var E = Lg++;
         E > 0 && (d += "H" + E.toString(32)), d += ":";
       } else {
-        var R = Uj++;
+        var R = U2++;
         d = ":" + u + "r" + R.toString(32) + ":";
       }
       return r.memoizedState = d, d;
@@ -15978,7 +15978,7 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
       var r = Xl(), i = r.memoizedState;
       return i;
     }
-    function zj(r, i, u) {
+    function z2(r, i, u) {
       typeof arguments[3] == "function" && c("State updates from the useState() and useReducer() Hooks don't support the second callback argument. To execute a side effect after rendering, declare it in the component body with useEffect().");
       var d = $f(r), v = {
         lane: d,
@@ -15998,7 +15998,7 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
       }
       rN(r, d);
     }
-    function Gj(r, i, u) {
+    function G2(r, i, u) {
       typeof arguments[3] == "function" && c("State updates from the useState() and useReducer() Hooks don't support the second callback argument. To execute a side effect after rendering, declare it in the component body with useEffect().");
       var d = $f(r), v = {
         lane: d,
@@ -16019,7 +16019,7 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
             try {
               var U = i.lastRenderedState, Y = R(U, u);
               if (v.hasEagerState = !0, v.eagerState = Y, rn(Y, U)) {
-                Oj(r, i, v, d);
+                O2(r, i, v, d);
                 return;
               }
             } catch {
@@ -16606,13 +16606,13 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
     function uN() {
       return qO;
     }
-    function Yj() {
+    function Y2() {
       pT = !0;
     }
-    function qj() {
+    function q2() {
       qO = !1, pT = !1;
     }
-    function Kj() {
+    function K2() {
       qO = pT, pT = !1;
     }
     function cN() {
@@ -16697,12 +16697,12 @@ Incoming: %s`, lt, "[" + i.join(", ") + "]", "[" + r.join(", ") + "]");
         digest: i != null ? i : null
       };
     }
-    function Xj(r, i) {
+    function X2(r, i) {
       return !0;
     }
     function eR(r, i) {
       try {
-        var u = Xj(r, i);
+        var u = X2(r, i);
         if (u === !1)
           return;
         var d = i.value, v = i.source, E = i.stack, R = E !== null ? E : "";
@@ -16730,7 +16730,7 @@ Visit https://reactjs.org/link/error-boundaries to learn more about error bounda
         });
       }
     }
-    var Jj = typeof WeakMap == "function" ? WeakMap : Map;
+    var J2 = typeof WeakMap == "function" ? WeakMap : Map;
     function pN(r, i, u) {
       var d = Sc(Kr, u);
       d.tag = eO, d.payload = {
@@ -16764,13 +16764,13 @@ Visit https://reactjs.org/link/error-boundaries to learn more about error bounda
     }
     function mN(r, i, u) {
       var d = r.pingCache, v;
-      if (d === null ? (d = r.pingCache = new Jj(), v = /* @__PURE__ */ new Set(), d.set(i, v)) : (v = d.get(i), v === void 0 && (v = /* @__PURE__ */ new Set(), d.set(i, v))), !v.has(u)) {
+      if (d === null ? (d = r.pingCache = new J2(), v = /* @__PURE__ */ new Set(), d.set(i, v)) : (v = d.get(i), v === void 0 && (v = /* @__PURE__ */ new Set(), d.set(i, v))), !v.has(u)) {
         v.add(u);
         var E = $H.bind(null, r, i, u);
         hi && ty(r, u), i.then(E, E);
       }
     }
-    function Qj(r, i, u, d) {
+    function Q2(r, i, u, d) {
       var v = r.updateQueue;
       if (v === null) {
         var E = /* @__PURE__ */ new Set();
@@ -16778,7 +16778,7 @@ Visit https://reactjs.org/link/error-boundaries to learn more about error bounda
       } else
         v.add(u);
     }
-    function Zj(r, i) {
+    function Z2(r, i) {
       var u = r.tag;
       if ((r.mode & Jn) === _n && (u === h || u === k || u === G)) {
         var d = r.alternate;
@@ -16788,7 +16788,7 @@ Visit https://reactjs.org/link/error-boundaries to learn more about error bounda
     function vN(r) {
       var i = r;
       do {
-        if (i.tag === j && Vj(i))
+        if (i.tag === j && V2(i))
           return i;
         i = i.return;
       } while (i !== null);
@@ -16817,10 +16817,10 @@ Visit https://reactjs.org/link/error-boundaries to learn more about error bounda
     function eB(r, i, u, d, v) {
       if (u.flags |= xo, hi && ty(r, v), d !== null && typeof d == "object" && typeof d.then == "function") {
         var E = d;
-        Zj(u), Yi() && u.mode & Jn && ox();
+        Z2(u), Yi() && u.mode & Jn && ox();
         var R = vN(i);
         if (R !== null) {
-          R.flags &= ~Ca, hN(R, i, u, r, v), R.mode & Jn && mN(r, E, v), Qj(R, r, E);
+          R.flags &= ~Ca, hN(R, i, u, r, v), R.mode & Jn && mN(r, E, v), Q2(R, r, E);
           return;
         } else {
           if (!mf(v)) {
@@ -17092,7 +17092,7 @@ Visit https://reactjs.org/link/error-boundaries to learn more about error bounda
       var Ye;
       mu(u) ? (Ye = !0, wb(i)) : Ye = !1, tv(i, v);
       var Ke = i.stateNode, Qe;
-      Ke === null ? (gT(r, i), Cx(i, u, d), vO(i, u, d, v), Qe = !0) : r === null ? Qe = Nj(i, u, d, v) : Qe = Mj(r, i, u, d, v);
+      Ke === null ? (gT(r, i), Cx(i, u, d), vO(i, u, d, v), Qe = !0) : r === null ? Qe = N2(i, u, d, v) : Qe = M2(r, i, u, d, v);
       var qt = sR(r, i, u, Qe, Ye, v);
       {
         var Sn = i.stateNode;
@@ -17154,7 +17154,7 @@ Visit https://reactjs.org/link/error-boundaries to learn more about error bounda
           var Ce = ap(new Error("This root received an early update, before anything was able hydrate. Switched the entire root to client rendering."), i);
           return ON(r, i, N, u, Ce);
         } else {
-          cj(i);
+          c2(i);
           var we = Px(i, null, N, u);
           i.child = we;
           for (var Ye = we; Ye; )
@@ -17313,7 +17313,7 @@ Check the render method of \`` + d + "`.");
       var d = i.pendingProps;
       _W(i) && (i.flags |= Mn);
       var v = Is.current, E = !1, R = (i.flags & Mn) !== bn;
-      if (R || pB(v, r) ? (E = !0, i.flags &= ~Mn) : (r === null || r.memoizedState !== null) && (v = kj(v, Fx)), v = av(v), Ff(i, v), r === null) {
+      if (R || pB(v, r) ? (E = !0, i.flags &= ~Mn) : (r === null || r.memoizedState !== null) && (v = k2(v, Fx)), v = av(v), Ff(i, v), r === null) {
         G0(i);
         var N = i.memoizedState;
         if (N !== null) {
@@ -17415,7 +17415,7 @@ Check the render method of \`` + d + "`.");
           return Kt.memoizedState = fR(R), i.memoizedState = cR, _t;
         }
       else {
-        if (sj(), (i.mode & Jn) === _n)
+        if (s2(), (i.mode & Jn) === _n)
           return hT(
             r,
             i,
@@ -17425,7 +17425,7 @@ Check the render method of \`` + d + "`.");
         if (N0(v)) {
           var N, U, Y;
           {
-            var J = R2(v);
+            var J = Rj(v);
             N = J.digest, U = J.message, Y = J.stack;
           }
           var Ce;
@@ -17450,9 +17450,9 @@ Check the render method of \`` + d + "`.");
         } else if (qC(v)) {
           i.flags |= Mn, i.child = r.child;
           var fn = zH.bind(null, r);
-          return I2(v, fn), null;
+          return Ij(v, fn), null;
         } else {
-          fj(i, v, E.treeContext);
+          f2(i, v, E.treeContext);
           var fr = d.children, ar = dR(i, fr);
           return ar.flags |= Qo, ar;
         }
@@ -17636,7 +17636,7 @@ Check the render method of \`` + d + "`.");
           if (R.children === E.children && !Rb())
             return _c(r, i, u);
         } else
-          Tj(i, v, u);
+          T2(i, v, u);
       }
       var J = E.children;
       return ko(r, i, J, u), i.child;
@@ -17659,7 +17659,7 @@ Check the render method of \`` + d + "`.");
       (i.mode & Jn) === _n && r !== null && (r.alternate = null, i.alternate = null, i.flags |= oa);
     }
     function _c(r, i, u) {
-      return r !== null && (i.dependencies = r.dependencies), dN(), ey(i.lanes), co(u, i.childLanes) ? (Aj(r, i), i.child) : null;
+      return r !== null && (i.dependencies = r.dependencies), dN(), ey(i.lanes), co(u, i.childLanes) ? (A2(r, i), i.child) : null;
     }
     function CB(r, i, u) {
       {
@@ -17762,8 +17762,8 @@ Check the render method of \`` + d + "`.");
             return Ds = !1, xB(r, i, u);
           (r.flags & Id) !== bn ? Ds = !0 : Ds = !1;
         }
-      } else if (Ds = !1, Yi() && nj(i)) {
-        var R = i.index, N = rj();
+      } else if (Ds = !1, Yi() && n2(i)) {
+        var R = i.index, N = r2();
         ix(i, N, R);
       }
       switch (i.lanes = nt, i.tag) {
@@ -17863,7 +17863,7 @@ Check the render method of \`` + d + "`.");
     }, LN = function(r, i, u, d, v) {
       var E = r.memoizedProps;
       if (E !== d) {
-        var R = i.stateNode, N = SO(), U = t2(R, u, E, d, v, N);
+        var R = i.stateNode, N = SO(), U = tj(R, u, E, d, v, N);
         i.updateQueue = U, U && cv(i);
       }
     }, kN = function(r, i, u, d) {
@@ -17910,14 +17910,14 @@ Check the render method of \`` + d + "`.");
       return r.childLanes = u, i;
     }
     function NB(r, i, u) {
-      if (hj() && (i.mode & Jn) !== _n && (i.flags & Mn) === bn)
+      if (h2() && (i.mode & Jn) !== _n && (i.flags & Mn) === bn)
         return dx(i), Zm(), i.flags |= Ca | xo | oi, !1;
       var d = Mb(i);
       if (u !== null && u.dehydrated !== null)
         if (r === null) {
           if (!d)
             throw new Error("A dehydrated suspense component was completed without a hydrated node. This is probably a bug in React.");
-          if (mj(i), Ki(i), (i.mode & Rn) !== _n) {
+          if (m2(i), Ki(i), (i.mode & Rn) !== _n) {
             var v = u !== null;
             if (v) {
               var E = i.child;
@@ -17982,10 +17982,10 @@ Check the render method of \`` + d + "`.");
             }
             var J = SO(), Ce = Mb(i);
             if (Ce)
-              dj(i, U, J) && cv(i);
+              d2(i, U, J) && cv(i);
             else {
               var we = QU(Y, d, U, J, i);
-              PN(we, i, !1, !1), i.stateNode = we, e2(we, Y, d, U) && cv(i);
+              PN(we, i, !1, !1), i.stateNode = we, ej(we, Y, d, U) && cv(i);
             }
             i.ref !== null && AN(i);
           }
@@ -18000,7 +18000,7 @@ Check the render method of \`` + d + "`.");
             if (typeof Ye != "string" && i.stateNode === null)
               throw new Error("We must have new props for new mounts. This error is likely caused by a bug in React. Please file an issue.");
             var Qe = Lx(), qt = SO(), Sn = Mb(i);
-            Sn ? pj(i) && cv(i) : i.stateNode = n2(Ye, Qe, qt, i);
+            Sn ? p2(i) && cv(i) : i.stateNode = nj(Ye, Qe, qt, i);
           }
           return Ki(i), null;
         }
@@ -18030,7 +18030,7 @@ Check the render method of \`` + d + "`.");
           return null;
         }
         case w:
-          return rv(i), hR(r, i), r === null && K2(i.stateNode.containerInfo), Ki(i), null;
+          return rv(i), hR(r, i), r === null && Kj(i.stateNode.containerInfo), Ki(i), null;
         case A:
           var Ht = i.type._context;
           return J0(Ht, i), Ki(i), null;
@@ -18055,7 +18055,7 @@ Check the render method of \`` + d + "`.");
                   if (Ha !== null) {
                     Hr = !0, i.flags |= Mn, Wg(jn, !1);
                     var vo = Ha.updateQueue;
-                    return vo !== null && (i.updateQueue = vo, i.flags |= $n), i.subtreeFlags = bn, Pj(i, u), Ff(i, RO(Is.current, Mg)), i.child;
+                    return vo !== null && (i.updateQueue = vo, i.flags |= $n), i.subtreeFlags = bn, P2(i, u), Ff(i, RO(Is.current, Mg)), i.child;
                   }
                   Sr = Sr.sibling;
                 }
@@ -18310,7 +18310,7 @@ Check the render method of \`` + d + "`.");
           case S: {
             {
               var U = r.stateNode;
-              T2(U.containerInfo);
+              Tj(U.containerInfo);
             }
             break;
           }
@@ -18464,7 +18464,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
             var J = u.stateNode;
             if (i === null && u.flags & $n) {
               var Ce = u.type, we = u.memoizedProps;
-              l2(J, Ce, we);
+              lj(J, Ce, we);
             }
             break;
           }
@@ -18546,7 +18546,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
             u = d;
             try {
               var v = d.stateNode;
-              i ? g2(v) : E2(d.stateNode, d.memoizedProps);
+              i ? gj(v) : Ej(d.stateNode, d.memoizedProps);
             } catch (R) {
               ca(r, r.return, R);
             }
@@ -18555,7 +18555,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
           if (u === null)
             try {
               var E = d.stateNode;
-              i ? y2(E) : b2(E, d.memoizedProps);
+              i ? yj(E) : bj(E, d.memoizedProps);
             } catch (R) {
               ca(r, r.return, R);
             }
@@ -18611,7 +18611,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
       {
         if (r.child = null, r.deletions = null, r.sibling = null, r.tag === O) {
           var u = r.stateNode;
-          u !== null && Q2(u);
+          u !== null && Qj(u);
         }
         r.stateNode = null, r._debugOwner = null, r.return = null, r.dependencies = null, r.memoizedProps = null, r.memoizedState = null, r.pendingProps = null, r.stateNode = null, r.updateQueue = null;
       }
@@ -18669,7 +18669,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
       var d = r.tag, v = d === O || d === I;
       if (v) {
         var E = r.stateNode;
-        i ? p2(u, E, i) : f2(u, E);
+        i ? pj(u, E, i) : fj(u, E);
       } else if (d !== w) {
         var R = r.child;
         if (R !== null) {
@@ -18683,7 +18683,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
       var d = r.tag, v = d === O || d === I;
       if (v) {
         var E = r.stateNode;
-        i ? d2(u, E, i) : c2(u, E);
+        i ? dj(u, E, i) : cj(u, E);
       } else if (d !== w) {
         var R = r.child;
         if (R !== null) {
@@ -18732,12 +18732,12 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
         case I: {
           {
             var d = Ji, v = xs;
-            Ji = null, Hf(r, i, u), Ji = d, xs = v, Ji !== null && (xs ? v2(Ji, u.stateNode) : m2(Ji, u.stateNode));
+            Ji = null, Hf(r, i, u), Ji = d, xs = v, Ji !== null && (xs ? vj(Ji, u.stateNode) : mj(Ji, u.stateNode));
           }
           return;
         }
         case ye: {
-          Ji !== null && (xs ? h2(Ji, u.stateNode) : x0(Ji, u.stateNode));
+          Ji !== null && (xs ? hj(Ji, u.stateNode) : x0(Ji, u.stateNode));
           return;
         }
         case w: {
@@ -18805,7 +18805,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
           var v = d.memoizedState;
           if (v !== null) {
             var E = v.dehydrated;
-            E !== null && L2(E);
+            E !== null && Lj(E);
           }
         }
       }
@@ -18898,7 +18898,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
                 var N = r.memoizedProps, U = d !== null ? d.memoizedProps : N, Y = r.type, J = r.updateQueue;
                 if (r.updateQueue = null, J !== null)
                   try {
-                    s2(R, J, Y, U, N, r);
+                    sj(R, J, Y, U, N, r);
                   } catch (Nn) {
                     ca(r, r.return, Nn);
                   }
@@ -18913,7 +18913,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
               throw new Error("This should have a text node initialized. This error is likely caused by a bug in React. Please file an issue.");
             var Ce = r.stateNode, we = r.memoizedProps, Ye = d !== null ? d.memoizedProps : we;
             try {
-              u2(Ce, Ye, we);
+              uj(Ce, Ye, we);
             } catch (Nn) {
               ca(r, r.return, Nn);
             }
@@ -18925,7 +18925,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
             var Ke = d.memoizedState;
             if (Ke.isDehydrated)
               try {
-                P2(i.containerInfo);
+                Pj(i.containerInfo);
               } catch (Nn) {
                 ca(r, r.return, Nn);
               }
@@ -19387,7 +19387,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
         return wn;
       if ((cr & Zi) !== Si && _i !== nt)
         return Ya(_i);
-      var u = Ej() !== yj;
+      var u = E2() !== y2;
       if (u) {
         if (Qi.transition !== null) {
           var d = Qi.transition;
@@ -19398,7 +19398,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
       var v = rl();
       if (v !== ur)
         return v;
-      var E = r2();
+      var E = rj();
       return E;
     }
     function OH(r) {
@@ -19431,7 +19431,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
       u != null && T1(u);
       var R;
       if (v === wn)
-        r.tag === Af ? (Ms.isBatchingLegacy !== null && (Ms.didScheduleLegacyUpdate = !0), tj(s1.bind(null, r))) : rx(s1.bind(null, r)), Ms.current !== null ? Ms.current.push(Pf) : i2(function() {
+        r.tag === Af ? (Ms.isBatchingLegacy !== null && (Ms.didScheduleLegacyUpdate = !0), t2(s1.bind(null, r))) : rx(s1.bind(null, r)), Ms.current !== null ? Ms.current.push(Pf) : ij(function() {
           (cr & (Zi | Jl)) === Si && Pf();
         }), R = null;
       else {
@@ -19458,7 +19458,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
       r.callbackPriority = v, r.callbackNode = R;
     }
     function o1(r, i) {
-      if (qj(), Zg = Kr, IT = nt, (cr & (Zi | Jl)) !== Si)
+      if (q2(), Zg = Kr, IT = nt, (cr & (Zi | Jl)) !== Si)
         throw new Error("Should not already be working.");
       var u = r.callbackNode, d = wc();
       if (d && r.callbackNode !== u)
@@ -19499,7 +19499,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
       var u = Kg;
       if (Ka(r)) {
         var d = sp(r, i);
-        d.flags |= Ca, q2(r.containerInfo);
+        d.flags |= Ca, qj(r.containerInfo);
       }
       var v = CT(r, i);
       if (v !== op) {
@@ -19598,7 +19598,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
       i = vf(i, ST), i = vf(i, qg), Bh(r, i);
     }
     function s1(r) {
-      if (Kj(), (cr & (Zi | Jl)) !== Si)
+      if (K2(), (cr & (Zi | Jl)) !== Si)
         throw new Error("Should not already be working.");
       wc();
       var i = Md(r, nt);
@@ -19661,14 +19661,14 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
     function sp(r, i) {
       r.finishedWork = null, r.finishedLanes = nt;
       var u = r.timeoutHandle;
-      if (u !== C0 && (r.timeoutHandle = C0, a2(u)), ka !== null)
+      if (u !== C0 && (r.timeoutHandle = C0, aj(u)), ka !== null)
         for (var d = ka.return; d !== null; ) {
           var v = d.alternate;
           FN(v, d), d = d.return;
         }
       Vo = r;
       var E = cp(r.current, null);
-      return ka = E, _i = Tu = i, Oi = Oc, Yg = null, TT = nt, qg = nt, ST = nt, Kg = null, cl = null, _j(), Os.discardPendingWarnings(), E;
+      return ka = E, _i = Tu = i, Oi = Oc, Yg = null, TT = nt, qg = nt, ST = nt, Kg = null, cl = null, _2(), Os.discardPendingWarnings(), E;
     }
     function c1(r, i) {
       do {
@@ -19865,7 +19865,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
         var fn = IR;
         throw IR = null, fn;
       }
-      return co(Jg, wn) && r.tag !== Af && wc(), R = r.pendingLanes, co(R, wn) ? (Yj(), r === CR ? Qg++ : (Qg = 0, CR = r)) : Qg = 0, Pf(), Mh(), null;
+      return co(Jg, wn) && r.tag !== Af && wc(), R = r.pendingLanes, co(R, wn) ? (Y2(), r === CR ? Qg++ : (Qg = 0, CR = r)) : Qg = 0, Pf(), Mh(), null;
     }
     function wc() {
       if (Wf !== null) {
@@ -20031,7 +20031,7 @@ Error message:
         try {
           return MN(r, i, u);
         } catch (E) {
-          if (uj() || E !== null && typeof E == "object" && typeof E.then == "function")
+          if (u2() || E !== null && typeof E == "object" && typeof E.then == "function")
             throw E;
           if (kb(), jx(), FN(r, i), w1(i, d), i.mode & Rn && KO(i), Ku(null, MN, null, r, i, u), G_()) {
             var v = Th();
@@ -20044,7 +20044,7 @@ Error message:
     var b1 = !1, kR;
     kR = /* @__PURE__ */ new Set();
     function JH(r) {
-      if (ia && !$j())
+      if (ia && !$2())
         switch (r.tag) {
           case h:
           case k:
@@ -20554,7 +20554,7 @@ Check the render method of \`` + Y + "`.");
     function C1(r) {
       if (!r)
         return Dl;
-      var i = Xo(r), u = ej(i);
+      var i = Xo(r), u = e2(i);
       if (i.tag === g) {
         var d = i.type;
         if (mu(d))
@@ -20880,7 +20880,7 @@ Check the render method of %s.`, Dn(Ur) || "Unknown"));
       if (Tb(Y.current, r), fg(r), v)
         for (var J = 0; J < v.length; J++) {
           var Ce = v[J];
-          Fj(Y, Ce);
+          F2(Y, Ce);
         }
       return new AT(Y);
     }
@@ -21076,7 +21076,7 @@ You might need to use a local HTTP server (instead of file://): https://reactjs.
 (function(e) {
   function n() {
     if (!(typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ > "u" || typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE != "function")) {
-      if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production")
+      if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production")
         throw new Error("^_^");
       try {
         __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(n);
@@ -21085,11 +21085,11 @@ You might need to use a local HTTP server (instead of file://): https://reactjs.
       }
     }
   }
-  [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production" ? (n(), e.exports = r$()) : e.exports = a$();
+  [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production" ? (n(), e.exports = r$()) : e.exports = a$();
 })(fD);
 const Sy = /* @__PURE__ */ iL(fD.exports);
 var oy = fD.exports;
-if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production")
+if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production")
   Ty.createRoot = oy.createRoot, Ty.hydrateRoot = oy.hydrateRoot;
 else {
   var UT = oy.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
@@ -21959,7 +21959,7 @@ var Re = /* @__PURE__ */ function() {
     value: function(t) {
       var a = document.createElement("style");
       try {
-        t || (t = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].REACT_APP_CSS_NONCE);
+        t || (t = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].REACT_APP_CSS_NONCE);
       } catch {
       }
       return t && a.setAttribute("nonce", t), document.head.appendChild(a), a;
@@ -26194,22 +26194,22 @@ function J3(e, n, t) {
 }
 var ZL = null;
 function Q3(e) {
-  document.addEventListener("inertia:start", Z3.bind(null, e)), document.addEventListener("inertia:progress", e4), document.addEventListener("inertia:finish", t4);
+  document.addEventListener("inertia:start", Z3.bind(null, e)), document.addEventListener("inertia:progress", eY), document.addEventListener("inertia:finish", tY);
 }
 function Z3(e) {
   ZL = setTimeout(() => Du.start(), e);
 }
-function e4(e) {
+function eY(e) {
   var n;
   Du.isStarted() && ((n = e.detail.progress) == null ? void 0 : n.percentage) && Du.set(Math.max(Du.status, e.detail.progress.percentage / 100 * 0.9));
 }
-function t4(e) {
+function tY(e) {
   if (clearTimeout(ZL), Du.isStarted())
     e.detail.visit.completed ? Du.done() : e.detail.visit.interrupted ? Du.set(0) : e.detail.visit.cancelled && (Du.done(), Du.remove());
   else
     return;
 }
-function n4(e) {
+function nY(e) {
   let n = document.createElement("style");
   n.type = "text/css", n.textContent = `
     #nprogress {
@@ -26285,9 +26285,9 @@ function n4(e) {
   `, document.head.appendChild(n);
 }
 function ek({ delay: e = 250, color: n = "#29d", includeCSS: t = !0, showSpinner: a = !1 } = {}) {
-  Q3(e), Du.configure({ showSpinner: a }), t && n4(n);
+  Q3(e), Du.configure({ showSpinner: a }), t && nY(n);
 }
-function r4(e) {
+function rY(e) {
   let n = e.currentTarget.tagName.toLowerCase() === "a";
   return !(e.target && (e == null ? void 0 : e.target).isContentEditable || e.defaultPrevented || n && e.which > 1 || n && e.altKey || n && e.ctrlKey || n && e.metaKey || n && e.shiftKey);
 }
@@ -26764,7 +26764,7 @@ var id = new K3(), sw = { exports: {} };
   }
   e.exports = ni;
 })(sw, sw.exports);
-const a4 = sw.exports;
+const aY = sw.exports;
 var tk = b.exports.createContext(void 0);
 tk.displayName = "InertiaHeadContext";
 var uw = tk, nk = b.exports.createContext(void 0);
@@ -26786,14 +26786,14 @@ function rk({ children: e, initialPage: n, initialComponent: t, resolveComponent
   return b.exports.createElement(uw.Provider, { value: h }, b.exports.createElement(cw.Provider, { value: c.page }, g({ Component: c.component, key: c.key, props: c.page.props })));
 }
 rk.displayName = "Inertia";
-async function i4({ id: e = "app", resolve: n, setup: t, title: a, progress: l = {}, page: f, render: c }) {
+async function iY({ id: e = "app", resolve: n, setup: t, title: a, progress: l = {}, page: f, render: c }) {
   let m = typeof window > "u", h = m ? null : document.getElementById(e), g = f || JSON.parse(h.dataset.page), T = (O) => Promise.resolve(n(O)).then((I) => I.default || I), S = [], w = await T(g.component).then((O) => t({ el: h, App: rk, props: { initialPage: g, initialComponent: O, resolveComponent: T, titleCallback: a, onHeadUpdate: m ? (I) => S = I : null } }));
   if (!m && l && ek(l), m) {
     let O = await c(b.exports.createElement("div", { id: e, "data-page": JSON.stringify(g) }, w));
     return { head: S, body: O };
   }
 }
-var o4 = function({ children: e, title: n }) {
+var oY = function({ children: e, title: n }) {
   let t = b.exports.useContext(uw), a = b.exports.useMemo(() => t.createProvider(), [t]);
   b.exports.useEffect(() => () => {
     a.disconnect();
@@ -26828,10 +26828,10 @@ var o4 = function({ children: e, title: n }) {
     return n && !w.find((O) => O.startsWith("<title")) && w.push(`<title inertia>${n}</title>`), w;
   }
   return a.update(T(e)), null;
-}, l4 = o4, xc = () => {
-}, s4 = b.exports.forwardRef(({ children: e, as: n = "a", data: t = {}, href: a, method: l = "get", preserveScroll: f = !1, preserveState: c = null, replace: m = !1, only: h = [], headers: g = {}, queryStringArrayFormat: T = "brackets", onClick: S = xc, onCancelToken: w = xc, onBefore: O = xc, onStart: I = xc, onProgress: C = xc, onFinish: V = xc, onCancel: M = xc, onSuccess: A = xc, onError: k = xc, ...H }, j) => {
+}, lY = oY, xc = () => {
+}, sY = b.exports.forwardRef(({ children: e, as: n = "a", data: t = {}, href: a, method: l = "get", preserveScroll: f = !1, preserveState: c = null, replace: m = !1, only: h = [], headers: g = {}, queryStringArrayFormat: T = "brackets", onClick: S = xc, onCancelToken: w = xc, onBefore: O = xc, onStart: I = xc, onProgress: C = xc, onFinish: V = xc, onCancel: M = xc, onSuccess: A = xc, onError: k = xc, ...H }, j) => {
   let $ = b.exports.useCallback((ne) => {
-    S(ne), r4(ne) && (ne.preventDefault(), id.visit(a, { data: t, method: l, preserveScroll: f, preserveState: c != null ? c : l !== "get", replace: m, only: h, headers: g, onCancelToken: w, onBefore: O, onStart: I, onProgress: C, onFinish: V, onCancel: M, onSuccess: A, onError: k }));
+    S(ne), rY(ne) && (ne.preventDefault(), id.visit(a, { data: t, method: l, preserveScroll: f, preserveState: c != null ? c : l !== "get", replace: m, only: h, headers: g, onCancelToken: w, onBefore: O, onStart: I, onProgress: C, onFinish: V, onCancel: M, onSuccess: A, onError: k }));
   }, [t, a, l, f, c, m, h, g, S, w, O, I, C, V, M, A, k]);
   n = n.toLowerCase(), l = l.toLowerCase();
   let [G, z] = QL(l, a || "", t, T);
@@ -26840,7 +26840,7 @@ var o4 = function({ children: e, title: n }) {
 Please specify a more appropriate element using the "as" attribute. For example:
 
 <Link href="${a}" method="${l}" as="button">...</Link>`), b.exports.createElement(n, { ...H, ...n === "a" ? { href: a } : {}, ref: j, onClick: $ }, e);
-}), _S = s4;
+}), _S = sY;
 function QM(e, n) {
   let [t, a] = b.exports.useState(() => {
     let l = id.restore(n);
@@ -26887,7 +26887,7 @@ function Une(e, n) {
   }, [h, S]);
   return { data: h, setData(z, ne) {
     g(typeof z == "string" ? { ...h, [z]: ne } : typeof z == "function" ? (ye) => z(ye) : z);
-  }, isDirty: !a4(h, l), errors: T, hasErrors: w, processing: I, progress: V, wasSuccessful: A, recentlySuccessful: H, transform(z) {
+  }, isDirty: !aY(h, l), errors: T, hasErrors: w, processing: I, progress: V, wasSuccessful: A, recentlySuccessful: H, transform(z) {
     $ = z;
   }, setDefaults(z, ne) {
     f(typeof z > "u" ? () => h : (ye) => ({ ...ye, ...typeof z == "string" ? { [z]: ne } : z }));
@@ -26917,7 +26917,7 @@ function Une(e, n) {
     c.current && c.current.cancel();
   } };
 }
-function u4() {
+function uY() {
   let e = b.exports.useContext(cw);
   if (!e)
     throw new Error("usePage must be used within the Inertia component");
@@ -26988,7 +26988,7 @@ var Cn = { exports: {} }, TI = { exports: {} }, Wr = {};
  * LICENSE file in the root directory of this source tree.
  */
 var ZM;
-function c4() {
+function cY() {
   if (ZM)
     return Wr;
   ZM = 1;
@@ -27064,8 +27064,8 @@ var $r = {};
  * LICENSE file in the root directory of this source tree.
  */
 var eA;
-function f4() {
-  return eA || (eA = 1, [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && function() {
+function fY() {
+  return eA || (eA = 1, [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && function() {
     var e = typeof Symbol == "function" && Symbol.for, n = e ? Symbol.for("react.element") : 60103, t = e ? Symbol.for("react.portal") : 60106, a = e ? Symbol.for("react.fragment") : 60107, l = e ? Symbol.for("react.strict_mode") : 60108, f = e ? Symbol.for("react.profiler") : 60114, c = e ? Symbol.for("react.provider") : 60109, m = e ? Symbol.for("react.context") : 60110, h = e ? Symbol.for("react.async_mode") : 60111, g = e ? Symbol.for("react.concurrent_mode") : 60111, T = e ? Symbol.for("react.forward_ref") : 60112, S = e ? Symbol.for("react.suspense") : 60113, w = e ? Symbol.for("react.suspense_list") : 60120, O = e ? Symbol.for("react.memo") : 60115, I = e ? Symbol.for("react.lazy") : 60116, C = e ? Symbol.for("react.block") : 60121, V = e ? Symbol.for("react.fundamental") : 60117, M = e ? Symbol.for("react.responder") : 60118, A = e ? Symbol.for("react.scope") : 60119;
     function k($e) {
       return typeof $e == "string" || typeof $e == "function" || $e === a || $e === g || $e === f || $e === l || $e === S || $e === w || typeof $e == "object" && $e !== null && ($e.$$typeof === I || $e.$$typeof === O || $e.$$typeof === c || $e.$$typeof === m || $e.$$typeof === T || $e.$$typeof === V || $e.$$typeof === M || $e.$$typeof === A || $e.$$typeof === C);
@@ -27148,7 +27148,7 @@ function f4() {
 var tA;
 function ok() {
   return tA || (tA = 1, function(e) {
-    [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production" ? e.exports = c4() : e.exports = f4();
+    [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV === "production" ? e.exports = cY() : e.exports = fY();
   }(TI)), TI.exports;
 }
 /*
@@ -27157,7 +27157,7 @@ object-assign
 @license MIT
 */
 var SI, nA;
-function d4() {
+function dY() {
   if (nA)
     return SI;
   nA = 1;
@@ -27216,13 +27216,13 @@ function lk() {
   return aA || (aA = 1, OI = Function.call.bind(Object.prototype.hasOwnProperty)), OI;
 }
 var RI, iA;
-function p4() {
+function pY() {
   if (iA)
     return RI;
   iA = 1;
   var e = function() {
   };
-  if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production") {
+  if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production") {
     var n = MD(), t = {}, a = lk();
     e = function(f) {
       var c = "Warning: " + f;
@@ -27234,7 +27234,7 @@ function p4() {
     };
   }
   function l(f, c, m, h, g) {
-    if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production") {
+    if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production") {
       for (var T in f)
         if (a(f, T)) {
           var S;
@@ -27262,17 +27262,17 @@ function p4() {
     }
   }
   return l.resetWarningCache = function() {
-    [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && (t = {});
+    [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && (t = {});
   }, RI = l, RI;
 }
 var II, oA;
-function m4() {
+function mY() {
   if (oA)
     return II;
   oA = 1;
-  var e = ok(), n = d4(), t = MD(), a = lk(), l = p4(), f = function() {
+  var e = ok(), n = dY(), t = MD(), a = lk(), l = pY(), f = function() {
   };
-  [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && (f = function(m) {
+  [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && (f = function(m) {
     var h = "Warning: " + m;
     typeof console < "u" && console.error(h);
     try {
@@ -27319,7 +27319,7 @@ function m4() {
     }
     C.prototype = Error.prototype;
     function V(L) {
-      if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production")
+      if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production")
         var te = {}, Oe = 0;
       function ce(Te, he, ge, fe, xe, Pe, rt) {
         if (fe = fe || w, Pe = Pe || ge, rt !== t) {
@@ -27328,7 +27328,7 @@ function m4() {
               "Calling PropTypes validators directly is not supported by the `prop-types` package. Use `PropTypes.checkPropTypes()` to call them. Read more at http://fb.me/use-check-prop-types"
             );
             throw $e.name = "Invariant Violation", $e;
-          } else if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && typeof console < "u") {
+          } else if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && typeof console < "u") {
             var Fe = fe + ":" + ge;
             !te[Fe] && Oe < 3 && (f(
               "You are manually calling a React.PropTypes validation function for the `" + Pe + "` prop on `" + fe + "`. This is deprecated and will throw in the standalone `prop-types` package. You may be seeing this warning due to a third-party PropTypes library. See https://fb.me/react-warning-dont-call-proptypes for details."
@@ -27409,7 +27409,7 @@ function m4() {
     }
     function G(L) {
       if (!Array.isArray(L))
-        return [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && (arguments.length > 1 ? f(
+        return [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && (arguments.length > 1 ? f(
           "Invalid arguments supplied to oneOf, expected an array, got " + arguments.length + " arguments. A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z])."
         ) : f("Invalid argument supplied to oneOf, expected an array.")), c;
       function te(Oe, ce, pe, Te, he) {
@@ -27443,7 +27443,7 @@ function m4() {
     }
     function ne(L) {
       if (!Array.isArray(L))
-        return [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && f("Invalid argument supplied to oneOfType, expected an instance of array."), c;
+        return [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" && f("Invalid argument supplied to oneOfType, expected an instance of array."), c;
       for (var te = 0; te < L.length; te++) {
         var Oe = L[te];
         if (typeof Oe != "function")
@@ -27587,7 +27587,7 @@ Valid keys: ` + JSON.stringify(Object.keys(L), null, "  ")
   }, II;
 }
 var wI, lA;
-function v4() {
+function vY() {
   if (lA)
     return wI;
   lA = 1;
@@ -27635,31 +27635,31 @@ function v4() {
     return f.PropTypes = f, f;
   }, wI;
 }
-if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production") {
-  var h4 = ok(), g4 = !0;
-  Cn.exports = m4()(h4.isElement, g4);
+if ([{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production") {
+  var hY = ok(), gY = !0;
+  Cn.exports = mY()(hY.isElement, gY);
 } else
-  Cn.exports = v4()();
-function y4(e, n) {
+  Cn.exports = vY()();
+function yY(e, n) {
   return e.classList ? !!n && e.classList.contains(n) : (" " + (e.className.baseVal || e.className) + " ").indexOf(" " + n + " ") !== -1;
 }
-function E4(e, n) {
-  e.classList ? e.classList.add(n) : y4(e, n) || (typeof e.className == "string" ? e.className = e.className + " " + n : e.setAttribute("class", (e.className && e.className.baseVal || "") + " " + n));
+function EY(e, n) {
+  e.classList ? e.classList.add(n) : yY(e, n) || (typeof e.className == "string" ? e.className = e.className + " " + n : e.setAttribute("class", (e.className && e.className.baseVal || "") + " " + n));
 }
 function sA(e, n) {
   return e.replace(new RegExp("(^|\\s)" + n + "(?:\\s|$)", "g"), "$1").replace(/\s+/g, " ").replace(/^\s*|\s*$/g, "");
 }
-function b4(e, n) {
+function bY(e, n) {
   e.classList ? e.classList.remove(n) : typeof e.className == "string" ? e.className = sA(e.className, n) : e.setAttribute("class", sA(e.className && e.className.baseVal || "", n));
 }
 const uA = {
   disabled: !1
 };
-var T4 = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" ? Cn.exports.oneOfType([Cn.exports.number, Cn.exports.shape({
+var TY = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" ? Cn.exports.oneOfType([Cn.exports.number, Cn.exports.shape({
   enter: Cn.exports.number,
   exit: Cn.exports.number,
   appear: Cn.exports.number
-}).isRequired]) : null, S4 = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" ? Cn.exports.oneOfType([Cn.exports.string, Cn.exports.shape({
+}).isRequired]) : null, SY = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" ? Cn.exports.oneOfType([Cn.exports.string, Cn.exports.shape({
   enter: Cn.exports.string,
   exit: Cn.exports.string,
   active: Cn.exports.string
@@ -27801,7 +27801,7 @@ var sk = function(n) {
   }, n;
 }(Ho.Component);
 Yc.contextType = OS;
-Yc.propTypes = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" ? {
+Yc.propTypes = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" ? {
   nodeRef: Cn.exports.shape({
     current: typeof Element > "u" ? Cn.exports.any : function(e, n, t, a, l, f) {
       var c = e[n];
@@ -27816,7 +27816,7 @@ Yc.propTypes = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/da
   enter: Cn.exports.bool,
   exit: Cn.exports.bool,
   timeout: function(n) {
-    var t = T4;
+    var t = TY;
     n.addEndListener || (t = t.isRequired);
     for (var a = arguments.length, l = new Array(a > 1 ? a - 1 : 0), f = 1; f < a; f++)
       l[f - 1] = arguments[f];
@@ -27852,13 +27852,13 @@ Yc.ENTERING = vp;
 Yc.ENTERED = Iv;
 Yc.EXITING = dw;
 const uk = Yc;
-var _4 = function(n, t) {
+var _Y = function(n, t) {
   return n && t && t.split(" ").forEach(function(a) {
-    return E4(n, a);
+    return EY(n, a);
   });
 }, DI = function(n, t) {
   return n && t && t.split(" ").forEach(function(a) {
-    return b4(n, a);
+    return bY(n, a);
   });
 }, AD = /* @__PURE__ */ function(e) {
   ND(n, e);
@@ -27901,7 +27901,7 @@ var _4 = function(n, t) {
   var t = n.prototype;
   return t.addClass = function(l, f, c) {
     var m = this.getClassNames(f)[c + "ClassName"], h = this.getClassNames("enter"), g = h.doneClassName;
-    f === "appear" && c === "done" && g && (m += " " + g), c === "active" && l && sk(l), m && (this.appliedClasses[f][c] = m, _4(l, m));
+    f === "appear" && c === "done" && g && (m += " " + g), c === "active" && l && sk(l), m && (this.appliedClasses[f][c] = m, _Y(l, m));
   }, t.removeClasses = function(l, f) {
     var c = this.appliedClasses[f], m = c.base, h = c.active, g = c.done;
     this.appliedClasses[f] = {}, m && DI(l, m), h && DI(l, h), g && DI(l, g);
@@ -27922,8 +27922,8 @@ var _4 = function(n, t) {
 AD.defaultProps = {
   classNames: ""
 };
-AD.propTypes = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" ? Wy({}, uk.propTypes, {
-  classNames: S4,
+AD.propTypes = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" ? Wy({}, uk.propTypes, {
+  classNames: SY,
   onEnter: Cn.exports.func,
   onEntering: Cn.exports.func,
   onEntered: Cn.exports.func,
@@ -27932,7 +27932,7 @@ AD.propTypes = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/da
   onExited: Cn.exports.func
 }) : {};
 const ck = AD;
-function O4(e) {
+function OY(e) {
   if (e === void 0)
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   return e;
@@ -27947,7 +27947,7 @@ function PD(e, n) {
     a[l.key] = t(l);
   }), a;
 }
-function R4(e, n) {
+function RY(e, n) {
   e = e || {}, n = n || {};
   function t(T) {
     return T in n ? n[T] : e[T];
@@ -27971,7 +27971,7 @@ function R4(e, n) {
 function gp(e, n, t) {
   return t[n] != null ? t[n] : e.props[n];
 }
-function I4(e, n) {
+function IY(e, n) {
   return PD(e.children, function(t) {
     return b.exports.cloneElement(t, {
       onExited: n.bind(null, t),
@@ -27982,8 +27982,8 @@ function I4(e, n) {
     });
   });
 }
-function w4(e, n, t) {
-  var a = PD(e.children), l = R4(n, a);
+function wY(e, n, t) {
+  var a = PD(e.children), l = RY(n, a);
   return Object.keys(l).forEach(function(f) {
     var c = l[f];
     if (!!b.exports.isValidElement(c)) {
@@ -28004,11 +28004,11 @@ function w4(e, n, t) {
     }
   }), l;
 }
-var D4 = Object.values || function(e) {
+var DY = Object.values || function(e) {
   return Object.keys(e).map(function(n) {
     return e[n];
   });
-}, C4 = {
+}, CY = {
   component: "div",
   childFactory: function(n) {
     return n;
@@ -28018,7 +28018,7 @@ var D4 = Object.values || function(e) {
   function n(a, l) {
     var f;
     f = e.call(this, a, l) || this;
-    var c = f.handleExited.bind(O4(f));
+    var c = f.handleExited.bind(OY(f));
     return f.state = {
       contextValue: {
         isMounting: !0
@@ -28039,7 +28039,7 @@ var D4 = Object.values || function(e) {
   }, n.getDerivedStateFromProps = function(l, f) {
     var c = f.children, m = f.handleExited, h = f.firstRender;
     return {
-      children: h ? I4(l, m) : w4(l, c, m),
+      children: h ? IY(l, m) : wY(l, c, m),
       firstRender: !1
     };
   }, t.handleExited = function(l, f) {
@@ -28051,7 +28051,7 @@ var D4 = Object.values || function(e) {
       };
     }));
   }, t.render = function() {
-    var l = this.props, f = l.component, c = l.childFactory, m = xD(l, ["component", "childFactory"]), h = this.state.contextValue, g = D4(this.state.children).map(c);
+    var l = this.props, f = l.component, c = l.childFactory, m = xD(l, ["component", "childFactory"]), h = this.state.contextValue, g = DY(this.state.children).map(c);
     return delete m.appear, delete m.enter, delete m.exit, f === null ? /* @__PURE__ */ Ho.createElement(OS.Provider, {
       value: h
     }, g) : /* @__PURE__ */ Ho.createElement(OS.Provider, {
@@ -28059,7 +28059,7 @@ var D4 = Object.values || function(e) {
     }, /* @__PURE__ */ Ho.createElement(f, m, g));
   }, n;
 }(Ho.Component);
-LD.propTypes = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", LOGNAME: "abanoub", XPC_SERVICE_NAME: "0", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "434d79ea-55f4-4bcf-8662-8c65ef26b4a2", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" ? {
+LD.propTypes = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/datagrip.vmoptions", PATH: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/abanoub/.dotnet/tools:/Users/abanoub/Library/Android/sdk/platform-tools/", PYCHARM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/pycharm.vmoptions", WEBSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webstorm.vmoptions", CLION_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/clion.vmoptions", JETBRAINSCLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrainsclient.vmoptions", TERM: "xterm-256color", GATEWAY_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/gateway.vmoptions", COMMAND_MODE: "unix2003", GOLAND_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/goland.vmoptions", IDEA_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/idea.vmoptions", RIDER_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rider.vmoptions", RUBYMINE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/rubymine.vmoptions", JETBRAINS_CLIENT_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/jetbrains_client.vmoptions", DEVECOSTUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/devecostudio.vmoptions", LOGNAME: "abanoub", STUDIO_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/studio.vmoptions", XPC_SERVICE_NAME: "0", __CFBundleIdentifier: "com.jetbrains.rider-EAP", SHELL: "/bin/zsh", APPCODE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/appcode.vmoptions", USER: "abanoub", TMPDIR: "/var/folders/r3/svklf1sd497_cr0zvhk2v5340000gn/T/", TERMINAL_EMULATOR: "JetBrains-JediTerm", DATASPELL_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/dataspell.vmoptions", SSH_AUTH_SOCK: "/private/tmp/com.apple.launchd.WCtsSn1p3Y/Listeners", XPC_FLAGS: "0x0", WEBIDE_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/webide.vmoptions", TERM_SESSION_ID: "dfa9d2f0-446e-48b8-b8d8-8a10de58d0f7", __CF_USER_TEXT_ENCODING: "0x1F5:0x0:0x0", PHPSTORM_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/phpstorm.vmoptions", LC_CTYPE: "UTF-8", HOME: "/Users/abanoub", SHLVL: "1", PWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", OLDPWD: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React", _: "/usr/local/bin/vite" }].NODE_ENV !== "production" ? {
   component: Cn.exports.any,
   children: Cn.exports.node,
   appear: Cn.exports.bool,
@@ -28067,13 +28067,13 @@ LD.propTypes = [{ DATAGRIP_VM_OPTIONS: "/Volumes/Data/.ja-netfilter/vmoptions/da
   exit: Cn.exports.bool,
   childFactory: Cn.exports.func
 } : {};
-LD.defaultProps = C4;
-const x4 = LD;
-function N4(e) {
+LD.defaultProps = CY;
+const xY = LD;
+function NY(e) {
   if (Array.isArray(e))
     return e;
 }
-function M4(e, n) {
+function MY(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -28105,7 +28105,7 @@ function cA(e, n) {
     a[t] = e[t];
   return a;
 }
-function A4(e, n) {
+function AY(e, n) {
   if (!!e) {
     if (typeof e == "string")
       return cA(e, n);
@@ -28116,12 +28116,12 @@ function A4(e, n) {
       return cA(e, n);
   }
 }
-function P4() {
+function PY() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function WT(e, n) {
-  return N4(e) || M4(e, n) || A4(e, n) || P4();
+  return NY(e) || MY(e, n) || AY(e, n) || PY();
 }
 var S_ = function(n) {
   var t = b.exports.useRef(void 0);
@@ -28148,7 +28148,7 @@ var S_ = function(n) {
   }, [f, c]), Bi(function() {
     O();
   }), [w, O];
-}, L4 = function(n) {
+}, LY = function(n) {
   var t = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 0, a = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : !0, l = b.exports.useRef(null), f = b.exports.useRef(null), c = b.exports.useCallback(function() {
     return clearTimeout(l.current);
   }, [l.current]);
@@ -28264,7 +28264,7 @@ function $y(e) {
     return n && typeof Symbol == "function" && n.constructor === Symbol && n !== Symbol.prototype ? "symbol" : typeof n;
   }, $y(e);
 }
-function k4(e, n) {
+function kY(e, n) {
   if ($y(e) !== "object" || e === null)
     return e;
   var t = e[Symbol.toPrimitive];
@@ -28276,12 +28276,12 @@ function k4(e, n) {
   }
   return (n === "string" ? String : Number)(e);
 }
-function V4(e) {
-  var n = k4(e, "string");
+function VY(e) {
+  var n = kY(e, "string");
   return $y(n) === "symbol" ? n : String(n);
 }
-function F4(e, n, t) {
-  return n = V4(n), n in e ? Object.defineProperty(e, n, {
+function FY(e, n, t) {
+  return n = VY(n), n in e ? Object.defineProperty(e, n, {
     value: t,
     enumerable: !0,
     configurable: !0,
@@ -28314,7 +28314,7 @@ function CI(e) {
   for (var n = 1; n < arguments.length; n++) {
     var t = arguments[n] != null ? arguments[n] : {};
     n % 2 ? fA(Object(t), !0).forEach(function(a) {
-      F4(e, a, t[a]);
+      FY(e, a, t[a]);
     }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : fA(Object(t)).forEach(function(a) {
       Object.defineProperty(e, a, Object.getOwnPropertyDescriptor(t, a));
     });
@@ -28409,11 +28409,11 @@ function mw() {
     return e;
   }, mw.apply(this, arguments);
 }
-function U4(e) {
+function UY(e) {
   if (Array.isArray(e))
     return e;
 }
-function j4(e, n) {
+function jY(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -28445,7 +28445,7 @@ function dA(e, n) {
     a[t] = e[t];
   return a;
 }
-function B4(e, n) {
+function BY(e, n) {
   if (!!e) {
     if (typeof e == "string")
       return dA(e, n);
@@ -28456,12 +28456,12 @@ function B4(e, n) {
       return dA(e, n);
   }
 }
-function H4() {
+function HY() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function pA(e, n) {
-  return U4(e) || j4(e, n) || B4(e, n) || H4();
+  return UY(e) || jY(e, n) || BY(e, n) || HY();
 }
 var RS = {
   defaultProps: {
@@ -28590,7 +28590,7 @@ var RS = {
   }, $), z, ne);
 });
 VD.displayName = "Panel";
-const W4 = ({ configs: e, resource: n, component: t, record: a, formData: l, setFieldValue: f, errors: c }) => /* @__PURE__ */ Ee(VD, {
+const WY = ({ configs: e, resource: n, component: t, record: a, formData: l, setFieldValue: f, errors: c }) => /* @__PURE__ */ Ee(VD, {
   className: `col-12 md:col-${t.columnSpan}`,
   header: t.label,
   toggleable: t.toggleable,
@@ -28687,7 +28687,7 @@ var IS = {
   }, c), h, g);
 });
 dk.displayName = "Card";
-const $4 = ({ configs: e, resource: n, component: t, record: a, formData: l, setFieldValue: f, errors: c }) => /* @__PURE__ */ Ee(dk, {
+const $Y = ({ configs: e, resource: n, component: t, record: a, formData: l, setFieldValue: f, errors: c }) => /* @__PURE__ */ Ee(dk, {
   className: `col-12 md:col-${t.columnSpan}`,
   title: t.label,
   style: { marginBottom: "2rem", ...t.style },
@@ -28733,11 +28733,11 @@ function hw() {
     return e;
   }, hw.apply(this, arguments);
 }
-function z4(e) {
+function zY(e) {
   if (Array.isArray(e))
     return e;
 }
-function G4(e, n) {
+function GY(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -28769,7 +28769,7 @@ function mA(e, n) {
     a[t] = e[t];
   return a;
 }
-function Y4(e, n) {
+function YY(e, n) {
   if (!!e) {
     if (typeof e == "string")
       return mA(e, n);
@@ -28780,12 +28780,12 @@ function Y4(e, n) {
       return mA(e, n);
   }
 }
-function q4() {
+function qY() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function vA(e, n) {
-  return z4(e) || G4(e, n) || Y4(e, n) || q4();
+  return zY(e) || GY(e, n) || YY(e, n) || qY();
 }
 var wS = {
   defaultProps: {
@@ -28905,7 +28905,7 @@ var wS = {
   }), ne, ye);
 });
 pk.displayName = "Fieldset";
-const K4 = ({ configs: e, resource: n, component: t, record: a, formData: l, setFieldValue: f, errors: c }) => /* @__PURE__ */ Ee(pk, {
+const KY = ({ configs: e, resource: n, component: t, record: a, formData: l, setFieldValue: f, errors: c }) => /* @__PURE__ */ Ee(pk, {
   className: `col-12 md:col-${t.columnSpan}`,
   legend: t.label,
   toggleable: t.toggleable,
@@ -28960,7 +28960,7 @@ function zy(e) {
     return n && typeof Symbol == "function" && n.constructor === Symbol && n !== Symbol.prototype ? "symbol" : typeof n;
   }, zy(e);
 }
-function X4(e, n) {
+function XY(e, n) {
   if (zy(e) !== "object" || e === null)
     return e;
   var t = e[Symbol.toPrimitive];
@@ -28972,12 +28972,12 @@ function X4(e, n) {
   }
   return (n === "string" ? String : Number)(e);
 }
-function J4(e) {
-  var n = X4(e, "string");
+function JY(e) {
+  var n = XY(e, "string");
   return zy(n) === "symbol" ? n : String(n);
 }
-function Q4(e, n, t) {
-  return n = J4(n), n in e ? Object.defineProperty(e, n, {
+function QY(e, n, t) {
+  return n = JY(n), n in e ? Object.defineProperty(e, n, {
     value: t,
     enumerable: !0,
     configurable: !0,
@@ -28990,11 +28990,11 @@ function gw(e, n) {
     a[t] = e[t];
   return a;
 }
-function Z4(e) {
+function ZY(e) {
   if (Array.isArray(e))
     return gw(e);
 }
-function eY(e) {
+function e4(e) {
   if (typeof Symbol < "u" && e[Symbol.iterator] != null || e["@@iterator"] != null)
     return Array.from(e);
 }
@@ -29009,18 +29009,18 @@ function mk(e, n) {
       return gw(e, n);
   }
 }
-function tY() {
+function t4() {
   throw new TypeError(`Invalid attempt to spread non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function nY(e) {
-  return Z4(e) || eY(e) || mk(e) || tY();
+function n4(e) {
+  return ZY(e) || e4(e) || mk(e) || t4();
 }
-function rY(e) {
+function r4(e) {
   if (Array.isArray(e))
     return e;
 }
-function aY(e, n) {
+function a4(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -29046,12 +29046,12 @@ function aY(e, n) {
     return m;
   }
 }
-function iY() {
+function i4() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function fy(e, n) {
-  return rY(e) || aY(e, n) || mk(e, n) || iY();
+  return r4(e) || a4(e, n) || mk(e, n) || i4();
 }
 var CS = {
   defaultProps: {
@@ -29117,7 +29117,7 @@ function $T(e) {
   for (var n = 1; n < arguments.length; n++) {
     var t = arguments[n] != null ? arguments[n] : {};
     n % 2 ? hA(Object(t), !0).forEach(function(a) {
-      Q4(e, a, t[a]);
+      QY(e, a, t[a]);
     }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : hA(Object(t)).forEach(function(a) {
       Object.defineProperty(e, a, Object.getOwnPropertyDescriptor(t, a));
     });
@@ -29153,7 +29153,7 @@ var vk = function() {
     Ct.preventDefault(), !(t.onBeforeTabClose && t.onBeforeTabClose({
       originalEvent: Ct,
       index: At
-    }) === !1) && (A([].concat(nY(M), [At])), t.onTabClose && t.onTabClose({
+    }) === !1) && (A([].concat(n4(M), [At])), t.onTabClose && t.onTabClose({
       originalEvent: Ct,
       index: At
     }));
@@ -29353,7 +29353,7 @@ var vk = function() {
 });
 vk.displayName = "TabPanel";
 hk.displayName = "TabView";
-const oY = ({ configs: e, resource: n, component: t, record: a, formData: l, setFieldValue: f, errors: c }) => /* @__PURE__ */ Ee(hk, {
+const o4 = ({ configs: e, resource: n, component: t, record: a, formData: l, setFieldValue: f, errors: c }) => /* @__PURE__ */ Ee(hk, {
   className: `col-12 md:col-${t.columnSpan}`,
   activeIndex: t.activeTabIndex,
   scrollable: t.scrollable,
@@ -29508,15 +29508,15 @@ function yw(e, n) {
     a[t] = e[t];
   return a;
 }
-function lY(e) {
+function l4(e) {
   if (Array.isArray(e))
     return yw(e);
 }
-function sY(e) {
+function s4(e) {
   if (typeof Symbol < "u" && e[Symbol.iterator] != null || e["@@iterator"] != null)
     return Array.from(e);
 }
-function uY(e, n) {
+function u4(e, n) {
   if (!!e) {
     if (typeof e == "string")
       return yw(e, n);
@@ -29527,12 +29527,12 @@ function uY(e, n) {
       return yw(e, n);
   }
 }
-function cY() {
+function c4() {
   throw new TypeError(`Invalid attempt to spread non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function fY(e) {
-  return lY(e) || sY(e) || uY(e) || cY();
+function f4(e) {
+  return l4(e) || s4(e) || u4(e) || c4();
 }
 var Op = {
   DEFAULT_MASKS: {
@@ -29561,7 +29561,7 @@ var Op = {
   onPaste: function(n, t, a) {
     if (!a) {
       var l = this.getRegex(t), f = n.clipboardData.getData("text");
-      fY(f).forEach(function(c) {
+      f4(f).forEach(function(c) {
         if (!l.test(c))
           return n.preventDefault(), !1;
       });
@@ -29572,11 +29572,11 @@ var Op = {
     return a && !f.test(a) && (l = !1), l;
   }
 };
-function dY(e) {
+function d4(e) {
   if (Array.isArray(e))
     return e;
 }
-function pY(e, n) {
+function p4(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -29608,7 +29608,7 @@ function gA(e, n) {
     a[t] = e[t];
   return a;
 }
-function mY(e, n) {
+function m4(e, n) {
   if (!!e) {
     if (typeof e == "string")
       return gA(e, n);
@@ -29619,12 +29619,12 @@ function mY(e, n) {
       return gA(e, n);
   }
 }
-function vY() {
+function v4() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function hY(e, n) {
-  return dY(e) || pY(e, n) || mY(e, n) || vY();
+function h4(e, n) {
+  return d4(e) || p4(e, n) || m4(e, n) || v4();
 }
 var Ew = {
   defaultProps: {
@@ -29643,7 +29643,7 @@ var Ew = {
     return Se.getDiffProps(n, Ew.defaultProps);
   }
 }, ku = /* @__PURE__ */ b.exports.memo(function(e) {
-  var n = Ew.getProps(e), t = b.exports.useState(n.visible && Re.hasDOM()), a = hY(t, 2), l = a[0], f = a[1];
+  var n = Ew.getProps(e), t = b.exports.useState(n.visible && Re.hasDOM()), a = h4(t, 2), l = a[0], f = a[1];
   So(function() {
     Re.hasDOM() && !l && (f(!0), n.onMounted && n.onMounted());
   }), _r(function() {
@@ -29676,7 +29676,7 @@ function Gy(e) {
     return n && typeof Symbol == "function" && n.constructor === Symbol && n !== Symbol.prototype ? "symbol" : typeof n;
   }, Gy(e);
 }
-function gY(e, n) {
+function g4(e, n) {
   if (Gy(e) !== "object" || e === null)
     return e;
   var t = e[Symbol.toPrimitive];
@@ -29688,12 +29688,12 @@ function gY(e, n) {
   }
   return (n === "string" ? String : Number)(e);
 }
-function yY(e) {
-  var n = gY(e, "string");
+function y4(e) {
+  var n = g4(e, "string");
   return Gy(n) === "symbol" ? n : String(n);
 }
-function EY(e, n, t) {
-  return n = yY(n), n in e ? Object.defineProperty(e, n, {
+function E4(e, n, t) {
+  return n = y4(n), n in e ? Object.defineProperty(e, n, {
     value: t,
     enumerable: !0,
     configurable: !0,
@@ -29706,11 +29706,11 @@ function Tw(e, n) {
     a[t] = e[t];
   return a;
 }
-function bY(e) {
+function b4(e) {
   if (Array.isArray(e))
     return Tw(e);
 }
-function TY(e) {
+function T4(e) {
   if (typeof Symbol < "u" && e[Symbol.iterator] != null || e["@@iterator"] != null)
     return Array.from(e);
 }
@@ -29725,18 +29725,18 @@ function gk(e, n) {
       return Tw(e, n);
   }
 }
-function SY() {
+function S4() {
   throw new TypeError(`Invalid attempt to spread non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function _Y(e) {
-  return bY(e) || TY(e) || gk(e) || SY();
+function _4(e) {
+  return b4(e) || T4(e) || gk(e) || S4();
 }
-function OY(e) {
+function O4(e) {
   if (Array.isArray(e))
     return e;
 }
-function RY(e, n) {
+function R4(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -29762,12 +29762,12 @@ function RY(e, n) {
     return m;
   }
 }
-function IY() {
+function I4() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function dy(e, n) {
-  return OY(e) || RY(e, n) || gk(e, n) || IY();
+  return O4(e) || R4(e, n) || gk(e, n) || I4();
 }
 var xS = {
   defaultProps: {
@@ -29987,7 +29987,7 @@ var xS = {
         return Ve.parentNode.insertBefore(et, Ve), et.appendChild(Ve), Ve.hasWrapper = !0, et;
       } else if (Ve.hasWrapper) {
         var Ut;
-        (Ut = Ve.parentElement).replaceWith.apply(Ut, _Y(Ve.parentElement.childNodes)), delete Ve.hasWrapper;
+        (Ut = Ve.parentElement).replaceWith.apply(Ut, _4(Ve.parentElement.childNodes)), delete Ve.hasWrapper;
       }
       return Ve;
     }
@@ -30054,7 +30054,7 @@ var xS = {
     };
   });
   var Ct = function() {
-    var Ve = xS.getOtherProps(t), et = ht("p-tooltip p-component", EY({}, "p-tooltip-".concat(g), !0), t.className, O), Ut = me(M.current);
+    var Ve = xS.getOtherProps(t), et = ht("p-tooltip p-component", E4({}, "p-tooltip-".concat(g), !0), t.className, O), Ut = me(M.current);
     return /* @__PURE__ */ b.exports.createElement("div", bw({
       id: t.id,
       ref: C,
@@ -30174,7 +30174,7 @@ const yk = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
     lineNumber: 11,
     columnNumber: 9
   }, globalThis);
-}, wY = (e) => {
+}, w4 = (e) => {
   const { component: n, errors: t, formData: a, setFieldValue: l } = e;
   return /* @__PURE__ */ Ee(yk, {
     ...e,
@@ -30267,7 +30267,7 @@ var PS = {
   }, t.tooltipOptions)));
 }));
 Ek.displayName = "InputTextarea";
-const DY = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
+const D4 = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
   const [l, f] = b.exports.useState(n[e.columnName]);
   return /* @__PURE__ */ Ee(js, {
     component: e,
@@ -30584,7 +30584,7 @@ var LS = {
   }));
 }));
 bk.displayName = "InputMask";
-const CY = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
+const C4 = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
   var l;
   return /* @__PURE__ */ Ee(js, {
     component: e,
@@ -30632,7 +30632,7 @@ function Yy(e) {
     return n && typeof Symbol == "function" && n.constructor === Symbol && n !== Symbol.prototype ? "symbol" : typeof n;
   }, Yy(e);
 }
-function xY(e, n) {
+function x4(e, n) {
   if (Yy(e) !== "object" || e === null)
     return e;
   var t = e[Symbol.toPrimitive];
@@ -30644,23 +30644,23 @@ function xY(e, n) {
   }
   return (n === "string" ? String : Number)(e);
 }
-function NY(e) {
-  var n = xY(e, "string");
+function N4(e) {
+  var n = x4(e, "string");
   return Yy(n) === "symbol" ? n : String(n);
 }
 function Tk(e, n, t) {
-  return n = NY(n), n in e ? Object.defineProperty(e, n, {
+  return n = N4(n), n in e ? Object.defineProperty(e, n, {
     value: t,
     enumerable: !0,
     configurable: !0,
     writable: !0
   }) : e[n] = t, e;
 }
-function MY(e) {
+function M4(e) {
   if (Array.isArray(e))
     return e;
 }
-function AY(e, n) {
+function A4(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -30692,7 +30692,7 @@ function yA(e, n) {
     a[t] = e[t];
   return a;
 }
-function PY(e, n) {
+function P4(e, n) {
   if (!!e) {
     if (typeof e == "string")
       return yA(e, n);
@@ -30703,12 +30703,12 @@ function PY(e, n) {
       return yA(e, n);
   }
 }
-function LY() {
+function L4() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function Nc(e, n) {
-  return MY(e) || AY(e, n) || PY(e, n) || LY();
+  return M4(e) || A4(e, n) || P4(e, n) || L4();
 }
 var kS = {
   defaultProps: {
@@ -31268,7 +31268,7 @@ function Gv(e) {
     return n && typeof Symbol == "function" && n.constructor === Symbol && n !== Symbol.prototype ? "symbol" : typeof n;
   }, Gv(e);
 }
-function kY(e, n) {
+function k4(e, n) {
   if (Gv(e) !== "object" || e === null)
     return e;
   var t = e[Symbol.toPrimitive];
@@ -31280,23 +31280,23 @@ function kY(e, n) {
   }
   return (n === "string" ? String : Number)(e);
 }
-function VY(e) {
-  var n = kY(e, "string");
+function V4(e) {
+  var n = k4(e, "string");
   return Gv(n) === "symbol" ? n : String(n);
 }
 function Sk(e, n, t) {
-  return n = VY(n), n in e ? Object.defineProperty(e, n, {
+  return n = V4(n), n in e ? Object.defineProperty(e, n, {
     value: t,
     enumerable: !0,
     configurable: !0,
     writable: !0
   }) : e[n] = t, e;
 }
-function FY(e) {
+function F4(e) {
   if (Array.isArray(e))
     return e;
 }
-function UY(e, n) {
+function U4(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -31328,7 +31328,7 @@ function bA(e, n) {
     a[t] = e[t];
   return a;
 }
-function jY(e, n) {
+function j4(e, n) {
   if (!!e) {
     if (typeof e == "string")
       return bA(e, n);
@@ -31339,12 +31339,12 @@ function jY(e, n) {
       return bA(e, n);
   }
 }
-function BY() {
+function B4() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function zT(e, n) {
-  return FY(e) || UY(e, n) || jY(e, n) || BY();
+  return F4(e) || U4(e, n) || j4(e, n) || B4();
 }
 var VS = {
   defaultProps: {
@@ -31674,10 +31674,10 @@ function _A(e) {
   }
   return e;
 }
-function HY(e, n) {
+function H4(e, n) {
   var t = typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (!t) {
-    if (Array.isArray(e) || (t = WY(e)) || n && e && typeof e.length == "number") {
+    if (Array.isArray(e) || (t = W4(e)) || n && e && typeof e.length == "number") {
       t && (e = t);
       var a = 0, l = function() {
       };
@@ -31707,7 +31707,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
   } };
 }
-function WY(e, n) {
+function W4(e, n) {
   if (!!e) {
     if (typeof e == "string")
       return OA(e, n);
@@ -31737,7 +31737,7 @@ var Ok = /* @__PURE__ */ b.exports.memo(/* @__PURE__ */ b.exports.forwardRef(fun
     if (G && !$) {
       var se = f.trim().toLocaleLowerCase(t.filterLocale), X = t.filterBy ? t.filterBy.split(",") : [t.optionLabel || "label"];
       if (t.optionGroupLabel) {
-        var W = [], Z = HY(t.options), ke;
+        var W = [], Z = H4(t.options), ke;
         try {
           for (Z.s(); !(ke = Z.n()).done; ) {
             var Ne = ke.value, Be = Uy.filter(mt(Ne), X, se, t.filterMatchMode, t.filterLocale);
@@ -32210,15 +32210,15 @@ var Ok = /* @__PURE__ */ b.exports.memo(/* @__PURE__ */ b.exports.forwardRef(fun
   }, t.tooltipOptions)));
 }));
 Ok.displayName = "Dropdown";
-function $Y(e) {
+function $4(e) {
   var n = typeof e;
   return e != null && (n == "object" || n == "function");
 }
-var Rk = $Y, zY = typeof kc == "object" && kc && kc.Object === Object && kc, GY = zY, YY = GY, qY = typeof self == "object" && self && self.Object === Object && self, KY = YY || qY || Function("return this")(), Ik = KY, XY = Ik, JY = function() {
-  return XY.Date.now();
-}, QY = JY, ZY = /\s/;
+var Rk = $4, z4 = typeof kc == "object" && kc && kc.Object === Object && kc, G4 = z4, Y4 = G4, q4 = typeof self == "object" && self && self.Object === Object && self, K4 = Y4 || q4 || Function("return this")(), Ik = K4, X4 = Ik, J4 = function() {
+  return X4.Date.now();
+}, Q4 = J4, Z4 = /\s/;
 function e5(e) {
-  for (var n = e.length; n-- && ZY.test(e.charAt(n)); )
+  for (var n = e.length; n-- && Z4.test(e.charAt(n)); )
     ;
   return n;
 }
@@ -32269,7 +32269,7 @@ function L5(e) {
   var t = M5.test(e);
   return t || A5.test(e) ? P5(e.slice(2), t ? 2 : 8) : N5.test(e) ? CA : +e;
 }
-var k5 = L5, V5 = Rk, xI = QY, xA = k5, F5 = "Expected a function", U5 = Math.max, j5 = Math.min;
+var k5 = L5, V5 = Rk, xI = Q4, xA = k5, F5 = "Expected a function", U5 = Math.max, j5 = Math.min;
 function B5(e, n, t) {
   var a, l, f, c, m, h, g = 0, T = !1, S = !1, w = !0;
   if (typeof e != "function")
@@ -33625,7 +33625,7 @@ function Zv() {
   return ma.configs;
 }
 function Vk() {
-  const e = u4();
+  const e = uY();
   return {
     component: e.component,
     ...e.props
@@ -33649,7 +33649,7 @@ const Z5 = {
   hideOnEscape(e) {
     e.keyCode === 27 && this.hide();
   }
-}, e6 = (e) => {
+}, e8 = (e) => {
   var w, O, I, C;
   const { component: n, errors: t, formData: a, setFieldValue: l } = e, f = Zv(), { resource: c, data: m } = Vk(), [h, g] = b.exports.useState([]);
   let T = m;
@@ -33706,7 +33706,7 @@ function Ky(e) {
     return n && typeof Symbol == "function" && n.constructor === Symbol && n !== Symbol.prototype ? "symbol" : typeof n;
   }, Ky(e);
 }
-function t6(e, n) {
+function t8(e, n) {
   if (Ky(e) !== "object" || e === null)
     return e;
   var t = e[Symbol.toPrimitive];
@@ -33718,12 +33718,12 @@ function t6(e, n) {
   }
   return (n === "string" ? String : Number)(e);
 }
-function n6(e) {
-  var n = t6(e, "string");
+function n8(e) {
+  var n = t8(e, "string");
   return Ky(n) === "symbol" ? n : String(n);
 }
 function GT(e, n, t) {
-  return n = n6(n), n in e ? Object.defineProperty(e, n, {
+  return n = n8(n), n in e ? Object.defineProperty(e, n, {
     value: t,
     enumerable: !0,
     configurable: !0,
@@ -33822,7 +33822,7 @@ function Yv(e) {
     return n && typeof Symbol == "function" && n.constructor === Symbol && n !== Symbol.prototype ? "symbol" : typeof n;
   }, Yv(e);
 }
-function r6(e, n) {
+function r8(e, n) {
   if (Yv(e) !== "object" || e === null)
     return e;
   var t = e[Symbol.toPrimitive];
@@ -33834,12 +33834,12 @@ function r6(e, n) {
   }
   return (n === "string" ? String : Number)(e);
 }
-function a6(e) {
-  var n = r6(e, "string");
+function a8(e) {
+  var n = r8(e, "string");
   return Yv(n) === "symbol" ? n : String(n);
 }
 function vy(e, n, t) {
-  return n = a6(n), n in e ? Object.defineProperty(e, n, {
+  return n = a8(n), n in e ? Object.defineProperty(e, n, {
     value: t,
     enumerable: !0,
     configurable: !0,
@@ -33862,11 +33862,11 @@ function Dw(e, n) {
     a[t] = e[t];
   return a;
 }
-function i6(e) {
+function i8(e) {
   if (Array.isArray(e))
     return Dw(e);
 }
-function o6(e) {
+function o8(e) {
   if (typeof Symbol < "u" && e[Symbol.iterator] != null || e["@@iterator"] != null)
     return Array.from(e);
 }
@@ -33881,18 +33881,18 @@ function Fk(e, n) {
       return Dw(e, n);
   }
 }
-function l6() {
+function l8() {
   throw new TypeError(`Invalid attempt to spread non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function YT(e) {
-  return i6(e) || o6(e) || Fk(e) || l6();
+  return i8(e) || o8(e) || Fk(e) || l8();
 }
-function s6(e) {
+function s8(e) {
   if (Array.isArray(e))
     return e;
 }
-function u6(e, n) {
+function u8(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -33918,12 +33918,12 @@ function u6(e, n) {
     return m;
   }
 }
-function c6() {
+function c8() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function qf(e, n) {
-  return s6(e) || u6(e, n) || Fk(e, n) || c6();
+  return s8(e) || u8(e, n) || Fk(e, n) || c8();
 }
 var WS = {
   defaultProps: {
@@ -34054,7 +34054,7 @@ Uk.displayName = "CalendarPanel";
 function kA(e, n) {
   var t = typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (!t) {
-    if (Array.isArray(e) || (t = f6(e)) || n && e && typeof e.length == "number") {
+    if (Array.isArray(e) || (t = f8(e)) || n && e && typeof e.length == "number") {
       t && (e = t);
       var a = 0, l = function() {
       };
@@ -34084,7 +34084,7 @@ In order to be iterable, non-array objects must have a [Symbol.iterator]() metho
     }
   } };
 }
-function f6(e, n) {
+function f8(e, n) {
   if (!!e) {
     if (typeof e == "string")
       return VA(e, n);
@@ -35642,7 +35642,7 @@ var jk = /* @__PURE__ */ b.exports.memo(/* @__PURE__ */ b.exports.forwardRef(fun
   }, Qc, Fp, Ia, Do, xi, _l));
 }));
 jk.displayName = "Calendar";
-const d6 = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
+const d8 = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
   const [l, f] = b.exports.useState(n[e.columnName] ? new Date(Date.parse(n[e.columnName])) : void 0);
   return b.exports.useEffect(() => {
     t(e.columnName, new Date(Date.parse(n[e.columnName])));
@@ -35704,7 +35704,7 @@ function Xy(e) {
     return n && typeof Symbol == "function" && n.constructor === Symbol && n !== Symbol.prototype ? "symbol" : typeof n;
   }, Xy(e);
 }
-function p6(e, n) {
+function p8(e, n) {
   if (Xy(e) !== "object" || e === null)
     return e;
   var t = e[Symbol.toPrimitive];
@@ -35716,12 +35716,12 @@ function p6(e, n) {
   }
   return (n === "string" ? String : Number)(e);
 }
-function m6(e) {
-  var n = p6(e, "string");
+function m8(e) {
+  var n = p8(e, "string");
   return Xy(n) === "symbol" ? n : String(n);
 }
-function v6(e, n, t) {
-  return n = m6(n), n in e ? Object.defineProperty(e, n, {
+function v8(e, n, t) {
+  return n = m8(n), n in e ? Object.defineProperty(e, n, {
     value: t,
     enumerable: !0,
     configurable: !0,
@@ -35734,11 +35734,11 @@ function Cw(e, n) {
     a[t] = e[t];
   return a;
 }
-function h6(e) {
+function h8(e) {
   if (Array.isArray(e))
     return Cw(e);
 }
-function g6(e) {
+function g8(e) {
   if (typeof Symbol < "u" && e[Symbol.iterator] != null || e["@@iterator"] != null)
     return Array.from(e);
 }
@@ -35753,18 +35753,18 @@ function Bk(e, n) {
       return Cw(e, n);
   }
 }
-function y6() {
+function y8() {
   throw new TypeError(`Invalid attempt to spread non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function E6(e) {
-  return h6(e) || g6(e) || Bk(e) || y6();
+function E8(e) {
+  return h8(e) || g8(e) || Bk(e) || y8();
 }
-function b6(e) {
+function b8(e) {
   if (Array.isArray(e))
     return e;
 }
-function T6(e, n) {
+function T8(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -35790,12 +35790,12 @@ function T6(e, n) {
     return m;
   }
 }
-function S6() {
+function S8() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function _6(e, n) {
-  return b6(e) || T6(e, n) || Bk(e, n) || S6();
+function _8(e, n) {
+  return b8(e) || T8(e, n) || Bk(e, n) || S8();
 }
 var $S = {
   defaultProps: {
@@ -35872,7 +35872,7 @@ function UA(e) {
   for (var n = 1; n < arguments.length; n++) {
     var t = arguments[n] != null ? arguments[n] : {};
     n % 2 ? FA(Object(t), !0).forEach(function(a) {
-      v6(e, a, t[a]);
+      v8(e, a, t[a]);
     }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : FA(Object(t)).forEach(function(a) {
       Object.defineProperty(e, a, Object.getOwnPropertyDescriptor(t, a));
     });
@@ -35880,7 +35880,7 @@ function UA(e) {
   return e;
 }
 var Hk = /* @__PURE__ */ b.exports.memo(/* @__PURE__ */ b.exports.forwardRef(function(e, n) {
-  var t = $S.getProps(e), a = b.exports.useState(!1), l = _6(a, 2), f = l[0], c = l[1], m = b.exports.useRef(null), h = b.exports.useRef(null), g = b.exports.useRef(null), T = b.exports.useRef(null), S = b.exports.useRef(null), w = b.exports.useRef(null), O = b.exports.useRef(null), I = b.exports.useRef(null), C = b.exports.useRef(null), V = b.exports.useRef(null), M = b.exports.useRef(null), A = b.exports.useRef(null), k = b.exports.useRef(null), H = b.exports.useRef(null), j = b.exports.useRef(null), $ = b.exports.useRef(null), G = b.exports.useRef(null), z = t.showButtons && t.buttonLayout === "stacked", ne = t.showButtons && t.buttonLayout === "horizontal", ye = t.showButtons && t.buttonLayout === "vertical", ve = t.inputMode || (t.mode === "decimal" && !t.minFractionDigits ? "numeric" : "decimal"), de = function() {
+  var t = $S.getProps(e), a = b.exports.useState(!1), l = _8(a, 2), f = l[0], c = l[1], m = b.exports.useRef(null), h = b.exports.useRef(null), g = b.exports.useRef(null), T = b.exports.useRef(null), S = b.exports.useRef(null), w = b.exports.useRef(null), O = b.exports.useRef(null), I = b.exports.useRef(null), C = b.exports.useRef(null), V = b.exports.useRef(null), M = b.exports.useRef(null), A = b.exports.useRef(null), k = b.exports.useRef(null), H = b.exports.useRef(null), j = b.exports.useRef(null), $ = b.exports.useRef(null), G = b.exports.useRef(null), z = t.showButtons && t.buttonLayout === "stacked", ne = t.showButtons && t.buttonLayout === "horizontal", ye = t.showButtons && t.buttonLayout === "vertical", ve = t.inputMode || (t.mode === "decimal" && !t.minFractionDigits ? "numeric" : "decimal"), de = function() {
     return {
       localeMatcher: t.localeMatcher,
       style: t.mode,
@@ -35892,7 +35892,7 @@ var Hk = /* @__PURE__ */ b.exports.memo(/* @__PURE__ */ b.exports.forwardRef(fun
     };
   }, _e = function() {
     S.current = new Intl.NumberFormat(t.locale, de());
-    var W = E6(new Intl.NumberFormat(t.locale, {
+    var W = E8(new Intl.NumberFormat(t.locale, {
       useGrouping: !1
     }).format(9876543210)).reverse(), Z = new Map(W.map(function(ke, Ne) {
       return [ke, Ne];
@@ -36416,7 +36416,7 @@ var Hk = /* @__PURE__ */ b.exports.memo(/* @__PURE__ */ b.exports.forwardRef(fun
   }, t.tooltipOptions)));
 }));
 Hk.displayName = "InputNumber";
-const O6 = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
+const O8 = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
   var l, f, c;
   return /* @__PURE__ */ Ee(js, {
     component: e,
@@ -36472,11 +36472,11 @@ function xy() {
     return e;
   }, xy.apply(this, arguments);
 }
-function R6(e) {
+function R8(e) {
   if (Array.isArray(e))
     return e;
 }
-function I6(e, n) {
+function I8(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -36508,7 +36508,7 @@ function jA(e, n) {
     a[t] = e[t];
   return a;
 }
-function w6(e, n) {
+function w8(e, n) {
   if (!!e) {
     if (typeof e == "string")
       return jA(e, n);
@@ -36519,12 +36519,12 @@ function w6(e, n) {
       return jA(e, n);
   }
 }
-function D6() {
+function D8() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function C6(e, n) {
-  return R6(e) || I6(e, n) || w6(e, n) || D6();
+function C8(e, n) {
+  return R8(e) || I8(e, n) || w8(e, n) || D8();
 }
 var zS = {
   defaultProps: {
@@ -36554,7 +36554,7 @@ var zS = {
     return Se.getDiffProps(n, zS.defaultProps);
   }
 }, Wk = /* @__PURE__ */ b.exports.memo(/* @__PURE__ */ b.exports.forwardRef(function(e, n) {
-  var t = zS.getProps(e), a = b.exports.useState(!1), l = C6(a, 2), f = l[0], c = l[1], m = b.exports.useRef(null), h = b.exports.useRef(t.inputRef), g = t.checked === t.trueValue, T = function(k) {
+  var t = zS.getProps(e), a = b.exports.useState(!1), l = C8(a, 2), f = l[0], c = l[1], m = b.exports.useRef(null), h = b.exports.useRef(t.inputRef), g = t.checked === t.trueValue, T = function(k) {
     t.disabled || (S(k), Re.focus(h.current), k.preventDefault());
   }, S = function(k) {
     if (t.onChange) {
@@ -36631,7 +36631,7 @@ var zS = {
   }, t.tooltipOptions)));
 }));
 Wk.displayName = "InputSwitch";
-const x6 = ({ component: e, errors: n, formData: t, setFieldValue: a }) => {
+const x8 = ({ component: e, errors: n, formData: t, setFieldValue: a }) => {
   var c, m, h, g;
   const [l, f] = b.exports.useState((m = (c = t[e.columnName]) != null ? c : e.defaultValue) != null ? m : !1);
   return /* @__PURE__ */ Ee(js, {
@@ -36679,11 +36679,11 @@ function xw(e, n) {
     a[t] = e[t];
   return a;
 }
-function N6(e) {
+function N8(e) {
   if (Array.isArray(e))
     return xw(e);
 }
-function M6(e) {
+function M8(e) {
   if (typeof Symbol < "u" && e[Symbol.iterator] != null || e["@@iterator"] != null)
     return Array.from(e);
 }
@@ -36698,18 +36698,18 @@ function $k(e, n) {
       return xw(e, n);
   }
 }
-function A6() {
+function A8() {
   throw new TypeError(`Invalid attempt to spread non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
-function P6(e) {
-  return N6(e) || M6(e) || $k(e) || A6();
+function P8(e) {
+  return N8(e) || M8(e) || $k(e) || A8();
 }
-function L6(e) {
+function L8(e) {
   if (Array.isArray(e))
     return e;
 }
-function k6(e, n) {
+function k8(e, n) {
   var t = e == null ? null : typeof Symbol < "u" && e[Symbol.iterator] || e["@@iterator"];
   if (t != null) {
     var a, l, f, c, m = [], h = !0, g = !1;
@@ -36735,12 +36735,12 @@ function k6(e, n) {
     return m;
   }
 }
-function V6() {
+function V8() {
   throw new TypeError(`Invalid attempt to destructure non-iterable instance.
 In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`);
 }
 function qT(e, n) {
-  return L6(e) || k6(e, n) || $k(e, n) || V6();
+  return L8(e) || k8(e, n) || $k(e, n) || V8();
 }
 var YS = {
   defaultProps: {
@@ -36836,7 +36836,7 @@ var YS = {
     return pe(Fe, mn);
   }, pe = function(Fe, xt) {
     var It = parseFloat(xt.toFixed(10)), on = It;
-    return t.range ? (l.current === 0 ? It < t.min ? It = t.min : It > S[1] && (It = S[1]) : It > t.max ? It = t.max : It < S[0] && (It = S[0]), on = P6(S), on[l.current] = It, t.onChange && t.onChange({
+    return t.range ? (l.current === 0 ? It < t.min ? It = t.min : It > S[1] && (It = S[1]) : It > t.max ? It = t.max : It < S[0] && (It = S[0]), on = P8(S), on[l.current] = It, t.onChange && t.onChange({
       originalEvent: Fe,
       value: on
     })) : (It < t.min ? It = t.min : It > t.max && (It = t.max), on = It, t.onChange && t.onChange({
@@ -36920,7 +36920,7 @@ var YS = {
   }), rt);
 }));
 zk.displayName = "Slider";
-const F6 = ({ component: e, errors: n, formData: t, setFieldValue: a }) => {
+const F8 = ({ component: e, errors: n, formData: t, setFieldValue: a }) => {
   var c;
   const [l, f] = b.exports.useState((c = t[e.columnName]) != null ? c : e.range === !0 ? [e.min, e.max] : e.min);
   return /* @__PURE__ */ Ee(js, {
@@ -36979,7 +36979,7 @@ function Jy(e) {
     return n && typeof Symbol == "function" && n.constructor === Symbol && n !== Symbol.prototype ? "symbol" : typeof n;
   }, Jy(e);
 }
-function U6(e, n) {
+function U8(e, n) {
   if (Jy(e) !== "object" || e === null)
     return e;
   var t = e[Symbol.toPrimitive];
@@ -36991,12 +36991,12 @@ function U6(e, n) {
   }
   return (n === "string" ? String : Number)(e);
 }
-function j6(e) {
-  var n = U6(e, "string");
+function j8(e) {
+  var n = U8(e, "string");
   return Jy(n) === "symbol" ? n : String(n);
 }
-function B6(e, n, t) {
-  return n = j6(n), n in e ? Object.defineProperty(e, n, {
+function B8(e, n, t) {
+  return n = j8(n), n in e ? Object.defineProperty(e, n, {
     value: t,
     enumerable: !0,
     configurable: !0,
@@ -37040,18 +37040,18 @@ function BA(e, n) {
   }
   return t;
 }
-function H6(e) {
+function H8(e) {
   for (var n = 1; n < arguments.length; n++) {
     var t = arguments[n] != null ? arguments[n] : {};
     n % 2 ? BA(Object(t), !0).forEach(function(a) {
-      B6(e, a, t[a]);
+      B8(e, a, t[a]);
     }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : BA(Object(t)).forEach(function(a) {
       Object.defineProperty(e, a, Object.getOwnPropertyDescriptor(t, a));
     });
   }
   return e;
 }
-var W6 = function() {
+var W8 = function() {
   try {
     return Quill;
   } catch {
@@ -37062,7 +37062,7 @@ var W6 = function() {
   So(function() {
     if (!m.current) {
       var I = {
-        modules: H6({
+        modules: H8({
           toolbar: t.showHeader ? f.current : !1
         }, t.modules),
         placeholder: t.placeholder,
@@ -37070,7 +37070,7 @@ var W6 = function() {
         theme: t.theme,
         formats: t.formats
       };
-      W6 ? (c.current = new Quill(l.current, I), h(), c.current && c.current.getModule("toolbar") && t.onLoad && t.onLoad(c.current)) : import("./quill.b83664c8.js").then((C) => C.q).then(function(C) {
+      W8 ? (c.current = new Quill(l.current, I), h(), c.current && c.current.getModule("toolbar") && t.onLoad && t.onLoad(c.current)) : import("./quill.fc70b09f.js").then((C) => C.q).then(function(C) {
         C && Re.isExist(l.current) && (C.default ? c.current = new C.default(l.current, I) : c.current = new C(l.current, I), h());
       }).then(function() {
         c.current && c.current.getModule("toolbar") && t.onLoad && t.onLoad(c.current);
@@ -37221,7 +37221,7 @@ var W6 = function() {
   }, T), w, O);
 }));
 Gk.displayName = "Editor";
-const $6 = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
+const $8 = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
   const [l, f] = b.exports.useState(n[e.columnName]);
   let c = null;
   return e.headerButtons && (c = /* @__PURE__ */ Ee("span", {
@@ -37273,7 +37273,7 @@ const $6 = ({ component: e, formData: n, setFieldValue: t, errors: a }) => {
  * Licensed under MIT, https://opensource.org/licenses/MIT/
  * Please visit https://pqina.nl/filepond/ for details.
  */
-const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
+const z8 = (e) => e instanceof HTMLElement, G8 = (e, n = [], t = []) => {
   const a = {
     ...e
   }, l = [], f = [], c = () => ({ ...a }), m = () => {
@@ -37314,7 +37314,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
       ...O
     };
   }), S;
-}, Y6 = (e, n, t) => {
+}, Y8 = (e, n, t) => {
   if (typeof t == "function") {
     e[n] = t;
     return;
@@ -37326,21 +37326,21 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
 }, nd = (e) => {
   const n = {};
   return Wa(e, (t) => {
-    Y6(n, t, e[t]);
+    Y8(n, t, e[t]);
   }), n;
 }, di = (e, n, t = null) => {
   if (t === null)
     return e.getAttribute(n) || e.hasAttribute(n);
   e.setAttribute(n, t);
-}, q6 = "http://www.w3.org/2000/svg", K6 = ["svg", "path"], HA = (e) => K6.includes(e), KS = (e, n, t = {}) => {
+}, q8 = "http://www.w3.org/2000/svg", K8 = ["svg", "path"], HA = (e) => K8.includes(e), KS = (e, n, t = {}) => {
   typeof n == "object" && (t = n, n = null);
-  const a = HA(e) ? document.createElementNS(q6, e) : document.createElement(e);
+  const a = HA(e) ? document.createElementNS(q8, e) : document.createElement(e);
   return n && (HA(e) ? di(a, "class", n) : a.className = n), Wa(t, (l, f) => {
     di(a, l, f);
   }), a;
-}, X6 = (e) => (n, t) => {
+}, X8 = (e) => (n, t) => {
   typeof t < "u" && e.children[t] ? e.insertBefore(n, e.children[t]) : e.appendChild(n);
-}, J6 = (e, n) => (t, a) => (typeof a < "u" ? n.splice(a, 0, t) : n.push(t), t), Q6 = (e, n) => (t) => (n.splice(n.indexOf(t), 1), t.element.parentNode && e.removeChild(t.element), t), Z6 = (() => typeof window < "u" && typeof window.document < "u")(), Yk = () => Z6, e8 = Yk() ? KS("svg") : {}, t8 = "children" in e8 ? (e) => e.children.length : (e) => e.childNodes.length, qk = (e, n, t, a) => {
+}, J8 = (e, n) => (t, a) => (typeof a < "u" ? n.splice(a, 0, t) : n.push(t), t), Q8 = (e, n) => (t) => (n.splice(n.indexOf(t), 1), t.element.parentNode && e.removeChild(t.element), t), Z8 = (() => typeof window < "u" && typeof window.document < "u")(), Yk = () => Z8, e6 = Yk() ? KS("svg") : {}, t6 = "children" in e6 ? (e) => e.children.length : (e) => e.childNodes.length, qk = (e, n, t, a) => {
   const l = t[0] || e.left, f = t[1] || e.top, c = l + e.width, m = f + e.height * (a[1] || 1), h = {
     element: {
       ...e
@@ -37365,7 +37365,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   n.top += e.top, n.right += e.left, n.bottom += e.top, n.left += e.left, n.bottom > e.bottom && (e.bottom = n.bottom), n.right > e.right && (e.right = n.right);
 }, $A = (e) => {
   e.width = e.right - e.left, e.height = e.bottom - e.top;
-}, yp = (e) => typeof e == "number", n8 = (e, n, t, a = 1e-3) => Math.abs(e - n) < a && Math.abs(t) < a, r8 = ({ stiffness: e = 0.5, damping: n = 0.75, mass: t = 10 } = {}) => {
+}, yp = (e) => typeof e == "number", n6 = (e, n, t, a = 1e-3) => Math.abs(e - n) < a && Math.abs(t) < a, r6 = ({ stiffness: e = 0.5, damping: n = 0.75, mass: t = 10 } = {}) => {
   let a = null, l = null, f = 0, c = !1;
   const g = nd({
     interpolate: (T, S) => {
@@ -37376,7 +37376,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
         return;
       }
       const w = -(l - a) * e;
-      f += w / t, l += f, f *= n, n8(l, a, f) || S ? (l = a, f = 0, c = !0, g.onupdate(l), g.oncomplete(l)) : g.onupdate(l);
+      f += w / t, l += f, f *= n, n6(l, a, f) || S ? (l = a, f = 0, c = !0, g.onupdate(l), g.oncomplete(l)) : g.onupdate(l);
     },
     target: {
       set: (T) => {
@@ -37397,7 +37397,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
     }
   });
   return g;
-}, a8 = (e) => e < 0.5 ? 2 * e * e : -1 + (4 - 2 * e) * e, i8 = ({ duration: e = 500, easing: n = a8, delay: t = 0 } = {}) => {
+}, a6 = (e) => e < 0.5 ? 2 * e * e : -1 + (4 - 2 * e) * e, i6 = ({ duration: e = 500, easing: n = a6, delay: t = 0 } = {}) => {
   let a = null, l, f, c = !0, m = !1, h = null;
   const T = nd({
     interpolate: (S, w) => {
@@ -37423,9 +37423,9 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   });
   return T;
 }, zA = {
-  spring: r8,
-  tween: i8
-}, o8 = (e, n, t) => {
+  spring: r6,
+  tween: i6
+}, o6 = (e, n, t) => {
   const a = e[n] && typeof e[n][t] == "object" ? e[n][t] : e[n] || e, l = typeof a == "string" ? a : a.type, f = typeof a == "object" ? { ...a } : {};
   return zA[l] ? zA[l](f) : null;
 }, jD = (e, n, t, a = !1) => {
@@ -37438,10 +37438,10 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
       });
     });
   });
-}, l8 = ({ mixinConfig: e, viewProps: n, viewInternalAPI: t, viewExternalAPI: a }) => {
+}, l6 = ({ mixinConfig: e, viewProps: n, viewInternalAPI: t, viewExternalAPI: a }) => {
   const l = { ...n }, f = [];
   return Wa(e, (c, m) => {
-    const h = o8(m);
+    const h = o6(m);
     if (!h)
       return;
     h.onupdate = (T) => {
@@ -37463,11 +37463,11 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
     destroy: () => {
     }
   };
-}, s8 = (e) => (n, t) => {
+}, s6 = (e) => (n, t) => {
   e.addEventListener(n, t);
-}, u8 = (e) => (n, t) => {
+}, u6 = (e) => (n, t) => {
   e.removeEventListener(n, t);
-}, c8 = ({
+}, c6 = ({
   mixinConfig: e,
   viewProps: n,
   viewInternalAPI: t,
@@ -37475,7 +37475,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   viewState: l,
   view: f
 }) => {
-  const c = [], m = s8(f.element), h = u8(f.element);
+  const c = [], m = s6(f.element), h = u6(f.element);
   return a.on = (g, T) => {
     c.push({
       type: g,
@@ -37491,9 +37491,9 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
       });
     }
   };
-}, f8 = ({ mixinConfig: e, viewProps: n, viewExternalAPI: t }) => {
+}, f6 = ({ mixinConfig: e, viewProps: n, viewExternalAPI: t }) => {
   jD(e, t, n);
-}, Bo = (e) => e != null, d8 = {
+}, Bo = (e) => e != null, d6 = {
   opacity: 1,
   scaleX: 1,
   scaleY: 1,
@@ -37504,28 +37504,28 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   rotateZ: 0,
   originX: 0,
   originY: 0
-}, p8 = ({ mixinConfig: e, viewProps: n, viewInternalAPI: t, viewExternalAPI: a, view: l }) => {
+}, p6 = ({ mixinConfig: e, viewProps: n, viewInternalAPI: t, viewExternalAPI: a, view: l }) => {
   const f = { ...n }, c = {};
   jD(e, [t, a], n);
   const m = () => [n.translateX || 0, n.translateY || 0], h = () => [n.scaleX || 0, n.scaleY || 0], g = () => l.rect ? qk(l.rect, l.childViews, m(), h()) : null;
   return t.rect = { get: g }, a.rect = { get: g }, e.forEach((T) => {
-    n[T] = typeof f[T] > "u" ? d8[T] : f[T];
+    n[T] = typeof f[T] > "u" ? d6[T] : f[T];
   }), {
     write: () => {
-      if (!!m8(c, n))
-        return v8(l.element, n), Object.assign(c, { ...n }), !0;
+      if (!!m6(c, n))
+        return v6(l.element, n), Object.assign(c, { ...n }), !0;
     },
     destroy: () => {
     }
   };
-}, m8 = (e, n) => {
+}, m6 = (e, n) => {
   if (Object.keys(e).length !== Object.keys(n).length)
     return !0;
   for (const t in n)
     if (n[t] !== e[t])
       return !0;
   return !1;
-}, v8 = (e, {
+}, v6 = (e, {
   opacity: n,
   perspective: t,
   translateX: a,
@@ -37544,11 +37544,11 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   (Bo(T) || Bo(S)) && (C += `transform-origin: ${T || 0}px ${S || 0}px;`), Bo(t) && (I += `perspective(${t}px) `), (Bo(a) || Bo(l)) && (I += `translate3d(${a || 0}px, ${l || 0}px, 0) `), (Bo(f) || Bo(c)) && (I += `scale3d(${Bo(f) ? f : 1}, ${Bo(c) ? c : 1}, 1) `), Bo(g) && (I += `rotateZ(${g}rad) `), Bo(m) && (I += `rotateX(${m}rad) `), Bo(h) && (I += `rotateY(${h}rad) `), I.length && (C += `transform:${I};`), Bo(n) && (C += `opacity:${n};`, n === 0 && (C += "visibility:hidden;"), n < 1 && (C += "pointer-events:none;")), Bo(O) && (C += `height:${O}px;`), Bo(w) && (C += `width:${w}px;`);
   const V = e.elementCurrentStyle || "";
   (C.length !== V.length || C !== V) && (e.style.cssText = C, e.elementCurrentStyle = C);
-}, h8 = {
-  styles: p8,
-  listeners: c8,
-  animations: l8,
-  apis: f8
+}, h6 = {
+  styles: p6,
+  listeners: c6,
+  animations: l6,
+  apis: f6
 }, GA = (e = {}, n = {}, t = {}) => (n.layoutCalculated || (e.paddingTop = parseInt(t.paddingTop, 10) || 0, e.marginTop = parseInt(t.marginTop, 10) || 0, e.marginRight = parseInt(t.marginRight, 10) || 0, e.marginBottom = parseInt(t.marginBottom, 10) || 0, e.marginLeft = parseInt(t.marginLeft, 10) || 0, n.layoutCalculated = !0), e.left = n.offsetLeft || 0, e.top = n.offsetTop || 0, e.width = n.offsetWidth || 0, e.height = n.offsetHeight || 0, e.right = e.left + e.width, e.bottom = e.top + e.height, e.scrollTop = n.scrollTop, e.hidden = n.offsetParent === null, e), pi = ({
   tag: e = "div",
   name: n = null,
@@ -37635,14 +37635,14 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
       get: _e
     },
     is: (he) => n === he,
-    appendChild: X6(C),
+    appendChild: X8(C),
     createChildView: me(O),
     linkView: (he) => (H.push(he), he),
     unlinkView: (he) => {
       H.splice(H.indexOf(he), 1);
     },
-    appendChildView: J6(C, H),
-    removeChildView: Q6(C, H),
+    appendChildView: J8(C, H),
+    removeChildView: Q8(C, H),
     registerWriter: (he) => z.push(he),
     registerReader: (he) => ne.push(he),
     registerDestroyer: (he) => ye.push(he),
@@ -37673,7 +37673,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
     }
   };
   Object.keys(w).sort((he, ge) => he === "styles" ? 1 : ge === "styles" ? -1 : 0).forEach((he) => {
-    const ge = h8[he]({
+    const ge = h6[he]({
       mixinConfig: w[he],
       viewProps: I,
       viewState: G,
@@ -37688,11 +37688,11 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
     root: pe,
     props: I
   });
-  const Te = t8(C);
+  const Te = t6(C);
   return H.forEach((he, ge) => {
     pe.appendChild(he.element, Te + ge);
   }), h(pe), nd(Oe);
-}, g8 = (e, n, t = 60) => {
+}, g6 = (e, n, t = 60) => {
   const a = "__framePainter";
   if (window[a]) {
     window[a].readers.push(e), window[a].writers.push(n);
@@ -37724,12 +37724,12 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   l.filter((m) => e[m.type]).forEach(
     (m) => e[m.type]({ root: t, props: a, action: m.data, timestamp: f, shouldOptimize: c })
   ), n && n({ root: t, props: a, actions: l, timestamp: f, shouldOptimize: c });
-}, YA = (e, n) => n.parentNode.insertBefore(e, n), qA = (e, n) => n.parentNode.insertBefore(e, n.nextSibling), __ = (e) => Array.isArray(e), Hc = (e) => e == null, y8 = (e) => e.trim(), O_ = (e) => "" + e, E8 = (e, n = ",") => Hc(e) ? [] : __(e) ? e : O_(e).split(n).map(y8).filter((t) => t.length), Kk = (e) => typeof e == "boolean", Xk = (e) => Kk(e) ? e : e === "true", Wo = (e) => typeof e == "string", Jk = (e) => yp(e) ? e : Wo(e) ? O_(e).replace(/[a-z]+/gi, "") : 0, dS = (e) => parseInt(Jk(e), 10), KA = (e) => parseFloat(Jk(e)), eh = (e) => yp(e) && isFinite(e) && Math.floor(e) === e, XA = (e, n = 1e3) => {
+}, YA = (e, n) => n.parentNode.insertBefore(e, n), qA = (e, n) => n.parentNode.insertBefore(e, n.nextSibling), __ = (e) => Array.isArray(e), Hc = (e) => e == null, y6 = (e) => e.trim(), O_ = (e) => "" + e, E6 = (e, n = ",") => Hc(e) ? [] : __(e) ? e : O_(e).split(n).map(y6).filter((t) => t.length), Kk = (e) => typeof e == "boolean", Xk = (e) => Kk(e) ? e : e === "true", Wo = (e) => typeof e == "string", Jk = (e) => yp(e) ? e : Wo(e) ? O_(e).replace(/[a-z]+/gi, "") : 0, dS = (e) => parseInt(Jk(e), 10), KA = (e) => parseFloat(Jk(e)), eh = (e) => yp(e) && isFinite(e) && Math.floor(e) === e, XA = (e, n = 1e3) => {
   if (eh(e))
     return e;
   let t = O_(e).trim();
   return /MB$/i.test(t) ? (t = t.replace(/MB$i/, "").trim(), dS(t) * n * n) : /KB/i.test(t) ? (t = t.replace(/KB$i/, "").trim(), dS(t) * n) : dS(t);
-}, Ep = (e) => typeof e == "function", b8 = (e) => {
+}, Ep = (e) => typeof e == "function", b6 = (e) => {
   let n = self, t = e.split("."), a = null;
   for (; a = t.shift(); )
     if (n = n[a], !n)
@@ -37742,12 +37742,12 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   fetch: "GET",
   restore: "GET",
   load: "GET"
-}, T8 = (e) => {
+}, T6 = (e) => {
   const n = {};
   return n.url = Wo(e) ? e : e.url || "", n.timeout = e.timeout ? parseInt(e.timeout, 10) : 0, n.headers = e.headers ? e.headers : {}, Wa(JA, (t) => {
-    n[t] = S8(t, e[t], JA[t], n.timeout, n.headers);
+    n[t] = S6(t, e[t], JA[t], n.timeout, n.headers);
   }), n.process = e.process || Wo(e) || e.url ? n.process : null, n.remove = e.remove || null, delete n.headers, n;
-}, S8 = (e, n, t, a, l) => {
+}, S6 = (e, n, t, a, l) => {
   if (n === null)
     return null;
   if (typeof n == "function")
@@ -37772,35 +37772,35 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
     };
   }
   return f.withCredentials = Xk(f.withCredentials), f;
-}, _8 = (e) => T8(e), O8 = (e) => e === null, ji = (e) => typeof e == "object" && e !== null, R8 = (e) => ji(e) && Wo(e.url) && ji(e.process) && ji(e.revert) && ji(e.restore) && ji(e.fetch), Mw = (e) => __(e) ? "array" : O8(e) ? "null" : eh(e) ? "int" : /^[0-9]+ ?(?:GB|MB|KB)$/gi.test(e) ? "bytes" : R8(e) ? "api" : typeof e, I8 = (e) => e.replace(/{\s*'/g, '{"').replace(/'\s*}/g, '"}').replace(/'\s*:/g, '":').replace(/:\s*'/g, ':"').replace(/,\s*'/g, ',"').replace(/'\s*,/g, '",'), w8 = {
-  array: E8,
+}, _6 = (e) => T6(e), O6 = (e) => e === null, ji = (e) => typeof e == "object" && e !== null, R6 = (e) => ji(e) && Wo(e.url) && ji(e.process) && ji(e.revert) && ji(e.restore) && ji(e.fetch), Mw = (e) => __(e) ? "array" : O6(e) ? "null" : eh(e) ? "int" : /^[0-9]+ ?(?:GB|MB|KB)$/gi.test(e) ? "bytes" : R6(e) ? "api" : typeof e, I6 = (e) => e.replace(/{\s*'/g, '{"').replace(/'\s*}/g, '"}').replace(/'\s*:/g, '":').replace(/:\s*'/g, ':"').replace(/,\s*'/g, ',"').replace(/'\s*,/g, '",'), w6 = {
+  array: E6,
   boolean: Xk,
   int: (e) => Mw(e) === "bytes" ? XA(e) : dS(e),
   number: KA,
   float: KA,
   bytes: XA,
   string: (e) => Ep(e) ? e : O_(e),
-  function: (e) => b8(e),
-  serverapi: _8,
+  function: (e) => b6(e),
+  serverapi: _6,
   object: (e) => {
     try {
-      return JSON.parse(I8(e));
+      return JSON.parse(I6(e));
     } catch {
       return null;
     }
   }
-}, D8 = (e, n) => w8[n](e), Qk = (e, n, t) => {
+}, D6 = (e, n) => w6[n](e), Qk = (e, n, t) => {
   if (e === n)
     return e;
   let a = Mw(e);
   if (a !== t) {
-    const l = D8(e, t);
+    const l = D6(e, t);
     if (a = Mw(l), l === null)
       throw `Trying to assign value with incorrect type to "${option}", allowed type: "${t}"`;
     e = l;
   }
   return e;
-}, C8 = (e, n) => {
+}, C6 = (e, n) => {
   let t = e;
   return {
     enumerable: !0,
@@ -37809,19 +37809,19 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
       t = Qk(a, e, n);
     }
   };
-}, x8 = (e) => {
+}, x6 = (e) => {
   const n = {};
   return Wa(e, (t) => {
     const a = e[t];
-    n[t] = C8(a[0], a[1]);
+    n[t] = C6(a[0], a[1]);
   }), nd(n);
-}, N8 = (e) => ({
+}, N6 = (e) => ({
   items: [],
   listUpdateTimeout: null,
   itemUpdateTimeout: null,
   processingQueue: [],
-  options: x8(e)
-}), R_ = (e, n = "-") => e.split(/(?=[A-Z])/).map((t) => t.toLowerCase()).join(n), M8 = (e, n) => {
+  options: x6(e)
+}), R_ = (e, n = "-") => e.split(/(?=[A-Z])/).map((t) => t.toLowerCase()).join(n), M6 = (e, n) => {
   const t = {};
   return Wa(n, (a) => {
     t[a] = {
@@ -37833,7 +37833,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
       }
     };
   }), t;
-}, A8 = (e) => (n, t, a) => {
+}, A6 = (e) => (n, t, a) => {
   const l = {};
   return Wa(e, (f) => {
     const c = R_(f, "_").toUpperCase();
@@ -37845,7 +37845,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
       n(`DID_SET_${c}`, { value: a.options[f] });
     };
   }), l;
-}, P8 = (e) => (n) => {
+}, P6 = (e) => (n) => {
   const t = {};
   return Wa(e, (a) => {
     t[`GET_${R_(a, "_").toUpperCase()}`] = (l) => n.options[a];
@@ -37856,7 +37856,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   BROWSE: 3,
   PASTE: 4,
   NONE: 5
-}, BD = () => Math.random().toString(36).substring(2, 11), HD = (e, n) => e.splice(n, 1), L8 = (e, n) => {
+}, BD = () => Math.random().toString(36).substring(2, 11), HD = (e, n) => e.splice(n, 1), L6 = (e, n) => {
   n ? e() : document.hidden ? Promise.resolve(1).then(e) : setTimeout(e, 0);
 }, I_ = () => {
   const e = [], n = (a, l) => {
@@ -37865,7 +37865,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
       e.findIndex((f) => f.event === a && (f.cb === l || !l))
     );
   }, t = (a, l, f) => {
-    e.filter((c) => c.event === a).map((c) => c.cb).forEach((c) => L8(() => c(...l), f));
+    e.filter((c) => c.event === a).map((c) => c.cb).forEach((c) => L6(() => c(...l), f));
   };
   return {
     fireSync: (a, ...l) => {
@@ -37891,7 +37891,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   Object.getOwnPropertyNames(e).filter((a) => !t.includes(a)).forEach(
     (a) => Object.defineProperty(n, a, Object.getOwnPropertyDescriptor(e, a))
   );
-}, k8 = [
+}, k6 = [
   "fire",
   "process",
   "revert",
@@ -37909,8 +37909,8 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   "freeze"
 ], vl = (e) => {
   const n = {};
-  return Zk(e, n, k8), n;
-}, V8 = (e) => {
+  return Zk(e, n, k6), n;
+}, V6 = (e) => {
   e.forEach((n, t) => {
     n.released && HD(e, t);
   });
@@ -37928,7 +37928,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   INPUT: 1,
   LIMBO: 2,
   LOCAL: 3
-}, eV = (e) => /[^0-9]+/.exec(e), tV = () => eV(1.1 .toLocaleString())[0], F8 = () => {
+}, eV = (e) => /[^0-9]+/.exec(e), tV = () => eV(1.1 .toLocaleString())[0], F6 = () => {
   const e = tV(), n = 1e3 .toLocaleString(), t = 1e3 .toString();
   return n !== t ? eV(n)[0] : e === "." ? "," : ".";
 }, yt = {
@@ -37953,7 +37953,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
     (m, h) => m.then((g) => h(g, t)),
     c(n, t)
   ).then((m) => a(m)).catch((m) => l(m));
-}), Np = (e, n, t) => WD.filter((a) => a.key === e).map((a) => a.cb(n, t)), U8 = (e, n) => WD.push({ key: e, cb: n }), j8 = (e) => Object.assign(Cv, e), XS = () => ({ ...Cv }), B8 = (e) => {
+}), Np = (e, n, t) => WD.filter((a) => a.key === e).map((a) => a.cb(n, t)), U6 = (e, n) => WD.push({ key: e, cb: n }), j6 = (e) => Object.assign(Cv, e), XS = () => ({ ...Cv }), B6 = (e) => {
   Wa(e, (n, t) => {
     !Cv[n] || (Cv[n][0] = Qk(
       t,
@@ -38004,7 +38004,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   labelFileSizeMegabytes: ["MB", yt.STRING],
   labelFileSizeGigabytes: ["GB", yt.STRING],
   labelDecimalSeparator: [tV(), yt.STRING],
-  labelThousandsSeparator: [F8(), yt.STRING],
+  labelThousandsSeparator: [F6(), yt.STRING],
   labelIdle: [
     'Drag & Drop your files or <span class="filepond--label-action">Browse</span>',
     yt.STRING
@@ -38094,7 +38094,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
     return n[1] / n[0];
   }
   return parseFloat(e);
-}, Ps = (e) => e.filter((n) => !n.archived), H8 = {
+}, Ps = (e) => e.filter((n) => !n.archived), H6 = {
   EMPTY: 0,
   IDLE: 1,
   ERROR: 2,
@@ -38102,7 +38102,7 @@ const z6 = (e) => e instanceof HTMLElement, G6 = (e, n = [], t = []) => {
   READY: 4
 };
 let KT = null;
-const W8 = () => {
+const W6 = () => {
   if (KT === null)
     try {
       const e = new DataTransfer();
@@ -38113,19 +38113,19 @@ const W8 = () => {
       KT = !1;
     }
   return KT;
-}, $8 = [
+}, $6 = [
   Yn.LOAD_ERROR,
   Yn.PROCESSING_ERROR,
   Yn.PROCESSING_REVERT_ERROR
-], z8 = [
+], z6 = [
   Yn.LOADING,
   Yn.PROCESSING,
   Yn.PROCESSING_QUEUED,
   Yn.INIT
-], G8 = [Yn.PROCESSING_COMPLETE], Y8 = (e) => $8.includes(e.status), q8 = (e) => z8.includes(e.status), K8 = (e) => G8.includes(e.status), QA = (e) => ji(e.options.server) && (ji(e.options.server.process) || Ep(e.options.server.process)), X8 = (e) => ({
+], G6 = [Yn.PROCESSING_COMPLETE], Y6 = (e) => $6.includes(e.status), q6 = (e) => z6.includes(e.status), K6 = (e) => G6.includes(e.status), QA = (e) => ji(e.options.server) && (ji(e.options.server.process) || Ep(e.options.server.process)), X6 = (e) => ({
   GET_STATUS: () => {
-    const n = Ps(e.items), { EMPTY: t, ERROR: a, BUSY: l, IDLE: f, READY: c } = H8;
-    return n.length === 0 ? t : n.some(Y8) ? a : n.some(q8) ? l : n.some(K8) ? c : f;
+    const n = Ps(e.items), { EMPTY: t, ERROR: a, BUSY: l, IDLE: f, READY: c } = H6;
+    return n.length === 0 ? t : n.some(Y6) ? a : n.some(q6) ? l : n.some(K6) ? c : f;
   },
   GET_ITEM: (n) => bp(e.items, n),
   GET_ACTIVE_ITEM: (n) => bp(Ps(e.items), n),
@@ -38147,7 +38147,7 @@ const W8 = () => {
   GET_ITEM_PANEL_ASPECT_RATIO: () => e.options.styleItemPanelAspectRatio,
   GET_ITEMS_BY_STATUS: (n) => Ps(e.items).filter((t) => t.status === n),
   GET_TOTAL_ITEMS: () => Ps(e.items).length,
-  SHOULD_UPDATE_FILE_INPUT: () => e.options.storeAsFile && W8() && !QA(e),
+  SHOULD_UPDATE_FILE_INPUT: () => e.options.storeAsFile && W6() && !QA(e),
   IS_ASYNC: () => QA(e),
   GET_FILE_SIZE_LABELS: (n) => ({
     labelBytes: n("GET_LABEL_FILE_SIZE_BYTES") || void 0,
@@ -38155,13 +38155,13 @@ const W8 = () => {
     labelMegabytes: n("GET_LABEL_FILE_SIZE_MEGABYTES") || void 0,
     labelGigabytes: n("GET_LABEL_FILE_SIZE_GIGABYTES") || void 0
   })
-}), J8 = (e) => {
+}), J6 = (e) => {
   const n = Ps(e.items).length;
   if (!e.options.allowMultiple)
     return n === 0;
   const t = e.options.maxFiles;
   return t === null || n < t;
-}, rV = (e, n, t) => Math.max(Math.min(t, e), n), Q8 = (e, n, t) => e.splice(n, 0, t), Z8 = (e, n, t) => Hc(n) ? null : typeof t > "u" ? (e.push(n), n) : (t = rV(t, 0, e.length), Q8(e, t, n), n), Aw = (e) => /^\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,([a-z0-9!$&',()*+;=\-._~:@\/?%\s]*)\s*$/i.test(
+}, rV = (e, n, t) => Math.max(Math.min(t, e), n), Q6 = (e, n, t) => e.splice(n, 0, t), Z6 = (e, n, t) => Hc(n) ? null : typeof t > "u" ? (e.push(n), n) : (t = rV(t, 0, e.length), Q6(e, t, n), n), Aw = (e) => /^\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,([a-z0-9!$&',()*+;=\-._~:@\/?%\s]*)\s*$/i.test(
   e
 ), cE = (e) => e.split("/").pop().split("?").shift(), w_ = (e) => e.split(".").pop(), e9 = (e) => {
   if (typeof e != "string")
@@ -39020,7 +39020,7 @@ const W8 = () => {
     }
     if (Kv(a) && t.options.ignoredFiles.includes(a.name.toLowerCase()))
       return;
-    if (!J8(t)) {
+    if (!J6(t)) {
       if (t.options.allowMultiple || !t.options.allowMultiple && !t.options.allowReplace) {
         const A = Za("warning", 0, "Max files");
         e("DID_THROW_MAX_FILES", {
@@ -39059,7 +39059,7 @@ const W8 = () => {
       T.setMetadata(M, h.metadata[M]);
     }), Np("DID_CREATE_ITEM", T, { query: n, dispatch: e });
     const S = n("GET_ITEM_INSERT_LOCATION");
-    t.options.itemInsertLocationFreedom || (l = S === "before" ? -1 : t.items.length), Z8(t.items, T, l), Ep(S) && a && LI(t, S);
+    t.options.itemInsertLocationFreedom || (l = S === "before" ? -1 : t.items.length), Z6(t.items, T, l), Ep(S) && a && LI(t, S);
     const w = T.id;
     T.on("init", () => {
       e("DID_INIT_ITEM", { id: w });
@@ -41002,10 +41002,10 @@ const FI = [], C_ = (e, n) => {
   }
 }), xq = (e = {}) => {
   let n = null;
-  const t = XS(), a = G6(
-    N8(t),
-    [X8, P8(t)],
-    [T9, A8(t)]
+  const t = XS(), a = G8(
+    N6(t),
+    [X6, P6(t)],
+    [T9, A6(t)]
   );
   a.dispatch("SET_OPTIONS", { options: e });
   const l = () => {
@@ -41027,7 +41027,7 @@ const FI = [], C_ = (e, n) => {
     },
     _write: (le) => {
       const Q = a.processActionQueue().filter((ae) => !/^SET_/.test(ae.type));
-      w && !Q.length || (A(Q), w = S._write(le, Q, m), V8(a.query("GET_ITEMS")), w && a.processDispatchQueue());
+      w && !Q.length || (A(Q), w = S._write(le, Q, m), V6(a.query("GET_ITEMS")), w && a.processDispatchQueue());
     }
   }, C = (le) => (Q) => {
     const ae = {
@@ -41148,7 +41148,7 @@ const FI = [], C_ = (e, n) => {
   }, Ae = {
     ...I_(),
     ...I,
-    ...M8(a, t),
+    ...M6(a, t),
     setOptions: k,
     addFile: $,
     addFiles: ne,
@@ -41269,7 +41269,7 @@ const FI = [], C_ = (e, n) => {
   return e.files && Array.from(e.files).forEach((c) => {
     f.addFile(c);
   }), f.replaceElement(e), f;
-}, Lq = (...e) => z6(e[0]) ? Pq(...e) : xV(...e), kq = ["fire", "_read", "_write"], RP = (e) => {
+}, Lq = (...e) => z8(e[0]) ? Pq(...e) : xV(...e), kq = ["fire", "_read", "_write"], RP = (e) => {
   const n = {};
   return Zk(e, n, kq), n;
 }, Vq = (e, n) => e.replace(/(?:{([a-zA-Z]+)})/g, (t, a) => n[a]), Fq = (e) => {
@@ -41310,7 +41310,7 @@ const FI = [], C_ = (e, n) => {
     return;
   IP.push(e);
   const n = e({
-    addFilter: U8,
+    addFilter: U6,
     utils: {
       Type: yt,
       forin: Wa,
@@ -41339,7 +41339,7 @@ const FI = [], C_ = (e, n) => {
       fileActionButton: cV
     }
   });
-  j8(n.options);
+  j6(n.options);
 }, Hq = () => Object.prototype.toString.call(window.operamini) === "[object OperaMini]", Wq = () => "Promise" in window, $q = () => "slice" in Blob.prototype, zq = () => "URL" in window && "createObjectURL" in window.URL, Gq = () => "visibilityState" in document, Yq = () => "performance" in window, qq = () => "supports" in (window.CSS || {}), Kq = () => /MSIE|Trident/.test(window.navigator.userAgent), jw = (() => {
   const e = Yk() && !Hq() && Gq() && Wq() && $q() && zq() && Yq() && (qq() || Kq());
   return () => e;
@@ -41349,7 +41349,7 @@ const FI = [], C_ = (e, n) => {
 };
 let wP = {}, pS = Mp, UI = Mp, DP = Mp, CP = Mp, Bw = Mp, xP = Mp, NP = Mp;
 if (jw()) {
-  g8(
+  g6(
     () => {
       Kf.apps.forEach((t) => t._read());
     },
@@ -41396,7 +41396,7 @@ if (jw()) {
     }), t;
   }, NP = (t) => (ji(t) && (Kf.apps.forEach((a) => {
     a.setOptions(t);
-  }), B8(t)), xP());
+  }), B6(t)), xP());
 }
 /*!
  * react-filepond v7.1.2
@@ -49077,25 +49077,25 @@ class sne {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 65,
       columnNumber: 57
-    }, this)), this.registerComponent("PanelLayout", (n) => /* @__PURE__ */ Ee(W4, {
+    }, this)), this.registerComponent("PanelLayout", (n) => /* @__PURE__ */ Ee(WY, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 66,
       columnNumber: 58
-    }, this)), this.registerComponent("CardLayout", (n) => /* @__PURE__ */ Ee($4, {
+    }, this)), this.registerComponent("CardLayout", (n) => /* @__PURE__ */ Ee($Y, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 67,
       columnNumber: 57
-    }, this)), this.registerComponent("FieldsetLayout", (n) => /* @__PURE__ */ Ee(K4, {
+    }, this)), this.registerComponent("FieldsetLayout", (n) => /* @__PURE__ */ Ee(KY, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 68,
       columnNumber: 61
-    }, this)), this.registerComponent("TabsLayout", (n) => /* @__PURE__ */ Ee(oY, {
+    }, this)), this.registerComponent("TabsLayout", (n) => /* @__PURE__ */ Ee(o4, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
@@ -49107,19 +49107,19 @@ class sne {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 70,
       columnNumber: 56
-    }, this)), this.registerComponent("IdField", (n) => /* @__PURE__ */ Ee(wY, {
+    }, this)), this.registerComponent("IdField", (n) => /* @__PURE__ */ Ee(w4, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 71,
       columnNumber: 54
-    }, this)), this.registerComponent("TextAreaField", (n) => /* @__PURE__ */ Ee(DY, {
+    }, this)), this.registerComponent("TextAreaField", (n) => /* @__PURE__ */ Ee(D4, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 72,
       columnNumber: 60
-    }, this)), this.registerComponent("MaskField", (n) => /* @__PURE__ */ Ee(CY, {
+    }, this)), this.registerComponent("MaskField", (n) => /* @__PURE__ */ Ee(C4, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
@@ -49131,37 +49131,37 @@ class sne {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 74,
       columnNumber: 63
-    }, this)), this.registerComponent("BelongsToField", (n) => /* @__PURE__ */ Ee(e6, {
+    }, this)), this.registerComponent("BelongsToField", (n) => /* @__PURE__ */ Ee(e8, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 75,
       columnNumber: 61
-    }, this)), this.registerComponent("DateTimeField", (n) => /* @__PURE__ */ Ee(d6, {
+    }, this)), this.registerComponent("DateTimeField", (n) => /* @__PURE__ */ Ee(d8, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 76,
       columnNumber: 60
-    }, this)), this.registerComponent("NumberField", (n) => /* @__PURE__ */ Ee(O6, {
+    }, this)), this.registerComponent("NumberField", (n) => /* @__PURE__ */ Ee(O8, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 77,
       columnNumber: 58
-    }, this)), this.registerComponent("SwitchInputField", (n) => /* @__PURE__ */ Ee(x6, {
+    }, this)), this.registerComponent("SwitchInputField", (n) => /* @__PURE__ */ Ee(x8, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 78,
       columnNumber: 63
-    }, this)), this.registerComponent("SliderField", (n) => /* @__PURE__ */ Ee(F6, {
+    }, this)), this.registerComponent("SliderField", (n) => /* @__PURE__ */ Ee(F8, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
       lineNumber: 79,
       columnNumber: 58
-    }, this)), this.registerComponent("EditorField", (n) => /* @__PURE__ */ Ee($6, {
+    }, this)), this.registerComponent("EditorField", (n) => /* @__PURE__ */ Ee($8, {
       ...n
     }, void 0, !1, {
       fileName: "/Volumes/Data/Websites/Inertia/Trinity/Trinity-React/src/TrinityApp.tsx",
@@ -49306,7 +49306,7 @@ const ma = new sne();
 window.Trinity = window.trinity = window.TrinityApp = window.trinityApp = ma;
 const QF = (e) => {
   var n, t, a, l;
-  return /* @__PURE__ */ Ee(l4, {
+  return /* @__PURE__ */ Ee(lY, {
     title: e.title ? `${e.title} - ${(n = ma.configs) == null ? void 0 : n.title}` : (t = ma.configs) == null ? void 0 : t.title,
     children: [
       /* @__PURE__ */ Ee("link", {
@@ -50398,7 +50398,7 @@ function Nne(e) {
   return Cne[n];
 }
 var iU = /* @__PURE__ */ b.exports.memo(/* @__PURE__ */ b.exports.forwardRef(function(e, n) {
-  var t = e.messageInfo, a = t.message, l = a.severity, f = a.content, c = a.summary, m = a.detail, h = a.closable, g = a.life, T = a.sticky, S = a.className, w = a.style, O = a.contentClassName, I = a.contentStyle, C = b.exports.useState(!1), V = uD(C, 2), M = V[0], A = V[1], k = L4(function() {
+  var t = e.messageInfo, a = t.message, l = a.severity, f = a.content, c = a.summary, m = a.detail, h = a.closable, g = a.life, T = a.sticky, S = a.className, w = a.style, O = a.contentClassName, I = a.contentStyle, C = b.exports.useState(!1), V = uD(C, 2), M = V[0], A = V[1], k = LY(function() {
     $();
   }, g || 3e3, !T && !M), H = uD(k, 1), j = H[0], $ = function() {
     j(), e.onClose && e.onClose(t);
@@ -50525,7 +50525,7 @@ var aL = 0, oU = /* @__PURE__ */ b.exports.memo(/* @__PURE__ */ b.exports.forwar
       id: t.id,
       className: H,
       style: t.style
-    }, k), /* @__PURE__ */ b.exports.createElement(x4, null, f && f.map(function(j) {
+    }, k), /* @__PURE__ */ b.exports.createElement(xY, null, f && f.map(function(j) {
       var $ = /* @__PURE__ */ b.exports.createRef();
       return /* @__PURE__ */ b.exports.createElement(Us, {
         nodeRef: $,
@@ -50827,11 +50827,11 @@ const Ane = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty(
   __proto__: null,
   default: TC
 }, Symbol.toStringTag, { value: "Module" }));
-i4({
+iY({
   progress: !1,
   resolve: async (e) => {
     try {
-      let n = ma.registeredPages.has(e) ? ma.registeredPages.get(e) : (await KW(/* @__PURE__ */ Object.assign({ "./pages/Create.tsx": () => import("./Create.0c5dd43f.js"), "./pages/Default.tsx": () => import("./Default.5bbcc05c.js"), "./pages/Edit.tsx": () => import("./Edit.82fac304.js"), "./pages/Error.tsx": () => Promise.resolve().then(() => Ane), "./pages/Index.tsx": () => import("./Index.b21a88a9.js"), "./pages/Login.tsx": () => import("./Login.0af11fab.js") }), `./pages/${e[0].toUpperCase() + e.slice(1)}.tsx`)).default;
+      let n = ma.registeredPages.has(e) ? ma.registeredPages.get(e) : (await KW(/* @__PURE__ */ Object.assign({ "./pages/Create.tsx": () => import("./Create.eab5ad38.js"), "./pages/Default.tsx": () => import("./Default.96a46346.js"), "./pages/Edit.tsx": () => import("./Edit.c10c0f8f.js"), "./pages/Error.tsx": () => Promise.resolve().then(() => Ane), "./pages/Index.tsx": () => import("./Index.66096ac4.js"), "./pages/Login.tsx": () => import("./Login.eef99f2a.js") }), `./pages/${e[0].toUpperCase() + e.slice(1)}.tsx`)).default;
       return n.layout === void 0 && (n.layout = (t) => /* @__PURE__ */ Ee(Mne, {
         children: t
       }, void 0, !1, {
