@@ -15,8 +15,7 @@ public abstract class TrinityPage
     protected ILogger Logger { get; init; } = null!;
     protected ModelStateDictionary ModelState { get; init; } = null!;
 
-    public abstract string PageName { get; }
-
+    public abstract string Slug { get; }
     public virtual string PageView { get; protected init; } = "Default";
     public virtual string? Label { get; protected init; }
     public virtual string? Icon { get; protected init; } = "pi pi-file";

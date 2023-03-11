@@ -5,7 +5,7 @@ namespace AbanoubNassem.Trinity.Pages;
 
 public class TrinityDashboardPage : TrinityPage
 {
-    public override string PageName => "Dashboard";
+    public override string Slug => "dashboard";
     public override string Label => "Dashboard";
     public override string Icon => "pi pi-fw pi-home";
 

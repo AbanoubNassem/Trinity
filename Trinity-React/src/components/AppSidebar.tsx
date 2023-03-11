@@ -44,12 +44,12 @@ const AppSidebar = () => {
     });
     for (let p in trinityApp.pages ?? []) {
         const page = trinityApp.pages![p];
-        if (page.pageName === 'Dashboard') continue;
+        if (page.slug.toLowerCase() === 'dashboard') continue;
 
         model[model.length - 1].items.push({
-            label: page.label ?? page.pageName,
+            label: page.label ?? page.slug,
             icon: page.icon,
-            to: `/pages/${page.pageName?.toLowerCase()}`,
+            to: `/pages/${page.slug?.toLowerCase()}`,
             visible: true,
             page
         });

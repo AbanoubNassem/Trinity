@@ -33,6 +33,13 @@ public static class AppExtensions
 
         var isDevelopment = env == Environments.Development;
 
+        var configs = new TrinityConfigurations(isDevelopment);
+
+        configure?.Invoke(configs);
+        if (configs.ConnectionFactory == null) throw new Exception("Connection Factory must be configured!");
+
+        services.AddSingleton(configs);
+
         services.AddMvc()
             .AddApplicationPart(typeof(TrinityConfigurations).Assembly);
 
@@ -48,12 +55,6 @@ public static class AppExtensions
 
         services.AddDirectoryBrowser();
 
-        var configs = new TrinityConfigurations(isDevelopment);
-
-        configure?.Invoke(configs);
-        if (configs.ConnectionFactory == null) throw new Exception("Connection Factory must be configured!");
-
-        services.AddSingleton(configs);
 
         var trinityManager = new TrinityManager(configs, services);
         services.AddSingleton(trinityManager);
@@ -82,8 +83,7 @@ public static class AppExtensions
             });
 
 
-        trinityManager.LoadResources();
-        trinityManager.LoadPages();
+        trinityManager.Init();
         return services;
     }
 
@@ -98,6 +98,12 @@ public static class AppExtensions
     /// <returns></returns>
     public static WebApplication UseTrinity(this WebApplication app, string? physicalTrinityWwwRootPath = null)
     {
+        var configs = app.Services.GetRequiredService<TrinityConfigurations>();
+        var trinityManager = app.Services.GetRequiredService<TrinityManager>();
+        var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
+
+        app.UsePathBase(new PathString($"/{configs.Prefix}"));
+
         if (app.Environment.IsDevelopment())
         {
             app.UseStatusCodePages();
@@ -143,11 +149,12 @@ public static class AppExtensions
 
 #endif
 
-        var basePath = Path.Combine(app.Environment.WebRootPath, "trinity_temp");
+        var basePath = Path.Combine("wwwroot", "trinity_temp");
         if (!Directory.Exists(basePath))
             Directory.CreateDirectory(basePath);
 
         TrinityTemp.ClearTrinityTempDirectory(app.Environment);
+
 
         app.UseInertia();
 
@@ -155,10 +162,6 @@ public static class AppExtensions
         app.UseAuthentication();
         app.UseAuthorization();
 
-
-        var configs = app.Services.GetService<TrinityConfigurations>()!;
-
-        var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
 
         app.Use((context, next) =>
         {
@@ -180,50 +183,49 @@ public static class AppExtensions
         {
             endpoints.MapControllerRoute(
                 name: "trinity-login",
-                pattern: configs.Prefix + "/login",
-                defaults: new { controller = "Trinity", action = "Login" }
+                pattern: "/login",
+                defaults: new { controller = "TrinityMain", action = "Login" }
             );
 
             endpoints.MapControllerRoute(
                 name: "trinity-logout",
-                pattern: configs.Prefix + "/logout",
-                defaults: new { controller = "Trinity", action = "Logout" }
+                pattern: "/logout",
+                defaults: new { controller = "TrinityMain", action = "Logout" }
             );
 
             endpoints.MapControllerRoute(
                 name: "trinity-upload",
-                pattern: configs.Prefix + "/upload/file",
-                defaults: new { controller = "Trinity", action = "UploadFile" }
+                pattern: "/upload/file",
+                defaults: new { controller = "TrinityMain", action = "UploadFile" }
             );
 
             endpoints.MapControllerRoute(
                 name: "trinity-delete",
-                pattern: configs.Prefix + "/delete/file",
-                defaults: new { controller = "Trinity", action = "DeleteFile" }
+                pattern: "/delete/file",
+                defaults: new { controller = "TrinityMain", action = "DeleteFile" }
             );
 
             endpoints.MapControllerRoute(
                 name: "trinity-initial",
-                pattern: configs.Prefix + "/{controller=Trinity}/{action=Index}"
+                pattern: "/{controller=TrinityMain}/{action=Index}"
             );
 
             endpoints.MapControllerRoute(
                 name: "trinity-pages",
-                pattern: configs.Prefix + "/pages/{pageName}/",
-                defaults: new { controller = "Trinity", action = "RenderPage" }
+                pattern: "/pages/{slug}/",
+                defaults: new { controller = "TrinityMain", action = "RenderPage" }
             );
 
             endpoints.MapControllerRoute(
                 name: "trinity-resources",
-                pattern: configs.Prefix + "/{name}/{view=index}/{id?}",
-                defaults: new { controller = "Trinity", action = "HandleResource" }
+                pattern: "/{name}/{view=index}/{id?}",
+                defaults: new { controller = "TrinityMain", action = "HandleResource" }
             );
 
-            // endpoints.MapControllerRoute(
-            //     name: "trinity-create",
-            //     pattern: configs?.Prefix + "/{name}/create",
-            //     defaults: new { controller = "Trinity", action = "Create" }
-            // );
+            foreach (var plugin in trinityManager.Plugins)
+            {
+                plugin.RegisterEndPoints(endpoints);
+            }
         });
 
 

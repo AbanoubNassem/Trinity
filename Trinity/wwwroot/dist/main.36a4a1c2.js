@@ -37070,7 +37070,7 @@ var W6 = function() {
         theme: t.theme,
         formats: t.formats
       };
-      W6 ? (c.current = new Quill(l.current, I), h(), c.current && c.current.getModule("toolbar") && t.onLoad && t.onLoad(c.current)) : import("./quill.9d087945.js").then((C) => C.q).then(function(C) {
+      W6 ? (c.current = new Quill(l.current, I), h(), c.current && c.current.getModule("toolbar") && t.onLoad && t.onLoad(c.current)) : import("./quill.b83664c8.js").then((C) => C.q).then(function(C) {
         C && Re.isExist(l.current) && (C.default ? c.current = new C.default(l.current, I) : c.current = new C(l.current, I), h());
       }).then(function() {
         c.current && c.current.getModule("toolbar") && t.onLoad && t.onLoad(c.current);
@@ -49912,10 +49912,10 @@ const pne = b.exports.forwardRef((e, n) => {
   });
   for (let c in (a = ma.pages) != null ? a : []) {
     const m = ma.pages[c];
-    m.pageName !== "Dashboard" && e[e.length - 1].items.push({
-      label: (l = m.label) != null ? l : m.pageName,
+    m.slug.toLowerCase() !== "dashboard" && e[e.length - 1].items.push({
+      label: (l = m.label) != null ? l : m.slug,
       icon: m.icon,
-      to: `/pages/${(f = m.pageName) == null ? void 0 : f.toLowerCase()}`,
+      to: `/pages/${(f = m.slug) == null ? void 0 : f.toLowerCase()}`,
       visible: !0,
       page: m
     });
@@ -50831,7 +50831,7 @@ i4({
   progress: !1,
   resolve: async (e) => {
     try {
-      let n = ma.registeredPages.has(e) ? ma.registeredPages.get(e) : (await KW(/* @__PURE__ */ Object.assign({ "./pages/Create.tsx": () => import("./Create.cd1ad327.js"), "./pages/Default.tsx": () => import("./Default.761a994a.js"), "./pages/Edit.tsx": () => import("./Edit.8ef42572.js"), "./pages/Error.tsx": () => Promise.resolve().then(() => Ane), "./pages/Index.tsx": () => import("./Index.b0dda3e0.js"), "./pages/Login.tsx": () => import("./Login.8fc57876.js") }), `./pages/${e[0].toUpperCase() + e.slice(1)}.tsx`)).default;
+      let n = ma.registeredPages.has(e) ? ma.registeredPages.get(e) : (await KW(/* @__PURE__ */ Object.assign({ "./pages/Create.tsx": () => import("./Create.0c5dd43f.js"), "./pages/Default.tsx": () => import("./Default.5bbcc05c.js"), "./pages/Edit.tsx": () => import("./Edit.82fac304.js"), "./pages/Error.tsx": () => Promise.resolve().then(() => Ane), "./pages/Index.tsx": () => import("./Index.b21a88a9.js"), "./pages/Login.tsx": () => import("./Login.0af11fab.js") }), `./pages/${e[0].toUpperCase() + e.slice(1)}.tsx`)).default;
       return n.layout === void 0 && (n.layout = (t) => /* @__PURE__ */ Ee(Mne, {
         children: t
       }, void 0, !1, {

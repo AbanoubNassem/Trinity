@@ -1,7 +1,7 @@
 import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 
 export default interface TrinityPage {
-    pageName: string;
+    slug: string;
     pageView: string;
     label?: string;
     to?: string;

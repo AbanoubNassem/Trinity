@@ -95,10 +95,8 @@ public abstract partial class TrinityResource
                     column.Filter(countFilters, globalSearch);
                     column.Filter(filters, globalSearch);
                 }
-                else if (requestFilters != null && requestFilters.ContainsKey(column.ColumnName))
+                else if (requestFilters != null && requestFilters.TryGetValue(column.ColumnName, out var search))
                 {
-                    var search = requestFilters[column.ColumnName];
-
                     column.Filter(countFilters, search);
                     column.Filter(filters, search);
                 }

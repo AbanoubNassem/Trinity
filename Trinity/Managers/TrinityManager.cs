@@ -1,6 +1,7 @@
 using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Pages;
+using AbanoubNassem.Trinity.Plugins;
 using AbanoubNassem.Trinity.Resources;
 using Humanizer;
 using Microsoft.AspNetCore.Http;
@@ -16,11 +17,10 @@ public class TrinityManager
 {
     private const BindingFlags Flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
     private readonly TrinityConfigurations _configurations;
-
     private readonly IServiceCollection _serviceProvider;
-
     public Dictionary<string, KeyValuePair<Type, object>> Resources { get; } = new();
     public Dictionary<string, KeyValuePair<Type, object>> Pages { get; } = new();
+    public List<TrinityPlugin> Plugins { get; } = new();
 
     public TrinityManager(TrinityConfigurations configurations, IServiceCollection serviceProvider)
     {
@@ -28,7 +28,14 @@ public class TrinityManager
         _serviceProvider = serviceProvider;
     }
 
-    public void LoadPages()
+    public void Init()
+    {
+        LoadPages();
+        LoadResources();
+        LoadPlugins();
+    }
+
+    private void LoadPages()
     {
         var trinityPageType = typeof(TrinityPage);
         var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -70,17 +77,17 @@ public class TrinityManager
             });
 
             var page = (TrinityPage)Activator.CreateInstance(pageType)!;
-            
-            Pages.TryAdd(page.PageName.ToLower(), new KeyValuePair<Type, object>(pageType, new
+
+            Pages.TryAdd(page.Slug.ToLower(), new KeyValuePair<Type, object>(pageType, new
             {
-                page.PageName,
+                page.Slug,
                 page.Label,
                 page.Icon,
             }));
         }
     }
 
-    public void LoadResources()
+    private void LoadResources()
     {
         var trinityResourceType = typeof(TrinityResource);
         var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -139,7 +146,7 @@ public class TrinityManager
 
 
             var resource = CreateResource(trinityResourceType, resourceType, plural);
-       
+
             Resources.Add(plural.ToLower(),
                 new KeyValuePair<Type, object>(resourceType,
                     new
@@ -188,5 +195,24 @@ public class TrinityManager
             .SetValue(resource, _configurations);
 
         return resource;
+    }
+
+    private void LoadPlugins()
+    {
+        var trinityResourceType = typeof(TrinityPlugin);
+        var types = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(s => s.GetTypes())
+            .Where(p => trinityResourceType.IsAssignableFrom(p) && !p.IsAbstract);
+
+
+        foreach (var pluginType in types)
+        {
+            var plugin = (TrinityPlugin)Activator.CreateInstance(pluginType)!;
+
+            _configurations.ExtraJavaScriptSources.AddRange(plugin.GetScriptSources());
+            _configurations.ExtraStyleSources.AddRange(plugin.GetStyleSources());
+
+            Plugins.Add(plugin);
+        }
     }
 }
