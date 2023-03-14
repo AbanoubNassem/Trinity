@@ -37,7 +37,7 @@ public sealed class TrinityMainController : TrinityController
         dashboard.Setup();
 
         var response = CreateResponse();
-        
+
         response.Page = page;
 
         return Inertia.Render("Default", response);

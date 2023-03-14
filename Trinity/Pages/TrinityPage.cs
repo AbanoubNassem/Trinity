@@ -31,4 +31,10 @@ public abstract class TrinityPage
     {
         return new List<ITrinityWidget>(0);
     }
+
+    public object? Data => GetData();
+    protected virtual object? GetData()
+    {
+        return null;
+    }
 }

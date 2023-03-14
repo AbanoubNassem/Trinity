@@ -9,15 +9,15 @@ import TrinityPage from '@/types/Models/Pages/TrinityPage';
 
 const Default = () => {
     const configs = useConfigs();
-    const page = usePageProps().page as TrinityPage;
+    const page = usePageProps().page as TrinityPage<any>;
 
     return (
         <>
-            <Head title={page.label ?? page.pageName}></Head>
+            <Head title={page.label ?? page.slug}></Head>
             <div className="grid">
                 <div className="col-12">
                     <div className="card">
-                        <h5>{page.label ?? page.pageName}</h5>
+                        <h5>{page.label ?? page.slug}</h5>
                         <div className="grid">
                             {page.schema?.map((w: TrinityWidget, index: number) =>
                                 trinityApp.registeredWidgets?.has(w.componentName) ? (
