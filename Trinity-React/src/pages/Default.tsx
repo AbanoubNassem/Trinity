@@ -5,21 +5,20 @@ import usePageProps from '@/hooks/trinity_page_props';
 import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 import trinityApp from '@/TrinityApp';
 import { Head } from '@/components/Head';
-import TrinityPage from '@/types/Models/Pages/TrinityPage';
 
 const Default = () => {
     const configs = useConfigs();
-    const page = usePageProps().page as TrinityPage<any>;
+    const { page } = usePageProps();
 
     return (
         <>
-            <Head title={page.label ?? page.slug}></Head>
+            <Head title={page?.label ?? page?.slug}></Head>
             <div className="grid">
                 <div className="col-12">
                     <div className="card">
-                        <h5>{page.label ?? page.slug}</h5>
+                        <h5>{page?.label ?? page?.slug}</h5>
                         <div className="grid">
-                            {page.schema?.map((w: TrinityWidget, index: number) =>
+                            {page?.schema?.map((w: TrinityWidget, index: number) =>
                                 trinityApp.registeredWidgets?.has(w.componentName) ? (
                                     <div
                                         className={classNames('col-12 md:col-6', w.columnSpan > 0 && w.columnSpan < 12 ? `lg:col-${w.columnSpan}` : 'lg:col-4')}

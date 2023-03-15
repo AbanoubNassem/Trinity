@@ -1,5 +1,4 @@
 using System.Globalization;
-using System.Text.Json;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Managers;
 using AbanoubNassem.Trinity.Providers;
@@ -21,10 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Localization;
-using Newtonsoft.Json;
 using StackExchange.Profiling;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 #if !DEBUG
 using System.Reflection;
@@ -76,7 +72,11 @@ public static class AppExtensions
                 ops.Cookie.Name = "Trinity";
             });
 
-        services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
+        services.AddAntiforgery(options =>
+        {
+            options.HeaderName = "X-XSRF-TOKEN";
+            options.Cookie.Name = "Trinity.Antiforgery";
+        });
 
         services.AddInertia(opts => { opts.RootView = "~/Views/TrinityApp.cshtml"; });
 
@@ -90,10 +90,7 @@ public static class AppExtensions
                 configs.MiniProfilerConfigures?.Invoke(conf);
             });
 
-
-        services.AddDistributedMemoryCache();
-        services.TryAddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
-        services.TryAddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
+        services.TryAddSingleton<TrinityLocalizer>();
 
         trinityManager.Init();
         return services;
@@ -174,7 +171,7 @@ public static class AppExtensions
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
-        app.SetupLocales(configs);
+        app.SetupLocales();
 
         app.Use((context, next) =>
         {
@@ -245,9 +242,9 @@ public static class AppExtensions
         return app;
     }
 
-    private static void SetupLocales(this IApplicationBuilder app, TrinityConfigurations configurations)
+    private static void SetupLocales(this IApplicationBuilder app)
     {
-        var supportedCultures = new List<CultureInfo>();
+        var supportedCultures = new Dictionary<string, CultureInfo>();
         var resourceDirectory = new DirectoryInfo(Path.Combine(AppContext.BaseDirectory, "Locales"));
 
         var jsonFiles = resourceDirectory.GetFiles("*.json", SearchOption.AllDirectories);
@@ -256,21 +253,10 @@ public static class AppExtensions
         {
             try
             {
-                var cultureName = Path.GetFileNameWithoutExtension(fileInfo.Name).Split('.').Last();
-                var culture = CultureInfo.CreateSpecificCulture(cultureName);
-                supportedCultures.Add(culture);
-                using var fReader = fileInfo.OpenText();
-                using var reader = new JsonTextReader(fReader);
-                // configurations.Locales.TryAdd(cultureName, new Dictionary<string, string>());
-                // while (reader.Read())
-                // {
-                //     if (reader.TokenType != JsonToken.PropertyName)
-                //         continue;
-                //     var key = reader.Value as string;
-                //
-                //     var value = reader.ReadAsString();
-                //     configurations.Locales[cultureName].TryAdd(key!, value!);
-                // }
+                var cultureName = Path.GetFileNameWithoutExtension(fileInfo.Name).Split('.').Last().Split('-').First();
+                if (supportedCultures.ContainsKey(cultureName)) continue;
+
+                supportedCultures.Add(cultureName, new CultureInfo(cultureName));
             }
             catch (CultureNotFoundException)
             {
@@ -284,9 +270,18 @@ public static class AppExtensions
         var requestLocalizationOptions = new RequestLocalizationOptions
         {
             DefaultRequestCulture = new RequestCulture(defaultCulture),
-            SupportedCultures = supportedCultures,
-            SupportedUICultures = supportedCultures,
+            SupportedCultures = supportedCultures.Values.ToList(),
+            SupportedUICultures = supportedCultures.Values.ToList(),
+            FallBackToParentCultures = true,
+            RequestCultureProviders = new List<IRequestCultureProvider>()
+            {
+                new QueryStringRequestCultureProvider() { QueryStringKey = "locale", UIQueryStringKey = "locale" },
+                new CookieRequestCultureProvider() { CookieName = ".Trinity.Locale" },
+                new AcceptLanguageHeaderRequestCultureProvider()
+            }
         };
+
+        var a = new CookieRequestCultureProvider();
 
         app.UseRequestLocalization(requestLocalizationOptions);
     }

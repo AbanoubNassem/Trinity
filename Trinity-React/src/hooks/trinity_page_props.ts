@@ -10,11 +10,12 @@ export default function usePageProps<T>(): {
     resources?: Array<TrinityResource>;
     pages?: { [key: string]: TrinityPage };
     resource?: TrinityResource;
+    page?: TrinityPage;
     data?: T;
     errors: Errors & ErrorBag;
     notifications?: Array<string>;
     sharedProps: {
-        [key: string]: string;
+        [key: string]: any;
     };
     [key: string]: any;
 } {

@@ -2,13 +2,13 @@ using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Pages;
 using AbanoubNassem.Trinity.Plugins;
+using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Resources;
 using Humanizer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using StackExchange.Profiling;
 
@@ -70,8 +70,7 @@ public class TrinityManager
                     );
                 pageType.GetProperty("Localizer", Flags)!
                     .SetValue(page, httpContext.RequestServices
-                        .GetRequiredService(typeof(IStringLocalizer<>)
-                            .MakeGenericType(pageType))
+                        .GetRequiredService(typeof(TrinityLocalizer))
                     );
 
                 var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
@@ -122,11 +121,10 @@ public class TrinityManager
                     httpContext.RequestServices.GetRequiredService(typeof(ILogger<>)
                         .MakeGenericType(resourceType)
                     ));
-                
+
                 resourceType.GetProperty("Localizer", Flags)!
                     .SetValue(resource, httpContext.RequestServices
-                        .GetRequiredService(typeof(IStringLocalizer<>)
-                            .MakeGenericType(resourceType))
+                        .GetRequiredService(typeof(TrinityLocalizer))
                     );
 
                 var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
@@ -187,19 +185,19 @@ public class TrinityManager
 
         if (resource.Label == null)
         {
-            trinityResourceType.GetField("_label", Flags)!
+            trinityResourceType.GetProperty("Label", Flags)!
                 .SetValue(resource, plural);
         }
 
         if (resource.PluralLabel == null)
         {
-            trinityResourceType.GetField("_pluralLabel", Flags)!
+            trinityResourceType.GetProperty("PluralLabel", Flags)!
                 .SetValue(resource, plural);
         }
 
         if (resource.Table == null)
         {
-            trinityResourceType.GetField("_table", Flags)!
+            trinityResourceType.GetProperty("Table", Flags)!
                 .SetValue(resource, plural.ToLower());
         }
 

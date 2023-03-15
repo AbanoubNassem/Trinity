@@ -37070,7 +37070,7 @@ var W6 = function() {
         theme: t.theme,
         formats: t.formats
       };
-      W6 ? (c.current = new Quill(l.current, I), h(), c.current && c.current.getModule("toolbar") && t.onLoad && t.onLoad(c.current)) : import("./quill.f8437bc5.js").then((C) => C.q).then(function(C) {
+      W6 ? (c.current = new Quill(l.current, I), h(), c.current && c.current.getModule("toolbar") && t.onLoad && t.onLoad(c.current)) : import("./quill.fac14668.js").then((C) => C.q).then(function(C) {
         C && Re.isExist(l.current) && (C.default ? c.current = new C.default(l.current, I) : c.current = new C(l.current, I), h());
       }).then(function() {
         c.current && c.current.getModule("toolbar") && t.onLoad && t.onLoad(c.current);
@@ -50832,7 +50832,7 @@ iY({
   progress: !1,
   resolve: async (e) => {
     try {
-      let n = ma.registeredPages.has(e) ? ma.registeredPages.get(e) : (await KW(/* @__PURE__ */ Object.assign({ "./pages/Create.tsx": () => import("./Create.9b0358e8.js"), "./pages/Default.tsx": () => import("./Default.ee04d039.js"), "./pages/Edit.tsx": () => import("./Edit.503782f9.js"), "./pages/Error.tsx": () => Promise.resolve().then(() => Ane), "./pages/Index.tsx": () => import("./Index.ce345dd5.js"), "./pages/Login.tsx": () => import("./Login.503d525a.js") }), `./pages/${e[0].toUpperCase() + e.slice(1)}.tsx`)).default;
+      let n = ma.registeredPages.has(e) ? ma.registeredPages.get(e) : (await KW(/* @__PURE__ */ Object.assign({ "./pages/Create.tsx": () => import("./Create.b4a24a64.js"), "./pages/Default.tsx": () => import("./Default.ae81271a.js"), "./pages/Edit.tsx": () => import("./Edit.9691a0b2.js"), "./pages/Error.tsx": () => Promise.resolve().then(() => Ane), "./pages/Index.tsx": () => import("./Index.cacca6d6.js"), "./pages/Login.tsx": () => import("./Login.9d681548.js") }), `./pages/${e[0].toUpperCase() + e.slice(1)}.tsx`)).default;
       return n.layout === void 0 && (n.layout = (t) => /* @__PURE__ */ Ee(Mne, {
         children: t
       }, void 0, !1, {

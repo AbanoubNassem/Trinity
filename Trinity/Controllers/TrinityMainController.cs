@@ -5,6 +5,7 @@ using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Managers;
 using AbanoubNassem.Trinity.Pages;
+using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Resources;
 using AbanoubNassem.Trinity.Utilities;
@@ -23,10 +24,10 @@ public sealed class TrinityMainController : TrinityController
 {
     private readonly TrinityConfigurations _configurations;
     private readonly TrinityManager _trinityManager;
-    private readonly IStringLocalizer<TrinityMainController> _localizer;
+    private readonly TrinityLocalizer _localizer;
 
     public TrinityMainController(TrinityConfigurations configurations, TrinityManager trinityManager,
-        IStringLocalizer<TrinityMainController> localizer)
+        TrinityLocalizer localizer)
     {
         _configurations = configurations;
         _trinityManager = trinityManager;
@@ -241,6 +242,8 @@ public sealed class TrinityMainController : TrinityController
         var response = CreateResponse();
         response.Page = pageObj;
 
+        response.Data = page.GetData();
+
         return Inertia.Render(page.PageView, response);
     }
 
@@ -254,7 +257,7 @@ public sealed class TrinityMainController : TrinityController
         response.Resources = _trinityManager.Resources.Values.Select(x => x.Value);
         response.Pages = _trinityManager.Pages.ToDictionary(x => x.Key, v => v.Value.Value);
         response.Locale = _localizer.GetAllStrings().ToDictionary(x => x.Name, x => x.Value);
-        
+
         return response;
     }
 }

@@ -44,7 +44,7 @@ import TrinityPage from '@/types/Models/Pages/TrinityPage';
 class TrinityApp {
     configs!: Configs;
     resources: Array<TrinityResource> = new Array<TrinityResource>();
-    pages: { [key: string]: TrinityPage<any> } = {};
+    pages: { [key: string]: TrinityPage } = {};
     registeredPages: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     registeredComponents: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();

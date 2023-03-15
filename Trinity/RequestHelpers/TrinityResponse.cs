@@ -1,3 +1,4 @@
+
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Configurations;
 using Microsoft.AspNetCore.Mvc;
