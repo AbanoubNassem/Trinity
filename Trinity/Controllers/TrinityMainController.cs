@@ -87,7 +87,7 @@ public sealed class TrinityMainController : TrinityController
         };
         claims.AddRange(loggedIn.ExtraClaims);
 
-        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var claimsIdentity = new ClaimsIdentity(claims, "Trinity");
 
         var authProperties = new AuthenticationProperties
         {
@@ -106,7 +106,7 @@ public sealed class TrinityMainController : TrinityController
     [HttpPost]
     public async Task<IActionResult> Logout()
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignOutAsync("Trinity");
 
         return HttpContext.IsInertiaRequest()
             ? Inertia.Location($"/{_configurations.Prefix}/login?returnUrl={Request.Headers.Referer}")
