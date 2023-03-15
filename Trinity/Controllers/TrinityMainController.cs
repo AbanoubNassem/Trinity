@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 
 namespace AbanoubNassem.Trinity.Controllers;
 
@@ -22,11 +23,14 @@ public sealed class TrinityMainController : TrinityController
 {
     private readonly TrinityConfigurations _configurations;
     private readonly TrinityManager _trinityManager;
+    private readonly IStringLocalizer<TrinityMainController> _localizer;
 
-    public TrinityMainController(TrinityConfigurations configurations, TrinityManager trinityManager)
+    public TrinityMainController(TrinityConfigurations configurations, TrinityManager trinityManager,
+        IStringLocalizer<TrinityMainController> localizer)
     {
         _configurations = configurations;
         _trinityManager = trinityManager;
+        _localizer = localizer;
     }
 
     public IActionResult Index()
@@ -249,7 +253,8 @@ public sealed class TrinityMainController : TrinityController
         response.Configs = _configurations;
         response.Resources = _trinityManager.Resources.Values.Select(x => x.Value);
         response.Pages = _trinityManager.Pages.ToDictionary(x => x.Key, v => v.Value.Value);
-
+        response.Locale = _localizer.GetAllStrings().ToDictionary(x => x.Name, x => x.Value);
+        
         return response;
     }
 }

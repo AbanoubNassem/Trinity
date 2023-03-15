@@ -1,5 +1,8 @@
+using System.Globalization;
+using System.Text.Json;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Managers;
+using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Utilities;
 using InertiaCore;
 using InertiaCore.Extensions;
@@ -7,6 +10,7 @@ using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -14,9 +18,13 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
+using Newtonsoft.Json;
 using StackExchange.Profiling;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 #if !DEBUG
 using System.Reflection;
@@ -83,6 +91,10 @@ public static class AppExtensions
             });
 
 
+        services.AddDistributedMemoryCache();
+        services.TryAddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
+        services.TryAddTransient(typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
+
         trinityManager.Init();
         return services;
     }
@@ -103,7 +115,7 @@ public static class AppExtensions
         var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
 
         app.UsePathBase(new PathString($"/{configs.Prefix}"));
-        
+
 
         if (app.Environment.IsDevelopment())
         {
@@ -162,7 +174,7 @@ public static class AppExtensions
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
-
+        app.SetupLocales(configs);
 
         app.Use((context, next) =>
         {
@@ -231,5 +243,51 @@ public static class AppExtensions
 
 
         return app;
+    }
+
+    private static void SetupLocales(this IApplicationBuilder app, TrinityConfigurations configurations)
+    {
+        var supportedCultures = new List<CultureInfo>();
+        var resourceDirectory = new DirectoryInfo(Path.Combine(AppContext.BaseDirectory, "Locales"));
+
+        var jsonFiles = resourceDirectory.GetFiles("*.json", SearchOption.AllDirectories);
+
+        foreach (var fileInfo in jsonFiles)
+        {
+            try
+            {
+                var cultureName = Path.GetFileNameWithoutExtension(fileInfo.Name).Split('.').Last();
+                var culture = CultureInfo.CreateSpecificCulture(cultureName);
+                supportedCultures.Add(culture);
+                using var fReader = fileInfo.OpenText();
+                using var reader = new JsonTextReader(fReader);
+                // configurations.Locales.TryAdd(cultureName, new Dictionary<string, string>());
+                // while (reader.Read())
+                // {
+                //     if (reader.TokenType != JsonToken.PropertyName)
+                //         continue;
+                //     var key = reader.Value as string;
+                //
+                //     var value = reader.ReadAsString();
+                //     configurations.Locales[cultureName].TryAdd(key!, value!);
+                // }
+            }
+            catch (CultureNotFoundException)
+            {
+                // Ignore cultures that are not supported by the framework
+            }
+        }
+
+
+        var defaultCulture = new CultureInfo("en");
+
+        var requestLocalizationOptions = new RequestLocalizationOptions
+        {
+            DefaultRequestCulture = new RequestCulture(defaultCulture),
+            SupportedCultures = supportedCultures,
+            SupportedUICultures = supportedCultures,
+        };
+
+        app.UseRequestLocalization(requestLocalizationOptions);
     }
 }

@@ -46,6 +46,8 @@ public class TrinityConfigurations
     };
 
     public List<string> ExtraJavaScriptSources { get; } = new();
+
+    // public Dictionary<string, Dictionary<string, string>> Locales { get; } = new();
 }
 
 public class ProgressConfigurations

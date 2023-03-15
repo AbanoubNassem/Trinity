@@ -42,19 +42,21 @@ import RadarChartWidget from '@/widgets/RadarChartWidget';
 import TrinityPage from '@/types/Models/Pages/TrinityPage';
 
 class TrinityApp {
-    configs: Configs = {} as any;
+    configs!: Configs;
     resources: Array<TrinityResource> = new Array<TrinityResource>();
-    pages: { [key: string]: TrinityPage } = {};
+    pages: { [key: string]: TrinityPage<any> } = {};
     registeredPages: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     registeredComponents: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     toast?: Toast;
+    locale: { [key: string]: string } = {};
 
     init(props: any) {
         this.configs = props.configs as Configs;
         this.resources = props.resources as Array<TrinityResource>;
         this.pages = props.pages;
+        this.locale = props.locale;
 
         setupProgress(this.configs.progressSettings);
 

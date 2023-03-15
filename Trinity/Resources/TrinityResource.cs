@@ -4,6 +4,7 @@ using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Validators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Resources;
@@ -11,16 +12,14 @@ namespace AbanoubNassem.Trinity.Resources;
 public abstract partial class TrinityResource
 {
     protected TrinityConfigurations Configurations { get; init; } = null!;
-
     protected IServiceProvider ServiceProvider { get; init; } = null!;
     protected HttpRequest Request { get; init; } = null!;
-
     protected HttpResponse Response { get; init; } = null!;
     protected ILogger Logger { get; init; } = null!;
-
     protected ModelStateDictionary ModelState { get; init; } = null!;
     protected ResourceValidator ResourceValidator { get; } = new();
-    [JsonIgnore] protected Func<IDbConnection> ConnectionFactory { get; init; } = null!;
+    protected Func<IDbConnection> ConnectionFactory { get; init; } = null!;
+    protected IStringLocalizer Localizer { get; init; } = null!;
 
     public string Name { get; init; } = null!;
 
@@ -37,6 +36,4 @@ public abstract partial class TrinityResource
 
     private string? _table = null;
     [JsonIgnore] public virtual string? Table => _table;
-
-   
 }

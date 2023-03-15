@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using StackExchange.Profiling;
 
@@ -67,6 +68,11 @@ public class TrinityManager
                         .GetRequiredService(typeof(ILogger<>)
                             .MakeGenericType(pageType))
                     );
+                pageType.GetProperty("Localizer", Flags)!
+                    .SetValue(page, httpContext.RequestServices
+                        .GetRequiredService(typeof(IStringLocalizer<>)
+                            .MakeGenericType(pageType))
+                    );
 
                 var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
                     .ActionContext!.ModelState;
@@ -116,6 +122,12 @@ public class TrinityManager
                     httpContext.RequestServices.GetRequiredService(typeof(ILogger<>)
                         .MakeGenericType(resourceType)
                     ));
+                
+                resourceType.GetProperty("Localizer", Flags)!
+                    .SetValue(resource, httpContext.RequestServices
+                        .GetRequiredService(typeof(IStringLocalizer<>)
+                            .MakeGenericType(resourceType))
+                    );
 
                 var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
                     .ActionContext!.ModelState;
