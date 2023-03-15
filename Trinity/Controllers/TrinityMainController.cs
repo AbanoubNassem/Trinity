@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Localization;
 
 namespace AbanoubNassem.Trinity.Controllers;
 
@@ -96,7 +95,7 @@ public sealed class TrinityMainController : TrinityController
         };
 
         await HttpContext.SignInAsync(
-            CookieAuthenticationDefaults.AuthenticationScheme,
+            "Trinity",
             new ClaimsPrincipal(claimsIdentity),
             authProperties
         );

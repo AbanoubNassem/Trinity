@@ -64,8 +64,8 @@ public static class AppExtensions
         services.AddSingleton(trinityManager);
 
         services.AddAuthorization();
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, ops =>
+        services.AddAuthentication("Trinity")
+            .AddCookie("Trinity", ops =>
             {
                 ops.LoginPath = "/login";
                 ops.LogoutPath = "/logout";
