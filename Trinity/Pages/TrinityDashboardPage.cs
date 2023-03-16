@@ -6,7 +6,7 @@ namespace AbanoubNassem.Trinity.Pages;
 public class TrinityDashboardPage : TrinityPage
 {
     public override string Slug => "dashboard";
-    public override string Label => "Dashboard";
+    public override string Label => Localizer["dashboard"];
     public override string Icon => "pi pi-fw pi-home";
 
     protected override List<ITrinityWidget> GetSchema()

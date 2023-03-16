@@ -11,7 +11,6 @@ using AbanoubNassem.Trinity.Resources;
 using AbanoubNassem.Trinity.Utilities;
 using InertiaCore;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,7 +51,11 @@ public sealed class TrinityMainController : TrinityController
     [HttpGet]
     public IActionResult Login()
     {
-        return Inertia.Render("Login", new { configs = _configurations });
+        return Inertia.Render("Login",
+            new
+            {
+                configs = _configurations, Locale = _localizer.GetAllStrings().ToDictionary(x => x.Name, x => x.Value)
+            });
     }
 
     [AllowAnonymous]
@@ -67,14 +70,14 @@ public sealed class TrinityMainController : TrinityController
 
         if (_configurations.AuthenticateUser == null)
         {
-            throw new Exception("Trinity.Configurations.AuthenticateUser Must be configured!");
+            throw new Exception(_localizer["auth_configurations"]);
         }
 
         var loggedIn = await _configurations.AuthenticateUser(HttpContext, loginRequest.Email, loginRequest.Password);
 
         if (loggedIn == null)
         {
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            ModelState.AddModelError(string.Empty, _localizer["invalid_login_attempt"]);
 
             return Inertia.Render("Login", new { configs = _configurations, errors = BadRequest(ModelState) });
         }
@@ -177,11 +180,11 @@ public sealed class TrinityMainController : TrinityController
         if (field is not ICanUploadField uploadField) return UnprocessableEntity();
 
         if (file == null)
-            return BadRequest("file not selected");
+            return BadRequest(_localizer["no_file_selected"]);
 
         return Ok(new
         {
-            data = await uploadField.Upload(file),
+            data = await uploadField.Upload(file, _localizer),
             notifications = TrinityNotifications.Flush(),
         });
     }
@@ -212,8 +215,8 @@ public sealed class TrinityMainController : TrinityController
 
             if (!filesToDelete.Any())
             {
-                TrinityNotifications.NotifyError("Nothing to delete/revert!");
-                return await Task.FromResult<IActionResult>(BadRequest("Nothing to delete/revert!"));
+                TrinityNotifications.NotifyError(_localizer["nothing_to_delete_revert"]);
+                return await Task.FromResult<IActionResult>(BadRequest(_localizer["nothing_to_delete_revert"]));
             }
 
             Parallel.ForEach(filesToDelete, System.IO.File.Delete);

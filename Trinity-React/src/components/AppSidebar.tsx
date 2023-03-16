@@ -1,14 +1,16 @@
 import React from 'react';
 import AppMenuItem from '@/components/AppMenuItem';
 import trinityApp from '@/TrinityApp';
+import { useLocalize } from '@/hooks/trinity_localizer';
 
 const AppSidebar = () => {
+    const localize = useLocalize();
     const model: Array<any> = [];
 
     const dashboard = trinityApp.pages['dashboard'];
 
     model.push({
-        label: 'Dashboard',
+        label: localize('dashboard'),
         visible: true,
         items: [
             {
@@ -21,7 +23,7 @@ const AppSidebar = () => {
     });
 
     model.push({
-        label: 'Resources',
+        label: localize('resources'),
         items: [],
         visible: true
     });
@@ -38,7 +40,7 @@ const AppSidebar = () => {
     }
 
     model.push({
-        label: 'Pages',
+        label: localize('pages'),
         items: [],
         visible: true
     });

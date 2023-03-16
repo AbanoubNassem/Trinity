@@ -40,8 +40,9 @@ import LineChartWidget from '@/widgets/LineChartWidget';
 import PolarAreaChartWidget from '@/widgets/PolarAreaChartWidget';
 import RadarChartWidget from '@/widgets/RadarChartWidget';
 import TrinityPage from '@/types/Models/Pages/TrinityPage';
+import TrinityLocalizer from '@/utilities/trinity_localizer';
 
-class TrinityApp {
+export class TrinityApp {
     configs!: Configs;
     resources: Array<TrinityResource> = new Array<TrinityResource>();
     pages: { [key: string]: TrinityPage } = {};
@@ -50,18 +51,18 @@ class TrinityApp {
     registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     toast?: Toast;
-    locale: { [key: string]: string } = {};
+    private localizer!: TrinityLocalizer;
 
-    init(props: any) {
+    init = (props: any) => {
         this.configs = props.configs as Configs;
         this.resources = props.resources as Array<TrinityResource>;
         this.pages = props.pages;
-        this.locale = props.locale;
+        this.localizer = new TrinityLocalizer(props.locale);
 
         setupProgress(this.configs.progressSettings);
 
         this.loadDefaults();
-    }
+    };
 
     private loadDefaults() {
         this.registerComponent('GridLayout', (props) => <GridLayout {...props} />);
@@ -104,25 +105,30 @@ class TrinityApp {
         this.registerWidget('RadarChartWidget', (props) => <RadarChartWidget {...props} />);
     }
 
-    registerComponent(name: string, component: (props: any) => React.ReactNode) {
+    registerComponent = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredComponents.set(name, component);
-    }
+    };
 
-    registerColumn(name: string, component: (props: any) => React.ReactNode) {
+    registerColumn = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredColumns.set(name, component);
-    }
+    };
 
-    registerWidget(name: string, component: (props: any) => React.ReactNode) {
+    registerWidget = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredWidgets.set(name, component);
-    }
+    };
 
-    registerPage(name: string, component: (props: any) => React.ReactNode) {
+    registerPage = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredPages.set(name, component);
-    }
+    };
+
+    localize = (key: string, ...args: Array<string>): string => {
+        // @ts-ignore
+        return this.localizer.localize(key, args);
+    };
 }
 
 const trinityApp = new TrinityApp();
 // @ts-ignore
-window.Trinity = window.trinity = window.TrinityApp = window.trinityApp = trinityApp as any;
+window.Trinity = window.trinity = window.trinityApp = trinityApp as any;
 
 export default trinityApp;

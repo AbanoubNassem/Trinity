@@ -6,7 +6,6 @@ using AbanoubNassem.Trinity.Utilities;
 using InertiaCore;
 using InertiaCore.Extensions;
 using Microsoft.AspNetCore.Antiforgery;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
@@ -59,8 +58,9 @@ public static class AppExtensions
 
         services.AddDirectoryBrowser();
 
-
-        var trinityManager = new TrinityManager(configs, services);
+        var localizer = new TrinityLocalizer();
+        services.TryAddSingleton(localizer);
+        var trinityManager = new TrinityManager(configs, services, localizer);
         services.AddSingleton(trinityManager);
 
         services.AddAuthorization();
@@ -90,7 +90,6 @@ public static class AppExtensions
                 configs.MiniProfilerConfigures?.Invoke(conf);
             });
 
-        services.TryAddSingleton<TrinityLocalizer>();
 
         trinityManager.Init();
         return services;
@@ -280,8 +279,6 @@ public static class AppExtensions
                 new AcceptLanguageHeaderRequestCultureProvider()
             }
         };
-
-        var a = new CookieRequestCultureProvider();
 
         app.UseRequestLocalization(requestLocalizationOptions);
     }

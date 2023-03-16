@@ -17,9 +17,11 @@ import BaseColumnComponent from '@/columns/BaseColumnComponent';
 import IPaginator from '@/types/Models/Paginator';
 import { Dialog } from 'primereact/dialog';
 import trinityApp from '@/TrinityApp';
+import { useLocalize } from '@/hooks/trinity_localizer';
 
 const Table = () => {
     const configs = useConfigs();
+    const localize = useLocalize();
     const { resource, data: paginator } = usePageProps<IPaginator<any>>();
     const resourceColumns = resource?.columns ?? [];
     const urlParams = useUrlParams();
@@ -144,7 +146,7 @@ const Table = () => {
     const deleteDialogFooter = (
         <React.Fragment>
             <Button
-                label="No"
+                label={localize('no')}
                 icon="pi pi-times"
                 className="p-button-text"
                 onClick={() => {
@@ -153,7 +155,7 @@ const Table = () => {
                 }}
             />
             <Button
-                label="Yes"
+                label={localize('yes')}
                 icon="pi pi-check"
                 className="p-button-text"
                 onClick={() => {
@@ -181,13 +183,13 @@ const Table = () => {
             <Button
                 className="p-button-success mr-2"
                 icon="pi pi-plus"
-                label="Create"
+                label={localize('create')}
                 onClick={() => trinityLink(`/${configs.prefix}/${resource?.name}/create`)}
             />
             <Button
                 className="p-button-danger"
                 icon="pi pi-trash"
-                label="Delete"
+                label={localize('delete')}
                 disabled={selectedItems.length === 0}
                 onClick={() => {
                     if (selectedItems.length) showDeleteDialog(true);
@@ -203,7 +205,7 @@ const Table = () => {
                     <Button
                         icon="pi pi-external-link"
                         className="p-button-primary  mr-2"
-                        label="Export"
+                        label={localize('export')}
                         onClick={exportCSV}
                     />
                 )}
@@ -211,7 +213,7 @@ const Table = () => {
                     <Button
                         type="button"
                         icon="pi pi-filter-slash"
-                        label="Clear"
+                        label={localize('clear')}
                         className="p-button-outlined"
                         onClick={clearFilters}
                     />
@@ -223,7 +225,7 @@ const Table = () => {
                         <i className="pi pi-search" />
                         <InputText
                             ref={globalSearchInput}
-                            placeholder="Keyword Search"
+                            placeholder={localize('keyword_search')}
                             onChange={onGlobalSearchInput}
                         />
                         {globalSearchInput.current && globalSearchInput.current.value && loading && <i className="pi pi-spin pi-spinner global-search-icon" />}
@@ -370,7 +372,7 @@ const Table = () => {
                             exportable={column.exportable}
                             hidden={column.hidden}
                             filter={!!column.customFilter || (column.searchable && !column.isGloballySearchable)}
-                            filterPlaceholder={column.searchPlaceholder ?? `Search by ${column.label}`}
+                            filterPlaceholder={column.searchPlaceholder ?? localize('search_by', column.label)}
                             filterElement={
                                 !!column.customFilter
                                     ? (options) => {
@@ -407,7 +409,7 @@ const Table = () => {
             <Dialog
                 visible={deleteDialog}
                 style={{ width: '450px' }}
-                header="Confirm"
+                header={localize('confirm')}
                 modal
                 footer={deleteDialogFooter}
                 onHide={() => {
@@ -420,16 +422,8 @@ const Table = () => {
                         className="pi pi-exclamation-triangle mr-3"
                         style={{ fontSize: '2rem' }}
                     />
-                    {selectedItemToDelete && (
-                        <span>
-                            Are you sure you want to delete <b>{selectedItemToDelete[resource?.titleColumn ?? 'id']}</b>?
-                        </span>
-                    )}
-                    {selectedItemToDelete === null && selectedItems.length && (
-                        <span>
-                            Are you sure you want to delete the <b>{selectedItems.length} selected records</b>?
-                        </span>
-                    )}
+                    {selectedItemToDelete && <span dangerouslySetInnerHTML={{ __html: localize('are_you_sure_to_delete', selectedItemToDelete[resource?.titleColumn ?? 'id']) }} />}
+                    {selectedItemToDelete === null && selectedItems.length && <span dangerouslySetInnerHTML={{ __html: localize('are_you_sure_to_delete_selected_records', selectedItems.length.toString()) }} />}
                 </div>
             </Dialog>
         </>

@@ -19,14 +19,17 @@ public class TrinityManager
     private const BindingFlags Flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
     private readonly TrinityConfigurations _configurations;
     private readonly IServiceCollection _serviceProvider;
+    private readonly TrinityLocalizer _trinityLocalizer;
     public Dictionary<string, KeyValuePair<Type, object>> Resources { get; } = new();
     public Dictionary<string, KeyValuePair<Type, object>> Pages { get; } = new();
     public List<TrinityPlugin> Plugins { get; } = new();
 
-    public TrinityManager(TrinityConfigurations configurations, IServiceCollection serviceProvider)
+    public TrinityManager(TrinityConfigurations configurations, IServiceCollection serviceProvider,
+        TrinityLocalizer trinityLocalizer)
     {
         _configurations = configurations;
         _serviceProvider = serviceProvider;
+        _trinityLocalizer = trinityLocalizer;
     }
 
     public void Init()
@@ -68,10 +71,8 @@ public class TrinityManager
                         .GetRequiredService(typeof(ILogger<>)
                             .MakeGenericType(pageType))
                     );
-                pageType.GetProperty("Localizer", Flags)!
-                    .SetValue(page, httpContext.RequestServices
-                        .GetRequiredService(typeof(TrinityLocalizer))
-                    );
+
+                pageType.GetProperty("Localizer", Flags)!.SetValue(page, _trinityLocalizer);
 
                 var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
                     .ActionContext!.ModelState;
@@ -82,6 +83,8 @@ public class TrinityManager
             });
 
             var page = (TrinityPage)Activator.CreateInstance(pageType)!;
+            pageType.GetProperty("Localizer", Flags)!
+                .SetValue(page, _trinityLocalizer);
 
             Pages.TryAdd(page.Slug.ToLower(), new KeyValuePair<Type, object>(pageType, new
             {
@@ -121,11 +124,6 @@ public class TrinityManager
                     httpContext.RequestServices.GetRequiredService(typeof(ILogger<>)
                         .MakeGenericType(resourceType)
                     ));
-
-                resourceType.GetProperty("Localizer", Flags)!
-                    .SetValue(resource, httpContext.RequestServices
-                        .GetRequiredService(typeof(TrinityLocalizer))
-                    );
 
                 var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
                     .ActionContext!.ModelState;
@@ -204,6 +202,7 @@ public class TrinityManager
         resourceType.GetProperty("Configurations", Flags)!
             .SetValue(resource, _configurations);
 
+        resourceType.GetProperty("Localizer", Flags)!.SetValue(resource, _trinityLocalizer);
         return resource;
     }
 

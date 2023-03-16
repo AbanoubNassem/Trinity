@@ -6,10 +6,12 @@ import { useLogo } from '@/hooks/trinity_logo';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
+import { useLocalize } from '@/hooks/trinity_localizer';
 
 const AppTopbar = forwardRef((props, ref) => {
     const configs = useConfigs();
     const logo = useLogo();
+    const localize = useLocalize();
     const { layoutState, onMenuToggle, showProfileSidebar } = useContext(LayoutContext);
     const menubuttonRef = useRef(null);
     const topbarmenuRef = useRef(null);
@@ -24,10 +26,10 @@ const AppTopbar = forwardRef((props, ref) => {
 
     const profileItems = [
         {
-            label: 'Profile',
+            label: localize('profile'),
             items: [
                 {
-                    label: 'Logout',
+                    label: localize('logout'),
                     icon: 'pi pi-sign-out',
                     href: '',
                     command: () => {
@@ -81,7 +83,7 @@ const AppTopbar = forwardRef((props, ref) => {
                     onClick={(e) => profileMenu.current!.toggle(e)}
                 >
                     <i className="pi pi-user"></i>
-                    <span>Profile</span>
+                    <span>{localize('profile')}</span>
                 </Button>
                 <Menu
                     ref={profileMenu}

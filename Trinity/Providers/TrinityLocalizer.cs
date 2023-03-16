@@ -22,7 +22,7 @@ public class TrinityLocalizer
 
     public IEnumerable<LocalizedString> GetAllStrings()
     {
-        var locale = Thread.CurrentThread.CurrentCulture.Name;
+        var locale = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
         if (_locales.TryGetValue(locale, out var strings)) return strings.Values;
 
@@ -40,7 +40,8 @@ public class TrinityLocalizer
 
                 if (locale != cultureName) continue;
 
-                using var reader = new JsonTextReader(fileInfo.OpenText());
+                using var sReader = fileInfo.OpenText();
+                using var reader = new JsonTextReader(sReader);
                 while (reader.Read())
                 {
                     if (reader.TokenType != JsonToken.PropertyName)
@@ -48,7 +49,7 @@ public class TrinityLocalizer
                     var key = reader.Value as string;
                     reader.Read();
                     var value = _serializer.Deserialize<string>(reader);
-                    _locales[locale].Add(key!, new LocalizedString(key!, value, false));
+                    _locales[locale].TryAdd(key!, new LocalizedString(key!, value, false));
                 }
             }
             catch
@@ -62,13 +63,13 @@ public class TrinityLocalizer
 
     private LocalizedString GetLocalizedString(string key)
     {
-        var locale = Thread.CurrentThread.CurrentCulture.Name;
+        var locale = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
         if (!_locales.ContainsKey(locale))
         {
             GetAllStrings();
         }
 
-        return !_locales[locale].ContainsKey(key) ? new LocalizedString(key, "") : _locales[locale][key];
+        return !_locales[locale].ContainsKey(key) ? new LocalizedString(key, key) : _locales[locale][key];
     }
 }

@@ -43,6 +43,14 @@ createInertiaApp({
         );
     }
 }).then(() => {
+    window.dispatchEvent(
+        new CustomEvent('trinity_ready', {
+            detail: {
+                trinityApp
+            }
+        })
+    );
+
     axios.interceptors.response.use(function (response) {
         // @ts-ignore
         const profiler = window.MiniProfiler as any;
@@ -52,12 +60,4 @@ createInertiaApp({
         }
         return response;
     });
-
-    window.dispatchEvent(
-        new CustomEvent('trinity_ready', {
-            detail: {
-                trinityApp
-            }
-        })
-    );
 });

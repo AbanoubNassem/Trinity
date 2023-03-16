@@ -188,12 +188,12 @@ public abstract partial class TrinityResource
 
         if (deleteQueryResult == 0)
         {
-            var recordStr = keys.Count == 1 ? "record was" : "records were";
-            TrinityNotifications.NotifySuccess($"The {recordStr} deleted successfully!");
+            var recordStr = keys.Count == 1 ? Localizer["record_was"] : Localizer["records_were"];
+            TrinityNotifications.NotifySuccess(Localizer["record_deleted", recordStr]);
         }
         else
         {
-            TrinityNotifications.NotifyError("Something went wrong while deleting the record!");
+            TrinityNotifications.NotifyError(Localizer["record_not_deleted"]);
         }
 
         return await GetTableData();

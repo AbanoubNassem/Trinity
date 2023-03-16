@@ -10,6 +10,7 @@ import { LayoutContext } from '@/contexts/LayoutContext';
 import { useLogo } from '@/hooks/trinity_logo';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { useForm } from '@inertiajs/react';
+import { useLocalize } from '@/hooks/trinity_localizer';
 
 const Login = () => {
     const configs = useConfigs();
@@ -18,6 +19,7 @@ const Login = () => {
     const [checked, setChecked] = useState(false);
     const { layoutConfig } = useContext(LayoutContext);
     const logo = useLogo();
+    const localize = useLocalize();
     const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
 
     const { data, setData, post, processing } = useForm({
@@ -64,12 +66,12 @@ const Login = () => {
                                         htmlFor="email1"
                                         className="block text-900 text-xl font-medium mb-2"
                                     >
-                                        Email
+                                        {localize('email')}
                                     </label>
                                     <InputText
                                         type="email"
                                         required
-                                        placeholder="Email address"
+                                        placeholder={localize('email_address')}
                                         className={classNames('w-full md:w-30rem mb-3', { 'p-invalid': errors.email })}
                                         value={data.email}
                                         onChange={(e) => setData('email', e.target.value)}
@@ -78,14 +80,14 @@ const Login = () => {
                                     {errors.email && <small className="p-error w-full block md:w-30rem">{errors.email}</small>}
                                 </div>
                                 <div className="field">
-                                    <label className="block text-900 font-medium text-xl mb-2">Password</label>
+                                    <label className="block text-900 font-medium text-xl mb-2">{localize('password')}</label>
                                     <Password
                                         value={password}
                                         onChange={(e) => {
                                             setPassword(e.target.value);
                                             setData('password', e.target.value);
                                         }}
-                                        placeholder="Password"
+                                        placeholder={localize('password')}
                                         type="password"
                                         required
                                         toggleMask
@@ -104,18 +106,18 @@ const Login = () => {
                                             }}
                                             className="mr-2"
                                         />
-                                        <label htmlFor="rememberme1">Remember me</label>
+                                        <label htmlFor="rememberme1">{localize('remember_me')}</label>
                                     </div>
-                                    <a
-                                        className="font-medium no-underline ml-2 text-right cursor-pointer"
-                                        style={{ color: 'var(--primary-color)' }}
-                                    >
-                                        Forgot password?
-                                    </a>
+                                    {/*<a*/}
+                                    {/*    className="font-medium no-underline ml-2 text-right cursor-pointer"*/}
+                                    {/*    style={{ color: 'var(--primary-color)' }}*/}
+                                    {/*>*/}
+                                    {/*    Forgot password?*/}
+                                    {/*</a>*/}
                                 </div>
 
                                 <Button
-                                    label="Sign In"
+                                    label={localize('sign_in')}
                                     className="w-full p-3 text-xl"
                                     type="submit"
                                     loading={processing}

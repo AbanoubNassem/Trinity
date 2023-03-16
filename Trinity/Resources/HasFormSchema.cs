@@ -98,7 +98,7 @@ public abstract partial class TrinityResource
         if (validation.IsValid && ModelState.IsValid) return form;
 
         validation.AddToModelState(ModelState);
-        TrinityNotifications.NotifyError("Please correct the validation errors.", "Validation Errors!");
+        TrinityNotifications.NotifyError(Localizer["fix_validation_errors"], Localizer["validation_errors"]);
         return null;
     }
 
@@ -123,11 +123,11 @@ public abstract partial class TrinityResource
 
         if (res != null)
         {
-            TrinityNotifications.NotifySuccess("A new record was added successfully!");
+            TrinityNotifications.NotifySuccess(Localizer["new_record_added"]);
         }
         else
         {
-            TrinityNotifications.NotifyError("Something wrong happened please try again.");
+            TrinityNotifications.NotifyError(Localizer["something_went_wrong"]);
             return null;
         }
 
@@ -177,8 +177,8 @@ public abstract partial class TrinityResource
         {
             if (!Request.RouteValues.TryGetValue("id", out var key)) return null;
 
-            ModelState.AddModelError("", $"The entity with {PrimaryKeyColumn}={key} doesn't exist.");
-            TrinityNotifications.NotifyError($"The entity with {PrimaryKeyColumn}={key} doesn't exist.");
+            ModelState.AddModelError("", Localizer["entity_does_not_exist", PrimaryKeyColumn, key!]);
+            TrinityNotifications.NotifyError(Localizer["entity_does_not_exist", PrimaryKeyColumn, key!]);
 
             return record;
         }
@@ -213,11 +213,11 @@ public abstract partial class TrinityResource
 
         if (res == 0)
         {
-            TrinityNotifications.NotifySuccess("The record updated successfully!");
+            TrinityNotifications.NotifySuccess(Localizer["record_updated"]);
         }
         else
         {
-            TrinityNotifications.NotifyError("Something went wrong while updating the record!");
+            TrinityNotifications.NotifyError(Localizer["record_not_updated"]);
         }
 
         return await GetEditData();

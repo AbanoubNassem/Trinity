@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using AbanoubNassem.Trinity.Components.TrinityField;
+using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Utilities;
 using Microsoft.AspNetCore.Http;
 
@@ -42,13 +43,11 @@ public class FileUploadField : CanUploadField<FileUploadField>
     {
     }
 
-    public override async Task<string?> Upload( IFormFile file)
+    public override async Task<string?> Upload(IFormFile file, TrinityLocalizer localizer)
     {
         if (MaximumFileSize != null && file.Length > MaximumFileSize)
         {
-            TrinityNotifications.NotifyError(
-                $"{file.FileName} was not uploaded size exceeded the maximum allowed size."
-            );
+            TrinityNotifications.NotifyError(localizer["file_exceeded_max_size", file.FileName]);
             return null;
         }
 
@@ -59,9 +58,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
 
             if (!match.Success)
             {
-                TrinityNotifications.NotifyError(
-                    $"{file.FileName} was not uploaded file type doesn't match ${pattern}."
-                );
+                TrinityNotifications.NotifyError(localizer["file_does_not_match_pattern", file.FileName, pattern]);
                 return null;
             }
         }
@@ -85,9 +82,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
         await using var stream = new FileStream(path, FileMode.Create);
         await file.CopyToAsync(stream);
 
-        TrinityNotifications.NotifySuccess(
-            $"{file.FileName} was uploaded successfully."
-        );
+        TrinityNotifications.NotifySuccess(localizer["file_was_uploaded", file.FileName]);
 
         var moveUploadedFromTempToDirectory = Path.Combine("wwwroot", GetUploadDirectory());
 
@@ -106,27 +101,27 @@ public class FileUploadField : CanUploadField<FileUploadField>
                            Array.Empty<string>();
 
         var files = new List<string>();
-        
-            foreach (var file in oldFiles)
-            {
-                var removed = formFilesIds.All(id => !file.Contains(id));
 
-                if (removed)
+        foreach (var file in oldFiles)
+        {
+            var removed = formFilesIds.All(id => !file.Contains(id));
+
+            if (removed)
+            {
+                try
                 {
-                    try
-                    {
-                        File.Delete(Path.Combine("wwwroot", file));
-                    }
-                    catch
-                    {
-                        // ignored
-                    }
+                    File.Delete(Path.Combine("wwwroot", file));
                 }
-                else
+                catch
                 {
-                    files.Add(file);
+                    // ignored
                 }
             }
+            else
+            {
+                files.Add(file);
+            }
+        }
 
         if (formFilesIds.Any())
         {
