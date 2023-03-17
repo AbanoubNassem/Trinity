@@ -1,7 +1,9 @@
 [dir="rtl"] {
-  i,.p-button .p-button-icon-left{
+
+  i, .p-menuitem-icon, .p-button .p-button-icon-left {
     margin-left: 0.5rem;
   }
+
   .layout-sidebar {
     position: fixed;
     width: 300px;
@@ -18,11 +20,11 @@
     box-shadow: 0px 3px 5px rgba(0, 0, 0, .02), 0px 0px 2px rgba(0, 0, 0, .05), 0px 1px 4px rgba(0, 0, 0, .08);
   }
 
-  .layout-main-container{
+  .layout-main-container {
     padding: 7rem 4rem 2rem 2rem;
     transition: margin-right $transitionDuration;
   }
-  
+
   @media screen and (min-width: 1960px) {
     .layout-main, .landing-wrapper {
       width: 1504px;

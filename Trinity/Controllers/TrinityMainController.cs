@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AbanoubNassem.Trinity.Controllers;
@@ -32,6 +33,7 @@ public sealed class TrinityMainController : TrinityController
         _localizer = localizer;
     }
 
+    [HttpGet]
     public IActionResult Index()
     {
         var page = HttpContext.RequestServices.GetRequiredService(_trinityManager.Pages["dashboard"].Key);
@@ -49,6 +51,7 @@ public sealed class TrinityMainController : TrinityController
     [AllowAnonymous]
     [AnonymousOnly]
     [HttpGet]
+    [Route("/login")]
     public IActionResult Login()
     {
         return Inertia.Render("Login",
@@ -61,6 +64,7 @@ public sealed class TrinityMainController : TrinityController
     [AllowAnonymous]
     [AnonymousOnly]
     [HttpPost]
+    [Route("/login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest, [FromQuery] string? returnUrl = null)
     {
         if (!ModelState.IsValid)
@@ -107,6 +111,7 @@ public sealed class TrinityMainController : TrinityController
     }
 
     [HttpPost]
+    [Route("/logout")]
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync("Trinity");
@@ -116,6 +121,11 @@ public sealed class TrinityMainController : TrinityController
             : Redirect($"/{_configurations.Prefix}/login?returnUrl={Request.Headers.Referer}");
     }
 
+    [HttpGet]
+    [HttpPost]
+    [HttpPut]
+    [HttpDelete]
+    [Route("/{name}/{view=index}/{id?}")]
     public async Task<IActionResult> HandleResource(string name, string view)
     {
         if (!_trinityManager.Resources.TryGetValue(name, out var resourceKv))
@@ -165,6 +175,7 @@ public sealed class TrinityMainController : TrinityController
     }
 
     [HttpPost]
+    [Route("/upload/file")]
     public async Task<IActionResult> UploadFile(IFormFile? file, [FromForm] string resourceName,
         [FromForm] string fieldName)
     {
@@ -190,6 +201,7 @@ public sealed class TrinityMainController : TrinityController
     }
 
     [HttpPost]
+    [Route("/delete/file")]
     public async Task<IActionResult> DeleteFile([FromBody] DeleteFileRequest request)
     {
         if (!_trinityManager.Resources.TryGetValue(request.ResourceName, out var resourceKv))
@@ -230,7 +242,8 @@ public sealed class TrinityMainController : TrinityController
         }));
     }
 
-
+    [HttpGet]
+    [Route("/pages/{slug}/")]
     public async Task<IActionResult> RenderPage(string slug)
     {
         if (!_trinityManager.Pages.TryGetValue(slug, out var pageKv)) return NotFound();

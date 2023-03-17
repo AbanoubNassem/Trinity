@@ -7,5 +7,4 @@ namespace AbanoubNassem.Trinity.Controllers;
 [AutoValidateAntiforgeryToken]
 public abstract class TrinityController : Controller
 {
-    
 }

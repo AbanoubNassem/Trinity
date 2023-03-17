@@ -43,7 +43,7 @@ public static class AppExtensions
 
         services.AddSingleton(configs);
 
-        services.AddMvc()
+        services.AddMvc(opt => { opt.Conventions.Insert(0, new RoutePrefixConvention($"{configs.Prefix}")); })
             .AddApplicationPart(typeof(TrinityConfigurations).Assembly);
 
         services.AddHttpContextAccessor();
@@ -67,8 +67,8 @@ public static class AppExtensions
         services.AddAuthentication("Trinity")
             .AddCookie("Trinity", ops =>
             {
-                ops.LoginPath = "/login";
-                ops.LogoutPath = "/logout";
+                ops.LoginPath = $"/{configs.Prefix}/login";
+                ops.LogoutPath = $"/{configs.Prefix}/logout";
                 ops.Cookie.Name = "Trinity";
             });
 
@@ -107,10 +107,7 @@ public static class AppExtensions
     public static WebApplication UseTrinity(this WebApplication app, string? physicalTrinityWwwRootPath = null)
     {
         var configs = app.Services.GetRequiredService<TrinityConfigurations>();
-        var trinityManager = app.Services.GetRequiredService<TrinityManager>();
         var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
-
-        app.UsePathBase(new PathString($"/{configs.Prefix}"));
 
 
         if (app.Environment.IsDevelopment())
@@ -143,7 +140,7 @@ public static class AppExtensions
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(physicalTrinityWwwRootPath),
-                RequestPath = "/trinity"
+                RequestPath = $"/{configs.Prefix}/trinity"
             });
 #else
         var assembly = typeof(Controllers.TrinityController).GetTypeInfo().Assembly;
@@ -153,7 +150,7 @@ public static class AppExtensions
                 assembly,
                 "AbanoubNassem.Trinity.wwwroot"
             ),
-            RequestPath = "/trinity"
+            RequestPath = $"/{configs.Prefix}/trinity"
         });
 
 #endif
@@ -166,7 +163,6 @@ public static class AppExtensions
 
 
         app.UseInertia();
-
         app.UseRouting();
         app.UseAuthentication();
         app.UseAuthorization();
@@ -174,7 +170,7 @@ public static class AppExtensions
 
         app.Use((context, next) =>
         {
-            var requestPath = context.Request.PathBase.Value;
+            var requestPath = context.Request.Path.Value;
 
             if (requestPath == null ||
                 !requestPath.StartsWith($"/{configs.Prefix}", StringComparison.OrdinalIgnoreCase))
@@ -186,57 +182,6 @@ public static class AppExtensions
 
             return next(context);
         });
-
-
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllerRoute(
-                name: "trinity-login",
-                pattern: "/login",
-                defaults: new { controller = "TrinityMain", action = "Login" }
-            );
-
-            endpoints.MapControllerRoute(
-                name: "trinity-logout",
-                pattern: "/logout",
-                defaults: new { controller = "TrinityMain", action = "Logout" }
-            );
-
-            endpoints.MapControllerRoute(
-                name: "trinity-upload",
-                pattern: "/upload/file",
-                defaults: new { controller = "TrinityMain", action = "UploadFile" }
-            );
-
-            endpoints.MapControllerRoute(
-                name: "trinity-delete",
-                pattern: "/delete/file",
-                defaults: new { controller = "TrinityMain", action = "DeleteFile" }
-            );
-
-            endpoints.MapControllerRoute(
-                name: "trinity-initial",
-                pattern: "/{controller=TrinityMain}/{action=Index}"
-            );
-
-            endpoints.MapControllerRoute(
-                name: "trinity-pages",
-                pattern: "/pages/{slug}/",
-                defaults: new { controller = "TrinityMain", action = "RenderPage" }
-            );
-
-            endpoints.MapControllerRoute(
-                name: "trinity-resources",
-                pattern: "/{name}/{view=index}/{id?}",
-                defaults: new { controller = "TrinityMain", action = "HandleResource" }
-            );
-
-            foreach (var plugin in trinityManager.Plugins)
-            {
-                plugin.RegisterEndPoints(endpoints);
-            }
-        });
-
 
         return app;
     }
@@ -283,3 +228,4 @@ public static class AppExtensions
         app.UseRequestLocalization(requestLocalizationOptions);
     }
 }
+

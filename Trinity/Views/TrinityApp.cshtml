@@ -11,13 +11,13 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link rel="stylesheet" type="text/css" href="~/trinity/dist/style.css"/>
+    <link rel="stylesheet" type="text/css" href="~/@(Configurations.Prefix)/trinity/dist/style.css"/>
     @foreach (var style in Configurations.ExtraStyleSources)
     {
         <link rel="stylesheet" type="text/css" href="@style"/>
     }
 
-    <link rel="icon" type="image/x-icon" href="~/trinity/dist/favicon.ico" inertia>
+    <link rel="icon" type="image/x-icon" href="~/@(Configurations.Prefix)/trinity/dist/favicon.ico" inertia>
     <title inertia>@Configurations.Title</title>
 </head>
 <body dir="@(Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft ? "rtl" : "ltr")">
@@ -25,7 +25,7 @@
 @await Inertia.Html(Model)
 @Html.AntiForgeryToken()
 
-<script type="module" crossorigin src="~/trinity/dist/trinity-react.js"></script>
+<script type="module" crossorigin src="~/@(Configurations.Prefix)/trinity/dist/trinity-react.js"></script>
 <mini-profiler/>
 @foreach (var js in Configurations.ExtraJavaScriptSources)
 {

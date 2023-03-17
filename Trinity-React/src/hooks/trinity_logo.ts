@@ -4,5 +4,5 @@ import { ThemeMode } from '@/types/Models/Configs';
 export function useLogo() {
     const configs = useConfigs();
 
-    return configs?.themeMode == ThemeMode.Dark ? configs.whiteLogo ?? '/trinity/dist/logo.svg' : configs?.darkLogo ?? '/trinity/dist/logo.svg';
+    return configs?.themeMode == ThemeMode.Dark ? configs.whiteLogo ?? `/${configs?.prefix}/trinity/dist/logo.svg` : configs?.darkLogo ?? `/${configs?.prefix}/trinity/dist/logo.svg`;
 }

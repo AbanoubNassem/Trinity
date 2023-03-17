@@ -13,8 +13,4 @@ public abstract class TrinityPlugin
     {
         return new List<string>(0);
     }
-
-    public virtual void RegisterEndPoints(IEndpointRouteBuilder endpointRouteBuilder)
-    {
-    }
 }
