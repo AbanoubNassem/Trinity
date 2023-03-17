@@ -3,13 +3,15 @@ import { useLogo } from '@/hooks/trinity_logo';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { Head } from '@/components/Head';
 import React from 'react';
+import { useLocalize } from '@/hooks/trinity_localizer';
 
 const Error = ({ statusCode, reasonPhrase }: { statusCode: number; reasonPhrase: string }) => {
     const configs = useConfigs();
+    const localize = useLocalize();
 
     return (
         <>
-            <Head title="Error" />
+            <Head title={localize('error')} />
             <div className="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
                 <div className="flex flex-column align-items-center justify-content-center">
                     <img
@@ -29,7 +31,7 @@ const Error = ({ statusCode, reasonPhrase }: { statusCode: number; reasonPhrase:
                             style={{ borderRadius: '53px' }}
                         >
                             <span className="text-red-500 font-bold text-3xl">{statusCode}</span>
-                            <h1 className="text-900 font-bold text-5xl mb-2">Whoops, something went wrong!</h1>
+                            <h1 className="text-900 font-bold text-5xl mb-2">{localize('whoops')}</h1>
                             <div className="text-600 mb-5">{reasonPhrase}</div>
                             <Link href={`/${configs.prefix}`}>
                                 <div className="w-full flex align-items-center py-5 border-300 border-bottom-1">
@@ -40,7 +42,7 @@ const Error = ({ statusCode, reasonPhrase }: { statusCode: number; reasonPhrase:
                                         <i className="text-50 pi pi-fw pi-home text-2xl"></i>
                                     </span>
                                     <span className="ml-4 flex flex-column">
-                                        <span className="text-900 lg:text-xl font-medium mb-1">Home</span>
+                                        <span className="text-900 lg:text-xl font-medium mb-1">{localize('dashboard')}</span>
                                     </span>
                                 </div>
                             </Link>

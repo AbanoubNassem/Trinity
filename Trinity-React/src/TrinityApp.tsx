@@ -43,6 +43,7 @@ import TrinityPage from '@/types/Models/Pages/TrinityPage';
 import TrinityLocalizer from '@/utilities/trinity_localizer';
 
 export class TrinityApp {
+    private localizer!: TrinityLocalizer;
     configs!: Configs;
     resources: Array<TrinityResource> = new Array<TrinityResource>();
     pages: { [key: string]: TrinityPage } = {};
@@ -51,13 +52,14 @@ export class TrinityApp {
     registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     toast?: Toast;
-    private localizer!: TrinityLocalizer;
+    isRtl: boolean = false;
 
     init = (props: any) => {
         this.configs = props.configs as Configs;
         this.resources = props.resources as Array<TrinityResource>;
         this.pages = props.pages;
         this.localizer = new TrinityLocalizer(props.locale);
+        this.isRtl = props.isRtl;
 
         setupProgress(this.configs.progressSettings);
 

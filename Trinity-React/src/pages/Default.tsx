@@ -5,10 +5,12 @@ import usePageProps from '@/hooks/trinity_page_props';
 import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 import trinityApp from '@/TrinityApp';
 import { Head } from '@/components/Head';
+import { useLocalize } from '@/hooks/trinity_localizer';
 
 const Default = () => {
     const configs = useConfigs();
     const { page } = usePageProps();
+    const localize = useLocalize();
 
     return (
         <>
@@ -26,11 +28,12 @@ const Default = () => {
                                     >
                                         {trinityApp.registeredWidgets?.get(w.componentName)!({
                                             configs: configs,
-                                            widget: w
+                                            widget: w,
+                                            localize
                                         })}
                                     </div>
                                 ) : (
-                                    <div>Unknown Widget {w.componentName}</div>
+                                    <div>{localize('unknown_widget', w.componentName)}</div>
                                 )
                             )}
                         </div>

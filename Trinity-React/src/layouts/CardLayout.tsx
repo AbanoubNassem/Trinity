@@ -5,7 +5,7 @@ import LayoutProps from '@/types/Props/Layouts/LayoutProps';
 import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 import trinityApp from '@/TrinityApp';
 
-const CardLayout = ({ configs, resource, component, record, formData, setFieldValue, errors }: LayoutProps<TrinityLayout>) => {
+const CardLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, localize }: LayoutProps<TrinityLayout>) => {
     return (
         <Card
             className={`col-12 md:col-${component.columnSpan}`}
@@ -24,7 +24,8 @@ const CardLayout = ({ configs, resource, component, record, formData, setFieldVa
                             containerClass: component.columns ? `md:col-${12 / component.columns}` : '',
                             formData,
                             setFieldValue,
-                            errors
+                            errors,
+                            localize
                         })
                     ) : (
                         <div key={`form_${index}_${innerComponent.componentName}`}></div>

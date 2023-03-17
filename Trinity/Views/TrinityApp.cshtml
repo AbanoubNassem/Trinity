@@ -5,7 +5,8 @@
 @inject TrinityConfigurations Configurations
 
 <!DOCTYPE html>
-<html lang="en">
+<html
+    lang="@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -19,7 +20,7 @@
     <link rel="icon" type="image/x-icon" href="~/trinity/dist/favicon.ico" inertia>
     <title inertia>@Configurations.Title</title>
 </head>
-<body>
+<body dir="@(Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft ? "rtl" : "ltr")">
 
 @await Inertia.Html(Model)
 @Html.AntiForgeryToken()

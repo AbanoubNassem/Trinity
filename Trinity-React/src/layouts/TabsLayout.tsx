@@ -6,7 +6,7 @@ import TabsLayout, { TabLayout } from '@/types/Models/Layouts/TabsLayout';
 import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 import trinityApp from '@/TrinityApp';
 
-const TabsLayout = ({ configs, resource, component, record, formData, setFieldValue, errors }: LayoutProps<TabsLayout>) => {
+const TabsLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, localize }: LayoutProps<TabsLayout>) => {
     return (
         <TabView
             className={`col-12 md:col-${component.columnSpan}`}
@@ -35,7 +35,8 @@ const TabsLayout = ({ configs, resource, component, record, formData, setFieldVa
                                     containerClass: (tab as TrinityLayout).columns ? `md:col-${12 / (tab as TrinityLayout).columns}` : '',
                                     formData,
                                     setFieldValue,
-                                    errors
+                                    errors,
+                                    localize
                                 })
                             ) : (
                                 <div key={`form_${index}_${innerComponent.componentName}`}></div>

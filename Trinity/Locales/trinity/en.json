@@ -32,7 +32,9 @@
   "no": "No",
   "yes": "Yes",
   "create": "Create",
+  "create_and_another": "Create & create another",
   "update": "Update",
+  "edit": "Edit",
   "delete": "Delete",
   "export": "Export",
   "clear": "Clear",
@@ -41,5 +43,8 @@
   "search_by": "Search by {0}",
   "confirm": "Confirm",
   "are_you_sure_to_delete": "Are you sure you want to delete <b>{0}</b>?",
-  "are_you_sure_to_delete_selected_records": "Are you sure you want to delete the <b>{0} selected records</b>?"
+  "are_you_sure_to_delete_selected_records": "Are you sure you want to delete the <b>{0} selected records</b>?",
+  "error": "Error",
+  "whoops": "Whoops, something went wrong!",
+  "unknown_widget": "Unknown Widget {0}"
 }

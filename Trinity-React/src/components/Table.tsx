@@ -181,7 +181,7 @@ const Table = () => {
     const toolbarRightContents = (
         <React.Fragment>
             <Button
-                className="p-button-success mr-2"
+                className="p-button-success mx-2"
                 icon="pi pi-plus"
                 label={localize('create')}
                 onClick={() => trinityLink(`/${configs.prefix}/${resource?.name}/create`)}
@@ -204,7 +204,7 @@ const Table = () => {
                 {!!exportableFields.length && (
                     <Button
                         icon="pi pi-external-link"
-                        className="p-button-primary  mr-2"
+                        className="p-button-primary  mx-2"
                         label={localize('export')}
                         onClick={exportCSV}
                     />
@@ -270,7 +270,7 @@ const Table = () => {
             <>
                 <Button
                     icon="pi pi-pencil"
-                    className="p-button-rounded p-button-success mr-2"
+                    className="p-button-rounded p-button-success mx-2"
                     onClick={() => {
                         trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${rowData[resource?.primaryKeyColumn!]}`, false, false);
                     }}
@@ -339,6 +339,7 @@ const Table = () => {
                                 column={column}
                                 columnValue={data[column.columnName]}
                                 record={data}
+                                localize={localize}
                             >
                                 {trinityApp.registeredColumns?.has(column.componentName) ? (
                                     trinityApp.registeredColumns?.get(column.componentName)!({

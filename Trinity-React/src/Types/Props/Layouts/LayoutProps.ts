@@ -13,4 +13,5 @@ export default interface LayoutProps<T extends BaseComponent> {
     setFieldValue: (name: string, value: any) => void;
     errors: Errors & ErrorBag;
     style?: CSSProperties | undefined;
+    localize: (key: string, ...args: Array<string>) => string;
 }

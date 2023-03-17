@@ -259,7 +259,7 @@ public sealed class TrinityMainController : TrinityController
         response.Resources = _trinityManager.Resources.Values.Select(x => x.Value);
         response.Pages = _trinityManager.Pages.ToDictionary(x => x.Key, v => v.Value.Value);
         response.Locale = _localizer.GetAllStrings().ToDictionary(x => x.Name, x => x.Value);
-
+        response.IsRtl = Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
         return response;
     }
 }

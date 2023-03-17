@@ -8,4 +8,5 @@ export default interface ColumnProps<T extends TrinityColumn> {
     columnValue: any;
     record: { [key: string]: any };
     children?: React.ReactNode;
+    localize: (key: string, ...args: Array<string>) => string;
 }

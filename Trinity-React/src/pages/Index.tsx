@@ -5,10 +5,12 @@ import Table from '@/components/Table';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { classNames } from 'primereact/utils';
 import trinityApp from '@/TrinityApp';
+import { useLocalize } from '@/hooks/trinity_localizer';
 
 const Index = () => {
     const { resource } = usePageProps();
     const configs = useConfigs();
+    const localize = useLocalize();
 
     return (
         <>
@@ -29,11 +31,12 @@ const Index = () => {
                                         {trinityApp.registeredWidgets?.get(w.componentName)!({
                                             configs: configs,
                                             resource: resource,
-                                            widget: w
+                                            widget: w,
+                                            localize
                                         })}
                                     </div>
                                 ) : (
-                                    <div>Unknown Widget</div>
+                                    <div>{localize('unknown_widget', w.componentName)}</div>
                                 )
                             )}
                         </div>
@@ -50,11 +53,12 @@ const Index = () => {
                                         {trinityApp.registeredWidgets?.get(w.componentName)!({
                                             configs: configs,
                                             resource: resource,
-                                            widget: w
+                                            widget: w,
+                                            localize
                                         })}
                                     </div>
                                 ) : (
-                                    <div>Unknown Widget</div>
+                                    <div>{localize('unknown_widget', w.componentName)}</div>
                                 )
                             )}
                         </div>

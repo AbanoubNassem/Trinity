@@ -10,9 +10,11 @@ import { useTrinityFields } from '@/hooks/trinity_resource_fields';
 import last from 'lodash/last';
 import { useForm, router } from '@inertiajs/react';
 import trinityApp from '@/TrinityApp';
+import { useLocalize } from '@/hooks/trinity_localizer';
 
 const Create = () => {
     const configs = useConfigs();
+    const localize = useLocalize();
     const { resource, errors, data: inserted } = usePageProps();
     const fields = useTrinityFields();
     const [createAddAnother, setCreateAddAnother] = useState(false);
@@ -53,21 +55,21 @@ const Create = () => {
     const toolbarRight = (
         <div className="grid">
             <Button
-                label="Create"
+                label={localize('create')}
                 className="m-2 p-button-primary"
                 disabled={form.processing}
                 loading={form.processing && !createAddAnother}
                 onClick={() => create(false)}
             />
             <Button
-                label="Create & create another"
+                label={localize('create_and_another')}
                 className="m-2 p-button-help"
                 disabled={form.processing}
                 loading={form.processing && createAddAnother}
                 onClick={() => create(true)}
             />
             <Button
-                label="Cancel"
+                label={localize('cancel')}
                 className="m-2 p-button-secondary"
                 onClick={() => trinityLink(`/${configs.prefix}/${resource?.name}`)}
             />
@@ -76,10 +78,12 @@ const Create = () => {
 
     return (
         <>
-            <Head title={`Create - ${resource?.pluralLabel}`}></Head>
+            <Head title={`${localize('create')} - ${resource?.pluralLabel}`}></Head>
 
             <div className="card">
-                <h5 className="mb-6">Create {resource?.pluralLabel}</h5>
+                <h5 className="mb-6">
+                    {localize('create')} {resource?.pluralLabel}
+                </h5>
 
                 <form className="p-fluid formgrid grid col-12">
                     {resource?.schema?.map((component, index) =>
@@ -92,7 +96,8 @@ const Create = () => {
                                 record: {},
                                 formData: data,
                                 setFieldValue,
-                                errors
+                                errors,
+                                localize
                             })
                         ) : (
                             <div key={`form_${index}_${component.componentName}`}></div>

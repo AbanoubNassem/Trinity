@@ -11,4 +11,5 @@ export default interface FieldProps<T extends TrinityField> {
     formData: any;
     setFieldValue: (name: string, value: any) => void;
     errors: Errors & ErrorBag;
+    localize: (key: string, ...args: Array<string>) => string;
 }

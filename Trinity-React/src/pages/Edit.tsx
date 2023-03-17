@@ -9,9 +9,11 @@ import { useForm } from '@inertiajs/react';
 import { useTrinityFields } from '@/hooks/trinity_resource_fields';
 import last from 'lodash/last';
 import trinityApp from '@/TrinityApp';
+import { useLocalize } from '@/hooks/trinity_localizer';
 
 const Edit = () => {
     const configs = useConfigs();
+    const localize = useLocalize();
     const { resource, errors, data: record } = usePageProps<any>();
     const fields = useTrinityFields();
 
@@ -40,14 +42,14 @@ const Edit = () => {
     const toolbarRight = (
         <div className="grid">
             <Button
-                label="Update"
+                label={localize('update')}
                 className="m-2 p-button-info"
                 disabled={form.processing}
                 loading={form.processing}
                 onClick={() => update()}
             />
             <Button
-                label="Cancel"
+                label={localize('cancel')}
                 className="m-2 p-button-secondary"
                 onClick={() => trinityLink(`/${configs.prefix}/${resource?.name}`)}
             />
@@ -56,10 +58,12 @@ const Edit = () => {
 
     return (
         <>
-            <Head title={`Edit - ${record[resource?.titleColumn ?? resource?.primaryKeyColumn ?? 'id']}`}></Head>
+            <Head title={`${localize('edit')} - ${record[resource?.titleColumn ?? resource?.primaryKeyColumn ?? 'id']}`}></Head>
 
             <div className="card">
-                <h5 className="mb-6">Create {resource?.pluralLabel}</h5>
+                <h5 className="mb-6">
+                    {localize('edit')} {resource?.pluralLabel}
+                </h5>
 
                 <form className="p-fluid formgrid grid col-12">
                     {resource?.schema?.map((component, index) =>
@@ -72,7 +76,8 @@ const Edit = () => {
                                 record,
                                 formData: data,
                                 setFieldValue,
-                                errors
+                                errors,
+                                localize
                             })
                         ) : (
                             <div key={`form_${index}_${component.componentName}`}></div>

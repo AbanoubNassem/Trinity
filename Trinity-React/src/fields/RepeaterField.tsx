@@ -10,7 +10,7 @@ import { Toolbar } from 'primereact/toolbar';
 import GridLayout from '@/layouts/GridLayout';
 import { BlockUI } from 'primereact/blockui';
 
-const RepeaterField = ({ configs, resource, component, formData, record, setFieldValue, errors }: FieldProps<RepeaterField>) => {
+const RepeaterField = ({ configs, resource, component, formData, record, setFieldValue, errors, localize }: FieldProps<RepeaterField>) => {
     const [value, setValue] = useState<Array<any>>(!Array.isArray(formData[component.columnName]) ? JSON.parse(formData[component.columnName] ?? '[{}]') : formData[component.columnName]);
 
     useEffect(() => {
@@ -76,6 +76,7 @@ const RepeaterField = ({ configs, resource, component, formData, record, setFiel
                     }}
                     errors={innerErrors}
                     style={{ zIndex: 100 }}
+                    localize={localize}
                 />
             </Panel>
         );

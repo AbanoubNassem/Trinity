@@ -33,4 +33,5 @@ public class TrinityResponse
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Dictionary<string, string>? Locale { get; set; }
+    public bool IsRtl{ get; set; }
 }

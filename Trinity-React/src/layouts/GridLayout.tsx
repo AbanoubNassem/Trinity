@@ -4,7 +4,7 @@ import LayoutProps from '@/types/Props/Layouts/LayoutProps';
 import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 import trinityApp from '@/TrinityApp';
 
-const GirdLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, style }: LayoutProps<TrinityLayout>) => {
+const GirdLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, style, localize }: LayoutProps<TrinityLayout>) => {
     return (
         <div
             style={style}
@@ -21,7 +21,8 @@ const GirdLayout = ({ configs, resource, component, record, formData, setFieldVa
                         containerClass: component.columns ? `md:col-${12 / component.columns}` : '',
                         formData,
                         setFieldValue,
-                        errors
+                        errors,
+                        localize
                     })
                 ) : (
                     <div key={`form_${index}_${innerComponent.componentName}`}></div>

@@ -35,6 +35,7 @@ createInertiaApp({
     },
     setup({ el, App, props }) {
         trinityApp.init(props.initialPage.props);
+        document.body.setAttribute('dir', trinityApp.isRtl ? 'rtl' : 'ltr');
 
         ReactDOM.createRoot(el).render(
             <LayoutProvider>
