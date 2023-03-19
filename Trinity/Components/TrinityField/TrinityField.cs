@@ -1,6 +1,6 @@
 using AbanoubNassem.Trinity.Components.Interfaces;
-using DapperQueryBuilder;
 using Humanizer;
+using SqlKata;
 
 namespace AbanoubNassem.Trinity.Components.TrinityField;
 
@@ -23,36 +23,36 @@ public abstract partial class TrinityField<T, TDeserialization> : TrinityCompone
         return typeof(TDeserialization);
     }
 
-    protected Action<FluentQueryBuilder>? SelectQueryUsing { get; set; }
+    protected Action<Query>? SelectQueryUsing { get; set; }
 
-    public virtual void SelectQuery(FluentQueryBuilder query)
+    public virtual void SelectQuery(Query query)
     {
         if (SelectQueryUsing != null)
             SelectQueryUsing(query);
         else
         {
-            query.Select($"t.{ColumnName:raw}");
+            query.Select($"t.{ColumnName}");
         }
     }
 
-    public void SetSelectQueryUsing(Action<FluentQueryBuilder> query)
+    public void SetSelectQueryUsing(Action<Query> query)
     {
         SelectQueryUsing = query;
     }
 
-    protected Action<Filters, string>? FilterQueryUsing { get; set; }
+    protected Action<Query, string>? FilterQueryUsing { get; set; }
 
-    public virtual void FilterQuery(Filters filters, string globalSearch)
+    public virtual void FilterQuery(Query query, string globalSearch)
     {
         if (FilterQueryUsing != null)
-            FilterQueryUsing(filters, globalSearch);
+            FilterQueryUsing(query, globalSearch);
         else
         {
-            filters.Add(new Filter($@"LOWER(t.{ColumnName:raw}) LIKE {globalSearch}"));
+            query.WhereLike($"t.{ColumnName}", globalSearch);
         }
     }
 
-    public void SetFilterQueryUsing(Action<Filters, string> filter)
+    public void SetFilterQueryUsing(Action<Query, string> filter)
     {
         FilterQueryUsing = filter;
     }

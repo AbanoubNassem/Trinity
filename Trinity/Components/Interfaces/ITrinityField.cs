@@ -1,6 +1,6 @@
-using DapperQueryBuilder;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using SqlKata;
 
 namespace AbanoubNassem.Trinity.Components.Interfaces;
 
@@ -12,11 +12,11 @@ public interface ITrinityField
 
     public void Fill(ref IDictionary<string, object?> form, IReadOnlyDictionary<string, object?>? oldRecord = null);
 
-    public void SelectQuery(FluentQueryBuilder query);
-    public void SetSelectQueryUsing(Action<FluentQueryBuilder> query);
+    public void SelectQuery(Query query);
+    public void SetSelectQueryUsing(Action<Query> query);
 
-    public void FilterQuery(Filters filters, string globalSearch);
-    void SetFilterQueryUsing(Action<Filters, string> filter);
+    public void FilterQuery(Query query, string globalSearch);
+    void SetFilterQueryUsing(Action<Query, string> filter);
 
     public void PrepareForValidation(IValidator validator, IReadOnlyDictionary<string, object?> form,
         ModelStateDictionary modelState);

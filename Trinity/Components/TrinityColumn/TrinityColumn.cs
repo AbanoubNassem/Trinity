@@ -1,6 +1,6 @@
 using AbanoubNassem.Trinity.Components.Interfaces;
-using DapperQueryBuilder;
 using Humanizer;
+using SqlKata;
 
 namespace AbanoubNassem.Trinity.Components.TrinityColumn;
 
@@ -8,10 +8,10 @@ public interface ITrinityColumn : ITrinityComponent
 {
     public string ColumnName { get; set; }
     bool IsGloballySearchable { get; set; }
-    void SelectQuery(FluentQueryBuilder query);
-    void Filter(Filters filters, string globalSearch);
+    void SelectQuery(Query query);
+    void Filter(Query query, string globalSearch);
     void Format(IDictionary<string, object?> record);
-    void Sort(FluentQueryBuilder query, string direction);
+    void Sort(Query query, string direction);
 }
 
 public abstract partial class TrinityColumn<T, TDeserialization> : TrinityComponent<T, TDeserialization>, ITrinityColumn
@@ -26,19 +26,19 @@ public abstract partial class TrinityColumn<T, TDeserialization> : TrinityCompon
         Title = columnName;
     }
 
-    public delegate void QueryCallbackWithString(FluentQueryBuilder query, string str);
+    public delegate void QueryCallbackWithString(Query query, string str);
 
-    public delegate void FiltersCallback(Filters filters, string str);
+    public delegate void FiltersCallback(Query query, string str);
 
     public delegate TCallBack CallbackWithRecord<out TCallBack>(IDictionary<string, object?> record);
 
-    public delegate void QueryCallback(FluentQueryBuilder query);
+    public delegate void QueryCallback(Query query);
 
     public string ColumnName { get; set; }
 
-    public virtual void SelectQuery(FluentQueryBuilder query)
+    public virtual void SelectQuery(Query query)
     {
-        query.Select($"t.{ColumnName:raw}");
+        query.Select($"t.{ColumnName}");
     }
 
     protected CallbackWithRecord<string>? FormatUsingCallback { get; set; }

@@ -3,10 +3,10 @@ using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Utilities;
-using DapperQueryBuilder;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Resources;
 
@@ -64,10 +64,10 @@ public abstract partial class TrinityResource
         {
             value = valueStr[0];
         }
-        // query.From($"{Table!.Split('.').Last():raw}");
+        // query.From($"{Table!.Split('.').Last()}");
 
         using var connection = ConnectionFactory();
-        var res = await field.GetAssociatesRelationshipQuery(connection, value, offset, search);
+        var res = await field.GetAssociatesRelationshipQuery(connection.QueryFactory(), value, offset, search);
 
         return new OkObjectResult(res);
     }
@@ -107,21 +107,24 @@ public abstract partial class TrinityResource
         var form = await ValidateRequest();
         if (form == null) return form;
 
-        foreach (var field in Fields.Values)
+        foreach (ITrinityField field in Fields.Values)
         {
-            ((ITrinityField)field).Fill(ref form);
+            field.Fill(ref form);
+
+            if (field is not IHasRelationship { HasRelationshipByDefault: true } relationshipField) continue;
+
+            var temp = form[field.ColumnName];
+            form.Remove(field.ColumnName);
+            form.TryAdd(relationshipField.ForeignColumn?.Split('.').First()!, temp);
         }
 
         using var conn = ConnectionFactory();
 
 
-        var cmd = conn.CommandBuilder(
-            $@"INSERT INTO {Table:raw} ({string.Join(',', form.Keys):raw}) VALUES {form.Values} {conn.GetLastInsertedId(PrimaryKeyColumn):raw}"
-        );
+        var res = await conn.Query().From(Table)
+            .InsertGetIdAsync<int>(form);
 
-        var res = await cmd.ExecuteScalarAsync();
-
-        if (res != null)
+        if (res > 0)
         {
             TrinityNotifications.NotifySuccess(Localizer["new_record_added"]);
         }
@@ -140,18 +143,18 @@ public abstract partial class TrinityResource
             return null;
 
         using var connection = ConnectionFactory();
-        var queryBuilder = (FluentQueryBuilder)connection.FluentQueryBuilder();
+        var queryBuilder = connection.Query();
 
-        queryBuilder.Select($"{PrimaryKeyColumn:raw}");
+        queryBuilder.Select($"{PrimaryKeyColumn}");
 
         foreach (ITrinityField field in Fields.Values)
         {
             field.SelectQuery(queryBuilder);
         }
 
-        var record = (IDictionary<string, object>?)await queryBuilder.From($"{Table:raw} t")
-            .Where($"{PrimaryKeyColumn:raw} = {key}")
-            .QuerySingleOrDefaultAsync();
+        var record = (IDictionary<string, object>?)await queryBuilder.From($"{Table} AS t")
+            .Where($"t.{PrimaryKeyColumn}", key)
+            .FirstOrDefaultAsync();
 
         if (record == null) return record;
 
@@ -160,7 +163,7 @@ public abstract partial class TrinityResource
             if (field is IHasRelationship { HasRelationshipByDefault: true } relationshipField)
             {
                 record = (await relationshipField.SelectRelationshipQuery(
-                    (FluentQueryBuilder)connection.FluentQueryBuilder(),
+                    connection.QueryFactory(),
                     new List<IDictionary<string, object?>>() { record! })).Last()!;
             }
         }
@@ -189,9 +192,9 @@ public abstract partial class TrinityResource
 
         using var conn = ConnectionFactory();
 
-        var cmd = conn.CommandBuilder(
-            $@"UPDATE {Table:raw} SET "
-        );
+        var query = conn.Query().From(Table);
+
+        var updates = new Dictionary<string, object?>();
 
         for (var i = 0; i < form.Count; i++)
         {
@@ -200,18 +203,16 @@ public abstract partial class TrinityResource
 
             field.Fill(ref form, (IReadOnlyDictionary<string, object?>?)record);
             if (field is IHasRelationship { HasRelationshipByDefault: true } relationshipField)
-                cmd.Append($@"{relationshipField.ForeignColumn?.Split('.').Last():raw} = {form[field.ColumnName]}");
+                updates.TryAdd(relationshipField.ForeignColumn?.Split('.').First()!, form[field.ColumnName]);
+
             else
-                cmd.Append($@"{field.ColumnName:raw} = {form[field.ColumnName]}");
-            if (i < form.Count - 1)
-                cmd.Append($",");
+                updates.TryAdd(field.ColumnName, form[field.ColumnName]);
         }
 
-        cmd.Append($"WHERE {PrimaryKeyColumn:raw} = {record[PrimaryKeyColumn]}");
 
-        var res = await cmd.ExecuteScalarAsync<int>();
+        var res = await query.Where(PrimaryKeyColumn, record[PrimaryKeyColumn]).UpdateAsync(updates);
 
-        if (res == 0)
+        if (res > 0)
         {
             TrinityNotifications.NotifySuccess(Localizer["record_updated"]);
         }

@@ -2,12 +2,13 @@ using System.Text.Json;
 using AbanoubNassem.Trinity.Columns;
 using AbanoubNassem.Trinity.Components.TrinityColumn;
 using AbanoubNassem.Trinity.Components.Interfaces;
+using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Utilities;
 using Dapper;
-using DapperQueryBuilder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Resources;
 
@@ -59,8 +60,6 @@ public abstract partial class TrinityResource
             }
 
             string? globalSearch = null;
-            // var filters = new Filters(Filters.FiltersType.OR);
-            // var countFilters = new Filters(Filters.FiltersType.OR);
             if (Request.Query.TryGetValue("globalSearch", out var globalSearchStr) &&
                 !string.IsNullOrEmpty(globalSearchStr))
             {
@@ -70,19 +69,18 @@ public abstract partial class TrinityResource
 
             using var conn = ConnectionFactory();
 
-            var query = (FluentQueryBuilder)conn.FluentQueryBuilder();
-            var countQuery = (FluentQueryBuilder)conn.FluentQueryBuilder();
+            var query = conn.Query();
+            var countQuery = conn.Query();
 
-            var filters = new Filters(Filters.FiltersType.OR);
-            var countFilters = new Filters(Filters.FiltersType.OR);
+
 
             countQuery
-                .Select($"COUNT(*)")
-                .From($"{Table:raw} AS t");
+                .From($"{Table} AS t")
+                .AsCount();
 
-            query.From($"{Table:raw} AS t");
+            query.From($"{Table} AS t");
 
-            query.Select($"t.{PrimaryKeyColumn:raw}");
+            query.Select($"t.{PrimaryKeyColumn}");
 
             foreach (ITrinityColumn column in Columns)
             {
@@ -92,21 +90,16 @@ public abstract partial class TrinityResource
 
                 if (globalSearch != null && column.IsGloballySearchable)
                 {
-                    column.Filter(countFilters, globalSearch);
-                    column.Filter(filters, globalSearch);
+                    column.Filter(countQuery, globalSearch);
+                    column.Filter(query, globalSearch);
                 }
                 else if (requestFilters != null && requestFilters.TryGetValue(column.ColumnName, out var search))
                 {
-                    column.Filter(countFilters, search);
-                    column.Filter(filters, search);
+                    column.Filter(countQuery, search);
+                    column.Filter(query, search);
                 }
             }
 
-            if (filters.Any())
-            {
-                countQuery.Where(countFilters);
-                query.Where(filters);
-            }
 
             if (sorts != null)
             {
@@ -123,12 +116,14 @@ public abstract partial class TrinityResource
             }
 
 
-            query.OrderBy($"t.{PrimaryKeyColumn:raw}");
+            query.OrderBy($"t.{PrimaryKeyColumn}");
+            
+            var count = await countQuery.FirstAsync<int>();
 
-            var count = await countQuery.QuerySingleAsync<int>();
+            var limit = query.Offset((page - 1) * perPage).Limit(perPage);
+            
+            var result = (await limit.GetAsync()).Cast<IDictionary<string, object?>>().ToList();
 
-            var limit = query.Limit((page - 1) * perPage, perPage);
-            var result = (await limit.QueryAsync()).Cast<IDictionary<string, object?>>().ToList();
 
             if (result.Any())
             {
@@ -137,7 +132,7 @@ public abstract partial class TrinityResource
                     if (baseColumn is IHasRelationship { HasRelationshipByDefault: true } relationshipColumn)
                     {
                         result = await relationshipColumn.SelectRelationshipQuery(
-                            (FluentQueryBuilder)conn.FluentQueryBuilder(),
+                            conn.QueryFactory(),
                             result,
                             sorts?.SingleOrDefault(x => x.Field == relationshipColumn.ColumnName)
                         );

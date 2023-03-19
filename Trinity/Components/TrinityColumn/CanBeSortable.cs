@@ -1,4 +1,4 @@
-using DapperQueryBuilder;
+using SqlKata;
 
 namespace AbanoubNassem.Trinity.Components.TrinityColumn;
 
@@ -15,11 +15,11 @@ public abstract partial class TrinityColumn<T, TDeserialization>
         return (this as T)!;
     }
 
-    public virtual void Sort(FluentQueryBuilder query, string direction)
+    public virtual void Sort(Query query, string direction)
     {
         if (SortCallback != null)
             SortCallback(query, direction);
         else
-            query.OrderBy($"t.{ColumnName:raw} {direction:raw}");
+            query.OrderBy($"t.{ColumnName} {direction}");
     }
 }

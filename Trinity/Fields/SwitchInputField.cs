@@ -22,10 +22,16 @@ public class SwitchInputField<T> : TrinityField<SwitchInputField<T>, T>
     }
 }
 
-public class SwitchInputField : SwitchInputField<bool>
+public class SwitchInputField : SwitchInputField<int>
 {
     public SwitchInputField(string columnName) : base(columnName)
     {
-        SetTrueFalseValue(true, false);
+        SetTrueFalseValue(1, 0);
+    }
+
+    public SwitchInputField SetDefaultValue(bool value)
+    {
+        DefaultValue = value ? 1 : 0;
+        return this;
     }
 }

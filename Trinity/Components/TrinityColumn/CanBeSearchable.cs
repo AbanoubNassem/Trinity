@@ -1,5 +1,5 @@
 using AbanoubNassem.Trinity.Fields;
-using DapperQueryBuilder;
+using SqlKata;
 
 namespace AbanoubNassem.Trinity.Components.TrinityColumn;
 
@@ -11,12 +11,16 @@ public abstract partial class TrinityColumn<T, TDeserialization>
 
     public bool IsGloballySearchable { get; set; }
 
+    protected bool CaseSensitive { get; set; }
+
     public virtual T SetAsSearchable(bool searchable = true, bool globallySearchable = true,
+        bool caseSensitive = false,
         FiltersCallback? searchCallback = null)
     {
         Searchable = searchable;
         IsGloballySearchable = globallySearchable;
         SearchCallback = searchCallback;
+        CaseSensitive = caseSensitive;
         if (!IsGloballySearchable && searchable)
         {
             SetCustomFilter(new TextField(ColumnName)
@@ -28,15 +32,14 @@ public abstract partial class TrinityColumn<T, TDeserialization>
         return (this as T)!;
     }
 
-    public virtual void Filter(Filters filters, string search)
+    public virtual void Filter(Query query, string search)
     {
         if (SearchCallback != null)
         {
-            SearchCallback.Invoke(filters, search);
+            SearchCallback.Invoke(query, search);
             return;
         }
 
-        var s = $"%{search.ToLower()}%";
-        filters.Add(new Filter($@"LOWER(t.{ColumnName:raw}) LIKE {s}"));
+        query.WhereLike($"t.{ColumnName}", $"%{search}%", CaseSensitive);
     }
 }
