@@ -123,10 +123,12 @@ public abstract partial class TrinityResource
             }
 
 
+            query.OrderBy($"t.{PrimaryKeyColumn:raw}");
+
             var count = await countQuery.QuerySingleAsync<int>();
 
-            var result = (await query.Limit((page - 1) * perPage, perPage).QueryAsync())
-                .Cast<IDictionary<string, object?>>().ToList();
+            var limit = query.Limit((page - 1) * perPage, perPage);
+            var result = (await limit.QueryAsync()).Cast<IDictionary<string, object?>>().ToList();
 
             if (result.Any())
             {

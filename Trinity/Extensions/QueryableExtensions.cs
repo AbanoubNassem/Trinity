@@ -5,15 +5,17 @@ namespace AbanoubNassem.Trinity.Extensions;
 
 public static class QueryableExtensions
 {
+    private static string? ConnectionType { get; set; }
+
     public static string GetLastInsertedId(this IDbConnection connection, string idColumn)
     {
-        var type = (connection is ProfiledDbConnection dbConnection
+        ConnectionType ??= (connection is ProfiledDbConnection dbConnection
             ? dbConnection.WrappedConnection.GetType()
             : connection.GetType()).ToString().Split('.').Last();
 
-        return type switch
+        return ConnectionType switch
         {
-            "SqlClient" => ";SELECT SCOPE_IDENTITY();",
+            "SqlConnection" => ";SELECT SCOPE_IDENTITY();",
             "MySqlConnection" => ";SELECT LAST_INSERT_ID();",
             "NpgsqlConnection" => $"RETURNING {idColumn}",
             "SQLiteConnection" => ";SELECT last_insert_rowid()",

@@ -177,35 +177,28 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
         string? value, int offset,
         string? search = null)
     {
-        // var test =
-        //     "(SELECT * FROM store t  LEFT JOIN staff o ON o.store_id = t.store_id  WHERE t.store_id = '2' LIMIT 1)  UNION (SELECT * FROM  store t LEFT JOIN staff o ON o.store_id = t.store_id  WHERE t.store_id != '2'  OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY)";
-        //
-        // var rs = await connection.QueryAsync<dynamic, dynamic, dynamic>(test, (store, staff) => new
-        // {
-        //     store,
-        //     staff
-        // }, null, null, true, "store_id");
-        //
-
         var table = ForeignTable!.Split('.').Last();
         var column = ForeignColumn!.Split('.').Last();
-        var query = "";
 
-        if (value != null)
+        var query = $"SELECT * FROM {table}";
+
+        var hasWhere = false;
+        if (value != null && value != "undefined")
         {
-            query += $"(SELECT * FROM {table} WHERE {column} = @value LIMIT 1) UNION ";
+            query +=
+                $" WHERE ({column} = @value OR {column} NOT IN (SELECT {column} FROM {table} WHERE {column} = @value))";
+            hasWhere = true;
         }
 
-
-        query += $"(SELECT * FROM  {table} " + (value != null ? $"WHERE {column} != @value" : "");
 
         if (search != null)
         {
-            query += $"AND LOWER({Title}) like '@search' ";
+            query += $" {(hasWhere? "AND" : "WHERE")} LOWER({Title}) like @search ";
         }
 
+        query += $" ORDER BY {column}";
 
-        query += $" OFFSET 0 ROWS FETCH NEXT {(value != null ? LazyItemsCount - 1 : LazyItemsCount)} ROWS ONLY)";
+        query += $" OFFSET 0 ROWS FETCH NEXT {(hasWhere ? LazyItemsCount - 1 : LazyItemsCount)} ROWS ONLY";
 
 
         var res = (await connection.QueryAsync(query, new

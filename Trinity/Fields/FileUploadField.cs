@@ -95,6 +95,8 @@ public class FileUploadField : CanUploadField<FileUploadField>
     public override void Fill(ref IDictionary<string, object?> form,
         IReadOnlyDictionary<string, object?>? oldRecord = null)
     {
+        if(!form.ContainsKey(ColumnName)) return;
+        
         var oldFiles = oldRecord?[ColumnName]?.ToString()?.Split(',').Where(x => !string.IsNullOrEmpty(x)).ToArray() ??
                        Array.Empty<string>();
         var formFilesIds = form[ColumnName]?.ToString()?.Split(',').Where(x => !string.IsNullOrEmpty(x)).ToArray() ??
