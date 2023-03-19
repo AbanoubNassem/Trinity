@@ -1,4 +1,7 @@
 using System.Data;
+using SqlKata;
+using SqlKata.Compilers;
+using SqlKata.Execution;
 using StackExchange.Profiling.Data;
 
 namespace AbanoubNassem.Trinity.Extensions;
@@ -6,20 +9,30 @@ namespace AbanoubNassem.Trinity.Extensions;
 public static class QueryableExtensions
 {
     private static string? ConnectionType { get; set; }
+    private static Compiler? Compiler { get; set; }
 
-    public static string GetLastInsertedId(this IDbConnection connection, string idColumn)
+    public static QueryFactory QueryFactory(this IDbConnection connection)
     {
         ConnectionType ??= (connection is ProfiledDbConnection dbConnection
             ? dbConnection.WrappedConnection.GetType()
             : connection.GetType()).ToString().Split('.').Last();
 
-        return ConnectionType switch
+        Compiler ??= ConnectionType switch
         {
-            "SqlConnection" => ";SELECT SCOPE_IDENTITY();",
-            "MySqlConnection" => ";SELECT LAST_INSERT_ID();",
-            "NpgsqlConnection" => $"RETURNING {idColumn}",
-            "SQLiteConnection" => ";SELECT last_insert_rowid()",
-            _ => $"RETURNING {idColumn}"
+            "SqlConnection" => new SqlServerCompiler(),
+            "MySqlConnection" => new MySqlCompiler(),
+            "NpgsqlConnection" => new PostgresCompiler(),
+            "SqliteConnection" => new SqliteCompiler(),
+            "FbConnection" => new FirebirdCompiler(),
+            "OracleConnection" => new OracleCompiler(),
+            _ => throw new Exception($"{ConnectionType} is not supported!")
         };
+
+        return new QueryFactory(connection, Compiler);
+    }
+
+    public static Query Query(this IDbConnection connection)
+    {
+        return connection.QueryFactory().Query();
     }
 }

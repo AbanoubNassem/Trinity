@@ -221,15 +221,19 @@ const Table = () => {
             </div>
             <div className="flex">
                 <div>
-                    <span className="p-input-icon-left">
-                        <i className="pi pi-search" />
-                        <InputText
-                            ref={globalSearchInput}
-                            placeholder={localize('keyword_search')}
-                            onChange={onGlobalSearchInput}
-                        />
-                        {globalSearchInput.current && globalSearchInput.current.value && loading && <i className="pi pi-spin pi-spinner global-search-icon" />}
-                    </span>
+                    {resource?.columns?.filter((c) => c.searchable || c.isGloballySearchable).length ? (
+                        <span className="p-input-icon-left">
+                            <i className="pi pi-search" />
+                            <InputText
+                                ref={globalSearchInput}
+                                placeholder={localize('keyword_search')}
+                                onChange={onGlobalSearchInput}
+                            />
+                            {globalSearchInput.current && globalSearchInput.current.value && loading && <i className="pi pi-spin pi-spinner global-search-icon" />}
+                        </span>
+                    ) : (
+                        <></>
+                    )}
                 </div>
 
                 <div

@@ -1,6 +1,6 @@
 using AbanoubNassem.Trinity.Components.TrinityColumn;
-using DapperQueryBuilder;
 using Humanizer;
+using SqlKata;
 
 namespace AbanoubNassem.Trinity.Columns;
 
@@ -21,62 +21,55 @@ public class AggregateColumn : TrinityColumn<AggregateColumn, object>
 
     private QueryCallback? _query;
 
-    public override void SelectQuery(FluentQueryBuilder query)
+    public override void SelectQuery(Query query)
     {
         base.SelectQuery(query);
 
         _query?.Invoke(query);
     }
 
-    private void Query(FormattableString queryStr, string aggregate)
+    private void Query(string foreignPrimaryKeyColumn, string foreignTable, string aggregate,
+        string foreignColumnToAggregate)
     {
         AggregateAlias ??= $"{ColumnName}_{aggregate}";
         SetLabel(AggregateAlias.Titleize());
-        _query = query => query.Select(queryStr);
+        _query = query =>
+            query.Select(
+                innerQuery => innerQuery.From($"{foreignTable} AS f")
+                    .WhereColumns($"f.{foreignPrimaryKeyColumn}", "=", $"t.{ColumnName}")
+                    .AsAggregate(aggregate, new[] { $"f.{foreignColumnToAggregate}" }),
+                AggregateAlias
+            );
     }
 
-    public AggregateColumn Counts(string foreignColumn, string foreignTable)
+    public AggregateColumn Counts(string foreignPrimaryKeyColumn, string foreignTable)
     {
-        Query(
-            $"( SELECT COUNT(*) FROM {foreignTable:raw} WHERE {foreignColumn:raw} = t.{ColumnName:raw} ) AS {AggregateAlias:raw}",
-            "count"
-        );
+        Query(foreignPrimaryKeyColumn, foreignTable, "count", foreignPrimaryKeyColumn);
         return this;
     }
 
-    public AggregateColumn Average(string foreignColumn, string foreignTable, string foreignColumnToAverage)
+    public AggregateColumn Average(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToAverage)
     {
-        Query(
-            $"( SELECT avg({foreignColumnToAverage:raw}) FROM {foreignTable:raw} WHERE {foreignColumn:raw} = t.{ColumnName:raw} ) AS {AggregateAlias:raw}",
-            "average"
-        );
+        Query(foreignPrimaryKeyColumn, foreignTable, "average", foreignColumnToAverage);
         return this;
     }
 
-    public AggregateColumn Sum(string foreignColumn, string foreignTable, string foreignColumnToSum)
+    public AggregateColumn Sum(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToSum)
     {
-        Query(
-            $"( SELECT sum({foreignColumnToSum:raw}) FROM {foreignTable:raw} WHERE {foreignColumn:raw} = t.{ColumnName:raw} ) AS {AggregateAlias:raw}",
-            "sum"
-        );
+        Query(foreignPrimaryKeyColumn, foreignTable, "sum", foreignColumnToSum);
+
         return this;
     }
 
-    public AggregateColumn Min(string foreignColumn, string foreignTable, string foreignColumnToMin)
+    public AggregateColumn Min(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToMin)
     {
-        Query(
-            $"( SELECT min({foreignColumnToMin:raw}) FROM {foreignTable:raw} WHERE {foreignColumn:raw} = t.{ColumnName:raw} ) AS {AggregateAlias:raw}",
-            "min"
-        );
+        Query(foreignPrimaryKeyColumn, foreignTable, "min", foreignColumnToMin);
         return this;
     }
 
-    public AggregateColumn Max(string foreignColumn, string foreignTable, string foreignColumnToMax)
+    public AggregateColumn Max(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToMax)
     {
-        Query(
-            $"( SELECT max({foreignColumnToMax:raw}) FROM {foreignTable:raw} WHERE {foreignColumn:raw} = t.{ColumnName:raw} ) AS {AggregateAlias:raw}",
-            "max"
-        );
+        Query(foreignPrimaryKeyColumn, foreignTable, "max", foreignColumnToMax);
         return this;
     }
 }

@@ -1,8 +1,8 @@
-using System.Data;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.RequestHelpers;
-using DapperQueryBuilder;
 using Humanizer;
+using SqlKata;
+using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Components.TrinityField;
 
@@ -18,19 +18,19 @@ public abstract class
         RelationshipName = ForeignTable.Singularize().Camelize();
     }
 
-    public abstract Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(FluentQueryBuilder query,
+    public abstract Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(QueryFactory queryFactory,
         List<IDictionary<string, object?>> list, Sort? sort = null);
 
-    public override void SelectQuery(FluentQueryBuilder query)
+    public override void SelectQuery(Query query)
     {
-        query.Select($"t.{ColumnName.Split('.')[0]:raw}");
+        query.Select($"t.{ColumnName.Split('.')[0]}");
     }
 
-    public override void FilterQuery(Filters filters, string globalSearch)
+    public override void FilterQuery(Query query, string globalSearch)
     {
     }
 
-    public virtual Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(IDbConnection connection, string? value,
+    public virtual Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(QueryFactory queryFactory, string? value,
         int offset,
         string? search = null)
     {

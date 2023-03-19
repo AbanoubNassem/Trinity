@@ -1,13 +1,13 @@
-using System.Data;
 using System.Text.Json;
 using AbanoubNassem.Trinity.Components.TrinityField;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Utilities;
 using AbanoubNassem.Trinity.Validators;
-using DapperQueryBuilder;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using SqlKata;
+using SqlKata.Execution;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace AbanoubNassem.Trinity.Fields;
@@ -22,7 +22,7 @@ public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IH
     {
     }
 
-    public override void SelectQuery(FluentQueryBuilder query)
+    public override void SelectQuery(Query query)
     {
         if (HasRelationshipByDefault) return;
         base.SelectQuery(query);
@@ -117,13 +117,13 @@ public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IH
         return this;
     }
 
-    public Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(FluentQueryBuilder query,
+    public Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(QueryFactory queryFactory,
         List<IDictionary<string, object?>> records, Sort? sort = null)
     {
         return Task.FromResult(records);
     }
 
-    public Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(IDbConnection connection,
+    public Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(QueryFactory queryFactory,
         string? value, int offset, string? search = null)
     {
         return Task.FromResult(new List<KeyValuePair<string, string>>());

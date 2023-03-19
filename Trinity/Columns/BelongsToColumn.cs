@@ -1,7 +1,8 @@
 using AbanoubNassem.Trinity.Components.TrinityColumn;
 using AbanoubNassem.Trinity.RequestHelpers;
-using DapperQueryBuilder;
-using Filter = DapperQueryBuilder.Filter;
+using SqlKata;
+using SqlKata.Execution;
+
 
 namespace AbanoubNassem.Trinity.Columns;
 
@@ -33,52 +34,39 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
         }
     }
 
-    public override void SelectQuery(FluentQueryBuilder query)
+    public override void SelectQuery(Query query)
     {
-        query.Select($"t.{ColumnName.Split('.').First():raw}");
+        query.Select($"t.{ColumnName.Split('.').First()}");
     }
 
 
-    public override void Filter(Filters filters, string str)
+    public override void Filter(Query query, string str)
     {
         var localColumns = ColumnName.Split('.');
-        var foreignTables = ForeignTable?.Split('.')?? Array.Empty<string>();
-        var foreignColumns = ForeignColumn?.Split('.')?? Array.Empty<string>();
-        var relationshipNames = RelationshipName?.Split('.')?? Array.Empty<string>();
+        var foreignTables = ForeignTable?.Split('.') ?? Array.Empty<string>();
+        var foreignColumns = ForeignColumn?.Split('.') ?? Array.Empty<string>();
+        var relationshipNames = RelationshipName?.Split('.') ?? Array.Empty<string>();
 
-        var search = $"%{str.ToLower()}%";
+        var search = $"%{str}%";
 
-        var innerFilters = new Filters(Filters.FiltersType.AND);
 
         for (var i = 0; i < foreignTables.Length; i++)
         {
             var parentRelation = i == 0 ? "t" : relationshipNames[i - 1];
-            if (i == foreignTables.Length - 1)
-            {
-                var appendParentheses = foreignTables.Length == 1 ? "" : ")";
-                innerFilters.Add(new Filter(
-                    $"EXISTS (SELECT {Title:raw} FROM {foreignTables[i]:raw} AS {relationshipNames[i]:raw} WHERE {foreignColumns[i]:raw} = {parentRelation:raw}.{localColumns[i]:raw} AND LOWER({Title:raw}) LIKE {search}) {appendParentheses:raw}")
-                );
-            }
-            else
-            {
-                var appendParentheses = i == 0 ? "" : ")";
-                innerFilters.Add(new Filter(
-                    $"EXISTS (SELECT {localColumns[i + 1]:raw} FROM {foreignTables[i]:raw} AS {relationshipNames[i]:raw} WHERE {foreignColumns[i]:raw} = {parentRelation:raw}.{localColumns[i]:raw} {appendParentheses:raw}")
-                );
-            }
+            query.Join($"{foreignTables[i]} AS {relationshipNames[i]}", $"{parentRelation}.{localColumns[i]}",
+                $"{relationshipNames[i]}.{foreignColumns[i]}");
         }
 
-        filters.Add(innerFilters);
+        query.WhereLike($"{relationshipNames.Last()}.{Title}", search, CaseSensitive);
     }
 
-    public override async Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(FluentQueryBuilder query,
+    public override async Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(QueryFactory queryFactory,
         List<IDictionary<string, object?>> entities, Sort? sort = null)
     {
         var localColumns = ColumnName.Split('.');
-        var foreignTables = ForeignTable?.Split('.')?? Array.Empty<string>();
-        var foreignColumns = ForeignColumn?.Split('.')?? Array.Empty<string>();
-        var relationshipNames = RelationshipName?.Split('.')?? Array.Empty<string>();
+        var foreignTables = ForeignTable?.Split('.') ?? Array.Empty<string>();
+        var foreignColumns = ForeignColumn?.Split('.') ?? Array.Empty<string>();
+        var relationshipNames = RelationshipName?.Split('.') ?? Array.Empty<string>();
 
 
         var temp = entities;
@@ -99,12 +87,12 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
             var i1 = i;
             var innerIds = temp.Select(x => x[localColumns[i1]]);
 
-            var q = (FluentQueryBuilder)query.Connection.FluentQueryBuilder()
-                .Select($"*")
-                .From($"{foreignTables[i]:raw}")
-                .Where($"{foreignColumns[i]:raw} in ({string.Join(',', innerIds):raw})");
+            var q = queryFactory.Query()
+                .Select("*")
+                .From($"{foreignTables[i]}")
+                .WhereIn(foreignColumns[i], innerIds);
 
-            var tempResult = (await q.QueryAsync()).Cast<IDictionary<string, object>>().ToList();
+            var tempResult = (await q.GetAsync()).Cast<IDictionary<string, object>>().ToList();
 
             foreach (var item in temp)
             {
@@ -164,59 +152,10 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
     }
 
     public override TrinityHasRelationshipColumn<string> SetAsSearchable(bool searchable = true,
-        bool globallySearchable = true,
+        bool globallySearchable = true, bool caseSensitive = false,
         FiltersCallback? searchCallback = null)
     {
-        base.SetAsSearchable(searchable, globallySearchable, searchCallback);
-        // SetCustomFilter(new BelongsToField(ColumnName, Title, ForeignTable, ForeignColumn, RelationshipName));
+        base.SetAsSearchable(searchable, globallySearchable, caseSensitive, searchCallback);
         return this;
     }
-
-    // public override async Task<List<KeyValuePair<string, string>>> RelationshipQuery(IDbConnection connection,
-    //     string? value, int offset,
-    //     string? search = null)
-    // {
-    //     // var test =
-    //     //     "(SELECT * FROM store t  LEFT JOIN staff o ON o.store_id = t.store_id  WHERE t.store_id = '2' LIMIT 1)  UNION (SELECT * FROM  store t LEFT JOIN staff o ON o.store_id = t.store_id  WHERE t.store_id != '2'  OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY)";
-    //     //
-    //     // var rs = await connection.QueryAsync<dynamic, dynamic, dynamic>(test, (store, staff) => new
-    //     // {
-    //     //     store,
-    //     //     staff
-    //     // }, null, null, true, "store_id");
-    //     //
-    //
-    //     var table = ForeignTable.Split('.').Last();
-    //     var column = ForeignColumn.Split('.').Last();
-    //     var query = "";
-    //
-    //     if (value != null)
-    //     {
-    //         query += $"(SELECT * FROM {table} WHERE {column} = @value LIMIT 1) UNION ";
-    //     }
-    //
-    //
-    //     query += $"(SELECT * FROM  {table} " + (value != null ? $"WHERE {column} != @value" : "");
-    //
-    //     if (search != null)
-    //     {
-    //         query += $"AND LOWER({Title}) like '@search' ";
-    //     }
-    //
-    //
-    //     query += $" OFFSET 0 ROWS FETCH NEXT {(value != null ? LazyItemsCount - 1 : LazyItemsCount)} ROWS ONLY)";
-    //
-    //
-    //     var res = (await connection.QueryAsync(query, new
-    //     {
-    //         value,
-    //         search,
-    //         offset
-    //     })).Cast<IDictionary<string, object?>>().ToList();
-    //
-    //     return res.Select(x =>
-    //             new KeyValuePair<string, string>(x[ForeignColumn.Split('.').Last()]!.ToString()!,
-    //                 x[Title]!.ToString()!))
-    //         .ToList();
-    // }
 }

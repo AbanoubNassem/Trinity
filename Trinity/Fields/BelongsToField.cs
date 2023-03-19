@@ -1,9 +1,7 @@
-using System.Data;
 using AbanoubNassem.Trinity.Components.TrinityField;
 using AbanoubNassem.Trinity.RequestHelpers;
-using Dapper;
-using DapperQueryBuilder;
-using Filter = DapperQueryBuilder.Filter;
+using SqlKata;
+using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Fields;
 
@@ -44,44 +42,33 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
         return this;
     }
 
-    public override void SelectQuery(FluentQueryBuilder query)
+    public override void SelectQuery(Query query)
     {
-        query.Select($"t.{ColumnName.Split('.').First():raw}");
+        query.Select($"t.{ColumnName.Split('.').First()}");
     }
 
 
-    public override void FilterQuery(Filters filters, string globalSearch)
+    public override void FilterQuery(Query query, string globalSearch)
     {
         var localColumns = ColumnName.Split('.');
         var foreignTables = ForeignTable?.Split('.') ?? Array.Empty<string>();
         var foreignColumns = ForeignColumn?.Split('.') ?? Array.Empty<string>();
         var relationshipNames = RelationshipName?.Split('.') ?? Array.Empty<string>();
 
-        var innerFilters = new Filters(Filters.FiltersType.AND);
+        var search = $"%{globalSearch}%";
+
 
         for (var i = 0; i < foreignTables.Length; i++)
         {
             var parentRelation = i == 0 ? "t" : relationshipNames[i - 1];
-            if (i == foreignTables.Length - 1)
-            {
-                var appendParentheses = foreignTables.Length == 1 ? "" : ")";
-                innerFilters.Add(new Filter(
-                    $"EXISTS (SELECT {Title:raw} FROM {foreignTables[i]:raw} AS {relationshipNames[i]:raw} WHERE {foreignColumns[i]:raw} = {parentRelation:raw}.{localColumns[i]:raw} AND LOWER({Title:raw}) LIKE {globalSearch}) {appendParentheses:raw}")
-                );
-            }
-            else
-            {
-                var appendParentheses = i == 0 ? "" : ")";
-                innerFilters.Add(new Filter(
-                    $"EXISTS (SELECT {localColumns[i + 1]:raw} FROM {foreignTables[i]:raw} AS {relationshipNames[i]:raw} WHERE {foreignColumns[i]:raw} = {parentRelation:raw}.{localColumns[i]:raw} {appendParentheses:raw}")
-                );
-            }
+            query.Join($"{foreignTables[i]} AS {relationshipNames[i]}", $"{parentRelation}.{localColumns[i]}",
+                $"{relationshipNames[i]}.{foreignColumns[i]}");
         }
 
-        filters.Add(innerFilters);
+        query.WhereLike($"{relationshipNames.Last()}.{Title}", search);
     }
 
-    public override async Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(FluentQueryBuilder query,
+    public override async Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(QueryFactory queryFactory,
         List<IDictionary<string, object?>> entities, Sort? sort = null)
     {
         var localColumns = ColumnName.Split('.');
@@ -108,12 +95,12 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
             var i1 = i;
             var innerIds = temp.Select(x => x[localColumns[i1]]);
 
-            var q = (FluentQueryBuilder)query.Connection.FluentQueryBuilder()
-                .Select($"*")
-                .From($"{foreignTables[i]:raw}")
-                .Where($"{foreignColumns[i]:raw} in ({string.Join(',', innerIds):raw})");
+            var q = queryFactory.Query()
+                .Select("*")
+                .From($"{foreignTables[i]}")
+                .WhereIn(foreignColumns[i], innerIds);
 
-            var tempResult = (await q.QueryAsync()).Cast<IDictionary<string, object>>().ToList();
+            var tempResult = (await q.GetAsync()).Cast<IDictionary<string, object>>().ToList();
 
             foreach (var item in temp)
             {
@@ -173,43 +160,46 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
     }
 
     public override async Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(
-        IDbConnection connection,
+        QueryFactory queryFactory,
         string? value, int offset,
         string? search = null)
     {
-        var table = ForeignTable!.Split('.').Last();
-        var column = ForeignColumn!.Split('.').Last();
+        var localColumns = ColumnName.Split('.');
+        var foreignTables = ForeignTable?.Split('.') ?? Array.Empty<string>();
+        var foreignColumns = ForeignColumn?.Split('.') ?? Array.Empty<string>();
+        var relationshipNames = RelationshipName?.Split('.') ?? Array.Empty<string>();
 
-        var query = $"SELECT * FROM {table}";
 
-        var hasWhere = false;
-        if (value != null && value != "undefined")
+        var query = queryFactory.Query().From($"{foreignTables.First()} AS t");
+
+        if (search == null && value != null && value != "undefined")
         {
-            query +=
-                $" WHERE ({column} = @value OR {column} NOT IN (SELECT {column} FROM {table} WHERE {column} = @value))";
-            hasWhere = true;
+            query.Where($"{relationshipNames.Last()}.{foreignColumns.Last()}", value)
+                .OrWhere($"{relationshipNames.Last()}.{foreignColumns.Last()}", "<>", value);
         }
 
+        for (var i = 0; i < foreignTables.Length; i++)
+        {
+            var parentRelation = i == 0 ? "t" : relationshipNames[i - 1];
+            query.Join($"{foreignTables[i]} AS {relationshipNames[i]}", $"{parentRelation}.{localColumns[i]}",
+                $"{relationshipNames[i]}.{foreignColumns[i]}");
+        }
+
+        query.Select($"{relationshipNames.First()}.{foreignColumns.First()}")
+            .Select($"{relationshipNames.Last()}.{Title}");
 
         if (search != null)
         {
-            query += $" {(hasWhere? "AND" : "WHERE")} LOWER({Title}) like @search ";
+            query.WhereLike($"{relationshipNames.Last()}.{Title}", $"%{search}%");
         }
 
-        query += $" ORDER BY {column}";
-
-        query += $" OFFSET 0 ROWS FETCH NEXT {(hasWhere ? LazyItemsCount - 1 : LazyItemsCount)} ROWS ONLY";
-
-
-        var res = (await connection.QueryAsync(query, new
-        {
-            value,
-            search,
-            offset
-        })).Cast<IDictionary<string, object?>>().ToList();
+        query.Offset(offset - 1)
+            .Limit(LazyItemsCount - 1);
+        
+        var res = (await query.GetAsync()).Cast<IDictionary<string, object?>>().ToList();
 
         return res.Select(x =>
-                new KeyValuePair<string, string>(x[ForeignColumn.Split('.').Last()]!.ToString()!,
+                new KeyValuePair<string, string>(x[foreignColumns.First()]!.ToString()!,
                     x[Title]!.ToString()!))
             .ToList();
     }

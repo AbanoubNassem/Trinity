@@ -1,15 +1,14 @@
-using System.Data;
 using AbanoubNassem.Trinity.RequestHelpers;
-using DapperQueryBuilder;
+using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Components.Interfaces;
 
 public interface IHasRelationship
 {
-    public Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(FluentQueryBuilder query,
+    public Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(QueryFactory queryFactory,
         List<IDictionary<string, object?>> records, Sort? sort = null);
 
-    public Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(IDbConnection connection, string? value,
+    public Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(QueryFactory queryFactory, string? value,
         int offset, string? search = null);
 
     public string? ForeignTable { get; protected set; }
