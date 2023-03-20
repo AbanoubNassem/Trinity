@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Configurations;
+using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -13,6 +15,7 @@ public abstract class TrinityPage
     protected IServiceProvider ServiceProvider { get; init; } = null!;
     protected HttpRequest Request { get; init; } = null!;
     protected HttpResponse Response { get; init; } = null!;
+    protected ClaimsPrincipal User { get; init; } = null!;
     protected ILogger Logger { get; init; } = null!;
     protected ModelStateDictionary ModelState { get; init; } = null!;
     protected TrinityLocalizer Localizer { get; init; } = null!;
@@ -37,5 +40,10 @@ public abstract class TrinityPage
     public virtual object? GetData()
     {
         return null;
+    }
+
+    public virtual bool CanView()
+    {
+        return User.IsAdmin();
     }
 }

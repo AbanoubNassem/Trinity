@@ -33,18 +33,9 @@ public sealed class TrinityMainController : TrinityController
     }
 
     [HttpGet]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var page = HttpContext.RequestServices.GetRequiredService(_trinityManager.Pages["dashboard"].Key);
-        var dashboard = (TrinityPage)page;
-
-        dashboard.Setup();
-
-        var response = CreateResponse();
-
-        response.Page = page;
-
-        return Inertia.Render("Default", response);
+        return await RenderPage("dashboard");
     }
 
     [AllowAnonymous]
@@ -127,14 +118,17 @@ public sealed class TrinityMainController : TrinityController
     [Route("/{name}/{view=index}/{id?}")]
     public async Task<IActionResult> HandleResource(string name, string view)
     {
-        if (!_trinityManager.Resources.TryGetValue(name, out var resourceKv))
+        if (!_trinityManager.Resources.TryGetValue(name, out var resourceValue))
         {
             return NotFound(name);
         }
 
-        var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceKv.Key);
+        var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceValue);
         //to serialize the public properties of TrinityResource class not ITrinityResource the interface.
         var resource = (resourceObject as ITrinityResource)!;
+
+        if (!resource.CanView())
+            return UnAuthorised();
 
         await resource.Setup();
 
@@ -146,9 +140,13 @@ public sealed class TrinityMainController : TrinityController
         switch (Request.Method)
         {
             case "GET" when view == "index":
+                if (!resource.CanView()) return UnAuthorised();
+
                 responseData.Data = await resource.GetTableData();
                 break;
             case "GET" when view == "edit":
+                if (!resource.CanUpdate()) return UnAuthorised();
+
                 responseData.Data = await resource.GetEditData();
                 if (responseData.Data == null)
                 {
@@ -159,12 +157,18 @@ public sealed class TrinityMainController : TrinityController
             case "GET" when view == "relationship":
                 return await resource.GetRelationData();
             case "POST" when view == "create":
+                if (!resource.CanCreate()) return UnAuthorised();
+
                 responseData.Data = await resource.Create();
                 break;
             case "PUT" when view == "edit":
+                if (!resource.CanUpdate()) return UnAuthorised();
+
                 responseData.Data = await resource.Update();
                 break;
             case "DELETE" when view is "delete" or "index" or "edit":
+                if (!resource.CanDelete()) return UnAuthorised();
+
                 responseData.Data = await resource.Delete();
                 break;
         }
@@ -178,12 +182,12 @@ public sealed class TrinityMainController : TrinityController
     public async Task<IActionResult> UploadFile(IFormFile? file, [FromForm] string resourceName,
         [FromForm] string fieldName)
     {
-        if (!_trinityManager.Resources.TryGetValue(resourceName, out var resourceKv))
+        if (!_trinityManager.Resources.TryGetValue(resourceName, out var resourceValue))
         {
             return NotFound(resourceName);
         }
 
-        var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceKv.Key);
+        var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceValue);
         var resource = (resourceObject as ITrinityResource)!;
         var field = resource.Fields[fieldName];
 
@@ -203,12 +207,12 @@ public sealed class TrinityMainController : TrinityController
     [Route("/delete/file")]
     public async Task<IActionResult> DeleteFile([FromBody] DeleteFileRequest request)
     {
-        if (!_trinityManager.Resources.TryGetValue(request.ResourceName, out var resourceKv))
+        if (!_trinityManager.Resources.TryGetValue(request.ResourceName, out var resourceValue))
         {
             return await Task.FromResult<IActionResult>(NotFound(request.ResourceName));
         }
 
-        var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceKv.Key);
+        var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceValue);
         var resource = (resourceObject as ITrinityResource)!;
         var field = resource.Fields[request.FieldName];
 
@@ -245,11 +249,13 @@ public sealed class TrinityMainController : TrinityController
     [Route("/pages/{slug}/")]
     public async Task<IActionResult> RenderPage(string slug)
     {
-        if (!_trinityManager.Pages.TryGetValue(slug, out var pageKv)) return NotFound();
+        if (!_trinityManager.Pages.TryGetValue(slug, out var pageV)) return NotFound();
 
-        var pageObj = HttpContext.RequestServices.GetRequiredService(pageKv.Key);
+        var pageObj = HttpContext.RequestServices.GetRequiredService(pageV);
         var page = (TrinityPage)pageObj;
 
+        if (!page.CanView())
+            return UnAuthorised();
 
         await page.Setup();
 
@@ -268,8 +274,13 @@ public sealed class TrinityMainController : TrinityController
         if (Request.IsInertiaRequest()) return response;
 
         response.Configs = _configurations;
-        response.Resources = _trinityManager.Resources.Values.Select(x => x.Value);
-        response.Pages = _trinityManager.Pages.ToDictionary(x => x.Key, v => v.Value.Value);
+        response.Resources = HttpContext.RequestServices
+            .GetRequiredServices(_trinityManager.Resources.Values)
+            .Where(x => ((ITrinityResource)x).CanView());
+        response.Pages = HttpContext.RequestServices
+            .GetRequiredServices(_trinityManager.Pages.Values)
+            .Where(x => ((TrinityPage)x).CanView())
+            .ToDictionary(x => ((TrinityPage)x).Slug, x => x);
         response.Locale = _localizer.GetAllStrings().ToDictionary(x => x.Name, x => x.Value);
         response.IsRtl = Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
         return response;

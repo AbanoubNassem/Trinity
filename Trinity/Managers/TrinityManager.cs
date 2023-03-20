@@ -20,9 +20,9 @@ public class TrinityManager
     private readonly TrinityConfigurations _configurations;
     private readonly IServiceCollection _serviceProvider;
     private readonly TrinityLocalizer _trinityLocalizer;
-    public Dictionary<string, KeyValuePair<Type, object>> Resources { get; } = new();
+    public Dictionary<string, Type> Resources { get; } = new();
 
-    public Dictionary<string, KeyValuePair<Type, object>> Pages { get; } = new();
+    public Dictionary<string, Type> Pages { get; } = new();
     // public List<TrinityPlugin> Plugins { get; } = new();
 
     public TrinityManager(TrinityConfigurations configurations, IServiceCollection serviceProvider,
@@ -45,8 +45,10 @@ public class TrinityManager
         var trinityPageType = typeof(TrinityPage);
         var types = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
-            .Where(p => trinityPageType.IsAssignableFrom(p) && !p.IsAbstract &&
-                        p.Namespace != "AbanoubNassem.Trinity.Pages")
+            .Where(p => trinityPageType.IsAssignableFrom(p)
+                        && p is { IsAbstract: false, IsInterface: false }
+                        && p.Namespace != "AbanoubNassem.Trinity.Pages"
+            )
             .ToList();
 
         if (!types.Any(x => x.Name is "Dashboard" or "DashboardPage"))
@@ -67,6 +69,7 @@ public class TrinityManager
                 pageType.GetProperty("ServiceProvider", Flags)!.SetValue(page, httpContext.RequestServices);
                 pageType.GetProperty("Request", Flags)!.SetValue(page, httpContext.Request);
                 pageType.GetProperty("Response", Flags)!.SetValue(page, httpContext.Response);
+                pageType.GetProperty("User", Flags)!.SetValue(page, httpContext.User);
                 pageType.GetProperty("Logger", Flags)!
                     .SetValue(page, httpContext.RequestServices
                         .GetRequiredService(typeof(ILogger<>)
@@ -87,12 +90,7 @@ public class TrinityManager
             pageType.GetProperty("Localizer", Flags)!
                 .SetValue(page, _trinityLocalizer);
 
-            Pages.TryAdd(page.Slug.ToLower(), new KeyValuePair<Type, object>(pageType, new
-            {
-                page.Slug,
-                page.Label,
-                page.Icon,
-            }));
+            Pages.TryAdd(page.Slug.ToLower(), pageType);
         }
     }
 
@@ -136,6 +134,8 @@ public class TrinityManager
 
                 resourceType.GetProperty("Response", Flags)!.SetValue(resource, httpContext.Response);
 
+                resourceType.GetProperty("User", Flags)!.SetValue(resource, httpContext.User);
+
                 if (_configurations.IsDevelopment)
                 {
                     resourceType.GetProperty("ConnectionFactory", Flags)!
@@ -154,23 +154,7 @@ public class TrinityManager
             });
 
 
-            var resource = CreateResource(resourceType, plural);
-
-            Resources.Add(plural.ToLower(),
-                new KeyValuePair<Type, object>(resourceType,
-                    new
-                    {
-                        resource.Icon,
-                        resource.Label,
-                        resource.Name,
-                        resource.PluralLabel,
-                        resource.PrimaryKeyColumn,
-                        resource.ShowGridlines,
-                        resource.StripedRows,
-                        resource.TitleColumn
-                    }
-                )
-            );
+            Resources.Add(plural.ToLower(), resourceType);
         }
     }
 

@@ -54,4 +54,9 @@ public class TrinityDashboardPage : TrinityPage
                 .SetHeight("300px")
         };
     }
+
+    public override bool CanView()
+    {
+        return true;
+    }
 }

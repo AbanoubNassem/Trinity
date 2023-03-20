@@ -1,4 +1,5 @@
 using System.Data;
+using System.Security.Claims;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Validators;
@@ -8,14 +9,13 @@ using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Resources;
 
-
-
 public abstract partial class TrinityResource<TPrimaryKeyType> : ITrinityResource
 {
     protected TrinityConfigurations Configurations { get; init; } = null!;
     protected IServiceProvider ServiceProvider { get; init; } = null!;
     protected HttpRequest Request { get; init; } = null!;
     protected HttpResponse Response { get; init; } = null!;
+    protected ClaimsPrincipal User { get; init; } = null!;
     protected ILogger Logger { get; init; } = null!;
     protected ModelStateDictionary ModelState { get; init; } = null!;
     protected ResourceValidator ResourceValidator { get; } = new();
