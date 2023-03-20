@@ -2,7 +2,7 @@ using AbanoubNassem.Trinity.Components.Interfaces;
 
 namespace AbanoubNassem.Trinity.Resources;
 
-public abstract partial class TrinityResource
+public abstract partial class TrinityResource<TPrimaryKeyType>
 {
     public List<object> TopWidgets => new(GetTopWidgets());
 

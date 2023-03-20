@@ -5,14 +5,13 @@ using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Utilities;
-using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Resources;
 
-public abstract partial class TrinityResource
+public abstract partial class TrinityResource<TPrimaryKeyType>
 {
     public abstract string TitleColumn { get; }
 
@@ -25,7 +24,6 @@ public abstract partial class TrinityResource
             new IdColumn(PrimaryKeyColumn)
         };
     }
-
 
     public virtual async Task<IPaginator?> GetTableData()
     {
@@ -73,7 +71,6 @@ public abstract partial class TrinityResource
             var countQuery = conn.Query();
 
 
-
             countQuery
                 .From($"{Table} AS t")
                 .AsCount();
@@ -115,13 +112,10 @@ public abstract partial class TrinityResource
                 }
             }
 
-
-            query.OrderBy($"t.{PrimaryKeyColumn}");
-            
             var count = await countQuery.FirstAsync<int>();
 
             var limit = query.Offset((page - 1) * perPage).Limit(perPage);
-            
+
             var result = (await limit.GetAsync()).Cast<IDictionary<string, object?>>().ToList();
 
 
@@ -168,22 +162,25 @@ public abstract partial class TrinityResource
         }
     }
 
-    public async Task<object?> Delete()
+
+
+    public virtual async Task<object?> Delete()
     {
-        var body = await Request.ReadFromJsonAsync<IDictionary<string, IList<string>>>();
+        var body = await Request.ReadFromJsonAsync<Dictionary<string, List<string>>>();
 
         if (body == null || !body.TryGetValue(PrimaryKeyColumn, out var keys))
             return null;
 
+        await BeforeDelete(ref keys);
+
         using var connection = ConnectionFactory();
 
-        var deleteQueryResult =
-            await connection.ExecuteScalarAsync<int>($"DELETE FROM {Table} WHERE {PrimaryKeyColumn} in @keys",
-                new { keys }
-            );
+        var deleteQueryResult = await connection.Query()
+            .From($"{Table} AS t")
+            .WhereIn($"t.{PrimaryKeyColumn}", keys)
+            .DeleteAsync();
 
-
-        if (deleteQueryResult == 0)
+        if (deleteQueryResult > 0)
         {
             var recordStr = keys.Count == 1 ? Localizer["record_was"] : Localizer["records_were"];
             TrinityNotifications.NotifySuccess(Localizer["record_deleted", recordStr]);
@@ -193,6 +190,10 @@ public abstract partial class TrinityResource
             TrinityNotifications.NotifyError(Localizer["record_not_deleted"]);
         }
 
+        await AfterDelete(keys, deleteQueryResult > 0);
+
         return await GetTableData();
     }
+
+  
 }

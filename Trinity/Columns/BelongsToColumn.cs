@@ -146,6 +146,7 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
         }
         else
         {
+           
             entities = entities.OrderByDescending(x => GetNestedRelationship(x, relationshipNames)?[columnTitle])
                 .ToList();
         }

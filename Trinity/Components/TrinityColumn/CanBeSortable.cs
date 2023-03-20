@@ -20,6 +20,10 @@ public abstract partial class TrinityColumn<T, TDeserialization>
         if (SortCallback != null)
             SortCallback(query, direction);
         else
-            query.OrderBy($"t.{ColumnName} {direction}");
+        {
+            if (direction == "ASC")
+                query.OrderBy($"t.{ColumnName}");
+            else query.OrderByDesc($"t.{ColumnName}");
+        }
     }
 }

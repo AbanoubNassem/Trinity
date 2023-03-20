@@ -15,7 +15,7 @@ public class MultipleSelectField<T> : SelectField<T[]?>
     }
 
 
-    public override void Fill(ref IDictionary<string, object?> form, IReadOnlyDictionary<string, object?>? record = null)
+    public override void Fill(ref Dictionary<string, object?> form, IReadOnlyDictionary<string, object?>? record = null)
     {
         if (!form.ContainsKey(ColumnName)) return;
 

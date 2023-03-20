@@ -11,7 +11,7 @@ const AppMenuItem = (props: { root?: any; index: number; parentKey?: any; item: 
 
     const item = props.item;
     const key = props.parentKey ? props.parentKey + '-' + props.index : String(props.index);
-    const isActive = (item: any) => item.to === window.location.pathname.split(configs.prefix)[1];
+    const isActive = (item: any) => (item.to === '/' ? window.location.pathname === `/${configs.prefix}/` : window.location.pathname.includes(item.to));
     const itemClick = (event: any) => {
         //avoid processing disabled items
         if (item.disabled) {

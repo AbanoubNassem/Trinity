@@ -21,8 +21,9 @@ public class TrinityManager
     private readonly IServiceCollection _serviceProvider;
     private readonly TrinityLocalizer _trinityLocalizer;
     public Dictionary<string, KeyValuePair<Type, object>> Resources { get; } = new();
+
     public Dictionary<string, KeyValuePair<Type, object>> Pages { get; } = new();
-    public List<TrinityPlugin> Plugins { get; } = new();
+    // public List<TrinityPlugin> Plugins { get; } = new();
 
     public TrinityManager(TrinityConfigurations configurations, IServiceCollection serviceProvider,
         TrinityLocalizer trinityLocalizer)
@@ -97,10 +98,10 @@ public class TrinityManager
 
     private void LoadResources()
     {
-        var trinityResourceType = typeof(TrinityResource);
+        var trinityResourceType = typeof(ITrinityResource);
         var types = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
-            .Where(p => trinityResourceType.IsAssignableFrom(p) && !p.IsAbstract);
+            .Where(p => trinityResourceType.IsAssignableFrom(p) && p is { IsAbstract: false, IsInterface: false });
 
 
         foreach (var resourceType in types)
@@ -114,7 +115,7 @@ public class TrinityManager
                 var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
                 var httpContext = httpContextAccessor.HttpContext!;
 
-                var resource = CreateResource(trinityResourceType, resourceType, plural);
+                var resource = CreateResource(resourceType, plural);
 
 
                 resourceType.GetProperty("ServiceProvider", Flags)!.SetValue(resource, httpContext.RequestServices);
@@ -153,7 +154,7 @@ public class TrinityManager
             });
 
 
-            var resource = CreateResource(trinityResourceType, resourceType, plural);
+            var resource = CreateResource(resourceType, plural);
 
             Resources.Add(plural.ToLower(),
                 new KeyValuePair<Type, object>(resourceType,
@@ -166,7 +167,6 @@ public class TrinityManager
                         resource.PrimaryKeyColumn,
                         resource.ShowGridlines,
                         resource.StripedRows,
-                        resource.Table,
                         resource.TitleColumn
                     }
                 )
@@ -174,30 +174,32 @@ public class TrinityManager
         }
     }
 
-    private TrinityResource CreateResource(IReflect trinityResourceType, Type resourceType, string plural)
+    private ITrinityResource CreateResource(Type resourceType, string plural)
     {
-        var resource = (TrinityResource)Activator.CreateInstance(resourceType)!;
+        var resource = (ITrinityResource)Activator.CreateInstance(resourceType)!;
 
-        trinityResourceType.GetProperty("Name", Flags)!
+        resourceType.GetProperty("Name", Flags)!
             .SetValue(resource, plural.ToLower());
 
         if (resource.Label == null)
         {
-            trinityResourceType.GetProperty("Label", Flags)!
+            resourceType.GetProperty("Label", Flags)!
                 .SetValue(resource, plural);
         }
 
         if (resource.PluralLabel == null)
         {
-            trinityResourceType.GetProperty("PluralLabel", Flags)!
+            resourceType.GetProperty("PluralLabel", Flags)!
                 .SetValue(resource, plural);
         }
 
-        if (resource.Table == null)
+        var table = resourceType.GetProperty("Table", Flags)!;
+
+        if (table.GetValue(resource) == null)
         {
-            trinityResourceType.GetProperty("Table", Flags)!
-                .SetValue(resource, plural.ToLower());
+            table.SetValue(resource, plural.ToLower());
         }
+
 
         resourceType.GetProperty("Configurations", Flags)!
             .SetValue(resource, _configurations);
@@ -208,10 +210,10 @@ public class TrinityManager
 
     private void LoadPlugins()
     {
-        var trinityResourceType = typeof(TrinityPlugin);
+        var trinityPluginType = typeof(TrinityPlugin);
         var types = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
-            .Where(p => trinityResourceType.IsAssignableFrom(p) && !p.IsAbstract);
+            .Where(p => trinityPluginType.IsAssignableFrom(p) && !p.IsAbstract);
 
 
         foreach (var pluginType in types)
@@ -221,7 +223,7 @@ public class TrinityManager
             _configurations.ExtraJavaScriptSources.AddRange(plugin.GetScriptSources());
             _configurations.ExtraStyleSources.AddRange(plugin.GetStyleSources());
 
-            Plugins.Add(plugin);
+            // Plugins.Add(plugin);
         }
     }
 }

@@ -58,7 +58,7 @@ public abstract partial class TrinityField<T, TDeserialization> : TrinityCompone
     }
 
 
-    public delegate void ActionFormWithRecord(IDictionary<string, object?> form,
+    public delegate void ActionFormWithRecord(Dictionary<string, object?> form,
         IReadOnlyDictionary<string, object?>? record = null);
 
     public delegate object? ActionWithRecordProperty(TDeserialization? property);
@@ -93,7 +93,7 @@ public abstract partial class TrinityField<T, TDeserialization> : TrinityCompone
     }
 
 
-    public void Format(IDictionary<string, object?> record)
+    public void Format(Dictionary<string, object?> record)
     {
         _formatUsing?.Invoke(record);
     }
@@ -120,7 +120,7 @@ public abstract partial class TrinityField<T, TDeserialization> : TrinityCompone
         return (this as T)!;
     }
 
-    public virtual void Fill(ref IDictionary<string, object?> form, IReadOnlyDictionary<string, object?>? record = null)
+    public virtual void Fill(ref Dictionary<string, object?> form, IReadOnlyDictionary<string, object?>? record = null)
     {
         if (form.TryGetValue(ColumnName, out var value))
         {

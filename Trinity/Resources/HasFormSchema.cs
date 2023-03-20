@@ -10,7 +10,7 @@ using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Resources;
 
-public abstract partial class TrinityResource
+public abstract partial class TrinityResource<TPrimaryKeyType>
 {
     private readonly Dictionary<string, object> _fields = new();
 
@@ -72,7 +72,7 @@ public abstract partial class TrinityResource
         return new OkObjectResult(res);
     }
 
-    private async Task<IDictionary<string, object?>?> ValidateRequest()
+    protected virtual async Task<Dictionary<string, object?>?> ValidateRequest()
     {
         var jsonForm = await Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>() ??
                        new Dictionary<string, JsonElement>();
@@ -102,7 +102,8 @@ public abstract partial class TrinityResource
         return null;
     }
 
-    public async Task<object?> Create()
+
+    public virtual async Task<object?> Create()
     {
         var form = await ValidateRequest();
         if (form == null) return form;
@@ -118,13 +119,15 @@ public abstract partial class TrinityResource
             form.TryAdd(relationshipField.ForeignColumn?.Split('.').First()!, temp);
         }
 
+        await BeforeCreate(ref form);
+
         using var conn = ConnectionFactory();
 
 
         var res = await conn.Query().From(Table)
-            .InsertGetIdAsync<int>(form);
+            .InsertGetIdAsync<TPrimaryKeyType>(form);
 
-        if (res > 0)
+        if (res != null)
         {
             TrinityNotifications.NotifySuccess(Localizer["new_record_added"]);
         }
@@ -134,10 +137,13 @@ public abstract partial class TrinityResource
             return null;
         }
 
+        await AfterCreate(form, res);
+
         return res;
     }
 
-    public async Task<object?> GetEditData()
+
+    public virtual async Task<IDictionary<string, object?>?> GetEditData()
     {
         if (!Request.RouteValues.TryGetValue("id", out var key))
             return null;
@@ -152,7 +158,7 @@ public abstract partial class TrinityResource
             field.SelectQuery(queryBuilder);
         }
 
-        var record = (IDictionary<string, object>?)await queryBuilder.From($"{Table} AS t")
+        var record = await queryBuilder.From($"{Table} AS t")
             .Where($"t.{PrimaryKeyColumn}", key)
             .FirstOrDefaultAsync();
 
@@ -164,7 +170,7 @@ public abstract partial class TrinityResource
             {
                 record = (await relationshipField.SelectRelationshipQuery(
                     connection.QueryFactory(),
-                    new List<IDictionary<string, object?>>() { record! })).Last()!;
+                    new List<IDictionary<string, object?>>() { record })).Last();
             }
         }
 
@@ -172,9 +178,10 @@ public abstract partial class TrinityResource
         return record;
     }
 
-    public async Task<object?> Update()
+
+    public virtual async Task<object?> Update()
     {
-        var record = (IDictionary<string, object?>?)await GetEditData();
+        var record = await GetEditData();
 
         if (record == null)
         {
@@ -190,6 +197,8 @@ public abstract partial class TrinityResource
         var form = await ValidateRequest();
         if (form == null) return record;
 
+        await BeforeUpdate(ref form, (IReadOnlyDictionary<string, object?>)record);
+
         using var conn = ConnectionFactory();
 
         var query = conn.Query().From(Table);
@@ -201,7 +210,7 @@ public abstract partial class TrinityResource
             var field = (ITrinityField)Fields[form.ElementAt(i).Key];
             if (field.ColumnName == PrimaryKeyColumn) continue;
 
-            field.Fill(ref form, (IReadOnlyDictionary<string, object?>?)record);
+            field.Fill(ref form, (IReadOnlyDictionary<string, object?>)record);
             if (field is IHasRelationship { HasRelationshipByDefault: true } relationshipField)
                 updates.TryAdd(relationshipField.ForeignColumn?.Split('.').First()!, form[field.ColumnName]);
 
@@ -221,6 +230,11 @@ public abstract partial class TrinityResource
             TrinityNotifications.NotifyError(Localizer["record_not_updated"]);
         }
 
-        return await GetEditData();
+        var newRecord = await GetEditData();
+
+        await AfterUpdate((IReadOnlyDictionary<string, object?>)record,
+            (IReadOnlyDictionary<string, object?>?)newRecord);
+
+        return newRecord;
     }
 }

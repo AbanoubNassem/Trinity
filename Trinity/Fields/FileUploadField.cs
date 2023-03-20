@@ -92,7 +92,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
         return randId;
     }
 
-    public override void Fill(ref IDictionary<string, object?> form,
+    public override void Fill(ref Dictionary<string, object?> form,
         IReadOnlyDictionary<string, object?>? oldRecord = null)
     {
         if(!form.ContainsKey(ColumnName)) return;

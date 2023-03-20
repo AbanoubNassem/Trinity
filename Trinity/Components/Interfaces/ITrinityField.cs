@@ -8,9 +8,9 @@ public interface ITrinityField
 {
     public string ColumnName { get; set; }
 
-    public void Format(IDictionary<string, object?> record);
+    public void Format(Dictionary<string, object?> record);
 
-    public void Fill(ref IDictionary<string, object?> form, IReadOnlyDictionary<string, object?>? oldRecord = null);
+    public void Fill(ref Dictionary<string, object?> form, IReadOnlyDictionary<string, object?>? oldRecord = null);
 
     public void SelectQuery(Query query);
     public void SetSelectQueryUsing(Action<Query> query);

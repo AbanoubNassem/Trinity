@@ -7,12 +7,12 @@ public abstract partial class TrinityField<T, TDeserialization>
 
 {
     public delegate void ValidateUsingDelegate(IValidator validator,
-        Action<IRuleBuilderInitial<IDictionary<string, object?>, TDeserialization?>> rules,
+        Action<IRuleBuilderInitial<Dictionary<string, object?>, TDeserialization?>> rules,
         IReadOnlyDictionary<string, object?> form);
 
     protected ValidateUsingDelegate? ValidateUsingCallback;
 
-    protected Action<IRuleBuilderInitial<IDictionary<string, object?>, TDeserialization?>>? Rules;
+    protected Action<IRuleBuilderInitial<Dictionary<string, object?>, TDeserialization?>>? Rules;
 
     private bool _isValidationRegistered;
 
@@ -23,7 +23,7 @@ public abstract partial class TrinityField<T, TDeserialization>
     }
 
     public virtual T SetValidationRules(
-        Action<IRuleBuilderInitial<IDictionary<string, object?>, TDeserialization?>> rules)
+        Action<IRuleBuilderInitial<Dictionary<string, object?>, TDeserialization?>> rules)
     {
         Rules = rules;
 
@@ -41,14 +41,14 @@ public abstract partial class TrinityField<T, TDeserialization>
             return;
         }
 
-        var rule = (validator as AbstractValidator<IDictionary<string, object?>>)!.RuleFor<TDeserialization?>(x =>
+        var rule = (validator as AbstractValidator<Dictionary<string, object?>>)!.RuleFor<TDeserialization?>(x =>
                 x.ContainsKey(ColumnName) && x[ColumnName] != null ? (TDeserialization)x[ColumnName]! : default
             )
             .Cascade(CascadeMode.Stop);
 
         Rules(rule);
 
-        ((IRuleBuilderOptions<IDictionary<string, object?>, TDeserialization?>)rule)
+        ((IRuleBuilderOptions<Dictionary<string, object?>, TDeserialization?>)rule)
             .WithName(Label)
             .OverridePropertyName(ColumnName);
 

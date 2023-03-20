@@ -134,7 +134,7 @@ public sealed class TrinityMainController : TrinityController
 
         var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceKv.Key);
         //to serialize the public properties of TrinityResource class not ITrinityResource the interface.
-        var resource = (resourceObject as TrinityResource)!;
+        var resource = (resourceObject as ITrinityResource)!;
 
         await resource.Setup();
 
@@ -184,7 +184,7 @@ public sealed class TrinityMainController : TrinityController
         }
 
         var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceKv.Key);
-        var resource = (resourceObject as TrinityResource)!;
+        var resource = (resourceObject as ITrinityResource)!;
         var field = resource.Fields[fieldName];
 
         if (field is not ICanUploadField uploadField) return UnprocessableEntity();
@@ -209,7 +209,7 @@ public sealed class TrinityMainController : TrinityController
         }
 
         var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceKv.Key);
-        var resource = (resourceObject as TrinityResource)!;
+        var resource = (resourceObject as ITrinityResource)!;
         var field = resource.Fields[request.FieldName];
 
         if (field is not ICanUploadField) return await Task.FromResult<IActionResult>(UnprocessableEntity());
