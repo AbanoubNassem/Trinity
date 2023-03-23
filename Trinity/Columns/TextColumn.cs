@@ -11,23 +11,23 @@ public class TextColumn : TrinityColumn<TextColumn, string>
     {
     }
 
-    public override void Format(IDictionary<string, object?> record)
+    public override void Format()
     {
-        base.Format(record);
+        base.Format();
 
         if (UrlCallback != null)
         {
-            record.Add($"{ColumnName}_url", UrlCallback(record));
+            Record.Add($"{ColumnName}_url", UrlCallback(Record));
         }
 
         if (_words != null)
         {
-            record[ColumnName] = record[ColumnName]?.ToString()?.Words((int)_words);
+            Record[ColumnName] = Record[ColumnName]?.ToString()?.Words((int)_words);
         }
 
         if (_limit != null)
         {
-            record[ColumnName] = record[ColumnName]?.ToString()?[..(int)_limit];
+            Record[ColumnName] = Record[ColumnName]?.ToString()?[..(int)_limit];
         }
     }
 

@@ -10,13 +10,13 @@ public class ImageColumn : TrinityColumn<ImageColumn, string>
 
     public override string ComponentName => "ImageColumn";
 
-    public override void Format(IDictionary<string, object?> record)
+    public override void Format()
     {
-        base.Format(record);
+        base.Format();
 
         if (AltCallback != null)
         {
-            record.Add($"{ColumnName}_alt", AltCallback(record));
+            Record.Add($"{ColumnName}_alt", AltCallback(Record));
         }
     }
 

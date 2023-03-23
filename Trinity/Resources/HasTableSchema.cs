@@ -15,7 +15,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 {
     public abstract string TitleColumn { get; }
 
-    public List<object> Columns => new(GetTableSchema());
+    public List<object> Columns => new(GetTableSchema().Where(x => !x.Hidden));
 
     protected virtual List<ITrinityColumn> GetTableSchema()
     {
@@ -79,10 +79,9 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
             query.Select($"t.{PrimaryKeyColumn}");
 
-            foreach (ITrinityColumn column in Columns)
+            var columns = Columns;
+            foreach (ITrinityColumn column in columns)
             {
-                if (column.Hidden) continue;
-
                 column.SelectQuery(query);
 
                 if (globalSearch != null && column.IsGloballySearchable)
@@ -103,7 +102,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
                 foreach (var sort in sorts)
                 {
                     var column =
-                        (ITrinityColumn?)Columns.SingleOrDefault(x => ((ITrinityColumn)x).ColumnName == sort.Field);
+                        (ITrinityColumn?)columns.SingleOrDefault(x => ((ITrinityColumn)x).ColumnName == sort.Field);
                     if (column is null or IHasRelationship) continue;
 
                     var direction = sort.Order == 1 ? "ASC" : "DESC";
@@ -121,7 +120,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
             if (result.Any())
             {
-                foreach (ITrinityColumn baseColumn in Columns)
+                foreach (ITrinityColumn baseColumn in columns)
                 {
                     if (baseColumn is IHasRelationship { HasRelationshipByDefault: true } relationshipColumn)
                     {
@@ -136,11 +135,11 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
             foreach (var record in result)
             {
-                foreach (ITrinityColumn column in Columns)
+                foreach (ITrinityColumn column in columns)
                 {
-                    if (column.Hidden) continue;
-
-                    column.Format(record);
+                    column.SetRecord(record);
+                    column.Setup();
+                    column.Format();
                 }
             }
 
@@ -161,7 +160,6 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
             throw;
         }
     }
-
 
 
     public virtual async Task<object?> Delete()
@@ -194,6 +192,4 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
         return await GetTableData();
     }
-
-  
 }

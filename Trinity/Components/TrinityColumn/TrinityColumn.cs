@@ -10,8 +10,10 @@ public interface ITrinityColumn : ITrinityComponent
     bool IsGloballySearchable { get; set; }
     void SelectQuery(Query query);
     void Filter(Query query, string globalSearch);
-    void Format(IDictionary<string, object?> record);
+    void Format();
     void Sort(Query query, string direction);
+    void Setup();
+    void SetRecord(IDictionary<string, object?> record);
 }
 
 public abstract partial class TrinityColumn<T, TDeserialization> : TrinityComponent<T, TDeserialization>, ITrinityColumn
@@ -26,11 +28,22 @@ public abstract partial class TrinityColumn<T, TDeserialization> : TrinityCompon
         Title = columnName;
     }
 
+    protected IDictionary<string, object?> Record { get; private set; } = null!;
+
+    public void SetRecord(IDictionary<string, object?> record)
+    {
+        Record = record;
+    }
+
+    public virtual void Setup()
+    {
+    }
+
     public delegate void QueryCallbackWithString(Query query, string str);
 
     public delegate void FiltersCallback(Query query, string str);
 
-    public delegate TCallBack CallbackWithRecord<out TCallBack>(IDictionary<string, object?> record);
+    public delegate TCallBackReturnType CallbackWithRecord<out TCallBackReturnType>(IDictionary<string, object?> record);
 
     public delegate void QueryCallback(Query query);
 
@@ -49,22 +62,21 @@ public abstract partial class TrinityColumn<T, TDeserialization> : TrinityCompon
         return (this as T)!;
     }
 
-    public virtual void Format(IDictionary<string, object?> record)
+    public virtual void Format()
     {
         if (FormatUsingCallback != null)
         {
-            record[ColumnName] = FormatUsingCallback(record);
-            return;
+            Record[ColumnName] = FormatUsingCallback(Record);
         }
 
         if (TooltipCallback != null)
         {
-            record.Add($"{ColumnName}_tooltip", TooltipCallback(record));
+            Record.Add($"{ColumnName}_tooltip", TooltipCallback(Record));
         }
 
         if (ExtraAttributesCallback != null)
         {
-            record.Add($"{ColumnName}_extraAttributes", ExtraAttributesCallback(record));
+            Record.Add($"{ColumnName}_extraAttributes", ExtraAttributesCallback(Record));
         }
     }
 
