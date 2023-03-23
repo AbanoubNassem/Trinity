@@ -159,4 +159,20 @@ public abstract partial class TrinityField<T, TDeserialization> : TrinityCompone
         Locale = locale;
         return (this as T)!;
     }
+    
+    public bool OnlyOnCreate { get; set; }
+
+    public T SetOnlyOnCreate(bool only = true)
+    {
+        OnlyOnCreate = only;
+        return (this as T)!;
+    }
+    
+    public bool OnlyOnUpdate { get; set; }
+
+    public T SetOnlyOnUpdate(bool only = true)
+    {
+        OnlyOnUpdate = only;
+        return (this as T)!;
+    }
 }

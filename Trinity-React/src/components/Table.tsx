@@ -180,21 +180,25 @@ const Table = () => {
 
     const toolbarRightContents = (
         <React.Fragment>
-            <Button
-                className="p-button-success mx-2"
-                icon="pi pi-plus"
-                label={localize('create')}
-                onClick={() => trinityLink(`/${configs.prefix}/${resource?.name}/create`)}
-            />
-            <Button
-                className="p-button-danger"
-                icon="pi pi-trash"
-                label={localize('delete')}
-                disabled={selectedItems.length === 0}
-                onClick={() => {
-                    if (selectedItems.length) showDeleteDialog(true);
-                }}
-            />
+            {resource?.canCreate && (
+                <Button
+                    className="p-button-success mx-2"
+                    icon="pi pi-plus"
+                    label={localize('create')}
+                    onClick={() => trinityLink(`/${configs.prefix}/${resource?.name}/create`)}
+                />
+            )}
+            {resource?.canDelete && (
+                <Button
+                    className="p-button-danger"
+                    icon="pi pi-trash"
+                    label={localize('delete')}
+                    disabled={selectedItems.length === 0}
+                    onClick={() => {
+                        if (selectedItems.length) showDeleteDialog(true);
+                    }}
+                />
+            )}
         </React.Fragment>
     );
 
@@ -271,23 +275,27 @@ const Table = () => {
 
     const actionBodyTemplate = (rowData: any) => {
         return (
-            <>
-                <Button
-                    icon="pi pi-pencil"
-                    className="p-button-rounded p-button-success mx-2"
-                    onClick={() => {
-                        trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${rowData[resource?.primaryKeyColumn!]}`, false, false);
-                    }}
-                />
-                <Button
-                    icon="pi pi-trash"
-                    className="p-button-rounded p-button-danger"
-                    onClick={() => {
-                        setSelectedItemToDelete(rowData);
-                        showDeleteDialog(true);
-                    }}
-                />
-            </>
+            <div className="flex justify-content-center">
+                {resource?.canUpdate && (
+                    <Button
+                        icon="pi pi-pencil"
+                        className="p-button-rounded p-button-success mx-2"
+                        onClick={() => {
+                            trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${rowData[resource?.primaryKeyColumn!]}`, false, false);
+                        }}
+                    />
+                )}
+                {resource?.canDelete && (
+                    <Button
+                        icon="pi pi-trash"
+                        className="p-button-rounded p-button-danger"
+                        onClick={() => {
+                            setSelectedItemToDelete(rowData);
+                            showDeleteDialog(true);
+                        }}
+                    />
+                )}
+            </div>
         );
     };
 
@@ -327,12 +335,14 @@ const Table = () => {
                 onFilter={onFilter}
                 filters={filters}
             >
-                <Column
-                    exportable={false}
-                    selectionMode="multiple"
-                    style={{ width: '3rem' }}
-                    filter={false}
-                />
+                {resource?.canDelete && (
+                    <Column
+                        exportable={false}
+                        selectionMode="multiple"
+                        style={{ width: '3rem' }}
+                        filter={false}
+                    />
+                )}
                 {columns.map((column) => {
                     const body = (data: any) => {
                         return loading ? (
@@ -404,11 +414,13 @@ const Table = () => {
                         />
                     );
                 })}
-                <Column
-                    body={loading ? <Skeleton /> : actionBodyTemplate}
-                    headerStyle={{ minWidth: '10rem' }}
-                    filter={false}
-                ></Column>
+                {(resource?.canUpdate || resource?.canDelete) && (
+                    <Column
+                        body={loading ? <Skeleton /> : actionBodyTemplate}
+                        headerStyle={{ minWidth: '10rem' }}
+                        filter={false}
+                    />
+                )}
             </DataTable>
 
             <Dialog

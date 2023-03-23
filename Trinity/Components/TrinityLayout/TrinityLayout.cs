@@ -4,7 +4,6 @@ namespace AbanoubNassem.Trinity.Components.TrinityLayout;
 
 public interface ITrinityLayout : ITrinityComponent, IHasSchema
 {
-
 }
 
 public abstract class TrinityLayout<T> : TrinityComponent<T, object?>, ITrinityLayout, IFormComponent where T : TrinityLayout<T>
@@ -25,6 +24,7 @@ public abstract class TrinityLayout<T> : TrinityComponent<T, object?>, ITrinityL
         Schema = schema.Cast<object>().ToList();
         return (this as T)!;
     }
+    
 
     public int Columns { get; protected set; }
 

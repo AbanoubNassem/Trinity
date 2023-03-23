@@ -22,6 +22,9 @@ public abstract partial class TrinityResource<TPrimaryKeyType> : ITrinityResourc
     protected Func<IDbConnection> ConnectionFactory { get; init; } = null!;
     protected TrinityLocalizer Localizer { get; init; } = null!;
 
+    protected bool IsCreateRequest { get; init; }
+    protected bool IsUpdateRequest { get; init; } 
+
     public string Name { get; init; } = null!;
     public virtual string? Label { get; init; }
     public virtual string? PluralLabel { get; init; }

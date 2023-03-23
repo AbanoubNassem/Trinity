@@ -7,6 +7,9 @@ namespace AbanoubNassem.Trinity.Components.Interfaces;
 public interface ITrinityField
 {
     public string ColumnName { get; set; }
+    
+    public bool OnlyOnCreate { get; set; }
+    public bool OnlyOnUpdate { get; set; }
 
     public void Format(Dictionary<string, object?> record);
 
@@ -22,4 +25,6 @@ public interface ITrinityField
         ModelStateDictionary modelState);
 
     Type GetDeserializationType();
+
+
 }

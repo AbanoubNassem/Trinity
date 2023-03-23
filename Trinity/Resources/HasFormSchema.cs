@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components.Interfaces;
+using AbanoubNassem.Trinity.Components.TrinityLayout;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Utilities;
 using FluentValidation.AspNetCore;
@@ -12,8 +13,6 @@ namespace AbanoubNassem.Trinity.Resources;
 
 public abstract partial class TrinityResource<TPrimaryKeyType>
 {
-    private readonly Dictionary<string, object> _fields = new();
-
     public virtual async Task Setup()
     {
         await Task.CompletedTask;
@@ -21,14 +20,54 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
     protected abstract List<IFormComponent> GetFormSchema();
 
-    public List<object> Schema => new(GetFormSchema());
+    protected virtual List<object> FilterSchema(IEnumerable<object>? schema)
+    {
+        if (schema == null) return new List<object>();
+
+        var filtered = schema.Select(x =>
+        {
+            var component = (ITrinityComponent)x;
+
+            if (component.Hidden)
+            {
+                return null;
+            }
+
+            if (x is ITrinityLayout layout)
+            {
+                layout.Schema = FilterSchema(layout.Schema);
+                return layout;
+            }
+
+
+            if (x is not ITrinityField field) return x;
+
+            if (
+                field is { OnlyOnCreate: false, OnlyOnUpdate: false } ||
+                (!IsCreateRequest && !IsUpdateRequest) ||
+                (IsCreateRequest && field.OnlyOnCreate) ||
+                (IsUpdateRequest && field.OnlyOnUpdate))
+            {
+                return x;
+            }
+
+
+            return null;
+        }).Where(x => x != null);
+
+        return filtered.ToList()!;
+    }
+
+    public List<object> Schema => new(FilterSchema(GetFormSchema()));
+
+    private readonly Dictionary<string, object> _fields = new();
 
     [JsonIgnore]
     public Dictionary<string, object> Fields
     {
         get
         {
-            if (_fields.Count != 0) return _fields;
+            if (_fields.Any()) return _fields;
 
             foreach (var field in Schema)
             {

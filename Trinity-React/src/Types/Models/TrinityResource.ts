@@ -15,4 +15,8 @@ export default interface TrinityResource {
     titleColumn: string;
     topWidgets?: Array<TrinityWidget>;
     bottomWidgets?: Array<TrinityWidget>;
+    canView: boolean;
+    canCreate: boolean;
+    canUpdate: boolean;
+    canDelete: boolean;
 }

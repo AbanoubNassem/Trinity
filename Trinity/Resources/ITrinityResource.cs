@@ -22,8 +22,8 @@ public interface ITrinityResource
     public Task<object?> Create();
     public Task<object?> Update();
     public Task<object?> Delete();
-    public bool CanView();
-    public bool CanCreate();
-    public bool CanUpdate();
-    public bool CanDelete();
+    public bool CanView { get; }
+    public bool CanCreate { get; }
+    public bool CanUpdate { get; }
+    public bool CanDelete { get; }
 }

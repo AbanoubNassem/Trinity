@@ -12,7 +12,7 @@ public class TrinityDashboardPage : TrinityPage
     protected override List<ITrinityWidget> GetSchema()
     {
         // Logger.LogInformation("this is a debug message!");
-        
+
         return new List<ITrinityWidget>()
         {
             new StatsWidget("Unique views", "192.1k")
@@ -55,8 +55,5 @@ public class TrinityDashboardPage : TrinityPage
         };
     }
 
-    public override bool CanView()
-    {
-        return true;
-    }
+    public override bool CanView => true;
 }

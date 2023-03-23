@@ -6,4 +6,5 @@ export default interface TrinityPage {
     label?: string;
     icon?: string;
     schema: Array<TrinityWidget>;
+    canView: boolean;
 }

@@ -110,10 +110,38 @@ public class TrinityManager
 
             _serviceProvider.TryAddScoped(resourceType, provider =>
             {
+                var resource = (ITrinityResource)Activator.CreateInstance(resourceType)!;
+                resourceType.GetProperty("Configurations", Flags)!
+                    .SetValue(resource, _configurations);
+
+                resourceType.GetProperty("Localizer", Flags)!.SetValue(resource, _trinityLocalizer);
+
                 var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
                 var httpContext = httpContextAccessor.HttpContext!;
+                var request = httpContext.Request;
 
-                var resource = CreateResource(resourceType, plural);
+
+                resourceType.GetProperty("Name", Flags)!
+                    .SetValue(resource, plural.ToLower());
+
+                if (resource.Label == null)
+                {
+                    resourceType.GetProperty("Label", Flags)!
+                        .SetValue(resource, plural);
+                }
+
+                if (resource.PluralLabel == null)
+                {
+                    resourceType.GetProperty("PluralLabel", Flags)!
+                        .SetValue(resource, plural);
+                }
+
+                var table = resourceType.GetProperty("Table", Flags)!;
+
+                if (table.GetValue(resource) == null)
+                {
+                    table.SetValue(resource, plural.ToLower());
+                }
 
 
                 resourceType.GetProperty("ServiceProvider", Flags)!.SetValue(resource, httpContext.RequestServices);
@@ -150,6 +178,19 @@ public class TrinityManager
                         .SetValue(resource, _configurations.ConnectionFactory);
                 }
 
+                switch (request.Method)
+                {
+                    case "GET" or "PUT" when
+                        (string?)request.RouteValues["view"] == "edit":
+                        resourceType.GetProperty("IsUpdateRequest", Flags)!.SetValue(resource, true);
+                        break;
+                    case "GET" or "POST" when
+                        (string?)request.RouteValues["view"] == "create":
+                        resourceType.GetProperty("IsCreateRequest", Flags)!.SetValue(resource, true);
+                        break;
+                }
+
+
                 return resource;
             });
 
@@ -158,39 +199,6 @@ public class TrinityManager
         }
     }
 
-    private ITrinityResource CreateResource(Type resourceType, string plural)
-    {
-        var resource = (ITrinityResource)Activator.CreateInstance(resourceType)!;
-
-        resourceType.GetProperty("Name", Flags)!
-            .SetValue(resource, plural.ToLower());
-
-        if (resource.Label == null)
-        {
-            resourceType.GetProperty("Label", Flags)!
-                .SetValue(resource, plural);
-        }
-
-        if (resource.PluralLabel == null)
-        {
-            resourceType.GetProperty("PluralLabel", Flags)!
-                .SetValue(resource, plural);
-        }
-
-        var table = resourceType.GetProperty("Table", Flags)!;
-
-        if (table.GetValue(resource) == null)
-        {
-            table.SetValue(resource, plural.ToLower());
-        }
-
-
-        resourceType.GetProperty("Configurations", Flags)!
-            .SetValue(resource, _configurations);
-
-        resourceType.GetProperty("Localizer", Flags)!.SetValue(resource, _trinityLocalizer);
-        return resource;
-    }
 
     private void LoadPlugins()
     {

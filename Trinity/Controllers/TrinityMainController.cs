@@ -127,7 +127,7 @@ public sealed class TrinityMainController : TrinityController
         //to serialize the public properties of TrinityResource class not ITrinityResource the interface.
         var resource = (resourceObject as ITrinityResource)!;
 
-        if (!resource.CanView())
+        if (!resource.CanView)
             return UnAuthorised();
 
         await resource.Setup();
@@ -140,12 +140,16 @@ public sealed class TrinityMainController : TrinityController
         switch (Request.Method)
         {
             case "GET" when view == "index":
-                if (!resource.CanView()) return UnAuthorised();
+                if (!resource.CanView) return UnAuthorised();
 
                 responseData.Data = await resource.GetTableData();
                 break;
+            case "GET" when view == "create":
+                if (!resource.CanCreate) return UnAuthorised();
+
+                break;
             case "GET" when view == "edit":
-                if (!resource.CanUpdate()) return UnAuthorised();
+                if (!resource.CanUpdate) return UnAuthorised();
 
                 responseData.Data = await resource.GetEditData();
                 if (responseData.Data == null)
@@ -157,17 +161,17 @@ public sealed class TrinityMainController : TrinityController
             case "GET" when view == "relationship":
                 return await resource.GetRelationData();
             case "POST" when view == "create":
-                if (!resource.CanCreate()) return UnAuthorised();
+                if (!resource.CanCreate) return UnAuthorised();
 
                 responseData.Data = await resource.Create();
                 break;
             case "PUT" when view == "edit":
-                if (!resource.CanUpdate()) return UnAuthorised();
+                if (!resource.CanUpdate) return UnAuthorised();
 
                 responseData.Data = await resource.Update();
                 break;
             case "DELETE" when view is "delete" or "index" or "edit":
-                if (!resource.CanDelete()) return UnAuthorised();
+                if (!resource.CanDelete) return UnAuthorised();
 
                 responseData.Data = await resource.Delete();
                 break;
@@ -254,7 +258,7 @@ public sealed class TrinityMainController : TrinityController
         var pageObj = HttpContext.RequestServices.GetRequiredService(pageV);
         var page = (TrinityPage)pageObj;
 
-        if (!page.CanView())
+        if (!page.CanView)
             return UnAuthorised();
 
         await page.Setup();
@@ -276,10 +280,10 @@ public sealed class TrinityMainController : TrinityController
         response.Configs = _configurations;
         response.Resources = HttpContext.RequestServices
             .GetRequiredServices(_trinityManager.Resources.Values)
-            .Where(x => ((ITrinityResource)x).CanView());
+            .Where(x => ((ITrinityResource)x).CanView);
         response.Pages = HttpContext.RequestServices
             .GetRequiredServices(_trinityManager.Pages.Values)
-            .Where(x => ((TrinityPage)x).CanView())
+            .Where(x => ((TrinityPage)x).CanView)
             .ToDictionary(x => ((TrinityPage)x).Slug, x => x);
         response.Locale = _localizer.GetAllStrings().ToDictionary(x => x.Name, x => x.Value);
         response.IsRtl = Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;

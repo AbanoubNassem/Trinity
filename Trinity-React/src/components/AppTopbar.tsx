@@ -42,7 +42,7 @@ const AppTopbar = forwardRef((props, ref) => {
 
     return (
         <div className="layout-topbar">
-            <Link href={`/${configs.prefix}`}>
+            <Link href={`/${configs.prefix}/`}>
                 <div className="layout-topbar-logo">
                     <>
                         <img
