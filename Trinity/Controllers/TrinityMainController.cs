@@ -89,6 +89,7 @@ public sealed class TrinityMainController : TrinityController
         var authProperties = new AuthenticationProperties
         {
             IsPersistent = loginRequest.Remember,
+            
         };
 
         await HttpContext.SignInAsync(
@@ -202,7 +203,7 @@ public sealed class TrinityMainController : TrinityController
 
         return Ok(new
         {
-            data = await uploadField.Upload(file, _localizer),
+            data = await uploadField.Upload(file),
             notifications = TrinityNotifications.Flush(),
         });
     }
@@ -274,8 +275,8 @@ public sealed class TrinityMainController : TrinityController
     private TrinityResponse CreateResponse()
     {
         var response = new TrinityResponse();
-
         if (Request.IsInertiaRequest()) return response;
+
 
         response.Configs = _configurations;
         response.Resources = HttpContext.RequestServices

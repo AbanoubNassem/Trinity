@@ -27,6 +27,9 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         var filtered = schema.Select(x =>
         {
             var component = (ITrinityComponent)x;
+            
+            component.Init(ServiceProvider);
+            component.Setup();
 
             if (component.Hidden)
             {
@@ -85,7 +88,9 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
             return new BadRequestResult();
 
         var field = (IHasRelationship)objField;
-
+        
+        ((ITrinityComponent)field).Init(ServiceProvider);
+        
         string? search = null;
         if (Request.Query.TryGetValue("search", out var searchStrings) && !string.IsNullOrEmpty(searchStrings[0]))
         {

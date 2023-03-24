@@ -82,6 +82,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
             var columns = Columns;
             foreach (ITrinityColumn column in columns)
             {
+                column.Init(ServiceProvider);
                 column.SelectQuery(query);
 
                 if (globalSearch != null && column.IsGloballySearchable)

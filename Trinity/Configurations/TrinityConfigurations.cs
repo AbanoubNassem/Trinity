@@ -1,6 +1,6 @@
 using System.Data.Common;
 using System.Text.Json.Serialization;
-using AbanoubNassem.Trinity.Concerns;
+using AbanoubNassem.Trinity.Models;
 using Microsoft.AspNetCore.Http;
 using StackExchange.Profiling;
 
@@ -16,7 +16,7 @@ public class TrinityConfigurations
         IsDevelopment = isDevelopment;
     }
 
-    public delegate Task<LoginConcern?> Authenticate(HttpContext httpContext, string email, string password);
+    public delegate Task<TrinityUser?> Authenticate(HttpContext httpContext, string email, string password);
 
     [JsonIgnore] public bool IsDevelopment { get; init; }
     [JsonIgnore] public Func<DbConnection> ConnectionFactory { get; set; } = null!;

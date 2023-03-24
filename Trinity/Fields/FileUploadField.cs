@@ -1,6 +1,5 @@
 using System.Text.RegularExpressions;
 using AbanoubNassem.Trinity.Components.TrinityField;
-using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Utilities;
 using Microsoft.AspNetCore.Http;
 
@@ -43,11 +42,11 @@ public class FileUploadField : CanUploadField<FileUploadField>
     {
     }
 
-    public override async Task<string?> Upload(IFormFile file, TrinityLocalizer localizer)
+    public override async Task<string?> Upload(IFormFile file)
     {
         if (MaximumFileSize != null && file.Length > MaximumFileSize)
         {
-            TrinityNotifications.NotifyError(localizer["file_exceeded_max_size", file.FileName]);
+            TrinityNotifications.NotifyError(Localizer["file_exceeded_max_size", file.FileName]);
             return null;
         }
 
@@ -58,7 +57,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
 
             if (!match.Success)
             {
-                TrinityNotifications.NotifyError(localizer["file_does_not_match_pattern", file.FileName, pattern]);
+                TrinityNotifications.NotifyError(Localizer["file_does_not_match_pattern", file.FileName, pattern]);
                 return null;
             }
         }
@@ -82,7 +81,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
         await using var stream = new FileStream(path, FileMode.Create);
         await file.CopyToAsync(stream);
 
-        TrinityNotifications.NotifySuccess(localizer["file_was_uploaded", file.FileName]);
+        TrinityNotifications.NotifySuccess(Localizer["file_was_uploaded", file.FileName]);
 
         var moveUploadedFromTempToDirectory = Path.Combine("wwwroot", GetUploadDirectory());
 

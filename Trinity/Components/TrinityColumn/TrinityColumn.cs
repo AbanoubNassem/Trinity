@@ -12,7 +12,6 @@ public interface ITrinityColumn : ITrinityComponent
     void Filter(Query query, string globalSearch);
     void Format();
     void Sort(Query query, string direction);
-    void Setup();
     void SetRecord(IDictionary<string, object?> record);
 }
 
@@ -33,10 +32,6 @@ public abstract partial class TrinityColumn<T, TDeserialization> : TrinityCompon
     public void SetRecord(IDictionary<string, object?> record)
     {
         Record = record;
-    }
-
-    public virtual void Setup()
-    {
     }
 
     public delegate void QueryCallbackWithString(Query query, string str);

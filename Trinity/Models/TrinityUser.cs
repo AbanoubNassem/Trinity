@@ -1,10 +1,11 @@
 using System.Security.Claims;
+using System.Text.Json.Serialization;
 
-namespace AbanoubNassem.Trinity.Concerns;
+namespace AbanoubNassem.Trinity.Models;
 
-public class LoginConcern
+public class TrinityUser
 {
-    public LoginConcern(string name, string email, string role)
+    public TrinityUser(string name, string email, string role)
     {
         Name = name;
         Email = email;
@@ -16,5 +17,5 @@ public class LoginConcern
     public string Role { get; set; }
 
     public string? Avatar { get; set; }
-    public List<Claim> ExtraClaims { get; } = new();
+    [JsonIgnore] public IEnumerable<Claim> ExtraClaims { get; } = new List<Claim>();
 }

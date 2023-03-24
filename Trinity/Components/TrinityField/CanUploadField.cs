@@ -5,7 +5,7 @@ namespace AbanoubNassem.Trinity.Components.TrinityField;
 
 public interface ICanUploadField
 {
-    public Task<string?> Upload(IFormFile files, TrinityLocalizer localizer);
+    public Task<string?> Upload(IFormFile files);
 }
 
 public abstract class CanUploadField<T> : TrinityField<T, string>, ICanUploadField where T : CanUploadField<T>
@@ -14,7 +14,7 @@ public abstract class CanUploadField<T> : TrinityField<T, string>, ICanUploadFie
     {
     }
 
-    public abstract Task<string?> Upload(IFormFile files, TrinityLocalizer localizer);
+    public abstract Task<string?> Upload(IFormFile files);
 
     protected string UploadTempDirectory { get; set; } = Path.Combine("wwwroot", "trinity_temp");
 
