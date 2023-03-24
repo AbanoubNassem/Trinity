@@ -1,18 +1,10 @@
 using System.Text.RegularExpressions;
 using AbanoubNassem.Trinity.Components.TrinityField;
+using AbanoubNassem.Trinity.Enums;
 using AbanoubNassem.Trinity.Utilities;
 using Microsoft.AspNetCore.Http;
 
 namespace AbanoubNassem.Trinity.Fields;
-
-public enum PanelLayoutType : byte
-{
-    Integrated,
-    Compact,
-    Circle,
-    IntegratedCircle,
-    CompactCircle
-}
 
 public enum ItemInsertLocationType : byte
 {
