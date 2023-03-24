@@ -1,6 +1,7 @@
 using System.Globalization;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Managers;
+using AbanoubNassem.Trinity.Models;
 using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Utilities;
 using InertiaCore;
@@ -228,4 +229,3 @@ public static class AppExtensions
         app.UseRequestLocalization(requestLocalizationOptions);
     }
 }
-

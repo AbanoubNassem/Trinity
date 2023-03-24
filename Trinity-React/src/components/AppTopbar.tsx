@@ -7,11 +7,15 @@ import { useConfigs } from '@/hooks/trinity_configs';
 import { Button } from 'primereact/button';
 import { Menu } from 'primereact/menu';
 import { useLocalize } from '@/hooks/trinity_localizer';
+import { useTrinityUser } from '@/hooks/trinity_user';
+import { Avatar } from 'primereact/avatar';
 
 const AppTopbar = forwardRef((props, ref) => {
     const configs = useConfigs();
     const logo = useLogo();
     const localize = useLocalize();
+    const user = useTrinityUser();
+
     const { layoutState, onMenuToggle, showProfileSidebar } = useContext(LayoutContext);
     const menubuttonRef = useRef(null);
     const topbarmenuRef = useRef(null);
@@ -26,7 +30,7 @@ const AppTopbar = forwardRef((props, ref) => {
 
     const profileItems = [
         {
-            label: localize('profile'),
+            label: user.name,
             items: [
                 {
                     label: localize('logout'),
@@ -82,8 +86,17 @@ const AppTopbar = forwardRef((props, ref) => {
                     className="p-link layout-topbar-button"
                     onClick={(e) => profileMenu.current!.toggle(e)}
                 >
-                    <i className="pi pi-user"></i>
-                    <span>{localize('profile')}</span>
+                    {user.avatar?.length ? (
+                        <Avatar
+                            image={user.avatar}
+                            shape="circle"
+                            size="large"
+                        />
+                    ) : (
+                        <i className="pi pi-user"></i>
+                    )}
+
+                    <span className="mx-1">{localize('profile')}</span>
                 </Button>
                 <Menu
                     ref={profileMenu}

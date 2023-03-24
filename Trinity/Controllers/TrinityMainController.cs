@@ -78,9 +78,11 @@ public sealed class TrinityMainController : TrinityController
 
         var claims = new List<Claim>
         {
+            new(ClaimTypes.NameIdentifier, loggedIn.Email),
             new(ClaimTypes.Email, loggedIn.Email),
             new(ClaimTypes.Name, loggedIn.Name),
             new(ClaimTypes.Role, loggedIn.Role),
+            new("avatar", loggedIn.Avatar ?? ""),
         };
         claims.AddRange(loggedIn.ExtraClaims);
 
@@ -89,7 +91,6 @@ public sealed class TrinityMainController : TrinityController
         var authProperties = new AuthenticationProperties
         {
             IsPersistent = loginRequest.Remember,
-            
         };
 
         await HttpContext.SignInAsync(
@@ -275,9 +276,15 @@ public sealed class TrinityMainController : TrinityController
     private TrinityResponse CreateResponse()
     {
         var response = new TrinityResponse();
+
         if (Request.IsInertiaRequest()) return response;
 
-
+        response.User = new
+        {
+            name = User.FindFirstValue(ClaimTypes.Name)!,
+            role = User.FindFirstValue(ClaimTypes.Role)!,
+            avatar = User.FindFirstValue("avatar")!,
+        };
         response.Configs = _configurations;
         response.Resources = HttpContext.RequestServices
             .GetRequiredServices(_trinityManager.Resources.Values)

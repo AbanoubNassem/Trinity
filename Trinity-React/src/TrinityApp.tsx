@@ -41,10 +41,12 @@ import PolarAreaChartWidget from '@/widgets/PolarAreaChartWidget';
 import RadarChartWidget from '@/widgets/RadarChartWidget';
 import TrinityPage from '@/types/Models/Pages/TrinityPage';
 import TrinityLocalizer from '@/utilities/trinity_localizer';
+import TrinityUser from '@/types/Models/TrinityUser';
 
 export class TrinityApp {
     private localizer!: TrinityLocalizer;
     configs!: Configs;
+    user!: TrinityUser;
     resources: Array<TrinityResource> = new Array<TrinityResource>();
     pages: { [key: string]: TrinityPage } = {};
     registeredPages: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
@@ -58,6 +60,7 @@ export class TrinityApp {
         this.configs = props.configs as Configs;
         this.resources = props.resources as Array<TrinityResource>;
         this.pages = props.pages;
+        this.user = props.user;
         this.localizer = new TrinityLocalizer(props.locale);
         this.isRtl = props.isRtl;
 

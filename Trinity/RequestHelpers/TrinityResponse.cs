@@ -1,7 +1,6 @@
-
-using System.Security.Claims;
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Configurations;
+using AbanoubNassem.Trinity.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbanoubNassem.Trinity.RequestHelpers;
@@ -34,5 +33,9 @@ public class TrinityResponse
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Dictionary<string, string>? Locale { get; set; }
-    public bool IsRtl{ get; set; }
+
+    public bool IsRtl { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public object? User { get; set; }
 }
