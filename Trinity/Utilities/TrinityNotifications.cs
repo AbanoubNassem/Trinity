@@ -1,5 +1,13 @@
 namespace AbanoubNassem.Trinity.Utilities;
 
+public enum NotificationSeverity
+{
+    Success,
+    Error,
+    Info,
+    Warn
+}
+
 public static class TrinityNotifications
 {
     private static readonly List<object> Notifications = new();

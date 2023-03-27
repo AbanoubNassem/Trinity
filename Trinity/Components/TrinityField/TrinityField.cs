@@ -108,7 +108,7 @@ public abstract partial class TrinityField<T, TDeserialization> : TrinityCompone
         return (this as T)!;
     }
 
-    public T SetFillUsingProperty(ActionWithRecordProperty fillUsingProperty)
+    public T SetFillUsing(ActionWithRecordProperty fillUsingProperty)
     {
         FillUsingProperty = fillUsingProperty;
         return (this as T)!;

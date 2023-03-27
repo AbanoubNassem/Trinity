@@ -8,7 +8,7 @@ const GirdLayout = ({ configs, resource, component, record, formData, setFieldVa
     return (
         <div
             style={style}
-            className={classNames(['p-fluid grid px-0 mx-0 col-12', component.columnSpan > 0 && component.columnSpan < 12 ? `md:col-${component.columnSpan}` : ''])}
+            className={classNames(['p-fluid grid px-0 mx-0 col-12', component?.columnSpan > 0 && component?.columnSpan < 12 ? `md:col-${component?.columnSpan}` : ''])}
         >
             {component?.schema.map((innerComponent, index) =>
                 trinityApp.registeredComponents?.has(innerComponent.componentName) ? (

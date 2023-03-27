@@ -1,5 +1,6 @@
 using System.Text.Json;
 using AbanoubNassem.Trinity.Columns;
+using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.TrinityColumn;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Extensions;
@@ -15,15 +16,26 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 {
     public abstract string TitleColumn { get; }
 
-    public List<object> Columns => new(GetTableSchema().Where(x => !x.Hidden));
+    private TrinityTable? _trinityTable;
+    protected TrinityTable TrinityTable => _trinityTable ??= GetTrinityTable();
+    public List<object> Columns => new(TrinityTable.Columns.Where(x => !x.Hidden));
 
-    protected virtual List<ITrinityColumn> GetTableSchema()
+    protected virtual TrinityTable GetTrinityTable()
     {
-        return new List<ITrinityColumn>()
-        {
-            new IdColumn(PrimaryKeyColumn)
-        };
+        return new TrinityTable()
+            .SetColumns(new List<ITrinityColumn>()
+            {
+                new IdColumn(PrimaryKeyColumn)
+            });
     }
+
+    // protected virtual List<ITrinityColumn> GetTableSchema()
+    // {
+    //     return new List<ITrinityColumn>()
+    //     {
+    //         new IdColumn(PrimaryKeyColumn)
+    //     };
+    // }
 
     public virtual async Task<IPaginator?> GetTableData()
     {

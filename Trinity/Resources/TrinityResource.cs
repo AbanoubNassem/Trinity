@@ -33,6 +33,11 @@ public abstract partial class TrinityResource<TPrimaryKeyType> : ITrinityResourc
     public virtual string? Icon => null;
     public virtual string PrimaryKeyColumn => "id";
     protected virtual string? Table { get; init; }
+    
+    public virtual async Task Setup()
+    {
+        await Task.CompletedTask;
+    }
 }
 
 public abstract class TrinityResource : TrinityResource<int>

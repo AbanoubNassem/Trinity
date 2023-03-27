@@ -1,6 +1,7 @@
-import BaseComponent from '@/types/Models/TrinityComponent';
+import TrinityComponent from '@/types/Models/TrinityComponent';
 import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
+import TrinityAction from '@/types/Models/Actions/TrinityAction';
 
 export default interface TrinityResource {
     name: string;
@@ -10,8 +11,10 @@ export default interface TrinityResource {
     icon: string;
     showGridlines: boolean;
     stripedRows: boolean;
-    schema?: Array<BaseComponent>;
+    schema?: Array<TrinityComponent>;
     columns?: Array<TrinityColumn>;
+    actions?: Array<TrinityAction>;
+    bulkActions?: Array<TrinityAction>;
     titleColumn: string;
     topWidgets?: Array<TrinityWidget>;
     bottomWidgets?: Array<TrinityWidget>;

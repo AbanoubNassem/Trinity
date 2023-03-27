@@ -12,6 +12,7 @@ import AppFooter from '@/components/AppFooter';
 import usePageProps from '@/hooks/trinity_page_props';
 import { ScrollTop } from 'primereact/scrolltop';
 import { Toast } from 'primereact/toast';
+import { ConfirmDialog } from 'primereact/confirmdialog';
 import trinityApp from '@/TrinityApp';
 
 const MainLayout = (props: any) => {
@@ -126,6 +127,7 @@ const MainLayout = (props: any) => {
             <Head />
             <ScrollTop />
             <Toast ref={toast} />
+            <ConfirmDialog />
             <div className={containerClass}>
                 <AppTopbar ref={topbarRef} />
                 <div

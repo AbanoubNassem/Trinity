@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.Interfaces;
-using AbanoubNassem.Trinity.Components.TrinityLayout;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Utilities;
 using FluentValidation.AspNetCore;
@@ -13,73 +13,18 @@ namespace AbanoubNassem.Trinity.Resources;
 
 public abstract partial class TrinityResource<TPrimaryKeyType>
 {
-    public virtual async Task Setup()
+    private TrinityForm? _trinityForm;
+    protected TrinityForm TrinityForm => _trinityForm ??= GetTrinityForm();
+
+    protected virtual TrinityForm GetTrinityForm()
     {
-        await Task.CompletedTask;
+        return new TrinityForm();
     }
 
-    protected abstract List<IFormComponent> GetFormSchema();
+    public List<object> Schema =>
+        new(TrinityForm.FilterSchema(TrinityForm.Schema, ServiceProvider, IsCreateRequest, IsUpdateRequest));
 
-    protected virtual List<object> FilterSchema(IEnumerable<object>? schema)
-    {
-        if (schema == null) return new List<object>();
-
-        var filtered = schema.Select(x =>
-        {
-            var component = (ITrinityComponent)x;
-            
-            component.Init(ServiceProvider);
-            component.Setup();
-
-            if (component.Hidden)
-            {
-                return null;
-            }
-
-            if (x is ITrinityLayout layout)
-            {
-                layout.Schema = FilterSchema(layout.Schema);
-                return layout;
-            }
-
-
-            if (x is not ITrinityField field) return x;
-
-            if (
-                field is { OnlyOnCreate: false, OnlyOnUpdate: false } ||
-                (!IsCreateRequest && !IsUpdateRequest) ||
-                (IsCreateRequest && field.OnlyOnCreate) ||
-                (IsUpdateRequest && field.OnlyOnUpdate))
-            {
-                return x;
-            }
-
-
-            return null;
-        }).Where(x => x != null);
-
-        return filtered.ToList()!;
-    }
-
-    public List<object> Schema => new(FilterSchema(GetFormSchema()));
-
-    private readonly Dictionary<string, object> _fields = new();
-
-    [JsonIgnore]
-    public Dictionary<string, object> Fields
-    {
-        get
-        {
-            if (_fields.Any()) return _fields;
-
-            foreach (var field in Schema)
-            {
-                TrinityUtils.GetInnerFields(in _fields, (ITrinityComponent)field);
-            }
-
-            return _fields;
-        }
-    }
+    [JsonIgnore] public Dictionary<string, object> Fields => TrinityForm.Fields;
 
     public virtual async Task<IActionResult> GetRelationData()
     {
@@ -88,9 +33,9 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
             return new BadRequestResult();
 
         var field = (IHasRelationship)objField;
-        
+
         ((ITrinityComponent)field).Init(ServiceProvider);
-        
+
         string? search = null;
         if (Request.Query.TryGetValue("search", out var searchStrings) && !string.IsNullOrEmpty(searchStrings[0]))
         {
@@ -116,23 +61,26 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         return new OkObjectResult(res);
     }
 
-    protected virtual async Task<Dictionary<string, object?>?> ValidateRequest()
+    public virtual async Task<Dictionary<string, object?>?> ValidateRequest(
+        Dictionary<string, JsonElement>? jsonForm = null , Dictionary<string, object>? fields = null)
     {
-        var jsonForm = await Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>() ??
-                       new Dictionary<string, JsonElement>();
+        jsonForm ??= await Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>() ??
+                     new Dictionary<string, JsonElement>();
+
+        fields ??= Fields;
 
         var form = new Dictionary<string, object?>();
         foreach (var kv in jsonForm)
         {
-            if (!Fields.ContainsKey(kv.Key)) continue;
+            if (!fields.ContainsKey(kv.Key)) continue;
             form.Add(kv.Key,
                 kv.Value.ValueKind == JsonValueKind.Null
                     ? null
-                    : kv.Value.Deserialize(((ITrinityField)Fields[kv.Key]).GetDeserializationType())
+                    : kv.Value.Deserialize(((ITrinityField)fields[kv.Key]).GetDeserializationType())
             );
         }
 
-        foreach (var field in Fields.Values)
+        foreach (var field in fields.Values)
         {
             ((ITrinityField)field).PrepareForValidation(ResourceValidator, form, ModelState);
         }

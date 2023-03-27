@@ -1,5 +1,7 @@
 using System.Security.Claims;
+using System.Text.Json;
 using AbanoubNassem.Trinity.Attributes;
+using AbanoubNassem.Trinity.Components.TrinityAction;
 using AbanoubNassem.Trinity.Components.TrinityField;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Extensions;
@@ -9,6 +11,7 @@ using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Resources;
 using AbanoubNassem.Trinity.Utilities;
+using Humanizer;
 using InertiaCore;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -120,23 +123,16 @@ public sealed class TrinityMainController : TrinityController
     [Route("/{name}/{view=index}/{id?}")]
     public async Task<IActionResult> HandleResource(string name, string view)
     {
-        if (!_trinityManager.Resources.TryGetValue(name, out var resourceValue))
-        {
-            return NotFound(name);
-        }
+        var resource = await GetResource(name);
 
-        var resourceObject = HttpContext.RequestServices.GetRequiredService(resourceValue);
-        //to serialize the public properties of TrinityResource class not ITrinityResource the interface.
-        var resource = (resourceObject as ITrinityResource)!;
+        if (resource == null) return NotFound();
 
         if (!resource.CanView)
             return UnAuthorised();
 
-        await resource.Setup();
-
         var responseData = CreateResponse();
 
-        responseData.Resource = resourceObject;
+        responseData.Resource = resource;
 
 
         switch (Request.Method)
@@ -271,6 +267,60 @@ public sealed class TrinityMainController : TrinityController
         response.Data = page.GetData();
 
         return Inertia.Render(page.PageView, response);
+    }
+
+    [HttpPost]
+    [Route("/actions/{resourceName}/{actionName}")]
+    public async Task<IActionResult> HandleAction(string resourceName, string actionName)
+    {
+        var resource = await GetResource(resourceName);
+
+        if (resource == null) return NotFound();
+
+        if (!resource.CanView)
+            return UnAuthorised();
+
+        var actionObj = resource.Actions.SingleOrDefault(x => ((ITrinityAction)x).ActionName == actionName) ??
+                        resource.BulkActions.SingleOrDefault(x => ((ITrinityAction)x).ActionName == actionName);
+
+        if (actionObj == null)
+            return NotFound();
+
+        var action = (ITrinityAction)actionObj;
+
+        var body = await Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>() ??
+                   new Dictionary<string, JsonElement>();
+
+        var primaryKeys = body["primaryKeys"].Deserialize<List<string>>() ?? new List<string>();
+
+        var form = body["form"].Deserialize<Dictionary<string, JsonElement>>() ?? new Dictionary<string, JsonElement>();
+
+        var validated = await resource.ValidateRequest(form, action.Form?.Fields);
+
+        if (validated == null)
+        {
+            return Ok(TrinityAction.Errors(TrinityNotifications.Flush(),
+                ModelState.ToDictionary(k => k.Key.Camelize(),
+                    v => v.Value?.Errors.FirstOrDefault()?.ErrorMessage ?? ""
+                ))
+            );
+        }
+
+        return Ok(await resource.HandleAction(action, validated, primaryKeys));
+    }
+
+    private async Task<ITrinityResource?> GetResource(string resourceName)
+    {
+        if (!_trinityManager.Resources.TryGetValue(resourceName, out var resourceValue))
+        {
+            return null;
+        }
+
+        var resource = (ITrinityResource)HttpContext.RequestServices.GetRequiredService(resourceValue);
+
+        await resource.Setup();
+
+        return resource;
     }
 
     private TrinityResponse CreateResponse()

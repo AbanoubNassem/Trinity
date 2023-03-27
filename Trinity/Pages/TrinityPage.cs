@@ -19,7 +19,7 @@ public abstract class TrinityPage
     protected ILogger Logger { get; init; } = null!;
     protected ModelStateDictionary ModelState { get; init; } = null!;
     protected TrinityLocalizer Localizer { get; init; } = null!;
-    
+
     public abstract string Slug { get; }
     public virtual string PageView { get; protected init; } = "Default";
     public virtual string? Label { get; protected init; }
@@ -30,7 +30,12 @@ public abstract class TrinityPage
         return Task.CompletedTask;
     }
 
-    public List<object> Schema => new(GetSchema());
+    public List<object> Schema => new(GetSchema().Select(x =>
+    {
+        x.Init(ServiceProvider);
+        x.Setup();
+        return x;
+    }));
 
     protected virtual List<ITrinityWidget> GetSchema()
     {

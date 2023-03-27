@@ -44,19 +44,19 @@ import TrinityLocalizer from '@/utilities/trinity_localizer';
 import TrinityUser from '@/types/Models/TrinityUser';
 
 export class TrinityApp {
-    private localizer!: TrinityLocalizer;
-    configs!: Configs;
-    user!: TrinityUser;
-    resources: Array<TrinityResource> = new Array<TrinityResource>();
-    pages: { [key: string]: TrinityPage } = {};
-    registeredPages: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
-    registeredComponents: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
-    registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
-    registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
-    toast?: Toast;
-    isRtl: boolean = false;
+    private static localizer: TrinityLocalizer;
+    static configs: Configs;
+    static user: TrinityUser;
+    static resources: Array<TrinityResource> = new Array<TrinityResource>();
+    static pages: { [key: string]: TrinityPage } = {};
+    static registeredPages: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
+    static registeredComponents: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
+    static registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
+    static registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
+    static toast?: Toast;
+    static isRtl: boolean = false;
 
-    init = (props: any) => {
+    static init = (props: any) => {
         this.configs = props.configs as Configs;
         this.resources = props.resources as Array<TrinityResource>;
         this.pages = props.pages;
@@ -69,7 +69,7 @@ export class TrinityApp {
         this.loadDefaults();
     };
 
-    private loadDefaults() {
+    private static loadDefaults() {
         this.registerComponent('GridLayout', (props) => <GridLayout {...props} />);
         this.registerComponent('PanelLayout', (props) => <PanelLayout {...props} />);
         this.registerComponent('CardLayout', (props) => <CardLayout {...props} />);
@@ -110,30 +110,29 @@ export class TrinityApp {
         this.registerWidget('RadarChartWidget', (props) => <RadarChartWidget {...props} />);
     }
 
-    registerComponent = (name: string, component: (props: any) => React.ReactNode) => {
+    static registerComponent = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredComponents.set(name, component);
     };
 
-    registerColumn = (name: string, component: (props: any) => React.ReactNode) => {
+    static registerColumn = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredColumns.set(name, component);
     };
 
-    registerWidget = (name: string, component: (props: any) => React.ReactNode) => {
+    static registerWidget = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredWidgets.set(name, component);
     };
 
-    registerPage = (name: string, component: (props: any) => React.ReactNode) => {
+    static registerPage = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredPages.set(name, component);
     };
 
-    localize = (key: string, ...args: Array<string>): string => {
+    static localize = (key: string, ...args: Array<string>): string => {
         // @ts-ignore
         return this.localizer.localize(key, args);
     };
 }
 
-const trinityApp = new TrinityApp();
 // @ts-ignore
-window.Trinity = window.trinity = window.trinityApp = trinityApp as any;
+window.Trinity = window.trinity = window.trinityApp = TrinityApp;
 
-export default trinityApp;
+export default TrinityApp;

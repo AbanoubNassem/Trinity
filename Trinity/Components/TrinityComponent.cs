@@ -1,4 +1,5 @@
 using AbanoubNassem.Trinity.Components.Interfaces;
+using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Providers;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,13 +11,14 @@ public abstract class TrinityComponent<T, TDeserialization> : ITrinityComponent
     public abstract string ComponentName { get; }
 
     public abstract string Type { get; }
-
+    protected TrinityConfigurations Configurations { get; private set; } = null!;
     protected IServiceProvider ServiceProvider { get; private set; } = null!;
     protected TrinityLocalizer Localizer { get; private set; } = null!;
 
     public void Init(IServiceProvider serviceProvider)
     {
         ServiceProvider = serviceProvider;
+        Configurations = serviceProvider.GetRequiredService<TrinityConfigurations>();
         Localizer = serviceProvider.GetRequiredService<TrinityLocalizer>();
     }
 
@@ -77,7 +79,7 @@ public abstract class TrinityComponent<T, TDeserialization> : ITrinityComponent
         return (this as T)!;
     }
 
-    public bool Visible { get; protected set; }
+    public bool Visible { get; protected set; } = true;
 
     public T SetAsVisible(bool value = true)
     {

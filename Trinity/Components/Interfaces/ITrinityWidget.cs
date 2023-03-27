@@ -1,6 +1,6 @@
 namespace AbanoubNassem.Trinity.Components.Interfaces;
 
-public interface ITrinityWidget
+public interface ITrinityWidget : ITrinityComponent
 {
     
 }

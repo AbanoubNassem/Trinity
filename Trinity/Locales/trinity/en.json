@@ -18,6 +18,8 @@
   "file_exceeded_max_size": "{0} was not uploaded size exceeded the maximum allowed size.",
   "file_does_not_match_pattern": "{0} was not uploaded, file type doesn't match {1}.",
   "file_was_uploaded": "{0} was uploaded successfully.",
+  "confirm_action_run": "Are you sure you want to run this action?",
+  "run_action": "Run Action",
   "----------------FRONTEND-----------------": "---------------FRONTEND-----------------",
   "email_address": "Email address",
   "email": "Email",
