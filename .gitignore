@@ -264,3 +264,4 @@ FakesAssemblies/
 
 .idea/
 Trinity-React/package-lock.json
+Trinity/wwwroot/dist/

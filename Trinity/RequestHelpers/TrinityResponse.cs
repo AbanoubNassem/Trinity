@@ -1,6 +1,5 @@
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Configurations;
-using AbanoubNassem.Trinity.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbanoubNassem.Trinity.RequestHelpers;

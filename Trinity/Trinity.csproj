@@ -9,6 +9,14 @@
         <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>bin\Debug\Trinity.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\Trinity.xml</DocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="AspNetCore.InertiaCore" Version="0.0.7" />
         <PackageReference Include="Dapper" Version="2.0.123" />

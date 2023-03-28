@@ -14,12 +14,28 @@ namespace AbanoubNassem.Trinity.Resources;
 
 public abstract partial class TrinityResource<TPrimaryKeyType>
 {
+    /// <summary>
+    /// The column to be used to get the single value ,
+    /// that should be used to represent the resource when being displayed.
+    /// </summary>
     public abstract string TitleColumn { get; }
 
     private TrinityTable? _trinityTable;
+
+    /// <summary>
+    /// A reference to the current <see cref="AbanoubNassem.Trinity.Components.TrinityTable"/>
+    /// </summary>
     protected TrinityTable TrinityTable => _trinityTable ??= GetTrinityTable();
+
+    /// <summary>
+    /// Get the columns displayed by the resource.
+    /// </summary>
     public List<object> Columns => new(TrinityTable.Columns.Where(x => !x.Hidden));
 
+    /// <summary>
+    /// Get the Table displayed by the resource.
+    /// </summary>
+    /// <returns>A new <see cref="AbanoubNassem.Trinity.Components.TrinityTable"/></returns>
     protected virtual TrinityTable GetTrinityTable()
     {
         return new TrinityTable()
@@ -29,14 +45,8 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
             });
     }
 
-    // protected virtual List<ITrinityColumn> GetTableSchema()
-    // {
-    //     return new List<ITrinityColumn>()
-    //     {
-    //         new IdColumn(PrimaryKeyColumn)
-    //     };
-    // }
 
+    /// <inheritdoc />
     public virtual async Task<IPaginator?> GetTableData()
     {
         try
@@ -175,6 +185,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
     }
 
 
+    /// <inheritdoc />
     public virtual async Task<object?> Delete()
     {
         var body = await Request.ReadFromJsonAsync<Dictionary<string, List<string>>>();

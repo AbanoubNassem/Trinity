@@ -4,11 +4,15 @@ namespace AbanoubNassem.Trinity.Resources;
 
 public abstract partial class TrinityResource<TPrimaryKeyType>
 {
-    public virtual bool CanView => User.IsAdmin();
+    /// <inheritdoc />
+    public virtual bool CanView => User.IsTrinityAdmin();
 
-    public virtual bool CanCreate => User.IsAdmin();
+    /// <inheritdoc />
+    public virtual bool CanCreate => User.IsTrinityAdmin();
 
-    public virtual bool CanUpdate => User.IsAdmin();
+    /// <inheritdoc />
+    public virtual bool CanUpdate => User.IsTrinityAdmin();
 
-    public virtual bool CanDelete => User.IsAdmin();
+    /// <inheritdoc />
+    public virtual bool CanDelete => User.IsTrinityAdmin();
 }

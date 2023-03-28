@@ -47,5 +47,5 @@ public abstract class TrinityPage
         return null;
     }
 
-    public virtual bool CanView => User.IsAdmin();
+    public virtual bool CanView => User.IsTrinityAdmin();
 }

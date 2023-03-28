@@ -6,11 +6,20 @@ using StackExchange.Profiling.Data;
 
 namespace AbanoubNassem.Trinity.Extensions;
 
+/// <summary>
+/// Adds extra functionality to <see cref="IDbConnection" />.
+/// </summary>
 public static class QueryableExtensions
 {
     private static string? ConnectionType { get; set; }
     private static Compiler? Compiler { get; set; }
 
+    /// <summary>
+    /// Creates a new instance of <see cref="QueryFactory"/>. 
+    /// </summary>
+    /// <param name="connection">The <see cref="IDbConnection" /> to create the <see cref="QueryFactory"/> from.</param>
+    /// <returns><see cref="QueryFactory"/></returns>
+    /// <exception cref="Exception">Throws an Exception if the Connection Provider is not supported.</exception>
     public static QueryFactory QueryFactory(this IDbConnection connection)
     {
         ConnectionType ??= (connection is ProfiledDbConnection dbConnection
@@ -31,6 +40,11 @@ public static class QueryableExtensions
         return new QueryFactory(connection, Compiler);
     }
 
+    /// <summary>
+    /// Creates a new instance of <see cref="Query"/>.
+    /// </summary>
+    /// <param name="connection">The <see cref="IDbConnection" /> to create the <see cref="Query"/> from.</param>
+    /// <returns><see cref="Query"/></returns>
     public static Query Query(this IDbConnection connection)
     {
         return connection.QueryFactory().Query();

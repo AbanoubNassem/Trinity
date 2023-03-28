@@ -14,17 +14,32 @@ using StackExchange.Profiling;
 
 namespace AbanoubNassem.Trinity.Managers;
 
+/// <summary>
+/// TrinityManager is responsible for Loading all the Trinity Resources,Pages and plugins
+/// </summary>
 public class TrinityManager
 {
     private const BindingFlags Flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
     private readonly TrinityConfigurations _configurations;
     private readonly IServiceCollection _serviceProvider;
     private readonly TrinityLocalizer _trinityLocalizer;
+    
+    /// <summary>
+    /// A Dictionary of the registered/loaded <see cref="ITrinityResource"/>.
+    /// </summary>
     public Dictionary<string, Type> Resources { get; } = new();
 
+    /// <summary>
+    /// A Dictionary of the registered/loaded <see cref="TrinityPage"/>.
+    /// </summary>
     public Dictionary<string, Type> Pages { get; } = new();
-    // public List<TrinityPlugin> Plugins { get; } = new();
 
+    /// <summary>
+    /// Creating a new instance of <see cref="TrinityManager"/>.
+    /// </summary>
+    /// <param name="configurations">The singleton of <see cref="TrinityConfigurations"/> registered in the app.</param>
+    /// <param name="serviceProvider">The current <see cref="IServiceCollection"/>.</param>
+    /// <param name="trinityLocalizer">The singleton of <see cref="TrinityLocalizer"/> registered in the app.</param>
     public TrinityManager(TrinityConfigurations configurations, IServiceCollection serviceProvider,
         TrinityLocalizer trinityLocalizer)
     {
@@ -33,6 +48,10 @@ public class TrinityManager
         _trinityLocalizer = trinityLocalizer;
     }
 
+    /// <summary>
+    /// Initialize Trinity by loading all the <see cref="TrinityPage"/>s , <see cref="ITrinityResource"/>s and
+    /// <see cref="TrinityPlugin"/>s .
+    /// </summary>
     public void Init()
     {
         LoadPages();

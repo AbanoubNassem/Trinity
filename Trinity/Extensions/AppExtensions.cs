@@ -1,7 +1,6 @@
 using System.Globalization;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Managers;
-using AbanoubNassem.Trinity.Models;
 using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Utilities;
 using InertiaCore;
@@ -28,8 +27,17 @@ using System.Reflection;
 
 namespace AbanoubNassem.Trinity.Extensions;
 
+/// <summary>
+/// Add the ability for Trinity to register itself.
+/// </summary>
 public static class AppExtensions
 {
+    /// <summary>
+    /// Add Trinity services and configurations to the specified <see cref="IServiceCollection" />. 
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
+    /// <param name="configure">An <see cref="Action{TrinityConfigurations}"/> to configure the provided <see cref="TrinityConfigurations"/>.</param>
+    /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
     public static IServiceCollection AddTrinity(this IServiceCollection services,
         Action<TrinityConfigurations>? configure = null)
     {
@@ -97,15 +105,14 @@ public static class AppExtensions
     }
 
     /// <summary>
-    /// 
+    /// Adds Trinity to the specified <see cref="IApplicationBuilder"/>, which enables Trinity {Admin Panel,Forms,Tables} capabilities.
     /// </summary>
-    /// <param name="app"></param>
+    /// <param name="app">The <see cref="IApplicationBuilder"/> to add Trinity to.</param>
     /// <param name="physicalTrinityWwwRootPath">
     ///     Used to point to the Trinity wwwroot directory, while development ,
     ///     to be able to load the new bundled Javascript files, on page refresh
     /// </param>
-    /// <returns></returns>
-    public static WebApplication UseTrinity(this WebApplication app, string? physicalTrinityWwwRootPath = null)
+    public static void UseTrinity(this WebApplication app, string? physicalTrinityWwwRootPath = null)
     {
         var configs = app.Services.GetRequiredService<TrinityConfigurations>();
         var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
@@ -160,7 +167,7 @@ public static class AppExtensions
         if (!Directory.Exists(basePath))
             Directory.CreateDirectory(basePath);
 
-        TrinityTemp.ClearTrinityTempDirectory(app.Environment);
+        TrinityUtils.ClearTrinityTempDirectory();
 
 
         app.UseInertia();
@@ -183,8 +190,6 @@ public static class AppExtensions
 
             return next(context);
         });
-
-        return app;
     }
 
     private static void SetupLocales(this IApplicationBuilder app)
@@ -218,10 +223,10 @@ public static class AppExtensions
             SupportedCultures = supportedCultures.Values.ToList(),
             SupportedUICultures = supportedCultures.Values.ToList(),
             FallBackToParentCultures = true,
-            RequestCultureProviders = new List<IRequestCultureProvider>()
+            RequestCultureProviders = new List<IRequestCultureProvider>
             {
-                new QueryStringRequestCultureProvider() { QueryStringKey = "locale", UIQueryStringKey = "locale" },
-                new CookieRequestCultureProvider() { CookieName = ".Trinity.Locale" },
+                new QueryStringRequestCultureProvider { QueryStringKey = "locale", UIQueryStringKey = "locale" },
+                new CookieRequestCultureProvider { CookieName = ".Trinity.Locale" },
                 new AcceptLanguageHeaderRequestCultureProvider()
             }
         };

@@ -14,18 +14,30 @@ namespace AbanoubNassem.Trinity.Resources;
 public abstract partial class TrinityResource<TPrimaryKeyType>
 {
     private TrinityForm? _trinityForm;
+    /// <summary>
+    /// A reference to the current <see cref="AbanoubNassem.Trinity.Components.TrinityForm"/>
+    /// </summary>
     protected TrinityForm TrinityForm => _trinityForm ??= GetTrinityForm();
 
+    /// <summary>
+    /// Get the form displayed by the resource.
+    /// </summary>
+    /// <returns>A new <see cref="AbanoubNassem.Trinity.Components.TrinityForm"/></returns>
     protected virtual TrinityForm GetTrinityForm()
     {
         return new TrinityForm();
     }
 
+    /// <summary>
+    /// Get the schema displayed by the resource.
+    /// </summary>
     public List<object> Schema =>
         new(TrinityForm.FilterSchema(TrinityForm.Schema, ServiceProvider, IsCreateRequest, IsUpdateRequest));
 
+    /// <inheritdoc />
     [JsonIgnore] public Dictionary<string, object> Fields => TrinityForm.Fields;
 
+    /// <inheritdoc />
     public virtual async Task<IActionResult> GetRelationData()
     {
         if (!Request.Query.TryGetValue("column", out var columnName) ||
@@ -61,6 +73,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         return new OkObjectResult(res);
     }
 
+    /// <inheritdoc />
     public virtual async Task<Dictionary<string, object?>?> ValidateRequest(
         Dictionary<string, JsonElement>? jsonForm = null , Dictionary<string, object>? fields = null)
     {
@@ -95,6 +108,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
     }
 
 
+    /// <inheritdoc />
     public virtual async Task<object?> Create()
     {
         var form = await ValidateRequest();
@@ -135,6 +149,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
     }
 
 
+    /// <inheritdoc />
     public virtual async Task<IDictionary<string, object?>?> GetEditData()
     {
         if (!Request.RouteValues.TryGetValue("id", out var key))
@@ -171,6 +186,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
     }
 
 
+    /// <inheritdoc />
     public virtual async Task<object?> Update()
     {
         var record = await GetEditData();
