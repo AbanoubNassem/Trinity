@@ -51,11 +51,10 @@ const AppTopbar = forwardRef((props, ref) => {
                     <>
                         <img
                             src={logo}
-                            width="47.22px"
+                            width="135px"
                             height={'35px'}
                             alt={configs?.title}
                         />
-                        <span>{configs?.title}</span>
                     </>
                 </div>
             </Link>

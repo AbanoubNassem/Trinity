@@ -6,9 +6,13 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace AbanoubNassem.Trinity.Attributes;
 
+/// <summary>
+/// Only allow unauthorized requests. 
+/// </summary>
 public class AnonymousOnly : Attribute, IAuthorizationFilter
 
 {
+    /// <inheritdoc />
     public void OnAuthorization(AuthorizationFilterContext context)
     {
         if (context.HttpContext.User.Identity is not { IsAuthenticated: true }) return;
