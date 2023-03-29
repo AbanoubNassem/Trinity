@@ -3,12 +3,19 @@ using AbanoubNassem.Trinity.Widgets;
 
 namespace AbanoubNassem.Trinity.Pages;
 
+/// <inheritdoc />
 public class TrinityDashboardPage : TrinityPage
 {
+    /// <inheritdoc />
     public override string Slug => "dashboard";
+
+    /// <inheritdoc />
     public override string Label => Localizer["dashboard"];
+
+    /// <inheritdoc />
     public override string Icon => "pi pi-fw pi-home";
 
+    /// <inheritdoc />
     protected override List<ITrinityWidget> GetSchema()
     {
         // Logger.LogInformation("this is a debug message!");
@@ -55,5 +62,6 @@ public class TrinityDashboardPage : TrinityPage
         };
     }
 
+    /// <inheritdoc />
     public override bool CanView => true;
 }

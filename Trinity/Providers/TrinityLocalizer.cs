@@ -3,12 +3,27 @@ using Newtonsoft.Json;
 
 namespace AbanoubNassem.Trinity.Providers;
 
+/// <summary>
+/// Provides localization functionality using JSON files as sources.
+/// </summary>
 public class TrinityLocalizer
 {
     private readonly JsonSerializer _serializer = new();
     private readonly Dictionary<string, Dictionary<string, LocalizedString>> _locales = new();
+
+    /// <summary>
+    /// Gets a localized string using its name.
+    /// </summary>
+    /// <param name="name">The name of the localized string.</param>
+    /// <returns>The localized string.</returns>
     public LocalizedString this[string name] => GetLocalizedString(name);
 
+    /// <summary>
+    /// Gets a localized string using its name and arguments.
+    /// </summary>
+    /// <param name="name">The name of the localized string.</param>
+    /// <param name="arguments">An array of objects to format the localized string.</param>
+    /// <returns>The localized string.</returns>
     public LocalizedString this[string name, params object[] arguments]
     {
         get
@@ -20,6 +35,10 @@ public class TrinityLocalizer
         }
     }
 
+    /// <summary>
+    /// Retrieves all localized strings.
+    /// </summary>
+    /// <returns>A collection of localized strings.</returns>
     public IEnumerable<LocalizedString> GetAllStrings()
     {
         var locale = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;

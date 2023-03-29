@@ -1,13 +1,24 @@
 using AbanoubNassem.Trinity.Components.Interfaces;
-using AbanoubNassem.Trinity.Components.TrinityLayout;
 using AbanoubNassem.Trinity.Utilities;
 
 namespace AbanoubNassem.Trinity.Components;
 
+/// <summary>
+/// Represents a form component used to build and manage forms.
+/// </summary>
 public class TrinityForm
 {
+    /// <summary>
+    /// Gets or sets the schema of the form.
+    /// </summary>
+    /// <value>The schema of the form.</value>
     public List<IFormComponent> Schema { get; private set; } = new();
 
+    /// <summary>
+    /// Sets the schema of the form.
+    /// </summary>
+    /// <param name="schema">The schema of the form.</param>
+    /// <returns>The current instance of the <see cref="TrinityForm"/> class.</returns>
     public TrinityForm SetSchema(List<IFormComponent> schema)
     {
         Schema = schema;
@@ -16,6 +27,10 @@ public class TrinityForm
 
     private readonly Dictionary<string, object> _fields = new();
 
+    /// <summary>
+    /// Gets the fields of the form.
+    /// </summary>
+    /// <value>The fields of the form.</value>
     public Dictionary<string, object> Fields
     {
         get
@@ -31,6 +46,14 @@ public class TrinityForm
         }
     }
 
+    /// <summary>
+    /// Filters the schema of the form based on the create and update requests.
+    /// </summary>
+    /// <param name="schema">The schema of the form to filter.</param>
+    /// <param name="serviceProvider">The service provider.</param>
+    /// <param name="isCreateRequest">True if the request is a create request, otherwise false.</param>
+    /// <param name="isUpdateRequest">True if the request is an update request, otherwise false.</param>
+    /// <returns>A filtered schema of the form.</returns>
     public static List<object> FilterSchema(IEnumerable<object>? schema, IServiceProvider serviceProvider,
         bool isCreateRequest = false, bool isUpdateRequest = false)
     {

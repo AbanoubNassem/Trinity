@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using System.Text.Json;
 using AbanoubNassem.Trinity.Attributes;
+using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Components.TrinityAction;
 using AbanoubNassem.Trinity.Components.TrinityField;
 using AbanoubNassem.Trinity.Configurations;
@@ -21,12 +22,24 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AbanoubNassem.Trinity.Controllers;
 
+/// <summary>
+/// Controller for the main pages of the application.
+/// </summary>
+/// <remarks>
+/// Handles the rendering of the dashboard and login pages, as well as handling user authentication and authorization.
+/// </remarks>
 public sealed class TrinityMainController : TrinityController
 {
     private readonly TrinityConfigurations _configurations;
     private readonly TrinityManager _trinityManager;
     private readonly TrinityLocalizer _localizer;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TrinityMainController"/> class.
+    /// </summary>
+    /// <param name="configurations">The <see cref="TrinityConfigurations"/> object to use.</param>
+    /// <param name="trinityManager">The <see cref="TrinityManager"/> object to use.</param>
+    /// <param name="localizer">The <see cref="TrinityLocalizer"/> object to use.</param>
     public TrinityMainController(TrinityConfigurations configurations, TrinityManager trinityManager,
         TrinityLocalizer localizer)
     {
@@ -35,12 +48,20 @@ public sealed class TrinityMainController : TrinityController
         _localizer = localizer;
     }
 
+    /// <summary>
+    /// Renders the dashboard page.
+    /// </summary>
+    /// <returns>The rendered page as an <see cref="IActionResult"/>.</returns>
     [HttpGet]
     public async Task<IActionResult> Index()
     {
         return await RenderPage("dashboard");
     }
 
+    /// <summary>
+    /// Renders the login page.
+    /// </summary>
+    /// <returns>The rendered page as an <see cref="IActionResult"/>.</returns>
     [AllowAnonymous]
     [AnonymousOnly]
     [HttpGet]
@@ -54,6 +75,12 @@ public sealed class TrinityMainController : TrinityController
             });
     }
 
+    /// <summary>
+    /// Handles user login requests.
+    /// </summary>
+    /// <param name="loginRequest">The <see cref="LoginRequest"/> object containing the user's login information.</param>
+    /// <param name="returnUrl">The URL to return the user to after logging in.</param>
+    /// <returns>The rendered page as an <see cref="IActionResult"/>.</returns>
     [AllowAnonymous]
     [AnonymousOnly]
     [HttpPost]
@@ -105,6 +132,9 @@ public sealed class TrinityMainController : TrinityController
         return Inertia.Render("Login", new { Data = returnUrl ?? $"/{_configurations.Prefix}/" });
     }
 
+    /// <summary>
+    /// Logs out the current user.
+    /// </summary>
     [HttpPost]
     [Route("/logout")]
     public async Task<IActionResult> Logout()
@@ -116,6 +146,11 @@ public sealed class TrinityMainController : TrinityController
             : Redirect($"/{_configurations.Prefix}/login?returnUrl={Request.Headers.Referer}");
     }
 
+    /// <summary>
+    /// Handles the request for a resource based on HTTP method and view.
+    /// </summary>
+    /// <param name="name">The name of the resource to handle.</param>
+    /// <param name="view">The view to handle (defaults to 'index').</param>
     [HttpGet]
     [HttpPost]
     [HttpPut]
@@ -179,6 +214,12 @@ public sealed class TrinityMainController : TrinityController
         return Inertia.Render(view, responseData);
     }
 
+    /// <summary>
+    /// Handles file uploads for a resource.
+    /// </summary>
+    /// <param name="file">The file to upload.</param>
+    /// <param name="resourceName">The name of the resource for which to upload a file.</param>
+    /// <param name="fieldName">The name of the field on the resource for which to upload a file.</param>
     [HttpPost]
     [Route("/upload/file")]
     public async Task<IActionResult> UploadFile(IFormFile? file, [FromForm] string resourceName,
@@ -205,6 +246,10 @@ public sealed class TrinityMainController : TrinityController
         });
     }
 
+    /// <summary>
+    /// Deletes a file from a resource.
+    /// </summary>
+    /// <param name="request">The request containing information about the file to delete.</param>
     [HttpPost]
     [Route("/delete/file")]
     public async Task<IActionResult> DeleteFile([FromBody] DeleteFileRequest request)
@@ -247,6 +292,10 @@ public sealed class TrinityMainController : TrinityController
         }));
     }
 
+    /// <summary>
+    /// Renders a page based on the provided slug.
+    /// </summary>
+    /// <param name="slug">The slug of the page to render.</param>
     [HttpGet]
     [Route("/pages/{slug}/")]
     public async Task<IActionResult> RenderPage(string slug)
@@ -269,6 +318,11 @@ public sealed class TrinityMainController : TrinityController
         return Inertia.Render(page.PageView, response);
     }
 
+    /// <summary>
+    /// Handles an action on a resource.
+    /// </summary>
+    /// <param name="resourceName">The name of the resource on which to handle the action.</param>
+    /// <param name="actionName">The name of the action to handle.</param>
     [HttpPost]
     [Route("/actions/{resourceName}/{actionName}")]
     public async Task<IActionResult> HandleAction(string resourceName, string actionName)

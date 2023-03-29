@@ -1,4 +1,4 @@
-using AbanoubNassem.Trinity.Components.TrinityAction;
+using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Extensions;
 using SqlKata.Execution;
 
