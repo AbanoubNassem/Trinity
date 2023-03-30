@@ -5,12 +5,18 @@ using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Fields;
 
+/// <summary>
+/// A class that represents a field-column in a table that has a relationship with another table.
+/// </summary>
 public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
 {
+    /// <inheritdoc />
     public override string ComponentName => "BelongsToField";
 
+    /// <inheritdoc />
     public override string Type => "Field";
 
+    /// <inheritdoc />
     public BelongsToField(string localColumnNames, string relationTables, string foreignColumnNames,
         string relationshipName, string relationSelectColumn)
         : base(localColumnNames, foreignColumnNames, relationTables)
@@ -20,6 +26,7 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
         SetRelationshipName(relationshipName);
     }
 
+    /// <inheritdoc />
     public BelongsToField(string columnName, string relationSelectColumn, string? foreignTable = null,
         string? relationshipName = null) : base(columnName)
     {
@@ -34,20 +41,31 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
         }
     }
 
+    /// <summary>
+    /// Gets or sets the list of options for the field.
+    /// </summary>
+    /// <value>The list of options for the field.</value>
     public List<KeyValuePair<string, string>>? Options { get; protected set; } = new();
 
+    /// <summary>
+    /// Sets the list of options for the field.
+    /// </summary>
+    /// <param name="options">The list of options to set.</param>
+    /// <returns>The current instance of the <see cref="BelongsToField{T}"/>.</returns>
     public BelongsToField<T> SetOptions(List<KeyValuePair<string, string>> options)
     {
         Options = options;
         return this;
     }
 
+    /// <inheritdoc />
     public override void SelectQuery(Query query)
     {
         query.Select($"t.{ColumnName.Split('.').First()}");
     }
 
 
+    /// <inheritdoc />
     public override void FilterQuery(Query query, string globalSearch)
     {
         var localColumns = ColumnName.Split('.');
@@ -68,6 +86,7 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
         query.WhereLike($"{relationshipNames.Last()}.{Title}", search);
     }
 
+    /// <inheritdoc />
     public override async Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(QueryFactory queryFactory,
         List<IDictionary<string, object?>> entities, Sort? sort = null)
     {
@@ -159,6 +178,7 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
         }
     }
 
+    /// <inheritdoc />
     public override async Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(
         QueryFactory queryFactory,
         string? value, int offset,
@@ -195,7 +215,7 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
 
         query.Offset(offset - 1)
             .Limit(LazyItemsCount - 1);
-        
+
         var res = (await query.GetAsync()).Cast<IDictionary<string, object?>>().ToList();
 
         return res.Select(x =>
@@ -205,14 +225,17 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
     }
 }
 
+/// <inheritdoc />
 public class BelongsToField : BelongsToField<string>
 {
+    /// <inheritdoc />
     public BelongsToField(string localColumnNames, string relationTables, string foreignColumnNames,
         string relationshipName, string relationSelectColumn) : base(localColumnNames, relationTables,
         foreignColumnNames, relationshipName, relationSelectColumn)
     {
     }
 
+    /// <inheritdoc />
     public BelongsToField(string columnName, string relationSelectColumn, string? foreignTable = null,
         string? relationshipName = null) : base(columnName, relationSelectColumn, foreignTable, relationshipName)
     {

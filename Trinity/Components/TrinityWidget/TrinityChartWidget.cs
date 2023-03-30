@@ -7,14 +7,14 @@ namespace AbanoubNassem.Trinity.Components.TrinityWidget;
 public abstract class TrinityChartWidget<T> : TrinityWidget<T> where T : TrinityChartWidget<T>
 {
     /// <summary>
-    /// Initializes a new instance of the TrinityChartWidget class.
+    /// Initializes a new instance of the <typeparamref name="T"/> class.
     /// </summary>
     protected TrinityChartWidget()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the TrinityChartWidget class with the specified chart labels.
+    /// Initializes a new instance of the <typeparamref name="T"/> class with the specified chart labels.
     /// </summary>
     /// <param name="labels">The chart labels.</param>
     protected TrinityChartWidget(params object[] labels)

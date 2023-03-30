@@ -6,11 +6,18 @@ using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Columns;
 
+/// <summary>
+/// A class that represents a column in a table that has a relationship with another table.
+/// </summary>
 public class BelongsToColumn : TrinityHasRelationshipColumn<string>
 {
+    /// <inheritdoc />
     public override string ComponentName => "BelongsToColumn";
+
+    /// <inheritdoc />
     public override string Type => "Column";
 
+    /// <inheritdoc />
     public BelongsToColumn(string localColumnNames, string relationTables, string foreignColumnNames,
         string relationshipName, string relationSelectColumn)
         : base(localColumnNames, foreignColumnNames, relationTables)
@@ -20,6 +27,7 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
         SetRelationshipName(relationshipName);
     }
 
+    /// <inheritdoc />
     public BelongsToColumn(string columnName, string relationSelectColumn, string? foreignTable = null,
         string? relationshipName = null) : base(columnName)
     {
@@ -34,12 +42,14 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
         }
     }
 
+    /// <inheritdoc />
     public override void SelectQuery(Query query)
     {
         query.Select($"t.{ColumnName.Split('.').First()}");
     }
 
 
+    /// <inheritdoc />
     public override void Filter(Query query, string str)
     {
         var localColumns = ColumnName.Split('.');
@@ -60,6 +70,7 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
         query.WhereLike($"{relationshipNames.Last()}.{Title}", search, CaseSensitive);
     }
 
+    /// <inheritdoc />
     public override async Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(QueryFactory queryFactory,
         List<IDictionary<string, object?>> entities, Sort? sort = null)
     {
@@ -146,12 +157,12 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
         }
         else
         {
-           
             entities = entities.OrderByDescending(x => GetNestedRelationship(x, relationshipNames)?[columnTitle])
                 .ToList();
         }
     }
 
+    /// <inheritdoc />
     public override TrinityHasRelationshipColumn<string> SetAsSearchable(bool searchable = true,
         bool globallySearchable = true, bool caseSensitive = false,
         FiltersCallback? searchCallback = null)

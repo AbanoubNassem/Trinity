@@ -12,22 +12,29 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace AbanoubNassem.Trinity.Fields;
 
+/// <summary>
+/// Represents a repeater field that is used to repeat a set of form components.
+/// </summary>
 public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IHasRelationship
 {
     private readonly ResourceValidator _repeaterFieldValidator = new();
 
+    /// <inheritdoc />
     public override string ComponentName => "RepeaterField";
 
+    /// <inheritdoc />
     public RepeaterField(string columnName) : base(columnName)
     {
     }
 
+    /// <inheritdoc />
     public override void SelectQuery(Query query)
     {
         if (HasRelationshipByDefault) return;
         base.SelectQuery(query);
     }
 
+    /// <inheritdoc />
     public override void PrepareForValidation(IValidator validator, IReadOnlyDictionary<string, object?> form,
         ModelStateDictionary modelState)
     {
@@ -75,9 +82,19 @@ public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IH
         }
     }
 
+    /// <summary>
+    /// Gets or sets the dictionary of fields.
+    /// </summary>
     protected Dictionary<string, object> Fields { get; set; } = new();
+
+    /// <inheritdoc />
     public List<object>? Schema { get; set; }
 
+    /// <summary>
+    /// Sets the schema for the repeater field.
+    /// </summary>
+    /// <param name="schema">The schema to set.</param>
+    /// <returns>The <see cref="RepeaterField"/> instance.</returns>
     public RepeaterField SetSchema(List<IFormComponent> schema)
     {
         Schema = new List<object>(schema.Count);
@@ -90,16 +107,40 @@ public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IH
         return this;
     }
 
+    /// <inheritdoc />
     public bool HasRelationshipByDefault { get; set; }
+
+    /// <summary>
+    /// Gets or sets the name of the local column in the database.
+    /// </summary>
     protected string? LocalColumnName { get; set; }
 
+    /// <inheritdoc />
     public string? ForeignTable { get; set; }
+
+    /// <inheritdoc />
     public string? ForeignColumn { get; set; }
 
+    /// <inheritdoc />
     public string? RelationshipName { get; set; }
+
+    /// <summary>
+    /// Gets or sets the name of the foreign column in the database.
+    /// </summary>
     public string? ForeignColumnName { get; set; }
+
+    /// <summary>
+    /// Gets or sets the name of the foreign table in the database.
+    /// </summary>
     public string? ForeignTableName { get; set; }
 
+    /// <summary>
+    /// Sets the relationship between the local column and the foreign column in the database.
+    /// </summary>
+    /// <param name="localColumnName">The name of the local column in the database.</param>
+    /// <param name="foreignColumnName">The name of the foreign column in the database.</param>
+    /// <param name="foreignTableName">The name of the foreign table in the database.</param>
+    /// <returns>The current instance of the <see cref="RepeaterField"/>.</returns>
     public RepeaterField SetRelationship(string localColumnName, string foreignColumnName, string foreignTableName)
     {
         HasRelationshipByDefault = true;
@@ -109,20 +150,30 @@ public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IH
         return this;
     }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the repeater field is collapsible.
+    /// </summary>
     public bool IsCollapsible { get; protected set; }
 
+    /// <summary>
+    /// Sets a value indicating whether the repeater field is collapsible.
+    /// </summary>
+    /// <param name="isCollapsible">The value indicating whether the repeater field is collapsible.</param>
+    /// <returns>The current instance of the <see cref="RepeaterField"/>.</returns>
     public RepeaterField SetCollapsible(bool isCollapsible = true)
     {
         IsCollapsible = isCollapsible;
         return this;
     }
 
+    /// <inheritdoc />
     public Task<List<IDictionary<string, object?>>> SelectRelationshipQuery(QueryFactory queryFactory,
         List<IDictionary<string, object?>> records, Sort? sort = null)
     {
         return Task.FromResult(records);
     }
 
+    /// <inheritdoc />
     public Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(QueryFactory queryFactory,
         string? value, int offset, string? search = null)
     {
