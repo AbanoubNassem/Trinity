@@ -1,5 +1,4 @@
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Extensions;
@@ -33,9 +32,29 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
     /// </summary>
     public List<object> Schema =>
         new(TrinityForm.FilterSchema(TrinityForm.Schema, ServiceProvider, IsCreateRequest, IsUpdateRequest));
-
-    /// <inheritdoc />
-    [JsonIgnore] public Dictionary<string, object> Fields => TrinityForm.Fields;
+    
+    // [JsonIgnore] public Dictionary<string, object> Fields => TrinityForm.Fields;
+    
+    private readonly Dictionary<string, object> _fields = new();
+    
+    /// <summary>
+    /// Gets the fields of the form.
+    /// </summary>
+    /// <value>The fields of the form.</value>
+    public Dictionary<string, object> Fields
+    {
+        get
+        {
+            if (_fields.Any()) return _fields;
+    
+            foreach (var field in Schema)
+            {
+                TrinityUtils.GetInnerFields(in _fields, (ITrinityComponent)field);
+            }
+    
+            return _fields;
+        }
+    }
 
     /// <inheritdoc />
     public virtual async Task<IActionResult> GetRelationData()

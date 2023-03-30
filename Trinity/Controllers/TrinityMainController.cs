@@ -238,7 +238,7 @@ public sealed class TrinityMainController : TrinityController
 
         if (file == null)
             return BadRequest(_localizer["no_file_selected"]);
-
+        
         return Ok(new
         {
             data = await uploadField.Upload(file),
@@ -349,7 +349,7 @@ public sealed class TrinityMainController : TrinityController
 
         var form = body["form"].Deserialize<Dictionary<string, JsonElement>>() ?? new Dictionary<string, JsonElement>();
 
-        var validated = await resource.ValidateRequest(form, action.Form?.Fields);
+        var validated = await resource.ValidateRequest(form, action.Fields);
 
         if (validated == null)
         {

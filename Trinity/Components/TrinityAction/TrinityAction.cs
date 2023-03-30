@@ -133,6 +133,26 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
         return (this as T)!;
     }
 
+    private readonly Dictionary<string, object> _fields = new();
+
+    /// <inheritdoc />
+    public Dictionary<string, object>? Fields
+    {
+        get
+        {
+            if (Schema == null) return null;
+            
+            if (_fields.Any()) return _fields;
+
+            foreach (var field in Schema)
+            {
+                TrinityUtils.GetInnerFields(in _fields, (ITrinityComponent)field);
+            }
+
+            return _fields;
+        }
+    }
+
     /// <inheritdoc />
     public virtual async Task<TrinityActionResult> Handle(Dictionary<string, object?> form,
         IReadOnlyCollection<IDictionary<string, object?>> records)

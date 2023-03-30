@@ -20,6 +20,12 @@ public interface ITrinityAction : ITrinityComponent
     public TrinityForm? Form { get; set; }
 
     /// <summary>
+    /// Gets the fields of the form.
+    /// </summary>
+    /// <value>The fields of the form.</value>
+    Dictionary<string, object>? Fields { get; }
+
+    /// <summary>
     /// Handles the action and returns the result of the action.
     /// </summary>
     /// <param name="form">The form data associated with the action.</param>

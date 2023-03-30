@@ -66,7 +66,7 @@ public interface ITrinityResource
 
     /// <summary>
     /// Validate the upcoming request based on the JsonFrom sent , and the registered
-    /// (<see cref="TrinityForm.Fields"/> , or any given custom fields).
+    /// (<see cref="Fields"/> , or any given custom fields).
     /// </summary>
     /// <param name="jsonForm">The JsonFrom sent.</param>
     /// <param name="fields">The registered Fields in the resource, or custom fields.</param>
@@ -75,13 +75,13 @@ public interface ITrinityResource
         Dictionary<string, object>? fields = null);
 
     /// <summary>
-    /// Creates a new record in the Database based on the given <see cref="TrinityForm.Fields"/>.
+    /// Creates a new record in the Database based on the given <see cref="Fields"/>.
     /// </summary>
     /// <returns>The new record if it succeeded.</returns>
     public Task<object?> Create();
 
     /// <summary>
-    /// Updates the given record in the Database with the given <see cref="TrinityForm.Fields"/>.
+    /// Updates the given record in the Database with the given <see cref="Fields"/>.
     /// </summary>
     /// <returns>The updated record if it succeeded.</returns>
     public Task<object?> Update();

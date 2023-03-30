@@ -1,5 +1,4 @@
 using AbanoubNassem.Trinity.Components.Interfaces;
-using AbanoubNassem.Trinity.Utilities;
 
 namespace AbanoubNassem.Trinity.Components;
 
@@ -24,27 +23,7 @@ public class TrinityForm
         Schema = schema;
         return this;
     }
-
-    private readonly Dictionary<string, object> _fields = new();
-
-    /// <summary>
-    /// Gets the fields of the form.
-    /// </summary>
-    /// <value>The fields of the form.</value>
-    public Dictionary<string, object> Fields
-    {
-        get
-        {
-            if (_fields.Any()) return _fields;
-
-            foreach (var field in Schema)
-            {
-                TrinityUtils.GetInnerFields(in _fields, (ITrinityComponent)field);
-            }
-
-            return _fields;
-        }
-    }
+    
 
     /// <summary>
     /// Filters the schema of the form based on the create and update requests.

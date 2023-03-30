@@ -1,3 +1,4 @@
+using AbanoubNassem.Trinity.Components.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace AbanoubNassem.Trinity.Components.TrinityField;
@@ -5,7 +6,7 @@ namespace AbanoubNassem.Trinity.Components.TrinityField;
 /// <summary>
 /// Represents a field that can be uploaded.
 /// </summary>
-public interface ICanUploadField
+public interface ICanUploadField : ITrinityComponent
 {
     /// <summary>
     /// Uploads the specified file.
