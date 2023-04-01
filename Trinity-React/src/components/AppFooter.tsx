@@ -7,14 +7,19 @@ const AppFooter = () => {
 
     return (
         <div className="layout-footer">
-            <img
-                src={logo}
-                alt={configs.title}
-                height="20"
-                className="mr-2"
-            />
-            by
-            <span className="font-medium ml-2">Abanoub Nassem</span>
+            {configs.footer ? (
+                <div dangerouslySetInnerHTML={{ __html: configs.footer.value }}></div>
+            ) : (
+                <>
+                    <span className="font-medium ml-2">© {new Date().getFullYear()}</span>
+                    <img
+                        src={logo}
+                        alt={configs.title}
+                        height="20"
+                        className="mx-2"
+                    />
+                </>
+            )}
         </div>
     );
 };

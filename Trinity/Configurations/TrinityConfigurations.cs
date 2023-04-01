@@ -1,6 +1,7 @@
 using System.Data.Common;
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Models;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Http;
 using StackExchange.Profiling;
 
@@ -88,6 +89,11 @@ public class TrinityConfigurations
     /// Define your Brand FavIcon.
     /// </summary>
     public string? FavIcon { get; set; }
+
+    /// <summary>
+    ///  Define your Brand Footer.
+    /// </summary>
+    public HtmlString? Footer { get; set; }
 
     /// <summary>
     /// Register Extra CSS style sources to be included in the admin panel.

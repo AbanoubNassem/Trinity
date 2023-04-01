@@ -36,7 +36,7 @@ const AppSidebar = () => {
             model[model.length - 1].items.push({
                 label: resource.pluralLabel,
                 icon: resource.icon,
-                to: `/${resource.pluralLabel.toLowerCase()}`,
+                to: `/${resource.name}`,
                 visible: true,
                 resource
             });
