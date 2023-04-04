@@ -1,4 +1,5 @@
 import React from 'react';
+import omit from 'lodash/omit';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
 import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 import { Tooltip } from 'primereact/tooltip';
@@ -9,10 +10,8 @@ const BaseColumnComponent = ({ column, record, children, resource }: ColumnProps
 
     return (
         <div
-            {...record[`${column.columnName}_extraAttributes`]}
-            className={classNames(record[`${column.columnName}_extraAttributes`] && 'className' in record[`${column.columnName}_extraAttributes`] ? record[`${column.columnName}_extraAttributes`]['className'] : '', {
-                [`text-${column.color}-600`]: column.color
-            })}
+            {...omit(record[`${column.columnName}_extraAttributes`], ['class', 'className'])}
+            className={classNames(`text-${column.color ?? 'black'}-600`, record[`${column.columnName}_extraAttributes`]?.class ?? record[`${column.columnName}_extraAttributes`]?.className)}
             style={{ fontFamily: column.fontFamily }}
         >
             {(record[`${column.columnName}_tooltip`] || column.tooltip) && <Tooltip target={`#${tooltipId}`} />}
@@ -24,7 +23,7 @@ const BaseColumnComponent = ({ column, record, children, resource }: ColumnProps
             >
                 {column.descriptionPosition === 'above' ? (
                     <div className="text-sm text-gray-500 mb-1">
-                        <p>{column.description}</p>
+                        <p>{record[`${column.columnName}_description`] ?? column.description}</p>
                     </div>
                 ) : (
                     <></>
@@ -38,7 +37,7 @@ const BaseColumnComponent = ({ column, record, children, resource }: ColumnProps
 
                 {column.descriptionPosition === 'bellow' ? (
                     <div className="text-sm text-gray-500 mt-1">
-                        <p>{column.description}</p>
+                        <p>{record[`${column.columnName}_description`] ?? column.description}</p>
                     </div>
                 ) : (
                     <></>

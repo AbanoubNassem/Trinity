@@ -19,19 +19,19 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
 
     /// <inheritdoc />
     public BelongsToColumn(string localColumnNames, string relationTables, string foreignColumnNames,
-        string relationshipName, string relationSelectColumn)
+        string foreignColumnToSelect, string relationshipName)
         : base(localColumnNames, foreignColumnNames, relationTables)
     {
-        SetTitle(relationSelectColumn);
+        SetTitle(foreignColumnToSelect);
 
         SetRelationshipName(relationshipName);
     }
 
     /// <inheritdoc />
-    public BelongsToColumn(string columnName, string relationSelectColumn, string? foreignTable = null,
+    public BelongsToColumn(string columnName, string foreignColumnToSelect, string? foreignTable = null,
         string? relationshipName = null) : base(columnName)
     {
-        SetTitle(relationSelectColumn);
+        SetTitle(foreignColumnToSelect);
 
         if (!string.IsNullOrWhiteSpace(foreignTable))
             SetForeignTable(foreignTable);
@@ -164,10 +164,11 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
 
     /// <inheritdoc />
     public override TrinityHasRelationshipColumn<string> SetAsSearchable(bool searchable = true,
+        bool isIndividuallySearchable = false,
         bool globallySearchable = true, bool caseSensitive = false,
         FiltersCallback? searchCallback = null)
     {
-        base.SetAsSearchable(searchable, globallySearchable, caseSensitive, searchCallback);
+        base.SetAsSearchable(searchable, isIndividuallySearchable, globallySearchable, caseSensitive, searchCallback);
         return this;
     }
 }

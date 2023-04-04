@@ -114,7 +114,7 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
     /// <param name="form">form data</param>
     /// <param name="records">Collection of records</param>
     /// <returns>A Task representing the asynchronous operation and returning a TrinityActionResult.</returns>
-    public delegate Task<TrinityActionResult> HandleActionUsingDelegate(Dictionary<string, object?> form,
+    public delegate Task<List<TrinityActionResult>> HandleActionUsingDelegate(Dictionary<string, object?> form,
         IReadOnlyCollection<IDictionary<string, object?>> records);
 
     /// <summary>
@@ -141,7 +141,7 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
         get
         {
             if (Schema == null) return null;
-            
+
             if (_fields.Any()) return _fields;
 
             foreach (var field in Schema)
@@ -154,13 +154,13 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
     }
 
     /// <inheritdoc />
-    public virtual async Task<TrinityActionResult> Handle(Dictionary<string, object?> form,
+    public virtual async Task<List<TrinityActionResult>> Handle(Dictionary<string, object?> form,
         IReadOnlyCollection<IDictionary<string, object?>> records)
     {
         if (HandleActionUsing != null)
             return await HandleActionUsing(form, records);
 
-        return await Task.FromResult(new TrinityActionResult("empty", new { }));
+        return await Task.FromResult(new List<TrinityActionResult>() { new("empty", new { }) });
     }
 
     /// <summary>

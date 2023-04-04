@@ -8,6 +8,7 @@ export default interface TrinityColumn extends TrinityComponent {
     title: string;
     sortable: boolean;
     searchable: boolean;
+    isIndividuallySearchable: boolean;
     isGloballySearchable: boolean;
     searchPlaceholder?: string;
     exportable: boolean;

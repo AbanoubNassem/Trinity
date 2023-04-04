@@ -108,7 +108,7 @@ public sealed class TrinityMainController : TrinityController
 
         var claims = new List<Claim>
         {
-            new(ClaimTypes.NameIdentifier, loggedIn.Email),
+            new(ClaimTypes.NameIdentifier, loggedIn.Identifier),
             new(ClaimTypes.Email, loggedIn.Email),
             new(ClaimTypes.Name, loggedIn.Name),
             new(ClaimTypes.Role, loggedIn.Role),

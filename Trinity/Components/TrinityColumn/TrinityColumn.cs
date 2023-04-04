@@ -109,6 +109,11 @@ public abstract partial class TrinityColumn<T, TDeserialization> : TrinityCompon
             Record[ColumnName] = FormatUsingCallback(Record);
         }
 
+        if (DescriptionUsingCallback != null)
+        {
+            Record.Add($"{ColumnName}_description", DescriptionUsingCallback(Record));
+        }
+
         if (TooltipCallback != null)
         {
             Record.Add($"{ColumnName}_tooltip", TooltipCallback(Record));

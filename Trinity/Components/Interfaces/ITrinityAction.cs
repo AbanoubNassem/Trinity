@@ -31,6 +31,6 @@ public interface ITrinityAction : ITrinityComponent
     /// <param name="form">The form data associated with the action.</param>
     /// <param name="records">The records associated with the action.</param>
     /// <returns>The result of the action.</returns>
-    public Task<TrinityActionResult> Handle(Dictionary<string, object?> form,
+    public Task<List<TrinityActionResult>> Handle(Dictionary<string, object?> form,
         IReadOnlyCollection<IDictionary<string, object?>> records);
 }

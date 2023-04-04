@@ -18,19 +18,19 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
 
     /// <inheritdoc />
     public BelongsToField(string localColumnNames, string relationTables, string foreignColumnNames,
-        string relationshipName, string relationSelectColumn)
+        string foreignColumnToSelect, string relationshipName)
         : base(localColumnNames, foreignColumnNames, relationTables)
     {
-        SetTitle(relationSelectColumn);
+        SetTitle(foreignColumnToSelect);
 
         SetRelationshipName(relationshipName);
     }
 
     /// <inheritdoc />
-    public BelongsToField(string columnName, string relationSelectColumn, string? foreignTable = null,
+    public BelongsToField(string columnName, string foreignColumnToSelect, string? foreignTable = null,
         string? relationshipName = null) : base(columnName)
     {
-        SetTitle(relationSelectColumn);
+        SetTitle(foreignColumnToSelect);
 
         if (!string.IsNullOrWhiteSpace(foreignTable))
             SetForeignTable(foreignTable);
@@ -230,14 +230,14 @@ public class BelongsToField : BelongsToField<string>
 {
     /// <inheritdoc />
     public BelongsToField(string localColumnNames, string relationTables, string foreignColumnNames,
-        string relationshipName, string relationSelectColumn) : base(localColumnNames, relationTables,
-        foreignColumnNames, relationshipName, relationSelectColumn)
+        string foreignColumnToSelect, string relationshipName) : base(localColumnNames, relationTables,
+        foreignColumnNames, relationshipName, foreignColumnToSelect)
     {
     }
 
     /// <inheritdoc />
-    public BelongsToField(string columnName, string relationSelectColumn, string? foreignTable = null,
-        string? relationshipName = null) : base(columnName, relationSelectColumn, foreignTable, relationshipName)
+    public BelongsToField(string columnName, string foreignColumnToSelect, string? foreignTable = null,
+        string? relationshipName = null) : base(columnName, foreignColumnToSelect, foreignTable, relationshipName)
     {
     }
 }

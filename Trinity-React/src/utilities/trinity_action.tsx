@@ -47,22 +47,23 @@ class TrinityAction {
             });
     }
 
-    public static async handleResponse(response: any) {
-        switch (response.type) {
-            case 'errors':
-            case 'notifications': {
-                TrinityApp.toast?.show(response.data['notifications']);
-                break;
+    public static async handleResponse(responseData: Array<any>) {
+        for (const response of responseData)
+            switch (response.type) {
+                case 'errors':
+                case 'notifications': {
+                    TrinityApp.toast?.show(response.data['notifications']);
+                    break;
+                }
+                case 'redirect': {
+                    this.visit(response.data['url'], response.data['openUrlInNewTab']);
+                    break;
+                }
+                case 'download': {
+                    await this.download(response.data['url'], response.data['filename']);
+                    break;
+                }
             }
-            case 'redirect': {
-                this.visit(response.data['url'], response.data['openUrlInNewTab']);
-                break;
-            }
-            case 'download': {
-                await this.download(response.data['url'], response.data['filename']);
-                break;
-            }
-        }
     }
 
     private static async download(url: string, filename: string) {

@@ -14,7 +14,12 @@ public abstract partial class TrinityColumn<T, TDeserialization>
     /// Gets or sets a value indicating whether this column is searchable.
     /// </summary>
     public bool Searchable { get; protected set; }
-
+    
+    /// <summary>
+    /// Gets or sets a value indicating whether this column is individually searchable.
+    /// </summary>
+    public bool IsIndividuallySearchable { get; set; }
+    
     /// <summary>
     /// Gets or sets a value indicating whether this column is globally searchable.
     /// </summary>
@@ -29,19 +34,23 @@ public abstract partial class TrinityColumn<T, TDeserialization>
     /// Sets this column as searchable with the specified search/filtering callback function.
     /// </summary>
     /// <param name="searchable">A value indicating whether this column is searchable.</param>
+    /// <param name="isIndividuallySearchable">A value indicating whether this column is individually searchable.</param>
     /// <param name="globallySearchable">A value indicating whether this column is globally searchable.</param>
     /// <param name="caseSensitive">A value indicating whether searches/filters on this column are case sensitive.</param>
     /// <param name="searchCallback">The search/filtering callback function.</param>
     /// <returns>The current instance of the <typeparamref name="T"/> column.</returns>
-    public virtual T SetAsSearchable(bool searchable = true, bool globallySearchable = true,
+    public virtual T SetAsSearchable(bool searchable = true,
+        bool isIndividuallySearchable = false,
+        bool globallySearchable = true,
         bool caseSensitive = false,
         FiltersCallback? searchCallback = null)
     {
         Searchable = searchable;
+        IsIndividuallySearchable = isIndividuallySearchable;
         IsGloballySearchable = globallySearchable;
         SearchCallback = searchCallback;
         CaseSensitive = caseSensitive;
-        if (!IsGloballySearchable && searchable)
+        if (IsIndividuallySearchable && searchable)
         {
             SetCustomFilter(new TextField(ColumnName)
                 .SetLabel(Label)

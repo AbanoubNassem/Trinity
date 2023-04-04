@@ -5,7 +5,7 @@ import React from 'react';
 import { Button } from 'primereact/button';
 
 const BadgeColumn = ({ column, columnValue }: ColumnProps<BadgeColumn>) => {
-    const option = column.options?.find((x) => x.value === columnValue);
+    const option = column.options?.find((x) => x.key === columnValue);
 
     if (option?.icon)
         return (

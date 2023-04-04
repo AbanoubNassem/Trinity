@@ -78,17 +78,41 @@ public class BadgeColumn<T> : TrinityColumn<BadgeColumn<T>, string>
     /// Sets the options for the badge column.
     /// </summary>
     /// <param name="options">A collection of option values and their corresponding severity types.</param>
-    /// <example> SetOptions( ("G", BadgeSeverityType.Info) )</example>
+    /// <remarks> SetOptions( (columnValue, LabelToDisplay) )</remarks>
+    /// <example> SetOptions( ("draft", "Draft") )</example>
     /// <returns>This <see cref="BadgeColumn{T}"/> instance.</returns>
-    public BadgeColumn<T> SetOptions(params (T?, BadgeSeverityType)[] options)
+    public BadgeColumn<T> SetOptions(params (T?, string)[] options)
     {
         Options = new List<object>(options.Length);
         foreach (var item in options)
         {
             Options.Add(new
             {
-                value = item.Item1,
-                severity = item.Item2 == BadgeSeverityType.None ? null : Enum.GetName(item.Item2)?.ToLower(),
+                key = item.Item1,
+                value = item.Item2,
+            });
+        }
+
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the options for the badge column.
+    /// </summary>
+    /// <param name="options">A collection of option values and their corresponding severity types.</param>
+    /// <remarks> SetOptions( (columnValue, LabelToDisplay, Severity) )</remarks>
+    /// <example> SetOptions( ("draft", "Draft", BadgeSeverityType.Info) )</example>
+    /// <returns>This <see cref="BadgeColumn{T}"/> instance.</returns>
+    public BadgeColumn<T> SetOptions(params (T?, string, BadgeSeverityType)[] options)
+    {
+        Options = new List<object>(options.Length);
+        foreach (var item in options)
+        {
+            Options.Add(new
+            {
+                key = item.Item1,
+                value = item.Item2,
+                severity = item.Item3 == BadgeSeverityType.None ? null : Enum.GetName(item.Item3)?.ToLower(),
             });
         }
 
@@ -99,18 +123,20 @@ public class BadgeColumn<T> : TrinityColumn<BadgeColumn<T>, string>
     /// Sets the options for the badge column.
     /// </summary>
     /// <param name="options">A collection of option values, their corresponding severity types, and their icons.</param>
-    /// <example> SetOptions( ("G", BadgeSeverityType.Info, "pi pi-eraser") )</example>
+    /// <remarks> SetOptions( (columnValue, LabelToDisplay, Severity, Icon) )</remarks>
+    /// <example> SetOptions( ("draft", "Draft", BadgeSeverityType.Info, "pi pi-eraser") )</example>
     /// <returns>This <see cref="BadgeColumn{T}"/> instance.</returns>
-    public BadgeColumn<T> SetOptions(params (T?, BadgeSeverityType, string?)[] options)
+    public BadgeColumn<T> SetOptions(params (T?, string, BadgeSeverityType, string?)[] options)
     {
         Options = new List<object>(options.Length);
         foreach (var item in options)
         {
             Options.Add(new
             {
-                value = item.Item1,
-                severity = item.Item2 == BadgeSeverityType.None ? null : Enum.GetName(item.Item2)?.ToLower(),
-                icon = item.Item3,
+                key = item.Item1,
+                value = item.Item2,
+                severity = item.Item3 == BadgeSeverityType.None ? null : Enum.GetName(item.Item3)?.ToLower(),
+                icon = item.Item4,
             });
         }
 

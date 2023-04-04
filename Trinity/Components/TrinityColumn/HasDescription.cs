@@ -31,6 +31,25 @@ public abstract partial class TrinityColumn<T, TDeserialization>
     public object? Description { get; protected set; }
 
     /// <summary>
+    /// Gets or sets the description callback of the column.
+    /// </summary>
+    protected CallbackWithRecord<string>? DescriptionUsingCallback { get; set; }
+
+    /// <summary>
+    /// Sets the description of the column with the specified position.
+    /// </summary>
+    /// <param name="descriptionUsingCallback">The description of the column.</param>
+    /// <param name="pos">The position of the description relative to the column. Default value is <see cref="DescriptionPositionTypes.Bellow"/>.</param>
+    /// <returns>The current instance of the <typeparamref name="T"/> column.</returns>
+    public T SetDescription(CallbackWithRecord<string>? descriptionUsingCallback,
+        DescriptionPositionTypes pos = DescriptionPositionTypes.Bellow)
+    {
+        DescriptionUsingCallback = descriptionUsingCallback;
+        DescriptionPosition = Enum.GetName(pos)?.ToLower() ?? "bellow";
+        return (this as T)!;
+    }
+
+    /// <summary>
     /// Sets the description of the column with the specified position.
     /// </summary>
     /// <param name="description">The description of the column.</param>

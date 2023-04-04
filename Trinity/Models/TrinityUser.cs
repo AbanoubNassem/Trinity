@@ -12,14 +12,16 @@ public record TrinityUser
     /// <summary>
     /// The TrinityUser that should be returned from <see cref="TrinityConfigurations.AuthenticateUser"/>.
     /// </summary>
+    /// <param name="identifier">The identifier of the user.</param>
     /// <param name="name">The name of the user.</param>
     /// <param name="email">The email of the user.</param>
     /// <param name="role">The role of the user.</param>
     /// <param name="avatar">The avatar of the user, if any.</param>
     /// <param name="extraClaims">Any extra claims to be added.</param>
-    public TrinityUser(string name, string email, string role, string? avatar = null,
+    public TrinityUser(string identifier,string name, string email, string role, string? avatar = null,
         IEnumerable<Claim>? extraClaims = null)
     {
+        Identifier = identifier;
         Name = name;
         Email = email;
         Role = role;
@@ -27,6 +29,11 @@ public record TrinityUser
         ExtraClaims = extraClaims ?? new List<Claim>();
     }
 
+    /// <summary>
+    /// The Identifier of the user.
+    /// </summary>
+    public string Identifier { get; }
+    
     /// <summary>
     /// The name of the user.
     /// </summary>

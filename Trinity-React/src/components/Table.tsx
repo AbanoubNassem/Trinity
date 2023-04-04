@@ -75,7 +75,7 @@ const Table = () => {
     let filters: DataTableFilterMeta = {};
     const urlFilters = JSON.parse(urlParams.columnsSearch) ?? {};
     resourceColumns.forEach((field) => {
-        if (field.customFilter || (field.searchable && !field.isGloballySearchable)) {
+        if (field.customFilter || (field.searchable && !field.isIndividuallySearchable)) {
             filters[field.columnName] = {
                 value: urlFilters[field.columnName],
                 matchMode: FilterMatchMode.CUSTOM
@@ -120,7 +120,7 @@ const Table = () => {
             if (Object.keys(columnsSearch).length) data.columnsSearch = JSON.stringify(columnsSearch);
         }
 
-        router.get(`/${configs.prefix}/${resource?.pluralLabel.toLowerCase()}`, data, {
+        router.get(`/${configs.prefix}/${resource?.name}`, data, {
             preserveState: true,
             preserveScroll: true,
             replace: true,
@@ -436,20 +436,18 @@ const Table = () => {
                             field={column.columnName}
                             header={column.label}
                             sortable={column.sortable}
-                            // showFilterMenu={false}
                             showFilterMatchModes={false}
-                            // showFilterOperator={false}
                             showClearButton
                             filterMatchMode={'custom'}
-                            excludeGlobalFilter={!column.isGloballySearchable}
+                            excludeGlobalFilter={!column.isGloballySearchable || column.isIndividuallySearchable}
                             filterField={column.columnName}
                             style={{ minWidth: '8rem' }}
                             exportable={column.exportable}
                             hidden={column.hidden}
-                            filter={!!column.customFilter || (column.searchable && !column.isGloballySearchable)}
+                            filter={!!column.customFilter || (column.searchable && column.isIndividuallySearchable)}
                             filterPlaceholder={column.searchPlaceholder ?? localize('search_by', column.label)}
                             filterElement={
-                                !!column.customFilter
+                                !!column.customFilter || column.isIndividuallySearchable
                                     ? (options) => {
                                           return (
                                               <div>
