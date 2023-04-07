@@ -12,7 +12,7 @@ public class CardLayout : TrinityLayout<CardLayout>
     public override string ComponentName => "CardLayout";
 
     /// <inheritdoc />
-    public CardLayout(IEnumerable<IFormComponent> schema, int columns = 0) : base(schema, columns)
+    public CardLayout(List<IFormComponent> schema, int columns = 0) : base(schema, columns)
     {
     }
     

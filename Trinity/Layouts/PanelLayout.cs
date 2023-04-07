@@ -12,7 +12,7 @@ public class PanelLayout : TrinityLayout<PanelLayout>
     public override string ComponentName => "PanelLayout";
 
     /// <inheritdoc />
-    public PanelLayout(IEnumerable<IFormComponent> schema, int columns = 0) : base(schema, columns)
+    public PanelLayout(List<IFormComponent> schema, int columns = 0) : base(schema, columns)
     {
     }
     

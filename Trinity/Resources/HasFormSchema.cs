@@ -13,6 +13,7 @@ namespace AbanoubNassem.Trinity.Resources;
 public abstract partial class TrinityResource<TPrimaryKeyType>
 {
     private TrinityForm? _trinityForm;
+
     /// <summary>
     /// A reference to the current <see cref="AbanoubNassem.Trinity.Components.TrinityForm"/>
     /// </summary>
@@ -32,11 +33,11 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
     /// </summary>
     public List<object> Schema =>
         new(TrinityForm.FilterSchema(TrinityForm.Schema, ServiceProvider, IsCreateRequest, IsUpdateRequest));
-    
+
     // [JsonIgnore] public Dictionary<string, object> Fields => TrinityForm.Fields;
-    
+
     private readonly Dictionary<string, object> _fields = new();
-    
+
     /// <summary>
     /// Gets the fields of the form.
     /// </summary>
@@ -46,12 +47,12 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         get
         {
             if (_fields.Any()) return _fields;
-    
+
             foreach (var field in Schema)
             {
                 TrinityUtils.GetInnerFields(in _fields, (ITrinityComponent)field);
             }
-    
+
             return _fields;
         }
     }
@@ -64,8 +65,6 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
             return new BadRequestResult();
 
         var field = (IHasRelationship)objField;
-
-        ((ITrinityComponent)field).Init(ServiceProvider);
 
         string? search = null;
         if (Request.Query.TryGetValue("search", out var searchStrings) && !string.IsNullOrEmpty(searchStrings[0]))
@@ -94,7 +93,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
     /// <inheritdoc />
     public virtual async Task<Dictionary<string, object?>?> ValidateRequest(
-        Dictionary<string, JsonElement>? jsonForm = null , Dictionary<string, object>? fields = null)
+        Dictionary<string, JsonElement>? jsonForm = null, Dictionary<string, object>? fields = null)
     {
         jsonForm ??= await Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>() ??
                      new Dictionary<string, JsonElement>();
@@ -135,6 +134,12 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
         foreach (ITrinityField field in Fields.Values)
         {
+            if (!field.IsSavable)
+            {
+                form.Remove(field.ColumnName);
+                continue;
+            }
+
             field.Fill(ref form);
 
             if (field is not IHasRelationship { HasRelationshipByDefault: true } relationshipField) continue;
@@ -185,8 +190,9 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         }
 
         var record = await queryBuilder.From($"{Table} AS t")
-            .Where($"t.{PrimaryKeyColumn}", key)
-            .FirstOrDefaultAsync();
+                .Where($"t.{PrimaryKeyColumn}", key)
+                .FirstOrDefaultAsync() as IDictionary<string, object?>
+            ;
 
         if (record == null) return record;
 
@@ -198,6 +204,8 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
                     connection.QueryFactory(),
                     new List<IDictionary<string, object?>>() { record })).Last();
             }
+
+            field.Format(ref record);
         }
 
 
@@ -236,6 +244,12 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         {
             var field = (ITrinityField)Fields[form.ElementAt(i).Key];
             if (field.ColumnName == PrimaryKeyColumn) continue;
+
+            if (!field.IsSavable)
+            {
+                form.Remove(field.ColumnName);
+                continue;
+            }
 
             field.Fill(ref form, (IReadOnlyDictionary<string, object?>)record);
             if (field is IHasRelationship { HasRelationshipByDefault: true } relationshipField)

@@ -8,6 +8,7 @@ export default interface TrinityField extends TrinityComponent {
     sortable: boolean;
     searchable: boolean;
     isGloballySearchable: boolean;
+    isRequired: boolean;
     searchPlaceholder?: string;
     exportable: boolean;
     placeholder?: string;
@@ -19,4 +20,7 @@ export default interface TrinityField extends TrinityComponent {
     suffixIcons?: Array<string>;
     locale?: string;
     defaultValue?: any;
+    extraAttributes?: { [k: string]: string };
+    extraInputAttributes?: { [k: string]: string };
+    inputType?: string;
 }

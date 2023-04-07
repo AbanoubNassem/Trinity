@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import FieldProps from '@/types/Props/Fields/FieldProps';
@@ -7,6 +7,7 @@ import { Editor } from 'primereact/editor';
 
 const EditorField = ({ component, formData, setFieldValue, errors }: FieldProps<EditorField>) => {
     const [value, setValue] = useState(formData[component.columnName]);
+    const editorRef = useRef<Editor>(null);
 
     let header = null;
     if (component.headerButtons) {
@@ -32,10 +33,18 @@ const EditorField = ({ component, formData, setFieldValue, errors }: FieldProps<
             style={{ zIndex: 200 }}
         >
             <Editor
+                ref={editorRef}
+                onLoad={(quill) => {
+                    console.log(quill);
+                    quill?.getModule('toolbar').removeHandler('image');
+
+                    quill?.getModule('toolbar').removeHandler('file');
+                }}
                 id={component.columnName}
                 name={component.columnName}
                 disabled={component.disabled}
                 hidden={component.hidden}
+                required={component.isRequired}
                 placeholder={component.placeholder}
                 className={classNames({ 'p-invalid': errors[component.columnName] })}
                 value={value}

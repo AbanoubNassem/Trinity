@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import { Button } from 'primereact/button';
@@ -16,6 +16,7 @@ const Edit = () => {
     const localize = useLocalize();
     const { resource, errors, data: record } = usePageProps<any>();
     const fields = useTrinityFields();
+    const formRef = useRef<HTMLFormElement>(null);
 
     const data = useMemo<{ [k: string]: any }>(() => {
         let innerData = {} as any;
@@ -46,7 +47,7 @@ const Edit = () => {
                 className="m-2 p-button-info"
                 disabled={form.processing}
                 loading={form.processing}
-                onClick={() => update()}
+                onClick={() => formRef.current?.requestSubmit()}
             />
             <Button
                 label={localize('cancel')}
@@ -65,7 +66,14 @@ const Edit = () => {
                     {localize('edit')} {resource?.pluralLabel}
                 </h5>
 
-                <form className="p-fluid formgrid grid col-12">
+                <form
+                    className="p-fluid formgrid grid col-12"
+                    ref={formRef}
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        update();
+                    }}
+                >
                     {resource?.schema?.map((component, index) =>
                         trinityApp.registeredComponents?.has(component.componentName) ? (
                             trinityApp.registeredComponents?.get(component.componentName)!({

@@ -10,10 +10,7 @@ public class RadarChartWidget : TrinityChartWidget<RadarChartWidget>
     /// <inheritdoc />
     public override string ComponentName => "RadarChartWidget";
 
-    /// <inheritdoc />
-    public RadarChartWidget(params object[] labels) : base(labels)
-    {
-    }
+  
 
     /// <summary>
     /// Sets the dataset for the radar chart widget.

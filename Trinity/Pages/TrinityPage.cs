@@ -1,59 +1,14 @@
-using System.Security.Claims;
+using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.Interfaces;
-using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Extensions;
-using AbanoubNassem.Trinity.Providers;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Pages;
 
 /// <summary>
 /// The base page class for Trinity framework.
 /// </summary>
-public abstract class TrinityPage
+public abstract class TrinityPage : CanMakeComponent
 {
-    /// <summary>
-    /// A reference to <see cref="TrinityConfigurations"/> in the <see cref="IServiceProvider"/>.
-    /// </summary>
-    protected TrinityConfigurations Configurations { get; init; } = null!;
-
-    /// <summary>
-    /// A reference to the <see cref="IServiceProvider"/> of the app.
-    /// </summary>
-    protected IServiceProvider ServiceProvider { get; init; } = null!;
-
-    /// <summary>
-    /// A reference to the current <see cref="HttpRequest"/>.
-    /// </summary>
-    protected HttpRequest Request { get; init; } = null!;
-
-    /// <summary>
-    /// A reference to the current <see cref="HttpResponse"/>.
-    /// </summary>
-    protected HttpResponse Response { get; init; } = null!;
-
-    /// <summary>
-    /// A reference to the current User <see cref="ClaimsPrincipal"/>.
-    /// </summary>
-    protected ClaimsPrincipal User { get; init; } = null!;
-
-    /// <summary>
-    ///  A reference to the current <see cref="ILogger{TrinityPage}"/>.
-    /// </summary>
-    protected ILogger Logger { get; init; } = null!;
-
-    /// <summary>
-    /// A reference to the current <see cref="ModelStateDictionary"/>.
-    /// </summary>
-    protected ModelStateDictionary ModelState { get; init; } = null!;
-
-    /// <summary>
-    /// A reference to the singleton of <see cref="TrinityLocalizer"/>. 
-    /// </summary>
-    protected TrinityLocalizer Localizer { get; init; } = null!;
-
     /// <summary>
     /// The page slug.
     /// </summary>
@@ -86,12 +41,7 @@ public abstract class TrinityPage
     /// <summary>
     /// The schema for the page.
     /// </summary>
-    public List<object> Schema => new(GetSchema().Select(x =>
-    {
-        x.Init(ServiceProvider);
-        x.Setup();
-        return x;
-    }));
+    public List<object> Schema => new(GetSchema());
 
     /// <summary>
     /// Gets the schema for the page.

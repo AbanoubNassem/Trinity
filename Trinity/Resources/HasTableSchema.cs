@@ -103,7 +103,6 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
             var columns = Columns;
             foreach (ITrinityColumn column in columns)
             {
-                column.Init(ServiceProvider);
                 column.SelectQuery(query);
 
                 if (globalSearch != null && column.IsGloballySearchable)
@@ -160,7 +159,6 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
                 foreach (ITrinityColumn column in columns)
                 {
                     column.SetRecord(record);
-                    column.Setup();
                     column.Format();
                 }
             }

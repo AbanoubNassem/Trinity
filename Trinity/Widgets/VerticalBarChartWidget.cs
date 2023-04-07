@@ -10,8 +10,5 @@ public class VerticalBarChartWidget : TrinityChartWidget<VerticalBarChartWidget>
     /// <inheritdoc />
     public override string ComponentName => "VerticalBarChartWidget";
 
-    /// <inheritdoc />
-    public VerticalBarChartWidget(params object[] labels) : base(labels)
-    {
-    }
+  
 }

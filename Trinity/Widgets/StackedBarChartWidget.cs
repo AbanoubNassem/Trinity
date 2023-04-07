@@ -10,11 +10,6 @@ public class StackedBarChartWidget : TrinityChartWidget<StackedBarChartWidget>
     /// <inheritdoc />
     public override string ComponentName => "StackedBarChartWidget";
 
-    /// <inheritdoc />
-    public StackedBarChartWidget(params object[] labels) : base(labels)
-    {
-    }
-
     /// <summary>
     /// Sets the dataset for the stacked bar chart widget.
     /// </summary>

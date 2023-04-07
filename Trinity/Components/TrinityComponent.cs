@@ -20,25 +20,18 @@ public abstract class TrinityComponent<T, TDeserialization> : ITrinityComponent
     /// <summary>
     /// A reference to the <see cref="TrinityConfigurations"/> singleton.
     /// </summary>
-    protected TrinityConfigurations Configurations { get; private set; } = null!;
+    protected TrinityConfigurations Configurations { get; init; } = null!;
 
     /// <summary>
     /// A reference to the app <see cref="IServiceProvider"/>.
     /// </summary>
-    protected IServiceProvider ServiceProvider { get; private set; } = null!;
+    protected IServiceProvider ServiceProvider { get; init; } = null!;
 
     /// <summary>
     /// A reference to the <see cref="TrinityLocalizer"/> singleton. 
     /// </summary>
-    protected TrinityLocalizer Localizer { get; private set; } = null!;
-
-    /// <inheritdoc />
-    public void Init(IServiceProvider serviceProvider)
-    {
-        ServiceProvider = serviceProvider;
-        Configurations = serviceProvider.GetRequiredService<TrinityConfigurations>();
-        Localizer = serviceProvider.GetRequiredService<TrinityLocalizer>();
-    }
+    protected TrinityLocalizer Localizer { get; init; } = null!;
+    
 
     /// <inheritdoc />
     public virtual void Setup()

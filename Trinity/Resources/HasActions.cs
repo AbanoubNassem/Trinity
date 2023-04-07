@@ -7,20 +7,10 @@ namespace AbanoubNassem.Trinity.Resources;
 public abstract partial class TrinityResource<TPrimaryKeyType>
 {
     /// <inheritdoc />
-    public List<object> Actions => new(TrinityTable.Actions.Select(x =>
-    {
-        x.Init(ServiceProvider);
-        x.Setup();
-        return x;
-    }));
+    public List<object> Actions => new(TrinityTable.Actions);
 
     /// <inheritdoc />
-    public List<object> BulkActions => new(TrinityTable.BulkActions.Select(x =>
-    {
-        x.Init(ServiceProvider);
-        x.Setup();
-        return x;
-    }));
+    public List<object> BulkActions => new(TrinityTable.BulkActions);
 
 
     /// <inheritdoc />

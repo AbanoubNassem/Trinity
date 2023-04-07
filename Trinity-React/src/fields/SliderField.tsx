@@ -20,6 +20,7 @@ const SliderField = ({ component, errors, formData, setFieldValue }: FieldProps<
                 id={component.columnName}
                 name={component.columnName}
                 disabled={component.disabled}
+                required={component.isRequired}
                 hidden={component.hidden}
                 placeholder={component.placeholder}
                 className={classNames('mt-3', { 'p-invalid': errors[component.columnName] })}

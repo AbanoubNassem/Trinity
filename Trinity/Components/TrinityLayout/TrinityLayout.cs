@@ -14,9 +14,9 @@ public abstract class TrinityLayout<T> : TrinityComponent<T, object?>, ITrinityL
     /// </summary>
     /// <param name="schema">The schema of the Trinity layout component.</param>
     /// <param name="columns">The number of columns in the Trinity layout component can span to.</param>
-    protected TrinityLayout(IEnumerable<IFormComponent> schema, int columns = 0)
+    protected TrinityLayout(List<IFormComponent> schema, int columns = 0)
     {
-        Schema = schema.Cast<object>().ToList();
+        Schema = new(schema);
         Columns = columns;
     }
 
@@ -38,7 +38,7 @@ public abstract class TrinityLayout<T> : TrinityComponent<T, object?>, ITrinityL
     /// <returns>The current instance of the <typeparamref name="T"/> layout.</returns>
     public T SetSchema(List<IFormComponent> schema)
     {
-        Schema = schema.Cast<object>().ToList();
+        Schema = new(schema);
         return (this as T)!;
     }
 

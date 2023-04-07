@@ -40,11 +40,6 @@ public class TrinityForm
 
         var filtered = schema.Select(x =>
         {
-            var component = (ITrinityComponent)x;
-
-            component.Init(serviceProvider);
-            component.Setup();
-
             if (x is ITrinityLayout layout)
             {
                 layout.Schema = FilterSchema(layout.Schema, serviceProvider, isCreateRequest, isUpdateRequest);

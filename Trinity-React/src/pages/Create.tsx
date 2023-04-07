@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import { Button } from 'primereact/button';
@@ -18,6 +18,7 @@ const Create = () => {
     const { resource, errors, data: inserted } = usePageProps();
     const fields = useTrinityFields();
     const [createAddAnother, setCreateAddAnother] = useState(false);
+    const formRef = useRef<HTMLFormElement>(null);
 
     let data = useMemo<{ [k: string]: any }>(() => {
         let innerData = {} as any;
@@ -41,12 +42,14 @@ const Create = () => {
 
     const setFieldValue = (name: string, value: any) => {
         data[name] = value;
+        console.log(data);
     };
 
-    const create = (_createAddAnother: boolean = false) => {
+    const create = () => {
         form.setData(data);
-        setCreateAddAnother(_createAddAnother);
+
         form.post('', {
+            method: 'post',
             preserveScroll: true,
             preserveState: true
         });
@@ -56,17 +59,25 @@ const Create = () => {
         <div className="grid">
             <Button
                 label={localize('create')}
+                type={'submit'}
                 className="m-2 p-button-primary"
                 disabled={form.processing}
                 loading={form.processing && !createAddAnother}
-                onClick={() => create(false)}
+                onClick={() => {
+                    setCreateAddAnother(false);
+                    formRef.current?.requestSubmit();
+                }}
             />
             <Button
                 label={localize('create_and_another')}
+                type={'submit'}
                 className="m-2 p-button-help"
                 disabled={form.processing}
                 loading={form.processing && createAddAnother}
-                onClick={() => create(true)}
+                onClick={() => {
+                    setCreateAddAnother(true);
+                    formRef.current?.requestSubmit();
+                }}
             />
             <Button
                 label={localize('cancel')}
@@ -85,7 +96,14 @@ const Create = () => {
                     {localize('create')} {resource?.pluralLabel}
                 </h5>
 
-                <form className="p-fluid formgrid grid col-12">
+                <form
+                    ref={formRef}
+                    className="p-fluid formgrid grid col-12"
+                    onSubmit={(e) => {
+                        e.preventDefault();
+                        create();
+                    }}
+                >
                     {resource?.schema?.map((component, index) =>
                         trinityApp.registeredComponents?.has(component.componentName) ? (
                             trinityApp.registeredComponents?.get(component.componentName)!({

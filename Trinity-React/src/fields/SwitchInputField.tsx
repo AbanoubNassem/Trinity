@@ -20,6 +20,7 @@ const SwitchInputField = ({ component, errors, formData, setFieldValue }: FieldP
                 disabled={component.disabled}
                 hidden={component.hidden}
                 placeholder={component.placeholder}
+                required={component.isRequired}
                 className={classNames({ 'p-invalid': errors[component.columnName] })}
                 tooltip={component.tooltip}
                 tooltipOptions={{ event: 'focus', position: 'top' }}

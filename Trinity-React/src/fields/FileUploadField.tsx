@@ -57,6 +57,7 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
                 instantUpload={component.autoUploads}
                 credits={false}
                 allowPaste={false}
+                required={component.isRequired}
                 allowMultiple={component.multiple}
                 acceptedFileTypes={component.fileTypes}
                 allowReorder={component.allowReorder}

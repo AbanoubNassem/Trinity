@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Pages;
@@ -23,7 +24,7 @@ public class TrinityManager
     private readonly TrinityConfigurations _configurations;
     private readonly IServiceCollection _serviceProvider;
     private readonly TrinityLocalizer _trinityLocalizer;
-    
+
     /// <summary>
     /// A Dictionary of the registered/loaded <see cref="ITrinityResource"/>.
     /// </summary>
@@ -59,6 +60,15 @@ public class TrinityManager
         LoadPlugins();
     }
 
+    private readonly ConcurrentDictionary<Type, IDictionary<string, PropertyInfo>> _propertyInfoCache = new();
+
+    private PropertyInfo? GetPropertyInfo(Type type, string propertyName)
+    {
+        var properties = _propertyInfoCache.GetOrAdd(type, t => t.GetProperties(Flags).ToDictionary(p => p.Name));
+        return properties.TryGetValue(propertyName, out var propertyInfo) ? propertyInfo : null;
+    }
+
+
     private void LoadPages()
     {
         var trinityPageType = typeof(TrinityPage);
@@ -81,33 +91,28 @@ public class TrinityManager
             {
                 var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
                 var httpContext = httpContextAccessor.HttpContext!;
-
-                var page = (TrinityPage)Activator.CreateInstance(pageType)!;
-
-                pageType.GetProperty("Configurations", Flags)!.SetValue(page, _configurations);
-                pageType.GetProperty("ServiceProvider", Flags)!.SetValue(page, httpContext.RequestServices);
-                pageType.GetProperty("Request", Flags)!.SetValue(page, httpContext.Request);
-                pageType.GetProperty("Response", Flags)!.SetValue(page, httpContext.Response);
-                pageType.GetProperty("User", Flags)!.SetValue(page, httpContext.User);
-                pageType.GetProperty("Logger", Flags)!
-                    .SetValue(page, httpContext.RequestServices
-                        .GetRequiredService(typeof(ILogger<>)
-                            .MakeGenericType(pageType))
-                    );
-
-                pageType.GetProperty("Localizer", Flags)!.SetValue(page, _trinityLocalizer);
-
                 var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
                     .ActionContext!.ModelState;
 
-                pageType.GetProperty("ModelState", Flags)!.SetValue(page, modelState);
+                var page = (TrinityPage)Activator.CreateInstance(pageType)!;
 
+                GetPropertyInfo(pageType, "Configurations")!.SetValue(page, _configurations);
+                GetPropertyInfo(pageType, "ServiceProvider")!.SetValue(page, httpContext.RequestServices);
+                GetPropertyInfo(pageType, "Request")!.SetValue(page, httpContext.Request);
+                GetPropertyInfo(pageType, "Response")!.SetValue(page, httpContext.Response);
+                GetPropertyInfo(pageType, "User")!.SetValue(page, httpContext.User);
+                GetPropertyInfo(pageType, "Logger")!.SetValue(page, httpContext.RequestServices
+                    .GetRequiredService(typeof(ILogger<>)
+                        .MakeGenericType(pageType))
+                );
+
+                GetPropertyInfo(pageType, "Localizer")!.SetValue(page, _trinityLocalizer);
+                GetPropertyInfo(pageType, "ModelState")!.SetValue(page, modelState);
                 return page;
             });
 
             var page = (TrinityPage)Activator.CreateInstance(pageType)!;
-            pageType.GetProperty("Localizer", Flags)!
-                .SetValue(page, _trinityLocalizer);
+            GetPropertyInfo(pageType, "Localizer")!.SetValue(page, _trinityLocalizer);
 
             Pages.TryAdd(page.Slug.ToLower(), pageType);
         }
@@ -130,82 +135,72 @@ public class TrinityManager
             _serviceProvider.TryAddScoped(resourceType, provider =>
             {
                 var resource = (ITrinityResource)Activator.CreateInstance(resourceType)!;
-                resourceType.GetProperty("Configurations", Flags)!
-                    .SetValue(resource, _configurations);
-
-                resourceType.GetProperty("Localizer", Flags)!.SetValue(resource, _trinityLocalizer);
 
                 var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
                 var httpContext = httpContextAccessor.HttpContext!;
                 var request = httpContext.Request;
+                var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
+                    .ActionContext!.ModelState;
 
+                GetPropertyInfo(resourceType, "Configurations")!.SetValue(resource, _configurations);
+                GetPropertyInfo(resourceType, "Localizer")!.SetValue(resource, _trinityLocalizer);
+                GetPropertyInfo(resourceType, "Name")!.SetValue(resource, plural.ToLower());
 
-                resourceType.GetProperty("Name", Flags)!
-                    .SetValue(resource, plural.ToLower());
 
                 if (resource.Label == null)
                 {
-                    resourceType.GetProperty("Label", Flags)!
-                        .SetValue(resource, plural);
+                    GetPropertyInfo(resourceType, "Label")!.SetValue(resource, plural);
                 }
 
                 if (resource.PluralLabel == null)
                 {
-                    resourceType.GetProperty("PluralLabel", Flags)!
-                        .SetValue(resource, plural);
+                    GetPropertyInfo(resourceType, "PluralLabel")!.SetValue(resource, plural);
                 }
 
-                var table = resourceType.GetProperty("Table", Flags)!;
+                var table = _propertyInfoCache[resourceType]["Table"];
 
                 if (table.GetValue(resource) == null)
                 {
                     table.SetValue(resource, plural.ToLower());
                 }
 
+                GetPropertyInfo(resourceType, "ServiceProvider")!.SetValue(resource, httpContext.RequestServices);
 
-                resourceType.GetProperty("ServiceProvider", Flags)!.SetValue(resource, httpContext.RequestServices);
-
-
-                resourceType.GetProperty("Logger", Flags)!.SetValue(resource,
+                GetPropertyInfo(resourceType, "Logger")!.SetValue(resource,
                     httpContext.RequestServices.GetRequiredService(typeof(ILogger<>)
-                        .MakeGenericType(resourceType)
-                    ));
-
-                var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
-                    .ActionContext!.ModelState;
-
-                resourceType.GetProperty("ModelState", Flags)!.SetValue(resource, modelState);
+                        .MakeGenericType(resourceType))
+                );
 
 
-                resourceType.GetProperty("Request", Flags)!.SetValue(resource, httpContext.Request);
+                GetPropertyInfo(resourceType, "ModelState")!.SetValue(resource, modelState);
 
-                resourceType.GetProperty("Response", Flags)!.SetValue(resource, httpContext.Response);
-
-                resourceType.GetProperty("User", Flags)!.SetValue(resource, httpContext.User);
+                GetPropertyInfo(resourceType, "Request")!.SetValue(resource, httpContext.Request);
+                GetPropertyInfo(resourceType, "Response")!.SetValue(resource, httpContext.Response);
+                GetPropertyInfo(resourceType, "User")!.SetValue(resource, httpContext.User);
 
                 if (_configurations.IsDevelopment)
                 {
-                    resourceType.GetProperty("ConnectionFactory", Flags)!
-                        .SetValue(resource,
-                            () => new StackExchange.Profiling.Data.ProfiledDbConnection(
-                                _configurations.ConnectionFactory(),
-                                MiniProfiler.Current));
+                    GetPropertyInfo(resourceType, "ConnectionFactory")!.SetValue(resource,
+                        () => new StackExchange.Profiling.Data.ProfiledDbConnection(
+                            _configurations.ConnectionFactory(),
+                            MiniProfiler.Current)
+                    );
                 }
                 else
                 {
-                    resourceType.GetProperty("ConnectionFactory", Flags)!
-                        .SetValue(resource, _configurations.ConnectionFactory);
+                    GetPropertyInfo(resourceType, "ConnectionFactory")!.SetValue(resource,
+                        _configurations.ConnectionFactory);
                 }
 
                 switch (request.Method)
                 {
                     case "GET" or "PUT" when
                         (string?)request.RouteValues["view"] == "edit":
-                        resourceType.GetProperty("IsUpdateRequest", Flags)!.SetValue(resource, true);
+                        GetPropertyInfo(resourceType, "IsUpdateRequest")!.SetValue(resource, true);
                         break;
                     case "GET" or "POST" when
                         (string?)request.RouteValues["view"] == "create":
-                        resourceType.GetProperty("IsCreateRequest", Flags)!.SetValue(resource, true);
+                        GetPropertyInfo(resourceType, "IsCreateRequest")!.SetValue(resource, true);
                         break;
                 }
 

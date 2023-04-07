@@ -38,7 +38,7 @@ public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IH
     public override void PrepareForValidation(IValidator validator, IReadOnlyDictionary<string, object?> form,
         ModelStateDictionary modelState)
     {
-        if (Schema == null) return;
+        if (Schema == null || !form.ContainsKey(ColumnName)) return;
 
 
         var repeaterJson = form[ColumnName]?.ToString();

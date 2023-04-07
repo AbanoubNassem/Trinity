@@ -13,5 +13,5 @@ export default interface DateTimeField extends TrinityField {
     disabledDays?: number[];
     showIcon: boolean;
     iconPos?: 'left' | 'right' | undefined;
-    view?: 'date' | 'month' | undefined;
+    view?: 'date' | 'month' | 'year' | undefined;
 }

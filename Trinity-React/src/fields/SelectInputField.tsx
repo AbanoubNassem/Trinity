@@ -59,6 +59,7 @@ const SelectInputField = (props: SelectFieldProps) => {
     }, 300);
 
     const fieldProps: MultiSelectProps | DropdownProps = {
+        required: component.isRequired,
         id: component.columnName,
         name: last(component.columnName.split('.')),
         disabled: component.disabled,

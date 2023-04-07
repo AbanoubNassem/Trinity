@@ -9,11 +9,7 @@ public class LineChartWidget : TrinityChartWidget<LineChartWidget>
 {
     /// <inheritdoc />
     public override string ComponentName => "LineChartWidget";
-
-    /// <inheritdoc />
-    public LineChartWidget(params object[] labels) : base(labels)
-    {
-    }
+    
 
     /// <summary>
     /// Adds a new dataset to the chart with the specified data, label, background color and border color.

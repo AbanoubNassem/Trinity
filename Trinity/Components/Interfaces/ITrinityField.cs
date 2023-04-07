@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using SqlKata;
@@ -25,10 +26,16 @@ public interface ITrinityField
     public bool OnlyOnUpdate { get; set; }
 
     /// <summary>
+    /// Whether the field should be saved into the database or not.
+    /// </summary>
+    [JsonIgnore]
+    bool IsSavable { get; set; }
+
+    /// <summary>
     /// Formats a record for the field, after it is retrieved from the database, but before it is sent to the Trinity front-end.
     /// </summary>
     /// <param name="record">The record to format.</param>
-    public void Format(Dictionary<string, object?> record);
+    public void Format(ref IDictionary<string, object?> record);
 
     /// <summary>
     /// Fills a form with data from a record for the field.

@@ -2,6 +2,7 @@ import React, { CSSProperties } from 'react';
 import { classNames } from 'primereact/utils';
 import TrinityField from '@/types/Models/Fields/TrinityField';
 import { Errors, ErrorBag } from '@inertiajs/core/types/types';
+import omit from 'lodash/omit';
 
 const BaseFieldComponent = ({ component, errors, children, style }: { component: TrinityField; errors: Errors & ErrorBag; children?: React.ReactNode; style?: CSSProperties | undefined }) => {
     if (component.hidden) return <></>;
@@ -9,9 +10,13 @@ const BaseFieldComponent = ({ component, errors, children, style }: { component:
     return (
         <div
             style={style}
-            className={classNames(['field col-12 md:col', component.columnSpan > 0 && component.columnSpan < 12 ? `md:col-${component.columnSpan}` : ''])}
+            {...omit(component.extraAttributes, ['class', 'className'])}
+            className={classNames(['field col-12 md:col', component.columnSpan > 0 && component.columnSpan < 12 ? `md:col-${component.columnSpan}` : ''], [component.extraAttributes?.class ?? component.extraAttributes?.className])}
         >
-            <label htmlFor={component.columnName}>{component.label}</label>
+            <label htmlFor={component.columnName}>
+                {component.label}
+                {component.isRequired && <sup className="font-medium text-red-700 dark:text-red-400">*</sup>}
+            </label>
 
             <div className={component.prefixes || component.suffixes || component.prefixIcons || component.suffixIcons ? 'p-inputgroup' : ''}>
                 {component.prefixIcons?.map((icon, index) => (

@@ -18,6 +18,7 @@ const TextAreaField = ({ component, formData, setFieldValue, errors }: FieldProp
                 name={component.columnName}
                 disabled={component.disabled}
                 hidden={component.hidden}
+                required={component.isRequired}
                 placeholder={component.placeholder}
                 className={classNames({ 'p-invalid': errors[component.columnName] })}
                 tooltip={component.tooltip}

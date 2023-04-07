@@ -83,7 +83,7 @@ public abstract partial class TrinityField<T, TDeserialization> : TrinityCompone
     /// </summary>
     /// <param name="form">The dictionary representing the form.</param>
     /// <param name="record">The dictionary representing the record.</param>
-    public delegate void ActionFormWithRecord(Dictionary<string, object?> form,
+    public delegate void ActionFormWithRecord(IDictionary<string, object?> form,
         IReadOnlyDictionary<string, object?>? record = null);
 
     /// <summary>
@@ -146,9 +146,8 @@ public abstract partial class TrinityField<T, TDeserialization> : TrinityCompone
         return (this as T)!;
     }
 
-
     /// <inheritdoc />
-    public void Format(Dictionary<string, object?> record)
+    public virtual void Format(ref IDictionary<string, object?> record)
     {
         _formatUsing?.Invoke(record);
     }
@@ -289,6 +288,85 @@ public abstract partial class TrinityField<T, TDeserialization> : TrinityCompone
     public T SetOnlyOnUpdate(bool only = true)
     {
         OnlyOnUpdate = only;
+        return (this as T)!;
+    }
+
+    /// <summary>
+    /// Gets or sets the extra attributes for this field wrapper.
+    /// </summary>
+    public Dictionary<string, string>? ExtraAttributes { get; set; }
+
+    /// <summary>
+    /// Sets the extra attributes for this field wrapper.
+    /// </summary>
+    /// <param name="extraAttributes">The extra attributes for this field wrapper.</param>
+    /// <returns>The current instance of the <typeparamref name="T"/> field.</returns>
+    public T SetExtraAttributes(Dictionary<string, string> extraAttributes)
+    {
+        ExtraAttributes = extraAttributes;
+        return (this as T)!;
+    }
+
+
+    /// <summary>
+    /// Gets or sets the extra attributes for this field.
+    /// </summary>
+    public Dictionary<string, string>? ExtraInputAttributes { get; set; }
+
+    /// <summary>
+    /// Sets the extra attributes for this field.
+    /// </summary>
+    /// <param name="extraInputAttributes">The extra attributes for this field.</param>
+    /// <returns>The current instance of the <typeparamref name="T"/> field.</returns>
+    public T SetExtraInputAttributes(Dictionary<string, string> extraInputAttributes)
+    {
+        ExtraInputAttributes = extraInputAttributes;
+        return (this as T)!;
+    }
+
+    /// <inheritdoc />
+    public bool IsSavable { get; set; } = true;
+
+    /// <summary>
+    /// Sets a value indicating whether the input field should saved into the database or not.
+    /// </summary>
+    /// <param name="isSavable">A value indicating whether the input field should saved into the database or not.</param>
+    /// <returns>The current instance of the <typeparamref name="T"/> field.</returns>
+    public T SetIsSavable(bool isSavable = true)
+    {
+        IsSavable = isSavable;
+        return (this as T)!;
+    }
+
+    /// <summary>
+    /// Gets or sets the placeholder text for the input field.
+    /// </summary>
+    public string? InputType { get; protected set; }
+
+    /// <summary>
+    /// Sets the html input type of the field.
+    /// </summary>
+    /// <param name="inputType">The html input type.</param>
+    /// <returns>The current instance of the <typeparamref name="T"/> field.</returns>
+    public T SetInputType(string inputType)
+    {
+        InputType = inputType;
+        return (this as T)!;
+    }
+
+    /// <summary>
+    /// Gets or sets whether to use a red asterisk to indicate a field is required or not.
+    /// </summary>
+    public bool IsRequired { get; protected set; }
+
+    /// <summary>
+    /// Sets whether to use a red asterisk to indicate a field is required or not.
+    /// </summary>
+    /// <param name="isRequired">whether to use a red asterisk or not.</param>
+    /// <returns>The current instance of the <typeparamref name="T"/> field.</returns>
+    public T SetAsRequired(bool isRequired = true)
+    {
+        IsRequired = isRequired;
         return (this as T)!;
     }
 }

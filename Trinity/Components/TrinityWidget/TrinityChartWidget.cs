@@ -14,19 +14,21 @@ public abstract class TrinityChartWidget<T> : TrinityWidget<T> where T : Trinity
     }
 
     /// <summary>
-    /// Initializes a new instance of the <typeparamref name="T"/> class with the specified chart labels.
-    /// </summary>
-    /// <param name="labels">The chart labels.</param>
-    protected TrinityChartWidget(params object[] labels)
-    {
-        ChartLabels = labels.ToList();
-    }
-
-    /// <summary>
     /// Gets or sets the chart labels.
     /// </summary>
     /// <value>The chart labels.</value>
     public List<object> ChartLabels { get; protected set; } = new();
+
+    /// <summary>
+    /// Sets The chart labels.
+    /// </summary>
+    /// <param name="labels">The chart labels.</param>
+    /// <returns></returns>
+    public T SetLabels(params object[] labels)
+    {
+        ChartLabels = labels.ToList();
+        return (this as T)!;
+    }
 
     /// <summary>
     /// Gets or sets the chart values.
