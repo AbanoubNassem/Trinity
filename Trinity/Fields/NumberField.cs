@@ -3,58 +3,58 @@ using AbanoubNassem.Trinity.Components.TrinityField;
 namespace AbanoubNassem.Trinity.Fields;
 
 /// <summary>
+/// The available format modes for displaying numbers in the number field.
+/// </summary>
+public enum FormatModeTypes : byte
+{
+    /// <summary>
+    /// Displays the number in decimal format.
+    /// </summary>
+    Decimal,
+
+    /// <summary>
+    /// Displays the number in currency format.
+    /// </summary>
+    Currency
+}
+
+/// <summary>
+/// The available types of currency displays for displaying numbers in currency format.
+/// </summary>
+public enum CurrencyDisplayTypes : byte
+{
+    /// <summary>
+    /// Displays the currency symbol (e.g., "$").
+    /// </summary>
+    Symbol,
+
+    /// <summary>
+    /// Displays the ISO code (e.g., "USD").
+    /// </summary>
+    Code
+}
+
+/// <summary>
+/// The available button layout options for the increment/decrement buttons.
+/// </summary>
+public enum ButtonLayoutTypes : byte
+{
+    /// <summary>
+    /// Displays the buttons stacked on top of each other.
+    /// </summary>
+    Stacked,
+
+    /// <summary>
+    /// Displays the buttons side by side horizontally.
+    /// </summary>
+    Horizontal
+}
+
+/// <summary>
 /// Represents a number field in Trinity framework.
 /// </summary>
 public class NumberField<T> : TrinityField<NumberField<T>, T>
 {
-    /// <summary>
-    /// The available format modes for displaying numbers in the number field.
-    /// </summary>
-    public enum FormatModeTypes : byte
-    {
-        /// <summary>
-        /// Displays the number in decimal format.
-        /// </summary>
-        Decimal,
-
-        /// <summary>
-        /// Displays the number in currency format.
-        /// </summary>
-        Currency
-    }
-
-    /// <summary>
-    /// The available types of currency displays for displaying numbers in currency format.
-    /// </summary>
-    public enum CurrencyDisplayTypes : byte
-    {
-        /// <summary>
-        /// Displays the currency symbol (e.g., "$").
-        /// </summary>
-        Symbol,
-
-        /// <summary>
-        /// Displays the ISO code (e.g., "USD").
-        /// </summary>
-        Code
-    }
-
-    /// <summary>
-    /// The available button layout options for the increment/decrement buttons.
-    /// </summary>
-    public enum ButtonLayoutTypes : byte
-    {
-        /// <summary>
-        /// Displays the buttons stacked on top of each other.
-        /// </summary>
-        Stacked,
-
-        /// <summary>
-        /// Displays the buttons side by side horizontally.
-        /// </summary>
-        Horizontal
-    }
-
     /// <inheritdoc />
     public override string ComponentName => "NumberField";
 

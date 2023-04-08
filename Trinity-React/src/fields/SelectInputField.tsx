@@ -74,6 +74,7 @@ const SelectInputField = (props: SelectFieldProps) => {
         filter: component.searchable || lazy,
         filterPlaceholder: component.searchPlaceholder,
         showClear: true,
+        style: { zIndex: 200 },
         filterMatchMode: 'contains',
         value: value,
         onChange: (e: any) => {

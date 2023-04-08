@@ -22,6 +22,7 @@ import 'filepond/dist/filepond.min.css';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 import 'filepond-plugin-media-preview/dist/filepond-plugin-media-preview.css';
 import trinityApp from '@/TrinityApp';
+import { FilePondFile, FileOrigin } from 'filepond';
 
 registerPlugin(
     FilePondPluginImageExifOrientation,
@@ -42,6 +43,63 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
     useEffect(() => {
         setFieldValue(component.columnName, record[component.columnName]);
     }, [record[component.columnName]]);
+
+    const getOpenLink = (file: FilePondFile) => {
+        let fileSource = file.source;
+
+        if (!fileSource) {
+            return;
+        }
+        const src = fileSource as string;
+        const anchor = document.createElement('a');
+        anchor.className = 'pi pi-external-link mx-2 text-white text-sm pointer-events-auto hover:bg-black-alpha-70';
+        anchor.href = src.startsWith('http') ? src : `/${src}`;
+        anchor.target = '_blank';
+
+        return anchor;
+    };
+    const insertOpenLink = (file: FilePondFile) => {
+        if (file.origin !== FileOrigin.LOCAL) {
+            return;
+        }
+
+        const anchor = getOpenLink(file);
+
+        if (!anchor) {
+            return;
+        }
+
+        document.getElementById(`filepond--item-${file.id}`)?.querySelector('.filepond--file-info-main')?.prepend(anchor);
+    };
+
+    const getDownloadLink = (file: FilePondFile) => {
+        let fileSource = file.source;
+
+        if (!fileSource) {
+            return;
+        }
+
+        const src = fileSource as string;
+        const anchor = document.createElement('a');
+        anchor.className = 'pi pi-download mx-2 text-white text-base pointer-events-auto hover:bg-black-alpha-70';
+        anchor.href = src.startsWith('http') ? src : `/${src}`;
+        anchor.download = file.file.name;
+
+        return anchor;
+    };
+    const insertDownloadLink = (file: FilePondFile) => {
+        if (file.origin !== FileOrigin.LOCAL) {
+            return;
+        }
+
+        const anchor = getDownloadLink(file);
+
+        if (!anchor) {
+            return;
+        }
+
+        document.getElementById(`filepond--item-${file.id}`)?.querySelector('.filepond--file-info-main')?.prepend(anchor);
+    };
 
     return (
         <BaseFieldComponent
@@ -191,6 +249,10 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
                 removeUploadedFileButtonPosition={component.removeUploadedFileButtonPosition}
                 allowVideoPreview={component.canPreview}
                 allowAudioPreview={component.canPreview}
+                onaddfile={(err, file) => {
+                    if (component.canPreview) insertOpenLink(file);
+                    if (component.canDownload) insertDownloadLink(file);
+                }}
             />
         </BaseFieldComponent>
     );

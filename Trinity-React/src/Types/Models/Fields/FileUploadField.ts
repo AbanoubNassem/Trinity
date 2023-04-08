@@ -28,4 +28,5 @@ export default interface FileUploadField extends TrinityField {
     panelLayout?: 'integrated' | 'compact' | 'circle' | 'integrated circle' | 'compact circle' | null;
     progressIndicatorPosition?: string;
     uploadProgressIndicatorPosition?: string;
+    canDownload:boolean;
 }

@@ -325,14 +325,14 @@ public abstract partial class TrinityField<T, TDeserialization> : TrinityCompone
     }
 
     /// <inheritdoc />
-    public bool IsSavable { get; set; } = true;
+    public virtual bool IsSavable { get; set; } = true;
 
     /// <summary>
     /// Sets a value indicating whether the input field should saved into the database or not.
     /// </summary>
     /// <param name="isSavable">A value indicating whether the input field should saved into the database or not.</param>
     /// <returns>The current instance of the <typeparamref name="T"/> field.</returns>
-    public T SetIsSavable(bool isSavable = true)
+    public virtual T SetIsSavable(bool isSavable = true)
     {
         IsSavable = isSavable;
         return (this as T)!;

@@ -34,6 +34,15 @@ public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IH
         base.SelectQuery(query);
     }
 
+    private bool _isSavable = true;
+
+    /// <inheritdoc />
+    public override bool IsSavable
+    {
+        set => _isSavable = value;
+        get => (CanCreateItem || CanDeleteItem || CanMoveItem) && _isSavable;
+    }
+
     /// <inheritdoc />
     public override void PrepareForValidation(IValidator validator, IReadOnlyDictionary<string, object?> form,
         ModelStateDictionary modelState)
@@ -107,6 +116,64 @@ public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IH
         return this;
     }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the user can create items.
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if the user can create items; otherwise, <c>false</c>.
+    /// </value>
+    public bool CanCreateItem { get; set; } = true;
+
+    /// <summary>
+    /// Sets whether the user can create items.
+    /// </summary>
+    /// <param name="can">Whether the user can create items.</param>
+    /// <returns>The <see cref="RepeaterField"/> instance.</returns>
+    public virtual RepeaterField SetCanCreateItem(bool can = true)
+    {
+        CanCreateItem = can;
+        return this;
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the user can delete items.
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if the user can delete items; otherwise, <c>false</c>.
+    /// </value>
+    public bool CanDeleteItem { get; set; } = true;
+
+    /// <summary>
+    /// Sets whether the user can delete items.
+    /// </summary>
+    /// <param name="can">Whether the user can delete items.</param>
+    /// <returns>The <see cref="RepeaterField"/> instance.</returns>
+    public virtual RepeaterField SetCanDeleteItem(bool can = true)
+    {
+        CanDeleteItem = can;
+        return this;
+    }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the user can move items.
+    /// </summary>
+    /// <value>
+    ///   <c>true</c> if the user can move items; otherwise, <c>false</c>.
+    /// </value>
+    public bool CanMoveItem { get; set; } = true;
+
+    /// <summary>
+    /// Sets whether the user can move items.
+    /// </summary>
+    /// <param name="can">Whether the user can move items.</param>
+    /// <returns>The <see cref="RepeaterField"/> instance.</returns>
+    public virtual RepeaterField SetCanMoveItem(bool can = true)
+    {
+        CanMoveItem = can;
+        return this;
+    }
+
+
     /// <inheritdoc />
     public bool HasRelationshipByDefault { get; set; }
 
@@ -160,7 +227,7 @@ public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IH
     /// </summary>
     /// <param name="isCollapsible">The value indicating whether the repeater field is collapsible.</param>
     /// <returns>The current instance of the <see cref="RepeaterField"/>.</returns>
-    public RepeaterField SetCollapsible(bool isCollapsible = true)
+    public RepeaterField SetAsCollapsible(bool isCollapsible = true)
     {
         IsCollapsible = isCollapsible;
         return this;

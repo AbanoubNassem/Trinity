@@ -31,4 +31,29 @@ public class SelectField<T> : TrinityField<SelectField<T>, T>
         Options = options;
         return this;
     }
+
+    /// <summary>
+    /// A value indicating whether this field is searchable.
+    /// </summary>
+    public bool Searchable { get; protected set; }
+
+    /// <summary>
+    /// Sets this field as searchable .
+    /// </summary>
+    /// <param name="searchable">A value indicating whether this field is searchable.</param>
+    /// <returns></returns>
+    public virtual SelectField<T> SetAsSearchable(bool searchable = true)
+    {
+        Searchable = searchable;
+        return this;
+    }
+}
+
+/// <inheritdoc />
+public class SelectField : SelectField<string>
+{
+    /// <inheritdoc />
+    public SelectField(string columnName) : base(columnName)
+    {
+    }
 }

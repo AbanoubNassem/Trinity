@@ -136,8 +136,8 @@ public class CanMakeComponent
             cachedConstructors[constructorParamTypes] = matchingConstructor;
         }
 
-        var component =
-            (T)Activator.CreateInstance(componentType, ConstructorFlags, null, constructorParams.ToArray(), null)!;
+        var component = (T)Activator
+            .CreateInstance(componentType, ConstructorFlags, null, constructorParams.ToArray(), null)!;
 
         SetComponentProperty(component, componentType, "Configurations", Configurations);
         SetComponentProperty(component, componentType, "ServiceProvider", ServiceProvider);

@@ -42,3 +42,13 @@ public class MultipleSelectField<T> : SelectField<T[]?>
         form[ColumnName] = string.Join(",", (T[]?)form[ColumnName]!);
     }
 }
+
+/// <inheritdoc />
+public class MultipleSelectField : MultipleSelectField<string>
+{
+    /// <inheritdoc />
+    public MultipleSelectField(string columnName, bool showAsChips = false, int? maxSelection = null) : base(columnName,
+        showAsChips, maxSelection)
+    {
+    }
+}

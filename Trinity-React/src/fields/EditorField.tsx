@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import FieldProps from '@/types/Props/Fields/FieldProps';
@@ -35,10 +35,10 @@ const EditorField = ({ component, formData, setFieldValue, errors }: FieldProps<
             <Editor
                 ref={editorRef}
                 onLoad={(quill) => {
-                    console.log(quill);
-                    quill?.getModule('toolbar').removeHandler('image');
-
-                    quill?.getModule('toolbar').removeHandler('file');
+                    const imageButton = quill.getModule('toolbar').container.querySelector('.ql-image');
+                    if (imageButton) {
+                        imageButton.parentNode?.removeChild(imageButton);
+                    }
                 }}
                 id={component.columnName}
                 name={component.columnName}

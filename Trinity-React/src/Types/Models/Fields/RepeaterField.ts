@@ -4,4 +4,7 @@ import BaseComponent from '@/types/Models/TrinityComponent';
 export default interface RepeaterField extends TrinityField {
     schema?: Array<BaseComponent>;
     isCollapsible: boolean;
+    canCreateItem: boolean;
+    canDeleteItem: boolean;
+    canMoveItem: boolean;
 }

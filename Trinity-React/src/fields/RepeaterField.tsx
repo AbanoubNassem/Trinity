@@ -34,16 +34,18 @@ const RepeaterField = ({ configs, resource, component, formData, record, setFiel
 
                 {options.collapsed && <div className="p-2 text-xs text-center text-gray-400">Content collapsed</div>}
 
-                <Button
-                    icon="pi pi-trash"
-                    className="p-button-rounded p-button-danger p-button-text"
-                    style={style}
-                    onClick={(event) => {
-                        event.preventDefault();
-                        setValue(value.filter((item) => item !== options.props.id));
-                        setFieldValue(component.columnName, JSON.stringify(value));
-                    }}
-                />
+                {component.canDeleteItem && (
+                    <Button
+                        icon="pi pi-trash"
+                        className="p-button-rounded p-button-danger p-button-text"
+                        style={style}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            setValue(value.filter((item) => item !== options.props.id));
+                            setFieldValue(component.columnName, JSON.stringify(value));
+                        }}
+                    />
+                )}
             </div>
         );
     };
@@ -75,7 +77,7 @@ const RepeaterField = ({ configs, resource, component, formData, record, setFiel
                         item[name] = fieldValue;
                     }}
                     errors={innerErrors}
-                    style={{ zIndex: 100 }}
+                    style={{ zIndex: 200 }}
                     localize={localize}
                 />
             </Panel>
@@ -114,10 +116,10 @@ const RepeaterField = ({ configs, resource, component, formData, record, setFiel
                     hidden={component.hidden}
                     placeholder={component.placeholder}
                     className={classNames({ 'p-invalid': errors[component.columnName] })}
-                    dragdrop
+                    dragdrop={component.canMoveItem}
                     value={value}
                     itemTemplate={itemTemplate}
-                    header={headerTemplate}
+                    header={component.canCreateItem ? headerTemplate : <></>}
                     onChange={(event) => {
                         setValue(event.value);
                         setFieldValue(component.columnName, JSON.stringify(value));

@@ -253,7 +253,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
     /// </summary>
     /// <param name="multiple"><c>true</c> to allow multiple files to be uploaded; otherwise, <c>false</c>.</param>
     /// <returns>The <see cref="FileUploadField"/> instance.</returns>
-    public FileUploadField SetMultiple(bool multiple = true)
+    public FileUploadField SetAsMultiple(bool multiple = true)
     {
         Multiple = multiple;
         return this;
@@ -665,6 +665,22 @@ public class FileUploadField : CanUploadField<FileUploadField>
     public FileUploadField SetAsImage()
     {
         SetFileTypes("image/*");
+        return this;
+    }
+    
+    /// <summary>
+    /// Gets or sets a value indicating whether the file can be downloaded.
+    /// </summary>
+    public bool CanDownload { get; protected set; } = true;
+
+    /// <summary>
+    /// Sets a value indicating whether the file can be previewed.
+    /// </summary>
+    /// <param name="can">The value to set.</param>
+    /// <returns>The current <see cref="FileUploadField"/> instance.</returns>
+    public FileUploadField SetCanDownload(bool can = true)
+    {
+        CanDownload = can;
         return this;
     }
 }
