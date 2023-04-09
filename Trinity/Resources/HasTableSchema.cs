@@ -195,8 +195,8 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         using var connection = ConnectionFactory();
 
         var deleteQueryResult = await connection.Query()
-            .From($"{Table} AS t")
-            .WhereIn($"t.{PrimaryKeyColumn}", keys)
+            .From($"{Table}")
+            .WhereIn($"{PrimaryKeyColumn}", keys)
             .DeleteAsync();
 
         if (deleteQueryResult > 0)

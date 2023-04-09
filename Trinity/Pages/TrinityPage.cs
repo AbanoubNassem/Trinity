@@ -41,7 +41,7 @@ public abstract class TrinityPage : CanMakeComponent
     /// <summary>
     /// The schema for the page.
     /// </summary>
-    public List<object> Schema => new(GetSchema());
+    public List<object> Schema => new(GetSchema().Where(x => x.Visible || !x.Hidden));
 
     /// <summary>
     /// Gets the schema for the page.
