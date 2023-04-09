@@ -12,7 +12,7 @@ public class Tab : TrinityLayout<Tab>
     public override string ComponentName => "TabLayout";
 
     /// <inheritdoc />
-    public Tab(string label, List<IFormComponent> schema, int columns = 0) : base(schema, columns)
+    public Tab(string label, List<IFormComponent> schema, int? columns = null) : base(schema, columns)
     {
         SetLabel(label);
     }
@@ -27,7 +27,7 @@ public class TabsLayout : TrinityLayout<TabsLayout>
     public override string ComponentName => "TabsLayout";
 
     /// <inheritdoc />
-    public TabsLayout(List<Tab> tabs, int columns = 0) : base(new(tabs), columns)
+    public TabsLayout(List<Tab> tabs, int? columns = null) : base(new(tabs), columns)
     {
     }
 

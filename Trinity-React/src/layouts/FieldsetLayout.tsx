@@ -17,18 +17,21 @@ const FieldsetLayout = ({ configs, resource, component, record, formData, setFie
             <div className={classNames(['p-fluid grid px-0 mx-0 col-12', component.columnSpan > 0 && component.columnSpan < 12 ? `md:col-${component.columnSpan}` : ''])}>
                 {component?.schema.map((innerComponent, index) =>
                     trinityApp.registeredComponents?.has(innerComponent.componentName) ? (
-                        trinityApp.registeredComponents?.get(innerComponent.componentName)!({
-                            key: `fieldset_${index}_${innerComponent.componentName}`,
-                            configs: configs,
-                            resource: resource,
-                            component: innerComponent,
-                            record: record,
-                            containerClass: component.columns ? `md:col-${12 / component.columns}` : '',
-                            formData,
-                            setFieldValue,
-                            errors,
-                            localize
-                        })
+                        <div
+                            key={`${component.componentName}_${index}_${innerComponent.componentName}`}
+                            className={component.columns ? `md:col-${12 / component.columns}` : 'col'}
+                        >
+                            {trinityApp.registeredComponents?.get(innerComponent.componentName)!({
+                                configs: configs,
+                                resource: resource,
+                                component: innerComponent,
+                                record: record,
+                                formData,
+                                setFieldValue,
+                                errors,
+                                localize
+                            })}
+                        </div>
                     ) : (
                         <div key={`form_${index}_${innerComponent.componentName}`}></div>
                     )

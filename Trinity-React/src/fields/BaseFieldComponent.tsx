@@ -5,11 +5,9 @@ import { Errors, ErrorBag } from '@inertiajs/core/types/types';
 import omit from 'lodash/omit';
 
 const BaseFieldComponent = ({ component, errors, children, style }: { component: TrinityField; errors: Errors & ErrorBag; children?: React.ReactNode; style?: CSSProperties | undefined }) => {
-    if (component.hidden) return <></>;
-
     return (
         <div
-            style={style}
+            style={{ ...style, ...{ display: component.hidden || !component.visible ? 'none' : undefined } }}
             {...omit(component.extraAttributes, ['class', 'className'])}
             className={classNames(['field col-12 md:col', component.columnSpan > 0 && component.columnSpan < 12 ? `md:col-${component.columnSpan}` : ''], [component.extraAttributes?.class ?? component.extraAttributes?.className])}
         >

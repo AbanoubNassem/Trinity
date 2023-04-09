@@ -23,7 +23,7 @@ const Create = () => {
     let data = useMemo<{ [k: string]: any }>(() => {
         let innerData = {} as any;
         for (const field of fields) {
-            innerData[last(field.columnName.split('.'))!] = undefined;
+            innerData[last(field.columnName.split('.'))!] = field.defaultValue;
         }
         return innerData;
     }, [configs]);
@@ -42,7 +42,6 @@ const Create = () => {
 
     const setFieldValue = (name: string, value: any) => {
         data[name] = value;
-        console.log(data);
     };
 
     const create = () => {

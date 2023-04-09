@@ -42,6 +42,7 @@ import RadarChartWidget from '@/widgets/RadarChartWidget';
 import TrinityPage from '@/types/Models/Pages/TrinityPage';
 import TrinityLocalizer from '@/utilities/trinity_localizer';
 import TrinityUser from '@/types/Models/TrinityUser';
+import BaseFieldComponent from '@/fields/BaseFieldComponent';
 
 export class TrinityApp {
     private static localizer: TrinityLocalizer;
@@ -75,20 +76,22 @@ export class TrinityApp {
         this.registerComponent('CardLayout', (props) => <CardLayout {...props} />);
         this.registerComponent('FieldsetLayout', (props) => <FieldsetLayout {...props} />);
         this.registerComponent('TabsLayout', (props) => <TabsLayout {...props} />);
-        this.registerComponent('TextField', (props) => <TextField {...props} />);
-        this.registerComponent('IdField', (props) => <IdField {...props} />);
-        this.registerComponent('TextAreaField', (props) => <TextAreaField {...props} />);
-        this.registerComponent('MaskField', (props) => <MaskField {...props} />);
-        this.registerComponent('SelectInputField', (props) => <SelectInputField {...props} />);
-        this.registerComponent('BelongsToField', (props) => <BelongsToField {...props} />);
-        this.registerComponent('DateTimeField', (props) => <DateTimeField {...props} />);
-        this.registerComponent('NumberField', (props) => <NumberField {...props} />);
-        this.registerComponent('SwitchInputField', (props) => <SwitchInputField {...props} />);
-        this.registerComponent('SliderField', (props) => <SliderField {...props} />);
-        this.registerComponent('EditorField', (props) => <EditorField {...props} />);
-        this.registerComponent('FileUploadField', (props) => <FileUploadField {...props} />);
-        this.registerComponent('RepeaterField', (props) => <RepeaterField {...props} />);
+
         this.registerComponent('DividerComponent', (props) => <DividerComponent {...props} />);
+
+        this.registerField('TextField', (props) => <TextField {...props} />);
+        this.registerField('IdField', (props) => <IdField {...props} />);
+        this.registerField('TextAreaField', (props) => <TextAreaField {...props} />);
+        this.registerField('MaskField', (props) => <MaskField {...props} />);
+        this.registerField('SelectInputField', (props) => <SelectInputField {...props} />);
+        this.registerField('BelongsToField', (props) => <BelongsToField {...props} />);
+        this.registerField('DateTimeField', (props) => <DateTimeField {...props} />);
+        this.registerField('NumberField', (props) => <NumberField {...props} />);
+        this.registerField('SwitchInputField', (props) => <SwitchInputField {...props} />);
+        this.registerField('SliderField', (props) => <SliderField {...props} />);
+        this.registerField('EditorField', (props) => <EditorField {...props} />);
+        this.registerField('FileUploadField', (props) => <FileUploadField {...props} />);
+        this.registerField('RepeaterField', (props) => <RepeaterField {...props} />);
 
         this.registerColumn('TextColumn', (props) => <TextColumn {...props} />);
         this.registerColumn('IconColumn', (props) => <IconColumn {...props} />);
@@ -114,18 +117,26 @@ export class TrinityApp {
         this.registeredComponents.set(name, component);
     };
 
+    static registerField = (name: string, component: (props: any) => React.ReactNode) => {
+        this.registeredComponents.set(name, (props: any) => (
+            <BaseFieldComponent
+                component={props.component}
+                errors={props.errors}
+                key={props.key}
+            >
+                {component(props)}
+            </BaseFieldComponent>
+        ));
+    };
     static registerColumn = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredColumns.set(name, component);
     };
-
     static registerWidget = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredWidgets.set(name, component);
     };
-
     static registerPage = (name: string, component: (props: any) => React.ReactNode) => {
         this.registeredPages.set(name, component);
     };
-
     static localize = (key: string, ...args: Array<string>): string => {
         // @ts-ignore
         return this.localizer.localize(key, args);

@@ -27,47 +27,42 @@ const DateTimeField = ({ component, formData, setFieldValue, errors }: FieldProp
     const [value, setValue] = useState(getValue());
 
     useEffect(() => {
-        setFieldValue(component.columnName, getValue());
+        setFieldValue(component.columnName, getValue() ?? component.defaultValue);
     }, [component]);
 
     return (
-        <BaseFieldComponent
-            component={component}
-            errors={errors}
-        >
-            <Calendar
-                id={component.columnName}
-                name={component.columnName}
-                disabled={component.disabled}
-                required={component.isRequired}
-                readOnlyInput={component.disabled}
-                placeholder={component.placeholder}
-                className={classNames({ 'p-invalid': errors[component.columnName] })}
-                tooltip={component.tooltip}
-                tooltipOptions={{ event: 'focus', position: 'top' }}
-                value={value}
-                onChange={(event) => {
-                    // const formatted = moment(event.target.value as any).format(component.dateFormat);
-                    console.log(event.target.value);
-                    setValue(event.target.value as any);
-                    setFieldValue(component.columnName, event.target.value);
-                }}
-                inline={component.inline}
-                selectionMode={component.selectionMode}
-                dateFormat={component.dateFormat}
-                hourFormat={component.hourFormat}
-                showTime={component.showTime}
-                timeOnly={component.timeOnly}
-                minDate={component.minDate ? new Date(Date.parse(component.minDate)) : undefined}
-                maxDate={component.maxDate ? new Date(Date.parse(component.maxDate)) : undefined}
-                disabledDays={component.disabledDays}
-                disabledDates={component.disabledDates ? component.disabledDates.map((d) => new Date(Date.parse(d))) : undefined}
-                showButtonBar
-                showIcon={component.showIcon}
-                iconPos={component.iconPos}
-                view={component.view}
-            />
-        </BaseFieldComponent>
+        <Calendar
+            id={component.columnName}
+            name={component.columnName}
+            disabled={component.disabled}
+            required={component.isRequired}
+            readOnlyInput={component.disabled}
+            placeholder={component.placeholder}
+            className={classNames({ 'p-invalid': errors[component.columnName] })}
+            tooltip={component.tooltip}
+            tooltipOptions={{ event: 'focus', position: 'top' }}
+            value={value}
+            onChange={(event) => {
+                // const formatted = moment(event.target.value as any).format(component.dateFormat);
+                console.log(event.target.value);
+                setValue(event.target.value as any);
+                setFieldValue(component.columnName, event.target.value);
+            }}
+            inline={component.inline}
+            selectionMode={component.selectionMode}
+            dateFormat={component.dateFormat}
+            hourFormat={component.hourFormat}
+            showTime={component.showTime}
+            timeOnly={component.timeOnly}
+            minDate={component.minDate ? new Date(Date.parse(component.minDate)) : undefined}
+            maxDate={component.maxDate ? new Date(Date.parse(component.maxDate)) : undefined}
+            disabledDays={component.disabledDays}
+            disabledDates={component.disabledDates ? component.disabledDates.map((d) => new Date(Date.parse(d))) : undefined}
+            showButtonBar
+            showIcon={component.showIcon}
+            iconPos={component.iconPos}
+            view={component.view}
+        />
     );
 };
 

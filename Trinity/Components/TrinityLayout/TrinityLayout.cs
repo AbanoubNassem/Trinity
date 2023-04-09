@@ -14,7 +14,7 @@ public abstract class TrinityLayout<T> : TrinityComponent<T, object?>, ITrinityL
     /// </summary>
     /// <param name="schema">The schema of the Trinity layout component.</param>
     /// <param name="columns">The number of columns in the Trinity layout component can span to.</param>
-    protected TrinityLayout(List<IFormComponent> schema, int columns = 0)
+    protected TrinityLayout(List<IFormComponent> schema, int? columns = null)
     {
         Schema = new(schema);
         Columns = columns;
@@ -45,14 +45,14 @@ public abstract class TrinityLayout<T> : TrinityComponent<T, object?>, ITrinityL
     /// <summary>
     /// Gets or sets The number of columns in the Trinity layout component can span to.
     /// </summary>
-    public int Columns { get; protected set; }
+    public int? Columns { get; protected set; }
 
     /// <summary>
     /// Sets The number of columns in the Trinity layout component can span to.
     /// </summary>
     /// <param name="columns">The number of columns in the Trinity layout component can span to.</param>
     /// <returns>The current instance of the <typeparamref name="T"/> layout.</returns>
-    public T SetColumns(int columns = 0)
+    public T SetColumns(int columns)
     {
         Columns = columns;
         return (this as T)!;

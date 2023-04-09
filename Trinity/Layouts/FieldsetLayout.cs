@@ -12,7 +12,7 @@ public class FieldsetLayout : TrinityLayout<FieldsetLayout>
     public override string ComponentName => "FieldsetLayout";
 
     /// <inheritdoc />
-    public FieldsetLayout(List<IFormComponent> schema, int columns = 0) : base(schema, columns)
+    public FieldsetLayout(List<IFormComponent> schema) : base(schema, 2)
     {
     }
 

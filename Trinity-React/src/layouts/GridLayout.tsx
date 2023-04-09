@@ -3,6 +3,7 @@ import { classNames } from 'primereact/utils';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
 import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 import trinityApp from '@/TrinityApp';
+import BaseFieldComponent from '@/fields/BaseFieldComponent';
 
 const GirdLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, style, localize }: LayoutProps<TrinityLayout>) => {
     return (
@@ -12,18 +13,21 @@ const GirdLayout = ({ configs, resource, component, record, formData, setFieldVa
         >
             {component?.schema.map((innerComponent, index) =>
                 trinityApp.registeredComponents?.has(innerComponent.componentName) ? (
-                    trinityApp.registeredComponents?.get(innerComponent.componentName)!({
-                        key: `grid_${index}_${innerComponent.componentName}`,
-                        configs: configs,
-                        resource: resource,
-                        component: innerComponent,
-                        record: record,
-                        containerClass: component.columns ? `md:col-${12 / component.columns}` : '',
-                        formData,
-                        setFieldValue,
-                        errors,
-                        localize
-                    })
+                    <div
+                        key={`${component.componentName}_${index}_${innerComponent.componentName}`}
+                        className={component.columns ? `md:col-${12 / component.columns}` : 'col'}
+                    >
+                        {trinityApp.registeredComponents?.get(innerComponent.componentName)!({
+                            configs: configs,
+                            resource: resource,
+                            component: innerComponent,
+                            record: record,
+                            formData,
+                            setFieldValue,
+                            errors,
+                            localize
+                        })}
+                    </div>
                 ) : (
                     <div key={`form_${index}_${innerComponent.componentName}`}></div>
                 )

@@ -103,32 +103,27 @@ const RepeaterField = ({ configs, resource, component, formData, record, setFiel
     );
 
     return (
-        <BaseFieldComponent
-            component={component}
-            errors={errors}
+        <BlockUI
+            blocked={component.disabled}
+            style={component.style}
         >
-            <BlockUI
-                blocked={component.disabled}
+            <OrderList
+                id={component.columnName}
+                hidden={component.hidden}
+                placeholder={component.placeholder}
+                className={classNames({ 'p-invalid': errors[component.columnName] })}
+                dragdrop={component.canMoveItem}
+                value={value}
+                itemTemplate={itemTemplate}
+                header={component.canCreateItem ? headerTemplate : <></>}
+                onChange={(event) => {
+                    setValue(event.value);
+                    setFieldValue(component.columnName, JSON.stringify(value));
+                }}
+                onBlur={() => setFieldValue(component.columnName, JSON.stringify(value))}
                 style={component.style}
-            >
-                <OrderList
-                    id={component.columnName}
-                    hidden={component.hidden}
-                    placeholder={component.placeholder}
-                    className={classNames({ 'p-invalid': errors[component.columnName] })}
-                    dragdrop={component.canMoveItem}
-                    value={value}
-                    itemTemplate={itemTemplate}
-                    header={component.canCreateItem ? headerTemplate : <></>}
-                    onChange={(event) => {
-                        setValue(event.value);
-                        setFieldValue(component.columnName, JSON.stringify(value));
-                    }}
-                    onBlur={() => setFieldValue(component.columnName, JSON.stringify(value))}
-                    style={component.style}
-                />
-            </BlockUI>
-        </BaseFieldComponent>
+            />
+        </BlockUI>
     );
 };
 

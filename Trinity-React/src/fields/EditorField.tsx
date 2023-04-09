@@ -27,37 +27,31 @@ const EditorField = ({ component, formData, setFieldValue, errors }: FieldProps<
     }
 
     return (
-        <BaseFieldComponent
-            component={component}
-            errors={errors}
-            style={{ zIndex: 200 }}
-        >
-            <Editor
-                ref={editorRef}
-                onLoad={(quill) => {
-                    const imageButton = quill.getModule('toolbar').container.querySelector('.ql-image');
-                    if (imageButton) {
-                        imageButton.parentNode?.removeChild(imageButton);
-                    }
-                }}
-                id={component.columnName}
-                name={component.columnName}
-                disabled={component.disabled}
-                hidden={component.hidden}
-                required={component.isRequired}
-                placeholder={component.placeholder}
-                className={classNames({ 'p-invalid': errors[component.columnName] })}
-                value={value}
-                onTextChange={(e) => {
-                    setFieldValue(component.columnName, e.htmlValue);
-                    setValue(e.htmlValue);
-                }}
-                style={{ height: component.height, zIndex: 300 }}
-                headerTemplate={header}
-                modules={component.modules}
-                maxLength={component.maxLength}
-            />
-        </BaseFieldComponent>
+        <Editor
+            ref={editorRef}
+            onLoad={(quill) => {
+                const imageButton = quill.getModule('toolbar').container.querySelector('.ql-image');
+                if (imageButton) {
+                    imageButton.parentNode?.removeChild(imageButton);
+                }
+            }}
+            id={component.columnName}
+            name={component.columnName}
+            disabled={component.disabled}
+            hidden={component.hidden}
+            required={component.isRequired}
+            placeholder={component.placeholder}
+            className={classNames({ 'p-invalid': errors[component.columnName] })}
+            value={value}
+            onTextChange={(e) => {
+                setFieldValue(component.columnName, e.htmlValue);
+                setValue(e.htmlValue);
+            }}
+            style={{ height: component.height, zIndex: 300 }}
+            headerTemplate={header}
+            modules={component.modules}
+            maxLength={component.maxLength}
+        />
     );
 };
 

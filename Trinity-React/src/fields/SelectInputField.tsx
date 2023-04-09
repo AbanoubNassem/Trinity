@@ -105,10 +105,7 @@ const SelectInputField = (props: SelectFieldProps) => {
         }
     };
     return (
-        <BaseFieldComponent
-            component={component}
-            errors={errors}
-        >
+        <>
             {component.multiple ? (
                 <MultiSelect
                     {...(fieldProps as any)}
@@ -122,7 +119,7 @@ const SelectInputField = (props: SelectFieldProps) => {
                     hidden={component.hidden}
                 />
             )}
-        </BaseFieldComponent>
+        </>
     );
 };
 

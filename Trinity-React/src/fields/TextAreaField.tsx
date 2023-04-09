@@ -9,30 +9,25 @@ const TextAreaField = ({ component, formData, setFieldValue, errors }: FieldProp
     const [value, setValue] = useState(formData[component.columnName]);
 
     return (
-        <BaseFieldComponent
-            component={component}
-            errors={errors}
-        >
-            <InputTextarea
-                id={component.columnName}
-                name={component.columnName}
-                disabled={component.disabled}
-                hidden={component.hidden}
-                required={component.isRequired}
-                placeholder={component.placeholder}
-                className={classNames({ 'p-invalid': errors[component.columnName] })}
-                tooltip={component.tooltip}
-                tooltipOptions={{ event: 'focus', position: 'top' }}
-                autoResize={component.autoResize}
-                rows={component.rows}
-                cols={component.cols}
-                value={value}
-                onChange={(event) => {
-                    setFieldValue(component.columnName, event.target.value);
-                    setValue(event.target.value);
-                }}
-            />
-        </BaseFieldComponent>
+        <InputTextarea
+            id={component.columnName}
+            name={component.columnName}
+            disabled={component.disabled}
+            hidden={component.hidden}
+            required={component.isRequired}
+            placeholder={component.placeholder}
+            className={classNames({ 'p-invalid': errors[component.columnName] })}
+            tooltip={component.tooltip}
+            tooltipOptions={{ event: 'focus', position: 'top' }}
+            autoResize={component.autoResize}
+            rows={component.rows}
+            cols={component.cols}
+            value={value}
+            onChange={(event) => {
+                setFieldValue(component.columnName, event.target.value);
+                setValue(event.target.value);
+            }}
+        />
     );
 };
 

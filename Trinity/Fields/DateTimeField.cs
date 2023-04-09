@@ -71,7 +71,7 @@ public class DateTimeField<T> : TrinityField<DateTimeField<T>, T>
     public DateTimeField(string columnName) : base(columnName)
     {
     }
-
+    
     /// <inheritdoc />
     public override string ComponentName => "DateTimeField";
 

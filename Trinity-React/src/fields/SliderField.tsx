@@ -10,10 +10,7 @@ const SliderField = ({ component, errors, formData, setFieldValue }: FieldProps<
     const [value, setValue] = useState<number | [number, number]>(formData[component.columnName] ?? (component.range === true ? [component.min, component.max] : component.min));
 
     return (
-        <BaseFieldComponent
-            component={component}
-            errors={errors}
-        >
+        <>
             <span>{component.range === true ? `[${(value as any)[0]}, ${(value as any)[1]}]` : `[${value}]`}</span>
 
             <Slider
@@ -35,7 +32,7 @@ const SliderField = ({ component, errors, formData, setFieldValue }: FieldProps<
                 range={component.range}
                 orientation={component.orientation}
             />
-        </BaseFieldComponent>
+        </>
     );
 };
 

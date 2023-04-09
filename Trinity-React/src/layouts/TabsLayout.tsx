@@ -26,20 +26,26 @@ const TabsLayout = ({ configs, resource, component, record, formData, setFieldVa
                     <div className={classNames(['p-fluid grid px-0 mx-0 col-12', tab.columnSpan > 0 && tab.columnSpan < 12 ? `md:col-${tab.columnSpan}` : ''])}>
                         {(tab as TrinityLayout)?.schema.map((innerComponent, index) =>
                             trinityApp.registeredComponents?.has(innerComponent.componentName) ? (
-                                trinityApp.registeredComponents?.get(innerComponent.componentName)!({
-                                    key: `fieldset_${index}_${innerComponent.componentName}`,
-                                    configs: configs,
-                                    resource: resource,
-                                    component: innerComponent,
-                                    record: record,
-                                    containerClass: (tab as TrinityLayout).columns ? `md:col-${12 / (tab as TrinityLayout).columns}` : '',
-                                    formData,
-                                    setFieldValue,
-                                    errors,
-                                    localize
-                                })
+                                <div
+                                    key={`${component.componentName}_${index}_${innerComponent.componentName}`}
+                                    className={(tab as TrinityLayout).columns ? `md:col-${12 / (tab as TrinityLayout).columns!}` : ''}
+                                >
+                                    {trinityApp.registeredComponents?.get(innerComponent.componentName)!({
+                                        configs: configs,
+                                        resource: resource,
+                                        component: innerComponent,
+                                        record: record,
+                                        formData,
+                                        setFieldValue,
+                                        errors,
+                                        localize
+                                    })}
+                                </div>
                             ) : (
-                                <div key={`form_${index}_${innerComponent.componentName}`}></div>
+                                <div
+                                    key={`form_${index}_${innerComponent.componentName}`}
+                                    className={(tab as TrinityLayout).columns ? `md:col-${12 / (tab as TrinityLayout).columns!}` : 'col'}
+                                />
                             )
                         )}
                     </div>
