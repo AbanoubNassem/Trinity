@@ -35,19 +35,19 @@ class TrinityAction {
             return this.visit(action.url, action.openUrlInNewTab);
         }
 
-        this.post(actionUrl, data);
+        this.post(action, actionUrl, data);
     }
 
-    private static post(actionUrl: string, data: any) {
+    private static post(action: TrinityActionModel, actionUrl: string, data: any) {
         axios
             .post(actionUrl, data)
             .then((r) => r.data)
             .then(async (res) => {
-                await this.handleResponse(res);
+                await this.handleResponse(action, res);
             });
     }
 
-    public static async handleResponse(responseData: Array<any>) {
+    public static async handleResponse(action: TrinityActionModel, responseData: Array<any>) {
         for (const response of responseData)
             switch (response.type) {
                 case 'errors':
@@ -56,7 +56,7 @@ class TrinityAction {
                     break;
                 }
                 case 'redirect': {
-                    this.visit(response.data['url'], response.data['openUrlInNewTab']);
+                    this.visit(response.data['url'], response.data['openUrlInNewTab'] ?? action.openUrlInNewTab);
                     break;
                 }
                 case 'download': {

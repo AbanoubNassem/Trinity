@@ -1,7 +1,6 @@
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Providers;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AbanoubNassem.Trinity.Components;
 
@@ -31,7 +30,7 @@ public abstract class TrinityComponent<T, TDeserialization> : ITrinityComponent
     /// A reference to the <see cref="TrinityLocalizer"/> singleton. 
     /// </summary>
     protected TrinityLocalizer Localizer { get; init; } = null!;
-    
+
 
     /// <inheritdoc />
     public virtual void Setup()
@@ -154,7 +153,7 @@ public abstract class TrinityComponent<T, TDeserialization> : ITrinityComponent
     /// <summary>
     /// Whether the component is visible or not.
     /// </summary>
-    public bool Visible { get; protected set; } = true;
+    public bool Visible { get; set; } = true;
 
     /// <summary>
     /// Set whether the component is visible or not.

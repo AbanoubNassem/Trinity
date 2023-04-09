@@ -18,8 +18,6 @@ public class TrinityDashboardPage : TrinityPage
     /// <inheritdoc />
     protected override List<ITrinityWidget> GetSchema()
     {
-        // Logger.LogInformation("this is a debug message!");
-
         return new List<ITrinityWidget>()
         {
             Make<StatsWidget>("Unique views", "192.1k")

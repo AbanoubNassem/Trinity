@@ -96,23 +96,23 @@ public class TrinityManager
 
                 var page = (TrinityPage)Activator.CreateInstance(pageType)!;
 
-                GetPropertyInfo(pageType, "Configurations")!.SetValue(page, _configurations);
-                GetPropertyInfo(pageType, "ServiceProvider")!.SetValue(page, httpContext.RequestServices);
-                GetPropertyInfo(pageType, "Request")!.SetValue(page, httpContext.Request);
-                GetPropertyInfo(pageType, "Response")!.SetValue(page, httpContext.Response);
-                GetPropertyInfo(pageType, "User")!.SetValue(page, httpContext.User);
-                GetPropertyInfo(pageType, "Logger")!.SetValue(page, httpContext.RequestServices
+                GetPropertyInfo(pageType, "Configurations")?.SetValue(page, _configurations);
+                GetPropertyInfo(pageType, "ServiceProvider")?.SetValue(page, httpContext.RequestServices);
+                GetPropertyInfo(pageType, "Request")?.SetValue(page, httpContext.Request);
+                GetPropertyInfo(pageType, "Response")?.SetValue(page, httpContext.Response);
+                GetPropertyInfo(pageType, "User")?.SetValue(page, httpContext.User);
+                GetPropertyInfo(pageType, "Logger")?.SetValue(page, httpContext.RequestServices
                     .GetRequiredService(typeof(ILogger<>)
                         .MakeGenericType(pageType))
                 );
 
-                GetPropertyInfo(pageType, "Localizer")!.SetValue(page, _trinityLocalizer);
-                GetPropertyInfo(pageType, "ModelState")!.SetValue(page, modelState);
+                GetPropertyInfo(pageType, "Localizer")?.SetValue(page, _trinityLocalizer);
+                GetPropertyInfo(pageType, "ModelState")?.SetValue(page, modelState);
                 return page;
             });
 
             var page = (TrinityPage)Activator.CreateInstance(pageType)!;
-            GetPropertyInfo(pageType, "Localizer")!.SetValue(page, _trinityLocalizer);
+            GetPropertyInfo(pageType, "Localizer")?.SetValue(page, _trinityLocalizer);
 
             Pages.TryAdd(page.Slug.ToLower(), pageType);
         }
@@ -142,19 +142,19 @@ public class TrinityManager
                 var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
                     .ActionContext!.ModelState;
 
-                GetPropertyInfo(resourceType, "Configurations")!.SetValue(resource, _configurations);
-                GetPropertyInfo(resourceType, "Localizer")!.SetValue(resource, _trinityLocalizer);
-                GetPropertyInfo(resourceType, "Name")!.SetValue(resource, plural.ToLower());
+                GetPropertyInfo(resourceType, "Configurations")?.SetValue(resource, _configurations);
+                GetPropertyInfo(resourceType, "Localizer")?.SetValue(resource, _trinityLocalizer);
+                GetPropertyInfo(resourceType, "Name")?.SetValue(resource, plural.ToLower());
 
 
                 if (resource.Label == null)
                 {
-                    GetPropertyInfo(resourceType, "Label")!.SetValue(resource, plural);
+                    GetPropertyInfo(resourceType, "Label")?.SetValue(resource, plural);
                 }
 
                 if (resource.PluralLabel == null)
                 {
-                    GetPropertyInfo(resourceType, "PluralLabel")!.SetValue(resource, plural);
+                    GetPropertyInfo(resourceType, "PluralLabel")?.SetValue(resource, plural);
                 }
 
                 var table = _propertyInfoCache[resourceType]["Table"];
@@ -164,23 +164,23 @@ public class TrinityManager
                     table.SetValue(resource, plural.ToLower());
                 }
 
-                GetPropertyInfo(resourceType, "ServiceProvider")!.SetValue(resource, httpContext.RequestServices);
+                GetPropertyInfo(resourceType, "ServiceProvider")?.SetValue(resource, httpContext.RequestServices);
 
-                GetPropertyInfo(resourceType, "Logger")!.SetValue(resource,
+                GetPropertyInfo(resourceType, "Logger")?.SetValue(resource,
                     httpContext.RequestServices.GetRequiredService(typeof(ILogger<>)
                         .MakeGenericType(resourceType))
                 );
 
 
-                GetPropertyInfo(resourceType, "ModelState")!.SetValue(resource, modelState);
+                GetPropertyInfo(resourceType, "ModelState")?.SetValue(resource, modelState);
 
-                GetPropertyInfo(resourceType, "Request")!.SetValue(resource, httpContext.Request);
-                GetPropertyInfo(resourceType, "Response")!.SetValue(resource, httpContext.Response);
-                GetPropertyInfo(resourceType, "User")!.SetValue(resource, httpContext.User);
+                GetPropertyInfo(resourceType, "Request")?.SetValue(resource, httpContext.Request);
+                GetPropertyInfo(resourceType, "Response")?.SetValue(resource, httpContext.Response);
+                GetPropertyInfo(resourceType, "User")?.SetValue(resource, httpContext.User);
 
                 if (_configurations.IsDevelopment)
                 {
-                    GetPropertyInfo(resourceType, "ConnectionFactory")!.SetValue(resource,
+                    GetPropertyInfo(resourceType, "ConnectionFactory")?.SetValue(resource,
                         () => new StackExchange.Profiling.Data.ProfiledDbConnection(
                             _configurations.ConnectionFactory(),
                             MiniProfiler.Current)
@@ -188,7 +188,7 @@ public class TrinityManager
                 }
                 else
                 {
-                    GetPropertyInfo(resourceType, "ConnectionFactory")!.SetValue(resource,
+                    GetPropertyInfo(resourceType, "ConnectionFactory")?.SetValue(resource,
                         _configurations.ConnectionFactory);
                 }
 
@@ -196,11 +196,11 @@ public class TrinityManager
                 {
                     case "GET" or "PUT" when
                         (string?)request.RouteValues["view"] == "edit":
-                        GetPropertyInfo(resourceType, "IsUpdateRequest")!.SetValue(resource, true);
+                        GetPropertyInfo(resourceType, "IsUpdateRequest")?.SetValue(resource, true);
                         break;
                     case "GET" or "POST" when
                         (string?)request.RouteValues["view"] == "create":
-                        GetPropertyInfo(resourceType, "IsCreateRequest")!.SetValue(resource, true);
+                        GetPropertyInfo(resourceType, "IsCreateRequest")?.SetValue(resource, true);
                         break;
                 }
 

@@ -16,6 +16,11 @@ public interface ITrinityComponent
     public bool Hidden { get; set; }
 
     /// <summary>
+    /// Whether the component is visible or not.
+    /// </summary>
+    public bool Visible { get; protected set; }
+
+    /// <summary>
     /// Setup is being called on each request, once the Component is resolved.
     /// Can be used to resolve extra Services or do some logic before using the Component.
     /// </summary>

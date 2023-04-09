@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import TrinityActionModel from '@/types/Models/Actions/TrinityAction';
 import { Dialog } from 'primereact/dialog';
 import GridLayout from '@/layouts/GridLayout';
@@ -18,8 +18,27 @@ interface Props {
 export const ActionDialog = React.memo(({ actionData, onHide }: Props) => {
     const configs = useConfigs();
     const { resource } = usePageProps();
-    const actionForm: { [k: string]: any } = {};
+    const form = useRef<HTMLFormElement>(null);
+    const formData: { [k: string]: any } = {};
     const [errors, setErrors] = useState<Errors & ErrorBag>({});
+
+    const submit = () => {
+        axios
+            .post(`/${configs.prefix}/actions/${resource?.name}/${actionData!.action!.actionName}`, {
+                primaryKeys: actionData?.items,
+                form: formData
+            })
+            .then((r) => r.data)
+            .then(async (response) => {
+                if (response.data?.errors) {
+                    setErrors(response.data.errors);
+                    return;
+                } else {
+                    onHide();
+                }
+                await TrinityAction.handleResponse(response);
+            });
+    };
 
     return (
         <Dialog
@@ -39,39 +58,34 @@ export const ActionDialog = React.memo(({ actionData, onHide }: Props) => {
                         label={TrinityApp.localize('run_action')}
                         icon="pi pi-check"
                         onClick={() => {
-                            axios
-                                .post(`/${configs.prefix}/actions/${resource?.name}/${actionData!.action!.actionName}`, {
-                                    primaryKeys: actionData?.items,
-                                    form: actionForm
-                                })
-                                .then((r) => r.data)
-                                .then(async (response) => {
-                                    if (response.data['errors']) {
-                                        setErrors(response.data['errors']);
-                                    } else {
-                                        onHide();
-                                    }
-                                    await TrinityAction.handleResponse(response);
-                                });
+                            form.current?.requestSubmit();
                         }}
                         autoFocus
                     />
                 </div>
             }
         >
-            <GridLayout
-                configs={TrinityApp.configs}
-                resource={resource!}
-                component={actionData?.action as any}
-                record={{}}
-                formData={actionForm}
-                setFieldValue={(name, fieldValue) => {
-                    actionForm[name] = fieldValue;
+            <form
+                ref={form}
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    submit();
                 }}
-                errors={errors}
-                style={{ zIndex: 100 }}
-                localize={TrinityApp.localize}
-            />
+            >
+                <GridLayout
+                    configs={TrinityApp.configs}
+                    resource={resource!}
+                    component={actionData?.action as any}
+                    record={{}}
+                    formData={formData}
+                    setFieldValue={(name, fieldValue) => {
+                        formData[name] = fieldValue;
+                    }}
+                    errors={errors}
+                    style={{ zIndex: 100 }}
+                    localize={TrinityApp.localize}
+                />
+            </form>
         </Dialog>
     );
 });

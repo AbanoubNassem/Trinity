@@ -240,9 +240,8 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
         var updates = new Dictionary<string, object?>();
 
-        for (var i = 0; i < form.Count; i++)
+        foreach (ITrinityField field in Fields.Values)
         {
-            var field = (ITrinityField)Fields[form.ElementAt(i).Key];
             if (field.ColumnName == PrimaryKeyColumn) continue;
 
             if (!field.IsSavable)

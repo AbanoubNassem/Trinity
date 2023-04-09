@@ -198,31 +198,33 @@ const Table = () => {
                     }}
                 />
             )}
-            {resource?.bulkActions?.map((act) => (
-                <Button
-                    key={act.id}
-                    severity={act.severity as any}
-                    label={act.label}
-                    icon={act.icon}
-                    style={act.style}
-                    className="mx-1"
-                    disabled={selectedItems.length === 0}
-                    onClick={() => {
-                        if (selectedItems.length) {
-                            if (act?.schema?.length)
-                                return setCurrentAction({
-                                    action: act,
-                                    items: selectedItems.map((x) => String(x[resource?.primaryKeyColumn ?? 'id']))
-                                });
+            {resource?.bulkActions
+                ?.filter((a) => !a.hidden && a.visible)
+                .map((act) => (
+                    <Button
+                        key={act.id}
+                        severity={act.severity as any}
+                        label={act.label}
+                        icon={act.icon}
+                        style={act.style}
+                        className="mx-1"
+                        disabled={selectedItems.length === 0}
+                        onClick={() => {
+                            if (selectedItems.length) {
+                                if (act?.schema?.length)
+                                    return setCurrentAction({
+                                        action: act,
+                                        items: selectedItems.map((x) => String(x[resource?.primaryKeyColumn ?? 'id']))
+                                    });
 
-                            TrinityAction.handle(act, `/${configs.prefix}/actions/${resource?.name}/${act.actionName}`, {
-                                primaryKeys: selectedItems.map((x) => String(x[resource?.primaryKeyColumn ?? 'id'])),
-                                form: {}
-                            });
-                        }
-                    }}
-                />
-            ))}
+                                TrinityAction.handle(act, `/${configs.prefix}/actions/${resource?.name}/${act.actionName}`, {
+                                    primaryKeys: selectedItems.map((x) => String(x[resource?.primaryKeyColumn ?? 'id'])),
+                                    form: {}
+                                });
+                            }
+                        }}
+                    />
+                ))}
         </React.Fragment>
     );
 
@@ -325,31 +327,33 @@ const Table = () => {
                         }}
                     />
                 )}
-                {resource?.actions?.map((act) => (
-                    <Button
-                        key={act.id}
-                        severity={act.severity as any}
-                        aria-label={act.label}
-                        tooltip={act.label}
-                        tooltipOptions={{ position: 'top' }}
-                        icon={act.icon}
-                        style={act.style}
-                        rounded
-                        className="mx-1"
-                        onClick={() => {
-                            if (act?.schema?.length)
-                                return setCurrentAction({
-                                    action: act,
-                                    items: [String(rowData[resource?.primaryKeyColumn!])]
-                                });
+                {resource?.actions
+                    ?.filter((a) => !a.hidden && a.visible)
+                    .map((act) => (
+                        <Button
+                            key={act.id}
+                            severity={act.severity as any}
+                            aria-label={act.label}
+                            tooltip={act.label}
+                            tooltipOptions={{ position: 'top' }}
+                            icon={act.icon}
+                            style={act.style}
+                            rounded
+                            className="mx-1"
+                            onClick={() => {
+                                if (act?.schema?.length)
+                                    return setCurrentAction({
+                                        action: act,
+                                        items: [String(rowData[resource?.primaryKeyColumn!])]
+                                    });
 
-                            TrinityAction.handle(act, `/${configs.prefix}/actions/${resource?.name}/${act.actionName}`, {
-                                primaryKeys: [String(rowData[resource?.primaryKeyColumn!])],
-                                form: {}
-                            });
-                        }}
-                    />
-                ))}
+                                TrinityAction.handle(act, `/${configs.prefix}/actions/${resource?.name}/${act.actionName}`, {
+                                    primaryKeys: [String(rowData[resource?.primaryKeyColumn!])],
+                                    form: {}
+                                });
+                            }}
+                        />
+                    ))}
             </div>
         );
     };
@@ -441,7 +445,6 @@ const Table = () => {
                             filterMatchMode={'custom'}
                             excludeGlobalFilter={!column.isGloballySearchable || column.isIndividuallySearchable}
                             filterField={column.columnName}
-                            style={{ minWidth: '8rem' }}
                             exportable={column.exportable}
                             hidden={column.hidden}
                             filter={!!column.customFilter || (column.searchable && column.isIndividuallySearchable)}
@@ -472,13 +475,12 @@ const Table = () => {
                         />
                     );
                 })}
-                {(resource?.canUpdate || resource?.canDelete) && (
-                    <Column
-                        body={loading ? <Skeleton /> : actionBodyTemplate}
-                        headerStyle={{ minWidth: '10rem' }}
-                        filter={false}
-                    />
-                )}
+                <Column
+                    body={loading ? <Skeleton /> : actionBodyTemplate}
+                    filter={false}
+                    align="center"
+                    exportable={false}
+                />
             </DataTable>
         </>
     );

@@ -112,13 +112,20 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
     /// Delegate for handling an action using a form data and a collection of records.
     /// </summary>
     /// <param name="form">form data</param>
-    /// <param name="records">Collection of records</param>
+    /// <param name="record">The selected record</param>
     /// <returns>A Task representing the asynchronous operation and returning a TrinityActionResult.</returns>
-    public delegate Task<List<TrinityActionResult>> HandleActionUsingDelegate(Dictionary<string, object?> form,
-        IReadOnlyCollection<IDictionary<string, object?>> records);
+    public delegate TrinityActionResult HandleActionUsingDelegate(Dictionary<string, object?> form,
+        IDictionary<string, object?> record);
 
     /// <summary>
-    /// Delegate for handling an action using a form data and a collection of records.
+    /// Represents a delegate that returns a URL as a string based on a given record.
+    /// </summary>
+    /// <param name="record">The record to use for generating the URL.</param>
+    /// <returns>The generated URL as a string.</returns>
+    public delegate string AsUrlDelegate(IDictionary<string, object?> record);
+
+    /// <summary>
+    /// Delegate for handling an action using a form data and a record.
     /// </summary>
     protected virtual HandleActionUsingDelegate? HandleActionUsing { get; private set; }
 
@@ -158,7 +165,23 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
         IReadOnlyCollection<IDictionary<string, object?>> records)
     {
         if (HandleActionUsing != null)
-            return await HandleActionUsing(form, records);
+        {
+            var result = records.Select(record =>
+                    HandleActionUsing(form, record)
+                )
+                .ToList();
+            return await Task.FromResult(result);
+        }
+
+        if (AsUrlCallback != null)
+        {
+            var result = records.Select(record =>
+                    TrinityAction.Redirect(AsUrlCallback(record), OpenUrlInNewTab)
+                )
+                .ToList();
+
+            return await Task.FromResult(result);
+        }
 
         return await Task.FromResult(new List<TrinityActionResult>() { new("empty", new { }) });
     }
@@ -242,6 +265,33 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
     }
 
     /// <summary>
+    /// Sets whether URLs should be opened in a new tab.
+    /// </summary>
+    /// <param name="openUrlInNewTab">Whether URLs should be opened in a new tab.</param>
+    /// <returns>The current instance of TrinityAction.</returns>
+    public T SetOpenUrlInNewTab(bool openUrlInNewTab = true)
+    {
+        OpenUrlInNewTab = openUrlInNewTab;
+        return (this as T)!;
+    }
+
+    /// <summary>
+    /// Gets or sets the delegate used to generate URLs.
+    /// </summary>
+    protected AsUrlDelegate? AsUrlCallback { get; set; }
+
+    /// <summary>
+    /// Sets the delegate used to generate URLs.
+    /// </summary>
+    /// <param name="callback">The delegate to use for generating URLs.</param>
+    /// <returns>The current instance of TrinityAction.</returns>
+    public T SetAsUrl(AsUrlDelegate callback)
+    {
+        AsUrlCallback = callback;
+        return (this as T)!;
+    }
+
+    /// <summary>
     /// Gets or sets a value indicating whether confirmation is required before the action can be performed.
     /// </summary>
     public bool RequiresConfirmation { get; protected set; }
@@ -255,9 +305,9 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
     {
         RequiresConfirmation = requiresConfirmation;
         SetConfirmHeader(ComponentName);
-        SetConfirmText("Are you sure you want to run this action?", "pi pi-info-circle");
-        SetConfirmButtonText("Yes", "pi pi-check", "p-button-success");
-        SetCancelButtonText("No", "pi pi-times");
+        SetConfirmText(Localizer["confirm_action_run"], "pi pi-info-circle");
+        SetConfirmButtonText(Localizer["yes"], "pi pi-check", "p-button-success");
+        SetCancelButtonText(Localizer["no"], "pi pi-times");
         return (this as T)!;
     }
 
