@@ -4,7 +4,6 @@ import FieldProps from '@/types/Props/Fields/FieldProps';
 import SliderField from '@/types/Models/Fields/SliderField';
 import { Slider } from 'primereact/slider';
 import { classNames } from 'primereact/utils';
-import BaseFieldComponent from '@/fields/BaseFieldComponent';
 
 const SliderField = ({ component, errors, formData, setFieldValue }: FieldProps<SliderField>) => {
     const [value, setValue] = useState<number | [number, number]>(formData[component.columnName] ?? (component.range === true ? [component.min, component.max] : component.min));

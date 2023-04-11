@@ -62,7 +62,7 @@ export class TrinityApp {
         this.resources = props.resources as Array<TrinityResource>;
         this.pages = props.pages;
         this.user = props.user;
-        this.localizer = new TrinityLocalizer(props.locale);
+        this.localizer = new TrinityLocalizer(props.locale, props.fallbackLocale);
         this.isRtl = props.isRtl;
 
         setupProgress(this.configs.progressSettings);

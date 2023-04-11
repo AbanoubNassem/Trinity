@@ -47,7 +47,7 @@ class TrinityAction {
             });
     }
 
-    public static async handleResponse(action: TrinityActionModel, responseData: Array<any>) {
+    public static async handleResponse(action: TrinityActionModel, responseData: Array<any> = []) {
         for (const response of responseData)
             switch (response.type) {
                 case 'errors':

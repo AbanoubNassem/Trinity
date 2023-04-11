@@ -1,3 +1,4 @@
+using AbanoubNassem.Trinity.Configurations;
 using Microsoft.Extensions.Localization;
 using Newtonsoft.Json;
 
@@ -10,6 +11,15 @@ public class TrinityLocalizer
 {
     private readonly JsonSerializer _serializer = new();
     private readonly Dictionary<string, Dictionary<string, LocalizedString>> _locales = new();
+    private readonly TrinityConfigurations _configurations;
+
+    /// <summary>
+    /// Provides localization functionality using JSON files as sources.
+    /// </summary>
+    public TrinityLocalizer(TrinityConfigurations configurations)
+    {
+        _configurations = configurations;
+    }
 
     /// <summary>
     /// Gets a localized string using its name.
@@ -39,9 +49,9 @@ public class TrinityLocalizer
     /// Retrieves all localized strings.
     /// </summary>
     /// <returns>A collection of localized strings.</returns>
-    public IEnumerable<LocalizedString> GetAllStrings()
+    public IEnumerable<LocalizedString> GetAllStrings(string? forceLocale = null)
     {
-        var locale = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+        var locale = forceLocale ?? Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
         if (_locales.TryGetValue(locale, out var strings)) return strings.Values;
 
@@ -89,6 +99,16 @@ public class TrinityLocalizer
             GetAllStrings();
         }
 
-        return !_locales[locale].ContainsKey(key) ? new LocalizedString(key, key) : _locales[locale][key];
+        // fallback
+        if (!_locales.ContainsKey(_configurations.FallbackLocale))
+        {
+            GetAllStrings(_configurations.FallbackLocale);
+        }
+
+        return !_locales[locale].ContainsKey(key)
+            ? _locales[_configurations.FallbackLocale].ContainsKey(key)
+                ? _locales[_configurations.FallbackLocale][key]
+                : new LocalizedString(key, key)
+            : _locales[locale][key];
     }
 }

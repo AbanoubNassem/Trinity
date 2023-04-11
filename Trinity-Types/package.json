@@ -1,0 +1,9 @@
+{
+  "name": "trinity-types",
+  "version": "0.0.1",
+  "description": "",
+  "types": "./types",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

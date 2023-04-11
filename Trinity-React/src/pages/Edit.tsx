@@ -88,7 +88,7 @@ const Edit = () => {
                                 localize
                             })
                         ) : (
-                            <div key={`form_${index}_${component.componentName}`}></div>
+                            <div key={`form_${index}_${component.componentName}`}>{`Unknown Component ${component.componentName}`}</div>
                         )
                     )}
                 </form>

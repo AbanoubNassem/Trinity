@@ -29,7 +29,10 @@ const GirdLayout = ({ configs, resource, component, record, formData, setFieldVa
                         })}
                     </div>
                 ) : (
-                    <div key={`form_${index}_${innerComponent.componentName}`}></div>
+                    <div
+                        key={`form_${index}_${innerComponent.componentName}`}
+                        className={component.columns ? `md:col-${12 / component.columns}` : 'col'}
+                    />
                 )
             )}
         </div>

@@ -1,6 +1,6 @@
 import usePageProps from '@/hooks/trinity_page_props';
 import TrinityField from '@/types/Models/Fields/TrinityField';
-import BaseComponent from '@/types/Models/BaseComponent';
+import BaseComponent from '@/types/Models/TrinityComponent';
 import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 
 export function useTrinityFields() {

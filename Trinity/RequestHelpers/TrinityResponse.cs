@@ -59,10 +59,16 @@ public class TrinityResponse
     public List<object>? Notifications { get; set; }
 
     /// <summary>
-    /// Gets or sets the current locale strings <see cref="TrinityLocalizer.GetAllStrings()"/>
+    /// Gets or sets the current locale strings <see cref="TrinityLocalizer.GetAllStrings(string)"/>
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public Dictionary<string, string>? Locale { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the fallback locale strings/>
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public Dictionary<string, string>? FallbackLocale { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the text is right-to-left (RTL).

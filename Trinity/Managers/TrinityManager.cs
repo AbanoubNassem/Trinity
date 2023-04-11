@@ -6,10 +6,12 @@ using AbanoubNassem.Trinity.Plugins;
 using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Resources;
 using Humanizer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using StackExchange.Profiling;
 
@@ -57,7 +59,6 @@ public class TrinityManager
     {
         LoadPages();
         LoadResources();
-        LoadPlugins();
     }
 
     private readonly ConcurrentDictionary<Type, IDictionary<string, PropertyInfo>> _propertyInfoCache = new();
@@ -214,7 +215,11 @@ public class TrinityManager
     }
 
 
-    private void LoadPlugins()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="app"></param>
+    public void LoadPlugins(WebApplication app)
     {
         var trinityPluginType = typeof(TrinityPlugin);
         var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -226,8 +231,25 @@ public class TrinityManager
         {
             var plugin = (TrinityPlugin)Activator.CreateInstance(pluginType)!;
 
-            _configurations.ExtraJavaScriptSources.AddRange(plugin.GetScriptSources());
-            _configurations.ExtraStyleSources.AddRange(plugin.GetStyleSources());
+            var name = pluginType.Name.Titleize().Replace(' ', '-').ToLower();
+            var baseName = pluginType.Namespace + ".wwwroot";
+            var path = $"/{_configurations.Prefix}/trinity/plugins/{name}";
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new EmbeddedFileProvider(
+                    pluginType.Assembly,
+                    baseName
+                ),
+                RequestPath = path
+            });
+
+            _configurations.ExtraJavaScriptSources.AddRange(plugin.GetScriptSources()
+                .Select(x => x.StartsWith("http") ? x : $"{path}/dist{x}" )
+            );
+            _configurations.ExtraStyleSources.AddRange(plugin.GetStyleSources()
+                .Select(x => x.StartsWith("http") ? x :  $"{path}/dist{x}")
+            );
 
             // Plugins.Add(plugin);
         }

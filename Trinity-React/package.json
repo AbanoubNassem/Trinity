@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "watch": "vite build --mode development --watch",
+    "types": "tsc --declaration --emitDeclarationOnly"
   },
   "dependencies": {
     "@inertiajs/react": "^1.0.2",
@@ -43,6 +45,7 @@
     "eslint-plugin-react": "^7.31.11",
     "postcss": "^8.4.19",
     "prettier": "2.8.7",
+    "rollup-plugin-copy": "^3.4.0",
     "sass": "^1.60.0",
     "typescript": "^5.0.3",
     "vite": "^4.2.1"

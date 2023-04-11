@@ -36,7 +36,7 @@ export const ActionDialog = React.memo(({ actionData, onHide }: Props) => {
                 } else {
                     onHide();
                 }
-                await TrinityAction.handleResponse(response);
+                await TrinityAction.handleResponse(actionData?.action!, response);
             });
     };
 

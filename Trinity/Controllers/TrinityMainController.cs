@@ -398,16 +398,28 @@ public sealed class TrinityMainController : TrinityController
             role = User.FindFirstValue(ClaimTypes.Role)!,
             avatar = User.FindFirstValue("avatar")!,
         };
+        
         response.Configs = _configurations;
+        
         response.Resources = HttpContext.RequestServices
             .GetRequiredServices(_trinityManager.Resources.Values)
             .Where(x => ((ITrinityResource)x).CanView);
+        
         response.Pages = HttpContext.RequestServices
             .GetRequiredServices(_trinityManager.Pages.Values)
             .Where(x => ((TrinityPage)x).CanView)
             .ToDictionary(x => ((TrinityPage)x).Slug, x => x);
+        
         response.Locale = _localizer.GetAllStrings().ToDictionary(x => x.Name, x => x.Value);
+        
+        if (Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName != _configurations.FallbackLocale)
+        {
+            response.FallbackLocale = _localizer.GetAllStrings(_configurations.FallbackLocale)
+                .ToDictionary(x => x.Name, x => x.Value);
+        }
+
         response.IsRtl = Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+        
         return response;
     }
 }

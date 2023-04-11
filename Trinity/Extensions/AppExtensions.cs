@@ -67,7 +67,7 @@ public static class AppExtensions
 
         services.AddDirectoryBrowser();
 
-        var localizer = new TrinityLocalizer();
+        var localizer = new TrinityLocalizer(configs);
         services.TryAddSingleton(localizer);
         var trinityManager = new TrinityManager(configs, services, localizer);
         services.AddSingleton(trinityManager);
@@ -115,8 +115,8 @@ public static class AppExtensions
     public static void UseTrinity(this WebApplication app, string? physicalTrinityWwwRootPath = null)
     {
         var configs = app.Services.GetRequiredService<TrinityConfigurations>();
+        var manager = app.Services.GetRequiredService<TrinityManager>();
         var antiforgery = app.Services.GetRequiredService<IAntiforgery>();
-
 
         if (app.Environment.IsDevelopment())
         {
@@ -162,6 +162,10 @@ public static class AppExtensions
         });
 
 #endif
+
+        manager.LoadPlugins(app);
+
+        app.UseStaticFiles();
 
         var basePath = Path.Combine("wwwroot", "trinity_temp");
         if (!Directory.Exists(basePath))
