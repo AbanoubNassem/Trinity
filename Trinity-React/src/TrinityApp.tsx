@@ -43,19 +43,31 @@ import TrinityPage from '@/types/Models/Pages/TrinityPage';
 import TrinityLocalizer from '@/utilities/trinity_localizer';
 import TrinityUser from '@/types/Models/TrinityUser';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
+import WidgetProps from '@/types/Props/Widgets/WidgetProps';
+import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
+import ColumnProps from '@/types/Props/Columns/ColumnProps';
+import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
+import FieldProps from '@/types/Props/Fields/FieldProps';
+import TrinityField from '@/types/Models/Fields/TrinityField';
+import LayoutProps from '@/types/Props/Layouts/LayoutProps';
+import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 
 export class TrinityApp {
     private static localizer: TrinityLocalizer;
     static configs: Configs;
     static user: TrinityUser;
     static resources: Array<TrinityResource> = new Array<TrinityResource>();
-    static pages: { [key: string]: TrinityPage } = {};
+    static pages: { [key: string]: TrinityPage<any> } = {};
     static registeredPages: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static registeredComponents: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static toast?: Toast;
     static isRtl: boolean = false;
+
+    static serving(callback: (app: typeof TrinityApp) => void) {
+        callback(this);
+    }
 
     static init = (props: any) => {
         this.configs = props.configs as Configs;
@@ -71,71 +83,81 @@ export class TrinityApp {
     };
 
     private static loadDefaults() {
-        this.registerComponent('GridLayout', (props) => <GridLayout {...props} />);
-        this.registerComponent('PanelLayout', (props) => <PanelLayout {...props} />);
-        this.registerComponent('CardLayout', (props) => <CardLayout {...props} />);
-        this.registerComponent('FieldsetLayout', (props) => <FieldsetLayout {...props} />);
-        this.registerComponent('TabsLayout', (props) => <TabsLayout {...props} />);
+        this.registerLayout('GridLayout', GridLayout);
+        this.registerLayout('PanelLayout', PanelLayout);
+        this.registerLayout('CardLayout', CardLayout);
+        this.registerLayout('FieldsetLayout', FieldsetLayout);
+        this.registerLayout('TabsLayout', TabsLayout);
 
-        this.registerComponent('DividerComponent', (props) => <DividerComponent {...props} />);
+        this.registerComponent('DividerComponent', DividerComponent);
 
-        this.registerField('TextField', (props) => <TextField {...props} />);
-        this.registerField('IdField', (props) => <IdField {...props} />);
-        this.registerField('TextAreaField', (props) => <TextAreaField {...props} />);
-        this.registerField('MaskField', (props) => <MaskField {...props} />);
-        this.registerField('SelectInputField', (props) => <SelectInputField {...props} />);
-        this.registerField('BelongsToField', (props) => <BelongsToField {...props} />);
-        this.registerField('DateTimeField', (props) => <DateTimeField {...props} />);
-        this.registerField('NumberField', (props) => <NumberField {...props} />);
-        this.registerField('SwitchInputField', (props) => <SwitchInputField {...props} />);
-        this.registerField('SliderField', (props) => <SliderField {...props} />);
-        this.registerField('EditorField', (props) => <EditorField {...props} />);
-        this.registerField('FileUploadField', (props) => <FileUploadField {...props} />);
-        this.registerField('RepeaterField', (props) => <RepeaterField {...props} />);
+        this.registerField('TextField', TextField);
+        this.registerField('IdField', IdField);
+        this.registerField('TextAreaField', TextAreaField);
+        this.registerField('MaskField', MaskField);
+        this.registerField('SelectInputField', SelectInputField);
+        this.registerField('BelongsToField', BelongsToField);
+        this.registerField('DateTimeField', DateTimeField);
+        this.registerField('NumberField', NumberField);
+        this.registerField('SwitchInputField', SwitchInputField);
+        this.registerField('SliderField', SliderField);
+        this.registerField('EditorField', EditorField);
+        this.registerField('FileUploadField', FileUploadField);
+        this.registerField('RepeaterField', RepeaterField);
 
-        this.registerColumn('TextColumn', (props) => <TextColumn {...props} />);
-        this.registerColumn('IconColumn', (props) => <IconColumn {...props} />);
-        this.registerColumn('BadgeColumn', (props) => <BadgeColumn {...props} />);
-        this.registerColumn('ImageColumn', (props) => <ImageColumn {...props} />);
-        this.registerColumn('ColorColumn', (props) => <ColorColumn {...props} />);
-        this.registerColumn('BelongsToColumn', (props) => <BelongsToColumn {...props} />);
-        this.registerColumn('AggregateColumn', (props) => <AggregateColumn {...props} />);
+        this.registerColumn('TextColumn', TextColumn);
+        this.registerColumn('IconColumn', IconColumn);
+        this.registerColumn('BadgeColumn', BadgeColumn);
+        this.registerColumn('ImageColumn', ImageColumn);
+        this.registerColumn('ColorColumn', ColorColumn);
+        this.registerColumn('BelongsToColumn', BelongsToColumn);
+        this.registerColumn('AggregateColumn', AggregateColumn);
 
-        this.registerWidget('StatsWidget', (props) => <StatsWidget {...props} />);
-        this.registerWidget('BarChartWidget', (props) => <BarChartWidget {...props} />);
-        this.registerWidget('PieChartWidget', (props) => <PieChartWidget {...props} />);
-        this.registerWidget('DoughnutChartWidget', (props) => <DoughnutChartWidget {...props} />);
-        this.registerWidget('VerticalBarChartWidget', (props) => <VerticalBarChartWidget {...props} />);
-        this.registerWidget('HorizontalBarChartWidget', (props) => <HorizontalBarChartWidget {...props} />);
-        this.registerWidget('StackedBarChartWidget', (props) => <StackedBarChartWidget {...props} />);
-        this.registerWidget('LineChartWidget', (props) => <LineChartWidget {...props} />);
-        this.registerWidget('PolarAreaChartWidget', (props) => <PolarAreaChartWidget {...props} />);
-        this.registerWidget('RadarChartWidget', (props) => <RadarChartWidget {...props} />);
+        this.registerWidget('StatsWidget', StatsWidget);
+        this.registerWidget('BarChartWidget', BarChartWidget);
+        this.registerWidget('PieChartWidget', PieChartWidget);
+        this.registerWidget('DoughnutChartWidget', DoughnutChartWidget);
+        this.registerWidget('VerticalBarChartWidget', VerticalBarChartWidget);
+        this.registerWidget('HorizontalBarChartWidget', HorizontalBarChartWidget);
+        this.registerWidget('StackedBarChartWidget', StackedBarChartWidget);
+        this.registerWidget('LineChartWidget', LineChartWidget);
+        this.registerWidget('PolarAreaChartWidget', PolarAreaChartWidget);
+        this.registerWidget('RadarChartWidget', RadarChartWidget);
     }
 
-    static registerComponent = (name: string, component: (props: any) => React.ReactNode) => {
-        this.registeredComponents.set(name, component);
+    static registerComponent = (name: string, component: (props: any) => JSX.Element) => {
+        const Component = component;
+        this.registeredComponents.set(name, (props) => <Component {...props} />);
     };
 
-    static registerField = (name: string, component: (props: any) => React.ReactNode) => {
+    static registerLayout = (name: string, component: (props: LayoutProps<TrinityLayout | any>) => JSX.Element) => {
+        const Component = component;
+        this.registeredComponents.set(name, (props) => <Component {...props} />);
+    };
+
+    static registerField = (name: string, component: (props: FieldProps<TrinityField | any>) => JSX.Element) => {
+        const Field = component;
         this.registeredComponents.set(name, (props: any) => (
             <BaseFieldComponent
                 component={props.component}
                 errors={props.errors}
                 key={props.key}
             >
-                {component(props)}
+                <Field {...props} />
             </BaseFieldComponent>
         ));
     };
-    static registerColumn = (name: string, component: (props: any) => React.ReactNode) => {
-        this.registeredColumns.set(name, component);
+    static registerColumn = (name: string, component: (props: ColumnProps<TrinityColumn | any>) => JSX.Element) => {
+        const Column = component;
+        this.registeredColumns.set(name, (props) => <Column {...props} />);
     };
-    static registerWidget = (name: string, component: (props: any) => React.ReactNode) => {
-        this.registeredWidgets.set(name, component);
+    static registerWidget = (name: string, component: (props: WidgetProps<TrinityWidget | any>) => JSX.Element) => {
+        const Widget = component;
+        this.registeredWidgets.set(name, (props) => <Widget {...props} />);
     };
-    static registerPage = (name: string, component: (props: any) => React.ReactNode) => {
-        this.registeredPages.set(name, component);
+    static registerPage = (name: string, component: (props: any) => JSX.Element) => {
+        const Page = component;
+        this.registeredPages.set(name, (props) => <Page {...{ ...props.page, ...{ data: props.data } }} />);
     };
     static localize = (key: string, ...args: Array<string>): string => {
         // @ts-ignore

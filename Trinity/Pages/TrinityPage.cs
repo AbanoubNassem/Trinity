@@ -1,6 +1,7 @@
 using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Extensions;
+using Humanizer;
 
 namespace AbanoubNassem.Trinity.Pages;
 
@@ -9,6 +10,8 @@ namespace AbanoubNassem.Trinity.Pages;
 /// </summary>
 public abstract class TrinityPage : CanMakeComponent
 {
+    private readonly string? _label;
+
     /// <summary>
     /// The page slug.
     /// </summary>
@@ -17,12 +20,16 @@ public abstract class TrinityPage : CanMakeComponent
     /// <summary>
     /// The name of the view to use for rendering the page.
     /// </summary>
-    public virtual string PageView { get; protected init; } = "Default";
+    public virtual string PageView => "Default";
 
     /// <summary>
     /// The label for the page.
     /// </summary>
-    public virtual string? Label { get; protected init; }
+    public virtual string? Label
+    {
+        get => _label ?? Slug.Titleize();
+        protected init => _label = value;
+    }
 
     /// <summary>
     /// The navigation icon to use for the page.

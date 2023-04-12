@@ -4,7 +4,7 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import '@/assets/styles/trinity.scss';
 
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { LayoutProvider } from '@/contexts/LayoutContext';
 import MainLayout from '@/MainLayout';
@@ -12,7 +12,11 @@ import axios from 'axios';
 import { createInertiaApp } from '@inertiajs/react';
 import trinityApp from '@/TrinityApp';
 import Error from '@/pages/Error';
+import PlaceholderPage from '@/pages/PlaceholderPage';
 
+window.React = React;
+// @ts-ignore
+window.ReactDOM = ReactDOM;
 createInertiaApp({
     progress: false,
     resolve: async (name) => {
@@ -25,12 +29,19 @@ createInertiaApp({
 
             return page;
         } catch {
-            return () => (
-                <Error
-                    statusCode={404}
-                    reasonPhrase={`The ${name} page is not found!`}
-                />
-            );
+            return () => {
+                const [currentComponent, setCurrentComponent] = useState(<PlaceholderPage />);
+
+                setTimeout(() => {
+                    setCurrentComponent(
+                        <Error
+                            statusCode={404}
+                            reasonPhrase={`The ${name} page is not found!`}
+                        />
+                    );
+                }, 5000);
+                return <>{currentComponent}</>;
+            };
         }
     },
     setup({ el, App, props }) {
@@ -44,14 +55,6 @@ createInertiaApp({
         );
     }
 }).then(() => {
-    window.dispatchEvent(
-        new CustomEvent('trinity_ready', {
-            detail: {
-                trinityApp
-            }
-        })
-    );
-
     axios.interceptors.response.use(function (response) {
         // @ts-ignore
         const profiler = window.MiniProfiler as any;

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "../Trinity-Types/types",
+    "outDir": "../Trinity-Types",
     "typeRoots": ["./types"],
     "target": "ESNext",
     "useDefineForClassFields": true,

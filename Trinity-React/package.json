@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "prebuild": "npm run prebuild:unix || npm run prebuild:win",
+    "prebuild:unix": "find ../Trinity-Types -type f ! -name '*.json' -exec rm -f {} \\; && find ../Trinity-Types -type d -empty -delete",
+    "prebuild:win": "forfiles /p \"..\\Trinity-Types\" /s /c \"cmd /c if @isdir==FALSE if @ext !=json del /f /q @path\" && forfiles /p \"..\\Trinity-Types\" /s /c \"cmd /c if @isdir==TRUE rd /s /q @path\"",
+    "build": "tsc --declaration --emitDeclarationOnly && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "watch": "vite build --mode development --watch",
