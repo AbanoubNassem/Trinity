@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "npm run prebuild:unix || npm run prebuild:win",
-    "prebuild:unix": "find ../Trinity-Types -type f ! -name '*.json' -exec rm -f {} \\; && find ../Trinity-Types -type d -empty -delete",
-    "prebuild:win": "forfiles /p \"..\\Trinity-Types\" /s /c \"cmd /c if @isdir==FALSE if @ext !=json del /f /q @path\" && forfiles /p \"..\\Trinity-Types\" /s /c \"cmd /c if @isdir==TRUE rd /s /q @path\"",
+    "prebuild:unix": "find ../Trinity-Types -type f ! -name '*.json' ! -name '.gitignore' -exec rm -f {} \\; && find ../Trinity-Types -type d -empty -delete\n",
+    "prebuild:win": "forfiles /p \"..\\Trinity-Types\" /s /c \"cmd /c if @isdir==FALSE if @ext !=json if @ext !=gitignore del /f /q @path\" && forfiles /p \"..\\Trinity-Types\" /s /c \"cmd /c if @isdir==TRUE rd /s /q @path\"",
     "build": "tsc --declaration --emitDeclarationOnly && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
