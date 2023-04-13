@@ -23,7 +23,7 @@ const TabsLayout = ({ configs, resource, component, record, formData, setFieldVa
                     leftIcon={(tab as TabLayout).leftHeaderIcon}
                     rightIcon={(tab as TabLayout).rightHeaderIcon}
                 >
-                    <div className={classNames(['p-fluid grid px-0 mx-0 col-12', tab.columnSpan > 0 && tab.columnSpan < 12 ? `md:col-${tab.columnSpan}` : ''])}>
+                    <div className={classNames(['p-fluid grid grid-nogutter px-0 mx-0 col-12', tab.columnSpan > 0 && tab.columnSpan < 12 ? `md:col-${tab.columnSpan}` : ''])}>
                         {(tab as TrinityLayout)?.schema.map((innerComponent, index) =>
                             trinityApp.registeredComponents?.has(innerComponent.componentName) ? (
                                 <div

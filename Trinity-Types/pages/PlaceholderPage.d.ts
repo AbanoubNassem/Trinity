@@ -1,3 +1,4 @@
+/// <reference types="react" />
 declare const PlaceholderPage: {
     (): JSX.Element;
     layout: any;

@@ -1,4 +1,3 @@
-import { Link } from '@inertiajs/react';
 import { useLogo } from '@/hooks/trinity_logo';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { Head } from '@/components/Head';
@@ -33,7 +32,7 @@ const Error = ({ statusCode, reasonPhrase }: { statusCode: number; reasonPhrase:
                             <span className="text-red-500 font-bold text-3xl">{statusCode}</span>
                             <h1 className="text-900 font-bold text-5xl mb-2">{localize('whoops')}</h1>
                             <div className="text-600 mb-5">{reasonPhrase}</div>
-                            <Link href={`/${configs.prefix}`}>
+                            <a href={`/${configs.prefix}`}>
                                 <div className="w-full flex align-items-center py-5 border-300 border-bottom-1">
                                     <span
                                         className="flex justify-content-center align-items-center bg-cyan-400 border-round"
@@ -45,7 +44,7 @@ const Error = ({ statusCode, reasonPhrase }: { statusCode: number; reasonPhrase:
                                         <span className="text-900 lg:text-xl font-medium mb-1">{localize('dashboard')}</span>
                                     </span>
                                 </div>
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </div>

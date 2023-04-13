@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import TrinityActionModel from '@/types/Models/Actions/TrinityAction';
 import { Dialog } from 'primereact/dialog';
-import GridLayout from '@/layouts/GridLayout';
 import TrinityApp from '@/TrinityApp';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Button } from 'primereact/button';
@@ -9,6 +8,7 @@ import { useConfigs } from '@/hooks/trinity_configs';
 import TrinityAction from '@/utilities/trinity_action';
 import { ErrorBag, Errors } from '@inertiajs/core/types/types';
 import axios from 'axios';
+import trinityApp from '@/TrinityApp';
 
 interface Props {
     actionData?: { action: TrinityActionModel; items: Array<any> } | undefined;
@@ -72,19 +72,25 @@ export const ActionDialog = React.memo(({ actionData, onHide }: Props) => {
                     submit();
                 }}
             >
-                <GridLayout
-                    configs={TrinityApp.configs}
-                    resource={resource!}
-                    component={actionData?.action as any}
-                    record={{}}
-                    formData={formData}
-                    setFieldValue={(name, fieldValue) => {
-                        formData[name] = fieldValue;
-                    }}
-                    errors={errors}
-                    style={{ zIndex: 100 }}
-                    localize={TrinityApp.localize}
-                />
+                {actionData?.action.schema?.map((component, index) =>
+                    trinityApp.registeredComponents?.has(component.componentName) ? (
+                        trinityApp.registeredComponents?.get(component.componentName)!({
+                            key: `form_${index}_${component.componentName}`,
+                            configs: configs,
+                            resource: resource,
+                            component,
+                            record: {},
+                            formData: formData,
+                            setFieldValue: (name: string, fieldValue: any) => {
+                                formData[name] = fieldValue;
+                            },
+                            errors,
+                            localize: TrinityApp.localize
+                        })
+                    ) : (
+                        <div key={`form_${index}_${component.componentName}`}> {`Unknown Component ${component.componentName}`}</div>
+                    )
+                )}
             </form>
         </Dialog>
     );

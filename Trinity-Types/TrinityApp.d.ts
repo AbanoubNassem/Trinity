@@ -12,13 +12,14 @@ import FieldProps from '@/types/Props/Fields/FieldProps';
 import TrinityField from '@/types/Models/Fields/TrinityField';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
 import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
+import PageProps from '@/types/Props/Pages/PageProps';
 export declare class TrinityApp {
     private static localizer;
     static configs: Configs;
     static user: TrinityUser;
     static resources: Array<TrinityResource>;
     static pages: {
-        [key: string]: TrinityPage<any>;
+        [key: string]: TrinityPage;
     };
     static registeredPages: Map<string, (props: any) => React.ReactNode>;
     static registeredComponents: Map<string, (props: any) => React.ReactNode>;
@@ -34,7 +35,7 @@ export declare class TrinityApp {
     static registerField: (name: string, component: (props: FieldProps<TrinityField | any>) => JSX.Element) => void;
     static registerColumn: (name: string, component: (props: ColumnProps<TrinityColumn | any>) => JSX.Element) => void;
     static registerWidget: (name: string, component: (props: WidgetProps<TrinityWidget | any>) => JSX.Element) => void;
-    static registerPage: (name: string, component: (props: any) => JSX.Element) => void;
+    static registerPage: (name: string, component: (props: PageProps<TrinityPage>) => JSX.Element) => void;
     static localize: (key: string, ...args: Array<string>) => string;
 }
 export default TrinityApp;

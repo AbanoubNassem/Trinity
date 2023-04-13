@@ -14,9 +14,10 @@ import trinityApp from '@/TrinityApp';
 import Error from '@/pages/Error';
 import PlaceholderPage from '@/pages/PlaceholderPage';
 
-window.React = React;
+import * as InertiaReact from '@inertiajs/react';
 // @ts-ignore
-window.ReactDOM = ReactDOM;
+import * as PrimeReact from 'primereact';
+
 createInertiaApp({
     progress: false,
     resolve: async (name) => {
@@ -65,3 +66,8 @@ createInertiaApp({
         return response;
     });
 });
+
+window.InertiaReact = InertiaReact;
+window.React = React;
+window.ReactDOM = ReactDOM;
+window.PrimeReact = PrimeReact;

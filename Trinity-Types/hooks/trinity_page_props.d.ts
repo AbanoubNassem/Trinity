@@ -7,10 +7,10 @@ export default function usePageProps<T>(): {
     configs?: Configs;
     resources?: Array<TrinityResource>;
     pages?: {
-        [key: string]: TrinityPage<any>;
+        [key: string]: TrinityPage;
     };
     resource?: TrinityResource;
-    page?: TrinityPage<T>;
+    page?: TrinityPage;
     data?: T;
     errors: Errors & ErrorBag;
     notifications?: Array<string>;

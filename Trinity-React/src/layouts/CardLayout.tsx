@@ -12,7 +12,7 @@ const CardLayout = ({ configs, resource, component, record, formData, setFieldVa
             title={component.label}
             style={{ ...{ marginBottom: '2rem' }, ...component.style }}
         >
-            <div className={classNames(['p-fluid grid px-0 mx-0 col-12', component.columnSpan > 0 && component.columnSpan < 12 ? `md:col-${component.columnSpan}` : ''])}>
+            <div className={classNames(['p-fluid grid grid-nogutter px-0 mx-0 col-12', component.columnSpan > 0 && component.columnSpan < 12 ? `md:col-${component.columnSpan}` : ''])}>
                 {component?.schema.map((innerComponent, index) =>
                     trinityApp.registeredComponents?.has(innerComponent.componentName) ? (
                         <div

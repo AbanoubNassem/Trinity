@@ -13,7 +13,7 @@ const BaseFieldComponent = ({ component, errors, children, style }: { component:
         >
             <label htmlFor={component.columnName}>
                 {component.label}
-                {component.isRequired && <sup className="font-medium text-red-700 dark:text-red-400">*</sup>}
+                <sup className="font-medium text-red-700 dark:text-red-400">{component.isRequired && '*'}</sup>
             </label>
 
             <div className={component.prefixes || component.suffixes || component.prefixIcons || component.suffixIcons ? 'p-inputgroup' : ''}>
@@ -58,11 +58,9 @@ const BaseFieldComponent = ({ component, errors, children, style }: { component:
 
             <small id={`${component.columnName}-help`}>{component.helperText}</small>
 
-            {errors[component.columnName] && (
-                <div className="p-error mt-1">
-                    <span className="flex">{errors[component.columnName]}</span>
-                </div>
-            )}
+            <div className="p-error mt-1">
+                <span className="flex">{errors[component.columnName]}</span>
+            </div>
         </div>
     );
 };

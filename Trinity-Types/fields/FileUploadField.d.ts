@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import FieldProps from '@/types/Props/Fields/FieldProps';
 import FileUploadField from '@/types/Models/Fields/FileUploadField';
 import 'filepond/dist/filepond.min.css';

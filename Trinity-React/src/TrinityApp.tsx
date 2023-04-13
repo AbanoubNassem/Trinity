@@ -51,13 +51,14 @@ import FieldProps from '@/types/Props/Fields/FieldProps';
 import TrinityField from '@/types/Models/Fields/TrinityField';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
 import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
+import PageProps from '@/types/Props/Pages/PageProps';
 
 export class TrinityApp {
     private static localizer: TrinityLocalizer;
     static configs: Configs;
     static user: TrinityUser;
     static resources: Array<TrinityResource> = new Array<TrinityResource>();
-    static pages: { [key: string]: TrinityPage<any> } = {};
+    static pages: { [key: string]: TrinityPage } = {};
     static registeredPages: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static registeredComponents: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
@@ -155,9 +156,20 @@ export class TrinityApp {
         const Widget = component;
         this.registeredWidgets.set(name, (props) => <Widget {...props} />);
     };
-    static registerPage = (name: string, component: (props: any) => JSX.Element) => {
+    static registerPage = (name: string, component: (props: PageProps<TrinityPage>) => JSX.Element) => {
         const Page = component;
-        this.registeredPages.set(name, (props) => <Page {...{ ...props.page, ...{ data: props.data } }} />);
+        this.registeredPages.set(name, (props) => (
+            <Page
+                {...{
+                    ...props.page,
+                    ...{
+                        configs: this.configs,
+                        data: props.data,
+                        localize: this.localize
+                    }
+                }}
+            />
+        ));
     };
     static localize = (key: string, ...args: Array<string>): string => {
         // @ts-ignore

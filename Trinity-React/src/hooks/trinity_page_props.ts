@@ -8,9 +8,9 @@ export default function usePageProps<T>(): {
     component: string;
     configs?: Configs;
     resources?: Array<TrinityResource>;
-    pages?: { [key: string]: TrinityPage<any> };
+    pages?: { [key: string]: TrinityPage };
     resource?: TrinityResource;
-    page?: TrinityPage<T>;
+    page?: TrinityPage;
     data?: T;
     errors: Errors & ErrorBag;
     notifications?: Array<string>;

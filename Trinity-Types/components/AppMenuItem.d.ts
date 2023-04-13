@@ -1,3 +1,4 @@
+/// <reference types="react" />
 declare const AppMenuItem: (props: {
     root?: any;
     index: number;

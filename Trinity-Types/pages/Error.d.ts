@@ -1,3 +1,4 @@
+/// <reference types="react" />
 declare const Error: {
     ({ statusCode, reasonPhrase }: {
         statusCode: number;
