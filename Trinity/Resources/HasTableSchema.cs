@@ -89,12 +89,6 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
             using var conn = ConnectionFactory();
 
             var query = conn.Query();
-            var countQuery = conn.Query();
-
-
-            countQuery
-                .From($"{Table} AS t")
-                .AsCount();
 
             query.From($"{Table} AS t");
 
@@ -107,12 +101,10 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
                 if (globalSearch != null && column.IsGloballySearchable)
                 {
-                    column.Filter(countQuery, globalSearch);
                     column.Filter(query, globalSearch);
                 }
                 else if (requestFilters != null && requestFilters.TryGetValue(column.ColumnName, out var search))
                 {
-                    column.Filter(countQuery, search);
                     column.Filter(query, search);
                 }
             }
@@ -132,10 +124,12 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
                 }
             }
 
-            var count = await countQuery.FirstAsync<int>();
+            var count = await query.FirstAsync<int>();
 
             var limit = query.Offset((page - 1) * perPage).Limit(perPage);
 
+            OnIndexQuery(ref query);
+            
             var result = (await limit.GetAsync()).Cast<IDictionary<string, object?>>().ToList();
 
 

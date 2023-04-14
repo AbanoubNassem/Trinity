@@ -190,11 +190,10 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         }
 
         var record = await queryBuilder.From($"{Table} AS t")
-                .Where($"t.{PrimaryKeyColumn}", key)
-                .FirstOrDefaultAsync() as IDictionary<string, object?>
-            ;
+            .Where($"t.{PrimaryKeyColumn}", key)
+            .FirstOrDefaultAsync() as IDictionary<string, object?>;
 
-        if (record == null) return record;
+        if (record == null) return null;
 
         foreach (ITrinityField field in Fields.Values)
         {

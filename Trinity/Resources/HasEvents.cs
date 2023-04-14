@@ -1,3 +1,5 @@
+using SqlKata;
+
 namespace AbanoubNassem.Trinity.Resources;
 
 public abstract partial class TrinityResource<TPrimaryKeyType>
@@ -60,5 +62,13 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
     protected virtual Task AfterDelete(IReadOnlyList<string> deletedIds, bool isDeletedSuccessfully)
     {
         return Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Executes before executing resource index page query.
+    /// </summary>
+    /// <param name="query">The query being executed.</param>
+    protected  virtual void OnIndexQuery(ref Query query)
+    {
     }
 }
