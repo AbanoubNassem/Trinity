@@ -7,6 +7,13 @@
         <AssemblyName>AbanoubNassem.Trinity</AssemblyName>
         <RootNamespace>AbanoubNassem.Trinity</RootNamespace>
         <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <Version>0.0.1</Version>
+        <Title>Trinity</Title>
+        <Description>Trinity is a powerful Single-Page Application (SPA) administration tool that is designed to streamline common administrative tasks and enhance the productivity of developers. With its feature-rich and beautifully-designed interface, built using C# and ASP.NET, Trinity makes it easy to manage your website's backend with ease.</Description>
+        <PackageProjectUrl>https://github.com/AbanoubNassem/Trinity</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/AbanoubNassem/Trinity#license</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/AbanoubNassem/Trinity</RepositoryUrl>
+        <PackageTags>"trinity", "admin panel", "administration tool", "C#", "ASP.NET", "Dapper", "SqlKata", "FluentValidation", "MiniProfiler", "ReactJS", "PrimeReact", "InertiaJS", "Vite", "SPA"</PackageTags>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -29,6 +36,7 @@
     
     <ItemGroup>
         <EmbeddedResource Include="wwwroot/**/**/**/*" Pack="false" />
+        <EmbeddedResource Update="wwwroot\dist\logo.png" />
     </ItemGroup>
     
     <ItemGroup>
