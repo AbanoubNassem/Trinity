@@ -7,7 +7,7 @@
         <AssemblyName>AbanoubNassem.Trinity</AssemblyName>
         <RootNamespace>AbanoubNassem.Trinity</RootNamespace>
         <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
         <Title>Trinity</Title>
         <Description>Trinity is a powerful Single-Page Application (SPA) administration tool that is designed to streamline common administrative tasks and enhance the productivity of developers. With its feature-rich and beautifully-designed interface, built using C# and ASP.NET, Trinity makes it easy to manage your website's backend with ease.</Description>
         <PackageProjectUrl>https://github.com/AbanoubNassem/Trinity</PackageProjectUrl>
@@ -17,11 +17,11 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-      <DocumentationFile>bin\Debug\Trinity.xml</DocumentationFile>
+        <DocumentationFile>bin/Debug/Trinity.xml</DocumentationFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DocumentationFile>bin\Release\Trinity.xml</DocumentationFile>
+        <DocumentationFile>bin/Release/Trinity.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -33,19 +33,26 @@
         <PackageReference Include="SqlKata" Version="2.4.0" />
         <PackageReference Include="SqlKata.Execution" Version="2.4.0" />
     </ItemGroup>
-    
+
     <ItemGroup>
         <EmbeddedResource Include="wwwroot/**/**/**/*" Pack="false" />
-        <EmbeddedResource Update="wwwroot\dist\logo.png" />
     </ItemGroup>
-    
+
+    <ItemGroup Label="FilesToCopy">
+        <None Include="Locales\**">
+            <Pack>true</Pack>
+            <PackageCopyToOutput>true</PackageCopyToOutput>
+            <PackagePath>contentFiles\any\any\Locales;content\any\any\Locales</PackagePath>
+        </None>
+    </ItemGroup>
+
+
     <ItemGroup>
-        <Watch Remove="wwwroot\**\*" />
+        <Watch Remove="wwwroot/**/*" />
     </ItemGroup>
-    
+
     <ItemGroup>
-      <Folder Include="Middlewares\" />
-      <Folder Include="wwwroot" />
+        <Folder Include="Middlewares/" />
+        <Folder Include="wwwroot" />
     </ItemGroup>
-    
 </Project>
