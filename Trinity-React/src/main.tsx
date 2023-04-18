@@ -1,4 +1,3 @@
-import 'primereact/resources/themes/tailwind-light/theme.css';
 import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
@@ -47,7 +46,6 @@ createInertiaApp({
     },
     setup({ el, App, props }) {
         trinityApp.init(props.initialPage.props);
-        document.body.setAttribute('dir', trinityApp.isRtl ? 'rtl' : 'ltr');
 
         ReactDOM.createRoot(el).render(
             <LayoutProvider>

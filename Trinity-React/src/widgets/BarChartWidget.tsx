@@ -1,13 +1,13 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
 import BarChartWidget from '@/types/Models/Widgets/BarChartWidget';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Chart } from 'primereact/chart';
 
 const BarChartWidget = ({ widget }: WidgetProps<BarChartWidget>) => {
     const chart = useRef<Chart>(null);
 
     return (
-        <div className="card my-0 py-0 flex justify-content-center">
+        <div className="card widget-container my-0 py-0 flex justify-content-center">
             <Chart
                 ref={chart}
                 type="bar"

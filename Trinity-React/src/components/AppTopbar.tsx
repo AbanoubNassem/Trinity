@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { LayoutContext } from '@/contexts/LayoutContext';
 import { Link, router } from '@inertiajs/react';
 import { classNames } from 'primereact/utils';
@@ -9,6 +9,8 @@ import { Menu } from 'primereact/menu';
 import { useLocalize } from '@/hooks/trinity_localizer';
 import { useTrinityUser } from '@/hooks/trinity_user';
 import { Avatar } from 'primereact/avatar';
+import PrimeReact from 'primereact/api';
+import { changeTrinityTheme } from '@/utilities/trinity_theme';
 
 const AppTopbar = forwardRef((props, ref) => {
     const configs = useConfigs();
@@ -21,6 +23,7 @@ const AppTopbar = forwardRef((props, ref) => {
     const topbarmenuRef = useRef(null);
     const topbarmenubuttonRef = useRef(null);
     const profileMenu = useRef<Menu>(null);
+    const [theme, setTheme] = useState(localStorage.getItem('theme') ?? 'light');
 
     useImperativeHandle(ref, () => ({
         menubutton: menubuttonRef.current,
@@ -28,6 +31,11 @@ const AppTopbar = forwardRef((props, ref) => {
         topbarmenubutton: topbarmenubuttonRef.current
     }));
 
+    const changeTheme = () => {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        changeTrinityTheme(newTheme);
+    };
     const profileItems = [
         {
             label: user.name,
@@ -46,18 +54,29 @@ const AppTopbar = forwardRef((props, ref) => {
 
     return (
         <div className="layout-topbar">
-            <Link href={`/${configs.prefix}/`}>
-                <div className="layout-topbar-logo">
-                    <>
-                        <img
-                            src={logo}
-                            width="135px"
-                            height={'35px'}
-                            alt={configs?.title}
-                        />
-                    </>
-                </div>
-            </Link>
+            <div className="flex justify-content-center align-items-center">
+                <Link href={`/${configs.prefix}/`}>
+                    <div className="layout-topbar-logo">
+                        <>
+                            <img
+                                src={logo}
+                                width="135px"
+                                height={'35px'}
+                                alt={configs?.title}
+                            />
+                        </>
+                    </div>
+                </Link>
+
+                <Button
+                    icon={`pi ${theme === 'light' ? 'pi-sun' : 'pi-moon'}`}
+                    rounded
+                    text
+                    size="large"
+                    aria-label="Theme"
+                    onClick={changeTheme}
+                />
+            </div>
 
             <button
                 ref={menubuttonRef}
@@ -95,7 +114,7 @@ const AppTopbar = forwardRef((props, ref) => {
                         <i className="pi pi-user"></i>
                     )}
 
-                    <span className="mx-1">{localize('profile')}</span>
+                    <span className="mx-1 text-white">{localize('profile')}</span>
                 </Button>
                 <Menu
                     ref={profileMenu}

@@ -52,6 +52,7 @@ import TrinityField from '@/types/Models/Fields/TrinityField';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
 import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 import PageProps from '@/types/Props/Pages/PageProps';
+import { changeTrinityTheme } from '@/utilities/trinity_theme';
 
 export class TrinityApp {
     private static localizer: TrinityLocalizer;
@@ -81,6 +82,11 @@ export class TrinityApp {
         setupProgress(this.configs.progressSettings);
 
         this.loadDefaults();
+
+        document.body.setAttribute('dir', this.isRtl ? 'rtl' : 'ltr');
+
+        const theme = localStorage.getItem('theme') ?? 'light';
+        changeTrinityTheme(theme);
     };
 
     private static loadDefaults() {

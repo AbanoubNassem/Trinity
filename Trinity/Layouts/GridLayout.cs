@@ -12,8 +12,7 @@ public class GridLayout : TrinityLayout<GridLayout>
     public override string ComponentName => "GridLayout";
 
     /// <inheritdoc />
-    public GridLayout(List<IFormComponent> schema) : base(schema, 2)
+    public GridLayout(List<IFormComponent> schema, int? columns = null) : base(schema, columns ?? 2)
     {
-        
     }
 }

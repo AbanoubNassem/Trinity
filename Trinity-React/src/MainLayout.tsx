@@ -107,8 +107,8 @@ const MainLayout = (props: any) => {
     });
 
     const containerClass = classNames('layout-wrapper', {
-        'layout-theme-light': layoutConfig.colorScheme === 'light',
-        'layout-theme-dark': layoutConfig.colorScheme === 'dark',
+        'layout-theme-light': localStorage.getItem('theme') !== 'dark',
+        'layout-theme-dark': localStorage.getItem('theme') === 'dark',
         'layout-overlay': layoutConfig.menuMode === 'overlay',
         'layout-static': layoutConfig.menuMode === 'static',
         'layout-static-inactive': layoutState.staticMenuDesktopInactive && layoutConfig.menuMode === 'static',

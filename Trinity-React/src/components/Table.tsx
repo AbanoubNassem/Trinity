@@ -363,6 +363,7 @@ const Table = () => {
             <Toolbar
                 start={toolbarLeftContents}
                 end={toolbarRightContents}
+                style={{ overflowY: 'auto' }}
             />
 
             <ActionDialog

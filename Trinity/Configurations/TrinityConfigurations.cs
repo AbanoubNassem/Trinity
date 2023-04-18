@@ -59,7 +59,7 @@ public class TrinityConfigurations
     /// The website title.
     /// </summary>
     public string Title { get; set; } = "Trinity";
-    
+
     /// <summary>
     /// The fallback locale.
     /// </summary>
