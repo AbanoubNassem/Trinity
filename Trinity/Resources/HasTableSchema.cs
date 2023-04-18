@@ -124,7 +124,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
                 }
             }
 
-            var count = await query.FirstAsync<int>();
+            var count = await query.Clone().CountAsync<int>();
 
             var limit = query.Offset((page - 1) * perPage).Limit(perPage);
 

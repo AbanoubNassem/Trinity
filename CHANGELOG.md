@@ -2,6 +2,10 @@
 
 All notable changes to `Trinity` will be documented in this file.
 
+## v0.0.5-v0.0.6
+
+- Fixed issue with loading rows count.
+
 ## v0.0.4
 
 - Minor bug fixes
