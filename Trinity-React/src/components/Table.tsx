@@ -31,7 +31,6 @@ const Table = () => {
     const [loading, setLoading] = useState(false);
     const dtRef = useRef<DataTable<Array<any>>>(null);
     const globalSearchInput = useRef<HTMLInputElement>(null);
-    const toggleableFieldsDiv = useRef<HTMLDivElement>();
     const toggleableMultiSelect = useRef<MultiSelect>(null);
     const [currentAction, setCurrentAction] = useState<{ action: TrinityActionModel; items: Array<any> }>();
     const [selectedItems, setSelectedItems] = useState<Array<any>>([]);
@@ -270,7 +269,6 @@ const Table = () => {
                 <div
                     id="toggleableFields"
                     className="mx-2"
-                    ref={toggleableFieldsDiv as any}
                 >
                     {toggleableColumns.length > 0 && (
                         <>
@@ -282,7 +280,7 @@ const Table = () => {
 
                             <MultiSelect
                                 ref={toggleableMultiSelect}
-                                appendTo={toggleableFieldsDiv.current}
+                                appendTo={document.getElementById('toggleableFields')}
                                 className="hidden"
                                 optionLabel="header"
                                 panelClassName="toggleableFields"

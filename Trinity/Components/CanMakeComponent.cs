@@ -106,38 +106,73 @@ public class CanMakeComponent
         {
             var constructors = componentType.GetConstructors(ConstructorFlags);
 
+            ConstructorInfo? bestMatchConstructor = null;
+            var maxMatchedParams = -1;
+
             foreach (var constructor in constructors)
             {
                 var parameters = constructor.GetParameters();
                 if (parameters.Length < constructorParams.Count) continue;
 
                 var constructorArgs = new List<object>(constructorParams);
-                foreach (var param in parameters)
+                var argsMatch = true;
+                var matchedParams = 0;
+
+                for (var i = 0; i < parameters.Length; i++)
                 {
-                    if (!param.IsOptional) continue;
-                    while (constructorArgs.Count <= param.Position)
+                    var param = parameters[i];
+                    if (i < constructorArgs.Count)
                     {
-                        constructorArgs.Add(Type.Missing);
+                        if (!param.ParameterType.IsInstanceOfType(constructorArgs[i]))
+                        {
+                            argsMatch = false;
+                            break;
+                        }
+
+                        matchedParams++;
+                    }
+                    else
+                    {
+                        if (param is not { HasDefaultValue: false, IsOptional: false }) continue;
+                        argsMatch = false;
+                        break;
                     }
                 }
 
-                if (constructorArgs.Count != parameters.Length) continue;
+                if (!argsMatch) continue;
 
-                matchingConstructor = constructor;
-                constructorParams = constructorArgs;
-                break;
+                if (matchedParams <= maxMatchedParams) continue;
+                bestMatchConstructor = constructor;
+                maxMatchedParams = matchedParams;
             }
 
-            if (matchingConstructor == null)
+            if (bestMatchConstructor == null)
             {
                 throw new ArgumentException("No matching constructor found.");
             }
 
+            matchingConstructor = bestMatchConstructor;
             cachedConstructors[constructorParamTypes] = matchingConstructor;
         }
 
+        var finalConstructorParams = new List<object>(constructorParams);
+        var finalParameters = matchingConstructor.GetParameters();
+
+        for (var i = finalConstructorParams.Count; i < finalParameters.Length; i++)
+        {
+            var param = finalParameters[i];
+            if (param.HasDefaultValue)
+            {
+                finalConstructorParams.Add(param.DefaultValue!);
+            }
+            else if (param.IsOptional)
+            {
+                finalConstructorParams.Add(Type.Missing);
+            }
+        }
+
         var component = (T)Activator
-            .CreateInstance(componentType, ConstructorFlags, null, constructorParams.ToArray(), null)!;
+            .CreateInstance(componentType, ConstructorFlags, null, finalConstructorParams.ToArray(), null)!;
 
         SetComponentProperty(component, componentType, "Configurations", Configurations);
         SetComponentProperty(component, componentType, "ServiceProvider", ServiceProvider);

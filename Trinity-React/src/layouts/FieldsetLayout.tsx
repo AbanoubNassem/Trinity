@@ -19,7 +19,7 @@ const FieldsetLayout = ({ configs, resource, component, record, formData, setFie
                     trinityApp.registeredComponents?.has(innerComponent.componentName) ? (
                         <div
                             key={`${component.componentName}_${index}_${innerComponent.componentName}`}
-                            className={component.columns ? `md:col-${12 / component.columns}` : 'col'}
+                            className={component.columns ? `md:col-${12 / component.columns}` : 'sm:col-12 md:col'}
                         >
                             {trinityApp.registeredComponents?.get(innerComponent.componentName)!({
                                 configs: configs,
@@ -35,7 +35,7 @@ const FieldsetLayout = ({ configs, resource, component, record, formData, setFie
                     ) : (
                         <div
                             key={`form_${index}_${innerComponent.componentName}`}
-                            className={component.columns ? `md:col-${12 / component.columns}` : 'col'}
+                            className={component.columns ? `md:col-${12 / component.columns}` : 'sm:col-12 md:col'}
                         />
                     )
                 )}

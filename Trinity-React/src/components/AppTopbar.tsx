@@ -100,22 +100,28 @@ const AppTopbar = forwardRef((props, ref) => {
                 ref={topbarmenuRef}
                 className={classNames('layout-topbar-menu', { 'layout-topbar-menu-mobile-active': layoutState.profileSidebarVisible })}
             >
-                <Button
-                    className="p-link layout-topbar-button"
-                    onClick={(e) => profileMenu.current!.toggle(e)}
-                >
-                    {user.avatar?.length ? (
+                {user.avatar?.length ? (
+                    <div
+                        className="flex align-items-center cursor-pointer"
+                        onClick={(e) => profileMenu.current!.toggle(e)}
+                    >
                         <Avatar
                             image={user.avatar}
                             shape="circle"
                             size="large"
                         />
-                    ) : (
+                        <span className="mx-3 sm:block md:hidden text-lg">{localize('profile')}</span>
+                    </div>
+                ) : (
+                    <Button
+                        className="p-link layout-topbar-button"
+                        onClick={(e) => profileMenu.current!.toggle(e)}
+                        rounded
+                    >
                         <i className="pi pi-user"></i>
-                    )}
-
-                    <span className="mx-1 text-white">{localize('profile')}</span>
-                </Button>
+                        <span className="mx-1 text-white">{localize('profile')}</span>
+                    </Button>
+                )}
                 <Menu
                     ref={profileMenu}
                     popup

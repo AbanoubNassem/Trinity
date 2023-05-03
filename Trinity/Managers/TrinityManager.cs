@@ -124,8 +124,17 @@ public class TrinityManager
         var trinityResourceType = typeof(ITrinityResource);
         var types = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(s => s.GetTypes())
-            .Where(p => trinityResourceType.IsAssignableFrom(p) && p is { IsAbstract: false, IsInterface: false });
+            .Where(p => trinityResourceType.IsAssignableFrom(p) &&
+                        p is { IsAbstract: false, IsInterface: false } &&
+                        p.Namespace != "AbanoubNassem.Trinity.Resources"
+            )
+            .ToList();
 
+
+        if (!types.Any(x => x.Name is "User" or "UserResource"))
+        {
+            types.Add(typeof(UserResource));
+        }
 
         foreach (var resourceType in types)
         {
@@ -245,10 +254,10 @@ public class TrinityManager
             });
 
             _configurations.ExtraJavaScriptSources.AddRange(plugin.GetScriptSources()
-                .Select(x => x.StartsWith("http") ? x : $"{path}/dist{x}" )
+                .Select(x => x.StartsWith("http") ? x : $"{path}/dist{x}")
             );
             _configurations.ExtraStyleSources.AddRange(plugin.GetStyleSources()
-                .Select(x => x.StartsWith("http") ? x :  $"{path}/dist{x}")
+                .Select(x => x.StartsWith("http") ? x : $"{path}/dist{x}")
             );
 
             // Plugins.Add(plugin);
