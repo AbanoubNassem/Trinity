@@ -1,6 +1,9 @@
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components.Interfaces;
+using AbanoubNassem.Trinity.Hubs;
+using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Utilities;
+using Microsoft.AspNetCore.SignalR;
 
 namespace AbanoubNassem.Trinity.Components.TrinityAction;
 
@@ -93,6 +96,11 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
 
     /// <inheritdoc />
     public string ActionName { get; init; }
+
+    /// <summary>
+    /// A reference to <see cref="TrinityHub"/>. 
+    /// </summary>
+    protected IHubContext<TrinityHub> HubContext { get; init; } = null!;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TrinityAction{T}"/> class.

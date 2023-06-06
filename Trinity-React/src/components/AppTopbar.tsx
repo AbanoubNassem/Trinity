@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useContext, useImperativeHandle, useRef, useState } from 'react';
 import { LayoutContext } from '@/contexts/LayoutContext';
 import { Link, router } from '@inertiajs/react';
 import { classNames } from 'primereact/utils';
@@ -9,8 +9,8 @@ import { Menu } from 'primereact/menu';
 import { useLocalize } from '@/hooks/trinity_localizer';
 import { useTrinityUser } from '@/hooks/trinity_user';
 import { Avatar } from 'primereact/avatar';
-import PrimeReact from 'primereact/api';
 import { changeTrinityTheme } from '@/utilities/trinity_theme';
+import trinityApp from '@/TrinityApp';
 
 const AppTopbar = forwardRef((props, ref) => {
     const configs = useConfigs();
@@ -44,8 +44,9 @@ const AppTopbar = forwardRef((props, ref) => {
                     label: localize('logout'),
                     icon: 'pi pi-sign-out',
                     href: '',
-                    command: () => {
-                        router.post(`/${configs.prefix}/logout`);
+                    command: async () => {
+                        await router.post(`/${configs.prefix}/logout`);
+                        await trinityApp.hubConnection.stop();
                     }
                 }
             ]

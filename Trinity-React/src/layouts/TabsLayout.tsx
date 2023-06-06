@@ -28,7 +28,7 @@ const TabsLayout = ({ configs, resource, component, record, formData, setFieldVa
                             trinityApp.registeredComponents?.has(innerComponent.componentName) ? (
                                 <div
                                     key={`${component.componentName}_${index}_${innerComponent.componentName}`}
-                                    className={(tab as TrinityLayout).columns ? `md:col-${12 / (tab as TrinityLayout).columns!}` : 'sm:col-12 md:col'}
+                                    className={classNames('col-12', (tab as TrinityLayout).columns ? `md:col-${12 / (tab as TrinityLayout).columns!}` : 'md:col')}
                                 >
                                     {trinityApp.registeredComponents?.get(innerComponent.componentName)!({
                                         configs: configs,
@@ -44,7 +44,7 @@ const TabsLayout = ({ configs, resource, component, record, formData, setFieldVa
                             ) : (
                                 <div
                                     key={`form_${index}_${innerComponent.componentName}`}
-                                    className={(tab as TrinityLayout).columns ? `md:col-${12 / (tab as TrinityLayout).columns!}` : 'sm:col-12 md:col'}
+                                    className={classNames('col-12', (tab as TrinityLayout).columns ? `md:col-${12 / (tab as TrinityLayout).columns!}` : 'md:col')}
                                 />
                             )
                         )}

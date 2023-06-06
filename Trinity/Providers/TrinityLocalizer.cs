@@ -78,7 +78,7 @@ public class TrinityLocalizer
                     var key = reader.Value as string;
                     reader.Read();
                     var value = _serializer.Deserialize<string>(reader);
-                    _locales[locale].TryAdd(key!, new LocalizedString(key!, value, false));
+                    _locales[locale].TryAdd(key!, new LocalizedString(key!, value ?? string.Empty, false));
                 }
             }
             catch

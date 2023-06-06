@@ -1,6 +1,8 @@
 using System.Globalization;
 using AbanoubNassem.Trinity.Configurations;
+using AbanoubNassem.Trinity.Hubs;
 using AbanoubNassem.Trinity.Managers;
+using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Utilities;
 using InertiaCore;
@@ -99,7 +101,8 @@ public static class AppExtensions
                 configs.MiniProfilerConfigures?.Invoke(conf);
             });
 
-
+        services.AddSignalR();
+        services.AddSingleton<TrinityNotifications>();
         trinityManager.Init();
         return services;
     }
@@ -179,6 +182,7 @@ public static class AppExtensions
         app.UseAuthentication();
         app.UseAuthorization();
         app.SetupLocales();
+        app.MapHub<TrinityHub>("/trinity-hub");
 
         app.Use((context, next) =>
         {

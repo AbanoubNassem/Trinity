@@ -1,6 +1,7 @@
+import React from 'react';
+import * as signalR from '@microsoft/signalr';
 import Configs from '@/types/Models/Configs';
 import TrinityResource from '@/types/Models/TrinityResource';
-import React from 'react';
 import { Toast } from 'primereact/toast';
 import GridLayout from '@/layouts/GridLayout';
 import PanelLayout from '@/layouts/PanelLayout';
@@ -66,6 +67,7 @@ export class TrinityApp {
     static registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static toast?: Toast;
     static isRtl: boolean = false;
+    static hubConnection = new signalR.HubConnectionBuilder().withUrl('/trinity-hub').build();
 
     static serving(callback: (app: typeof TrinityApp) => void) {
         callback(this);
@@ -87,6 +89,11 @@ export class TrinityApp {
 
         const theme = localStorage.getItem('theme') ?? 'light';
         changeTrinityTheme(theme);
+
+        this.hubConnection.start().catch((err) => console.log(err));
+        this.hubConnection.on('hello', () => {
+            console.log('hello');
+        });
     };
 
     private static loadDefaults() {

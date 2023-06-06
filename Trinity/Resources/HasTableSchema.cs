@@ -4,7 +4,6 @@ using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.RequestHelpers;
-using AbanoubNassem.Trinity.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using SqlKata.Execution;

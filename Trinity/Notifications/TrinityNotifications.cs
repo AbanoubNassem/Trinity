@@ -1,4 +1,7 @@
-namespace AbanoubNassem.Trinity.Utilities;
+using AbanoubNassem.Trinity.Hubs;
+using Microsoft.AspNetCore.SignalR;
+
+namespace AbanoubNassem.Trinity.Notifications;
 
 /// <summary>
 /// specifies the type of the message.
@@ -29,9 +32,19 @@ public enum NotificationSeverity
 /// <summary>
 /// TrinityNotifications allow you to notify Nova users of events within your application.
 /// </summary>
-public static class TrinityNotifications
+public class TrinityNotifications
 {
-    private static readonly List<object> Notifications = new();
+    private readonly List<object> _notifications = new();
+    private IHubContext<TrinityHub> _hubContext;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="hubContext"></param>
+    public TrinityNotifications(IHubContext<TrinityHub> hubContext)
+    {
+        _hubContext = hubContext;
+    }
 
     /// <summary>
     /// Show a Toast of a successful message. 
@@ -41,7 +54,7 @@ public static class TrinityNotifications
     /// <param name="lifeTimeMs">Delay in milliseconds to close the message automatically.</param>
     /// <param name="closable">Whether the message can be closed manually using the close icon.</param>
     /// <param name="sticky">When enabled, message is not removed automatically.</param>
-    public static void NotifySuccess(string message, string? title = null, int lifeTimeMs = 3000, bool closable = true,
+    public void NotifySuccess(string message, string? title = null, int lifeTimeMs = 3000, bool closable = true,
         bool sticky = false)
     {
         Notify(new
@@ -58,7 +71,7 @@ public static class TrinityNotifications
     /// <param name="lifeTimeMs">Delay in milliseconds to close the message automatically.</param>
     /// <param name="closable">Whether the message can be closed manually using the close icon.</param>
     /// <param name="sticky">When enabled, message is not removed automatically.</param>
-    public static void NotifyError(string message, string? title = null, int lifeTimeMs = 3000, bool closable = true,
+    public void NotifyError(string message, string? title = null, int lifeTimeMs = 3000, bool closable = true,
         bool sticky = false)
     {
         Notify(new
@@ -75,7 +88,7 @@ public static class TrinityNotifications
     /// <param name="lifeTimeMs">Delay in milliseconds to close the message automatically.</param>
     /// <param name="closable">Whether the message can be closed manually using the close icon.</param>
     /// <param name="sticky">When enabled, message is not removed automatically.</param>
-    public static void NotifyInformation(string message, string? title = null, int lifeTimeMs = 3000,
+    public void NotifyInformation(string message, string? title = null, int lifeTimeMs = 3000,
         bool closable = true,
         bool sticky = false)
     {
@@ -93,7 +106,7 @@ public static class TrinityNotifications
     /// <param name="lifeTimeMs">Delay in milliseconds to close the message automatically.</param>
     /// <param name="closable">Whether the message can be closed manually using the close icon.</param>
     /// <param name="sticky">When enabled, message is not removed automatically.</param>
-    public static void NotifyWarning(string message, string? title = null, int lifeTimeMs = 3000, bool closable = true,
+    public void NotifyWarning(string message, string? title = null, int lifeTimeMs = 3000, bool closable = true,
         bool sticky = false)
     {
         Notify(new
@@ -102,20 +115,20 @@ public static class TrinityNotifications
         });
     }
 
-    private static void Notify(object notification)
+    private void Notify(object notification)
     {
-        Notifications.Add(notification);
+        _notifications.Add(notification);
     }
 
     /// <summary>
     /// Flush the notifications and clear it.
     /// </summary>
     /// <returns>A list of all the notifications added before flushing.</returns>
-    public static List<object> Flush()
+    public List<object> Flush()
     {
-        var tmp = new List<object>(Notifications);
+        var tmp = new List<object>(_notifications);
 
-        Notifications.Clear();
+        _notifications.Clear();
 
         return tmp;
     }

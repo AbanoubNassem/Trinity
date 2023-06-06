@@ -4,10 +4,14 @@ using System.Reflection;
 using System.Security.Claims;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Configurations;
+using AbanoubNassem.Trinity.Hubs;
+using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Providers;
+using AbanoubNassem.Trinity.Utilities;
 using AbanoubNassem.Trinity.Validators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
 namespace AbanoubNassem.Trinity.Components;
@@ -76,6 +80,15 @@ public class CanMakeComponent
     /// </summary>
     protected TrinityLocalizer Localizer { get; init; } = null!;
 
+    /// <summary>
+    /// A reference to <see cref="TrinityHub"/>. 
+    /// </summary>
+    protected IHubContext<TrinityHub> HubContext { get; init; } = null!;
+
+    /// <summary>
+    /// A reference to <see cref="TrinityNotifications"/>. 
+    /// </summary>
+    protected TrinityNotifications TrinityNotifications { get; init; } = null!;
 
     private const BindingFlags ConstructorFlags =
         BindingFlags.Instance | BindingFlags.Public | BindingFlags.OptionalParamBinding;
@@ -177,6 +190,8 @@ public class CanMakeComponent
         SetComponentProperty(component, componentType, "Configurations", Configurations);
         SetComponentProperty(component, componentType, "ServiceProvider", ServiceProvider);
         SetComponentProperty(component, componentType, "Localizer", Localizer);
+        SetComponentProperty(component, componentType, "HubContext", HubContext);
+        SetComponentProperty(component, componentType, "TrinityNotifications", TrinityNotifications);
 
         component.Setup();
 

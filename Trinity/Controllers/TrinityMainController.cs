@@ -7,11 +7,11 @@ using AbanoubNassem.Trinity.Components.TrinityField;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Managers;
+using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Pages;
 using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.RequestHelpers;
 using AbanoubNassem.Trinity.Resources;
-using AbanoubNassem.Trinity.Utilities;
 using Humanizer;
 using InertiaCore;
 using Microsoft.AspNetCore.Authentication;
@@ -33,6 +33,7 @@ public sealed class TrinityMainController : TrinityController
     private readonly TrinityConfigurations _configurations;
     private readonly TrinityManager _trinityManager;
     private readonly TrinityLocalizer _localizer;
+    private readonly TrinityNotifications _trinityNotifications;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TrinityMainController"/> class.
@@ -40,12 +41,14 @@ public sealed class TrinityMainController : TrinityController
     /// <param name="configurations">The <see cref="TrinityConfigurations"/> object to use.</param>
     /// <param name="trinityManager">The <see cref="TrinityManager"/> object to use.</param>
     /// <param name="localizer">The <see cref="TrinityLocalizer"/> object to use.</param>
+    /// <param name="trinityNotifications">The <see cref="TrinityNotifications"/> object to use.</param>
     public TrinityMainController(TrinityConfigurations configurations, TrinityManager trinityManager,
-        TrinityLocalizer localizer)
+        TrinityLocalizer localizer, TrinityNotifications trinityNotifications)
     {
         _configurations = configurations;
         _trinityManager = trinityManager;
         _localizer = localizer;
+        _trinityNotifications = trinityNotifications;
     }
 
     /// <summary>
@@ -210,7 +213,7 @@ public sealed class TrinityMainController : TrinityController
                 break;
         }
 
-        responseData.Notifications = TrinityNotifications.Flush();
+        responseData.Notifications = _trinityNotifications.Flush();
         return Inertia.Render(view, responseData);
     }
 
@@ -242,7 +245,7 @@ public sealed class TrinityMainController : TrinityController
         return Ok(new
         {
             data = await uploadField.Upload(file),
-            notifications = TrinityNotifications.Flush(),
+            notifications = _trinityNotifications.Flush(),
         });
     }
 
@@ -277,7 +280,7 @@ public sealed class TrinityMainController : TrinityController
 
             if (!filesToDelete.Any())
             {
-                TrinityNotifications.NotifyError(_localizer["nothing_to_delete_revert"]);
+                _trinityNotifications.NotifyError(_localizer["nothing_to_delete_revert"]);
                 return await Task.FromResult<IActionResult>(BadRequest(_localizer["nothing_to_delete_revert"]));
             }
 
@@ -288,7 +291,7 @@ public sealed class TrinityMainController : TrinityController
         return await Task.FromResult<IActionResult>(Ok(new
         {
             data,
-            notifications = TrinityNotifications.Flush(),
+            notifications = _trinityNotifications.Flush(),
         }));
     }
 
@@ -362,7 +365,7 @@ public sealed class TrinityMainController : TrinityController
 
         if (validated == null)
         {
-            return Ok(TrinityAction.Errors(TrinityNotifications.Flush(),
+            return Ok(TrinityAction.Errors(_trinityNotifications.Flush(),
                 ModelState.ToDictionary(k => k.Key.Camelize(),
                     v => v.Value?.Errors.FirstOrDefault()?.ErrorMessage ?? ""
                 ))
