@@ -7,7 +7,6 @@ using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Hubs;
 using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Providers;
-using AbanoubNassem.Trinity.Utilities;
 using AbanoubNassem.Trinity.Validators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;

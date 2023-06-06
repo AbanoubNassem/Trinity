@@ -1,6 +1,3 @@
-using AbanoubNassem.Trinity.Hubs;
-using Microsoft.AspNetCore.SignalR;
-
 namespace AbanoubNassem.Trinity.Notifications;
 
 /// <summary>
@@ -35,15 +32,26 @@ public enum NotificationSeverity
 public class TrinityNotifications
 {
     private readonly List<object> _notifications = new();
-    private IHubContext<TrinityHub> _hubContext;
+    private readonly IServiceProvider _serviceProvider;
 
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="hubContext"></param>
-    public TrinityNotifications(IHubContext<TrinityHub> hubContext)
+    /// <param name="serviceProvider"></param>
+    public TrinityNotifications(IServiceProvider serviceProvider)
     {
-        _hubContext = hubContext;
+        _serviceProvider = serviceProvider;
+    }
+
+    /// <summary>
+    /// Notifies users with the specified TrinityNotification using the specified user identifiers.
+    /// </summary>
+    /// <param name="notification">The TrinityNotification to send.</param>
+    /// <param name="userIdentifiers">the user identifiers.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public async Task NotifyUsers(TrinityNotification notification, params string[] userIdentifiers)
+    {
+        await notification.Send(_serviceProvider, userIdentifiers);
     }
 
     /// <summary>

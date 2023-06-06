@@ -7,7 +7,6 @@ using AbanoubNassem.Trinity.Pages;
 using AbanoubNassem.Trinity.Plugins;
 using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Resources;
-using AbanoubNassem.Trinity.Utilities;
 using Humanizer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

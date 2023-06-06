@@ -91,8 +91,8 @@ export class TrinityApp {
         changeTrinityTheme(theme);
 
         this.hubConnection.start().catch((err) => console.log(err));
-        this.hubConnection.on('hello', () => {
-            console.log('hello');
+        this.hubConnection.on('ANewRecordAddedNotification', (data) => {
+            console.log(data);
         });
     };
 

@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace AbanoubNassem.Trinity.Hubs;
 
+/// <summary>
+///  Represents a SignalR hub for Trinity functionality.
+/// </summary>
 [Authorize]
 public class TrinityHub : Hub
 {
-    async Task SendHello()
-    {
-        await Clients.All.SendAsync("hello");
-    }
 }
