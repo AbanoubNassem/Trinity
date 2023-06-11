@@ -1,58 +1,7 @@
 using AbanoubNassem.Trinity.Components.TrinityColumn;
+using AbanoubNassem.Trinity.Models;
 
 namespace AbanoubNassem.Trinity.Columns;
-
-/// <summary>
-/// Defines an enumeration of badge severity types.
-/// </summary>
-public enum BadgeSeverityType : byte
-{
-    /// <summary>
-    /// Indicates no severity.
-    /// </summary>
-    None,
-
-    /// <summary>
-    /// Indicates a success severity.
-    /// </summary>
-    Success,
-
-    /// <summary>
-    /// Indicates an info severity.
-    /// </summary>
-    Info,
-
-    /// <summary>
-    /// Indicates a warning severity.
-    /// </summary>
-    Warning,
-
-    /// <summary>
-    /// Indicates a danger severity.
-    /// </summary>
-    Danger
-}
-
-/// <summary>
-/// Defines an enumeration of badge size types.
-/// </summary>
-public enum BadgeSizeType
-{
-    /// <summary>
-    /// Indicates a normal size badge.
-    /// </summary>
-    Normal,
-
-    /// <summary>
-    /// Indicates a large size badge.
-    /// </summary>
-    Large,
-
-    /// <summary>
-    /// Indicates an extra large size badge.
-    /// </summary>
-    XLarge
-}
 
 /// <summary>
 /// Represents a column of badge components.

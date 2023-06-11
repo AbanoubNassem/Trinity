@@ -1,7 +1,6 @@
 using System.Collections.Concurrent;
 using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
-using AbanoubNassem.Trinity.Hubs;
 using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Pages;
 using AbanoubNassem.Trinity.Plugins;
@@ -11,7 +10,6 @@ using Humanizer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
@@ -112,9 +110,6 @@ public class TrinityManager
 
                 GetPropertyInfo(pageType, "Localizer")?.SetValue(page, _trinityLocalizer);
                 GetPropertyInfo(pageType, "ModelState")?.SetValue(page, modelState);
-                GetPropertyInfo(pageType, "HubContext")?.SetValue(page,
-                    httpContext.RequestServices.GetRequiredService<IHubContext<TrinityHub>>()
-                );
                 GetPropertyInfo(pageType, "TrinityNotifications")?.SetValue(page,
                     httpContext.RequestServices.GetRequiredService<TrinityNotifications>()
                 );
@@ -210,10 +205,6 @@ public class TrinityManager
                     GetPropertyInfo(resourceType, "ConnectionFactory")?.SetValue(resource,
                         _configurations.ConnectionFactory);
                 }
-
-                GetPropertyInfo(resourceType, "HubContext")?.SetValue(resource,
-                    httpContext.RequestServices.GetRequiredService<IHubContext<TrinityHub>>()
-                );
 
                 GetPropertyInfo(resourceType, "TrinityNotifications")?.SetValue(resource,
                     httpContext.RequestServices.GetRequiredService<TrinityNotifications>()

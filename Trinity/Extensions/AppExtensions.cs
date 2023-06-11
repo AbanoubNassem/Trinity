@@ -182,7 +182,8 @@ public static class AppExtensions
         app.UseAuthentication();
         app.UseAuthorization();
         app.SetupLocales();
-        app.MapHub<TrinityHub>("/trinity-hub");
+
+        app.MapHub<TrinityNotificationsHub>($"{configs.Prefix}/trinity-notifications-hub");
 
         app.Use((context, next) =>
         {

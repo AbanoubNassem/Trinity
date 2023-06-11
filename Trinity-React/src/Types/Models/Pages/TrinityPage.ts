@@ -1,4 +1,5 @@
 import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
+import { BadgeProps } from 'primereact/badge';
 
 export default interface TrinityPage {
     slug: string;
@@ -7,4 +8,5 @@ export default interface TrinityPage {
     icon?: string;
     schema: Array<TrinityWidget>;
     canView: boolean;
+    badge?: BadgeProps;
 }

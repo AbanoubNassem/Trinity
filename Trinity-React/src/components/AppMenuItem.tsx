@@ -5,6 +5,7 @@ import { Ripple } from 'primereact/ripple';
 import { Link } from '@inertiajs/react';
 import { CSSTransition as Transition } from 'react-transition-group';
 import { useConfigs } from '@/hooks/trinity_configs';
+import { Badge } from 'primereact/badge';
 
 const AppMenuItem = (props: { root?: any; index: number; parentKey?: any; item: any; className?: any }) => {
     const configs = useConfigs();
@@ -61,6 +62,12 @@ const AppMenuItem = (props: { root?: any; index: number; parentKey?: any; item: 
                     <i className={classNames('layout-menuitem-icon', item.icon)}></i>
                     <span className="layout-menuitem-text">{item.label}</span>
                     {item.items && <i className="pi pi-fw pi-angle-down layout-submenu-toggler"></i>}
+                    {item.badge && (
+                        <Badge
+                            className="mx-1"
+                            {...item.badge}
+                        ></Badge>
+                    )}
                     <Ripple />
                 </Link>
             ) : null}
@@ -75,6 +82,12 @@ const AppMenuItem = (props: { root?: any; index: number; parentKey?: any; item: 
                     <i className={classNames('layout-menuitem-icon', item.icon)}></i>
                     <span className="layout-menuitem-text">{item.label}</span>
                     {item.items && <i className="pi pi-fw pi-angle-down layout-submenu-toggler"></i>}
+                    {item.badge && (
+                        <Badge
+                            className="mx-1"
+                            {...item.badge}
+                        ></Badge>
+                    )}
                     <Ripple />
                 </Link>
             ) : null}

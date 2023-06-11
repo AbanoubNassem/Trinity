@@ -98,9 +98,9 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
     public string ActionName { get; init; }
 
     /// <summary>
-    /// A reference to <see cref="TrinityHub"/>. 
+    /// A reference to <see cref="TrinityNotificationsHub"/>. 
     /// </summary>
-    protected IHubContext<TrinityHub> HubContext { get; init; } = null!;
+    protected IHubContext<TrinityNotificationsHub> TrinityNotificationsHub { get; init; } = null!;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TrinityAction{T}"/> class.

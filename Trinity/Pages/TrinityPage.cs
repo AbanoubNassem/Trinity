@@ -1,6 +1,7 @@
 using AbanoubNassem.Trinity.Components;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Extensions;
+using AbanoubNassem.Trinity.Models;
 using Humanizer;
 
 namespace AbanoubNassem.Trinity.Pages;
@@ -73,4 +74,9 @@ public abstract class TrinityPage : CanMakeComponent
     /// </summary>
 
     public virtual bool CanView => User.IsTrinityAdmin();
+
+    /// <summary>
+    /// Represents a badge in the resource.
+    /// </summary>
+    public TrinityBadge? Badge { get; } = null;
 }

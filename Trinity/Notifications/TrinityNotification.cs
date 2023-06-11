@@ -1,3 +1,5 @@
+using AbanoubNassem.Trinity.Notifications.Channels;
+
 namespace AbanoubNassem.Trinity.Notifications;
 
 /// <summary>
@@ -7,18 +9,18 @@ public abstract class TrinityNotification
 {
     // The default notification channels to use
     private static readonly List<ITrinityNotificationChannel> DefaultChannels = new()
-        { new SignalRChannel() };
+        { new TrinitySignalRChannel() };
 
     /// <summary>
     /// Gets or sets the name of the notification.
     /// </summary>
-    public string? Name { get; set; }
+    public virtual string? Name { get; set; }
 
     /// <summary>
     /// Retrieves the list of notification channels to use.
     /// </summary>
     /// <returns>A list of ITrinityNotificationChannel objects.</returns>
-    protected List<ITrinityNotificationChannel> Via()
+    protected virtual List<ITrinityNotificationChannel> Via()
     {
         return DefaultChannels;
     }
@@ -42,6 +44,19 @@ public abstract class TrinityNotification
         foreach (var channel in Via())
         {
             await channel.Send(serviceProvider, this, userIdentifiers);
+        }
+    }
+
+    /// <summary>
+    /// Sends the notification using the specified service provider to all users.
+    /// </summary>
+    /// <param name="serviceProvider">The service provider for resolving dependencies.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public async Task SendAll(IServiceProvider serviceProvider)
+    {
+        foreach (var channel in Via())
+        {
+            await channel.SendAll(serviceProvider, this);
         }
     }
 }

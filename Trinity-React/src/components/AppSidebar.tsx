@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AppMenuItem from '@/components/AppMenuItem';
 import trinityApp from '@/TrinityApp';
 import { useLocalize } from '@/hooks/trinity_localizer';
+import { BadgeProps } from 'primereact/badge';
 
 const AppSidebar = () => {
     const localize = useLocalize();
     const model: Array<any> = [];
+    const [_, setBadge] = useState<BadgeProps>();
 
+    useEffect(() => {
+        trinityApp.hubConnection.on('TrinityResourceBadgeUpdateNotification', (notification: { resource: string; badge: BadgeProps }) => {
+            const resource = trinityApp.resources.find((r) => r.name === notification.resource);
+            resource!.badge = notification.badge;
+            setBadge(notification.badge);
+        });
+
+        trinityApp.hubConnection.on('TrinityPageBadgeUpdateNotification', (notification: { page: string; badge: BadgeProps }) => {
+            const [_, page] = Object.entries(trinityApp.pages).find(([_, page]) => page.slug === notification.page)!;
+            page.badge = notification.badge;
+            setBadge(notification.badge);
+        });
+    }, [trinityApp.resources, trinityApp.pages]);
     if (trinityApp.pages['dashboard']) {
         const dashboard = trinityApp.pages['dashboard'];
 
@@ -38,6 +53,7 @@ const AppSidebar = () => {
                 icon: resource.icon,
                 to: `/${resource.name}`,
                 visible: true,
+                badge: resource.badge,
                 resource
             });
         }
@@ -58,6 +74,7 @@ const AppSidebar = () => {
                 icon: page.icon,
                 to: `/pages/${page.slug?.toLowerCase()}`,
                 visible: true,
+                badge: page.badge,
                 page
             });
         }

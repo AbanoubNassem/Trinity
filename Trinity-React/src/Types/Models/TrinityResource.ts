@@ -2,6 +2,7 @@ import TrinityComponent from '@/types/Models/TrinityComponent';
 import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
 import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
 import TrinityAction from '@/types/Models/Actions/TrinityAction';
+import { BadgeProps } from 'primereact/badge';
 
 export default interface TrinityResource {
     name: string;
@@ -22,4 +23,5 @@ export default interface TrinityResource {
     canCreate: boolean;
     canUpdate: boolean;
     canDelete: boolean;
+    badge?: BadgeProps;
 }

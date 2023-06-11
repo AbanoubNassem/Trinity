@@ -54,6 +54,8 @@ import LayoutProps from '@/types/Props/Layouts/LayoutProps';
 import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
 import PageProps from '@/types/Props/Pages/PageProps';
 import { changeTrinityTheme } from '@/utilities/trinity_theme';
+import { HubConnection } from '@microsoft/signalr';
+import { BadgeProps } from 'primereact/badge';
 
 export class TrinityApp {
     private static localizer: TrinityLocalizer;
@@ -67,7 +69,7 @@ export class TrinityApp {
     static registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static toast?: Toast;
     static isRtl: boolean = false;
-    static hubConnection = new signalR.HubConnectionBuilder().withUrl('/trinity-hub').build();
+    static hubConnection: HubConnection;
 
     static serving(callback: (app: typeof TrinityApp) => void) {
         callback(this);
@@ -90,10 +92,11 @@ export class TrinityApp {
         const theme = localStorage.getItem('theme') ?? 'light';
         changeTrinityTheme(theme);
 
-        this.hubConnection.start().catch((err) => console.log(err));
-        this.hubConnection.on('ANewRecordAddedNotification', (data) => {
-            console.log(data);
-        });
+        this.hubConnection = new signalR.HubConnectionBuilder().withUrl(`/${this.configs.prefix}/trinity-notifications-hub`).build();
+        this.hubConnection
+            .start()
+            .then(async () => {})
+            .catch((err) => console.log(err));
     };
 
     private static loadDefaults() {
