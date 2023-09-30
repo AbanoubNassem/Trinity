@@ -57,6 +57,12 @@ public class TrinityResponse
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public List<object>? Notifications { get; set; }
+    
+    /// <summary>
+    /// Gets the database notifications count.
+    /// </summary>
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public int? DatabaseNotificationsCount { get; set; }
 
     /// <summary>
     /// Gets or sets the current locale strings <see cref="TrinityLocalizer.GetAllStrings(string)"/>
@@ -80,4 +86,6 @@ public class TrinityResponse
     /// </summary>
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public object? User { get; set; }
+    
+
 }

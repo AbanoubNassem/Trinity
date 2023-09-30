@@ -7,14 +7,14 @@ namespace AbanoubNassem.Trinity.Columns;
 /// <summary>
 /// Represents an aggregate column in a SQL query.
 /// </summary>
-public class AggregateColumn : TrinityColumn<AggregateColumn, object>
+public class AggregateColumnType : TrinityColumn<AggregateColumnType, object>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="AggregateColumn"/> class.
+    /// Initializes a new instance of the <see cref="AggregateColumnType"/> class.
     /// </summary>
     /// <param name="columnName">The name of the column.</param>
     /// <param name="aggregateAlias">The alias for the aggregate function.</param>
-    public AggregateColumn(string columnName, string? aggregateAlias = null) : base(columnName)
+    public AggregateColumnType(string columnName, string? aggregateAlias = null) : base(columnName)
     {
         AggregateAlias = aggregateAlias;
         if (aggregateAlias != null)
@@ -24,7 +24,7 @@ public class AggregateColumn : TrinityColumn<AggregateColumn, object>
     }
 
     /// <inheritdoc />
-    public override string ComponentName => "AggregateColumn";
+    public override string ComponentName => "AggregateColumnType";
 
     /// <summary>
     /// Gets or sets the alias for the aggregate function.
@@ -63,8 +63,8 @@ public class AggregateColumn : TrinityColumn<AggregateColumn, object>
     /// </summary>
     /// <param name="foreignPrimaryKeyColumn">The primary key column of the foreign table to join.</param>
     /// <param name="foreignTable">The name of the foreign table to join.</param>
-    /// <returns>The current <see cref="AggregateColumn"/> instance.</returns>
-    public AggregateColumn Counts(string foreignPrimaryKeyColumn, string foreignTable)
+    /// <returns>The current <see cref="AggregateColumnType"/> instance.</returns>
+    public AggregateColumnType Counts(string foreignPrimaryKeyColumn, string foreignTable)
     {
         Query(foreignPrimaryKeyColumn, foreignTable, "count", foreignPrimaryKeyColumn);
         return this;
@@ -76,8 +76,8 @@ public class AggregateColumn : TrinityColumn<AggregateColumn, object>
     /// <param name="foreignPrimaryKeyColumn">The primary key column of the foreign table to join.</param>
     /// <param name="foreignTable">The name of the foreign table to join.</param>
     /// <param name="foreignColumnToAverage">The name of the column to average.</param>
-    /// <returns>The current <see cref="AggregateColumn"/> instance.</returns>
-    public AggregateColumn Average(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToAverage)
+    /// <returns>The current <see cref="AggregateColumnType"/> instance.</returns>
+    public AggregateColumnType Average(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToAverage)
     {
         Query(foreignPrimaryKeyColumn, foreignTable, "average", foreignColumnToAverage);
         return this;
@@ -89,8 +89,8 @@ public class AggregateColumn : TrinityColumn<AggregateColumn, object>
     /// <param name="foreignPrimaryKeyColumn">The primary key column of the foreign table to join.</param>
     /// <param name="foreignTable">The name of the foreign table to join.</param>
     /// <param name="foreignColumnToSum">The name of the column to sum.</param>
-    /// <returns>The current <see cref="AggregateColumn"/> instance.</returns>
-    public AggregateColumn Sum(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToSum)
+    /// <returns>The current <see cref="AggregateColumnType"/> instance.</returns>
+    public AggregateColumnType Sum(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToSum)
     {
         Query(foreignPrimaryKeyColumn, foreignTable, "sum", foreignColumnToSum);
 
@@ -103,9 +103,9 @@ public class AggregateColumn : TrinityColumn<AggregateColumn, object>
     /// <param name="foreignPrimaryKeyColumn">The name of the primary key column of the foreign table.</param>
     /// <param name="foreignTable">The name of the foreign table.</param>
     /// <param name="foreignColumnToMin">The name of the column in the foreign table to calculate the MIN aggregate function on.</param>
-    /// <returns>The current <see cref="AggregateColumn"/> instance.</returns>
+    /// <returns>The current <see cref="AggregateColumnType"/> instance.</returns>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="foreignPrimaryKeyColumn"/>, <paramref name="foreignTable"/>, or <paramref name="foreignColumnToMin"/> is null.</exception>
-    public AggregateColumn Min(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToMin)
+    public AggregateColumnType Min(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToMin)
     {
         Query(foreignPrimaryKeyColumn, foreignTable, "min", foreignColumnToMin);
         return this;
@@ -117,9 +117,9 @@ public class AggregateColumn : TrinityColumn<AggregateColumn, object>
     /// <param name="foreignPrimaryKeyColumn">The name of the primary key column of the foreign table.</param>
     /// <param name="foreignTable">The name of the foreign table.</param>
     /// <param name="foreignColumnToMax">The name of the column in the foreign table to calculate the MAX aggregate function on.</param>
-    /// <returns>The current <see cref="AggregateColumn"/> instance.</returns>
+    /// <returns>The current <see cref="AggregateColumnType"/> instance.</returns>
     /// <exception cref="ArgumentNullException">Thrown when <paramref name="foreignPrimaryKeyColumn"/>, <paramref name="foreignTable"/>, or <paramref name="foreignColumnToMax"/> is null.</exception>
-    public AggregateColumn Max(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToMax)
+    public AggregateColumnType Max(string foreignPrimaryKeyColumn, string foreignTable, string foreignColumnToMax)
     {
         Query(foreignPrimaryKeyColumn, foreignTable, "max", foreignColumnToMax);
         return this;

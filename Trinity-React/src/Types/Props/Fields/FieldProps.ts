@@ -1,9 +1,9 @@
-import TrinityField from '@/types/Models/Fields/TrinityField';
+import TrinityFieldType from '@/types/Models/Fields/TrinityFieldType';
 import { ErrorBag, Errors } from '@inertiajs/core/types/types';
 import TrinityResource from '@/types/Models/TrinityResource';
 import Configs from '@/types/Models/Configs';
 
-export default interface FieldProps<T extends TrinityField> {
+export default interface FieldProps<T extends TrinityFieldType> {
     configs: Configs;
     resource: TrinityResource;
     component: T;

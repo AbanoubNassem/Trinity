@@ -1,9 +1,9 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
-import StatsWidget from '@/types/Models/Widgets/StatsWidget';
+import StatsWidgetType from '@/types/Models/Widgets/StatsWidgetType';
 import { Chart } from 'primereact/chart';
 import { useEffect, useRef } from 'react';
 
-const StatsWidget = ({ widget }: WidgetProps<StatsWidget>) => {
+const StatsWidget = ({ widget }: WidgetProps<StatsWidgetType>) => {
     const chart = useRef<Chart>(null);
 
     useEffect(() => {

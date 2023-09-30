@@ -4,10 +4,10 @@ import { classNames } from 'primereact/utils';
 import { Panel } from 'primereact/panel';
 
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
-import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
+import TrinityLayoutType from '@/types/Models/Layouts/TrinityLayoutType';
 import trinityApp from '@/TrinityApp';
 
-const PanelLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, localize }: LayoutProps<TrinityLayout>) => {
+const PanelLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, localize }: LayoutProps<TrinityLayoutType>) => {
     return (
         <Panel
             className={`col-12 md:col-${component.columnSpan}`}

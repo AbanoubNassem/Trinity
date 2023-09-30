@@ -41,12 +41,23 @@ public static class QueryableExtensions
     }
 
     /// <summary>
-    /// Creates a new instance of <see cref="Query"/>.
+    /// Creates a new instance of <see cref="SqlKata.Query"/>.
     /// </summary>
-    /// <param name="connection">The <see cref="IDbConnection" /> to create the <see cref="Query"/> from.</param>
-    /// <returns><see cref="Query"/></returns>
+    /// <param name="connection">The <see cref="IDbConnection" /> to create the <see cref="SqlKata.Query"/> from.</param>
+    /// <returns><see cref="SqlKata.Query"/></returns>
     public static Query Query(this IDbConnection connection)
     {
         return connection.QueryFactory().Query();
+    }
+
+    /// <summary>
+    /// Creates a new instance of <see cref="SqlKata.Query"/>.
+    /// </summary>
+    /// <param name="connection">The <see cref="IDbConnection" /> to create the <see cref="SqlKata.Query"/> from.</param>
+    /// <param name="table">The table name.</param>
+    /// <returns><see cref="SqlKata.Query"/></returns>
+    public static Query Query(this IDbConnection connection, string table)
+    {
+        return connection.QueryFactory().Query(table);
     }
 }

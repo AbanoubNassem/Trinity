@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import axios from 'axios';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import FileUploadField from '@/types/Models/Fields/FileUploadField';
+import FileUploadFieldType from '@/types/Models/Fields/FileUploadFieldType';
 import { classNames } from 'primereact/utils';
 import { FilePond, registerPlugin } from 'react-filepond';
 
@@ -35,7 +35,7 @@ registerPlugin(
     FilePondPluginImageTransform,
     FilePondPluginMediaPreview
 );
-const FileUploadField = ({ configs, resource, component, formData, record, setFieldValue, errors }: FieldProps<FileUploadField>) => {
+const FileUploadField = ({ configs, resource, component, formData, record, setFieldValue, errors }: FieldProps<FileUploadFieldType>) => {
     const pond = useRef<FilePond>(null);
 
     const getFiles = (): Array<string> => formData[component.columnName]?.split(',')?.filter((e: string) => e !== '') ?? [];

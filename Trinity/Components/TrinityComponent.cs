@@ -33,9 +33,9 @@ public abstract class TrinityComponent<T, TDeserialization> : ITrinityComponent
     protected TrinityLocalizer Localizer { get; init; } = null!;
 
     /// <summary>
-    /// A reference to <see cref="TrinityNotifications"/>. 
+    /// A reference to <see cref="TrinityNotificationsBase"/>. 
     /// </summary>
-    protected TrinityNotifications TrinityNotifications { get; init; } = null!;
+    protected TrinityNotificationsBase TrinityNotificationsBase { get; init; } = null!;
 
     /// <inheritdoc />
     public virtual void Setup()

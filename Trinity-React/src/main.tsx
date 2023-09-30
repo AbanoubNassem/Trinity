@@ -54,6 +54,7 @@ createInertiaApp({
         );
     }
 }).then(() => {
+    // axios.defaults.withCredentials = true;
     axios.interceptors.response.use(function (response) {
         // @ts-ignore
         const profiler = window.MiniProfiler as any;

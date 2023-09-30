@@ -102,7 +102,7 @@ public static class AppExtensions
             });
 
         services.AddSignalR();
-        services.AddSingleton<TrinityNotifications>();
+        services.AddSingleton<TrinityNotificationsBase>();
         trinityManager.Init();
         return services;
     }
@@ -126,6 +126,8 @@ public static class AppExtensions
             app.UseStatusCodePages();
             app.UseDeveloperExceptionPage();
             app.UseMiniProfiler();
+            // app.UseViteDevMiddleware();
+            // app.UseTrinityAdminRedirectMiddleware();
         }
         else
         {

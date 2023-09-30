@@ -2,10 +2,10 @@ import React, { useRef, useState } from 'react';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import EditorField from '@/types/Models/Fields/EditorField';
+import EditorFieldType from '@/types/Models/Fields/EditorFieldType';
 import { Editor } from 'primereact/editor';
 
-const EditorField = ({ component, formData, setFieldValue, errors }: FieldProps<EditorField>) => {
+const EditorField = ({ component, formData, setFieldValue, errors }: FieldProps<EditorFieldType>) => {
     const [value, setValue] = useState(formData[component.columnName]);
     const editorRef = useRef<Editor>(null);
 

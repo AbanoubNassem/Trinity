@@ -2,9 +2,9 @@ import React from 'react';
 
 import TextField from '@/fields/TextField';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import TrinityField from '@/types/Models/Fields/TrinityField';
+import TrinityFieldType from '@/types/Models/Fields/TrinityFieldType';
 
-const IdField = (props: FieldProps<TrinityField>) => {
+const IdField = (props: FieldProps<TrinityFieldType>) => {
     const { component, errors, formData, setFieldValue } = props;
 
     return (

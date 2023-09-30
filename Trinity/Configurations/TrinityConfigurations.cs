@@ -10,7 +10,7 @@ namespace AbanoubNassem.Trinity.Configurations;
 /// <summary>
 /// Provides programmatic configuration for the Trinity framework.
 /// </summary>
-public class TrinityConfigurations
+public sealed class TrinityConfigurations
 {
     /// <summary>
     /// Creates a new instance of <see cref="TrinityConfigurations"/>.
@@ -69,6 +69,11 @@ public class TrinityConfigurations
     /// The front-end request loading indicator.
     /// </summary>
     public ProgressConfigurations ProgressSettings { get; set; } = new();
+
+    /// <summary>
+    /// The configurations of the database notifications.
+    /// </summary>
+    public TrinityDatabaseNotificationsConfigurations? DatabaseNotifications { get; set; }
 
     /// <summary>
     /// Define what is the Max pagination is allowed per resource.

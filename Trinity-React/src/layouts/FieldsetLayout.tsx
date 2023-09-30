@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { classNames } from 'primereact/utils';
 import { Fieldset } from 'primereact/fieldset';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
-import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
+import TrinityLayoutType from '@/types/Models/Layouts/TrinityLayoutType';
 import trinityApp from '@/TrinityApp';
 
-const FieldsetLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, localize }: LayoutProps<TrinityLayout>) => {
+const FieldsetLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, localize }: LayoutProps<TrinityLayoutType>) => {
     return (
         <Fieldset
             className={`col-12 md:col-${component.columnSpan}`}

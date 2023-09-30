@@ -1,10 +1,10 @@
 import React from 'react';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
-import TextColumn from '@/types/Models/Columns/TextColumn';
+import TextColumnType from '@/types/Models/Columns/TextColumnType';
 import moment from 'moment';
 import { classNames } from 'primereact/utils';
 
-const TextColumn = ({ column, columnValue, record }: ColumnProps<TextColumn>) => {
+const TextColumn = ({ column, columnValue, record }: ColumnProps<TextColumnType>) => {
     let value = column.timeAgo ? moment(columnValue).fromNow() : (column.dateTimeFormat !== null ? moment(columnValue).format(column.dateTimeFormat) : columnValue) ?? record['defaultValue'];
 
     if (column.currency !== null) {

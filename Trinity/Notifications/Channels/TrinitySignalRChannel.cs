@@ -15,10 +15,13 @@ public class TrinitySignalRChannel : ITrinityNotificationChannel
     {
         var hub = serviceProvider.GetRequiredService<IHubContext<TrinityNotificationsHub>>();
 
-        await hub.Clients.Users(userIdentifiers)
-            .SendAsync(notification.Name ?? notification.GetType().Name,
-                notification.Data(serviceProvider, userIdentifiers)
+        foreach (var id in userIdentifiers)
+        {
+            await hub.Clients.User(id).SendAsync(
+                notification.Name ?? notification.GetType().Name,
+                notification.Data(serviceProvider, id)
             );
+        }
     }
 
     /// <inheritdoc />
@@ -26,7 +29,8 @@ public class TrinitySignalRChannel : ITrinityNotificationChannel
     {
         var hub = serviceProvider.GetRequiredService<IHubContext<TrinityNotificationsHub>>();
 
-        await hub.Clients.All.SendAsync(notification.Name ?? notification.GetType().Name,
-            notification.Data(serviceProvider));
+        var data = notification.Data(serviceProvider);
+
+        await hub.Clients.All.SendAsync(notification.Name ?? notification.GetType().Name, data);
     }
 }

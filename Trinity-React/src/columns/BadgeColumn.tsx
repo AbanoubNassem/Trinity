@@ -1,10 +1,10 @@
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
-import BadgeColumn from '@/types/Models/Columns/BadgeColumn';
+import BadgeColumnType from '@/types/Models/Columns/BadgeColumnType';
 import { Badge } from 'primereact/badge';
 import React from 'react';
 import { Button } from 'primereact/button';
 
-const BadgeColumn = ({ column, columnValue }: ColumnProps<BadgeColumn>) => {
+const BadgeColumn = ({ column, columnValue }: ColumnProps<BadgeColumnType>) => {
     const option = column.options?.find((x) => x.key === columnValue);
 
     if (option?.icon)

@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { classNames } from 'primereact/utils';
 import { Card } from 'primereact/card';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
-import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
+import TrinityLayoutType from '@/types/Models/Layouts/TrinityLayoutType';
 import trinityApp from '@/TrinityApp';
 
-const CardLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, localize }: LayoutProps<TrinityLayout>) => {
+const CardLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, localize }: LayoutProps<TrinityLayoutType>) => {
     return (
         <Card
             className={`col-12 md:col-${component.columnSpan}`}

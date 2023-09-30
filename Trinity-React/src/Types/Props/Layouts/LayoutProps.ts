@@ -1,4 +1,4 @@
-import BaseComponent from '@/types/Models/TrinityComponent';
+import BaseComponent from '@/types/Models/TrinityComponentType';
 import { Errors, ErrorBag } from '@inertiajs/core/types/types';
 import TrinityResource from '@/types/Models/TrinityResource';
 import Configs from '@/types/Models/Configs';

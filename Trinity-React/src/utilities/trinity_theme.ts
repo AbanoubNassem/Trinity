@@ -27,7 +27,7 @@ const replaceLink = (linkElement: HTMLElement, href: string, onComplete?: () => 
 export function changeTrinityTheme(theme: string, onComplete?: () => void) {
     const configs = TrinityApp.configs;
 
-    replaceLink(document.getElementById('theme-css')!, `/${configs.prefix}/trinity/dist/${theme}-theme.css`, onComplete);
+    replaceLink(document.getElementById('theme-css')!, `/${configs.prefix}/trinity/${theme}-theme.css`, onComplete);
 
     localStorage.setItem('theme', theme);
 }

@@ -1,6 +1,6 @@
 import { router } from '@inertiajs/react';
 import { confirmDialog } from 'primereact/confirmdialog';
-import TrinityActionModel from '@/types/Models/Actions/TrinityAction';
+import TrinityActionModel from '@/types/Models/Actions/TrinityActionType';
 import axios from 'axios';
 import TrinityApp from '@/TrinityApp';
 import React from 'react';

@@ -1,8 +1,8 @@
 import ComponentProps from '@/types/Props/Components/ComponentProps';
 import { Divider } from 'primereact/divider';
-import DividerComponent from '@/types/Models/Components/DividerComponent';
+import DividerComponentType from '@/types/Models/Components/DividerComponentType';
 
-const DividerComponent = ({ component }: ComponentProps<DividerComponent>) => {
+const DividerComponent = ({ component }: ComponentProps<DividerComponentType>) => {
     return (
         <>
             {component.color && (

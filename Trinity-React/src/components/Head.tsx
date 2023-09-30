@@ -12,7 +12,7 @@ export const Head = (props: { title?: string; children?: React.ReactNode }) => {
             <link
                 rel="icon"
                 type="image/x-icon"
-                href={trinityApp.configs?.favIcon ?? `/${trinityApp.configs?.prefix}/trinity/dist/favicon.ico`}
+                href={trinityApp.configs?.favIcon ?? `/${trinityApp.configs?.prefix}/trinity/favicon.ico`}
             />
             {props.children}
         </InertiaHead>

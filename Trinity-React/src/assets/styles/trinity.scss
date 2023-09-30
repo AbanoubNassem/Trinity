@@ -28,7 +28,7 @@
 }
 
 .trinity-dropdown .p-dropdown-item-empty {
-  display: none !important;
+  //display: none !important;
 }
 
 //
@@ -79,4 +79,14 @@
 
 .widget-container {
   overflow-y: auto
+}
+
+.db-notifications {
+  height: 93% !important;
+
+  .p-orderlist-list {
+    height: 100% !important;
+    max-height: unset;
+    border:none !important;
+  }
 }

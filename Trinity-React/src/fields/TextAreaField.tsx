@@ -3,9 +3,9 @@ import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { InputTextarea } from 'primereact/inputtextarea';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import TextAreaField from '@/types/Models/Fields/TextAreaField';
+import TextAreaFieldType from '@/types/Models/Fields/TextAreaFieldType';
 
-const TextAreaField = ({ component, formData, setFieldValue, errors }: FieldProps<TextAreaField>) => {
+const TextAreaField = ({ component, formData, setFieldValue, errors }: FieldProps<TextAreaFieldType>) => {
     const [value, setValue] = useState(formData[component.columnName]);
 
     return (

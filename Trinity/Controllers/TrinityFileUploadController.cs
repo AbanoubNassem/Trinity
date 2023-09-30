@@ -17,20 +17,20 @@ public sealed class TrinityFileUploadController : TrinityController
 {
     private readonly TrinityManager _trinityManager;
     private readonly TrinityLocalizer _localizer;
-    private readonly TrinityNotifications _trinityNotifications;
+    private readonly TrinityNotificationsBase _trinityNotificationsBase;
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="trinityManager"></param>
     /// <param name="localizer"></param>
-    /// <param name="trinityNotifications"></param>
+    /// <param name="trinityNotificationsBase"></param>
     public TrinityFileUploadController(TrinityManager trinityManager, TrinityLocalizer localizer,
-        TrinityNotifications trinityNotifications)
+        TrinityNotificationsBase trinityNotificationsBase)
     {
         _trinityManager = trinityManager;
         _localizer = localizer;
-        _trinityNotifications = trinityNotifications;
+        _trinityNotificationsBase = trinityNotificationsBase;
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public sealed class TrinityFileUploadController : TrinityController
         return Ok(new
         {
             data = await uploadField.Upload(file),
-            notifications = _trinityNotifications.Flush(),
+            notifications = _trinityNotificationsBase.Flush(),
         });
     }
 
@@ -96,7 +96,7 @@ public sealed class TrinityFileUploadController : TrinityController
 
             if (!filesToDelete.Any())
             {
-                _trinityNotifications.NotifyError(_localizer["nothing_to_delete_revert"]);
+                _trinityNotificationsBase.NotifyError(_localizer["nothing_to_delete_revert"]);
                 return await Task.FromResult<IActionResult>(BadRequest(_localizer["nothing_to_delete_revert"]));
             }
 
@@ -107,7 +107,7 @@ public sealed class TrinityFileUploadController : TrinityController
         return await Task.FromResult<IActionResult>(Ok(new
         {
             data,
-            notifications = _trinityNotifications.Flush(),
+            notifications = _trinityNotificationsBase.Flush(),
         }));
     }
 }

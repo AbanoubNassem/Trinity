@@ -1,10 +1,10 @@
 import React from 'react';
 import { Image } from 'primereact/image';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
-import ImageColumn from '@/types/Models/Columns/ImageColumn';
+import ImageColumnType from '@/types/Models/Columns/ImageColumnType';
 import { classNames } from 'primereact/utils';
 
-const ImageColumn = ({ column, columnValue, record }: ColumnProps<ImageColumn>) => {
+const ImageColumn = ({ column, columnValue, record }: ColumnProps<ImageColumnType>) => {
     const value = columnValue ? columnValue.split(',')[0] : undefined;
 
     return (

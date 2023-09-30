@@ -1,9 +1,9 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
 import React, { useEffect, useRef } from 'react';
 import { Chart } from 'primereact/chart';
-import PieChartWidget from '@/types/Models/Widgets/PieChartWidget';
+import PieChartWidgetType from '@/types/Models/Widgets/PieChartWidgetType';
 
-const PieChartWidget = ({ widget }: WidgetProps<PieChartWidget>) => {
+const PieChartWidget = ({ widget }: WidgetProps<PieChartWidgetType>) => {
     const chart = useRef<Chart>(null);
 
     return (

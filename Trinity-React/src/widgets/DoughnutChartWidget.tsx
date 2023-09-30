@@ -1,9 +1,9 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
 import React, { useRef } from 'react';
 import { Chart } from 'primereact/chart';
-import DoughnutChartWidget from '@/types/Models/Widgets/DoughnutChartWidget';
+import DoughnutChartWidgetType from '@/types/Models/Widgets/DoughnutChartWidgetType';
 
-const DoughnutChartWidget = ({ widget }: WidgetProps<DoughnutChartWidget>) => {
+const DoughnutChartWidget = ({ widget }: WidgetProps<DoughnutChartWidgetType>) => {
     const chart = useRef<Chart>(null);
 
     return (

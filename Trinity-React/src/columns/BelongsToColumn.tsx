@@ -1,8 +1,8 @@
 import React from 'react';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
-import RelationshipColumn from '@/types/Models/Columns/RelationshipColumn';
+import RelationshipColumnType from '@/types/Models/Columns/RelationshipColumnType';
 
-const BelongsToColumn = ({ column, record }: ColumnProps<RelationshipColumn>) => {
+const BelongsToColumn = ({ column, record }: ColumnProps<RelationshipColumnType>) => {
     const relations = column.relationshipName?.split('.') ?? [];
 
     let lastRelation = record;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { Dropdown, DropdownProps } from 'primereact/dropdown';
 
@@ -48,6 +47,7 @@ const SelectInputField = (props: SelectFieldProps) => {
         if (fetching || !search) return;
         setFetching(true);
         const res = await search({ ...e, ...{ value: getValue() } });
+
         //TODO:: fix lazy loading !?
         setOptions(!!res.length ? res : EMPTY);
         setFetching(false);
@@ -104,6 +104,7 @@ const SelectInputField = (props: SelectFieldProps) => {
             onLazyLoad: loadItems
         }
     };
+
     return (
         <>
             {component.multiple ? (

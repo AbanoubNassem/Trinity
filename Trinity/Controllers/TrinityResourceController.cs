@@ -30,7 +30,7 @@ public sealed class TrinityResourceController : TrinityController
         if (!resource.CanView)
             return UnAuthorised();
 
-        var responseData = CreateResponse();
+        var responseData = await CreateResponse();
 
         responseData.Resource = resource;
 
@@ -75,7 +75,7 @@ public sealed class TrinityResourceController : TrinityController
                 break;
         }
 
-        responseData.Notifications = TrinityNotifications.Flush();
+        responseData.Notifications = TrinityNotificationsBase.Flush();
         return Inertia.Render(view, responseData);
     }
 }

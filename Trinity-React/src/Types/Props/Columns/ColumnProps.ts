@@ -1,8 +1,8 @@
-import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
+import TrinityColumnType from '@/types/Models/Columns/TrinityColumnType';
 import React from 'react';
 import TrinityResource from '@/types/Models/TrinityResource';
 
-export default interface ColumnProps<T extends TrinityColumn> {
+export default interface ColumnProps<T extends TrinityColumnType> {
     resource: TrinityResource;
     column: T;
     columnValue: any;

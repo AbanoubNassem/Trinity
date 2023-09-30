@@ -80,7 +80,7 @@ public class CanMakeComponent
     /// <summary>
     /// A reference to <see cref="TrinityNotifications"/>. 
     /// </summary>
-    protected TrinityNotifications TrinityNotifications { get; init; } = null!;
+    protected TrinityNotificationsBase TrinityNotifications { get; init; } = null!;
 
     private const BindingFlags ConstructorFlags =
         BindingFlags.Instance | BindingFlags.Public | BindingFlags.OptionalParamBinding;

@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { InputSwitch } from 'primereact/inputswitch';
 import { classNames } from 'primereact/utils';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import SwitchInputField from '@/types/Models/Fields/SwitchInputField';
+import SwitchInputFieldType from '@/types/Models/Fields/SwitchInputFieldType';
 
-const SwitchInputField = ({ component, errors, formData, setFieldValue }: FieldProps<SwitchInputField>) => {
+const SwitchInputField = ({ component, errors, formData, setFieldValue }: FieldProps<SwitchInputFieldType>) => {
     const getValue = (defaultValue = component.falseValue) => {
         const { columnName, trueValue, falseValue } = component;
         const value = formData[columnName];

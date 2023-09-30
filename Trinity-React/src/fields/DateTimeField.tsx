@@ -3,9 +3,9 @@ import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { Calendar } from 'primereact/calendar';
 import { classNames } from 'primereact/utils';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import DateTimeField from '@/types/Models/Fields/DateTimeField';
+import DateTimeFieldType from '@/types/Models/Fields/DateTimeFieldType';
 
-const DateTimeField = ({ component, formData, setFieldValue, errors }: FieldProps<DateTimeField>) => {
+const DateTimeField = ({ component, formData, setFieldValue, errors }: FieldProps<DateTimeFieldType>) => {
     const getValue = () => {
         if (!formData[component.columnName]) return undefined;
 

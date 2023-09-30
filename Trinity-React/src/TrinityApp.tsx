@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import * as signalR from '@microsoft/signalr';
 import Configs from '@/types/Models/Configs';
 import TrinityResource from '@/types/Models/TrinityResource';
@@ -40,34 +40,34 @@ import StackedBarChartWidget from '@/widgets/StackedBarChartWidget';
 import LineChartWidget from '@/widgets/LineChartWidget';
 import PolarAreaChartWidget from '@/widgets/PolarAreaChartWidget';
 import RadarChartWidget from '@/widgets/RadarChartWidget';
-import TrinityPage from '@/types/Models/Pages/TrinityPage';
+import TrinityPageType from '@/types/Models/Pages/TrinityPageType';
 import TrinityLocalizer from '@/utilities/trinity_localizer';
 import TrinityUser from '@/types/Models/TrinityUser';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
-import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
+import TrinityWidgetType from '@/types/Models/Widgets/TrinityWidgetType';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
-import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
+import TrinityColumnType from '@/types/Models/Columns/TrinityColumnType';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import TrinityField from '@/types/Models/Fields/TrinityField';
+import TrinityFieldType from '@/types/Models/Fields/TrinityFieldType';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
-import TrinityLayout from '@/types/Models/Layouts/TrinityLayout';
+import TrinityLayoutType from '@/types/Models/Layouts/TrinityLayoutType';
 import PageProps from '@/types/Props/Pages/PageProps';
 import { changeTrinityTheme } from '@/utilities/trinity_theme';
 import { HubConnection } from '@microsoft/signalr';
-import { BadgeProps } from 'primereact/badge';
 
 export class TrinityApp {
     private static localizer: TrinityLocalizer;
     static configs: Configs;
     static user: TrinityUser;
     static resources: Array<TrinityResource> = new Array<TrinityResource>();
-    static pages: { [key: string]: TrinityPage } = {};
+    static pages: { [key: string]: TrinityPageType } = {};
     static registeredPages: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static registeredComponents: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static toast?: Toast;
+    static databaseNotificationsCount?: number;
     static isRtl: boolean = false;
     static hubConnection: HubConnection;
 
@@ -82,6 +82,7 @@ export class TrinityApp {
         this.user = props.user;
         this.localizer = new TrinityLocalizer(props.locale, props.fallbackLocale);
         this.isRtl = props.isRtl;
+        this.databaseNotificationsCount = props.databaseNotificationsCount;
 
         setupProgress(this.configs.progressSettings);
 
@@ -142,17 +143,17 @@ export class TrinityApp {
         this.registerWidget('RadarChartWidget', RadarChartWidget);
     }
 
-    static registerComponent = (name: string, component: (props: any) => JSX.Element) => {
+    static registerComponent = (name: string, component: (props: any) => ReactElement) => {
         const Component = component;
         this.registeredComponents.set(name, (props) => <Component {...props} />);
     };
 
-    static registerLayout = (name: string, component: (props: LayoutProps<TrinityLayout | any>) => JSX.Element) => {
+    static registerLayout = (name: string, component: (props: LayoutProps<TrinityLayoutType | any>) => ReactElement) => {
         const Component = component;
         this.registeredComponents.set(name, (props) => <Component {...props} />);
     };
 
-    static registerField = (name: string, component: (props: FieldProps<TrinityField | any>) => JSX.Element) => {
+    static registerField = (name: string, component: (props: FieldProps<TrinityFieldType | any>) => ReactElement) => {
         const Field = component;
         this.registeredComponents.set(name, (props: any) => (
             <BaseFieldComponent
@@ -164,15 +165,15 @@ export class TrinityApp {
             </BaseFieldComponent>
         ));
     };
-    static registerColumn = (name: string, component: (props: ColumnProps<TrinityColumn | any>) => JSX.Element) => {
+    static registerColumn = (name: string, component: (props: ColumnProps<TrinityColumnType | any>) => ReactElement) => {
         const Column = component;
         this.registeredColumns.set(name, (props) => <Column {...props} />);
     };
-    static registerWidget = (name: string, component: (props: WidgetProps<TrinityWidget | any>) => JSX.Element) => {
+    static registerWidget = (name: string, component: (props: WidgetProps<TrinityWidgetType | any>) => ReactElement) => {
         const Widget = component;
         this.registeredWidgets.set(name, (props) => <Widget {...props} />);
     };
-    static registerPage = (name: string, component: (props: PageProps<TrinityPage>) => JSX.Element) => {
+    static registerPage = (name: string, component: (props: PageProps<TrinityPageType>) => ReactElement) => {
         const Page = component;
         this.registeredPages.set(name, (props) => (
             <Page

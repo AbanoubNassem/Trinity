@@ -1,10 +1,10 @@
 import React, { CSSProperties } from 'react';
 import { classNames } from 'primereact/utils';
-import TrinityField from '@/types/Models/Fields/TrinityField';
+import TrinityFieldType from '@/types/Models/Fields/TrinityFieldType';
 import { Errors, ErrorBag } from '@inertiajs/core/types/types';
 import omit from 'lodash/omit';
 
-const BaseFieldComponent = ({ component, errors, children, style }: { component: TrinityField; errors: Errors & ErrorBag; children?: React.ReactNode; style?: CSSProperties | undefined }) => {
+const BaseFieldComponent = ({ component, errors, children, style }: { component: TrinityFieldType; errors: Errors & ErrorBag; children?: React.ReactNode; style?: CSSProperties | undefined }) => {
     return (
         <div
             style={{ ...style, ...{ display: component.hidden || !component.visible ? 'none' : undefined } }}

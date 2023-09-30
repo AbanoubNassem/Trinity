@@ -18,7 +18,7 @@ import IPaginator from '@/types/Models/Paginator';
 import trinityApp from '@/TrinityApp';
 import { useLocalize } from '@/hooks/trinity_localizer';
 import TrinityAction from '@/utilities/trinity_action';
-import TrinityActionModel from '@/types/Models/Actions/TrinityAction';
+import TrinityActionModel from '@/types/Models/Actions/TrinityActionType';
 import { confirmDialog } from 'primereact/confirmdialog';
 import { ActionDialog } from '@/components/ActionDialog';
 
@@ -441,7 +441,7 @@ const Table = () => {
                             sortable={column.sortable}
                             showFilterMatchModes={false}
                             showClearButton
-                            filterMatchMode={'custom'}
+                            filterMatchMode={FilterMatchMode.CUSTOM}
                             excludeGlobalFilter={!column.isGloballySearchable || column.isIndividuallySearchable}
                             filterField={column.columnName}
                             exportable={column.exportable}
@@ -457,7 +457,7 @@ const Table = () => {
                                                       trinityApp.registeredComponents?.get(column.customFilter!.componentName)!({
                                                           key: `${column.columnName}_filter`,
                                                           component: column.customFilter!,
-                                                          setFieldValue: (name: string, value: any) => {
+                                                          setFieldValue: (_name: string, value: any) => {
                                                               options.filterCallback(value);
                                                           },
                                                           formData: { [column.columnName]: options.value },

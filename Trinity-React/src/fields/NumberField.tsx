@@ -3,9 +3,9 @@ import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { InputNumber } from 'primereact/inputnumber';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import NumberField from '@/types/Models/Fields/NumberField';
+import NumberFieldType from '@/types/Models/Fields/NumberFieldType';
 
-const NumberField = ({ component, formData, setFieldValue, errors }: FieldProps<NumberField>) => {
+const NumberField = ({ component, formData, setFieldValue, errors }: FieldProps<NumberFieldType>) => {
     const [value, setValue] = useState(formData[component.columnName]);
 
     return (

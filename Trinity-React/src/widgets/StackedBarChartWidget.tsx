@@ -1,9 +1,9 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
 import React, { useRef } from 'react';
 import { Chart } from 'primereact/chart';
-import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
+import TrinityWidgetType from '@/types/Models/Widgets/TrinityWidgetType';
 
-const StackedBarChartWidget = ({ widget }: WidgetProps<TrinityWidget>) => {
+const StackedBarChartWidget = ({ widget }: WidgetProps<TrinityWidgetType>) => {
     const chart = useRef<Chart>(null);
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');

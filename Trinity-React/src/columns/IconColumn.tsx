@@ -1,8 +1,8 @@
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
-import IconColumn from '@/types/Models/Columns/IconColumn';
+import IconColumnType from '@/types/Models/Columns/IconColumnType';
 import { classNames } from 'primereact/utils';
 
-const IconColumn = ({ column, columnValue }: ColumnProps<IconColumn>) => {
+const IconColumn = ({ column, columnValue }: ColumnProps<IconColumnType>) => {
     if (column.isBoolean) {
         const isTrue = column.trueValue ? columnValue === column.trueValue : !!columnValue === true;
         const isFalse = column.falseValue ? columnValue === column.falseValue : !!columnValue === false;

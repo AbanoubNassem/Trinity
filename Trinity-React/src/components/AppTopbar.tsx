@@ -11,6 +11,7 @@ import { useTrinityUser } from '@/hooks/trinity_user';
 import { Avatar } from 'primereact/avatar';
 import { changeTrinityTheme } from '@/utilities/trinity_theme';
 import trinityApp from '@/TrinityApp';
+import NotificationsSidebar from '@/components/NotificationsSidebar';
 
 const AppTopbar = forwardRef((props, ref) => {
     const configs = useConfigs();
@@ -54,7 +55,7 @@ const AppTopbar = forwardRef((props, ref) => {
     ];
 
     return (
-        <div className="layout-topbar">
+        <div className="layout-topbar flex justify-content-between">
             <div className="flex justify-content-center align-items-center">
                 <Link href={`/${configs.prefix}/`}>
                     <div className="layout-topbar-logo">
@@ -77,57 +78,61 @@ const AppTopbar = forwardRef((props, ref) => {
                     aria-label="Theme"
                     onClick={changeTheme}
                 />
+
+                <button
+                    ref={menubuttonRef}
+                    type="button"
+                    className="p-link layout-menu-button layout-topbar-button"
+                    onClick={onMenuToggle}
+                >
+                    <i className="pi pi-bars" />
+                </button>
             </div>
 
-            <button
-                ref={menubuttonRef}
-                type="button"
-                className="p-link layout-menu-button layout-topbar-button"
-                onClick={onMenuToggle}
-            >
-                <i className="pi pi-bars" />
-            </button>
+            <div className="flex">
+                <NotificationsSidebar />
 
-            <button
-                ref={topbarmenubuttonRef}
-                type="button"
-                className="p-link layout-topbar-menu-button layout-topbar-button"
-                onClick={showProfileSidebar}
-            >
-                <i className="pi pi-ellipsis-v" />
-            </button>
+                <button
+                    ref={topbarmenubuttonRef}
+                    type="button"
+                    className="p-link layout-topbar-menu-button layout-topbar-button"
+                    onClick={showProfileSidebar}
+                >
+                    <i className="pi pi-ellipsis-v" />
+                </button>
 
-            <div
-                ref={topbarmenuRef}
-                className={classNames('layout-topbar-menu', { 'layout-topbar-menu-mobile-active': layoutState.profileSidebarVisible })}
-            >
-                {user.avatar?.length ? (
-                    <div
-                        className="flex align-items-center cursor-pointer"
-                        onClick={(e) => profileMenu.current!.toggle(e)}
-                    >
-                        <Avatar
-                            image={user.avatar}
-                            shape="circle"
-                            size="large"
-                        />
-                        <span className="mx-3 sm:block md:hidden text-lg">{localize('profile')}</span>
-                    </div>
-                ) : (
-                    <Button
-                        className="p-link layout-topbar-button"
-                        onClick={(e) => profileMenu.current!.toggle(e)}
-                        rounded
-                    >
-                        <i className="pi pi-user"></i>
-                        <span className="mx-1 text-white">{localize('profile')}</span>
-                    </Button>
-                )}
-                <Menu
-                    ref={profileMenu}
-                    popup
-                    model={profileItems}
-                />
+                <div
+                    ref={topbarmenuRef}
+                    className={classNames('layout-topbar-menu', { 'layout-topbar-menu-mobile-active': layoutState.profileSidebarVisible })}
+                >
+                    {user.avatar?.length ? (
+                        <div
+                            className="flex align-items-center cursor-pointer"
+                            onClick={(e) => profileMenu.current!.toggle(e)}
+                        >
+                            <Avatar
+                                image={user.avatar}
+                                shape="circle"
+                                size="large"
+                            />
+                            <span className="mx-3 sm:block md:hidden text-lg">{localize('profile')}</span>
+                        </div>
+                    ) : (
+                        <Button
+                            className="p-link layout-topbar-button"
+                            onClick={(e) => profileMenu.current!.toggle(e)}
+                            rounded
+                        >
+                            <i className="pi pi-user"></i>
+                            <span className="mx-1 text-white">{localize('profile')}</span>
+                        </Button>
+                    )}
+                    <Menu
+                        ref={profileMenu}
+                        popup
+                        model={profileItems}
+                    />
+                </div>
             </div>
         </div>
     );

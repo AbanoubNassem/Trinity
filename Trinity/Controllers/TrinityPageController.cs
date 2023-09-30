@@ -38,7 +38,7 @@ public sealed class TrinityPageController : TrinityController
 
         await page.Setup();
 
-        var response = CreateResponse();
+        var response = await CreateResponse();
         response.Page = pageObj;
 
         response.Data = page.GetData();

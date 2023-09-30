@@ -19,7 +19,7 @@
 // import ImageColumn from '@/columns/ImageColumn';
 // import ColorColumn from '@/columns/ColorColumn';
 // import BelongsToColumn from '@/columns/BelongsToColumn';
-// import AggregateColumn from '@/columns/AggregateColumn';
+// import AggregateColumnType from '@/columns/AggregateColumnType';
 // import SliderField from '@/fields/SliderField';
 // import EditorField from '@/fields/EditorField';
 // import FileUploadField from '@/fields/FileUploadField';
@@ -85,7 +85,7 @@
 //         ['ImageColumn', (props) => <ImageColumn {...props} />],
 //         ['ColorColumn', (props) => <ColorColumn {...props} />],
 //         ['BelongsToColumn', (props) => <BelongsToColumn {...props} />],
-//         ['AggregateColumn', (props) => <AggregateColumn {...props} />]
+//         ['AggregateColumnType', (props) => <AggregateColumnType {...props} />]
 //     ]);
 //
 //     const widgets = new Map<string, (props: any) => React.ReactNode>([

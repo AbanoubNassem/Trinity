@@ -1,7 +1,7 @@
-import TrinityComponent from '@/types/Models/TrinityComponent';
-import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
-import TrinityWidget from '@/types/Models/Widgets/TrinityWidget';
-import TrinityAction from '@/types/Models/Actions/TrinityAction';
+import TrinityComponentType from '@/types/Models/TrinityComponentType';
+import TrinityColumnType from '@/types/Models/Columns/TrinityColumnType';
+import TrinityWidgetType from '@/types/Models/Widgets/TrinityWidgetType';
+import TrinityActionType from '@/types/Models/Actions/TrinityActionType';
 import { BadgeProps } from 'primereact/badge';
 
 export default interface TrinityResource {
@@ -12,13 +12,13 @@ export default interface TrinityResource {
     icon: string;
     showGridlines: boolean;
     stripedRows: boolean;
-    schema?: Array<TrinityComponent>;
-    columns?: Array<TrinityColumn>;
-    actions?: Array<TrinityAction>;
-    bulkActions?: Array<TrinityAction>;
+    schema?: Array<TrinityComponentType>;
+    columns?: Array<TrinityColumnType>;
+    actions?: Array<TrinityActionType>;
+    bulkActions?: Array<TrinityActionType>;
     titleColumn: string;
-    topWidgets?: Array<TrinityWidget>;
-    bottomWidgets?: Array<TrinityWidget>;
+    topWidgets?: Array<TrinityWidgetType>;
+    bottomWidgets?: Array<TrinityWidgetType>;
     canView: boolean;
     canCreate: boolean;
     canUpdate: boolean;

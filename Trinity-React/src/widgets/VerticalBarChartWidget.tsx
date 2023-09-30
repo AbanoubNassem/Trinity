@@ -1,9 +1,9 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
-import VerticalBarChart from '@/types/Models/Widgets/VerticalBarChart';
+import VerticalBarChartType from '@/types/Models/Widgets/VerticalBarChartType';
 import React, { useRef } from 'react';
 import { Chart } from 'primereact/chart';
 
-const VerticalBarChartWidget = ({ widget }: WidgetProps<VerticalBarChart>) => {
+const VerticalBarChartWidget = ({ widget }: WidgetProps<VerticalBarChartType>) => {
     const chart = useRef<Chart>(null);
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');

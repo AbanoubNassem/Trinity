@@ -7,13 +7,15 @@
         <AssemblyName>AbanoubNassem.Trinity</AssemblyName>
         <RootNamespace>AbanoubNassem.Trinity</RootNamespace>
         <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
-        <Version>0.0.7</Version>
+        <Version>0.0.8</Version>
         <Title>Trinity</Title>
         <Description>Trinity is a powerful Single-Page Application (SPA) administration tool that is designed to streamline common administrative tasks and enhance the productivity of developers. With its feature-rich and beautifully-designed interface, built using C# and ASP.NET, Trinity makes it easy to manage your website's backend with ease.</Description>
         <PackageProjectUrl>https://github.com/AbanoubNassem/Trinity</PackageProjectUrl>
         <PackageLicenseUrl>https://github.com/AbanoubNassem/Trinity/blob/main/LICENSE.md</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/AbanoubNassem/Trinity</RepositoryUrl>
         <PackageTags>"trinity", "admin panel", "administration tool", "C#", "ASP.NET", "Dapper", "SqlKata", "FluentValidation", "MiniProfiler", "ReactJS", "PrimeReact", "InertiaJS", "Vite", "SPA"</PackageTags>
+        <LangVersion>latestmajor</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -25,8 +27,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AspNetCore.InertiaCore" Version="0.0.7" />
-        <PackageReference Include="Dapper" Version="2.0.123" />
+        <PackageReference Include="AspNetCore.InertiaCore" Version="0.0.8" />
+        <PackageReference Include="Dapper" Version="2.0.151" />
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
         <PackageReference Include="Humanizer.Core" Version="2.14.1" />
         <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.3.8" />
@@ -52,7 +54,24 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Middlewares/" />
         <Folder Include="wwwroot" />
     </ItemGroup>
+
+    <!-- Ensure Node environment on Build -->
+    <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build;PublishBuildAssets" Condition=" !Exists('node_modules') ">
+        <!-- Ensure Node.js is installed -->
+        <Exec Command="node --version" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+        <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+        <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+        <!-- Install Node packages -->
+        <Exec Command="cd ../Trinity-React &amp;&amp; npm install" />
+    </Target>
+    
+    <!-- Build the final assets -->
+    <Target Name="PublishBuildAssets" BeforeTargets="BeforePublish" Condition=" '$(Configuration)' == 'Release' ">
+        <!-- Build the final assets -->
+        <Exec Command="cd ../Trinity-React &amp;&amp; npm run build" />
+    </Target>
 </Project>

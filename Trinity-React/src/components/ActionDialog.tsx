@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import TrinityActionModel from '@/types/Models/Actions/TrinityAction';
+import TrinityActionModel from '@/types/Models/Actions/TrinityActionType';
 import { Dialog } from 'primereact/dialog';
 import TrinityApp from '@/TrinityApp';
 import usePageProps from '@/hooks/trinity_page_props';

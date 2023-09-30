@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import SliderField from '@/types/Models/Fields/SliderField';
+import SliderFieldType from '@/types/Models/Fields/SliderFieldType';
 import { Slider } from 'primereact/slider';
 import { classNames } from 'primereact/utils';
 
-const SliderField = ({ component, errors, formData, setFieldValue }: FieldProps<SliderField>) => {
+const SliderField = ({ component, errors, formData, setFieldValue }: FieldProps<SliderFieldType>) => {
     const [value, setValue] = useState<number | [number, number]>(formData[component.columnName] ?? (component.range === true ? [component.min, component.max] : component.min));
 
     return (

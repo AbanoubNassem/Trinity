@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import Table from '@/components/Table';

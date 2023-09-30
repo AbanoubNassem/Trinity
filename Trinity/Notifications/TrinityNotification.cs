@@ -1,3 +1,4 @@
+using AbanoubNassem.Trinity.Models;
 using AbanoubNassem.Trinity.Notifications.Channels;
 
 namespace AbanoubNassem.Trinity.Notifications;
@@ -9,7 +10,7 @@ public abstract class TrinityNotification
 {
     // The default notification channels to use
     private static readonly List<ITrinityNotificationChannel> DefaultChannels = new()
-        { new TrinitySignalRChannel() };
+        { new TrinitySignalRChannel(), new TrinityDatabaseChannel() };
 
     /// <summary>
     /// Gets or sets the name of the notification.
@@ -26,12 +27,12 @@ public abstract class TrinityNotification
     }
 
     /// <summary>
-    /// Retrieves the data associated with the notification.
+    /// Retrieves the data associated with the notification , based on the user_id given.
     /// </summary>
     /// <param name="serviceProvider">The service provider for resolving dependencies.</param>
-    /// <param name="userIdentifiers">the user identifiers.</param>
-    /// <returns>The data object for the notification.</returns>
-    public abstract object Data(IServiceProvider serviceProvider, params string[] userIdentifiers);
+    /// <param name="userIdentifier">the user identifier.</param>
+    /// <returns>The <see cref="TrinityNotificationData"/> for the notification.</returns>
+    public abstract TrinityNotificationData Data(IServiceProvider serviceProvider, string? userIdentifier = null);
 
     /// <summary>
     /// Sends the notification using the specified service provider and user identifiers.

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import RepeaterField from '@/types/Models/Fields/RepeaterField';
+import RepeaterFieldType from '@/types/Models/Fields/RepeaterFieldType';
 import { OrderList } from 'primereact/orderlist';
 import { Panel, PanelHeaderTemplateOptions } from 'primereact/panel';
 import { Button } from 'primereact/button';
@@ -10,7 +10,7 @@ import { Toolbar } from 'primereact/toolbar';
 import GridLayout from '@/layouts/GridLayout';
 import { BlockUI } from 'primereact/blockui';
 
-const RepeaterField = ({ configs, resource, component, formData, record, setFieldValue, errors, localize }: FieldProps<RepeaterField>) => {
+const RepeaterField = ({ configs, resource, component, formData, record, setFieldValue, errors, localize }: FieldProps<RepeaterFieldType>) => {
     const [value, setValue] = useState<Array<any>>(!Array.isArray(formData[component.columnName]) ? JSON.parse(formData[component.columnName] ?? '[{}]') : formData[component.columnName]);
 
     useEffect(() => {

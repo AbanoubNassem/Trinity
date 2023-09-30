@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
+using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Controllers;
 
@@ -50,13 +51,13 @@ public abstract class TrinityController : Controller
     protected TrinityLocalizer Localizer => _localizer ??=
         HttpContext.RequestServices.GetRequiredService<TrinityLocalizer>();
 
-    private TrinityNotifications? _trinityNotification;
+    private TrinityNotificationsBase? _trinityNotification;
 
     /// <summary>
-    /// A reference <see cref="TrinityNotifications"/> object to use.
+    /// A reference <see cref="TrinityNotificationsBase"/> object to use.
     /// </summary>
-    protected TrinityNotifications TrinityNotifications => _trinityNotification ??=
-        HttpContext.RequestServices.GetRequiredService<TrinityNotifications>();
+    protected TrinityNotificationsBase TrinityNotificationsBase => _trinityNotification ??=
+        HttpContext.RequestServices.GetRequiredService<TrinityNotificationsBase>();
 
     /// <summary>
     /// Returns an HTTP 401 Unauthorized response with an optional error message, suitable for use in an Inertia request.
@@ -99,7 +100,7 @@ public abstract class TrinityController : Controller
     /// Creates a TrinityResponse object based on the current request and user information.
     /// </summary>
     /// <returns>The created TrinityResponse object.</returns>
-    protected TrinityResponse CreateResponse()
+    protected async Task<TrinityResponse> CreateResponse()
     {
         var response = new TrinityResponse();
         // If the request is an Inertia request, return the response without further processing
@@ -140,6 +141,16 @@ public abstract class TrinityController : Controller
 
         // Set the IsRtl property based on the current culture
         response.IsRtl = Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft;
+
+        if (_configurations?.DatabaseNotifications != null)
+        {
+            response.DatabaseNotificationsCount = await _configurations.ConnectionFactory()
+                .Query(_configurations.DatabaseNotifications.NotificationsTable)
+                .Select("*")
+                .Where("user_id", User.FindFirstValue(ClaimTypes.NameIdentifier)!)
+                .WhereNull("read_at")
+                .CountAsync<int>();
+        }
 
         return response;
     }

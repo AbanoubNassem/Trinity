@@ -10,9 +10,9 @@ import { VirtualScrollerLazyEvent } from 'primereact/virtualscroller';
 import last from 'lodash/last';
 import modal from '@/utilities/inertia_modal';
 import FieldProps from '@/types/Props/Fields/FieldProps';
-import RelationshipField from '@/types/Models/Fields/RelationshipField';
+import RelationshipFieldType from '@/types/Models/Fields/RelationshipFieldType';
 
-const BelongsToField = (props: FieldProps<RelationshipField>) => {
+const BelongsToField = (props: FieldProps<RelationshipFieldType>) => {
     const { component, errors, formData, setFieldValue } = props;
     const configs = useConfigs();
     const { resource, data } = usePageProps<any>();

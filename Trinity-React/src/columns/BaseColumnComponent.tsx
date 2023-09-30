@@ -1,11 +1,11 @@
 import React from 'react';
 import omit from 'lodash/omit';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
-import TrinityColumn from '@/types/Models/Columns/TrinityColumn';
+import TrinityColumnType from '@/types/Models/Columns/TrinityColumnType';
 import { Tooltip } from 'primereact/tooltip';
 import { classNames } from 'primereact/utils';
 
-const BaseColumnComponent = ({ column, record, children, resource }: ColumnProps<TrinityColumn>) => {
+const BaseColumnComponent = ({ column, record, children, resource }: ColumnProps<TrinityColumnType>) => {
     const tooltipId = `${column.columnName}_${record[resource.primaryKeyColumn]}_tooltip`;
 
     return (
