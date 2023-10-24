@@ -1,4 +1,3 @@
-import React from 'react';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
 import RelationshipColumnType from '@/types/Models/Columns/RelationshipColumnType';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import TextField from '@/fields/TextField';
 import FieldProps from '@/types/Props/Fields/FieldProps';
 import TrinityFieldType from '@/types/Models/Fields/TrinityFieldType';

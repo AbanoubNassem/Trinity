@@ -111,7 +111,7 @@ public class TrinityManager
                 GetPropertyInfo(pageType, "Localizer")?.SetValue(page, _trinityLocalizer);
                 GetPropertyInfo(pageType, "ModelState")?.SetValue(page, modelState);
                 GetPropertyInfo(pageType, "TrinityNotifications")?.SetValue(page,
-                    httpContext.RequestServices.GetRequiredService<TrinityNotificationsBase>()
+                    httpContext.RequestServices.GetRequiredService<TrinityNotificationsManager>()
                 );
                 return page;
             });
@@ -207,7 +207,7 @@ public class TrinityManager
                 }
 
                 GetPropertyInfo(resourceType, "TrinityNotifications")?.SetValue(resource,
-                    httpContext.RequestServices.GetRequiredService<TrinityNotificationsBase>()
+                    httpContext.RequestServices.GetRequiredService<TrinityNotificationsManager>()
                 );
 
                 switch (request.Method)

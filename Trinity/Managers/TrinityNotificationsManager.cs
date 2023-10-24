@@ -1,4 +1,6 @@
-namespace AbanoubNassem.Trinity.Notifications;
+using AbanoubNassem.Trinity.Notifications;
+
+namespace AbanoubNassem.Trinity.Managers;
 
 /// <summary>
 /// specifies the type of the message.
@@ -29,7 +31,7 @@ public enum NotificationSeverity
 /// <summary>
 /// TrinityNotifications allow you to notify Nova users of events within your application.
 /// </summary>
-public sealed class TrinityNotificationsBase
+public sealed class TrinityNotificationsManager
 {
     private readonly List<object> _notifications = new();
     private readonly IServiceProvider _serviceProvider;
@@ -38,7 +40,7 @@ public sealed class TrinityNotificationsBase
     /// 
     /// </summary>
     /// <param name="serviceProvider"></param>
-    public TrinityNotificationsBase(IServiceProvider serviceProvider)
+    public TrinityNotificationsManager(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
     }

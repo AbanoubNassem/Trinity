@@ -1,6 +1,3 @@
-import React from 'react';
-
-import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import { classNames } from 'primereact/utils';
 import { InputMask } from 'primereact/inputmask';
 import FieldProps from '@/types/Props/Fields/FieldProps';

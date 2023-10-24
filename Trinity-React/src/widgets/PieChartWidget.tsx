@@ -1,5 +1,5 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
-import React, { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { Chart } from 'primereact/chart';
 import PieChartWidgetType from '@/types/Models/Widgets/PieChartWidgetType';
 

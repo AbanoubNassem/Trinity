@@ -1,6 +1,6 @@
 import { useConfigs } from '@/hooks/trinity_configs';
 import { classNames } from 'primereact/utils';
-import React from 'react';
+
 import usePageProps from '@/hooks/trinity_page_props';
 import TrinityWidgetType from '@/types/Models/Widgets/TrinityWidgetType';
 import trinityApp from '@/TrinityApp';

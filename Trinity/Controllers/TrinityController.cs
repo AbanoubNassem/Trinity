@@ -2,7 +2,6 @@ using System.Security.Claims;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Extensions;
 using AbanoubNassem.Trinity.Managers;
-using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Pages;
 using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.RequestHelpers;
@@ -51,13 +50,13 @@ public abstract class TrinityController : Controller
     protected TrinityLocalizer Localizer => _localizer ??=
         HttpContext.RequestServices.GetRequiredService<TrinityLocalizer>();
 
-    private TrinityNotificationsBase? _trinityNotification;
+    private TrinityNotificationsManager? _trinityNotificationsManager;
 
     /// <summary>
-    /// A reference <see cref="TrinityNotificationsBase"/> object to use.
+    /// A reference <see cref="TrinityNotificationsManager"/> object to use.
     /// </summary>
-    protected TrinityNotificationsBase TrinityNotificationsBase => _trinityNotification ??=
-        HttpContext.RequestServices.GetRequiredService<TrinityNotificationsBase>();
+    protected TrinityNotificationsManager TrinityNotificationsManager => _trinityNotificationsManager ??=
+        HttpContext.RequestServices.GetRequiredService<TrinityNotificationsManager>();
 
     /// <summary>
     /// Returns an HTTP 401 Unauthorized response with an optional error message, suitable for use in an Inertia request.

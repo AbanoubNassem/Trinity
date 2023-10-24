@@ -1,4 +1,3 @@
-import React from 'react';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
 import TrinityColumnType from '@/types/Models/Columns/TrinityColumnType';
 import { ColorPicker } from 'primereact/colorpicker';

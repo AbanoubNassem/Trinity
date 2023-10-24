@@ -1,4 +1,3 @@
-import React from 'react';
 import { classNames } from 'primereact/utils';
 import { TabView, TabPanel } from 'primereact/tabview';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';

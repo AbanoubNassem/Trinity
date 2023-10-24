@@ -1,4 +1,3 @@
-import React from 'react';
 import omit from 'lodash/omit';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
 import TrinityColumnType from '@/types/Models/Columns/TrinityColumnType';

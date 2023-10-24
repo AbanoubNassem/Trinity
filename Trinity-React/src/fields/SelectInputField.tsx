@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { classNames } from 'primereact/utils';
 import { Dropdown, DropdownProps } from 'primereact/dropdown';
 

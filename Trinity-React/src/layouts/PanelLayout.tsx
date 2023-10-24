@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import { classNames } from 'primereact/utils';
 
 import { Panel } from 'primereact/panel';

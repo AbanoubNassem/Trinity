@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import BaseFieldComponent from '@/fields/BaseFieldComponent';
+import { useEffect, useState } from 'react';
 import { Calendar } from 'primereact/calendar';
 import { classNames } from 'primereact/utils';
 import FieldProps from '@/types/Props/Fields/FieldProps';
@@ -41,8 +40,8 @@ const DateTimeField = ({ component, formData, setFieldValue, errors }: FieldProp
             className={classNames({ 'p-invalid': errors[component.columnName] })}
             tooltip={component.tooltip}
             tooltipOptions={{ event: 'focus', position: 'top' }}
-            value={value}
-            onChange={(event) => {
+            value={value as any}
+            onChange={(event: any) => {
                 // const formatted = moment(event.target.value as any).format(component.dateFormat);
                 console.log(event.target.value);
                 setValue(event.target.value as any);

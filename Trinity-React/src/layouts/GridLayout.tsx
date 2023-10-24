@@ -1,9 +1,7 @@
-import React from 'react';
 import { classNames } from 'primereact/utils';
 import LayoutProps from '@/types/Props/Layouts/LayoutProps';
 import TrinityLayoutType from '@/types/Models/Layouts/TrinityLayoutType';
 import trinityApp from '@/TrinityApp';
-import BaseFieldComponent from '@/fields/BaseFieldComponent';
 
 const GirdLayout = ({ configs, resource, component, record, formData, setFieldValue, errors, style, localize }: LayoutProps<TrinityLayoutType>) => {
     return (

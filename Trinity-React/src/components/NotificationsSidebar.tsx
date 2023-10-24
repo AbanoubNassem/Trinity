@@ -1,19 +1,18 @@
 import { Sidebar } from 'primereact/sidebar';
 import trinityApp from '@/TrinityApp';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from 'primereact/button';
 import { Badge } from 'primereact/badge';
 import { useLocalize } from '@/hooks/trinity_localizer';
 import { DataScroller } from 'primereact/datascroller';
 import axios from 'axios';
-import IPaginator from '@/types/Models/Paginator';
-import { TrinityNotificationData } from '@/types/Models/TrinityNotificationData';
+import { TrinityNotificationData, TrinityNotificationObject } from '@/types/Models/TrinityNotificationObject.ts';
 import { useConfigs } from '@/hooks/trinity_configs';
 
 const NotificationsSidebar = () => {
     const configs = useConfigs();
     const [showNotifications, setShowNotifications] = useState(false);
-    const [notifications, setNotifications] = useState<Array<TrinityNotificationData>>([]);
+    const [notifications, setNotifications] = useState<Array<TrinityNotificationObject>>([]);
 
     const localize = useLocalize();
 
@@ -27,33 +26,10 @@ const NotificationsSidebar = () => {
             await loadNotifications();
         })();
     }, []);
-    const itemTemplate = (notification: TrinityNotificationData) => {
-        console.log('here', notification);
-        return (
-            <div
-                key={notification.id}
-                className="flex flex-wrap p-2 align-items-center gap-3"
-            >
-                {notification.data.image ? (
-                    <img
-                        className="w-4rem shadow-2 flex-shrink-0 border-round"
-                        src={`https://primefaces.org/cdn/primereact/images/product/${notification.data.image}`}
-                        alt={notification.data.title}
-                    />
-                ) : notification.data.icon ? (
-                    <i className="pi pi-tag text-sm"></i>
-                ) : null}
-
-                <div className="flex-1 flex flex-column gap-2 xl:mr-8">
-                    <span className="font-bold">{notification.data.title}</span>
-                    <div className="flex align-items-center gap-2">
-                        <i className="pi pi-tag text-sm"></i>
-                        <span>{notification.data.body}</span>
-                    </div>
-                </div>
-                <span className="font-bold text-900">${notification.data.image}</span>
-            </div>
-        );
+    const itemTemplate = (noti: TrinityNotificationObject) => {
+        const notification: TrinityNotificationData = JSON.parse(noti.data as string);
+        console.log('here', noti.id, notification);
+        return <div className=""></div>;
     };
 
     return (

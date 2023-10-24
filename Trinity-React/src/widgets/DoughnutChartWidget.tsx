@@ -1,5 +1,5 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Chart } from 'primereact/chart';
 import DoughnutChartWidgetType from '@/types/Models/Widgets/DoughnutChartWidgetType';
 

@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useContext, useImperativeHandle, useRef, useState } from 'react';
 import { LayoutContext } from '@/contexts/LayoutContext';
 import { Link, router } from '@inertiajs/react';
 import { classNames } from 'primereact/utils';
@@ -13,7 +13,7 @@ import { changeTrinityTheme } from '@/utilities/trinity_theme';
 import trinityApp from '@/TrinityApp';
 import NotificationsSidebar from '@/components/NotificationsSidebar';
 
-const AppTopbar = forwardRef((props, ref) => {
+const AppTopbar = forwardRef((_props, ref) => {
     const configs = useConfigs();
     const logo = useLogo();
     const localize = useLocalize();

@@ -22,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using StackExchange.Profiling;
+using Vite.AspNetCore.Extensions;
 
 #if !DEBUG
 using System.Reflection;
@@ -88,7 +89,8 @@ public static class AppExtensions
             options.HeaderName = "X-XSRF-TOKEN";
             options.Cookie.Name = "Trinity.Antiforgery";
         });
-
+        
+        services.AddViteServices();
         services.AddInertia(opts => { opts.RootView = "~/Views/TrinityApp.cshtml"; });
 
         if (isDevelopment)
@@ -102,7 +104,7 @@ public static class AppExtensions
             });
 
         services.AddSignalR();
-        services.AddSingleton<TrinityNotificationsBase>();
+        services.AddSingleton<TrinityNotificationsManager>();
         trinityManager.Init();
         return services;
     }
@@ -111,11 +113,7 @@ public static class AppExtensions
     /// Adds Trinity to the specified <see cref="IApplicationBuilder"/>, which enables Trinity {Admin Panel,Forms,Tables} capabilities.
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/> to add Trinity to.</param>
-    /// <param name="physicalTrinityWwwRootPath">
-    ///     Used to point to the Trinity wwwroot directory, while development ,
-    ///     to be able to load the new bundled Javascript files, on page refresh
-    /// </param>
-    public static void UseTrinity(this WebApplication app, string? physicalTrinityWwwRootPath = null)
+    public static void UseTrinity(this WebApplication app)
     {
         var configs = app.Services.GetRequiredService<TrinityConfigurations>();
         var manager = app.Services.GetRequiredService<TrinityManager>();
@@ -126,8 +124,6 @@ public static class AppExtensions
             app.UseStatusCodePages();
             app.UseDeveloperExceptionPage();
             app.UseMiniProfiler();
-            // app.UseViteDevMiddleware();
-            // app.UseTrinityAdminRedirectMiddleware();
         }
         else
         {
@@ -149,12 +145,7 @@ public static class AppExtensions
         app.UseDefaultFiles();
 
 #if DEBUG
-        if (physicalTrinityWwwRootPath != null)
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(physicalTrinityWwwRootPath),
-                RequestPath = $"/{configs.Prefix}/trinity"
-            });
+        app.UseViteDevMiddleware();
 #else
         var assembly = typeof(Controllers.TrinityController).GetTypeInfo().Assembly;
         app.UseStaticFiles(new StaticFileOptions
@@ -163,7 +154,7 @@ public static class AppExtensions
                 assembly,
                 "AbanoubNassem.Trinity.wwwroot"
             ),
-            RequestPath = $"/{configs.Prefix}/trinity"
+            RequestPath = $"/{configs.Prefix}/trinity",
         });
 
 #endif

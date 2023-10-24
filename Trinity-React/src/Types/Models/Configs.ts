@@ -8,6 +8,7 @@ export default interface Configs {
     progressSettings: any;
     rowsPerPageOptions: Array<number>;
     themeMode: ThemeMode;
+    viteUrl: string;
 }
 
 export enum ThemeMode {

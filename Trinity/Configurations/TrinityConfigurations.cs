@@ -33,6 +33,16 @@ public sealed class TrinityConfigurations
     public bool IsDevelopment { get; init; }
 
     /// <summary>
+    /// The vite server url , used while development.
+    /// </summary>
+#if DEBUG
+   public string ViteUrl { get; set; } = "http://localhost:5173";
+#else
+    public string ViteUrl { get; set; }
+#endif
+
+
+    /// <summary>
     /// A factory to create a new connection, to perform queries when needed.
     /// </summary>
     [JsonIgnore]

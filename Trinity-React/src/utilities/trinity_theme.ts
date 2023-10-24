@@ -1,4 +1,5 @@
 import TrinityApp from '@/TrinityApp';
+import trinityApp from '@/TrinityApp.tsx';
 
 const replaceLink = (linkElement: HTMLElement, href: string, onComplete?: () => void) => {
     if (!linkElement || !href) {
@@ -26,8 +27,12 @@ const replaceLink = (linkElement: HTMLElement, href: string, onComplete?: () => 
 
 export function changeTrinityTheme(theme: string, onComplete?: () => void) {
     const configs = TrinityApp.configs;
-
-    replaceLink(document.getElementById('theme-css')!, `/${configs.prefix}/trinity/${theme}-theme.css`, onComplete);
+    // @ts-ignore
+    if (import.meta.env.DEV) {
+        replaceLink(document.getElementById('theme-css')!, `${trinityApp.configs.viteUrl}/${theme}-theme.css`, onComplete);
+    } else {
+        replaceLink(document.getElementById('theme-css')!, `/${configs.prefix}/trinity/${theme}-theme.css`, onComplete);
+    }
 
     localStorage.setItem('theme', theme);
 }

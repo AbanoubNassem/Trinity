@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 
 import { classNames, DomHandler } from 'primereact/utils';
 import PrimeReact from 'primereact/api';

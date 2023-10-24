@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Skeleton } from 'primereact/skeleton';
 import MainLayout from '@/MainLayout';
 

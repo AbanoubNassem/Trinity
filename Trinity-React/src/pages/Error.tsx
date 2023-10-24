@@ -1,7 +1,7 @@
 import { useLogo } from '@/hooks/trinity_logo';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { Head } from '@/components/Head';
-import React from 'react';
+
 import { useLocalize } from '@/hooks/trinity_localizer';
 
 const Error = ({ statusCode, reasonPhrase }: { statusCode: number; reasonPhrase: string }) => {

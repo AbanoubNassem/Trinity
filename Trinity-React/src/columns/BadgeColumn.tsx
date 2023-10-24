@@ -1,7 +1,7 @@
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
 import BadgeColumnType from '@/types/Models/Columns/BadgeColumnType';
 import { Badge } from 'primereact/badge';
-import React from 'react';
+
 import { Button } from 'primereact/button';
 
 const BadgeColumn = ({ column, columnValue }: ColumnProps<BadgeColumnType>) => {

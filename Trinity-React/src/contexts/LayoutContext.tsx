@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { createContext, useState } from 'react';
 
-export const LayoutContext = React.createContext<{
+export const LayoutContext = createContext<{
     layoutConfig: { ripple: boolean; inputStyle: string; menuMode: string; colorScheme: string; theme: string; scale: number };
     layoutState: { staticMenuDesktopInactive: boolean; overlayMenuActive: boolean; profileSidebarVisible: boolean; configSidebarVisible: boolean; staticMenuMobileActive: boolean; menuHoverActive: boolean };
     setLayoutState: React.Dispatch<React.SetStateAction<{ staticMenuDesktopInactive: boolean; overlayMenuActive: boolean; profileSidebarVisible: boolean; configSidebarVisible: boolean; staticMenuMobileActive: boolean; menuHoverActive: boolean }>>;

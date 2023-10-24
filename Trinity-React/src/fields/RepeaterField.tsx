@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import BaseFieldComponent from '@/fields/BaseFieldComponent';
+import { useEffect, useState } from 'react';
 import { classNames } from 'primereact/utils';
 import FieldProps from '@/types/Props/Fields/FieldProps';
 import RepeaterFieldType from '@/types/Models/Fields/RepeaterFieldType';

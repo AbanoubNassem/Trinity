@@ -1,5 +1,5 @@
 import TrinityFieldType from '@/types/Models/Fields/TrinityFieldType';
-import { ErrorBag, Errors } from '@inertiajs/core/types/types';
+import { ErrorBag, Errors } from '@inertiajs/core';
 import TrinityResource from '@/types/Models/TrinityResource';
 import Configs from '@/types/Models/Configs';
 

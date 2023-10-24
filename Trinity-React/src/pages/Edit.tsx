@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import { memo, useMemo, useRef } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import { Button } from 'primereact/button';
@@ -101,4 +101,4 @@ const Edit = () => {
     );
 };
 
-export default React.memo(Edit);
+export default memo(Edit);

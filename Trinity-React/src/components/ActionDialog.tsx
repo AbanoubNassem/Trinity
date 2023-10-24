@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import TrinityActionModel from '@/types/Models/Actions/TrinityActionType';
 import { Dialog } from 'primereact/dialog';
 import TrinityApp from '@/TrinityApp';
@@ -6,7 +6,7 @@ import usePageProps from '@/hooks/trinity_page_props';
 import { Button } from 'primereact/button';
 import { useConfigs } from '@/hooks/trinity_configs';
 import TrinityAction from '@/utilities/trinity_action';
-import { ErrorBag, Errors } from '@inertiajs/core/types/types';
+import { ErrorBag, Errors } from '@inertiajs/core';
 import axios from 'axios';
 import trinityApp from '@/TrinityApp';
 
@@ -15,7 +15,7 @@ interface Props {
     onHide: () => void;
 }
 
-export const ActionDialog = React.memo(({ actionData, onHide }: Props) => {
+export const ActionDialog = memo(({ actionData, onHide }: Props) => {
     const configs = useConfigs();
     const { resource } = usePageProps();
     const form = useRef<HTMLFormElement>(null);

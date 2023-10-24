@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import axios from 'axios';
-import BaseFieldComponent from '@/fields/BaseFieldComponent';
 import FieldProps from '@/types/Props/Fields/FieldProps';
 import FileUploadFieldType from '@/types/Models/Fields/FileUploadFieldType';
 import { classNames } from 'primereact/utils';
@@ -144,7 +143,7 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
             })}
             server={{
                 url: `/${configs.prefix}`,
-                load: async (source, load, error, progress, abort, headers) => {
+                load: async (source, load, error, progress, abort, _headers) => {
                     if (source?.includes('/'))
                         axios({
                             method: 'get',
@@ -200,7 +199,7 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
                         .catch((err) => error(err));
                 },
 
-                process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+                process: (_fieldName, file, _metadata, load, error, progress, abort, _transfer, _options) => {
                     const uploadData = new FormData();
                     uploadData.append('file', file, file.name);
                     uploadData.append('resourceName', resource?.pluralLabel.toLowerCase() ?? '');
@@ -245,7 +244,7 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
             removeUploadedFileButtonPosition={component.removeUploadedFileButtonPosition}
             allowVideoPreview={component.canPreview}
             allowAudioPreview={component.canPreview}
-            onaddfile={(err, file) => {
+            onaddfile={(_err, file) => {
                 if (component.canPreview) insertOpenLink(file);
                 if (component.canDownload) insertDownloadLink(file);
             }}

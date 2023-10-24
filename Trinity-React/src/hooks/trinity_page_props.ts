@@ -1,7 +1,7 @@
 import Configs from '@/types/Models/Configs';
 import TrinityResource from '@/types/Models/TrinityResource';
 import { usePage } from '@inertiajs/react';
-import { ErrorBag, Errors } from '@inertiajs/core/types/types';
+import { ErrorBag, Errors } from '@inertiajs/core';
 import TrinityPageType from '@/types/Models/Pages/TrinityPageType';
 
 export default function usePageProps<T>(): {

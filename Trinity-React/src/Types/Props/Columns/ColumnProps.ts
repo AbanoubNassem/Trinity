@@ -1,5 +1,5 @@
 import TrinityColumnType from '@/types/Models/Columns/TrinityColumnType';
-import React from 'react';
+
 import TrinityResource from '@/types/Models/TrinityResource';
 
 export default interface ColumnProps<T extends TrinityColumnType> {

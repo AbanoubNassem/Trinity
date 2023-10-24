@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import { Button } from 'primereact/button';
@@ -130,4 +130,4 @@ const Create = () => {
     );
 };
 
-export default React.memo(Create);
+export default memo(Create);

@@ -1,6 +1,6 @@
 import WidgetProps from '@/types/Props/Widgets/WidgetProps';
 import BarChartWidgetType from '@/types/Models/Widgets/BarChartWidgetType';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Chart } from 'primereact/chart';
 
 const BarChartWidget = ({ widget }: WidgetProps<BarChartWidgetType>) => {

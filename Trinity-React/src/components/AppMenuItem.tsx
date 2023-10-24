@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { classNames } from 'primereact/utils';
 import { Ripple } from 'primereact/ripple';
 import { Link } from '@inertiajs/react';

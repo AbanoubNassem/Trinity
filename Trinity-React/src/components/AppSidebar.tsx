@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppMenuItem from '@/components/AppMenuItem';
 import trinityApp from '@/TrinityApp';
 import { useLocalize } from '@/hooks/trinity_localizer';

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import BaseFieldComponent from '@/fields/BaseFieldComponent';
+import { useState } from 'react';
 import { classNames } from 'primereact/utils';
 import { InputTextarea } from 'primereact/inputtextarea';
 import FieldProps from '@/types/Props/Fields/FieldProps';

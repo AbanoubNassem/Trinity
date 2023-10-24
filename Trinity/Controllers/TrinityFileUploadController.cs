@@ -17,20 +17,20 @@ public sealed class TrinityFileUploadController : TrinityController
 {
     private readonly TrinityManager _trinityManager;
     private readonly TrinityLocalizer _localizer;
-    private readonly TrinityNotificationsBase _trinityNotificationsBase;
+    private readonly TrinityNotificationsManager _trinityNotificationsManager;
 
     /// <summary>
     /// 
     /// </summary>
     /// <param name="trinityManager"></param>
     /// <param name="localizer"></param>
-    /// <param name="trinityNotificationsBase"></param>
+    /// <param name="trinityNotificationsManager"></param>
     public TrinityFileUploadController(TrinityManager trinityManager, TrinityLocalizer localizer,
-        TrinityNotificationsBase trinityNotificationsBase)
+        TrinityNotificationsManager trinityNotificationsManager)
     {
         _trinityManager = trinityManager;
         _localizer = localizer;
-        _trinityNotificationsBase = trinityNotificationsBase;
+        _trinityNotificationsManager = trinityNotificationsManager;
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public sealed class TrinityFileUploadController : TrinityController
         return Ok(new
         {
             data = await uploadField.Upload(file),
-            notifications = _trinityNotificationsBase.Flush(),
+            notifications = _trinityNotificationsManager.Flush(),
         });
     }
 
@@ -96,7 +96,7 @@ public sealed class TrinityFileUploadController : TrinityController
 
             if (!filesToDelete.Any())
             {
-                _trinityNotificationsBase.NotifyError(_localizer["nothing_to_delete_revert"]);
+                _trinityNotificationsManager.NotifyError(_localizer["nothing_to_delete_revert"]);
                 return await Task.FromResult<IActionResult>(BadRequest(_localizer["nothing_to_delete_revert"]));
             }
 
@@ -107,7 +107,7 @@ public sealed class TrinityFileUploadController : TrinityController
         return await Task.FromResult<IActionResult>(Ok(new
         {
             data,
-            notifications = _trinityNotificationsBase.Flush(),
+            notifications = _trinityNotificationsManager.Flush(),
         }));
     }
 }

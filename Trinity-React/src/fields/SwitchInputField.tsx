@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { InputSwitch } from 'primereact/inputswitch';
 import { classNames } from 'primereact/utils';

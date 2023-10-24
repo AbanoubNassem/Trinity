@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Button } from 'primereact/button';
 import { Toolbar } from 'primereact/toolbar';
@@ -177,7 +177,7 @@ const Table = () => {
     const toolbarLeftContents = <></>;
 
     const toolbarRightContents = (
-        <React.Fragment>
+        <>
             {resource?.canCreate && (
                 <Button
                     className="p-button-success mx-1"
@@ -224,7 +224,7 @@ const Table = () => {
                         }}
                     />
                 ))}
-        </React.Fragment>
+        </>
     );
 
     const header = (

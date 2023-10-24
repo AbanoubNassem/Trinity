@@ -1,7 +1,7 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import { classNames } from 'primereact/utils';
 import TrinityFieldType from '@/types/Models/Fields/TrinityFieldType';
-import { Errors, ErrorBag } from '@inertiajs/core/types/types';
+import { Errors, ErrorBag } from '@inertiajs/core';
 import omit from 'lodash/omit';
 
 const BaseFieldComponent = ({ component, errors, children, style }: { component: TrinityFieldType; errors: Errors & ErrorBag; children?: React.ReactNode; style?: CSSProperties | undefined }) => {

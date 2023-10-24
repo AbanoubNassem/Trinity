@@ -1,7 +1,7 @@
 import TrinityPageType from '@/types/Models/Pages/TrinityPageType';
 import Configs from '@/types/Models/Configs';
 
-export { TrinityPageType };
+export type { TrinityPageType };
 export default interface PageProps<TData> extends TrinityPageType {
     configs: Configs;
     data?: TData;

@@ -1,5 +1,6 @@
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Configurations;
+using AbanoubNassem.Trinity.Managers;
 using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Providers;
 
@@ -33,9 +34,9 @@ public abstract class TrinityComponent<T, TDeserialization> : ITrinityComponent
     protected TrinityLocalizer Localizer { get; init; } = null!;
 
     /// <summary>
-    /// A reference to <see cref="TrinityNotificationsBase"/>. 
+    /// A reference to <see cref="TrinityNotificationsManager"/>. 
     /// </summary>
-    protected TrinityNotificationsBase TrinityNotificationsBase { get; init; } = null!;
+    protected TrinityNotificationsManager TrinityNotificationsManager { get; init; } = null!;
 
     /// <inheritdoc />
     public virtual void Setup()

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import FieldProps from '@/types/Props/Fields/FieldProps';
 import SliderFieldType from '@/types/Models/Fields/SliderFieldType';

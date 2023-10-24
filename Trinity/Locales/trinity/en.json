@@ -48,5 +48,6 @@
   "are_you_sure_to_delete_selected_records": "Are you sure you want to delete the <b>{0} selected records</b>?",
   "error": "Error",
   "whoops": "Whoops, something went wrong!",
-  "unknown_widget": "Unknown Widget {0}"
+  "unknown_widget": "Unknown Widget {0}",
+  "notifications": "Notifications"
 }

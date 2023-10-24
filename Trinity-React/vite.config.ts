@@ -1,5 +1,4 @@
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
-import { resolve } from 'path';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'node:url';
 
@@ -7,14 +6,18 @@ export default defineConfig({
     define: {
         'process.env': JSON.stringify(process.env.NODE_ENV || 'development')
     },
+    root: 'src',
+    appType: 'custom',
+    publicDir: '../public',
     build: {
-        outDir: resolve(__dirname, '../Trinity/wwwroot/'),
         emptyOutDir: true,
-        lib: {
-            entry: resolve(__dirname, 'src/main.tsx'),
-            name: 'trinity',
-            fileName: 'trinity-react',
-            formats: ['es']
+        outDir: '../../Trinity/wwwroot/dist',
+        assetsDir: '',
+        rollupOptions: {
+            input: 'src/main.tsx',
+            output: {
+                entryFileNames: 'trinity.js'
+            }
         }
     },
     plugins: [react(), splitVendorChunkPlugin()],
@@ -23,5 +26,9 @@ export default defineConfig({
             // @ts-ignore
             '@': fileURLToPath(new URL('./src', import.meta.url))
         }
+    },
+    server: {
+        strictPort: true,
+        hmr: true
     }
 });

@@ -112,7 +112,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
     {
         if (MaximumFileSize != null && file.Length > MaximumFileSize)
         {
-            TrinityNotificationsBase.NotifyError(Localizer["file_exceeded_max_size", file.FileName]);
+            TrinityNotificationsManager.NotifyError(Localizer["file_exceeded_max_size", file.FileName]);
             return null;
         }
 
@@ -123,7 +123,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
 
             if (!match.Success)
             {
-                TrinityNotificationsBase.NotifyError(Localizer["file_does_not_match_pattern", file.FileName, pattern]);
+                TrinityNotificationsManager.NotifyError(Localizer["file_does_not_match_pattern", file.FileName, pattern]);
                 return null;
             }
         }
@@ -132,7 +132,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
 
         if (res != null)
         {
-            TrinityNotificationsBase.NotifyError(res);
+            TrinityNotificationsManager.NotifyError(res);
             return null;
         }
 
@@ -147,7 +147,7 @@ public class FileUploadField : CanUploadField<FileUploadField>
         await using var stream = new FileStream(path, FileMode.Create);
         await file.CopyToAsync(stream);
 
-        TrinityNotificationsBase.NotifySuccess(Localizer["file_was_uploaded", file.FileName]);
+        TrinityNotificationsManager.NotifySuccess(Localizer["file_was_uploaded", file.FileName]);
 
         var moveUploadedFromTempToDirectory = Path.Combine("wwwroot", GetUploadDirectory());
 

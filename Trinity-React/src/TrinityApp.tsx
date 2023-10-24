@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import * as signalR from '@microsoft/signalr';
 import Configs from '@/types/Models/Configs';
 import TrinityResource from '@/types/Models/TrinityResource';

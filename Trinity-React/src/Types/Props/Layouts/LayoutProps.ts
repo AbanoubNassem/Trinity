@@ -1,5 +1,5 @@
 import BaseComponent from '@/types/Models/TrinityComponentType';
-import { Errors, ErrorBag } from '@inertiajs/core/types/types';
+import { Errors, ErrorBag } from '@inertiajs/core';
 import TrinityResource from '@/types/Models/TrinityResource';
 import Configs from '@/types/Models/Configs';
 import { CSSProperties } from 'react';

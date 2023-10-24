@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import usePageProps from '@/hooks/trinity_page_props';
 import { Head } from '@/components/Head';
 import { Button } from 'primereact/button';

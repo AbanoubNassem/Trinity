@@ -1,4 +1,3 @@
-import React from 'react';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
 import TextColumnType from '@/types/Models/Columns/TextColumnType';
 import moment from 'moment';

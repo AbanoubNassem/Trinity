@@ -1,5 +1,4 @@
-import React, { useRef, useState } from 'react';
-import BaseFieldComponent from '@/fields/BaseFieldComponent';
+import { useRef, useState } from 'react';
 import { classNames } from 'primereact/utils';
 import FieldProps from '@/types/Props/Fields/FieldProps';
 import EditorFieldType from '@/types/Models/Fields/EditorFieldType';

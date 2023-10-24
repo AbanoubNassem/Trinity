@@ -1,4 +1,3 @@
-import React from 'react';
 import { Image } from 'primereact/image';
 import ColumnProps from '@/types/Props/Columns/ColumnProps';
 import ImageColumnType from '@/types/Models/Columns/ImageColumnType';

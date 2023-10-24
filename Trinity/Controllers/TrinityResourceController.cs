@@ -75,7 +75,7 @@ public sealed class TrinityResourceController : TrinityController
                 break;
         }
 
-        responseData.Notifications = TrinityNotificationsBase.Flush();
+        responseData.Notifications = TrinityNotificationsManager.Flush();
         return Inertia.Render(view, responseData);
     }
 }
