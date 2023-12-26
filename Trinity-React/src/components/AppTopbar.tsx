@@ -114,6 +114,7 @@ const AppTopbar = forwardRef((_props, ref) => {
                                 image={user.avatar}
                                 shape="circle"
                                 size="large"
+                                style={{ background: 'transparent' }}
                             />
                             <span className="mx-3 sm:block md:hidden text-lg">{localize('profile')}</span>
                         </div>
