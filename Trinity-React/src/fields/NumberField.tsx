@@ -38,8 +38,8 @@ const NumberField = ({ component, formData, setFieldValue, errors }: FieldProps<
             buttonLayout={component.buttonLayout}
             incrementButtonClassName={component.incrementButtonClassName}
             decrementButtonClassName={component.decrementButtonClassName}
-            incrementButtonIcon={component.incrementButtonIcon}
-            decrementButtonIcon={component.decrementButtonIcon}
+            incrementButtonIcon={component.incrementButtonIcon as any}
+            decrementButtonIcon={component.decrementButtonIcon as any}
         />
     );
 };

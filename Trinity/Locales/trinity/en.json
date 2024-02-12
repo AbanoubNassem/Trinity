@@ -49,5 +49,8 @@
   "error": "Error",
   "whoops": "Whoops, something went wrong!",
   "unknown_widget": "Unknown Widget {0}",
-  "notifications": "Notifications"
+  "notifications": "Notifications",
+  "read_all": "Read all",
+  "clear_all": "Clear all",
+  "remove_all": "Remove all"
 }

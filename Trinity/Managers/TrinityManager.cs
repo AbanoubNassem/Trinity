@@ -240,9 +240,9 @@ public class TrinityManager
 
 
     /// <summary>
-    /// 
+    /// Load and prepare the found Trinity Plugins assemblies.
     /// </summary>
-    /// <param name="app"></param>
+    /// <param name="app"><see cref="WebApplication"/></param>
     public void LoadPlugins(WebApplication app)
     {
         var trinityPluginType = typeof(TrinityPlugin);
@@ -279,6 +279,11 @@ public class TrinityManager
         }
     }
 
+    /// <summary>
+    /// Dynamically inject required services in the Notification
+    /// </summary>
+    /// <param name="serviceProvider"><see cref="IServiceProvider"/></param>
+    /// <param name="notification"><see cref="TrinityNotification"/></param>
     public void SetupNotification(IServiceProvider serviceProvider, TrinityNotification notification)
     {
         var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();

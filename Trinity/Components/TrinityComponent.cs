@@ -1,7 +1,6 @@
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Managers;
-using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Providers;
 
 namespace AbanoubNassem.Trinity.Components;

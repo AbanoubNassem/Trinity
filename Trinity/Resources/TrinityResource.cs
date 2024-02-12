@@ -65,6 +65,4 @@ public abstract partial class TrinityResource<TPrimaryKeyType> : CanMakeComponen
 }
 
 /// <inheritdoc />
-public abstract class TrinityResource : TrinityResource<int>
-{
-}
+public abstract class TrinityResource : TrinityResource<int>;

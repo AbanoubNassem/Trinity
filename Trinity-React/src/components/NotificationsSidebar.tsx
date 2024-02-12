@@ -14,7 +14,8 @@ import IPaginator from '@/types/Models/Paginator.ts';
 
 const NotificationsSidebar = React.memo(() => {
     const configs = useConfigs();
-    const [showNotifications, setShowNotifications] = useState(false);
+    const [paginator, setPaginator] = useState<IPaginator<TrinityNotificationObject>>();
+    const [showSidebar, setShowSidebar] = useState(false);
     const [notificationsCount, setNotificationsCount] = useState(trinityApp.databaseNotificationsCount ?? 0);
     const notificationsRef = useRef<Array<TrinityNotificationObject>>([]);
     const [loading, setLoading] = useState(false);
@@ -26,9 +27,44 @@ const NotificationsSidebar = React.memo(() => {
         try {
             setLoading(true);
 
-            const paginator = (await axios.get<IPaginator<TrinityNotificationObject>>(`/${configs.prefix}/notifications/all?page=${currentPage}&perPage=${perPage}`)).data;
-            notificationsRef.current = append ? [...notificationsRef.current, ...paginator.data] : paginator.data;
-            setNotificationsCount(paginator.totalCount ?? notificationsRef.current.length);
+            const res = (await axios.get<any>(`/${configs.prefix}/notifications/all?page=${currentPage}&perPage=${perPage}`)).data;
+            setPaginator(res.pagination as IPaginator<TrinityNotificationObject>);
+
+            notificationsRef.current = append ? [...notificationsRef.current, ...res.pagination.data] : res.pagination.data;
+            setNotificationsCount(res.unreadCount);
+            setRerenderKey((prevKey) => prevKey + 1);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const readAllNotifications = async () => {
+        try {
+            setLoading(true);
+
+            const res = (await axios.post(`/${configs.prefix}/notifications/read-all`)).data;
+            if (res > 0) {
+                notificationsRef.current = notificationsRef.current.map((n) => {
+                    n.read_at = new Date();
+                    return n;
+                });
+            }
+            setNotificationsCount(0);
+            setRerenderKey((prevKey) => prevKey + 1);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const clearAllNotifications = async () => {
+        try {
+            setLoading(true);
+
+            const res = (await axios.post(`/${configs.prefix}/notifications/clear-all`)).data;
+            if (res > 0) {
+                notificationsRef.current = [];
+            }
+            setNotificationsCount(0);
             setRerenderKey((prevKey) => prevKey + 1);
         } finally {
             setLoading(false);
@@ -59,7 +95,7 @@ const NotificationsSidebar = React.memo(() => {
         return (
             <div
                 key={noti.id ?? opt.index}
-                className="p-3"
+                className={`p-3 ${!noti.read_at ? 'border-left-3 border-primary' : ''}`}
             >
                 <div className="flex align-items-center">
                     {notification.image ? (
@@ -113,13 +149,13 @@ const NotificationsSidebar = React.memo(() => {
                         rounded
                         text
                         className="mx-2"
-                        onClick={() => setShowNotifications(true)}
+                        onClick={() => setShowSidebar(true)}
                     >
                         <i
                             className="pi pi-bell p-overlay-badge"
                             style={{ fontSize: '1.6rem' }}
                         >
-                            {trinityApp.databaseNotificationsCount! > 0 ? (
+                            {notificationsCount > 0 ? (
                                 <Badge
                                     value={notificationsCount}
                                     severity="danger"
@@ -129,12 +165,34 @@ const NotificationsSidebar = React.memo(() => {
                     </Button>
 
                     <Sidebar
-                        visible={showNotifications}
-                        onHide={() => setShowNotifications(false)}
+                        visible={showSidebar}
+                        onHide={() => setShowSidebar(false)}
                         position={trinityApp.isRtl ? 'left' : 'right'}
                         className="w-full md:w-20rem lg:w-30rem"
                         blockScroll
-                        header={`${localize('notifications')} ${notificationsCount ? `(${notificationsCount})` : ''}`}
+                        header={
+                            <div className="flex flex-column">
+                                {`${localize('notifications')} ${notificationsCount ? `(${notificationsCount})` : ''}`}
+                                <span className="p-buttonset mt-2">
+                                    <Button
+                                        label={localize('read_all')}
+                                        icon="pi pi-eye"
+                                        text
+                                        size="small"
+                                        onClick={readAllNotifications}
+                                    />
+                                    <Button
+                                        className="mx-2"
+                                        label={localize('remove_all')}
+                                        icon="pi pi-trash"
+                                        text
+                                        size="small"
+                                        severity="danger"
+                                        onClick={clearAllNotifications}
+                                    />
+                                </span>
+                            </div>
+                        }
                     >
                         {notificationsRef.current?.length ? (
                             <VirtualScroller
@@ -147,8 +205,8 @@ const NotificationsSidebar = React.memo(() => {
                                     if (loading) return;
 
                                     const page = Math.ceil(+ev.last / 10);
-                                    if ((+ev.first == 0 && +ev.last == 10) || (Math.ceil((+ev.first + +ev.last) / 10) > page && notificationsCount > notificationsRef.current.length)) {
-                                        await loadNotifications(page, 10, true);
+                                    if ((+ev.first == 0 && +ev.last == 10) || (Math.ceil((+ev.first + +ev.last) / 10) > page && paginator?.totalCount! > notificationsRef.current.length)) {
+                                        await loadNotifications(paginator!.currentPage + 1, 10, true);
                                     }
                                 }}
                                 showLoader

@@ -6,6 +6,4 @@ namespace AbanoubNassem.Trinity.Validators;
 /// <summary>
 /// The FluentValidation Validator for <see cref="TrinityResource{TPrimaryKeyType}"/>
 /// </summary>
-public class ResourceValidator : AbstractValidator<Dictionary<string, object?>>
-{
-}
+public class ResourceValidator : AbstractValidator<Dictionary<string, object?>>;

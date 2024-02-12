@@ -109,7 +109,7 @@ const RepeaterField = ({ configs, resource, component, formData, record, setFiel
             <OrderList
                 id={component.columnName}
                 hidden={component.hidden}
-                placeholder={component.placeholder}
+                filterPlaceholder={component.placeholder}
                 className={classNames({ 'p-invalid': errors[component.columnName] })}
                 dragdrop={component.canMoveItem}
                 value={value}
@@ -121,6 +121,8 @@ const RepeaterField = ({ configs, resource, component, formData, record, setFiel
                 }}
                 onBlur={() => setFieldValue(component.columnName, JSON.stringify(value))}
                 style={component.style}
+                // @ts-ignore
+                dataKey={null}
             />
         </BlockUI>
     );

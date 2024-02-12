@@ -1,7 +1,6 @@
 using System.Text.Json.Serialization;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Hubs;
-using AbanoubNassem.Trinity.Managers;
 using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Utilities;
 using Microsoft.AspNetCore.SignalR;

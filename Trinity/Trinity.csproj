@@ -7,7 +7,7 @@
         <AssemblyName>AbanoubNassem.Trinity</AssemblyName>
         <RootNamespace>AbanoubNassem.Trinity</RootNamespace>
         <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
-        <Version>0.0.8</Version>
+        <Version>0.0.9</Version>
         <Title>Trinity</Title>
         <Description>Trinity is a powerful Single-Page Application (SPA) administration tool that is designed to streamline common administrative tasks and enhance the productivity of developers. With its feature-rich and beautifully-designed interface, built using C# and ASP.NET, Trinity makes it easy to manage your website's backend with ease.</Description>
         <PackageProjectUrl>https://github.com/AbanoubNassem/Trinity</PackageProjectUrl>
@@ -55,6 +55,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Middlewares\" />
         <Folder Include="wwwroot" />
     </ItemGroup>
 

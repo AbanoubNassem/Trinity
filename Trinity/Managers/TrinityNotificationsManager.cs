@@ -1,5 +1,3 @@
-using AbanoubNassem.Trinity.Notifications;
-
 namespace AbanoubNassem.Trinity.Managers;
 
 /// <summary>
