@@ -2,6 +2,17 @@
 
 All notable changes to `Trinity` will be documented in this file.
 
+## v0.0.10
+
+- Fix serving static assets in production.
+- Minor bug fixes.
+  
+## v0.0.9
+
+- Support NetCore 8
+- Bug fixes
+- Added TrinityPushNotifications
+  
 ## v0.0.7
 
 - Upgrade dependencies.
