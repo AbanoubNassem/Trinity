@@ -9,8 +9,9 @@ export interface TrinityNotificationData {
     image: string | null;
     action: TrinityActionType | null;
 }
-
 export interface TrinityNotificationObject {
-    id: string | number;
+    id?: string | number;
     data: string | TrinityNotificationData;
+    created_at?: Date;
+    read_at?: Date;
 }

@@ -9,8 +9,8 @@ export default interface Configs {
     rowsPerPageOptions: Array<number>;
     themeMode: ThemeMode;
     viteUrl: string;
+    isDatabaseNotificationsEnabled: boolean;
 }
-
 export enum ThemeMode {
     Light,
     Dark
