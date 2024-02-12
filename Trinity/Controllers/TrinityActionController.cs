@@ -56,7 +56,7 @@ public sealed class TrinityActionController : TrinityController
 
         if (validated == null)
         {
-            return Ok(TrinityAction.Errors(TrinityNotificationsManager.Flush(),
+            return Ok(TrinityAction.Errors(TrinityNotifications.Flush(),
                 ModelState.ToDictionary(k => k.Key.Camelize(),
                     v => v.Value?.Errors.FirstOrDefault()?.ErrorMessage ?? ""
                 ))

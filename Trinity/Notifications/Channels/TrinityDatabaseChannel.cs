@@ -12,7 +12,10 @@ namespace AbanoubNassem.Trinity.Notifications.Channels;
 /// </summary>
 public class TrinityDatabaseChannel : ITrinityNotificationChannel
 {
-    private static readonly string[] Cols = { "id", "type", "user_id", "data", "read_at", "created_at", "updated_at" };
+    private static readonly string[] Cols = ["id", "type", "user_id", "data", "read_at", "created_at", "updated_at"];
+
+    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+        { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 
     /// <summary>
     /// Asynchronously sends a <see cref="TrinityNotification"/> to a subset of users.
@@ -38,7 +41,7 @@ public class TrinityDatabaseChannel : ITrinityNotificationChannel
                 Guid.NewGuid(),
                 notification.Name ?? notification.GetType().Name,
                 id,
-                JsonSerializer.Serialize(notification.Data(serviceProvider, id)),
+                JsonSerializer.Serialize(notification.Data(id), JsonSerializerOptions),
                 null,
                 DateTime.Now,
                 DateTime.Now
@@ -66,7 +69,7 @@ public class TrinityDatabaseChannel : ITrinityNotificationChannel
         const int chunkSize = 10000;
         var userIdCount = await queryFactory.Query(configurations.DatabaseNotifications.UsersTable).CountAsync<long>();
 
-        var data = JsonSerializer.Serialize(notification.Data(serviceProvider));
+        var data = JsonSerializer.Serialize(notification.Data(), JsonSerializerOptions);
 
         for (var i = 0; i < userIdCount; i += chunkSize)
         {

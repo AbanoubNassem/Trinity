@@ -5,6 +5,7 @@ declare global {
         InertiaReact;
         ReactDOM;
         PrimeReact;
+        TrinityApp;
     }
 }
 

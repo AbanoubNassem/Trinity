@@ -36,7 +36,7 @@ public sealed class TrinityConfigurations
     /// The vite server url , used while development.
     /// </summary>
 #if DEBUG
-   public string ViteUrl { get; set; } = "http://localhost:5173";
+    public string ViteUrl { get; set; } = "http://localhost:5173";
 #else
     public string ViteUrl { get; set; }
 #endif
@@ -83,7 +83,13 @@ public sealed class TrinityConfigurations
     /// <summary>
     /// The configurations of the database notifications.
     /// </summary>
+    [JsonIgnore]
     public TrinityDatabaseNotificationsConfigurations? DatabaseNotifications { get; set; }
+
+    /// <summary>
+    /// Wither the DatabaseNotifications is enabled or not.
+    /// </summary>
+    public bool IsDatabaseNotificationsEnabled => DatabaseNotifications != null;
 
     /// <summary>
     /// Define what is the Max pagination is allowed per resource.

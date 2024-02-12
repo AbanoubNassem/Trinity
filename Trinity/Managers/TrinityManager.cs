@@ -113,6 +113,9 @@ public class TrinityManager
                 GetPropertyInfo(pageType, "TrinityNotifications")?.SetValue(page,
                     httpContext.RequestServices.GetRequiredService<TrinityNotificationsManager>()
                 );
+                GetPropertyInfo(pageType, "TrinityPushNotifications")?.SetValue(page,
+                    httpContext.RequestServices.GetRequiredService<TrinityPushNotificationsManager>()
+                );
                 return page;
             });
 
@@ -210,6 +213,10 @@ public class TrinityManager
                     httpContext.RequestServices.GetRequiredService<TrinityNotificationsManager>()
                 );
 
+                GetPropertyInfo(resourceType, "TrinityPushNotifications")?.SetValue(resource,
+                    httpContext.RequestServices.GetRequiredService<TrinityPushNotificationsManager>()
+                );
+
                 switch (request.Method)
                 {
                     case "GET" or "PUT" when
@@ -270,5 +277,34 @@ public class TrinityManager
 
             // Plugins.Add(plugin);
         }
+    }
+
+    public void SetupNotification(IServiceProvider serviceProvider, TrinityNotification notification)
+    {
+        var httpContextAccessor = serviceProvider.GetRequiredService<IHttpContextAccessor>();
+        var httpContext = httpContextAccessor.HttpContext!;
+        var modelState = httpContext.RequestServices.GetRequiredService<IActionContextAccessor>()
+            .ActionContext!.ModelState;
+
+        var notificationType = notification.GetType();
+
+        GetPropertyInfo(notificationType, "Configurations")?.SetValue(notification, _configurations);
+        GetPropertyInfo(notificationType, "ServiceProvider")?.SetValue(notification, httpContext.RequestServices);
+        GetPropertyInfo(notificationType, "Request")?.SetValue(notification, httpContext.Request);
+        GetPropertyInfo(notificationType, "Response")?.SetValue(notification, httpContext.Response);
+        GetPropertyInfo(notificationType, "User")?.SetValue(notification, httpContext.User);
+        GetPropertyInfo(notificationType, "Logger")?.SetValue(notification, httpContext.RequestServices
+            .GetRequiredService(typeof(ILogger<>)
+                .MakeGenericType(notificationType))
+        );
+
+        GetPropertyInfo(notificationType, "Localizer")?.SetValue(notification, _trinityLocalizer);
+        GetPropertyInfo(notificationType, "ModelState")?.SetValue(notification, modelState);
+        GetPropertyInfo(notificationType, "TrinityNotifications")?.SetValue(notification,
+            httpContext.RequestServices.GetRequiredService<TrinityNotificationsManager>()
+        );
+        GetPropertyInfo(notificationType, "TrinityPushNotifications")?.SetValue(notification,
+            httpContext.RequestServices.GetRequiredService<TrinityPushNotificationsManager>()
+        );
     }
 }

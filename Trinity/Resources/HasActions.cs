@@ -7,10 +7,10 @@ namespace AbanoubNassem.Trinity.Resources;
 public abstract partial class TrinityResource<TPrimaryKeyType>
 {
     /// <inheritdoc />
-    public List<object> Actions => new(TrinityTable.Actions);
+    public List<object> Actions => [..TrinityTable.Actions];
 
     /// <inheritdoc />
-    public List<object> BulkActions => new(TrinityTable.BulkActions);
+    public List<object> BulkActions => [..TrinityTable.BulkActions];
 
 
     /// <inheritdoc />

@@ -11,6 +11,8 @@ export interface TrinityNotificationData {
 }
 
 export interface TrinityNotificationObject {
-    id: string | number;
+    id?: string | number;
     data: string | TrinityNotificationData;
+    created_at?: Date;
+    read_at?: Date;
 }

@@ -78,9 +78,14 @@ public class CanMakeComponent
     protected TrinityLocalizer Localizer { get; init; } = null!;
     
     /// <summary>
-    /// A reference to <see cref="TrinityNotifications"/>. 
+    /// A reference to <see cref="TrinityNotificationsManager"/>. 
     /// </summary>
     protected TrinityNotificationsManager TrinityNotifications { get; init; } = null!;
+    
+    /// <summary>
+    /// A reference to <see cref="TrinityPushNotificationsManager"/>. 
+    /// </summary>
+    protected TrinityPushNotificationsManager TrinityPushNotifications { get; init; } = null!;
 
     private const BindingFlags ConstructorFlags =
         BindingFlags.Instance | BindingFlags.Public | BindingFlags.OptionalParamBinding;
@@ -183,6 +188,7 @@ public class CanMakeComponent
         SetComponentProperty(component, componentType, "ServiceProvider", ServiceProvider);
         SetComponentProperty(component, componentType, "Localizer", Localizer);
         SetComponentProperty(component, componentType, "TrinityNotifications", TrinityNotifications);
+        SetComponentProperty(component, componentType, "TrinityPushNotifications", TrinityPushNotifications);
 
         component.Setup();
 

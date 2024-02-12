@@ -23,7 +23,7 @@ public class NotificationsController : TrinityController
 
         var query = Configurations.ConnectionFactory()
             .Query(Configurations.DatabaseNotifications.NotificationsTable)
-            .Select("id", "data")
+            .Select("id", "data","read_at","created_at")
             .Where("user_id", User.FindFirstValue(ClaimTypes.NameIdentifier)!)
             // .WhereNull("read_at")
             .OrderByDesc("created_at");

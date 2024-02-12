@@ -50,13 +50,22 @@ public abstract class TrinityController : Controller
     protected TrinityLocalizer Localizer => _localizer ??=
         HttpContext.RequestServices.GetRequiredService<TrinityLocalizer>();
 
-    private TrinityNotificationsManager? _trinityNotificationsManager;
+    private TrinityNotificationsManager? _trinityNotifications;
 
     /// <summary>
     /// A reference <see cref="TrinityNotificationsManager"/> object to use.
     /// </summary>
-    protected TrinityNotificationsManager TrinityNotificationsManager => _trinityNotificationsManager ??=
+    protected TrinityNotificationsManager TrinityNotifications => _trinityNotifications ??=
         HttpContext.RequestServices.GetRequiredService<TrinityNotificationsManager>();
+    
+    
+    private TrinityPushNotificationsManager? _trinityPushNotifications;
+
+    /// <summary>
+    /// A reference <see cref="TrinityPushNotificationsManager"/> object to use.
+    /// </summary>
+    protected TrinityPushNotificationsManager TrinityPushNotifications => _trinityPushNotifications ??=
+        HttpContext.RequestServices.GetRequiredService<TrinityPushNotificationsManager>();
 
     /// <summary>
     /// Returns an HTTP 401 Unauthorized response with an optional error message, suitable for use in an Inertia request.

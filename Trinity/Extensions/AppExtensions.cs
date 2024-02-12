@@ -2,7 +2,6 @@ using System.Globalization;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Hubs;
 using AbanoubNassem.Trinity.Managers;
-using AbanoubNassem.Trinity.Notifications;
 using AbanoubNassem.Trinity.Providers;
 using AbanoubNassem.Trinity.Utilities;
 using InertiaCore;
@@ -89,7 +88,7 @@ public static class AppExtensions
             options.HeaderName = "X-XSRF-TOKEN";
             options.Cookie.Name = "Trinity.Antiforgery";
         });
-        
+
         services.AddViteServices();
         services.AddInertia(opts => { opts.RootView = "~/Views/TrinityApp.cshtml"; });
 
@@ -105,6 +104,7 @@ public static class AppExtensions
 
         services.AddSignalR();
         services.AddSingleton<TrinityNotificationsManager>();
+        services.AddSingleton<TrinityPushNotificationsManager>();
         trinityManager.Init();
         return services;
     }
