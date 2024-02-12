@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Reflection;
 using AbanoubNassem.Trinity.Configurations;
 using AbanoubNassem.Trinity.Hubs;
 using AbanoubNassem.Trinity.Managers;

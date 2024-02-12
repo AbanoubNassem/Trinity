@@ -19,7 +19,7 @@ public class NotificationsController : TrinityController
     [Route("/notifications/all")]
     public async Task<IActionResult?> GetAll()
     {
-        if (Configurations.DatabaseNotifications == null) return null;
+        if (Configurations.DatabaseNotifications == null) return Ok();
 
         var page = int.Parse(Request.Query["page"].FirstOrDefault() ?? "1");
         var perPage = int.Parse(Request.Query["perPage"].FirstOrDefault() ?? "10");

@@ -2,14 +2,15 @@
 @using InertiaCore
 @addTagHelper *, MiniProfiler.AspNetCore.Mvc
 @inject TrinityConfigurations Configurations
+@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
 @{
-    #if DEBUG
+#if DEBUG
     var isDebug = true;
     var path = Configurations.ViteUrl;
-    #else
+#else
     var isDebug = false;
     var path = $"/{Configurations.Prefix}/trinity/dist";
-    #endif
+#endif
 }
 
 <!DOCTYPE html>
@@ -18,8 +19,9 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
+    <link rel="stylesheet" type="text/css" href="@(path)/primeicons.css"/>
     <link id="theme-css" rel="stylesheet" type="text/css" href="@(path)/light-theme.css"/>
+
     @foreach (var style in Configurations.ExtraStyleSources)
     {
         <link rel="stylesheet" type="text/css" href="@style"/>

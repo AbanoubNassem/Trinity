@@ -31,7 +31,7 @@ export function changeTrinityTheme(theme: string, onComplete?: () => void) {
     if (import.meta.env.DEV) {
         replaceLink(document.getElementById('theme-css')!, `${trinityApp.configs.viteUrl}/${theme}-theme.css`, onComplete);
     } else {
-        replaceLink(document.getElementById('theme-css')!, `/${configs.prefix}/trinity/${theme}-theme.css`, onComplete);
+        replaceLink(document.getElementById('theme-css')!, `/${configs.prefix}/trinity/dist/${theme}-theme.css`, onComplete);
     }
 
     localStorage.setItem('theme', theme);

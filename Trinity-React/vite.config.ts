@@ -1,6 +1,7 @@
 import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'node:url';
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 
 export default defineConfig({
     define: {
@@ -9,10 +10,12 @@ export default defineConfig({
     root: 'src',
     appType: 'custom',
     publicDir: '../public',
+    base: './',
     build: {
         emptyOutDir: true,
         outDir: '../../Trinity/wwwroot/dist',
         assetsDir: '',
+
         rollupOptions: {
             input: 'src/main.tsx',
             output: {
@@ -20,7 +23,7 @@ export default defineConfig({
             }
         }
     },
-    plugins: [react(), splitVendorChunkPlugin()],
+    plugins: [react(), splitVendorChunkPlugin(), cssInjectedByJsPlugin()],
     resolve: {
         alias: {
             // @ts-ignore

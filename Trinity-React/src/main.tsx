@@ -1,3 +1,5 @@
+import 'vite/modulepreload-polyfill';
+
 import '@/assets/styles/trinity.scss';
 
 import React, { useState } from 'react';
@@ -51,7 +53,7 @@ createInertiaApp({
         );
     }
 }).then(() => {
-    // axios.defaults.withCredentials = true;
+    axios.defaults.withCredentials = true;
     axios.interceptors.response.use(function (response) {
         // @ts-ignore
         const profiler = window.MiniProfiler as any;

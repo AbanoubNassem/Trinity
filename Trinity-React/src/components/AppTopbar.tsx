@@ -90,7 +90,7 @@ const AppTopbar = forwardRef((_props, ref) => {
             </div>
 
             <div className="flex">
-                <NotificationsSidebar />
+                {trinityApp.configs.isDatabaseNotificationsEnabled ? <NotificationsSidebar /> : null}
 
                 <button
                     ref={topbarmenubuttonRef}

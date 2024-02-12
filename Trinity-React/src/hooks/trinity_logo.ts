@@ -8,7 +8,7 @@ export function useLogo() {
     if (import.meta.env.DEV) {
         url = configs.viteUrl;
     } else {
-        url = `/${configs?.prefix}/trinity`;
+        url = `/${configs?.prefix}/trinity/dist`;
     }
 
     return configs?.themeMode == ThemeMode.Dark ? configs.whiteLogo ?? `${url}/logo.svg` : configs?.darkLogo ?? `${url}/logo.svg`;
