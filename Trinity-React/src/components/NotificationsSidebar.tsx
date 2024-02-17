@@ -173,24 +173,26 @@ const NotificationsSidebar = React.memo(() => {
                         header={
                             <div className="flex flex-column">
                                 {`${localize('notifications')} ${notificationsCount ? `(${notificationsCount})` : ''}`}
-                                <span className="p-buttonset mt-2">
-                                    <Button
-                                        label={localize('read_all')}
-                                        icon="pi pi-eye"
-                                        text
-                                        size="small"
-                                        onClick={readAllNotifications}
-                                    />
-                                    <Button
-                                        className="mx-2"
-                                        label={localize('remove_all')}
-                                        icon="pi pi-trash"
-                                        text
-                                        size="small"
-                                        severity="danger"
-                                        onClick={clearAllNotifications}
-                                    />
-                                </span>
+                                {notificationsRef.current.length > 0 ? (
+                                    <span className="p-buttonset mt-2">
+                                        <Button
+                                            label={localize('read_all')}
+                                            icon="pi pi-eye"
+                                            text
+                                            size="small"
+                                            onClick={readAllNotifications}
+                                        />
+                                        <Button
+                                            className="mx-2"
+                                            label={localize('remove_all')}
+                                            icon="pi pi-trash"
+                                            text
+                                            size="small"
+                                            severity="danger"
+                                            onClick={clearAllNotifications}
+                                        />
+                                    </span>
+                                ) : null}
                             </div>
                         }
                     >
