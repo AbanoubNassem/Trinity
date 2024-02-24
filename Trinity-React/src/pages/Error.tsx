@@ -32,7 +32,7 @@ const Error = ({ statusCode, reasonPhrase }: { statusCode: number; reasonPhrase:
                             <span className="text-red-500 font-bold text-3xl">{statusCode}</span>
                             <h1 className="text-900 font-bold text-5xl mb-2">{localize('whoops')}</h1>
                             <div className="text-600 mb-5">{reasonPhrase}</div>
-                            <a href={`/${configs.prefix}`}>
+                            <a href={`${configs.prefix}`}>
                                 <div className="w-full flex align-items-center py-5 border-300 border-bottom-1">
                                     <span
                                         className="flex justify-content-center align-items-center bg-cyan-400 border-round"

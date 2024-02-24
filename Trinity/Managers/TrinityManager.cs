@@ -257,7 +257,7 @@ public class TrinityManager
 
             var name = pluginType.Name.Titleize().Replace(' ', '-').ToLower();
             var baseName = pluginType.Namespace + ".wwwroot";
-            var path = $"/{_configurations.Prefix}/trinity/plugins/{name}";
+            var path = $"{_configurations.Prefix}/trinity/plugins/{name}";
 
             app.UseStaticFiles(new StaticFileOptions
             {

@@ -119,7 +119,7 @@ const Table = () => {
             if (Object.keys(columnsSearch).length) data.columnsSearch = JSON.stringify(columnsSearch);
         }
 
-        router.get(`/${configs.prefix}/${resource?.name}`, data, {
+        router.get(`${configs.prefix}/${resource?.name}`, data, {
             preserveState: true,
             preserveScroll: true,
             replace: true,
@@ -183,7 +183,7 @@ const Table = () => {
                     className="p-button-success mx-1"
                     icon="pi pi-plus"
                     label={localize('create')}
-                    onClick={() => trinityLink(`/${configs.prefix}/${resource?.name}/create`)}
+                    onClick={() => trinityLink(`${configs.prefix}/${resource?.name}/create`)}
                 />
             )}
             {resource?.canDelete && (
@@ -216,7 +216,7 @@ const Table = () => {
                                         items: selectedItems.map((x) => String(x[resource?.primaryKeyColumn ?? 'id']))
                                     });
 
-                                TrinityAction.handle(act, `/${configs.prefix}/actions/${resource?.name}/${act.actionName}`, {
+                                TrinityAction.handle(act, `${configs.prefix}/actions/${resource?.name}/${act.actionName}`, {
                                     primaryKeys: selectedItems.map((x) => String(x[resource?.primaryKeyColumn ?? 'id'])),
                                     form: {}
                                 });
@@ -345,7 +345,7 @@ const Table = () => {
                                         items: [String(rowData[resource?.primaryKeyColumn!])]
                                     });
 
-                                TrinityAction.handle(act, `/${configs.prefix}/actions/${resource?.name}/${act.actionName}`, {
+                                TrinityAction.handle(act, `${configs.prefix}/actions/${resource?.name}/${act.actionName}`, {
                                     primaryKeys: [String(rowData[resource?.primaryKeyColumn!])],
                                     form: {}
                                 });

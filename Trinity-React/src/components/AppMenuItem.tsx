@@ -10,7 +10,7 @@ const AppMenuItem = (props: { root?: any; index: number; parentKey?: any; item: 
 
     const item = props.item;
     const key = props.parentKey ? props.parentKey + '-' + props.index : String(props.index);
-    const isActive = (item: any) => (item.to === '/' ? window.location.pathname.endsWith(`/${configs.prefix}/`) : window.location.pathname.includes(item.to));
+    const isActive = (item: any) => (item.to === '/' ? window.location.pathname.endsWith(`${configs.prefix}/`) : window.location.pathname.includes(item.to));
     const itemClick = (event: any) => {
         //avoid processing disabled items
         if (item.disabled) {
@@ -72,7 +72,7 @@ const AppMenuItem = (props: { root?: any; index: number; parentKey?: any; item: 
 
             {item.to && !item.items && item.visible ? (
                 <Link
-                    href={`/${configs?.prefix}${item.to}`}
+                    href={`${configs?.prefix}${item.to}`}
                     onClick={(e) => itemClick(e)}
                     className={classNames(item.class, 'p-ripple', { 'active-route': isActive(item) })}
                     target={item.target}

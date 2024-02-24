@@ -24,7 +24,7 @@ export const ActionDialog = memo(({ actionData, onHide }: Props) => {
 
     const submit = () => {
         axios
-            .post(`/${configs.prefix}/actions/${resource?.name}/${actionData!.action!.actionName}`, {
+            .post(`${configs.prefix}/actions/${resource?.name}/${actionData!.action!.actionName}`, {
                 primaryKeys: actionData?.items,
                 form: formData
             })

@@ -81,7 +81,7 @@ const Create = () => {
             <Button
                 label={localize('cancel')}
                 className="m-2 p-button-secondary"
-                onClick={() => trinityLink(`/${configs.prefix}/${resource?.name}`)}
+                onClick={() => trinityLink(`${configs.prefix}/${resource?.name}`)}
             />
         </div>
     );

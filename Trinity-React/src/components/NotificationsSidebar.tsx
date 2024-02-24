@@ -27,7 +27,7 @@ const NotificationsSidebar = React.memo(() => {
         try {
             setLoading(true);
 
-            const res = (await axios.get<any>(`/${configs.prefix}/notifications/all?page=${currentPage}&perPage=${perPage}`)).data;
+            const res = (await axios.get<any>(`${configs.prefix}/notifications/all?page=${currentPage}&perPage=${perPage}`)).data;
             setPaginator(res.pagination as IPaginator<TrinityNotificationObject>);
 
             notificationsRef.current = append ? [...notificationsRef.current, ...res.pagination.data] : res.pagination.data;
@@ -42,7 +42,7 @@ const NotificationsSidebar = React.memo(() => {
         try {
             setLoading(true);
 
-            const res = (await axios.post(`/${configs.prefix}/notifications/read-all`)).data;
+            const res = (await axios.post(`${configs.prefix}/notifications/read-all`)).data;
             if (res > 0) {
                 notificationsRef.current = notificationsRef.current.map((n) => {
                     n.read_at = new Date();
@@ -60,7 +60,7 @@ const NotificationsSidebar = React.memo(() => {
         try {
             setLoading(true);
 
-            const res = (await axios.post(`/${configs.prefix}/notifications/clear-all`)).data;
+            const res = (await axios.post(`${configs.prefix}/notifications/clear-all`)).data;
             if (res > 0) {
                 notificationsRef.current = [];
             }
@@ -127,7 +127,7 @@ const NotificationsSidebar = React.memo(() => {
                                     label={!act.icon ? act.label : undefined}
                                     className=" text-left"
                                     onClick={() => {
-                                        TrinityAction.handle(act, `/${configs.prefix}/actions/notifications/${act.actionName}`, {
+                                        TrinityAction.handle(act, `${configs.prefix}/actions/notifications/${act.actionName}`, {
                                             primaryKeys: [String(noti.id)],
                                             form: {}
                                         });

@@ -21,7 +21,7 @@ public class AnonymousOnly : Attribute, IAuthorizationFilter
             (TrinityConfigurations)context.HttpContext.RequestServices.GetService(typeof(TrinityConfigurations))!;
 
         context.Result = context.HttpContext.IsInertiaRequest()
-            ? Inertia.Location($"/{configs.Prefix}/")
-            : new RedirectResult($"/{configs.Prefix}/");
+            ? Inertia.Location($"{configs.Prefix}/")
+            : new RedirectResult($"{configs.Prefix}/");
     }
 }

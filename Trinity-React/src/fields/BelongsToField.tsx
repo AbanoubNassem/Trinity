@@ -32,7 +32,7 @@ const BelongsToField = (props: FieldProps<RelationshipFieldType>) => {
             | null
     ): Promise<SelectItemOptionsType> {
         const res = await axios
-            .get(`/${configs.prefix}/${resource?.name}/relationship`, {
+            .get(`${configs.prefix}/${resource?.name}/relationship`, {
                 params: {
                     column: component.columnName,
                     search: e?.filter,

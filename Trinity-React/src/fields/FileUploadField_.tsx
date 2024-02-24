@@ -35,7 +35,7 @@
 //         form.append('fieldName', component.columnName);
 //
 //         axios
-//             .post(`/${configs.prefix}/upload`, form, {
+//             .post(`${configs.prefix}/upload`, form, {
 //                 headers: {
 //                     'Content-Type': 'multipart/form-data'
 //                 }

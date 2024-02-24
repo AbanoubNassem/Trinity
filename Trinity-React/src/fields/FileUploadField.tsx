@@ -142,7 +142,7 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
                 };
             })}
             server={{
-                url: `/${configs.prefix}`,
+                url: `${configs.prefix}`,
                 load: async (source, load, error, progress, abort, _headers) => {
                     if (source?.includes('/'))
                         axios({
@@ -162,7 +162,7 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
 
                 remove: (source, load, error) => {
                     axios
-                        .post(`/${configs.prefix}/delete/file`, {
+                        .post(`${configs.prefix}/delete/file`, {
                             UniqueFileIdOrUrl: source,
                             resourceName: resource?.pluralLabel.toLowerCase() ?? '',
                             fieldName: component.columnName,
@@ -181,7 +181,7 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
                 },
                 revert: (uniqueFileId, load, error) => {
                     axios
-                        .post(`/${configs.prefix}/delete/file`, {
+                        .post(`${configs.prefix}/delete/file`, {
                             UniqueFileIdOrUrl: uniqueFileId,
                             resourceName: resource?.pluralLabel.toLowerCase() ?? '',
                             fieldName: component.columnName,
@@ -208,7 +208,7 @@ const FileUploadField = ({ configs, resource, component, formData, record, setFi
                     const cancelToken = axios.CancelToken.source();
 
                     axios
-                        .post(`/${configs.prefix}/upload/file`, uploadData, {
+                        .post(`${configs.prefix}/upload/file`, uploadData, {
                             cancelToken: cancelToken.token,
                             headers: {
                                 'Content-Type': 'multipart/form-data'

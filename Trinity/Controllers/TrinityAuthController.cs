@@ -86,7 +86,7 @@ public sealed class TrinityAuthController : TrinityController
             authProperties
         );
 
-        return Inertia.Render("Login", new { Data = returnUrl ?? $"/{Configurations.Prefix}/" });
+        return Inertia.Render("Login", new { Data = returnUrl ?? $"{Configurations.Prefix}/" });
     }
 
     /// <summary>
@@ -99,7 +99,7 @@ public sealed class TrinityAuthController : TrinityController
         await HttpContext.SignOutAsync("Trinity");
 
         return HttpContext.IsInertiaRequest()
-            ? Inertia.Location($"/{Configurations.Prefix}/login?returnUrl={Request.Headers.Referer}")
-            : Redirect($"/{Configurations.Prefix}/login?returnUrl={Request.Headers.Referer}");
+            ? Inertia.Location($"{Configurations.Prefix}/login?returnUrl={Request.Headers.Referer}")
+            : Redirect($"{Configurations.Prefix}/login?returnUrl={Request.Headers.Referer}");
     }
 }

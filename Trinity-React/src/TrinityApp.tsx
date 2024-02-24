@@ -93,7 +93,7 @@ export class TrinityApp {
         const theme = localStorage.getItem('theme') ?? 'light';
         changeTrinityTheme(theme);
 
-        this.hubConnection = new signalR.HubConnectionBuilder().withUrl(`/${this.configs.prefix}/trinity-notifications-hub`).build();
+        this.hubConnection = new signalR.HubConnectionBuilder().withUrl(`${this.configs.prefix}/trinity-notifications-hub`).build();
         this.hubConnection
             .start()
             .then(async () => {})

@@ -79,8 +79,8 @@ public static class AppExtensions
         services.AddAuthentication("Trinity")
             .AddCookie("Trinity", ops =>
             {
-                ops.LoginPath = $"/{configs.Prefix}/login";
-                ops.LogoutPath = $"/{configs.Prefix}/logout";
+                ops.LoginPath = $"{configs.Prefix}/login";
+                ops.LogoutPath = $"{configs.Prefix}/logout";
                 ops.Cookie.Name = "Trinity";
             });
 
@@ -90,7 +90,7 @@ public static class AppExtensions
             options.Cookie.Name = "Trinity.Antiforgery";
         });
 
-        services.AddViteServices();
+        services.AddViteServices((options) => { options.Server.Https = true; });
         services.AddInertia(opts => { opts.RootView = "~/Views/TrinityApp.cshtml"; });
 
         if (isDevelopment)
@@ -146,7 +146,7 @@ public static class AppExtensions
         app.UseDefaultFiles();
 
 #if DEBUG
-        app.UseViteDevMiddleware();
+        app.UseViteDevelopmentServer(true);
 #else
         var assembly = typeof(Controllers.TrinityController).GetTypeInfo().Assembly;
         app.UseStaticFiles(new StaticFileOptions
@@ -155,7 +155,7 @@ public static class AppExtensions
                 assembly,
                 "AbanoubNassem.Trinity.wwwroot"
             ),
-            RequestPath = $"/{configs.Prefix}/trinity",
+            RequestPath = $"{configs.Prefix}/trinity",
         });
 
 #endif

@@ -46,7 +46,7 @@ const AppTopbar = forwardRef((_props, ref) => {
                     icon: 'pi pi-sign-out',
                     href: '',
                     command: async () => {
-                        await router.post(`/${configs.prefix}/logout`);
+                        router.post(`${configs.prefix}/logout`);
                         await trinityApp.hubConnection.stop();
                     }
                 }
@@ -57,7 +57,7 @@ const AppTopbar = forwardRef((_props, ref) => {
     return (
         <div className="layout-topbar flex justify-content-between">
             <div className="flex justify-content-center align-items-center">
-                <Link href={`/${configs.prefix}/`}>
+                <Link href={`${configs.prefix}`}>
                     <div className="layout-topbar-logo">
                         <>
                             <img

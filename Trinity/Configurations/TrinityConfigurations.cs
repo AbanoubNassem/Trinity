@@ -36,7 +36,7 @@ public sealed class TrinityConfigurations
     /// The vite server url , used while development.
     /// </summary>
 #if DEBUG
-    public string ViteUrl { get; set; } = "http://localhost:5173";
+    public string ViteUrl { get; set; } = "https://localhost:5173";
 #else
     public string ViteUrl { get; set; }
 #endif
@@ -60,10 +60,16 @@ public sealed class TrinityConfigurations
     [JsonIgnore]
     public Authenticate? AuthenticateUser { get; set; }
 
+    private string _prefix = "admin";
+
     /// <summary>
     /// The prefix is used to prefix all the Trinity routes.
     /// </summary>
-    public string Prefix { get; set; } = "admin";
+    public string Prefix
+    {
+        set => _prefix = string.IsNullOrEmpty(value) || value.Equals("/") ? "" : value.StartsWith('/') ? value : '/' + value;
+        get => _prefix;
+    }
 
     /// <summary>
     /// The website title.
