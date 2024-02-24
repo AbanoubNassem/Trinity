@@ -4,9 +4,9 @@ import moment from 'moment';
 import { classNames } from 'primereact/utils';
 
 const TextColumn = ({ column, columnValue, record }: ColumnProps<TextColumnType>) => {
-    let value = column.timeAgo ? moment(columnValue).fromNow() : (column.dateTimeFormat !== null ? moment(columnValue).format(column.dateTimeFormat) : columnValue) ?? record['defaultValue'];
+    let value = column.timeAgo ? moment(columnValue).fromNow() : (column.dateTimeFormat ? moment(columnValue).format(column.dateTimeFormat) : columnValue) ?? record['defaultValue'];
 
-    if (column.currency !== null) {
+    if (column.currency) {
         const formatter = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: column.currency

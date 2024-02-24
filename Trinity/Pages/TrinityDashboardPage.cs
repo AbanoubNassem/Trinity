@@ -16,9 +16,9 @@ public class TrinityDashboardPage : TrinityPage
     public override string Icon => "pi pi-fw pi-home";
 
     /// <inheritdoc />
-    protected override List<ITrinityWidget> GetSchema()
+    protected override List<ITrinityComponent> GetSchema()
     {
-        return new List<ITrinityWidget>()
+        return new List<ITrinityComponent>()
         {
             Make<StatsWidget>("Unique views", "192.1k")
                 .SetIcon("pi pi-shopping-cart", "red", "black")

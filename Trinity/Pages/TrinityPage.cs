@@ -55,9 +55,9 @@ public abstract class TrinityPage : CanMakeComponent
     /// Gets the schema for the page.
     /// </summary>
     /// <returns>The schema for the page.</returns>
-    protected virtual List<ITrinityWidget> GetSchema()
+    protected virtual List<ITrinityComponent> GetSchema()
     {
-        return new List<ITrinityWidget>(0);
+        return new List<ITrinityComponent>(0);
     }
 
     /// <summary>

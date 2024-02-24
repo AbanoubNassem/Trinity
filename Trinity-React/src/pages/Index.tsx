@@ -22,12 +22,12 @@ const Index = () => {
 
                         <div className="grid">
                             {resource?.topWidgets?.map((w, index) =>
-                                trinityApp.registeredWidgets?.has(w.componentName) ? (
+                                trinityApp.registeredComponents?.has(w.componentName) ? (
                                     <div
                                         className={classNames('col-12', w.columnSpan > 0 && w.columnSpan < 12 ? `md:col-${w.columnSpan}` : 'md:col')}
                                         key={`widget_${index}_${w.componentName}`}
                                     >
-                                        {trinityApp.registeredWidgets?.get(w.componentName)!({
+                                        {trinityApp.registeredComponents?.get(w.componentName)!({
                                             configs: configs,
                                             resource: resource,
                                             widget: w,
@@ -44,12 +44,12 @@ const Index = () => {
 
                         <div className="grid mt-2">
                             {resource?.bottomWidgets?.map((w, index) =>
-                                trinityApp.registeredWidgets?.has(w.componentName) ? (
+                                trinityApp.registeredComponents?.has(w.componentName) ? (
                                     <div
                                         className={classNames('col-12', w.columnSpan > 0 && w.columnSpan < 12 ? `md:col-${w.columnSpan}` : 'md:col')}
                                         key={`widget_${index}_${w.componentName}`}
                                     >
-                                        {trinityApp.registeredWidgets?.get(w.componentName)!({
+                                        {trinityApp.registeredComponents?.get(w.componentName)!({
                                             configs: configs,
                                             resource: resource,
                                             widget: w,

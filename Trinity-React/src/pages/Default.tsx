@@ -2,15 +2,31 @@ import { useConfigs } from '@/hooks/trinity_configs';
 import { classNames } from 'primereact/utils';
 
 import usePageProps from '@/hooks/trinity_page_props';
-import TrinityWidgetType from '@/types/Models/Widgets/TrinityWidgetType';
 import trinityApp from '@/TrinityApp';
 import { Head } from '@/components/Head';
 import { useLocalize } from '@/hooks/trinity_localizer';
+import TrinityComponentType from '@/types/Models/TrinityComponentType.ts';
 
 const Default = () => {
     const configs = useConfigs();
-    const { page } = usePageProps();
+    const { page, errors, data: record } = usePageProps();
     const localize = useLocalize();
+
+    //TODO:: do forms the right way
+    let data: any = record;
+    // const data = useMemo<{ [k: string]: any }>(() => {
+    //     let innerData = {} as any;
+    //     for (const field of page?.schema??[]) {
+    //         innerData[last(field.columnName.split('.'))!] = record[last(field.columnName.split('.'))!];
+    //     }
+    //     return innerData;
+    // }, [configs]);
+    //
+    // const form = useForm(data);
+
+    const setFieldValue = (name: string, value: any) => {
+        data[name] = value;
+    };
 
     return (
         <>
@@ -20,20 +36,26 @@ const Default = () => {
                     <div className="card">
                         <h5>{page?.label ?? page?.slug}</h5>
                         <div className="grid">
-                            {page?.schema?.map((w: TrinityWidgetType, index: number) =>
-                                trinityApp.registeredWidgets?.has(w.componentName) ? (
+                            {page?.schema?.map((component: TrinityComponentType, index: number) =>
+                                trinityApp.registeredComponents?.has(component.componentName) ? (
                                     <div
-                                        className={classNames('col-12 md:col-6', w.columnSpan > 0 && w.columnSpan < 12 ? `lg:col-${w.columnSpan}` : 'lg:col-4')}
-                                        key={`widget_${index}_${w.componentName}`}
+                                        className={classNames('col-12 md:col-6', component.columnSpan > 0 && component.columnSpan < 12 ? `lg:col-${component.columnSpan}` : 'lg:col-4')}
+                                        key={`${page?.slug ?? 'page'}_${index}_${component.componentName}`}
                                     >
-                                        {trinityApp.registeredWidgets?.get(w.componentName)!({
+                                        {trinityApp.registeredComponents?.get(component.componentName)!({
                                             configs: configs,
-                                            widget: w,
-                                            localize
+                                            widget: component,
+                                            localize,
+                                            component,
+                                            page,
+
+                                            formData: data,
+                                            setFieldValue,
+                                            errors
                                         })}
                                     </div>
                                 ) : (
-                                    <div>{localize('unknown_widget', w.componentName)}</div>
+                                    <div>{localize('unknown_widget', component.componentName)}</div>
                                 )
                             )}
                         </div>

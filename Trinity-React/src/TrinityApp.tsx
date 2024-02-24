@@ -64,8 +64,8 @@ export class TrinityApp {
     static pages: { [key: string]: TrinityPageType } = {};
     static registeredPages: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static registeredComponents: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
-    static registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
-    static registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
+    // static registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
+    // static registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static toast?: Toast;
     static databaseNotificationsCount?: number;
     static isRtl: boolean = false;
@@ -123,6 +123,7 @@ export class TrinityApp {
         this.registerField('FileUploadField', FileUploadField);
         this.registerField('RepeaterField', RepeaterField);
 
+        this.registerColumn('IdColumn', TextColumn);
         this.registerColumn('TextColumn', TextColumn);
         this.registerColumn('IconColumn', IconColumn);
         this.registerColumn('BadgeColumn', BadgeColumn);
@@ -167,11 +168,11 @@ export class TrinityApp {
     };
     static registerColumn = (name: string, component: (props: ColumnProps<TrinityColumnType | any>) => ReactElement) => {
         const Column = component;
-        this.registeredColumns.set(name, (props) => <Column {...props} />);
+        this.registeredComponents.set(name, (props) => <Column {...props} />);
     };
     static registerWidget = (name: string, component: (props: WidgetProps<TrinityWidgetType | any>) => ReactElement) => {
         const Widget = component;
-        this.registeredWidgets.set(name, (props) => <Widget {...props} />);
+        this.registeredComponents.set(name, (props) => <Widget {...props} />);
     };
     static registerPage = (name: string, component: (props: PageProps<TrinityPageType>) => ReactElement) => {
         const Page = component;

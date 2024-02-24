@@ -309,7 +309,7 @@ const Table = () => {
                         tooltipOptions={{ position: 'top' }}
                         className="p-button-rounded p-button-success mx-1"
                         onClick={() => {
-                            trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${rowData[resource?.primaryKeyColumn!]}`, false, false);
+                            trinityLink(`${configs?.prefix}/${resource?.name}/edit/${rowData[resource?.primaryKeyColumn!]}`, false, false);
                         }}
                     />
                 )}
@@ -418,8 +418,8 @@ const Table = () => {
                                 record={data}
                                 localize={localize}
                             >
-                                {trinityApp.registeredColumns?.has(column.componentName) ? (
-                                    trinityApp.registeredColumns?.get(column.componentName)!({
+                                {trinityApp.registeredComponents?.has(column.componentName) ? (
+                                    trinityApp.registeredComponents?.get(column.componentName)!({
                                         column,
                                         columnValue: data[column.columnName] ?? data['defaultValue'],
                                         record: data,
