@@ -16,4 +16,16 @@ public static class ClaimsPrincipalExtensions
     {
         return user.IsInRole("admin") || user.IsInRole("administrator");
     }
+
+    /// <summary>
+    /// Get the current logged-in user Id
+    /// </summary>
+    /// <param name="user">an instance of <see cref="ClaimsPrincipal"/>.</param>
+    /// <returns>String value indicating User is Id.</returns>
+    public static string Id(this ClaimsPrincipal user)
+    {
+        return user.FindFirstValue(ClaimTypes.NameIdentifier);
+    }
+
+    
 }

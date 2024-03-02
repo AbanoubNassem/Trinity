@@ -32,5 +32,11 @@ public interface ITrinityAction : ITrinityComponent
     /// <param name="records">The records associated with the action.</param>
     /// <returns>The result of the action.</returns>
     public Task<List<TrinityActionResult>> Handle(Dictionary<string, object?> form,
-        IReadOnlyCollection<IDictionary<string, object?>> records);
+        List<IDictionary<string, object?>> records);
+    
+    /// <summary>
+    /// Setting the record after it's retrieved from the database.
+    /// </summary>
+    /// <param name="record">The record retrieved from the database.</param>
+    void SetRecord(IDictionary<string, object?> record);
 }

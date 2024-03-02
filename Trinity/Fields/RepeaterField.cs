@@ -241,7 +241,7 @@ public class RepeaterField : TrinityField<RepeaterField, string>, IHasSchema, IH
     }
 
     /// <inheritdoc />
-    public Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(QueryFactory queryFactory,
+    public Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(QueryFactory queryFactory, string localTable,
         string? value, int offset, string? search = null)
     {
         return Task.FromResult(new List<KeyValuePair<string, string>>());

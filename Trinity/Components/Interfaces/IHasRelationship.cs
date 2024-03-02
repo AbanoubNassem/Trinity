@@ -22,11 +22,13 @@ public interface IHasRelationship
     /// A method that gets the associates relationship query using the specified queryFactory, value, offset, search string, and returns a list of the key-value pairs.
     /// </summary>
     /// <param name="queryFactory">The query factory used to create the query</param>
+    /// <param name="localTable">The local table of the field</param>
     /// <param name="value">The value to search for, if any.</param>
     /// <param name="offset">The offset to use</param>
     /// <param name="search">The search string to use</param>
     /// <returns>A list of key-value pairs</returns>
     public Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(QueryFactory queryFactory,
+        string localTable,
         string? value,
         int offset, string? search = null);
 

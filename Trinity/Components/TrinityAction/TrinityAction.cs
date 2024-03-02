@@ -116,14 +116,32 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
     {
     }
 
+
+    /// <summary>
+    ///  The record retrieved from the database.
+    /// </summary>
+    protected IDictionary<string, object?> Record { get; private set; } = null!;
+
+    /// <inheritdoc />
+    public void SetRecord(IDictionary<string, object?> record)
+    {
+        Record = record;
+
+        if (HideUsingCallback != null)
+        {
+            Hidden = HideUsingCallback(record);
+        }
+    }
+
+
     /// <summary>
     /// Delegate for handling an action using a form data and a collection of records.
     /// </summary>
     /// <param name="form">form data</param>
-    /// <param name="record">The selected record</param>
+    /// <param name="records">The selected record</param>
     /// <returns>A Task representing the asynchronous operation and returning a TrinityActionResult.</returns>
     public delegate TrinityActionResult HandleActionUsingDelegate(Dictionary<string, object?> form,
-        IDictionary<string, object?> record);
+        List<IDictionary<string, object?>> records);
 
     /// <summary>
     /// Represents a delegate that returns a URL as a string based on a given record.
@@ -170,15 +188,12 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
 
     /// <inheritdoc />
     public virtual async Task<List<TrinityActionResult>> Handle(Dictionary<string, object?> form,
-        IReadOnlyCollection<IDictionary<string, object?>> records)
+        List<IDictionary<string, object?>> records)
     {
         if (HandleActionUsing != null)
         {
-            var result = records.Select(record =>
-                    HandleActionUsing(form, record)
-                )
-                .ToList();
-            return await Task.FromResult(result);
+
+            return [HandleActionUsing(form, records)];
         }
 
         if (AsUrlCallback != null)
@@ -457,7 +472,8 @@ public abstract class TrinityAction<T> : TrinityComponent<T, object>, ITrinityAc
     {
         return new TrinityActionResult("redirect", new
         {
-            url, openUrlInNewTab
+            url,
+            openUrlInNewTab
         });
     }
 

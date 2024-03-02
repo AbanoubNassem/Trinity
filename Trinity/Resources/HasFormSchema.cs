@@ -6,6 +6,7 @@ using AbanoubNassem.Trinity.Utilities;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SqlKata;
 using SqlKata.Execution;
 
 namespace AbanoubNassem.Trinity.Resources;
@@ -83,10 +84,9 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         {
             value = valueStr[0];
         }
-        // query.From($"{Table!.Split('.').Last()}");
 
         using var connection = ConnectionFactory();
-        var res = await field.GetAssociatesRelationshipQuery(connection.QueryFactory(), value, offset, search);
+        var res = await field.GetAssociatesRelationshipQuery(connection.QueryFactory(), Table!, value, offset, search);
 
         return new OkObjectResult(res);
     }
@@ -146,16 +146,19 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
             var temp = form[field.ColumnName];
             form.Remove(field.ColumnName);
-            form.TryAdd(relationshipField.ForeignColumn?.Split('.').First()!, temp);
+            form.TryAdd(relationshipField.ColumnName?.Split('.').First()!, temp);
         }
 
-        await BeforeCreate(ref form);
+        await BeforeCreate(form);
 
         using var conn = ConnectionFactory();
 
+        var query = conn.Query().From(Table)
+            .AsInsert(form, true);
 
-        var res = await conn.Query().From(Table)
-            .InsertGetIdAsync<TPrimaryKeyType>(form);
+        OnCreateQuery(ref query);
+
+        var res = await query.FirstOrDefaultAsync<TPrimaryKeyType>();
 
         if (res != null)
         {
@@ -174,26 +177,31 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
 
     /// <inheritdoc />
-    public virtual async Task<IDictionary<string, object?>?> GetEditData()
+    public virtual async Task<IDictionary<string, object?>?> GetEditData(object? key = null)
     {
-        if (!Request.RouteValues.TryGetValue("id", out var key))
+        if (key == null && !Request.RouteValues.TryGetValue("id", out key))
             return null;
 
         using var connection = ConnectionFactory();
         var queryBuilder = connection.Query();
 
-        queryBuilder.Select($"{PrimaryKeyColumn}");
+        queryBuilder.Select($"t.{PrimaryKeyColumn}");
 
         foreach (ITrinityField field in Fields.Values)
         {
             field.SelectQuery(queryBuilder);
         }
 
-        var record = await queryBuilder.From($"{Table} AS t")
-            .Where($"t.{PrimaryKeyColumn}", key)
-            .FirstOrDefaultAsync() as IDictionary<string, object?>;
+        var query = queryBuilder.From($"{Table} AS t")
+            .Where($"t.{PrimaryKeyColumn}", key);
+
+        OnIndexQuery(ref query);
+
+        var record = await query.FirstOrDefaultAsync() as IDictionary<string, object?>;
 
         if (record == null) return null;
+
+        GenerateRecordActions(record);
 
         foreach (ITrinityField field in Fields.Values)
         {
@@ -213,9 +221,8 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
 
     /// <inheritdoc />
-    public virtual async Task<object?> Update()
+    public virtual async Task<object?> Update(IDictionary<string, object?>? record)
     {
-        var record = await GetEditData();
 
         if (record == null)
         {
@@ -231,7 +238,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         var form = await ValidateRequest();
         if (form == null) return record;
 
-        await BeforeUpdate(ref form, (IReadOnlyDictionary<string, object?>)record);
+        await BeforeUpdate(form, (IReadOnlyDictionary<string, object?>)record);
 
         using var conn = ConnectionFactory();
 
@@ -258,7 +265,15 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         }
 
 
-        var res = await query.Where(PrimaryKeyColumn, record[PrimaryKeyColumn]).UpdateAsync(updates);
+        var q = query.Where(PrimaryKeyColumn, record[PrimaryKeyColumn]).AsUpdate(updates);
+
+        OnUpdateQuery(ref q);
+
+        var c = q.GetOneComponent<InsertClause>("update");
+
+        var res = await q.UpdateAsync(c.Columns.Select((_, i) =>
+            new KeyValuePair<string, object>(c.Columns[i], c.Values[i]))
+        );
 
         if (res > 0)
         {

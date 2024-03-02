@@ -64,8 +64,6 @@ export class TrinityApp {
     static pages: { [key: string]: TrinityPageType } = {};
     static registeredPages: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static registeredComponents: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
-    // static registeredColumns: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
-    // static registeredWidgets: Map<string, (props: any) => React.ReactNode> = new Map<string, (props: any) => React.ReactNode>();
     static toast?: Toast;
     static databaseNotificationsCount?: number;
     static isRtl: boolean = false;
@@ -174,20 +172,20 @@ export class TrinityApp {
         const Widget = component;
         this.registeredComponents.set(name, (props) => <Widget {...props} />);
     };
-    static registerPage = (name: string, component: (props: PageProps<TrinityPageType>) => ReactElement) => {
-        const Page = component;
-        this.registeredPages.set(name, (props) => (
-            <Page
-                {...{
-                    ...props.page,
-                    ...{
-                        configs: this.configs,
-                        data: props.data,
-                        localize: this.localize
-                    }
-                }}
-            />
-        ));
+
+    static registerPage = (name: string, component: (props: PageProps<TrinityPageType>) => ReactElement, layout: ReactElement | undefined | null = undefined) => {
+        let Page: any = (props: any) =>
+            component({
+                ...props.page,
+                ...{
+                    configs: this.configs,
+                    data: props.data,
+                    localize: this.localize
+                }
+            });
+        Page.layout = layout;
+        this.registeredPages.delete(name);
+        this.registeredPages.set(name, Page);
     };
     static localize = (key: string, ...args: Array<string>): string => {
         // @ts-ignore

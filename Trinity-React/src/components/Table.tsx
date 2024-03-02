@@ -19,7 +19,6 @@ import trinityApp from '@/TrinityApp';
 import { useLocalize } from '@/hooks/trinity_localizer';
 import TrinityAction from '@/utilities/trinity_action';
 import TrinityActionModel from '@/types/Models/Actions/TrinityActionType';
-import { confirmDialog } from 'primereact/confirmdialog';
 import { ActionDialog } from '@/components/ActionDialog';
 
 const Table = () => {
@@ -144,35 +143,6 @@ const Table = () => {
         dtRef.current?.exportCSV(event);
     };
 
-    const showDeleteDialog = (selectedItemToDelete: any = null) => {
-        confirmDialog({
-            header: localize('confirm'),
-            message: () => (
-                <>
-                    {selectedItemToDelete && <span dangerouslySetInnerHTML={{ __html: localize('are_you_sure_to_delete', selectedItemToDelete[resource?.titleColumn ?? 'id']) }} />}
-                    {selectedItemToDelete === null && selectedItems.length && <span dangerouslySetInnerHTML={{ __html: localize('are_you_sure_to_delete_selected_records', selectedItems.length.toString()) }} />}
-                </>
-            ),
-            icon: 'pi pi-info-circle',
-            acceptClassName: 'p-button-danger',
-            acceptLabel: localize('yes'),
-            rejectLabel: localize('no'),
-            accept: () => {
-                if (selectedItemToDelete !== null || selectedItems !== null) {
-                    router.delete('', {
-                        data: {
-                            [resource?.primaryKeyColumn ?? 'id']: selectedItemToDelete !== null ? [String(selectedItemToDelete![resource?.primaryKeyColumn ?? 'id'])] : selectedItems!.map((r: any) => String(r[resource?.primaryKeyColumn ?? 'id']))
-                        },
-                        preserveState: true,
-                        preserveScroll: true
-                    });
-                }
-
-                setSelectedItems([]);
-            },
-            reject: () => {}
-        });
-    };
 
     const toolbarLeftContents = <></>;
 
@@ -184,17 +154,6 @@ const Table = () => {
                     icon="pi pi-plus"
                     label={localize('create')}
                     onClick={() => trinityLink(`${configs.prefix}/${resource?.name}/create`)}
-                />
-            )}
-            {resource?.canDelete && (
-                <Button
-                    className="p-button-danger mx-1"
-                    icon="pi pi-trash"
-                    label={localize('delete')}
-                    disabled={selectedItems.length === 0}
-                    onClick={() => {
-                        if (selectedItems.length) showDeleteDialog();
-                    }}
                 />
             )}
             {resource?.bulkActions
@@ -218,7 +177,8 @@ const Table = () => {
 
                                 TrinityAction.handle(act, `${configs.prefix}/actions/${resource?.name}/${act.actionName}`, {
                                     primaryKeys: selectedItems.map((x) => String(x[resource?.primaryKeyColumn ?? 'id'])),
-                                    form: {}
+                                    form: {},
+                                    bulk: true
                                 });
                             }
                         }}
@@ -301,32 +261,8 @@ const Table = () => {
     const actionBodyTemplate = (rowData: any) => {
         return (
             <div className="flex justify-content-center">
-                {resource?.canUpdate && (
-                    <Button
-                        icon="pi pi-pencil"
-                        aria-label={localize('update')}
-                        tooltip={localize('update')}
-                        tooltipOptions={{ position: 'top' }}
-                        className="p-button-rounded p-button-success mx-1"
-                        onClick={() => {
-                            trinityLink(`${configs?.prefix}/${resource?.name}/edit/${rowData[resource?.primaryKeyColumn!]}`, false, false);
-                        }}
-                    />
-                )}
-                {resource?.canDelete && (
-                    <Button
-                        icon="pi pi-trash"
-                        aria-label={localize('delete')}
-                        tooltip={localize('delete')}
-                        tooltipOptions={{ position: 'top' }}
-                        className="p-button-rounded p-button-danger mx-1"
-                        onClick={() => {
-                            showDeleteDialog(rowData);
-                        }}
-                    />
-                )}
-                {resource?.actions
-                    ?.filter((a) => !a.hidden && a.visible)
+                {(resource?.actions)
+                    ?.filter((a) => !a.hidden && a.visible && rowData['actions'].includes(a.actionName))
                     .map((act) => (
                         <Button
                             key={act.id}
@@ -347,7 +283,8 @@ const Table = () => {
 
                                 TrinityAction.handle(act, `${configs.prefix}/actions/${resource?.name}/${act.actionName}`, {
                                     primaryKeys: [String(rowData[resource?.primaryKeyColumn!])],
-                                    form: {}
+                                    form: {},
+                                    bulk: false
                                 });
                             }}
                         />
@@ -451,24 +388,24 @@ const Table = () => {
                             filterElement={
                                 !!column.customFilter || column.isIndividuallySearchable
                                     ? (options) => {
-                                          return (
-                                              <div>
-                                                  {trinityApp.registeredComponents?.has(column.customFilter!.componentName) ? (
-                                                      trinityApp.registeredComponents?.get(column.customFilter!.componentName)!({
-                                                          key: `${column.columnName}_filter`,
-                                                          component: column.customFilter!,
-                                                          setFieldValue: (_name: string, value: any) => {
-                                                              options.filterCallback(value);
-                                                          },
-                                                          formData: { [column.columnName]: options.value },
-                                                          errors: {}
-                                                      })
-                                                  ) : (
-                                                      <>{column.customFilter!.componentName}</>
-                                                  )}
-                                              </div>
-                                          );
-                                      }
+                                        return (
+                                            <div>
+                                                {trinityApp.registeredComponents?.has(column.customFilter!.componentName) ? (
+                                                    trinityApp.registeredComponents?.get(column.customFilter!.componentName)!({
+                                                        key: `${column.columnName}_filter`,
+                                                        component: column.customFilter!,
+                                                        setFieldValue: (_name: string, value: any) => {
+                                                            options.filterCallback(value);
+                                                        },
+                                                        formData: { [column.columnName]: options.value },
+                                                        errors: {}
+                                                    })
+                                                ) : (
+                                                    <>{column.customFilter!.componentName}</>
+                                                )}
+                                            </div>
+                                        );
+                                    }
                                     : undefined
                             }
                         />

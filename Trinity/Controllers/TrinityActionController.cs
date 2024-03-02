@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Components.TrinityAction;
 using Humanizer;
@@ -28,21 +29,45 @@ public sealed class TrinityActionController : TrinityController
         if (!resource.CanView)
             return UnAuthorised();
 
-        var actionObj = resource.Actions.SingleOrDefault(x => ((ITrinityAction)x).ActionName == actionName) ??
-                        resource.BulkActions.SingleOrDefault(x => ((ITrinityAction)x).ActionName == actionName);
+        var body = await Request.ReadFromJsonAsync<Dictionary<string, JsonValue>>() ??
+                   new Dictionary<string, JsonValue>();
 
-        if (actionObj == null)
+        if (!body.TryGetValue("bulk", out var bulk)) return UnprocessableEntity();
+
+        var primaryKeys = body["primaryKeys"].Deserialize<List<string>>() ?? [];
+
+        if (!primaryKeys.Any()) return UnprocessableEntity();
+
+        ITrinityAction? action = null;
+        List<IDictionary<string, object?>>? records = null;
+
+        if (bulk.GetValue<bool>())
+        {
+            action =
+                resource.BulkActions.SingleOrDefault(x => ((ITrinityAction)x).ActionName == actionName) as
+                    ITrinityAction;
+        }
+        else
+        {
+            var record = (await resource.GetEditData(primaryKeys.First()));
+            if (record != null)
+            {
+                records = [record];
+            }
+            var actions = (List<string>)record?["actions"]!;
+            action = resource.Actions.SingleOrDefault(x => ((ITrinityAction)x).ActionName == actionName)! as
+                ITrinityAction;
+
+            if (!actions.Contains(actionName))
+                return UnAuthorised();
+        }
+
+        if (action == null)
             return NotFound();
-
-        var action = (ITrinityAction)actionObj;
 
         if (!action.Visible || action.Hidden)
             return UnAuthorised();
 
-        var body = await Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>() ??
-                   new Dictionary<string, JsonElement>();
-
-        var primaryKeys = body["primaryKeys"].Deserialize<List<string>>() ?? new List<string>();
 
         var validated = new Dictionary<string, object?>(0);
 
@@ -63,6 +88,6 @@ public sealed class TrinityActionController : TrinityController
             );
         }
 
-        return Ok(await resource.HandleAction(action, validated, primaryKeys));
+        return Ok(await resource.HandleAction(action, validated, primaryKeys, records));
     }
 }

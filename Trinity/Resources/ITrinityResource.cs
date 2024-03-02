@@ -35,6 +35,7 @@ public interface ITrinityResource
     /// </summary>
     List<object> Actions { get; }
 
+
     /// <summary>
     /// The bulk actions available for the resource.
     /// </summary>
@@ -62,7 +63,13 @@ public interface ITrinityResource
     /// Retrieves the record to be edited from the Database based on the given id in <see cref="HttpRequest.RouteValues"/>.
     /// </summary>
     /// <returns>The record to be edited from the Database.</returns>
-    public Task<IDictionary<string, object?>?> GetEditData();
+    public Task<IDictionary<string, object?>?> GetEditData(object? key = null);
+
+    /// <summary>
+    /// Retrieves the records to be deleted from the Database based on the given ids in <see cref="HttpRequest.RouteValues"/>.
+    /// </summary>
+    /// <returns>The records to be deleted from the Database.</returns>
+    public Task<List<IDictionary<string, object?>>?> GetDeletableData(List<string> keys);
 
     /// <summary>
     /// Validate the upcoming request based on the JsonFrom sent , and the registered
@@ -84,13 +91,13 @@ public interface ITrinityResource
     /// Updates the given record in the Database with the given <see cref="Fields"/>.
     /// </summary>
     /// <returns>The updated record if it succeeded.</returns>
-    public Task<object?> Update();
+    public Task<object?> Update(IDictionary<string, object?>? record);
 
     /// <summary>
-    /// Deletes all the records from the Database based on the sent keys.
+    /// Deletes all the records from the Database based on the sent or given keys.
     /// </summary>
     /// <returns>A fresh <see cref="GetTableData"/></returns>
-    public Task<object?> Delete();
+    public Task<object?> Delete(List<IDictionary<string, object?>> records);
 
     /// <summary>
     /// Handle and Execute the action given.
@@ -98,9 +105,10 @@ public interface ITrinityResource
     /// <param name="action">The <see cref="ITrinityAction"/> given in the request.</param>
     /// <param name="form">The form values sent with the action, if any.</param>
     /// <param name="primaryKeys">The keys of the records to apply the action to.</param>
+    /// /// <param name="records">The records if it was already loaded.</param>
     /// <returns><see cref="TrinityActionResult"/></returns>
     public Task<object> HandleAction(ITrinityAction action, Dictionary<string, object?> form,
-        List<string> primaryKeys);
+        List<string> primaryKeys, List<IDictionary<string, object?>>? records);
 
     /// <summary>
     /// Whether the user can View the resource or not.
@@ -121,4 +129,14 @@ public interface ITrinityResource
     /// Whether the user can Delete records from the resource or not.
     /// </summary>
     public bool CanDelete { get; }
+
+    /// <summary>
+    /// Whether the user can Update a record in the resource or not.
+    /// </summary>
+    public bool CanUpdateRecord(IDictionary<string, object?>? record);
+
+    /// <summary>
+    /// Whether the user can Delete records from the resource or not.
+    /// </summary>
+    public bool CanDeleteRecord(IDictionary<string, object?>? record);
 }

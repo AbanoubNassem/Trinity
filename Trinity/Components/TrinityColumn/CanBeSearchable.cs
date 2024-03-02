@@ -26,7 +26,7 @@ public abstract partial class TrinityColumn<T, TDeserialization>
     public bool IsGloballySearchable { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether searches/filters on this column are case sensitive.
+    /// Gets or sets a value indicating whether searches/filters on this column are case-sensitive.
     /// </summary>
     protected bool CaseSensitive { get; set; }
 
@@ -36,7 +36,7 @@ public abstract partial class TrinityColumn<T, TDeserialization>
     /// <param name="searchable">A value indicating whether this column is searchable.</param>
     /// <param name="isIndividuallySearchable">A value indicating whether this column is individually searchable.</param>
     /// <param name="globallySearchable">A value indicating whether this column is globally searchable.</param>
-    /// <param name="caseSensitive">A value indicating whether searches/filters on this column are case sensitive.</param>
+    /// <param name="caseSensitive">A value indicating whether searches/filters on this column are case-sensitive.</param>
     /// <param name="searchCallback">The search/filtering callback function.</param>
     /// <returns>The current instance of the <typeparamref name="T"/> column.</returns>
     public virtual T SetAsSearchable(bool searchable = true,

@@ -6,6 +6,8 @@ declare global {
         ReactDOM;
         PrimeReact;
         TrinityApp;
+        trinity;
+        trinityApp;
     }
 }
 

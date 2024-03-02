@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.Json;
 using AbanoubNassem.Trinity.Columns;
 using AbanoubNassem.Trinity.Components;
@@ -96,6 +97,8 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
             var columns = Columns;
             foreach (ITrinityColumn column in columns)
             {
+                if (column.IsCustomColumn) continue;
+
                 column.SelectQuery(query);
 
                 if (globalSearch != null && column.IsGloballySearchable)
@@ -128,7 +131,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
             var limit = query.Offset((page - 1) * perPage).Limit(perPage);
 
             OnIndexQuery(ref query);
-            
+
             var result = (await limit.GetAsync()).Cast<IDictionary<string, object?>>().ToList();
 
 
@@ -154,6 +157,9 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
                     column.SetRecord(record);
                     column.Format();
                 }
+
+                GenerateRecordActions(record);
+                await BeforeIndex(record);
             }
 
 
@@ -174,23 +180,53 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         }
     }
 
-
-    /// <inheritdoc />
-    public virtual async Task<object?> Delete()
+    private void GenerateRecordActions(IDictionary<string, object?> record)
     {
-        var body = await Request.ReadFromJsonAsync<Dictionary<string, List<string>>>();
+        var actions = new List<string>();
+        foreach (ITrinityAction act in Actions)
+        {
+            act.SetRecord(record);
+            if (act.Hidden || !act.Visible) continue;
+            actions.Add(act.ActionName);
+        }
+        record.Add("actions", actions);
+    }
 
-        if (body == null || !body.TryGetValue(PrimaryKeyColumn, out var keys))
-            return null;
-
-        await BeforeDelete(ref keys);
+    /// <summary>
+    /// Get the deletable records based on given keys
+    /// </summary>
+    /// <param name="keys">Keys of the deletable records.</param>
+    /// <returns>the deletable records</returns>
+    public virtual async Task<List<IDictionary<string, object?>>?> GetDeletableData(List<string> keys)
+    {
+        await BeforeDelete(keys);
 
         using var connection = ConnectionFactory();
 
-        var deleteQueryResult = await connection.Query()
+        var query = connection.Query()
             .From($"{Table}")
-            .WhereIn($"{PrimaryKeyColumn}", keys)
-            .DeleteAsync();
+            .WhereIn($"{PrimaryKeyColumn}", keys);
+        OnDeleteQuery(ref query);
+
+        return (await query.GetAsync()).Cast<IDictionary<string, object?>>().ToList();
+    }
+
+    /// <inheritdoc />
+    public virtual async Task<object?> Delete(List<IDictionary<string, object?>> records)
+    {
+        var keys = records.Select(x => x[PrimaryKeyColumn]!.ToString()!).ToList();
+
+        await BeforeDelete(keys);
+
+        using var connection = ConnectionFactory();
+
+        var query = connection.Query()
+            .From($"{Table}")
+            .WhereIn($"{PrimaryKeyColumn}", keys);
+        OnDeleteQuery(ref query);
+
+        var deleteQueryResult = await query.DeleteAsync();
+
 
         if (deleteQueryResult > 0)
         {
@@ -201,6 +237,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
         {
             TrinityNotifications.NotifyError(Localizer["record_not_deleted"]);
         }
+
 
         await AfterDelete(keys, deleteQueryResult > 0);
 

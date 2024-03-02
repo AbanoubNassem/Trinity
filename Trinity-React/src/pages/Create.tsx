@@ -33,7 +33,7 @@ const Create = () => {
     useEffect(() => {
         if (inserted) {
             if (!createAddAnother) {
-                trinityLink(`/${configs?.prefix}/${resource?.name}/edit/${inserted}`, false, false);
+                trinityLink(`${configs?.prefix}/${resource?.name}/edit/${inserted}`, false, false);
             } else {
                 router.get('');
             }

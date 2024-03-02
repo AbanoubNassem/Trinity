@@ -11,10 +11,14 @@ import { useLogo } from '@/hooks/trinity_logo';
 import { useConfigs } from '@/hooks/trinity_configs';
 import { useForm } from '@inertiajs/react';
 import { useLocalize } from '@/hooks/trinity_localizer';
+import trinityApp from '@/TrinityApp.tsx';
 
 const Login = () => {
     const configs = useConfigs();
-    const { errors, data: responseData } = usePageProps();
+    const { errors, data: responseData, pages } = usePageProps();
+
+    if (pages?.hasOwnProperty('Login') || pages?.hasOwnProperty('login') || trinityApp.registeredPages.has('Login') || trinityApp.registeredPages.has('login')) return null;
+
     const [password, setPassword] = useState('');
     const [checked, setChecked] = useState(false);
     const { layoutConfig } = useContext(LayoutContext);

@@ -52,15 +52,6 @@ public abstract partial class TrinityColumn<T, TDeserialization> : TrinityCompon
     public delegate void FiltersCallback(Query query, string str);
 
     /// <summary>
-    /// Represents a method that handles a query result record and returns a specified type.
-    /// </summary>
-    /// <typeparam name="TCallBackReturnType">The return type of the method.</typeparam>
-    /// <param name="record">The record being handled.</param>
-    /// <returns>The result of the method.</returns>
-    public delegate TCallBackReturnType
-        CallbackWithRecord<out TCallBackReturnType>(IDictionary<string, object?> record);
-
-    /// <summary>
     /// Represents a method that handles a query without a return value.
     /// </summary>
     /// <param name="query">The query being handled.</param>
@@ -289,6 +280,19 @@ public abstract partial class TrinityColumn<T, TDeserialization> : TrinityCompon
         CustomFilter = filter;
         if (filterCallback != null)
             SearchCallback = filterCallback;
+        return (this as T)!;
+    }
+
+    /// <inheritdoc />
+    public bool IsCustomColumn { get; set; }
+
+    /// <summary>
+    /// Sets the column as custom , which mean it's not in the database.
+    /// </summary>
+    /// <returns>The current instance of the <typeparamref name="T"/> column.</returns>
+    public T SetAsCustomColumn(bool isCustom = true)
+    {
+        IsCustomColumn = isCustom;
         return (this as T)!;
     }
 }

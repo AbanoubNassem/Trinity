@@ -5,10 +5,18 @@ namespace AbanoubNassem.Trinity.Resources;
 public abstract partial class TrinityResource<TPrimaryKeyType>
 {
     /// <summary>
+    /// Fired before returning the record to the frontend.
+    /// </summary>
+    /// <param name="record">The current record in the Database.</param>
+    protected virtual Task BeforeIndex(IDictionary<string, object?> record)
+    {
+        return Task.CompletedTask;
+    }
+    /// <summary>
     /// Fired before inserting a new record to the Resource table.
     /// </summary>
     /// <param name="form">The given form after validation.</param>
-    protected virtual Task BeforeCreate(ref Dictionary<string, object?> form)
+    protected virtual Task BeforeCreate(Dictionary<string, object?> form)
     {
         return Task.CompletedTask;
     }
@@ -28,7 +36,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
     /// </summary>
     /// <param name="form">The validated form used to update the record.</param>
     /// <param name="record">The current record in the Database.</param>
-    protected virtual Task BeforeUpdate(ref Dictionary<string, object?> form,
+    protected virtual Task BeforeUpdate(Dictionary<string, object?> form,
         IReadOnlyDictionary<string, object?> record)
     {
         return Task.CompletedTask;
@@ -49,7 +57,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
     /// Fired before deleting the given ids from the Resource table.
     /// </summary>
     /// <param name="idsToBeDeleted">The given ids to be deleted.</param>
-    protected virtual Task BeforeDelete(ref List<string> idsToBeDeleted)
+    protected virtual Task BeforeDelete(List<string> idsToBeDeleted)
     {
         return Task.CompletedTask;
     }
@@ -68,7 +76,31 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
     /// Executes before executing resource index page query.
     /// </summary>
     /// <param name="query">The query being executed.</param>
-    protected  virtual void OnIndexQuery(ref Query query)
+    protected virtual void OnIndexQuery(ref Query query)
+    {
+    }
+
+    /// <summary>
+    /// Executes before creating the record query.
+    /// </summary>
+    /// <param name="query">The query being executed.</param>
+    protected virtual void OnCreateQuery(ref Query query)
+    {
+    }
+
+    /// <summary>
+    /// Executes before updating the record query.
+    /// </summary>
+    /// <param name="query">The query being executed.</param>
+    protected virtual void OnUpdateQuery(ref Query query)
+    {
+    }
+
+    /// <summary>
+    /// Executes before deleting the record query.
+    /// </summary>
+    /// <param name="query">The query being executed.</param>
+    protected virtual void OnDeleteQuery(ref Query query)
     {
     }
 }

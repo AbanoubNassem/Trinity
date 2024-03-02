@@ -47,7 +47,7 @@ public abstract class
 
     /// <inheritdoc />
     public virtual Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(QueryFactory queryFactory,
-        string? value,
+        string localTable, string? value,
         int offset,
         string? search = null)
     {
@@ -124,6 +124,15 @@ public abstract class
     {
         Lazy = lazy;
         LazyItemsCount = lazyItemsCount;
+        return this;
+    }
+
+    protected Action<Query>? AssociatesRelationshipQuery { get; set; }
+
+    public HasRelationshipField<T, TDeserialization> SetAssociatesRelationshipQueryUsing(Action<Query> query)
+    {
+        AssociatesRelationshipQuery = query;
+
         return this;
     }
 }

@@ -18,6 +18,11 @@ public interface ITrinityColumn : ITrinityComponent
     bool IsGloballySearchable { get; set; }
 
     /// <summary>
+    /// Gets or sets if the column is custom , which mean it's not in the database.
+    /// </summary>
+    public bool IsCustomColumn { get; protected set; }
+
+    /// <summary>
     /// How a column is being selected from the database.
     /// </summary>
     /// <param name="query">the query being applied to the database.</param>

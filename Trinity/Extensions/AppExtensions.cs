@@ -184,7 +184,7 @@ public static class AppExtensions
             var requestPath = context.Request.Path.Value;
 
             if (requestPath == null ||
-                !requestPath.StartsWith($"/{configs.Prefix}", StringComparison.OrdinalIgnoreCase))
+                !requestPath.StartsWith($"{configs.Prefix}", StringComparison.OrdinalIgnoreCase))
                 return next(context);
 
             var tokenSet = antiforgery.GetAndStoreTokens(context);

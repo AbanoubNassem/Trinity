@@ -1,3 +1,4 @@
+using AbanoubNassem.Trinity.Components.Interfaces;
 using AbanoubNassem.Trinity.Components.TrinityColumn;
 using AbanoubNassem.Trinity.Extensions;
 
@@ -141,4 +142,6 @@ public class TextColumn : TrinityColumn<TextColumn, string>
         Currency = currency;
         return this;
     }
+
+  
 }

@@ -47,6 +47,7 @@ public abstract class TrinityHasRelationshipColumn<T> : TrinityColumn<TrinityHas
 
     /// <inheritdoc />
     public virtual Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(QueryFactory queryFactory,
+        string localTable,
         string? value,
         int offset,
         string? search = null)

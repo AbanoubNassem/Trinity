@@ -37,6 +37,15 @@ public abstract class TrinityComponent<T, TDeserialization> : ITrinityComponent
     /// </summary>
     protected TrinityNotificationsManager TrinityNotificationsManager { get; init; } = null!;
 
+    /// <summary>
+    /// Represents a method that handles a query result record and returns a specified type.
+    /// </summary>
+    /// <typeparam name="TCallBackReturnType">The return type of the method.</typeparam>
+    /// <param name="record">The record being handled.</param>
+    /// <returns>The result of the method.</returns>
+    public delegate TCallBackReturnType
+        CallbackWithRecord<out TCallBackReturnType>(IDictionary<string, object?> record);
+
     /// <inheritdoc />
     public virtual void Setup()
     {
@@ -152,6 +161,25 @@ public abstract class TrinityComponent<T, TDeserialization> : ITrinityComponent
     {
         Hidden = value;
         Visible = !value;
+        return (this as T)!;
+    }
+
+    /// <summary>
+    /// A callback function to hide of the component using the record data.
+    /// </summary>
+    /// <remarks>
+    /// The callback function should accept the record and return boolean.
+    /// </remarks>
+    protected CallbackWithRecord<bool>? HideUsingCallback { get; set; }
+
+    /// <summary>
+    /// Sets the <see cref="HideUsingCallback"/> property of the component.
+    /// </summary>
+    /// <param name="hideUsing">The callback function to set.</param>
+    /// <returns>The instance of the derived class.</returns>
+    public T SetAsHiddenUsing(CallbackWithRecord<bool> hideUsing)
+    {
+        HideUsingCallback = hideUsing;
         return (this as T)!;
     }
 

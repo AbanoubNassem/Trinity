@@ -17,29 +17,22 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
     public override string Type => "Field";
 
     /// <inheritdoc />
-    public BelongsToField(string localColumnNames, string relationTables, string foreignColumnNames,
-        string foreignColumnToSelect, string relationshipName)
-        : base(localColumnNames, foreignColumnNames, relationTables)
+    public BelongsToField(string columnName, string foreignColumn, string? foreignTable, string foreignColumnToSelect,string? relationshipName = null) 
+        : base(columnName, foreignColumn, foreignTable)
     {
         SetTitle(foreignColumnToSelect);
 
-        SetRelationshipName(relationshipName);
-    }
+        //if (!string.IsNullOrWhiteSpace(foreignTable))
+        //    SetForeignTable(foreignTable);
 
-    /// <inheritdoc />
-    public BelongsToField(string columnName, string foreignColumnToSelect, string? foreignTable = null,
-        string? relationshipName = null) : base(columnName)
-    {
-        SetTitle(foreignColumnToSelect);
-
-        if (!string.IsNullOrWhiteSpace(foreignTable))
-            SetForeignTable(foreignTable);
+        //SetForeignColumn("id");
 
         if (relationshipName != null)
         {
             SetRelationshipName(relationshipName);
         }
     }
+
 
     /// <summary>
     /// Gets or sets the list of options for the field.
@@ -180,17 +173,18 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
 
     /// <inheritdoc />
     public override async Task<List<KeyValuePair<string, string>>> GetAssociatesRelationshipQuery(
-        QueryFactory queryFactory,
+        QueryFactory queryFactory, string localTable,
         string? value, int offset,
         string? search = null)
     {
         var localColumns = ColumnName.Split('.');
+        var localTables = localTable?.Split('.') ?? Array.Empty<string>();
         var foreignTables = ForeignTable?.Split('.') ?? Array.Empty<string>();
         var foreignColumns = ForeignColumn?.Split('.') ?? Array.Empty<string>();
         var relationshipNames = RelationshipName?.Split('.') ?? Array.Empty<string>();
 
 
-        var query = queryFactory.Query().From($"{foreignTables.First()} AS t");
+        var query = queryFactory.Query().From($"{foreignTables.Last()} AS {relationshipNames.First()}");
 
         if (search == null && value != null && value != "undefined")
         {
@@ -198,9 +192,9 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
                 .OrWhere($"{relationshipNames.Last()}.{foreignColumns.Last()}", "<>", value);
         }
 
-        for (var i = 0; i < foreignTables.Length; i++)
+        for (var i = 1; i < foreignTables.Length; i++)
         {
-            var parentRelation = i == 0 ? "t" : relationshipNames[i - 1];
+            var parentRelation =  relationshipNames[i - 1];
             query.Join($"{foreignTables[i]} AS {relationshipNames[i]}", $"{parentRelation}.{localColumns[i]}",
                 $"{relationshipNames[i]}.{foreignColumns[i]}");
         }
@@ -213,8 +207,11 @@ public class BelongsToField<T> : HasRelationshipField<BelongsToField<T>, T>
             query.WhereLike($"{relationshipNames.Last()}.{Title}", $"%{search}%");
         }
 
+ 
         query.Offset(offset - 1)
             .Limit(LazyItemsCount - 1);
+
+        AssociatesRelationshipQuery?.Invoke(query);
 
         var res = (await query.GetAsync()).Cast<IDictionary<string, object?>>().ToList();
 

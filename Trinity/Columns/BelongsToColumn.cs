@@ -52,6 +52,12 @@ public class BelongsToColumn : TrinityHasRelationshipColumn<string>
     /// <inheritdoc />
     public override void Filter(Query query, string str)
     {
+        if (CustomFilter != null && SearchCallback != null)
+        {
+            SearchCallback(query, str);
+            return;
+        }
+
         var localColumns = ColumnName.Split('.');
         var foreignTables = ForeignTable?.Split('.') ?? Array.Empty<string>();
         var foreignColumns = ForeignColumn?.Split('.') ?? Array.Empty<string>();

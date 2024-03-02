@@ -1,6 +1,8 @@
 using System.Security.Claims;
 using AbanoubNassem.Trinity.Attributes;
 using AbanoubNassem.Trinity.Extensions;
+using AbanoubNassem.Trinity.Models;
+using AbanoubNassem.Trinity.Pages;
 using AbanoubNassem.Trinity.RequestHelpers;
 using InertiaCore;
 using Microsoft.AspNetCore.Authentication;
@@ -27,8 +29,8 @@ public sealed class TrinityAuthController : TrinityController
         return Inertia.Render("Login",
             new
             {
-                configs = Configurations,
-                Locale = Localizer.GetAllStrings().ToDictionary(x => x.Name, x => x.Value)
+                Configs = Configurations,
+                Locale = Localizer.GetAllStrings().ToDictionary(x => x.Name, x => x.Value),
             });
     }
 
@@ -54,12 +56,22 @@ public sealed class TrinityAuthController : TrinityController
             throw new Exception(Localizer["auth_configurations"]);
         }
 
-        var loggedIn = await Configurations.AuthenticateUser(HttpContext, loginRequest.Email, loginRequest.Password);
-
-        if (loggedIn == null)
+        TrinityUser? loggedIn;
+        try
         {
-            ModelState.AddModelError(string.Empty, Localizer["invalid_login_attempt"]);
+            loggedIn =
+                await Configurations.AuthenticateUser(HttpContext, loginRequest.Email, loginRequest.Password);
 
+            if (loggedIn == null)
+            {
+                ModelState.AddModelError("login", Localizer["invalid_login_attempt"]);
+
+                return Inertia.Render("Login", new { configs = Configurations, errors = BadRequest(ModelState) });
+            }
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError("login", ex.Message);
             return Inertia.Render("Login", new { configs = Configurations, errors = BadRequest(ModelState) });
         }
 

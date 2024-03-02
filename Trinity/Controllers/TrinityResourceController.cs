@@ -1,5 +1,7 @@
 using InertiaCore;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace AbanoubNassem.Trinity.Controllers;
 
@@ -47,9 +49,11 @@ public sealed class TrinityResourceController : TrinityController
 
                 break;
             case "GET" when view == "edit":
-                if (!resource.CanUpdate) return UnAuthorised();
+                var record = await resource.GetEditData();
 
-                responseData.Data = await resource.GetEditData();
+                if (!resource.CanUpdate || !resource.CanUpdateRecord(record)) return UnAuthorised();
+
+                responseData.Data = record;
                 if (responseData.Data == null)
                 {
                     return NotFound();
@@ -64,14 +68,31 @@ public sealed class TrinityResourceController : TrinityController
                 responseData.Data = await resource.Create();
                 break;
             case "PUT" when view == "edit":
-                if (!resource.CanUpdate) return UnAuthorised();
+                var rec = await resource.GetEditData();
+                if (!resource.CanUpdate || !resource.CanUpdateRecord(rec)) return UnAuthorised();
 
-                responseData.Data = await resource.Update();
+                responseData.Data = await resource.Update(rec);
                 break;
             case "DELETE" when view is "delete" or "index" or "edit":
-                if (!resource.CanDelete) return UnAuthorised();
+                if (!resource.CanDelete)
+                    return UnAuthorised();
 
-                responseData.Data = await resource.Delete();
+                var body = await Request.ReadFromJsonAsync<Dictionary<string, List<string>>>();
+                var keys = new List<string>();
+                if (body == null || !body.TryGetValue(((dynamic)resource).PrimaryKeyColumn, out keys))
+                    return UnAuthorised();
+
+                var records = await resource.GetDeletableData(keys ?? []);
+
+                if (records == null || !records.Any()) return UnprocessableEntity();
+
+                if (records.Any(r => !resource.CanDeleteRecord(r)))
+                {
+                    return UnAuthorised();
+                }
+
+
+                responseData.Data = await resource.Delete(records);
                 break;
         }
 
