@@ -258,7 +258,7 @@ public abstract partial class TrinityResource<TPrimaryKeyType>
 
             field.Fill(ref form, (IReadOnlyDictionary<string, object?>)record);
             if (field is IHasRelationship { HasRelationshipByDefault: true } relationshipField)
-                updates.TryAdd(relationshipField.ForeignColumn?.Split('.').First()!, form[field.ColumnName]);
+                updates.TryAdd(relationshipField.ColumnName?.Split('.').First()!, form[field.ColumnName]);
 
             else
                 updates.TryAdd(field.ColumnName, form[field.ColumnName]);
