@@ -144,12 +144,22 @@ export class TrinityApp {
 
     static registerComponent = (name: string, component: (props: any) => ReactElement) => {
         const Component = component;
-        this.registeredComponents.set(name, (props) => <Component {...props} />);
+        this.registeredComponents.set(name, (props) => (
+            <Component
+                {...props}
+                key={`c-${props.key}`}
+            />
+        ));
     };
 
     static registerLayout = (name: string, component: (props: LayoutProps<TrinityLayoutType | any>) => ReactElement) => {
         const Component = component;
-        this.registeredComponents.set(name, (props) => <Component {...props} />);
+        this.registeredComponents.set(name, (props) => (
+            <Component
+                {...props}
+                key={`c-${props.key}`}
+            />
+        ));
     };
 
     static registerField = (name: string, component: (props: FieldProps<TrinityFieldType | any>) => ReactElement) => {
@@ -160,17 +170,30 @@ export class TrinityApp {
                 errors={props.errors}
                 key={props.key}
             >
-                <Field {...props} />
+                <Field
+                    {...props}
+                    key={`f-${props.key}`}
+                />
             </BaseFieldComponent>
         ));
     };
     static registerColumn = (name: string, component: (props: ColumnProps<TrinityColumnType | any>) => ReactElement) => {
         const Column = component;
-        this.registeredComponents.set(name, (props) => <Column {...props} />);
+        this.registeredComponents.set(name, (props) => (
+            <Column
+                {...props}
+                key={`col-${props.key}`}
+            />
+        ));
     };
     static registerWidget = (name: string, component: (props: WidgetProps<TrinityWidgetType | any>) => ReactElement) => {
         const Widget = component;
-        this.registeredComponents.set(name, (props) => <Widget {...props} />);
+        this.registeredComponents.set(name, (props) => (
+            <Widget
+                {...props}
+                key={`wid-${props.key}`}
+            />
+        ));
     };
 
     static registerPage = (name: string, component: (props: PageProps<TrinityPageType>) => ReactElement, layout: ReactElement | undefined | null = undefined) => {

@@ -15,6 +15,7 @@ import PlaceholderPage from '@/pages/PlaceholderPage';
 import * as InertiaReact from '@inertiajs/react';
 // @ts-ignore
 import * as PrimeReact from 'primereact';
+import { PrimeReactProvider } from 'primereact/api';
 
 createInertiaApp({
     progress: false,
@@ -47,9 +48,11 @@ createInertiaApp({
         trinityApp.init(props.initialPage.props);
 
         ReactDOM.createRoot(el).render(
-            <LayoutProvider>
-                <App {...props} />
-            </LayoutProvider>
+            <PrimeReactProvider>
+                <LayoutProvider>
+                    <App {...props} />
+                </LayoutProvider>
+            </PrimeReactProvider>
         );
     }
 }).then(() => {
